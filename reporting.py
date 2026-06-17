@@ -17,6 +17,13 @@ BOOLEAN_DISPLAY_COLUMNS = [
     "成交量是否溫和放大",
 ]
 
+DISPLAY_COLUMN_RENAMES = {
+    "阿斯拉分數": "綜合強度分數",
+    "阿斯拉評級": "投資觀察評等",
+    "關注原因": "入選理由",
+    "收盤價": "收盤價(當天的日期)",
+}
+
 
 def _to_yes_no(value: object) -> object:
     if pd.isna(value):
@@ -56,6 +63,7 @@ def format_report_for_output(report: pd.DataFrame) -> pd.DataFrame:
         dates = pd.to_datetime(output["股價最後日期"], errors="coerce").dt.strftime("%m/%d")
         output["收盤價"] = output["收盤價"].astype(str) + " (" + dates.fillna(output["股價最後日期"].astype(str)) + ")"
         output = output.drop(columns=["股價最後日期"])
+    output = output.rename(columns=DISPLAY_COLUMN_RENAMES)
     return output
 
 
@@ -115,13 +123,13 @@ def build_mobile_cards(display_report: pd.DataFrame) -> str:
         rank = _value(row, "排名")
         code = _value(row, "股票代號")
         name = _value(row, "股票名稱")
-        rating = _value(row, "阿斯拉評級")
-        score = _format_number(row, "阿斯拉分數", decimals=1)
+        rating = _value(row, "投資觀察評等")
+        score = _format_number(row, "綜合強度分數", decimals=1)
         concept = _value(row, "概念股")
-        reason = _value(row, "關注原因")
+        reason = _value(row, "入選理由")
         business = _value(row, "公司業務")
         risk = _value(row, "風險說明")
-        price = _format_number(row, "收盤價", decimals=2)
+        price = _value(row, "收盤價(當天的日期)")
         volume = _value(row, "當天成交量(張)")
         yoy = _format_percent(row, "月營收年增率")
         mom = _format_percent(row, "月營收月增率")
@@ -165,13 +173,13 @@ def build_desktop_summary_table(display_report: pd.DataFrame) -> str:
         "股票代號",
         "股票名稱",
         "概念股",
-        "阿斯拉分數",
-        "阿斯拉評級",
-        "收盤價",
+        "綜合強度分數",
+        "投資觀察評等",
+        "收盤價(當天的日期)",
         "當天成交量(張)",
         "月營收年增率",
         "月營收月增率",
-        "關注原因",
+        "入選理由",
     ]
     available = [column for column in columns if column in display_report.columns]
     summary = display_report[available].copy()
