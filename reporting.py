@@ -40,6 +40,13 @@ def format_report_for_output(report: pd.DataFrame) -> pd.DataFrame:
     for column in ["收盤價"]:
         if column in output.columns:
             output[column] = pd.to_numeric(output[column], errors="coerce").round(2)
+    for column in ["月營收年增率", "月營收月增率"]:
+        if column in output.columns:
+            values = pd.to_numeric(output[column], errors="coerce")
+            output[column] = values.map(lambda value: "-" if pd.isna(value) else f"{value:+.2f}%")
+    if "阿斯拉分數" in output.columns:
+        values = pd.to_numeric(output["阿斯拉分數"], errors="coerce")
+        output["阿斯拉分數"] = values.map(lambda value: "-" if pd.isna(value) else f"{value:.1f}")
     if "當天成交量" in output.columns:
         output["當天成交量"] = (
             pd.to_numeric(output["當天成交量"], errors="coerce").div(1000).round(0).astype("Int64")
@@ -81,6 +88,8 @@ def _value(row: pd.Series, column: str, default: str = "-") -> str:
 def _format_percent(row: pd.Series, column: str) -> str:
     if column not in row or pd.isna(row[column]):
         return "-"
+    if isinstance(row[column], str) and row[column].strip().endswith("%"):
+        return row[column]
     value = pd.to_numeric(row[column], errors="coerce")
     if pd.isna(value):
         return str(row[column])
@@ -134,7 +143,7 @@ def build_mobile_cards(display_report: pd.DataFrame) -> str:
         <div><span>月增</span><strong>{mom}</strong></div>
         <div><span>慢慢買</span><strong>{slow_buy}</strong></div>
       </div>
-      <p class="concept">{concept}</p>
+      <p class="concept"><span>概念股：</span>{concept}</p>
       <p><strong>關注：</strong>{reason}</p>
       <details>
         <summary>公司業務與風險</summary>
@@ -146,6 +155,26 @@ def build_mobile_cards(display_report: pd.DataFrame) -> str:
 """
         )
     return "\n".join(cards)
+
+
+def build_desktop_summary_table(display_report: pd.DataFrame) -> str:
+    columns = [
+        "排名",
+        "股票代號",
+        "股票名稱",
+        "概念股",
+        "阿斯拉分數",
+        "阿斯拉評級",
+        "收盤價",
+        "當天成交量(張)",
+        "月營收年增率",
+        "月營收月增率",
+        "關注原因",
+        "股價最後日期",
+    ]
+    available = [column for column in columns if column in display_report.columns]
+    summary = display_report[available].copy()
+    return summary.to_html(index=False, classes="summary-table", border=0)
 
 
 def publish_static_site(csv_path: Path, html_path: Path, stamp: str, site_dir: Path = SITE_DIR) -> None:
@@ -175,16 +204,7 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
     display_report = format_report_for_output(report)
     display_report.to_csv(csv_path, index=False, encoding="utf-8-sig")
 
-    styled = display_report.style.hide(axis="index").format(
-        {
-            "月營收年增率": "{:+.2f}%",
-            "月營收月增率": "{:+.2f}%",
-            "阿斯拉分數": "{:.1f}",
-            "收盤價": "{:,.2f}",
-            "當天成交量(張)": "{:,}",
-        },
-        na_rep="-",
-    )
+    desktop_table = build_desktop_summary_table(display_report)
     mobile_cards = build_mobile_cards(display_report)
     html = f"""<!doctype html>
 <html lang="zh-Hant">
@@ -225,12 +245,33 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
     .desktop-table {{
       background: var(--card);
       border-radius: 14px;
-      overflow: auto;
+      overflow: hidden;
       box-shadow: 0 8px 24px rgba(15, 35, 70, 0.08);
     }}
-    table {{ border-collapse: collapse; width: 100%; min-width: 1600px; font-size: 14px; }}
-    th, td {{ border: 1px solid #ddd; padding: 8px; vertical-align: top; }}
-    th {{ background: #152238; color: white; position: sticky; top: 0; }}
+    table.summary-table {{
+      border-collapse: collapse;
+      table-layout: fixed;
+      width: 100%;
+      font-size: 13px;
+    }}
+    .summary-table th, .summary-table td {{
+      border: 1px solid #ddd;
+      padding: 8px;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }}
+    .summary-table th {{ background: #152238; color: white; position: sticky; top: 0; }}
+    .summary-table th:nth-child(1), .summary-table td:nth-child(1) {{ width: 42px; text-align: center; }}
+    .summary-table th:nth-child(2), .summary-table td:nth-child(2) {{ width: 70px; }}
+    .summary-table th:nth-child(3), .summary-table td:nth-child(3) {{ width: 86px; }}
+    .summary-table th:nth-child(4), .summary-table td:nth-child(4) {{ width: 150px; }}
+    .summary-table th:nth-child(5), .summary-table td:nth-child(5) {{ width: 70px; text-align: right; }}
+    .summary-table th:nth-child(6), .summary-table td:nth-child(6) {{ width: 64px; text-align: center; }}
+    .summary-table th:nth-child(7), .summary-table td:nth-child(7) {{ width: 76px; text-align: right; }}
+    .summary-table th:nth-child(8), .summary-table td:nth-child(8) {{ width: 92px; text-align: right; }}
+    .summary-table th:nth-child(9), .summary-table td:nth-child(9) {{ width: 88px; text-align: right; }}
+    .summary-table th:nth-child(10), .summary-table td:nth-child(10) {{ width: 88px; text-align: right; }}
+    .summary-table th:nth-child(12), .summary-table td:nth-child(12) {{ width: 92px; }}
     tr:nth-child(even) {{ background: #f8fafc; }}
     .mobile-cards {{ display: none; }}
     .stock-card {{
@@ -271,6 +312,7 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
       font-weight: 800;
       margin: 14px 0 8px;
     }}
+    .concept span {{ color: var(--muted); font-weight: 700; }}
     details {{
       border-top: 1px solid var(--line);
       margin-top: 12px;
@@ -312,7 +354,7 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
       {mobile_cards}
     </section>
     <section class="desktop-table">
-      {styled.to_html()}
+      {desktop_table}
     </section>
   </main>
 </body>
