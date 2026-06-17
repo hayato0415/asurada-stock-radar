@@ -109,7 +109,24 @@ https://你的帳號.github.io/asurada-stock-radar/
 
 打開這個網址時，`docs/index.html` 會自動導到最新的 `docs/latest.html`。
 
-## 每天更新公開網站
+## 每天自動更新公開網站
+
+GitHub Actions 會在每週一到週五台灣時間 16:10 自動執行：
+
+1. 下載最新台股清單、月營收、股價與成交量
+2. 產生 `docs/latest.html` 與 `docs/latest.csv`
+3. 自動 commit 並 push 回 `main`
+4. 觸發 GitHub Pages 重新部署
+
+設定檔：
+
+```text
+.github/workflows/update-daily-report.yml
+```
+
+你也可以到 GitHub 的 `Actions -> Update Daily Stock Report -> Run workflow` 手動更新一次。
+
+## 本機手動更新公開網站
 
 每天盤後：
 

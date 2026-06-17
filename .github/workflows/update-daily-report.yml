@@ -1,0 +1,44 @@
+name: Update Daily Stock Report
+
+on:
+  schedule:
+    # 08:10 UTC = 16:10 Asia/Taipei. GitHub cron uses UTC.
+    - cron: "10 8 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-daily-report
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Generate daily report
+        run: python run_daily_scan.py --refresh --price-limit 180 --top-n 30
+
+      - name: Commit updated report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs
+          if git diff --cached --quiet; then
+            echo "No report changes to commit."
+          else
+            git commit -m "Update daily stock report"
+            git push
+          fi
