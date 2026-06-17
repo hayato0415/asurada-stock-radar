@@ -251,6 +251,11 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
     }}
     h1 {{ margin: 0 0 8px; font-size: clamp(24px, 5vw, 36px); }}
     .note {{ color: #dbeafe; margin: 0; }}
+    .score-note {{
+      color: #e0f2fe;
+      font-size: 13px;
+      margin: 10px 0 0;
+    }}
     .desktop-table {{
       background: var(--card);
       border-radius: 14px;
@@ -342,11 +347,16 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
     summary {{ color: var(--accent); font-weight: 800; cursor: pointer; }}
     .date {{ color: var(--muted); font-size: 13px; }}
     .actions {{ margin-top: 12px; }}
-    .actions a {{
+    .actions a,
+    .actions button {{
+      background: transparent;
       color: white;
       display: inline-block;
       border: 1px solid rgba(255,255,255,.45);
       border-radius: 999px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 14px;
       padding: 6px 12px;
       text-decoration: none;
       margin-right: 8px;
@@ -366,9 +376,10 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
     <section class="hero">
       <h1>阿斯拉台股主升段雷達</h1>
       <p class="note">本報告僅供研究與風險控管，不構成投資建議，也不包含自動下單功能。</p>
+      <p class="score-note">綜合強度分數為 0-100 分，用來排序候選股強弱；投資觀察評等依分數分級，方便快速判斷觀察優先順序。</p>
       <div class="actions">
         <a href="latest.csv">下載 CSV</a>
-        <a href="https://github.com/hayato0415/jtgame-search">GitHub</a>
+        <button type="button" onclick="alert('本雷達依據營收成長、成交量、股價位置、題材概念與技術強度進行初步篩選，僅供研究與風險控管參考，不構成投資建議。')">資料說明</button>
       </div>
     </section>
     <section class="mobile-cards">
