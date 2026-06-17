@@ -78,6 +78,24 @@ def _value(row: pd.Series, column: str, default: str = "-") -> str:
     return str(row[column])
 
 
+def _format_percent(row: pd.Series, column: str) -> str:
+    if column not in row or pd.isna(row[column]):
+        return "-"
+    value = pd.to_numeric(row[column], errors="coerce")
+    if pd.isna(value):
+        return str(row[column])
+    return f"{value:+.2f}%"
+
+
+def _format_number(row: pd.Series, column: str, decimals: int = 1) -> str:
+    if column not in row or pd.isna(row[column]):
+        return "-"
+    value = pd.to_numeric(row[column], errors="coerce")
+    if pd.isna(value):
+        return str(row[column])
+    return f"{value:,.{decimals}f}"
+
+
 def build_mobile_cards(display_report: pd.DataFrame) -> str:
     cards: list[str] = []
     for _, row in display_report.iterrows():
@@ -85,15 +103,15 @@ def build_mobile_cards(display_report: pd.DataFrame) -> str:
         code = _value(row, "股票代號")
         name = _value(row, "股票名稱")
         rating = _value(row, "阿斯拉評級")
-        score = _value(row, "阿斯拉分數")
+        score = _format_number(row, "阿斯拉分數", decimals=1)
         concept = _value(row, "概念股")
         reason = _value(row, "關注原因")
         business = _value(row, "公司業務")
         risk = _value(row, "風險說明")
-        price = _value(row, "收盤價")
+        price = _format_number(row, "收盤價", decimals=2)
         volume = _value(row, "當天成交量(張)")
-        yoy = _value(row, "月營收年增率")
-        mom = _value(row, "月營收月增率")
+        yoy = _format_percent(row, "月營收年增率")
+        mom = _format_percent(row, "月營收月增率")
         date = _value(row, "股價最後日期")
         slow_buy = _value(row, "是否適合慢慢買")
         cards.append(
