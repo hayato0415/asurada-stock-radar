@@ -14,6 +14,8 @@ BOOLEAN_COLUMNS = [
     "成交量是否溫和放大",
 ]
 
+MIN_REPORT_VOLUME_SHARES = 1_000_000
+
 INDUSTRY_NAMES = {
     "1": "水泥工業",
     "2": "食品工業",
@@ -246,13 +248,18 @@ def build_candidates(
 
 
 def top_report(frame: pd.DataFrame, limit: int = 30) -> pd.DataFrame:
-    ranked = frame.sort_values(
+    filtered = frame.copy()
+    if "當天成交量" in filtered.columns:
+        filtered["當天成交量"] = pd.to_numeric(filtered["當天成交量"], errors="coerce")
+        filtered = filtered[filtered["當天成交量"].ge(MIN_REPORT_VOLUME_SHARES)]
+
+    ranked = filtered.sort_values(
         ["阿斯拉分數", "月營收年增率", "月營收月增率"],
         ascending=False,
     ).head(limit).copy()
     ranked.insert(0, "排名", range(1, len(ranked) + 1))
-    columns = [column for column in REPORT_COLUMNS if column in frame.columns]
+    columns = [column for column in REPORT_COLUMNS if column in filtered.columns]
     columns.insert(0, "排名")
     extra = ["阿斯拉分數", "收盤價", "當天成交量", "股價最後日期", "市場", "年月"]
-    columns.extend([column for column in extra if column in frame.columns])
+    columns.extend([column for column in extra if column in filtered.columns])
     return ranked[columns]
