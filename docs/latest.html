@@ -167,6 +167,36 @@
       font-weight: 800;
       padding: 14px;
     }
+    .mode-toggle {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .mode-toggle label {
+      align-items: center;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      cursor: pointer;
+      display: inline-flex;
+      font-weight: 800;
+      gap: 6px;
+      padding: 8px 12px;
+    }
+    .mode-toggle label:has(input:checked) {
+      background: #152238;
+      border-color: #152238;
+      color: white;
+    }
+    .mode-toggle input {
+      accent-color: var(--accent);
+    }
+    .mode-note {
+      color: var(--muted);
+      line-height: 1.65;
+      margin: 12px 0 0;
+    }
     .basis-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -364,15 +394,28 @@
       margin-top: 10px;
     }
     .status-line,
-    .risk-label {
+    .risk-label,
+    .mode-label {
       color: var(--muted);
       font-size: 13px;
       margin: 10px 0 0;
     }
     .status-line strong,
-    .risk-label {
+    .risk-label,
+    .mode-label strong {
       color: var(--ink);
       font-weight: 800;
+    }
+    .mode-penalty-note {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 12px;
+      color: #9a3412;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.5;
+      margin: 8px 0 0;
+      padding: 8px 10px;
     }
     .risk-pill {
       background: #eef2ff;
@@ -462,6 +505,20 @@
     .summary-table td:nth-child(4),
     .summary-table td:nth-child(15) {
       line-height: 1.45;
+    }
+    .score-cell .score-value {
+      display: block;
+    }
+    .score-penalty-chip {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 999px;
+      color: #9a3412;
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      margin-top: 3px;
+      padding: 2px 6px;
     }
     tr:nth-child(even) { background: #f8fafc; }
     .mobile-cards { display: none; }
@@ -612,6 +669,20 @@
     </section>
 
 
+    <section class="panel radar-mode-panel">
+      <div class="section-title">
+        <h2>雷達模式</h2>
+        <span>切換觀察角度，不刪除原始股票資料</span>
+      </div>
+      <div class="mode-toggle" role="radiogroup" aria-label="雷達模式">
+        <label><input type="radio" name="radarMode" value="main" checked> 主升段模式</label>
+        <label><input type="radio" name="radarMode" value="market"> 全市場模式</label>
+        <label><input type="radio" name="radarMode" value="defensive"> 資產防守模式</label>
+      </div>
+      <p id="radarModeNote" class="mode-note">主升段模式：優先觀察 AI、半導體、記憶體、PCB、CPO、光通訊、散熱、電源、低軌衛星、玻璃基板、被動元件、機器人、重電、軍工；防守族群不刪除，但未放量或未命中事件時會降權顯示。</p>
+    </section>
+
+
     <section class="panel holdings-panel">
       <div class="section-title">
         <h2>我的持股設定</h2>
@@ -664,7 +735,7 @@
     <div id="noResults" class="no-results">目前篩選條件下沒有符合的股票</div>
     <section class="mobile-cards">
       
-    <article class="stock-card radar-item" data-code="2536" data-name="宏普" data-search="2536 宏普" data-rating="A" data-concept="營建;資產;都更" data-mom="9513.2000">
+    <article class="stock-card radar-item" data-code="2536" data-name="宏普" data-search="2536 宏普" data-rating="A" data-concept="營建;資產;都更" data-mom="9513.2000" data-yoy="367.4300" data-score="80.0000" data-volume="4127.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#1</div>
@@ -673,7 +744,7 @@
         <div class="badge">A</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>80.0</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">80.0</strong></div>
         <div><span>收盤價</span><strong>22.35</strong></div>
         <div><span>成交量</span><strong>4127 張</strong></div>
       </div>
@@ -683,6 +754,8 @@
         <div><span>去年同月營收</span><strong>8.66億元</strong></div>
         <div><span>年增率%</span><strong>+367.43%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">一般觀察</span></div>
@@ -696,7 +769,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="8422" data-name="可寧衛*" data-search="8422 可寧衛*" data-rating="A" data-concept="綠能環保;循環經濟" data-mom="227.5900">
+    <article class="stock-card radar-item" data-code="8422" data-name="可寧衛*" data-search="8422 可寧衛*" data-rating="A" data-concept="綠能環保;循環經濟" data-mom="227.5900" data-yoy="199.6100" data-score="80.0000" data-volume="9728.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#2</div>
@@ -705,7 +778,7 @@
         <div class="badge">A</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>80.0</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">80.0</strong></div>
         <div><span>收盤價</span><strong>28.1</strong></div>
         <div><span>成交量</span><strong>9728 張</strong></div>
       </div>
@@ -715,6 +788,8 @@
         <div><span>去年同月營收</span><strong>4.25億元</strong></div>
         <div><span>年增率%</span><strong>+199.61%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">一般觀察</span></div>
@@ -728,7 +803,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="2539" data-name="櫻花建" data-search="2539 櫻花建" data-rating="A" data-concept="營建;資產;都更" data-mom="42.9700">
+    <article class="stock-card radar-item" data-code="2539" data-name="櫻花建" data-search="2539 櫻花建" data-rating="A" data-concept="營建;資產;都更" data-mom="42.9700" data-yoy="418.9300" data-score="77.9000" data-volume="1766.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#3</div>
@@ -737,7 +812,7 @@
         <div class="badge">A</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>77.9</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">77.9</strong></div>
         <div><span>收盤價</span><strong>39.95</strong></div>
         <div><span>成交量</span><strong>1766 張</strong></div>
       </div>
@@ -747,6 +822,8 @@
         <div><span>去年同月營收</span><strong>5.69億元</strong></div>
         <div><span>年增率%</span><strong>+418.93%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">一般觀察</span></div>
@@ -760,7 +837,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="5534" data-name="長虹" data-search="5534 長虹" data-rating="A-" data-concept="營建;資產;都更" data-mom="132.1300">
+    <article class="stock-card radar-item" data-code="5534" data-name="長虹" data-search="5534 長虹" data-rating="A-" data-concept="營建;資產;都更" data-mom="132.1300" data-yoy="452.5900" data-score="75.0000" data-volume="2505.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#4</div>
@@ -769,7 +846,7 @@
         <div class="badge">A-</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>75.0</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">75.0</strong></div>
         <div><span>收盤價</span><strong>83.2</strong></div>
         <div><span>成交量</span><strong>2505 張</strong></div>
       </div>
@@ -779,6 +856,8 @@
         <div><span>去年同月營收</span><strong>9,027萬元</strong></div>
         <div><span>年增率%</span><strong>+452.59%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">一般觀察</span></div>
@@ -792,7 +871,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="5522" data-name="遠雄" data-search="5522 遠雄" data-rating="A-" data-concept="營建;資產;都更" data-mom="182.2400">
+    <article class="stock-card radar-item" data-code="5522" data-name="遠雄" data-search="5522 遠雄" data-rating="A-" data-concept="營建;資產;都更" data-mom="182.2400" data-yoy="191.6400" data-score="75.0000" data-volume="2047.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#5</div>
@@ -801,7 +880,7 @@
         <div class="badge">A-</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>75.0</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">75.0</strong></div>
         <div><span>收盤價</span><strong>74.4</strong></div>
         <div><span>成交量</span><strong>2047 張</strong></div>
       </div>
@@ -811,6 +890,8 @@
         <div><span>去年同月營收</span><strong>2.22億元</strong></div>
         <div><span>年增率%</span><strong>+191.64%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">一般觀察</span></div>
@@ -824,7 +905,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="2537" data-name="聯上發" data-search="2537 聯上發" data-rating="A-" data-concept="營建;資產;都更" data-mom="145.9100">
+    <article class="stock-card radar-item" data-code="2537" data-name="聯上發" data-search="2537 聯上發" data-rating="A-" data-concept="營建;資產;都更" data-mom="145.9100" data-yoy="128.4900" data-score="75.0000" data-volume="6929.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#6</div>
@@ -833,7 +914,7 @@
         <div class="badge">A-</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>75.0</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">75.0</strong></div>
         <div><span>收盤價</span><strong>12.0</strong></div>
         <div><span>成交量</span><strong>6929 張</strong></div>
       </div>
@@ -843,6 +924,8 @@
         <div><span>去年同月營收</span><strong>3,117萬元</strong></div>
         <div><span>年增率%</span><strong>+128.49%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">一般觀察</span></div>
@@ -856,7 +939,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="2885" data-name="元大金" data-search="2885 元大金" data-rating="A-" data-concept="金融;壽險;銀行" data-mom="23.2300">
+    <article class="stock-card radar-item" data-code="2885" data-name="元大金" data-search="2885 元大金" data-rating="A-" data-concept="金融;壽險;銀行" data-mom="23.2300" data-yoy="928.4200" data-score="67.0000" data-volume="41083.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#7</div>
@@ -865,7 +948,7 @@
         <div class="badge">A-</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>67.0</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">67.0</strong></div>
         <div><span>收盤價</span><strong>68.0</strong></div>
         <div><span>成交量</span><strong>41083 張</strong></div>
       </div>
@@ -875,6 +958,8 @@
         <div><span>去年同月營收</span><strong>20.67億元</strong></div>
         <div><span>年增率%</span><strong>+928.42%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">一般觀察</span></div>
@@ -888,7 +973,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="2889" data-name="國票金" data-search="2889 國票金" data-rating="A-" data-concept="金融;壽險;銀行" data-mom="5.7400">
+    <article class="stock-card radar-item" data-code="2889" data-name="國票金" data-search="2889 國票金" data-rating="A-" data-concept="金融;壽險;銀行" data-mom="5.7400" data-yoy="147.9400" data-score="66.7000" data-volume="7193.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#8</div>
@@ -897,7 +982,7 @@
         <div class="badge">A-</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>66.7</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">66.7</strong></div>
         <div><span>收盤價</span><strong>15.25</strong></div>
         <div><span>成交量</span><strong>7193 張</strong></div>
       </div>
@@ -907,6 +992,8 @@
         <div><span>去年同月營收</span><strong>6.41億元</strong></div>
         <div><span>年增率%</span><strong>+147.94%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">一般觀察</span></div>
@@ -920,7 +1007,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="2543" data-name="皇昌" data-search="2543 皇昌" data-rating="A-" data-concept="營建;資產;都更" data-mom="15.5700">
+    <article class="stock-card radar-item" data-code="2543" data-name="皇昌" data-search="2543 皇昌" data-rating="A-" data-concept="營建;資產;都更" data-mom="15.5700" data-yoy="86.1400" data-score="66.2000" data-volume="2737.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#9</div>
@@ -929,7 +1016,7 @@
         <div class="badge">A-</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>66.2</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">66.2</strong></div>
         <div><span>收盤價</span><strong>44.1</strong></div>
         <div><span>成交量</span><strong>2737 張</strong></div>
       </div>
@@ -939,6 +1026,8 @@
         <div><span>去年同月營收</span><strong>8.32億元</strong></div>
         <div><span>年增率%</span><strong>+86.14%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">一般觀察</span></div>
@@ -952,7 +1041,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="2347" data-name="聯強" data-search="2347 聯強" data-rating="A-" data-concept="電子通路;半導體通路" data-mom="18.2800">
+    <article class="stock-card radar-item" data-code="2347" data-name="聯強" data-search="2347 聯強" data-rating="A-" data-concept="電子通路;半導體通路" data-mom="18.2800" data-yoy="129.2700" data-score="65.5000" data-volume="11082.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#10</div>
@@ -961,7 +1050,7 @@
         <div class="badge">A-</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>65.5</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">65.5</strong></div>
         <div><span>收盤價</span><strong>93.4</strong></div>
         <div><span>成交量</span><strong>11082 張</strong></div>
       </div>
@@ -971,6 +1060,8 @@
         <div><span>去年同月營收</span><strong>295.80億元</strong></div>
         <div><span>年增率%</span><strong>+129.27%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">一般觀察</span></div>
@@ -984,7 +1075,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="3535" data-name="晶彩科" data-search="3535 晶彩科" data-rating="B" data-concept="光電;面板;光通訊/cpo" data-mom="458.5100">
+    <article class="stock-card radar-item" data-code="3535" data-name="晶彩科" data-search="3535 晶彩科" data-rating="B" data-concept="光電;面板;光通訊/cpo" data-mom="458.5100" data-yoy="2229.0300" data-score="65.0000" data-volume="1265.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#11</div>
@@ -993,7 +1084,7 @@
         <div class="badge">B</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>65.0</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">65.0</strong></div>
         <div><span>收盤價</span><strong>134.0</strong></div>
         <div><span>成交量</span><strong>1265 張</strong></div>
       </div>
@@ -1003,6 +1094,8 @@
         <div><span>去年同月營收</span><strong>475萬元</strong></div>
         <div><span>年增率%</span><strong>+2229.03%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">一般觀察</span></div>
@@ -1016,7 +1109,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="8112" data-name="至上" data-search="8112 至上" data-rating="B" data-concept="電子通路;半導體通路" data-mom="53.7900">
+    <article class="stock-card radar-item" data-code="8112" data-name="至上" data-search="8112 至上" data-rating="B" data-concept="電子通路;半導體通路" data-mom="53.7900" data-yoy="253.1800" data-score="65.0000" data-volume="16411.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#12</div>
@@ -1025,7 +1118,7 @@
         <div class="badge">B</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>65.0</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">65.0</strong></div>
         <div><span>收盤價</span><strong>98.2</strong></div>
         <div><span>成交量</span><strong>16411 張</strong></div>
       </div>
@@ -1035,6 +1128,8 @@
         <div><span>去年同月營收</span><strong>152.67億元</strong></div>
         <div><span>年增率%</span><strong>+253.18%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">一般觀察</span></div>
@@ -1048,7 +1143,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="3041" data-name="揚智" data-search="3041 揚智" data-rating="B" data-concept="半導體;ai供應鏈;先進製程" data-mom="45.2800">
+    <article class="stock-card radar-item" data-code="3041" data-name="揚智" data-search="3041 揚智" data-rating="B" data-concept="半導體;ai供應鏈;先進製程" data-mom="45.2800" data-yoy="97.9400" data-score="63.1000" data-volume="13504.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#13</div>
@@ -1057,7 +1152,7 @@
         <div class="badge">B</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>63.1</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">63.1</strong></div>
         <div><span>收盤價</span><strong>28.15</strong></div>
         <div><span>成交量</span><strong>13504 張</strong></div>
       </div>
@@ -1067,6 +1162,8 @@
         <div><span>去年同月營收</span><strong>8,781萬元</strong></div>
         <div><span>年增率%</span><strong>+97.94%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">一般觀察</span></div>
@@ -1080,7 +1177,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="2337" data-name="旺宏" data-search="2337 旺宏" data-rating="B" data-concept="記憶體;低基期;ai邊緣需求" data-mom="5.8000">
+    <article class="stock-card radar-item" data-code="2337" data-name="旺宏" data-search="2337 旺宏" data-rating="B" data-concept="記憶體;低基期;ai邊緣需求" data-mom="5.8000" data-yoy="175.8000" data-score="61.7000" data-volume="125932.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#14</div>
@@ -1089,7 +1186,7 @@
         <div class="badge">B</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>61.7</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">61.7</strong></div>
         <div><span>收盤價</span><strong>169.0</strong></div>
         <div><span>成交量</span><strong>125932 張</strong></div>
       </div>
@@ -1099,6 +1196,8 @@
         <div><span>去年同月營收</span><strong>22.68億元</strong></div>
         <div><span>年增率%</span><strong>+175.80%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">爆量股</span></div>
@@ -1112,7 +1211,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="4934" data-name="太極" data-search="4934 太極" data-rating="B" data-concept="光電;面板;光通訊/cpo" data-mom="36.9400">
+    <article class="stock-card radar-item" data-code="4934" data-name="太極" data-search="4934 太極" data-rating="B" data-concept="光電;面板;光通訊/cpo" data-mom="36.9400" data-yoy="281.1000" data-score="61.1000" data-volume="1120.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#15</div>
@@ -1121,7 +1220,7 @@
         <div class="badge">B</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>61.1</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">61.1</strong></div>
         <div><span>收盤價</span><strong>17.1</strong></div>
         <div><span>成交量</span><strong>1120 張</strong></div>
       </div>
@@ -1131,6 +1230,8 @@
         <div><span>去年同月營收</span><strong>519萬元</strong></div>
         <div><span>年增率%</span><strong>+281.10%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">一般觀察</span></div>
@@ -1144,7 +1245,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="2820" data-name="華票" data-search="2820 華票" data-rating="B" data-concept="金融;壽險;銀行" data-mom="11.3600">
+    <article class="stock-card radar-item" data-code="2820" data-name="華票" data-search="2820 華票" data-rating="B" data-concept="金融;壽險;銀行" data-mom="11.3600" data-yoy="89.4000" data-score="60.8000" data-volume="3569.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#16</div>
@@ -1153,7 +1254,7 @@
         <div class="badge">B</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>60.8</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">60.8</strong></div>
         <div><span>收盤價</span><strong>17.85</strong></div>
         <div><span>成交量</span><strong>3569 張</strong></div>
       </div>
@@ -1163,6 +1264,8 @@
         <div><span>去年同月營收</span><strong>2.20億元</strong></div>
         <div><span>年增率%</span><strong>+89.40%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">一般觀察</span></div>
@@ -1176,7 +1279,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="1444" data-name="力麗" data-search="1444 力麗" data-rating="B" data-concept="04" data-mom="72.0500">
+    <article class="stock-card radar-item" data-code="1444" data-name="力麗" data-search="1444 力麗" data-rating="B" data-concept="04" data-mom="72.0500" data-yoy="81.0200" data-score="60.3000" data-volume="1594.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#17</div>
@@ -1185,7 +1288,7 @@
         <div class="badge">B</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>60.3</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">60.3</strong></div>
         <div><span>收盤價</span><strong>7.04</strong></div>
         <div><span>成交量</span><strong>1594 張</strong></div>
       </div>
@@ -1195,6 +1298,8 @@
         <div><span>去年同月營收</span><strong>5.92億元</strong></div>
         <div><span>年增率%</span><strong>+81.02%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">一般觀察</span></div>
@@ -1208,7 +1313,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="3022" data-name="威強電" data-search="3022 威強電" data-rating="B" data-concept="ai伺服器;pc/nb;邊緣運算" data-mom="39.2900">
+    <article class="stock-card radar-item" data-code="3022" data-name="威強電" data-search="3022 威強電" data-rating="B" data-concept="ai伺服器;pc/nb;邊緣運算" data-mom="39.2900" data-yoy="92.4000" data-score="59.9000" data-volume="1438.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#18</div>
@@ -1217,7 +1322,7 @@
         <div class="badge">B</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>59.9</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">59.9</strong></div>
         <div><span>收盤價</span><strong>84.5</strong></div>
         <div><span>成交量</span><strong>1438 張</strong></div>
       </div>
@@ -1227,6 +1332,8 @@
         <div><span>去年同月營收</span><strong>4.62億元</strong></div>
         <div><span>年增率%</span><strong>+92.40%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">觀察順位較後</span></div>
@@ -1240,7 +1347,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="4967" data-name="十銓" data-search="4967 十銓" data-rating="B" data-concept="半導體;ai供應鏈;先進製程" data-mom="26.8400">
+    <article class="stock-card radar-item" data-code="4967" data-name="十銓" data-search="4967 十銓" data-rating="B" data-concept="半導體;ai供應鏈;先進製程" data-mom="26.8400" data-yoy="112.5900" data-score="58.1000" data-volume="3913.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#19</div>
@@ -1249,7 +1356,7 @@
         <div class="badge">B</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>58.1</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">58.1</strong></div>
         <div><span>收盤價</span><strong>278.5</strong></div>
         <div><span>成交量</span><strong>3913 張</strong></div>
       </div>
@@ -1259,6 +1366,8 @@
         <div><span>去年同月營收</span><strong>12.02億元</strong></div>
         <div><span>年增率%</span><strong>+112.59%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">觀察順位較後</span></div>
@@ -1272,7 +1381,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="6901" data-name="鑽石投資" data-search="6901 鑽石投資" data-rating="B" data-concept="其他" data-mom="22.3400">
+    <article class="stock-card radar-item" data-code="6901" data-name="鑽石投資" data-search="6901 鑽石投資" data-rating="B" data-concept="其他" data-mom="22.3400" data-yoy="407.4600" data-score="56.7000" data-volume="3566.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#20</div>
@@ -1281,7 +1390,7 @@
         <div class="badge">B</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>56.7</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">56.7</strong></div>
         <div><span>收盤價</span><strong>16.55</strong></div>
         <div><span>成交量</span><strong>3566 張</strong></div>
       </div>
@@ -1291,6 +1400,8 @@
         <div><span>去年同月營收</span><strong>1.37億元</strong></div>
         <div><span>年增率%</span><strong>+407.46%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">觀察順位較後</span></div>
@@ -1304,7 +1415,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="6589" data-name="台康生技" data-search="6589 台康生技" data-rating="B" data-concept="生技醫療;醫材;新藥" data-mom="42.0800">
+    <article class="stock-card radar-item" data-code="6589" data-name="台康生技" data-search="6589 台康生技" data-rating="B" data-concept="生技醫療;醫材;新藥" data-mom="42.0800" data-yoy="56.3500" data-score="56.7000" data-volume="1183.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#21</div>
@@ -1313,7 +1424,7 @@
         <div class="badge">B</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>56.7</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">56.7</strong></div>
         <div><span>收盤價</span><strong>46.45</strong></div>
         <div><span>成交量</span><strong>1183 張</strong></div>
       </div>
@@ -1323,6 +1434,8 @@
         <div><span>去年同月營收</span><strong>7,470萬元</strong></div>
         <div><span>年增率%</span><strong>+56.35%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">觀察順位較後</span></div>
@@ -1336,7 +1449,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="1316" data-name="上曜" data-search="1316 上曜" data-rating="B" data-concept="營建;資產;都更" data-mom="5.3300">
+    <article class="stock-card radar-item" data-code="1316" data-name="上曜" data-search="1316 上曜" data-rating="B" data-concept="營建;資產;都更" data-mom="5.3300" data-yoy="152.9600" data-score="56.6000" data-volume="2540.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#22</div>
@@ -1345,7 +1458,7 @@
         <div class="badge">B</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>56.6</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">56.6</strong></div>
         <div><span>收盤價</span><strong>10.95</strong></div>
         <div><span>成交量</span><strong>2540 張</strong></div>
       </div>
@@ -1355,6 +1468,8 @@
         <div><span>去年同月營收</span><strong>2.85億元</strong></div>
         <div><span>年增率%</span><strong>+152.96%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">觀察順位較後</span></div>
@@ -1368,7 +1483,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="2101" data-name="南港" data-search="2101 南港" data-rating="B" data-concept="輪胎;橡膠材料" data-mom="4.5000">
+    <article class="stock-card radar-item" data-code="2101" data-name="南港" data-search="2101 南港" data-rating="B" data-concept="輪胎;橡膠材料" data-mom="4.5000" data-yoy="158.7500" data-score="56.4000" data-volume="2596.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#23</div>
@@ -1377,7 +1492,7 @@
         <div class="badge">B</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>56.4</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">56.4</strong></div>
         <div><span>收盤價</span><strong>32.45</strong></div>
         <div><span>成交量</span><strong>2596 張</strong></div>
       </div>
@@ -1387,6 +1502,8 @@
         <div><span>去年同月營收</span><strong>8.32億元</strong></div>
         <div><span>年增率%</span><strong>+158.75%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">觀察順位較後</span></div>
@@ -1400,7 +1517,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="6446" data-name="藥華藥" data-search="6446 藥華藥" data-rating="B" data-concept="生技醫療;醫材;新藥" data-mom="19.1000">
+    <article class="stock-card radar-item" data-code="6446" data-name="藥華藥" data-search="6446 藥華藥" data-rating="B" data-concept="生技醫療;醫材;新藥" data-mom="19.1000" data-yoy="108.4700" data-score="55.7000" data-volume="2829.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#24</div>
@@ -1409,7 +1526,7 @@
         <div class="badge">B</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>55.7</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">55.7</strong></div>
         <div><span>收盤價</span><strong>1060.0</strong></div>
         <div><span>成交量</span><strong>2829 張</strong></div>
       </div>
@@ -1419,6 +1536,8 @@
         <div><span>去年同月營收</span><strong>11.79億元</strong></div>
         <div><span>年增率%</span><strong>+108.47%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">觀察順位較後</span></div>
@@ -1432,7 +1551,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="2548" data-name="華固" data-search="2548 華固" data-rating="B" data-concept="營建;資產;都更" data-mom="-67.0500">
+    <article class="stock-card radar-item" data-code="2548" data-name="華固" data-search="2548 華固" data-rating="B" data-concept="營建;資產;都更" data-mom="-67.0500" data-yoy="9203.5600" data-score="55.0000" data-volume="4109.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#25</div>
@@ -1441,7 +1560,7 @@
         <div class="badge">B</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>55.0</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">55.0</strong></div>
         <div><span>收盤價</span><strong>103.5</strong></div>
         <div><span>成交量</span><strong>4109 張</strong></div>
       </div>
@@ -1451,6 +1570,8 @@
         <div><span>去年同月營收</span><strong>340萬元</strong></div>
         <div><span>年增率%</span><strong>+9203.56%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">月增轉弱</span><span class="risk-pill">低基期需確認</span><span class="risk-pill">觀察順位較後</span></div>
@@ -1464,7 +1585,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="6550" data-name="北極星藥業-KY" data-search="6550 北極星藥業-ky" data-rating="B" data-concept="生技醫療;醫材;新藥" data-mom="-4.0200">
+    <article class="stock-card radar-item" data-code="6550" data-name="北極星藥業-KY" data-search="6550 北極星藥業-ky" data-rating="B" data-concept="生技醫療;醫材;新藥" data-mom="-4.0200" data-yoy="248.6500" data-score="55.0000" data-volume="1746.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#26</div>
@@ -1473,7 +1594,7 @@
         <div class="badge">B</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>55.0</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">55.0</strong></div>
         <div><span>收盤價</span><strong>13.65</strong></div>
         <div><span>成交量</span><strong>1746 張</strong></div>
       </div>
@@ -1483,6 +1604,8 @@
         <div><span>去年同月營收</span><strong>46萬元</strong></div>
         <div><span>年增率%</span><strong>+248.65%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">月增轉弱</span><span class="risk-pill">觀察順位較後</span></div>
@@ -1496,7 +1619,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="4739" data-name="康普" data-search="4739 康普" data-rating="B" data-concept="化工材料;特用化學" data-mom="12.9200">
+    <article class="stock-card radar-item" data-code="4739" data-name="康普" data-search="4739 康普" data-rating="B" data-concept="化工材料;特用化學" data-mom="12.9200" data-yoy="140.9500" data-score="53.9000" data-volume="3717.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#27</div>
@@ -1505,7 +1628,7 @@
         <div class="badge">B</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>53.9</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">53.9</strong></div>
         <div><span>收盤價</span><strong>123.5</strong></div>
         <div><span>成交量</span><strong>3717 張</strong></div>
       </div>
@@ -1515,6 +1638,8 @@
         <div><span>去年同月營收</span><strong>4.81億元</strong></div>
         <div><span>年增率%</span><strong>+140.95%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">觀察順位較後</span></div>
@@ -1528,7 +1653,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="2383" data-name="台光電" data-search="2383 台光電" data-rating="B" data-concept="pcb;被動元件;電子零組件" data-mom="12.1700">
+    <article class="stock-card radar-item" data-code="2383" data-name="台光電" data-search="2383 台光電" data-rating="B" data-concept="pcb;被動元件;電子零組件" data-mom="12.1700" data-yoy="114.6300" data-score="53.7000" data-volume="1905.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#28</div>
@@ -1537,7 +1662,7 @@
         <div class="badge">B</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>53.7</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">53.7</strong></div>
         <div><span>收盤價</span><strong>5600.0</strong></div>
         <div><span>成交量</span><strong>1905 張</strong></div>
       </div>
@@ -1547,6 +1672,8 @@
         <div><span>去年同月營收</span><strong>72.77億元</strong></div>
         <div><span>年增率%</span><strong>+114.63%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">觀察順位較後</span></div>
@@ -1560,7 +1687,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="2368" data-name="金像電" data-search="2368 金像電" data-rating="B" data-concept="pcb;ai伺服器;高階板材" data-mom="20.3500">
+    <article class="stock-card radar-item" data-code="2368" data-name="金像電" data-search="2368 金像電" data-rating="B" data-concept="pcb;ai伺服器;高階板材" data-mom="20.3500" data-yoy="87.3000" data-score="52.9000" data-volume="3571.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#29</div>
@@ -1569,7 +1696,7 @@
         <div class="badge">B</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>52.9</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">52.9</strong></div>
         <div><span>收盤價</span><strong>1355.0</strong></div>
         <div><span>成交量</span><strong>3571 張</strong></div>
       </div>
@@ -1579,6 +1706,8 @@
         <div><span>去年同月營收</span><strong>46.84億元</strong></div>
         <div><span>年增率%</span><strong>+87.30%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">觀察順位較後</span></div>
@@ -1592,7 +1721,7 @@
     </article>
 
 
-    <article class="stock-card radar-item" data-code="9945" data-name="潤泰新" data-search="9945 潤泰新" data-rating="B" data-concept="其他" data-mom="32.8300">
+    <article class="stock-card radar-item" data-code="9945" data-name="潤泰新" data-search="9945 潤泰新" data-rating="B" data-concept="其他" data-mom="32.8300" data-yoy="72.0000" data-score="52.9000" data-volume="17319.0000" data-change="">
       <div class="card-top">
         <div>
           <div class="rank">#30</div>
@@ -1601,7 +1730,7 @@
         <div class="badge">B</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>52.9</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">52.9</strong></div>
         <div><span>收盤價</span><strong>27.5</strong></div>
         <div><span>成交量</span><strong>17319 張</strong></div>
       </div>
@@ -1611,6 +1740,8 @@
         <div><span>去年同月營收</span><strong>30.42億元</strong></div>
         <div><span>年增率%</span><strong>+72.00%</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>研究觀察</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags"><span class="risk-pill">觀察順位較後</span></div>
@@ -1630,7 +1761,7 @@
     <tr><th>排名</th><th>股票<br>代號</th><th>股票<br>名稱</th><th>概念股</th><th>雷達<br>強度</th><th>雷達<br>等級</th><th>收盤價<br>06/18</th><th>當天成交量<br>(張)</th><th>當月<br>營收</th><th>月增率<br>%</th><th>去年同月<br>營收</th><th>年增率<br>%</th><th>風險<br>標籤</th><th>追蹤<br>狀態</th><th>入選理由</th></tr>
   </thead>
   <tbody>
-    <tr class="radar-item" data-code="2536" data-name="宏普" data-search="2536 宏普" data-rating="A" data-concept="營建;資產;都更" data-mom="9513.2000"><td>1</td><td>2536</td><td>宏普</td><td>營建;資產;都更</td><td>80.0</td><td>A</td><td>22.35</td><td>4127</td><td>40.47億元</td><td>+9513.20%</td><td>8.66億元</td><td>+367.43%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 367.4%，月增 9513.2%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="8422" data-name="可寧衛*" data-search="8422 可寧衛*" data-rating="A" data-concept="綠能環保;循環經濟" data-mom="227.5900"><td>2</td><td>8422</td><td>可寧衛*</td><td>綠能環保;循環經濟</td><td>80.0</td><td>A</td><td>28.1</td><td>9728</td><td>12.73億元</td><td>+227.59%</td><td>4.25億元</td><td>+199.61%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 199.6%，月增 227.6%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2539" data-name="櫻花建" data-search="2539 櫻花建" data-rating="A" data-concept="營建;資產;都更" data-mom="42.9700"><td>3</td><td>2539</td><td>櫻花建</td><td>營建;資產;都更</td><td>77.9</td><td>A</td><td>39.95</td><td>1766</td><td>29.53億元</td><td>+42.97%</td><td>5.69億元</td><td>+418.93%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 418.9%，月增 43.0%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="5534" data-name="長虹" data-search="5534 長虹" data-rating="A-" data-concept="營建;資產;都更" data-mom="132.1300"><td>4</td><td>5534</td><td>長虹</td><td>營建;資產;都更</td><td>75.0</td><td>A-</td><td>83.2</td><td>2505</td><td>4.99億元</td><td>+132.13%</td><td>9,027萬元</td><td>+452.59%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 452.6%，月增 132.1%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="5522" data-name="遠雄" data-search="5522 遠雄" data-rating="A-" data-concept="營建;資產;都更" data-mom="182.2400"><td>5</td><td>5522</td><td>遠雄</td><td>營建;資產;都更</td><td>75.0</td><td>A-</td><td>74.4</td><td>2047</td><td>6.47億元</td><td>+182.24%</td><td>2.22億元</td><td>+191.64%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 191.6%，月增 182.2%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2537" data-name="聯上發" data-search="2537 聯上發" data-rating="A-" data-concept="營建;資產;都更" data-mom="145.9100"><td>6</td><td>2537</td><td>聯上發</td><td>營建;資產;都更</td><td>75.0</td><td>A-</td><td>12.0</td><td>6929</td><td>7,121萬元</td><td>+145.91%</td><td>3,117萬元</td><td>+128.49%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 128.5%，月增 145.9%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2885" data-name="元大金" data-search="2885 元大金" data-rating="A-" data-concept="金融;壽險;銀行" data-mom="23.2300"><td>7</td><td>2885</td><td>元大金</td><td>金融;壽險;銀行</td><td>67.0</td><td>A-</td><td>68.0</td><td>41083</td><td>212.61億元</td><td>+23.23%</td><td>20.67億元</td><td>+928.42%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 928.4%，月增 23.2%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2889" data-name="國票金" data-search="2889 國票金" data-rating="A-" data-concept="金融;壽險;銀行" data-mom="5.7400"><td>8</td><td>2889</td><td>國票金</td><td>金融;壽險;銀行</td><td>66.7</td><td>A-</td><td>15.25</td><td>7193</td><td>15.89億元</td><td>+5.74%</td><td>6.41億元</td><td>+147.94%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 147.9%，月增 5.7%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2543" data-name="皇昌" data-search="2543 皇昌" data-rating="A-" data-concept="營建;資產;都更" data-mom="15.5700"><td>9</td><td>2543</td><td>皇昌</td><td>營建;資產;都更</td><td>66.2</td><td>A-</td><td>44.1</td><td>2737</td><td>15.48億元</td><td>+15.57%</td><td>8.32億元</td><td>+86.14%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 86.1%，月增 15.6%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2347" data-name="聯強" data-search="2347 聯強" data-rating="A-" data-concept="電子通路;半導體通路" data-mom="18.2800"><td>10</td><td>2347</td><td>聯強</td><td>電子通路;半導體通路</td><td>65.5</td><td>A-</td><td>93.4</td><td>11082</td><td>678.19億元</td><td>+18.28%</td><td>295.80億元</td><td>+129.27%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 129.3%，月增 18.3%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="3535" data-name="晶彩科" data-search="3535 晶彩科" data-rating="B" data-concept="光電;面板;光通訊/cpo" data-mom="458.5100"><td>11</td><td>3535</td><td>晶彩科</td><td>光電;面板;光通訊/CPO</td><td>65.0</td><td>B</td><td>134.0</td><td>1265</td><td>1.11億元</td><td>+458.51%</td><td>475萬元</td><td>+2229.03%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 2229.0%，月增 458.5%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="8112" data-name="至上" data-search="8112 至上" data-rating="B" data-concept="電子通路;半導體通路" data-mom="53.7900"><td>12</td><td>8112</td><td>至上</td><td>電子通路;半導體通路</td><td>65.0</td><td>B</td><td>98.2</td><td>16411</td><td>539.21億元</td><td>+53.79%</td><td>152.67億元</td><td>+253.18%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 253.2%，月增 53.8%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="3041" data-name="揚智" data-search="3041 揚智" data-rating="B" data-concept="半導體;ai供應鏈;先進製程" data-mom="45.2800"><td>13</td><td>3041</td><td>揚智</td><td>半導體;AI供應鏈;先進製程</td><td>63.1</td><td>B</td><td>28.15</td><td>13504</td><td>1.74億元</td><td>+45.28%</td><td>8,781萬元</td><td>+97.94%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 97.9%，月增 45.3%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2337" data-name="旺宏" data-search="2337 旺宏" data-rating="B" data-concept="記憶體;低基期;ai邊緣需求" data-mom="5.8000"><td>14</td><td>2337</td><td>旺宏</td><td>記憶體;低基期;AI邊緣需求</td><td>61.7</td><td>B</td><td>169.0</td><td>125932</td><td>62.56億元</td><td>+5.80%</td><td>22.68億元</td><td>+175.80%</td><td><span class="risk-pill">爆量股</span></td><td>研究觀察</td><td>低基期後營收轉強，若價格與報價循環續揚，具重新估值空間</td></tr><tr class="radar-item" data-code="4934" data-name="太極" data-search="4934 太極" data-rating="B" data-concept="光電;面板;光通訊/cpo" data-mom="36.9400"><td>15</td><td>4934</td><td>太極</td><td>光電;面板;光通訊/CPO</td><td>61.1</td><td>B</td><td>17.1</td><td>1120</td><td>1,976萬元</td><td>+36.94%</td><td>519萬元</td><td>+281.10%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 281.1%，月增 36.9%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2820" data-name="華票" data-search="2820 華票" data-rating="B" data-concept="金融;壽險;銀行" data-mom="11.3600"><td>16</td><td>2820</td><td>華票</td><td>金融;壽險;銀行</td><td>60.8</td><td>B</td><td>17.85</td><td>3569</td><td>4.18億元</td><td>+11.36%</td><td>2.20億元</td><td>+89.40%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 89.4%，月增 11.4%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="1444" data-name="力麗" data-search="1444 力麗" data-rating="B" data-concept="04" data-mom="72.0500"><td>17</td><td>1444</td><td>力麗</td><td>04</td><td>60.3</td><td>B</td><td>7.04</td><td>1594</td><td>10.72億元</td><td>+72.05%</td><td>5.92億元</td><td>+81.02%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 81.0%，月增 72.0%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="3022" data-name="威強電" data-search="3022 威強電" data-rating="B" data-concept="ai伺服器;pc/nb;邊緣運算" data-mom="39.2900"><td>18</td><td>3022</td><td>威強電</td><td>AI伺服器;PC/NB;邊緣運算</td><td>59.9</td><td>B</td><td>84.5</td><td>1438</td><td>8.89億元</td><td>+39.29%</td><td>4.62億元</td><td>+92.40%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 92.4%，月增 39.3%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="4967" data-name="十銓" data-search="4967 十銓" data-rating="B" data-concept="半導體;ai供應鏈;先進製程" data-mom="26.8400"><td>19</td><td>4967</td><td>十銓</td><td>半導體;AI供應鏈;先進製程</td><td>58.1</td><td>B</td><td>278.5</td><td>3913</td><td>25.56億元</td><td>+26.84%</td><td>12.02億元</td><td>+112.59%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 112.6%，月增 26.8%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="6901" data-name="鑽石投資" data-search="6901 鑽石投資" data-rating="B" data-concept="其他" data-mom="22.3400"><td>20</td><td>6901</td><td>鑽石投資</td><td>其他</td><td>56.7</td><td>B</td><td>16.55</td><td>3566</td><td>6.93億元</td><td>+22.34%</td><td>1.37億元</td><td>+407.46%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 407.5%，月增 22.3%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="6589" data-name="台康生技" data-search="6589 台康生技" data-rating="B" data-concept="生技醫療;醫材;新藥" data-mom="42.0800"><td>21</td><td>6589</td><td>台康生技</td><td>生技醫療;醫材;新藥</td><td>56.7</td><td>B</td><td>46.45</td><td>1183</td><td>1.17億元</td><td>+42.08%</td><td>7,470萬元</td><td>+56.35%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 56.3%，月增 42.1%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="1316" data-name="上曜" data-search="1316 上曜" data-rating="B" data-concept="營建;資產;都更" data-mom="5.3300"><td>22</td><td>1316</td><td>上曜</td><td>營建;資產;都更</td><td>56.6</td><td>B</td><td>10.95</td><td>2540</td><td>7.20億元</td><td>+5.33%</td><td>2.85億元</td><td>+152.96%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 153.0%，月增 5.3%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2101" data-name="南港" data-search="2101 南港" data-rating="B" data-concept="輪胎;橡膠材料" data-mom="4.5000"><td>23</td><td>2101</td><td>南港</td><td>輪胎;橡膠材料</td><td>56.4</td><td>B</td><td>32.45</td><td>2596</td><td>21.52億元</td><td>+4.50%</td><td>8.32億元</td><td>+158.75%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 158.7%，月增 4.5%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="6446" data-name="藥華藥" data-search="6446 藥華藥" data-rating="B" data-concept="生技醫療;醫材;新藥" data-mom="19.1000"><td>24</td><td>6446</td><td>藥華藥</td><td>生技醫療;醫材;新藥</td><td>55.7</td><td>B</td><td>1060.0</td><td>2829</td><td>24.58億元</td><td>+19.10%</td><td>11.79億元</td><td>+108.47%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 108.5%，月增 19.1%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2548" data-name="華固" data-search="2548 華固" data-rating="B" data-concept="營建;資產;都更" data-mom="-67.0500"><td>25</td><td>2548</td><td>華固</td><td>營建;資產;都更</td><td>55.0</td><td>B</td><td>103.5</td><td>4109</td><td>3.16億元</td><td>-67.05%</td><td>340萬元</td><td>+9203.56%</td><td><span class="risk-pill">月增轉弱</span><span class="risk-pill">低基期需確認</span><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 9203.6%，月增 -67.1%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="6550" data-name="北極星藥業-KY" data-search="6550 北極星藥業-ky" data-rating="B" data-concept="生技醫療;醫材;新藥" data-mom="-4.0200"><td>26</td><td>6550</td><td>北極星藥業-KY</td><td>生技醫療;醫材;新藥</td><td>55.0</td><td>B</td><td>13.65</td><td>1746</td><td>160萬元</td><td>-4.02%</td><td>46萬元</td><td>+248.65%</td><td><span class="risk-pill">月增轉弱</span><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 248.7%，月增 -4.0%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="4739" data-name="康普" data-search="4739 康普" data-rating="B" data-concept="化工材料;特用化學" data-mom="12.9200"><td>27</td><td>4739</td><td>康普</td><td>化工材料;特用化學</td><td>53.9</td><td>B</td><td>123.5</td><td>3717</td><td>11.60億元</td><td>+12.92%</td><td>4.81億元</td><td>+140.95%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 141.0%，月增 12.9%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2383" data-name="台光電" data-search="2383 台光電" data-rating="B" data-concept="pcb;被動元件;電子零組件" data-mom="12.1700"><td>28</td><td>2383</td><td>台光電</td><td>PCB;被動元件;電子零組件</td><td>53.7</td><td>B</td><td>5600.0</td><td>1905</td><td>156.19億元</td><td>+12.17%</td><td>72.77億元</td><td>+114.63%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 114.6%，月增 12.2%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2368" data-name="金像電" data-search="2368 金像電" data-rating="B" data-concept="pcb;ai伺服器;高階板材" data-mom="20.3500"><td>29</td><td>2368</td><td>金像電</td><td>PCB;AI伺服器;高階板材</td><td>52.9</td><td>B</td><td>1355.0</td><td>3571</td><td>87.73億元</td><td>+20.35%</td><td>46.84億元</td><td>+87.30%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 87.3%，月增 20.4%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="9945" data-name="潤泰新" data-search="9945 潤泰新" data-rating="B" data-concept="其他" data-mom="32.8300"><td>30</td><td>9945</td><td>潤泰新</td><td>其他</td><td>52.9</td><td>B</td><td>27.5</td><td>17319</td><td>52.32億元</td><td>+32.83%</td><td>30.42億元</td><td>+72.00%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 72.0%，月增 32.8%，符合低基期轉強預篩</td></tr>
+    <tr class="radar-item" data-code="2536" data-name="宏普" data-search="2536 宏普" data-rating="A" data-concept="營建;資產;都更" data-mom="9513.2000" data-yoy="367.4300" data-score="80.0000" data-volume="4127.0000" data-change=""><td>1</td><td>2536</td><td>宏普</td><td>營建;資產;都更</td><td class="score-cell"><span class="score-value">80.0</span><span class="score-penalty-chip" hidden>降權</span></td><td>A</td><td>22.35</td><td>4127</td><td>40.47億元</td><td>+9513.20%</td><td>8.66億元</td><td>+367.43%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 367.4%，月增 9513.2%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="8422" data-name="可寧衛*" data-search="8422 可寧衛*" data-rating="A" data-concept="綠能環保;循環經濟" data-mom="227.5900" data-yoy="199.6100" data-score="80.0000" data-volume="9728.0000" data-change=""><td>2</td><td>8422</td><td>可寧衛*</td><td>綠能環保;循環經濟</td><td class="score-cell"><span class="score-value">80.0</span><span class="score-penalty-chip" hidden>降權</span></td><td>A</td><td>28.1</td><td>9728</td><td>12.73億元</td><td>+227.59%</td><td>4.25億元</td><td>+199.61%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 199.6%，月增 227.6%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2539" data-name="櫻花建" data-search="2539 櫻花建" data-rating="A" data-concept="營建;資產;都更" data-mom="42.9700" data-yoy="418.9300" data-score="77.9000" data-volume="1766.0000" data-change=""><td>3</td><td>2539</td><td>櫻花建</td><td>營建;資產;都更</td><td class="score-cell"><span class="score-value">77.9</span><span class="score-penalty-chip" hidden>降權</span></td><td>A</td><td>39.95</td><td>1766</td><td>29.53億元</td><td>+42.97%</td><td>5.69億元</td><td>+418.93%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 418.9%，月增 43.0%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="5534" data-name="長虹" data-search="5534 長虹" data-rating="A-" data-concept="營建;資產;都更" data-mom="132.1300" data-yoy="452.5900" data-score="75.0000" data-volume="2505.0000" data-change=""><td>4</td><td>5534</td><td>長虹</td><td>營建;資產;都更</td><td class="score-cell"><span class="score-value">75.0</span><span class="score-penalty-chip" hidden>降權</span></td><td>A-</td><td>83.2</td><td>2505</td><td>4.99億元</td><td>+132.13%</td><td>9,027萬元</td><td>+452.59%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 452.6%，月增 132.1%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="5522" data-name="遠雄" data-search="5522 遠雄" data-rating="A-" data-concept="營建;資產;都更" data-mom="182.2400" data-yoy="191.6400" data-score="75.0000" data-volume="2047.0000" data-change=""><td>5</td><td>5522</td><td>遠雄</td><td>營建;資產;都更</td><td class="score-cell"><span class="score-value">75.0</span><span class="score-penalty-chip" hidden>降權</span></td><td>A-</td><td>74.4</td><td>2047</td><td>6.47億元</td><td>+182.24%</td><td>2.22億元</td><td>+191.64%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 191.6%，月增 182.2%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2537" data-name="聯上發" data-search="2537 聯上發" data-rating="A-" data-concept="營建;資產;都更" data-mom="145.9100" data-yoy="128.4900" data-score="75.0000" data-volume="6929.0000" data-change=""><td>6</td><td>2537</td><td>聯上發</td><td>營建;資產;都更</td><td class="score-cell"><span class="score-value">75.0</span><span class="score-penalty-chip" hidden>降權</span></td><td>A-</td><td>12.0</td><td>6929</td><td>7,121萬元</td><td>+145.91%</td><td>3,117萬元</td><td>+128.49%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 128.5%，月增 145.9%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2885" data-name="元大金" data-search="2885 元大金" data-rating="A-" data-concept="金融;壽險;銀行" data-mom="23.2300" data-yoy="928.4200" data-score="67.0000" data-volume="41083.0000" data-change=""><td>7</td><td>2885</td><td>元大金</td><td>金融;壽險;銀行</td><td class="score-cell"><span class="score-value">67.0</span><span class="score-penalty-chip" hidden>降權</span></td><td>A-</td><td>68.0</td><td>41083</td><td>212.61億元</td><td>+23.23%</td><td>20.67億元</td><td>+928.42%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 928.4%，月增 23.2%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2889" data-name="國票金" data-search="2889 國票金" data-rating="A-" data-concept="金融;壽險;銀行" data-mom="5.7400" data-yoy="147.9400" data-score="66.7000" data-volume="7193.0000" data-change=""><td>8</td><td>2889</td><td>國票金</td><td>金融;壽險;銀行</td><td class="score-cell"><span class="score-value">66.7</span><span class="score-penalty-chip" hidden>降權</span></td><td>A-</td><td>15.25</td><td>7193</td><td>15.89億元</td><td>+5.74%</td><td>6.41億元</td><td>+147.94%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 147.9%，月增 5.7%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2543" data-name="皇昌" data-search="2543 皇昌" data-rating="A-" data-concept="營建;資產;都更" data-mom="15.5700" data-yoy="86.1400" data-score="66.2000" data-volume="2737.0000" data-change=""><td>9</td><td>2543</td><td>皇昌</td><td>營建;資產;都更</td><td class="score-cell"><span class="score-value">66.2</span><span class="score-penalty-chip" hidden>降權</span></td><td>A-</td><td>44.1</td><td>2737</td><td>15.48億元</td><td>+15.57%</td><td>8.32億元</td><td>+86.14%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 86.1%，月增 15.6%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2347" data-name="聯強" data-search="2347 聯強" data-rating="A-" data-concept="電子通路;半導體通路" data-mom="18.2800" data-yoy="129.2700" data-score="65.5000" data-volume="11082.0000" data-change=""><td>10</td><td>2347</td><td>聯強</td><td>電子通路;半導體通路</td><td class="score-cell"><span class="score-value">65.5</span><span class="score-penalty-chip" hidden>降權</span></td><td>A-</td><td>93.4</td><td>11082</td><td>678.19億元</td><td>+18.28%</td><td>295.80億元</td><td>+129.27%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 129.3%，月增 18.3%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="3535" data-name="晶彩科" data-search="3535 晶彩科" data-rating="B" data-concept="光電;面板;光通訊/cpo" data-mom="458.5100" data-yoy="2229.0300" data-score="65.0000" data-volume="1265.0000" data-change=""><td>11</td><td>3535</td><td>晶彩科</td><td>光電;面板;光通訊/CPO</td><td class="score-cell"><span class="score-value">65.0</span><span class="score-penalty-chip" hidden>降權</span></td><td>B</td><td>134.0</td><td>1265</td><td>1.11億元</td><td>+458.51%</td><td>475萬元</td><td>+2229.03%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 2229.0%，月增 458.5%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="8112" data-name="至上" data-search="8112 至上" data-rating="B" data-concept="電子通路;半導體通路" data-mom="53.7900" data-yoy="253.1800" data-score="65.0000" data-volume="16411.0000" data-change=""><td>12</td><td>8112</td><td>至上</td><td>電子通路;半導體通路</td><td class="score-cell"><span class="score-value">65.0</span><span class="score-penalty-chip" hidden>降權</span></td><td>B</td><td>98.2</td><td>16411</td><td>539.21億元</td><td>+53.79%</td><td>152.67億元</td><td>+253.18%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 253.2%，月增 53.8%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="3041" data-name="揚智" data-search="3041 揚智" data-rating="B" data-concept="半導體;ai供應鏈;先進製程" data-mom="45.2800" data-yoy="97.9400" data-score="63.1000" data-volume="13504.0000" data-change=""><td>13</td><td>3041</td><td>揚智</td><td>半導體;AI供應鏈;先進製程</td><td class="score-cell"><span class="score-value">63.1</span><span class="score-penalty-chip" hidden>降權</span></td><td>B</td><td>28.15</td><td>13504</td><td>1.74億元</td><td>+45.28%</td><td>8,781萬元</td><td>+97.94%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 97.9%，月增 45.3%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2337" data-name="旺宏" data-search="2337 旺宏" data-rating="B" data-concept="記憶體;低基期;ai邊緣需求" data-mom="5.8000" data-yoy="175.8000" data-score="61.7000" data-volume="125932.0000" data-change=""><td>14</td><td>2337</td><td>旺宏</td><td>記憶體;低基期;AI邊緣需求</td><td class="score-cell"><span class="score-value">61.7</span><span class="score-penalty-chip" hidden>降權</span></td><td>B</td><td>169.0</td><td>125932</td><td>62.56億元</td><td>+5.80%</td><td>22.68億元</td><td>+175.80%</td><td><span class="risk-pill">爆量股</span></td><td>研究觀察</td><td>低基期後營收轉強，若價格與報價循環續揚，具重新估值空間</td></tr><tr class="radar-item" data-code="4934" data-name="太極" data-search="4934 太極" data-rating="B" data-concept="光電;面板;光通訊/cpo" data-mom="36.9400" data-yoy="281.1000" data-score="61.1000" data-volume="1120.0000" data-change=""><td>15</td><td>4934</td><td>太極</td><td>光電;面板;光通訊/CPO</td><td class="score-cell"><span class="score-value">61.1</span><span class="score-penalty-chip" hidden>降權</span></td><td>B</td><td>17.1</td><td>1120</td><td>1,976萬元</td><td>+36.94%</td><td>519萬元</td><td>+281.10%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 281.1%，月增 36.9%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2820" data-name="華票" data-search="2820 華票" data-rating="B" data-concept="金融;壽險;銀行" data-mom="11.3600" data-yoy="89.4000" data-score="60.8000" data-volume="3569.0000" data-change=""><td>16</td><td>2820</td><td>華票</td><td>金融;壽險;銀行</td><td class="score-cell"><span class="score-value">60.8</span><span class="score-penalty-chip" hidden>降權</span></td><td>B</td><td>17.85</td><td>3569</td><td>4.18億元</td><td>+11.36%</td><td>2.20億元</td><td>+89.40%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 89.4%，月增 11.4%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="1444" data-name="力麗" data-search="1444 力麗" data-rating="B" data-concept="04" data-mom="72.0500" data-yoy="81.0200" data-score="60.3000" data-volume="1594.0000" data-change=""><td>17</td><td>1444</td><td>力麗</td><td>04</td><td class="score-cell"><span class="score-value">60.3</span><span class="score-penalty-chip" hidden>降權</span></td><td>B</td><td>7.04</td><td>1594</td><td>10.72億元</td><td>+72.05%</td><td>5.92億元</td><td>+81.02%</td><td><span class="risk-pill">一般觀察</span></td><td>研究觀察</td><td>營收年增 81.0%，月增 72.0%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="3022" data-name="威強電" data-search="3022 威強電" data-rating="B" data-concept="ai伺服器;pc/nb;邊緣運算" data-mom="39.2900" data-yoy="92.4000" data-score="59.9000" data-volume="1438.0000" data-change=""><td>18</td><td>3022</td><td>威強電</td><td>AI伺服器;PC/NB;邊緣運算</td><td class="score-cell"><span class="score-value">59.9</span><span class="score-penalty-chip" hidden>降權</span></td><td>B</td><td>84.5</td><td>1438</td><td>8.89億元</td><td>+39.29%</td><td>4.62億元</td><td>+92.40%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 92.4%，月增 39.3%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="4967" data-name="十銓" data-search="4967 十銓" data-rating="B" data-concept="半導體;ai供應鏈;先進製程" data-mom="26.8400" data-yoy="112.5900" data-score="58.1000" data-volume="3913.0000" data-change=""><td>19</td><td>4967</td><td>十銓</td><td>半導體;AI供應鏈;先進製程</td><td class="score-cell"><span class="score-value">58.1</span><span class="score-penalty-chip" hidden>降權</span></td><td>B</td><td>278.5</td><td>3913</td><td>25.56億元</td><td>+26.84%</td><td>12.02億元</td><td>+112.59%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 112.6%，月增 26.8%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="6901" data-name="鑽石投資" data-search="6901 鑽石投資" data-rating="B" data-concept="其他" data-mom="22.3400" data-yoy="407.4600" data-score="56.7000" data-volume="3566.0000" data-change=""><td>20</td><td>6901</td><td>鑽石投資</td><td>其他</td><td class="score-cell"><span class="score-value">56.7</span><span class="score-penalty-chip" hidden>降權</span></td><td>B</td><td>16.55</td><td>3566</td><td>6.93億元</td><td>+22.34%</td><td>1.37億元</td><td>+407.46%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 407.5%，月增 22.3%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="6589" data-name="台康生技" data-search="6589 台康生技" data-rating="B" data-concept="生技醫療;醫材;新藥" data-mom="42.0800" data-yoy="56.3500" data-score="56.7000" data-volume="1183.0000" data-change=""><td>21</td><td>6589</td><td>台康生技</td><td>生技醫療;醫材;新藥</td><td class="score-cell"><span class="score-value">56.7</span><span class="score-penalty-chip" hidden>降權</span></td><td>B</td><td>46.45</td><td>1183</td><td>1.17億元</td><td>+42.08%</td><td>7,470萬元</td><td>+56.35%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 56.3%，月增 42.1%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="1316" data-name="上曜" data-search="1316 上曜" data-rating="B" data-concept="營建;資產;都更" data-mom="5.3300" data-yoy="152.9600" data-score="56.6000" data-volume="2540.0000" data-change=""><td>22</td><td>1316</td><td>上曜</td><td>營建;資產;都更</td><td class="score-cell"><span class="score-value">56.6</span><span class="score-penalty-chip" hidden>降權</span></td><td>B</td><td>10.95</td><td>2540</td><td>7.20億元</td><td>+5.33%</td><td>2.85億元</td><td>+152.96%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 153.0%，月增 5.3%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2101" data-name="南港" data-search="2101 南港" data-rating="B" data-concept="輪胎;橡膠材料" data-mom="4.5000" data-yoy="158.7500" data-score="56.4000" data-volume="2596.0000" data-change=""><td>23</td><td>2101</td><td>南港</td><td>輪胎;橡膠材料</td><td class="score-cell"><span class="score-value">56.4</span><span class="score-penalty-chip" hidden>降權</span></td><td>B</td><td>32.45</td><td>2596</td><td>21.52億元</td><td>+4.50%</td><td>8.32億元</td><td>+158.75%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 158.7%，月增 4.5%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="6446" data-name="藥華藥" data-search="6446 藥華藥" data-rating="B" data-concept="生技醫療;醫材;新藥" data-mom="19.1000" data-yoy="108.4700" data-score="55.7000" data-volume="2829.0000" data-change=""><td>24</td><td>6446</td><td>藥華藥</td><td>生技醫療;醫材;新藥</td><td class="score-cell"><span class="score-value">55.7</span><span class="score-penalty-chip" hidden>降權</span></td><td>B</td><td>1060.0</td><td>2829</td><td>24.58億元</td><td>+19.10%</td><td>11.79億元</td><td>+108.47%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 108.5%，月增 19.1%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2548" data-name="華固" data-search="2548 華固" data-rating="B" data-concept="營建;資產;都更" data-mom="-67.0500" data-yoy="9203.5600" data-score="55.0000" data-volume="4109.0000" data-change=""><td>25</td><td>2548</td><td>華固</td><td>營建;資產;都更</td><td class="score-cell"><span class="score-value">55.0</span><span class="score-penalty-chip" hidden>降權</span></td><td>B</td><td>103.5</td><td>4109</td><td>3.16億元</td><td>-67.05%</td><td>340萬元</td><td>+9203.56%</td><td><span class="risk-pill">月增轉弱</span><span class="risk-pill">低基期需確認</span><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 9203.6%，月增 -67.1%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="6550" data-name="北極星藥業-KY" data-search="6550 北極星藥業-ky" data-rating="B" data-concept="生技醫療;醫材;新藥" data-mom="-4.0200" data-yoy="248.6500" data-score="55.0000" data-volume="1746.0000" data-change=""><td>26</td><td>6550</td><td>北極星藥業-KY</td><td>生技醫療;醫材;新藥</td><td class="score-cell"><span class="score-value">55.0</span><span class="score-penalty-chip" hidden>降權</span></td><td>B</td><td>13.65</td><td>1746</td><td>160萬元</td><td>-4.02%</td><td>46萬元</td><td>+248.65%</td><td><span class="risk-pill">月增轉弱</span><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 248.7%，月增 -4.0%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="4739" data-name="康普" data-search="4739 康普" data-rating="B" data-concept="化工材料;特用化學" data-mom="12.9200" data-yoy="140.9500" data-score="53.9000" data-volume="3717.0000" data-change=""><td>27</td><td>4739</td><td>康普</td><td>化工材料;特用化學</td><td class="score-cell"><span class="score-value">53.9</span><span class="score-penalty-chip" hidden>降權</span></td><td>B</td><td>123.5</td><td>3717</td><td>11.60億元</td><td>+12.92%</td><td>4.81億元</td><td>+140.95%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 141.0%，月增 12.9%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2383" data-name="台光電" data-search="2383 台光電" data-rating="B" data-concept="pcb;被動元件;電子零組件" data-mom="12.1700" data-yoy="114.6300" data-score="53.7000" data-volume="1905.0000" data-change=""><td>28</td><td>2383</td><td>台光電</td><td>PCB;被動元件;電子零組件</td><td class="score-cell"><span class="score-value">53.7</span><span class="score-penalty-chip" hidden>降權</span></td><td>B</td><td>5600.0</td><td>1905</td><td>156.19億元</td><td>+12.17%</td><td>72.77億元</td><td>+114.63%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 114.6%，月增 12.2%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="2368" data-name="金像電" data-search="2368 金像電" data-rating="B" data-concept="pcb;ai伺服器;高階板材" data-mom="20.3500" data-yoy="87.3000" data-score="52.9000" data-volume="3571.0000" data-change=""><td>29</td><td>2368</td><td>金像電</td><td>PCB;AI伺服器;高階板材</td><td class="score-cell"><span class="score-value">52.9</span><span class="score-penalty-chip" hidden>降權</span></td><td>B</td><td>1355.0</td><td>3571</td><td>87.73億元</td><td>+20.35%</td><td>46.84億元</td><td>+87.30%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 87.3%，月增 20.4%，符合低基期轉強預篩</td></tr><tr class="radar-item" data-code="9945" data-name="潤泰新" data-search="9945 潤泰新" data-rating="B" data-concept="其他" data-mom="32.8300" data-yoy="72.0000" data-score="52.9000" data-volume="17319.0000" data-change=""><td>30</td><td>9945</td><td>潤泰新</td><td>其他</td><td class="score-cell"><span class="score-value">52.9</span><span class="score-penalty-chip" hidden>降權</span></td><td>B</td><td>27.5</td><td>17319</td><td>52.32億元</td><td>+32.83%</td><td>30.42億元</td><td>+72.00%</td><td><span class="risk-pill">觀察順位較後</span></td><td>研究觀察</td><td>營收年增 72.0%，月增 32.8%，符合低基期轉強預篩</td></tr>
   </tbody>
 </table>
     </section>
@@ -1654,9 +1785,25 @@
     const importHoldingsFile = document.getElementById('importHoldingsFile');
     const newsEventsList = document.getElementById('newsEventsList');
     const newsEventsUrl = window.location.pathname.includes('/reports/') ? '../news-events.json' : 'news-events.json';
+    const modeInputs = Array.from(document.querySelectorAll('input[name="radarMode"]'));
+    const radarModeNote = document.getElementById('radarModeNote');
     let latestNewsEvents = [];
+    let majorEventCodes = new Set();
 
     const radarByCode = new Map(radarData.map((stock) => [stock.code, stock]));
+    const mainThemeKeywords = ['AI', '半導體', '記憶體', 'PCB', 'CPO', '光通訊', '散熱', '電源', '低軌衛星', '玻璃基板', '被動元件', '機器人', '重電', '軍工'];
+    const constructionKeywords = ['營建', '資產', '都更'];
+    const financeKeywords = ['金融', '壽險', '銀行'];
+    const modeLabels = {
+      main: '主升段',
+      market: '全市場',
+      defensive: '資產防守',
+    };
+    const modeNotes = {
+      main: '主升段模式：優先觀察 AI、半導體、記憶體、PCB、CPO、光通訊、散熱、電源、低軌衛星、玻璃基板、被動元件、機器人、重電、軍工；防守族群不刪除，但未放量或未命中事件時會降權顯示。',
+      market: '全市場模式：不降權，所有股票照原始雷達強度排序。',
+      defensive: '資產防守模式：只顯示營建、資產、都更、金融、壽險、銀行相關股票，並依雷達強度、成交量、營收年增、營收月增排序。',
+    };
 
     function escapeHtml(value) {
       return String(value ?? '')
@@ -1783,7 +1930,14 @@
         console.warn('Unable to load news events', error);
         latestNewsEvents = [];
       }
+      majorEventCodes = new Set(
+        (Array.isArray(latestNewsEvents) ? latestNewsEvents : [])
+          .flatMap((event) => event.related_stocks || [])
+          .map(normalizeHoldingCode)
+          .filter(Boolean)
+      );
       renderNewsEvents(latestNewsEvents);
+      applyFilters();
     }
 
     function renderHoldings(codes) {
@@ -1880,7 +2034,128 @@
       reader.readAsText(file, 'utf-8');
     });
 
+    function getRadarMode() {
+      return modeInputs.find((input) => input.checked)?.value || 'main';
+    }
+
+    function hasAnyKeyword(text, keywords) {
+      const normalized = String(text || '').toUpperCase();
+      return keywords.some((keyword) => normalized.includes(String(keyword).toUpperCase()));
+    }
+
+    function itemMetrics(item) {
+      return {
+        code: item.dataset.code || '',
+        concept: item.dataset.concept || '',
+        originalScore: Number(item.dataset.score || 'NaN'),
+        volume: Number(item.dataset.volume || 'NaN'),
+        yoy: Number(item.dataset.yoy || 'NaN'),
+        mom: Number(item.dataset.mom || 'NaN'),
+        dailyChange: Number(item.dataset.change || 'NaN'),
+        originalIndex: Number(item.dataset.originalIndex || '0'),
+      };
+    }
+
+    function downgradeInfo(item) {
+      const metrics = itemMetrics(item);
+      const isMainTheme = hasAnyKeyword(metrics.concept, mainThemeKeywords);
+      const isConstruction = hasAnyKeyword(metrics.concept, constructionKeywords);
+      const isFinance = hasAnyKeyword(metrics.concept, financeKeywords);
+      const isDefensive = isConstruction || isFinance;
+      let penalty = 0;
+      if (isConstruction) penalty = Math.max(penalty, 10);
+      if (isFinance) penalty = Math.max(penalty, 15);
+
+      const cancelPenalty =
+        metrics.volume > 3000 ||
+        majorEventCodes.has(metrics.code) ||
+        metrics.dailyChange > 3;
+
+      const shouldDowngrade = isDefensive && penalty > 0 && !cancelPenalty;
+      const originalScore = Number.isFinite(metrics.originalScore) ? metrics.originalScore : 0;
+      const adjustedScore = shouldDowngrade ? Math.max(0, originalScore - penalty) : originalScore;
+      return {
+        ...metrics,
+        isMainTheme,
+        isDefensive,
+        shouldDowngrade,
+        adjustedScore,
+      };
+    }
+
+    function sortItems(items, mode) {
+      return [...items].sort((a, b) => {
+        const aInfo = downgradeInfo(a);
+        const bInfo = downgradeInfo(b);
+        if (mode === 'defensive') {
+          return (
+            (bInfo.originalScore - aInfo.originalScore) ||
+            ((Number.isFinite(bInfo.volume) ? bInfo.volume : -Infinity) - (Number.isFinite(aInfo.volume) ? aInfo.volume : -Infinity)) ||
+            ((Number.isFinite(bInfo.yoy) ? bInfo.yoy : -Infinity) - (Number.isFinite(aInfo.yoy) ? aInfo.yoy : -Infinity)) ||
+            ((Number.isFinite(bInfo.mom) ? bInfo.mom : -Infinity) - (Number.isFinite(aInfo.mom) ? aInfo.mom : -Infinity)) ||
+            (aInfo.originalIndex - bInfo.originalIndex)
+          );
+        }
+        if (mode === 'market') {
+          return (bInfo.originalScore - aInfo.originalScore) || (aInfo.originalIndex - bInfo.originalIndex);
+        }
+        return (
+          (Number(bInfo.isMainTheme) - Number(aInfo.isMainTheme)) ||
+          (bInfo.adjustedScore - aInfo.adjustedScore) ||
+          (aInfo.originalIndex - bInfo.originalIndex)
+        );
+      });
+    }
+
+    function updateItemModeDisplay(item, mode) {
+      const info = downgradeInfo(item);
+      const displayScore = mode === 'main' ? info.adjustedScore : info.originalScore;
+      const scoreText = Number.isFinite(displayScore) ? displayScore.toFixed(1) : '';
+      const label = modeLabels[mode] || '主升段';
+      item.dataset.modeVisible = mode === 'defensive' ? String(info.isDefensive) : 'true';
+      item.dataset.modeScore = scoreText;
+
+      item.querySelectorAll('.score-value').forEach((node) => {
+        node.textContent = scoreText;
+      });
+      item.querySelectorAll('.score-penalty-chip').forEach((node) => {
+        node.hidden = !(mode === 'main' && info.shouldDowngrade);
+      });
+      item.querySelectorAll('.mode-tag').forEach((node) => {
+        node.textContent = label;
+      });
+      item.querySelectorAll('.mode-penalty-note').forEach((node) => {
+        node.hidden = !(mode === 'main' && info.shouldDowngrade);
+      });
+    }
+
+    function applyRadarMode() {
+      const mode = getRadarMode();
+      if (radarModeNote) radarModeNote.textContent = modeNotes[mode] || modeNotes.main;
+      const rows = Array.from(document.querySelectorAll('tr.radar-item'));
+      const cards = Array.from(document.querySelectorAll('article.radar-item'));
+
+      rows.forEach((row, index) => {
+        if (!row.dataset.originalIndex) row.dataset.originalIndex = String(index);
+        updateItemModeDisplay(row, mode);
+      });
+      cards.forEach((card, index) => {
+        if (!card.dataset.originalIndex) card.dataset.originalIndex = String(index);
+        updateItemModeDisplay(card, mode);
+      });
+
+      const tbody = document.querySelector('.summary-table tbody');
+      if (tbody) {
+        sortItems(rows, mode).forEach((row) => tbody.appendChild(row));
+      }
+      const mobileSection = document.querySelector('.mobile-cards');
+      if (mobileSection) {
+        sortItems(cards, mode).forEach((card) => mobileSection.appendChild(card));
+      }
+    }
+
     function applyFilters() {
+      applyRadarMode();
       const search = (searchInput?.value || '').trim().toLowerCase();
       const rating = ratingFilter?.value || '';
       const concept = (conceptInput?.value || '').trim().toLowerCase();
@@ -1894,6 +2169,8 @@
         const itemRating = item.dataset.rating || '';
         const itemConcept = item.dataset.concept || '';
         const itemMom = Number(item.dataset.mom || 'NaN');
+        const modeVisible = item.dataset.modeVisible !== 'false';
+        if (!modeVisible) return false;
         if (search && !itemSearch.includes(search)) return false;
         if (rating && itemRating !== rating) return false;
         if (concept && !itemConcept.includes(concept)) return false;
@@ -1920,6 +2197,9 @@
     [searchInput, ratingFilter, conceptInput, positiveMomOnly].forEach((control) => {
       control?.addEventListener('input', applyFilters);
       control?.addEventListener('change', applyFilters);
+    });
+    modeInputs.forEach((control) => {
+      control.addEventListener('change', applyFilters);
     });
     loadHoldings();
     loadNewsEvents();

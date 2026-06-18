@@ -77,7 +77,15 @@ def _filter_attrs(row: pd.Series) -> str:
     rating = _value(row, "雷達等級")
     concept = _value(row, "概念股")
     mom = _parse_number(row.get("月營收月增率"))
+    yoy = _parse_number(row.get("月營收年增率"))
+    score = _parse_number(row.get("雷達強度"))
+    volume = _parse_number(row.get("當天成交量(張)"))
+    daily_change = _parse_number(row.get("今日漲跌幅"))
     mom_value = "" if mom is None else f"{mom:.4f}"
+    yoy_value = "" if yoy is None else f"{yoy:.4f}"
+    score_value = "" if score is None else f"{score:.4f}"
+    volume_value = "" if volume is None else f"{volume:.4f}"
+    daily_change_value = "" if daily_change is None else f"{daily_change:.4f}"
     search = f"{code} {name}".lower()
     return (
         f'data-code="{escape(code)}" '
@@ -85,7 +93,11 @@ def _filter_attrs(row: pd.Series) -> str:
         f'data-search="{escape(search)}" '
         f'data-rating="{escape(rating)}" '
         f'data-concept="{escape(concept.lower())}" '
-        f'data-mom="{escape(mom_value)}"'
+        f'data-mom="{escape(mom_value)}" '
+        f'data-yoy="{escape(yoy_value)}" '
+        f'data-score="{escape(score_value)}" '
+        f'data-volume="{escape(volume_value)}" '
+        f'data-change="{escape(daily_change_value)}"'
     )
 
 
@@ -396,7 +408,7 @@ def build_mobile_cards(display_report: pd.DataFrame) -> str:
         <div class="badge">{escape(rating)}</div>
       </div>
       <div class="metrics">
-        <div><span>雷達強度</span><strong>{escape(score)}</strong></div>
+        <div><span>雷達強度</span><strong class="score-value">{escape(score)}</strong></div>
         <div><span>收盤價</span><strong>{escape(price)}</strong></div>
         <div><span>成交量</span><strong>{escape(volume)} 張</strong></div>
       </div>
@@ -406,6 +418,8 @@ def build_mobile_cards(display_report: pd.DataFrame) -> str:
         <div><span>去年同月營收</span><strong>{escape(previous_year_revenue)}</strong></div>
         <div><span>年增率%</span><strong>{escape(yoy)}</strong></div>
       </div>
+      <p class="mode-label">雷達模式標籤：<strong class="mode-tag">主升段</strong></p>
+      <p class="mode-penalty-note" hidden>主升段模式降權：族群非當前高動能主流，需等待政策、利率或量價確認。</p>
       <p class="status-line"><strong>追蹤狀態：</strong>{escape(tracking_status)}</p>
       <p class="risk-label">風險標籤：</p>
       <div class="risk-tags">{_risk_tag_html(risk_tags)}</div>
@@ -475,6 +489,8 @@ def build_desktop_summary_table(display_report: pd.DataFrame) -> str:
             value = _value(row, column)
             if column == "風險標籤":
                 cells.append(f"<td>{_risk_tag_html(value)}</td>")
+            elif column == "雷達強度":
+                cells.append(f'<td class="score-cell"><span class="score-value">{escape(value)}</span><span class="score-penalty-chip" hidden>降權</span></td>')
             else:
                 cells.append(f"<td>{escape(value)}</td>")
         rows.append(f'<tr class="radar-item" {attrs}>{"".join(cells)}</tr>')
@@ -533,6 +549,23 @@ def build_news_events_section() -> str:
       <div id="newsEventsList" class="news-events-list">
         <div class="empty-events">事件資料載入中...</div>
       </div>
+    </section>
+"""
+
+
+def build_radar_mode_section() -> str:
+    return """
+    <section class="panel radar-mode-panel">
+      <div class="section-title">
+        <h2>雷達模式</h2>
+        <span>切換觀察角度，不刪除原始股票資料</span>
+      </div>
+      <div class="mode-toggle" role="radiogroup" aria-label="雷達模式">
+        <label><input type="radio" name="radarMode" value="main" checked> 主升段模式</label>
+        <label><input type="radio" name="radarMode" value="market"> 全市場模式</label>
+        <label><input type="radio" name="radarMode" value="defensive"> 資產防守模式</label>
+      </div>
+      <p id="radarModeNote" class="mode-note">主升段模式：優先觀察 AI、半導體、記憶體、PCB、CPO、光通訊、散熱、電源、低軌衛星、玻璃基板、被動元件、機器人、重電、軍工；防守族群不刪除，但未放量或未命中事件時會降權顯示。</p>
     </section>
 """
 
@@ -708,6 +741,7 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
     mobile_cards = build_mobile_cards(display_report)
     overview_section = build_overview_section(display_report)
     news_events_section = build_news_events_section()
+    radar_mode_section = build_radar_mode_section()
     data_basis_section = build_data_basis_section()
     score_explanation_section = build_score_explanation_section()
     v3_placeholder_section = build_v3_placeholder_section(display_report)
@@ -882,6 +916,36 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
       color: var(--muted);
       font-weight: 800;
       padding: 14px;
+    }}
+    .mode-toggle {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }}
+    .mode-toggle label {{
+      align-items: center;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      cursor: pointer;
+      display: inline-flex;
+      font-weight: 800;
+      gap: 6px;
+      padding: 8px 12px;
+    }}
+    .mode-toggle label:has(input:checked) {{
+      background: #152238;
+      border-color: #152238;
+      color: white;
+    }}
+    .mode-toggle input {{
+      accent-color: var(--accent);
+    }}
+    .mode-note {{
+      color: var(--muted);
+      line-height: 1.65;
+      margin: 12px 0 0;
     }}
     .basis-grid {{
       display: grid;
@@ -1080,15 +1144,28 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
       margin-top: 10px;
     }}
     .status-line,
-    .risk-label {{
+    .risk-label,
+    .mode-label {{
       color: var(--muted);
       font-size: 13px;
       margin: 10px 0 0;
     }}
     .status-line strong,
-    .risk-label {{
+    .risk-label,
+    .mode-label strong {{
       color: var(--ink);
       font-weight: 800;
+    }}
+    .mode-penalty-note {{
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 12px;
+      color: #9a3412;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.5;
+      margin: 8px 0 0;
+      padding: 8px 10px;
     }}
     .risk-pill {{
       background: #eef2ff;
@@ -1178,6 +1255,20 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
     .summary-table td:nth-child(4),
     .summary-table td:nth-child(15) {{
       line-height: 1.45;
+    }}
+    .score-cell .score-value {{
+      display: block;
+    }}
+    .score-penalty-chip {{
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 999px;
+      color: #9a3412;
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      margin-top: 3px;
+      padding: 2px 6px;
     }}
     tr:nth-child(even) {{ background: #f8fafc; }}
     .mobile-cards {{ display: none; }}
@@ -1276,6 +1367,7 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
 {v3_placeholder_section}
 {overview_section}
 {news_events_section}
+{radar_mode_section}
 {holdings_section}
 {filter_section}
     <div id="noResults" class="no-results">目前篩選條件下沒有符合的股票</div>
@@ -1305,9 +1397,25 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
     const importHoldingsFile = document.getElementById('importHoldingsFile');
     const newsEventsList = document.getElementById('newsEventsList');
     const newsEventsUrl = window.location.pathname.includes('/reports/') ? '../news-events.json' : 'news-events.json';
+    const modeInputs = Array.from(document.querySelectorAll('input[name="radarMode"]'));
+    const radarModeNote = document.getElementById('radarModeNote');
     let latestNewsEvents = [];
+    let majorEventCodes = new Set();
 
     const radarByCode = new Map(radarData.map((stock) => [stock.code, stock]));
+    const mainThemeKeywords = ['AI', '半導體', '記憶體', 'PCB', 'CPO', '光通訊', '散熱', '電源', '低軌衛星', '玻璃基板', '被動元件', '機器人', '重電', '軍工'];
+    const constructionKeywords = ['營建', '資產', '都更'];
+    const financeKeywords = ['金融', '壽險', '銀行'];
+    const modeLabels = {{
+      main: '主升段',
+      market: '全市場',
+      defensive: '資產防守',
+    }};
+    const modeNotes = {{
+      main: '主升段模式：優先觀察 AI、半導體、記憶體、PCB、CPO、光通訊、散熱、電源、低軌衛星、玻璃基板、被動元件、機器人、重電、軍工；防守族群不刪除，但未放量或未命中事件時會降權顯示。',
+      market: '全市場模式：不降權，所有股票照原始雷達強度排序。',
+      defensive: '資產防守模式：只顯示營建、資產、都更、金融、壽險、銀行相關股票，並依雷達強度、成交量、營收年增、營收月增排序。',
+    }};
 
     function escapeHtml(value) {{
       return String(value ?? '')
@@ -1434,7 +1542,14 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
         console.warn('Unable to load news events', error);
         latestNewsEvents = [];
       }}
+      majorEventCodes = new Set(
+        (Array.isArray(latestNewsEvents) ? latestNewsEvents : [])
+          .flatMap((event) => event.related_stocks || [])
+          .map(normalizeHoldingCode)
+          .filter(Boolean)
+      );
       renderNewsEvents(latestNewsEvents);
+      applyFilters();
     }}
 
     function renderHoldings(codes) {{
@@ -1531,7 +1646,128 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
       reader.readAsText(file, 'utf-8');
     }});
 
+    function getRadarMode() {{
+      return modeInputs.find((input) => input.checked)?.value || 'main';
+    }}
+
+    function hasAnyKeyword(text, keywords) {{
+      const normalized = String(text || '').toUpperCase();
+      return keywords.some((keyword) => normalized.includes(String(keyword).toUpperCase()));
+    }}
+
+    function itemMetrics(item) {{
+      return {{
+        code: item.dataset.code || '',
+        concept: item.dataset.concept || '',
+        originalScore: Number(item.dataset.score || 'NaN'),
+        volume: Number(item.dataset.volume || 'NaN'),
+        yoy: Number(item.dataset.yoy || 'NaN'),
+        mom: Number(item.dataset.mom || 'NaN'),
+        dailyChange: Number(item.dataset.change || 'NaN'),
+        originalIndex: Number(item.dataset.originalIndex || '0'),
+      }};
+    }}
+
+    function downgradeInfo(item) {{
+      const metrics = itemMetrics(item);
+      const isMainTheme = hasAnyKeyword(metrics.concept, mainThemeKeywords);
+      const isConstruction = hasAnyKeyword(metrics.concept, constructionKeywords);
+      const isFinance = hasAnyKeyword(metrics.concept, financeKeywords);
+      const isDefensive = isConstruction || isFinance;
+      let penalty = 0;
+      if (isConstruction) penalty = Math.max(penalty, 10);
+      if (isFinance) penalty = Math.max(penalty, 15);
+
+      const cancelPenalty =
+        metrics.volume > 3000 ||
+        majorEventCodes.has(metrics.code) ||
+        metrics.dailyChange > 3;
+
+      const shouldDowngrade = isDefensive && penalty > 0 && !cancelPenalty;
+      const originalScore = Number.isFinite(metrics.originalScore) ? metrics.originalScore : 0;
+      const adjustedScore = shouldDowngrade ? Math.max(0, originalScore - penalty) : originalScore;
+      return {{
+        ...metrics,
+        isMainTheme,
+        isDefensive,
+        shouldDowngrade,
+        adjustedScore,
+      }};
+    }}
+
+    function sortItems(items, mode) {{
+      return [...items].sort((a, b) => {{
+        const aInfo = downgradeInfo(a);
+        const bInfo = downgradeInfo(b);
+        if (mode === 'defensive') {{
+          return (
+            (bInfo.originalScore - aInfo.originalScore) ||
+            ((Number.isFinite(bInfo.volume) ? bInfo.volume : -Infinity) - (Number.isFinite(aInfo.volume) ? aInfo.volume : -Infinity)) ||
+            ((Number.isFinite(bInfo.yoy) ? bInfo.yoy : -Infinity) - (Number.isFinite(aInfo.yoy) ? aInfo.yoy : -Infinity)) ||
+            ((Number.isFinite(bInfo.mom) ? bInfo.mom : -Infinity) - (Number.isFinite(aInfo.mom) ? aInfo.mom : -Infinity)) ||
+            (aInfo.originalIndex - bInfo.originalIndex)
+          );
+        }}
+        if (mode === 'market') {{
+          return (bInfo.originalScore - aInfo.originalScore) || (aInfo.originalIndex - bInfo.originalIndex);
+        }}
+        return (
+          (Number(bInfo.isMainTheme) - Number(aInfo.isMainTheme)) ||
+          (bInfo.adjustedScore - aInfo.adjustedScore) ||
+          (aInfo.originalIndex - bInfo.originalIndex)
+        );
+      }});
+    }}
+
+    function updateItemModeDisplay(item, mode) {{
+      const info = downgradeInfo(item);
+      const displayScore = mode === 'main' ? info.adjustedScore : info.originalScore;
+      const scoreText = Number.isFinite(displayScore) ? displayScore.toFixed(1) : '';
+      const label = modeLabels[mode] || '主升段';
+      item.dataset.modeVisible = mode === 'defensive' ? String(info.isDefensive) : 'true';
+      item.dataset.modeScore = scoreText;
+
+      item.querySelectorAll('.score-value').forEach((node) => {{
+        node.textContent = scoreText;
+      }});
+      item.querySelectorAll('.score-penalty-chip').forEach((node) => {{
+        node.hidden = !(mode === 'main' && info.shouldDowngrade);
+      }});
+      item.querySelectorAll('.mode-tag').forEach((node) => {{
+        node.textContent = label;
+      }});
+      item.querySelectorAll('.mode-penalty-note').forEach((node) => {{
+        node.hidden = !(mode === 'main' && info.shouldDowngrade);
+      }});
+    }}
+
+    function applyRadarMode() {{
+      const mode = getRadarMode();
+      if (radarModeNote) radarModeNote.textContent = modeNotes[mode] || modeNotes.main;
+      const rows = Array.from(document.querySelectorAll('tr.radar-item'));
+      const cards = Array.from(document.querySelectorAll('article.radar-item'));
+
+      rows.forEach((row, index) => {{
+        if (!row.dataset.originalIndex) row.dataset.originalIndex = String(index);
+        updateItemModeDisplay(row, mode);
+      }});
+      cards.forEach((card, index) => {{
+        if (!card.dataset.originalIndex) card.dataset.originalIndex = String(index);
+        updateItemModeDisplay(card, mode);
+      }});
+
+      const tbody = document.querySelector('.summary-table tbody');
+      if (tbody) {{
+        sortItems(rows, mode).forEach((row) => tbody.appendChild(row));
+      }}
+      const mobileSection = document.querySelector('.mobile-cards');
+      if (mobileSection) {{
+        sortItems(cards, mode).forEach((card) => mobileSection.appendChild(card));
+      }}
+    }}
+
     function applyFilters() {{
+      applyRadarMode();
       const search = (searchInput?.value || '').trim().toLowerCase();
       const rating = ratingFilter?.value || '';
       const concept = (conceptInput?.value || '').trim().toLowerCase();
@@ -1545,6 +1781,8 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
         const itemRating = item.dataset.rating || '';
         const itemConcept = item.dataset.concept || '';
         const itemMom = Number(item.dataset.mom || 'NaN');
+        const modeVisible = item.dataset.modeVisible !== 'false';
+        if (!modeVisible) return false;
         if (search && !itemSearch.includes(search)) return false;
         if (rating && itemRating !== rating) return false;
         if (concept && !itemConcept.includes(concept)) return false;
@@ -1571,6 +1809,9 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
     [searchInput, ratingFilter, conceptInput, positiveMomOnly].forEach((control) => {{
       control?.addEventListener('input', applyFilters);
       control?.addEventListener('change', applyFilters);
+    }});
+    modeInputs.forEach((control) => {{
+      control.addEventListener('change', applyFilters);
     }});
     loadHoldings();
     loadNewsEvents();
