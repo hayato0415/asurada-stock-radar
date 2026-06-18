@@ -117,6 +117,7 @@ def format_report_for_output(report: pd.DataFrame) -> pd.DataFrame:
         if column in output.columns:
             values = output[column].map(_parse_number)
             output[column] = values.map(lambda value: "-" if pd.isna(value) else f"{value:+.2f}%")
+    output["去年同月營收"] = output.apply(_previous_year_revenue_amount, axis=1)
     if "阿斯拉分數" in output.columns:
         values = pd.to_numeric(output["阿斯拉分數"], errors="coerce")
         output["阿斯拉分數"] = values.map(lambda value: "-" if pd.isna(value) else f"{value:.1f}")
@@ -258,6 +259,15 @@ def _format_revenue_with_percent(row: pd.Series, percent_column: str) -> str:
     return f"{amount} / {percent}"
 
 
+def _previous_year_revenue_amount(row: pd.Series) -> str:
+    amount_thousand = _parse_number(row.get("單月營收_千元"))
+    yoy = _parse_number(row.get("月營收年增率"))
+    if amount_thousand is None or yoy is None or yoy <= -100:
+        return "-"
+    previous_amount_thousand = amount_thousand / (1 + yoy / 100)
+    return _format_revenue_amount(previous_amount_thousand)
+
+
 def _risk_tag_html(tags: str) -> str:
     return "".join(f'<span class="risk-pill">{escape(tag.strip())}</span>' for tag in tags.split("、") if tag.strip())
 
@@ -347,8 +357,10 @@ def build_mobile_cards(display_report: pd.DataFrame) -> str:
         risk = _value(row, "風險說明")
         price = _value(row, "收盤價")
         volume = _value(row, "當天成交量(張)")
-        yoy = _format_revenue_with_percent(row, "月營收年增率")
-        mom = _format_revenue_with_percent(row, "月營收月增率")
+        current_revenue = _value(row, "月營收金額")
+        yoy = _format_percent(row, "月營收年增率")
+        mom = _format_percent(row, "月營收月增率")
+        previous_year_revenue = _value(row, "去年同月營收")
         tracking_status = _value(row, "追蹤狀態")
         risk_tags = _value(row, "風險標籤")
         attrs = _filter_attrs(row)
@@ -368,8 +380,10 @@ def build_mobile_cards(display_report: pd.DataFrame) -> str:
         <div><span>成交量</span><strong>{escape(volume)} 張</strong></div>
       </div>
       <div class="metrics">
-        <div><span>營收年增</span><strong>{escape(yoy)}</strong></div>
-        <div><span>營收月增</span><strong>{escape(mom)}</strong></div>
+        <div><span>當月營收</span><strong>{escape(current_revenue)}</strong></div>
+        <div><span>月增率%</span><strong>{escape(mom)}</strong></div>
+        <div><span>去年同月營收</span><strong>{escape(previous_year_revenue)}</strong></div>
+        <div><span>年增率%</span><strong>{escape(yoy)}</strong></div>
       </div>
       <p class="status-line"><strong>追蹤狀態：</strong>{escape(tracking_status)}</p>
       <p class="risk-label">風險標籤：</p>
@@ -401,8 +415,10 @@ def build_desktop_summary_table(display_report: pd.DataFrame) -> str:
         "雷達等級",
         "收盤價",
         "當天成交量(張)",
-        "月營收年增率",
+        "月營收金額",
         "月營收月增率",
+        "去年同月營收",
+        "月營收年增率",
         "風險標籤",
         "追蹤狀態",
         "入選理由",
@@ -413,7 +429,6 @@ def build_desktop_summary_table(display_report: pd.DataFrame) -> str:
     summary = display_report[available].copy()
     price_date = display_report.attrs.get("price_date_label")
     price_header = f"收盤價<br>{price_date}" if price_date else "收盤價"
-    revenue_month_header = _revenue_month_header_label(display_report)
     header_labels = {
         "股票代號": "股票<br>代號",
         "股票名稱": "股票<br>名稱",
@@ -421,8 +436,10 @@ def build_desktop_summary_table(display_report: pd.DataFrame) -> str:
         "雷達等級": "雷達<br>等級",
         "收盤價": price_header,
         "當天成交量(張)": "當天成交量<br>(張)",
-        "月營收年增率": f"{escape(revenue_month_header)}<br>金額/年增",
-        "月營收月增率": f"{escape(revenue_month_header)}<br>金額/月增",
+        "月營收金額": "當月<br>營收",
+        "月營收月增率": "月增率<br>%",
+        "去年同月營收": "去年同月<br>營收",
+        "月營收年增率": "年增率<br>%",
         "風險標籤": "風險<br>標籤",
         "追蹤狀態": "追蹤<br>狀態",
         "前次排名": "較前次<br>排名",
@@ -437,8 +454,6 @@ def build_desktop_summary_table(display_report: pd.DataFrame) -> str:
             value = _value(row, column)
             if column == "風險標籤":
                 cells.append(f"<td>{_risk_tag_html(value)}</td>")
-            elif column in {"月營收年增率", "月營收月增率"}:
-                cells.append(f"<td>{escape(_format_revenue_with_percent(row, column))}</td>")
             else:
                 cells.append(f"<td>{escape(value)}</td>")
         rows.append(f'<tr class="radar-item" {attrs}>{"".join(cells)}</tr>')
@@ -1010,18 +1025,20 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
     .summary-table th:nth-child(1), .summary-table td:nth-child(1) {{ width: 3%; text-align: center; }}
     .summary-table th:nth-child(2), .summary-table td:nth-child(2) {{ width: 5%; text-align: center; }}
     .summary-table th:nth-child(3), .summary-table td:nth-child(3) {{ width: 6%; text-align: center; }}
-    .summary-table th:nth-child(4), .summary-table td:nth-child(4) {{ width: 11%; }}
+    .summary-table th:nth-child(4), .summary-table td:nth-child(4) {{ width: 10%; }}
     .summary-table th:nth-child(5), .summary-table td:nth-child(5) {{ width: 5%; text-align: right; }}
     .summary-table th:nth-child(6), .summary-table td:nth-child(6) {{ width: 5%; text-align: center; }}
     .summary-table th:nth-child(7), .summary-table td:nth-child(7) {{ width: 6%; text-align: right; }}
     .summary-table th:nth-child(8), .summary-table td:nth-child(8) {{ width: 7%; text-align: right; }}
-    .summary-table th:nth-child(9), .summary-table td:nth-child(9) {{ width: 10%; text-align: right; }}
-    .summary-table th:nth-child(10), .summary-table td:nth-child(10) {{ width: 10%; text-align: right; }}
-    .summary-table th:nth-child(11), .summary-table td:nth-child(11) {{ width: 8%; text-align: center; }}
-    .summary-table th:nth-child(12), .summary-table td:nth-child(12) {{ width: 6%; text-align: center; }}
-    .summary-table th:nth-child(13), .summary-table td:nth-child(13) {{ width: 18%; }}
+    .summary-table th:nth-child(9), .summary-table td:nth-child(9) {{ width: 8%; text-align: right; }}
+    .summary-table th:nth-child(10), .summary-table td:nth-child(10) {{ width: 6%; text-align: right; }}
+    .summary-table th:nth-child(11), .summary-table td:nth-child(11) {{ width: 8%; text-align: right; }}
+    .summary-table th:nth-child(12), .summary-table td:nth-child(12) {{ width: 6%; text-align: right; }}
+    .summary-table th:nth-child(13), .summary-table td:nth-child(13) {{ width: 8%; text-align: center; }}
+    .summary-table th:nth-child(14), .summary-table td:nth-child(14) {{ width: 6%; text-align: center; }}
+    .summary-table th:nth-child(15), .summary-table td:nth-child(15) {{ width: 11%; }}
     .summary-table td:nth-child(4),
-    .summary-table td:nth-child(13) {{
+    .summary-table td:nth-child(15) {{
       line-height: 1.45;
     }}
     tr:nth-child(even) {{ background: #f8fafc; }}
