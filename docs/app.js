@@ -5,6 +5,7 @@ const state = {
   stocks: [],
   news: [],
   themes: {},
+  concepts: {},
   themeCandidates: [],
   technical: {},
   profiles: {},
@@ -12,13 +13,13 @@ const state = {
 };
 
 const TECH_THEMES = [
-  "AI伺服器", "PCB", "CPO", "光通訊", "矽光子", "記憶體", "半導體", "半導體設備", "玻璃基板",
+  "AI伺服器", "AI PC", "AI手機", "AI智慧眼鏡", "PCB", "CPO", "光通訊", "矽光子", "記憶體", "半導體", "半導體設備", "玻璃基板",
   "低軌衛星", "重電", "散熱", "電源", "被動元件", "IC設計", "封測", "材料",
   "機器人", "智慧眼鏡", "無人機", "軍工電子",
 ];
 
 const NON_TECH_THEMES = [
-  "營建", "資產", "都更", "金融", "壽險", "銀行", "生醫", "觀光", "食品", "航運", "鋼鐵", "塑化", "傳產",
+  "營建", "資產", "都更", "金融", "壽險", "銀行", "生醫", "生技", "觀光", "食品", "航運", "鋼鐵", "塑化", "原物料", "傳產",
 ];
 
 const constructionThemes = ["營建", "資產", "都更"];
@@ -99,10 +100,11 @@ async function loadJson(path, fallback) {
 }
 
 async function loadAllData() {
-  const [stocks, news, themes, themeCandidates, technical, profiles, master] = await Promise.all([
+  const [stocks, news, themes, concepts, themeCandidates, technical, profiles, master] = await Promise.all([
     loadJson("data/stocks-latest.json", []),
     loadJson("data/news-events.json", []),
     loadJson("data/themes-map.json", {}),
+    loadJson("data/concepts-map.json", {}),
     loadJson("data/theme-candidates.json", []),
     loadJson("data/technical-latest.json", {}),
     loadJson("data/stock-profiles.json", {}),
@@ -113,6 +115,7 @@ async function loadAllData() {
   state.themes = Array.isArray(themes)
     ? Object.fromEntries(themes.map((theme) => [theme.name || theme.theme_name, theme]))
     : (themes && typeof themes === "object" ? themes : {});
+  state.concepts = concepts && typeof concepts === "object" ? concepts : {};
   state.themeCandidates = Array.isArray(themeCandidates) ? themeCandidates : [];
   state.technical = technical && typeof technical === "object" ? technical : {};
   state.profiles = profiles && typeof profiles === "object" ? profiles : {};
@@ -205,7 +208,7 @@ function sortedStocks(mode = "main", input = state.stocks) {
     return list.filter(isTechStock).sort((a, b) => toNumber(a.rank) - toNumber(b.rank));
   }
   if (mode === "nontech") {
-    return nonTechEventStocks().sort((a, b) => toNumber(a.rank) - toNumber(b.rank));
+    return list.filter(isNonTechStock).sort((a, b) => toNumber(a.rank) - toNumber(b.rank));
   }
   if (mode === "defensive") {
     return list
@@ -219,9 +222,6 @@ function sortedStocks(mode = "main", input = state.stocks) {
       );
   }
   if (mode === "market") {
-    return list.sort((a, b) => toNumber(a.rank) - toNumber(b.rank));
-  }
-  if (mode === "search") {
     return list.sort((a, b) => toNumber(a.rank) - toNumber(b.rank));
   }
   return list.sort((a, b) => {
@@ -367,11 +367,32 @@ function newsListHtml(events, emptyText = "目前沒有相關新聞") {
             <div class="muted">來源：${escapeHtml(event.source_name || "來源未標示")}｜日期：${escapeHtml(formatDate(event.date))}｜題材：${escapeHtml(event.category || "未分類")}｜影響：${escapeHtml(event.impact || "中性")}</div>
             ${event.summary ? `<p>${escapeHtml(event.summary)}</p>` : ""}
             ${event.asurada_analysis ? `<p class="analysis">${escapeHtml(event.asurada_analysis)}</p>` : ""}
+            <p><span class="label">分析相關股票</span></p><div class="chip-row">${stockChips(event.related_stocks || [], "無相關股票")}</div>
             <a class="solid-link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">查看新聞</a>
           </li>
         `;
       }).join("")}
     </ol>
+  `;
+}
+
+function externalSearchLinks(keyword) {
+  const q = encodeURIComponent(keyword || "");
+  const links = [
+    ["Yahoo 股市搜尋", `https://tw.stock.yahoo.com/search/result?q=${q}`],
+    ["鉅亨網搜尋", `https://news.cnyes.com/search/all?keyword=${q}`],
+    ["MoneyDJ 搜尋", `https://www.moneydj.com/kmdj/search/list.aspx?_Query_=${q}`],
+    ["CMoney 搜尋", `https://www.cmoney.tw/notes/?q=${q}`],
+  ];
+  return `<div class="button-row">${links.map(([label, href]) => `<a class="solid-link" href="${href}" target="_blank" rel="noopener noreferrer">${label}</a>`).join("")}</div>`;
+}
+
+function themeNewsBlock(theme, limit = 5) {
+  const news = themeNews(theme).slice(0, limit);
+  if (news.length) return newsListHtml(news);
+  return `
+    <div class="empty">目前內部新聞資料庫尚未收錄此題材新聞。</div>
+    ${externalSearchLinks(theme.theme_name || theme.name || "")}
   `;
 }
 
@@ -386,12 +407,34 @@ function themeNews(theme) {
   });
 }
 
+function conceptEntries() {
+  const source = Object.keys(state.concepts || {}).length ? state.concepts : state.themes;
+  return Object.entries(source).map(([key, concept]) => ({
+    name: concept.theme_name || concept.name || key,
+    theme_name: concept.theme_name || concept.name || key,
+    group: concept.group || "全部概念",
+    aliases: concept.aliases || [],
+    keywords: concept.keywords || [],
+    description: concept.description || "",
+    related_stocks: concept.related_stocks || [],
+    source_links: concept.source_links || [],
+  }));
+}
+
+function conceptMatches(concept, query, group = "全部概念") {
+  if (group && group !== "全部概念" && concept.group !== group) return false;
+  if (!query) return true;
+  const text = [concept.name, concept.group, concept.description, ...(concept.aliases || []), ...(concept.keywords || [])].join(" ").toLowerCase();
+  return text.includes(query.toLowerCase());
+}
+
 function renderHeader(active) {
   const nav = [
     ["index.html", "首頁", "index"],
     ["radar.html", "全股雷達", "radar"],
     ["news.html", "重大新聞", "news"],
     ["themes.html", "題材概念股", "themes"],
+    ["concepts.html", "概念股資料庫", "concepts"],
     ["stock.html", "個股查詢", "stock"],
     ["portfolio.html", "我的持股", "portfolio"],
   ];
@@ -430,7 +473,7 @@ function renderHome() {
   const main = $("#app");
   const holdings = readStoredCodes(HOLDINGS_KEY);
   const hitHoldings = holdings.filter((code) => stockByCode(code));
-  const techStocks = sortedStocks("main").filter(isTechStock).slice(0, 30);
+  const techStocks = sortedStocks("tech").slice(0, 30);
   const topStocks = techStocks.slice(0, 10);
   const concepts = techStocks.flatMap((stock) => String(stock.concept || "").split(";").map((x) => x.trim()).filter(Boolean));
   const topConcepts = [...new Set(concepts)].slice(0, 8);
@@ -462,8 +505,8 @@ function renderHome() {
       ${stockTable(topStocks, "main", true)}
     </section>
     <section class="panel">
-      <div class="section-title"><h2>非電子事件雷達</h2><span>有事件、爆量、強勢或我的清單命中才顯示</span></div>
-      ${nonTech.length ? stockTable(nonTech, "market", true) : `<div class="empty">目前沒有符合條件的非電子事件股</div>`}
+      <div class="section-title"><h2>非電子類別</h2><span>獨立分流，不佔用電子主升段前 30</span></div>
+      ${nonTech.length ? stockTable(nonTech, "market", true) : `<div class="empty">目前沒有符合條件的非電子類別股票</div>`}
     </section>
   `;
 }
@@ -471,122 +514,85 @@ function renderHome() {
 function renderRadar() {
   renderHeader("radar");
   const main = $("#app");
-  let selectedTheme = "";
-  const themeButtons = themeEntries().map((theme) => `<button class="secondary theme-filter" data-theme="${escapeHtml(theme.theme_name)}">${escapeHtml(theme.theme_name)}</button>`).join("");
+  const conceptOptions = conceptEntries().map((concept) => `<option value="${escapeHtml(concept.name)}"></option>`).join("");
   main.innerHTML = `
     <section class="panel">
       <div class="section-title"><h2>全股雷達清單</h2><span id="radarCount"></span></div>
       <div class="filters">
-        <label>雷達模式<select id="mode"><option value="tech">電子主升段</option><option value="nontech">非電子事件</option><option value="market">全市場</option><option value="defensive">資產金融</option><option value="search">搜尋結果</option></select></label>
-        <label>股票搜尋<input id="search" placeholder="代號或名稱，例如 2337、旺宏"></label>
+        <label>雷達模式<select id="mode"><option value="tech">電子主升段</option><option value="nontech">非電子類別</option><option value="market">全市場雷達</option></select></label>
+        <label>股票搜尋<input id="search" placeholder="代號、名稱或概念股，例如 2337、旺宏、CPO"></label>
         <label>雷達等級<select id="rating"><option value="">全部</option><option>A</option><option>A-</option><option>B</option></select></label>
-        <label>概念股<input id="concept" placeholder="AI、PCB、記憶體..."></label>
+        <label>簡單題材篩選<input id="concept" list="conceptOptions" placeholder="AI、PCB、記憶體..."></label>
       </div>
+      <datalist id="conceptOptions">${conceptOptions}</datalist>
       <p id="modeNote" class="mode-note"></p>
     </section>
-    <section class="grid cols-2">
-      <div id="radarList"></div>
-      <aside class="panel">
-        <div class="section-title"><h2>概念股篩選</h2><span>來自 themes-map.json</span></div>
-        <div class="chip-row"><button id="clearTheme" class="secondary">全部題材</button>${themeButtons}</div>
-        <div id="themeDetail" class="theme-detail"></div>
-      </aside>
-    </section>
+    <section id="radarList"></section>
   `;
   const render = () => {
     const mode = $("#mode").value;
     const search = $("#search").value.trim().toLowerCase();
     const rating = $("#rating").value;
     const concept = $("#concept").value.trim().toLowerCase();
-    const selectedThemeObject = selectedTheme ? themeEntries().find((theme) => theme.theme_name === selectedTheme) : null;
-    const selectedThemeCodes = new Set((selectedThemeObject?.related_stocks || []).map(normalizeCode));
     let list = sortedStocks(mode);
     list = list.filter((stock) => {
-      if (search && !`${stock.code} ${displayStockName(stock.code)}`.toLowerCase().includes(search)) return false;
+      const haystack = `${stock.code} ${displayStockName(stock.code)} ${stock.concept || ""} ${stock.reason || ""}`.toLowerCase();
+      if (search && !haystack.includes(search)) return false;
       if (rating && stock.rating !== rating) return false;
-      if (selectedTheme && !(selectedThemeCodes.has(normalizeCode(stock.code)) || `${stock.concept || ""} ${stock.reason || ""}`.toLowerCase().includes(concept))) return false;
-      if (!selectedTheme && concept && !`${stock.concept || ""} ${stock.reason || ""}`.toLowerCase().includes(concept)) return false;
+      if (concept && !haystack.includes(concept)) return false;
       return true;
     });
     $("#radarCount").textContent = `顯示 ${list.length} 檔`;
     $("#modeNote").textContent = mode === "tech"
       ? "電子主升段雷達只顯示電子與科技主流族群，非電子不佔用主升段排序。"
       : mode === "nontech"
-        ? "非電子事件雷達只顯示有事件、爆量、強勢或我的清單命中的非電子族群。"
-      : mode === "market"
-        ? "全市場模式不降權，照原始雷達強度排序。"
-        : mode === "defensive"
-          ? "資產金融模式只顯示營建、資產、都更、金融、壽險、銀行相關股票。"
-          : "搜尋結果模式會依搜尋、等級與概念股條件顯示結果。";
+        ? "非電子類別顯示營建、資產、金融、航運、原物料、觀光、生技等非電子族群。"
+        : "全市場雷達不分電子與非電子，照原始雷達排序顯示。";
     $("#radarList").innerHTML = stockTable(list, mode);
-    renderRadarThemeDetail(selectedTheme);
   };
-  $all(".theme-filter").forEach((button) => button.addEventListener("click", () => {
-    selectedTheme = button.dataset.theme || "";
-    $("#concept").value = selectedTheme;
-    $("#mode").value = "search";
-    render();
-  }));
-  $("#clearTheme").addEventListener("click", () => {
-    selectedTheme = "";
-    $("#concept").value = "";
-    render();
-  });
   ["mode", "search", "rating", "concept"].forEach((id) => $(`#${id}`).addEventListener("input", render));
   ["mode", "rating"].forEach((id) => $(`#${id}`).addEventListener("change", render));
   render();
 }
 
-function renderRadarThemeDetail(themeName) {
-  const el = $("#themeDetail");
-  if (!el) return;
-  if (!themeName) {
-    el.innerHTML = `<div class="empty">點選上方概念股分類，可查看該題材股票、新聞與持股命中。</div>`;
-    return;
-  }
-  const theme = themeEntries().find((item) => item.theme_name === themeName);
-  if (!theme) {
-    el.innerHTML = `<div class="empty">找不到此題材分類</div>`;
-    return;
-  }
-  const holdings = new Set([...readStoredCodes(HOLDINGS_KEY), ...readStoredCodes(WATCHLIST_KEY)]);
-  const related = (theme.related_stocks || []).map(normalizeCode).filter(Boolean);
-  const radarHits = related.filter((code) => stockByCode(code));
-  const holdingHits = related.filter((code) => holdings.has(code));
-  const relatedNews = themeNews(theme).slice(0, 5);
-  el.innerHTML = `
-    <h3>${escapeHtml(theme.theme_name)}</h3>
-    <p><span class="label">相關股票</span></p><div class="chip-row">${stockChips(related, "無相關台股")}</div>
-    <p><span class="label">雷達命中股票</span></p><div class="chip-row">${stockChips(radarHits, "未命中今日雷達")}</div>
-    <p><span class="label">持股/觀察命中</span></p><div class="chip-row">${stockChips(holdingHits, "未命中我的清單")}</div>
-    <p><span class="label">相關新聞</span></p>${newsListHtml(relatedNews, "目前沒有此題材的新聞")}
-  `;
+function eventMarketGroup(event) {
+  if (event.market_group) return event.market_group;
+  const text = `${event.category || ""} ${(event.related_keywords || []).join(" ")} ${event.title || ""}`.toUpperCase();
+  return TECH_THEMES.some((keyword) => text.includes(String(keyword).toUpperCase())) ? "電子股" : "非電子類別";
+}
+
+function eventNewsRegion(event) {
+  if (event.news_region) return event.news_region;
+  return event.region === "國際" ? "國際" : "台股";
 }
 
 function renderNews() {
   renderHeader("news");
   const main = $("#app");
-  const filters = ["全部", "國際", "台股", "AI", "記憶體", "半導體", "PCB", "CPO", "利率匯率", "原物料", "持股命中"];
+  const sections = [
+    ["電子股", "國際", "電子股｜國際重大新聞"],
+    ["電子股", "台股", "電子股｜台股重大新聞"],
+    ["非電子類別", "國際", "非電子類別｜國際重大新聞"],
+    ["非電子類別", "台股", "非電子類別｜台股重大新聞"],
+  ];
   main.innerHTML = `
     <section class="panel">
-      <div class="section-title"><h2>重大新聞雷達</h2><span>只保存摘要、來源與阿斯拉連動分析</span></div>
-      <div class="chip-row">${filters.map((x, i) => `<button class="${i ? "secondary" : ""}" data-filter="${escapeHtml(x)}">${escapeHtml(x)}</button>`).join("")}</div>
+      <div class="section-title"><h2>重大新聞雷達</h2><span>依市場屬性與新聞地區分區，僅保留摘要、來源與連動分析</span></div>
     </section>
-    <section id="newsList" class="grid"></section>
+    ${sections.map(([group, region, title]) => `
+      <section class="panel">
+        <div class="section-title"><h2>${title}</h2><span id="count-${group}-${region}"></span></div>
+        <div id="news-${group}-${region}" class="grid"></div>
+      </section>
+    `).join("")}
   `;
-  const render = (filter = "全部") => {
-    const holdings = new Set(readStoredCodes(HOLDINGS_KEY));
-    const list = state.news.filter((event) => {
-      if (!isRealSourceUrl(eventUrl(event))) return false;
-      if (filter === "全部") return true;
-      if (filter === "持股命中") return (event.related_stocks || []).some((code) => holdings.has(normalizeCode(code)));
-      const aliases = newsFilterAliases[filter] || [filter];
-      return event.region === filter || aliases.includes(event.category) || aliases.some((keyword) => (event.related_keywords || []).includes(keyword));
-    });
-    $("#newsList").innerHTML = list.length ? list.map(eventCard).join("") : `<div class="empty">目前沒有符合條件的重大事件資料</div>`;
-  };
-  $all("[data-filter]").forEach((button) => button.addEventListener("click", () => render(button.dataset.filter)));
-  render();
+  sections.forEach(([group, region]) => {
+    const list = state.news.filter((event) => isRealSourceUrl(eventUrl(event)) && eventMarketGroup(event) === group && eventNewsRegion(event) === region);
+    const target = $(`#news-${group}-${region}`);
+    const count = $(`#count-${group}-${region}`);
+    if (count) count.textContent = `${list.length} 則`;
+    if (target) target.innerHTML = list.length ? list.map(eventCard).join("") : `<div class="empty">目前沒有此分區新聞</div>`;
+  });
 }
 
 function themeEntries() {
@@ -603,12 +609,34 @@ function themeEntries() {
 function renderThemes() {
   renderHeader("themes");
   const main = $("#app");
-  const themes = themeEntries();
+  const concepts = conceptEntries();
+  const options = concepts.flatMap((concept) => [concept.name, ...(concept.aliases || []), ...(concept.keywords || [])])
+    .filter(Boolean)
+    .filter((value, index, array) => array.indexOf(value) === index)
+    .map((value) => `<option value="${escapeHtml(value)}"></option>`)
+    .join("");
+  const groups = ["全部概念", "電子概念", "非電子概念", "政策概念", "原物料概念", "金融資產概念"];
   main.innerHTML = `
-    <section class="panel"><div class="section-title"><h2>題材概念股</h2><span>以自製 themes-map.json 為主</span></div></section>
-    <section class="grid cols-2">${themes.length ? themes.map(themeCard).join("") : `<div class="empty">themes-map.json 尚無資料</div>`}</section>
+    <section class="panel">
+      <div class="section-title"><h2>題材頁</h2><span>搜尋資料來源：concepts-map.json 的名稱、別名與關鍵字</span></div>
+      <div class="filters">
+        <label>題材搜尋<input id="themeSearch" list="themeSuggestions" placeholder="AI、玻璃、光..."></label>
+        <label>分類<select id="themeGroup">${groups.map((group) => `<option>${escapeHtml(group)}</option>`).join("")}</select></label>
+      </div>
+      <datalist id="themeSuggestions">${options}</datalist>
+    </section>
+    <section id="themeList" class="grid cols-2"></section>
     <section class="panel"><div class="section-title"><h2>新題材候選</h2><span>近 3 天新聞高頻關鍵字</span></div>${themeCandidatesHtml()}</section>
   `;
+  const render = () => {
+    const query = $("#themeSearch").value.trim();
+    const group = $("#themeGroup").value;
+    const list = concepts.filter((concept) => conceptMatches(concept, query, group));
+    $("#themeList").innerHTML = list.length ? list.map(themeCard).join("") : `<div class="empty">找不到符合條件的題材</div>`;
+  };
+  $("#themeSearch").addEventListener("input", render);
+  $("#themeGroup").addEventListener("change", render);
+  render();
 }
 
 function themeCard(theme) {
@@ -616,18 +644,30 @@ function themeCard(theme) {
   const related = (theme.related_stocks || []).map(normalizeCode).filter(Boolean);
   const radarHits = related.filter((code) => stockByCode(code));
   const holdingHits = related.filter((code) => holdings.has(code));
-  const relatedNews = themeNews(theme).slice(0, 5);
   return `
     <article class="card theme-card">
       <h3>${escapeHtml(theme.theme_name)}</h3>
       <p class="muted">${escapeHtml(theme.description || `${theme.theme_name} 相關題材`)}</p>
+      <p><span class="label">分類</span>${escapeHtml(theme.group || "未分類")}</p>
       <p><span class="label">別名</span>${escapeHtml((theme.aliases || []).join("、") || "-")}</p>
-      <p><span class="label">相關新聞事件</span></p>${newsListHtml(relatedNews, "暫無相關新聞")}
+      <p><span class="label">關鍵字</span>${escapeHtml((theme.keywords || []).join("、") || "-")}</p>
+      <p><span class="label">相關新聞事件</span></p>${themeNewsBlock(theme, 5)}
       <p><span class="label">相關台股</span></p><div class="chip-row">${stockChips(related, "無相關台股")}</div>
       <p><span class="label">雷達命中股票</span></p><div class="chip-row">${stockChips(radarHits, "未命中今日雷達")}</div>
       <p><span class="label">持股命中股票</span></p><div class="chip-row">${stockChips(holdingHits, "未命中我的持股")}</div>
+      <p><span class="label">來源參考</span></p>${sourceLinksHtml(theme.source_links || [])}
     </article>
   `;
+}
+
+function sourceLinksHtml(links) {
+  const valid = (links || []).filter((link) => isRealSourceUrl(typeof link === "string" ? link : link.url));
+  if (!valid.length) return `<div class="empty">暫無來源參考連結</div>`;
+  return `<div class="button-row">${valid.map((link) => {
+    const href = typeof link === "string" ? link : link.url;
+    const label = typeof link === "string" ? "參考來源" : (link.name || "參考來源");
+    return `<a class="solid-link" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
+  }).join("")}</div>`;
 }
 
 function themeCandidatesHtml() {
@@ -643,6 +683,75 @@ function themeCandidatesHtml() {
         </article>
       `).join("")}
     </div>
+  `;
+}
+
+function renderConcepts() {
+  renderHeader("concepts");
+  const main = $("#app");
+  const concepts = conceptEntries();
+  const groups = ["全部概念", "電子概念", "非電子概念", "政策概念", "原物料概念", "金融資產概念"];
+  const options = concepts.flatMap((concept) => [concept.name, ...(concept.aliases || []), ...(concept.keywords || [])])
+    .filter(Boolean)
+    .filter((value, index, array) => array.indexOf(value) === index)
+    .map((value) => `<option value="${escapeHtml(value)}"></option>`)
+    .join("");
+  main.innerHTML = `
+    <section class="panel">
+      <div class="section-title"><h2>概念股資料庫</h2><span>完整概念分類，不限今日雷達命中</span></div>
+      <div class="filters">
+        <label>概念股搜尋<input id="conceptSearch" list="conceptSuggestions" placeholder="AI、玻璃、光..."></label>
+        <label>分類<select id="conceptGroup">${groups.map((group) => `<option>${escapeHtml(group)}</option>`).join("")}</select></label>
+      </div>
+      <datalist id="conceptSuggestions">${options}</datalist>
+    </section>
+    <section id="conceptList" class="grid cols-2"></section>
+    <section class="panel"><div class="section-title"><h2>新概念候選</h2><span>先觀察，不自動加入正式概念</span></div>${themeCandidatesHtml()}</section>
+  `;
+  const render = () => {
+    const query = $("#conceptSearch").value.trim();
+    const group = $("#conceptGroup").value;
+    const list = concepts.filter((concept) => conceptMatches(concept, query, group));
+    $("#conceptList").innerHTML = list.length ? list.map(conceptCard).join("") : `<div class="empty">找不到符合條件的概念股分類</div>`;
+  };
+  $("#conceptSearch").addEventListener("input", render);
+  $("#conceptGroup").addEventListener("change", render);
+  render();
+}
+
+function conceptCard(concept) {
+  const holdings = new Set([...readStoredCodes(HOLDINGS_KEY), ...readStoredCodes(WATCHLIST_KEY)]);
+  const related = (concept.related_stocks || []).map(normalizeCode).filter(Boolean);
+  const news = themeNews(concept).slice(0, 5);
+  return `
+    <article class="card theme-card">
+      <div class="section-title"><h3>${escapeHtml(concept.name)}</h3>${chip(concept.group || "未分類")}</div>
+      <p class="muted">${escapeHtml(concept.description || `${concept.name} 相關概念`)}</p>
+      <p><span class="label">別名</span>${escapeHtml((concept.aliases || []).join("、") || "-")}</p>
+      <p><span class="label">關鍵字</span>${escapeHtml((concept.keywords || []).join("、") || "-")}</p>
+      <p><span class="label">相關個股</span></p>
+      <div class="table-wrap">
+        <table class="concept-stock-table">
+          <thead><tr><th>股票代號</th><th>股票名稱</th><th>今日雷達</th><th>我的持股</th><th>重大新聞</th></tr></thead>
+          <tbody>
+            ${related.map((code) => {
+              const radarHit = Boolean(stockByCode(code));
+              const holdingHit = holdings.has(code);
+              const newsHit = state.news.some((event) => (event.related_stocks || []).map(normalizeCode).includes(code));
+              return `<tr>
+                <td><a class="stock-link" href="stock.html?code=${encodeURIComponent(code)}">${escapeHtml(code)}</a></td>
+                <td>${escapeHtml(displayStockName(code))}</td>
+                <td>${radarHit ? "是" : "否"}</td>
+                <td>${holdingHit ? "是" : "否"}</td>
+                <td>${newsHit ? "是" : "否"}</td>
+              </tr>`;
+            }).join("")}
+          </tbody>
+        </table>
+      </div>
+      <p><span class="label">相關新聞</span></p>${news.length ? newsListHtml(news) : themeNewsBlock(concept, 5)}
+      <p><span class="label">來源參考連結</span></p>${sourceLinksHtml(concept.source_links || [])}
+    </article>
   `;
 }
 
@@ -816,6 +925,7 @@ async function boot(page) {
   if (page === "radar") renderRadar();
   if (page === "news") renderNews();
   if (page === "themes") renderThemes();
+  if (page === "concepts") renderConcepts();
   if (page === "stock") renderStock();
   if (page === "portfolio") renderPortfolio();
 }

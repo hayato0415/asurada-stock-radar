@@ -215,6 +215,16 @@ tr:nth-child(even) { background: #f8fafc; }
 .analysis {
   line-height: 1.65;
 }
+.news-list {
+  margin: 8px 0 0;
+  padding-left: 22px;
+}
+.news-list li {
+  margin-bottom: 14px;
+}
+.concept-stock-table {
+  min-width: 620px;
+}
 .penalty-note {
   background: #fff7ed;
   border: 1px solid #fed7aa;
