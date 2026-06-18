@@ -264,6 +264,14 @@ function radarScore(stock, mode = "main") {
   return `${stock.rating || "-"} / ${score}`;
 }
 
+function matchesRating(stock, rating) {
+  if (!rating) return true;
+  const stockRating = String(stock.rating || "").trim();
+  if (rating === "A") return stockRating === "A" || stockRating === "A-";
+  if (rating === "C") return stockRating === "C" || stockRating === "觀察";
+  return stockRating === rating;
+}
+
 function stockCard(stock, mode = "main", compact = false) {
   const info = radarModeInfo(stock, mode);
   const modeName = mode === "market" ? "全市場" : mode === "defensive" ? "資產防守" : "主升段";
@@ -300,7 +308,7 @@ function stockTable(stocks, mode = "main", compact = false) {
     const info = radarModeInfo(stock, mode);
     return `
       <tr>
-        <td>${escapeHtml(stock.rank)}</td>
+        <td>${escapeHtml(stock.display_rank ?? stock.rank)}</td>
         <td><a class="stock-link" href="stock.html?code=${encodeURIComponent(stock.code)}">${escapeHtml(stock.code)}</a></td>
         <td>${escapeHtml(displayStockName(stock.code))}</td>
         <td>${escapeHtml(radarScore(stock, mode))}${info.downgraded ? "<br><span class=\"chip warn\">降權</span>" : ""}</td>
@@ -525,11 +533,12 @@ function renderRadar() {
     list = list.filter((stock) => {
       const haystack = `${stock.code} ${displayStockName(stock.code)} ${stock.concept || ""} ${stock.reason || ""}`.toLowerCase();
       if (search && !haystack.includes(search)) return false;
-      if (rating && stock.rating !== rating) return false;
+      if (!matchesRating(stock, rating)) return false;
       if (concept && !haystack.includes(concept)) return false;
       return true;
     });
     if (!hasUserFilter) list = list.slice(0, 30);
+    list = list.map((stock, index) => ({ ...stock, display_rank: index + 1 }));
     $("#radarCount").textContent = `顯示 ${list.length} 檔`;
     $("#modeNote").textContent = mode === "tech"
       ? "電子主升段雷達只顯示電子與科技主流族群，非電子不佔用主升段排序。"

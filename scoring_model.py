@@ -247,16 +247,19 @@ def build_candidates(
     return frame.sort_values("阿斯拉分數", ascending=False)
 
 
-def top_report(frame: pd.DataFrame, limit: int = 30) -> pd.DataFrame:
+def top_report(frame: pd.DataFrame, limit: int | None = 30) -> pd.DataFrame:
     filtered = frame.copy()
     if "當天成交量" in filtered.columns:
         filtered["當天成交量"] = pd.to_numeric(filtered["當天成交量"], errors="coerce")
         filtered = filtered[filtered["當天成交量"].ge(MIN_REPORT_VOLUME_SHARES)]
 
-    ranked = filtered.sort_values(
+    ranked_source = filtered.sort_values(
         ["阿斯拉分數", "月營收年增率", "月營收月增率"],
         ascending=False,
-    ).head(limit).copy()
+    )
+    if limit is not None:
+        ranked_source = ranked_source.head(limit)
+    ranked = ranked_source.copy()
     ranked.insert(0, "排名", range(1, len(ranked) + 1))
     columns = [column for column in REPORT_COLUMNS if column in filtered.columns]
     columns.insert(0, "排名")

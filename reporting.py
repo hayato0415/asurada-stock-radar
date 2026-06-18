@@ -783,14 +783,23 @@ def publish_static_site(csv_path: Path, html_path: Path, stamp: str, site_dir: P
         index_path.write_text(index_html, encoding="utf-8")
 
 
-def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[Path, Path]:
+def write_reports(
+    report: pd.DataFrame,
+    output_dir: Path = OUTPUT_DIR,
+    interactive_report: pd.DataFrame | None = None,
+) -> tuple[Path, Path]:
     output_dir.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now().strftime("%Y%m%d")
     csv_path = output_dir / f"asurada_candidates_{stamp}.csv"
     html_path = output_dir / f"asurada_candidates_{stamp}.html"
     display_report = format_report_for_output(report)
+    interactive_display_report = (
+        format_report_for_output(interactive_report)
+        if interactive_report is not None
+        else display_report
+    )
     display_report.to_csv(csv_path, index=False, encoding="utf-8-sig")
-    publish_interactive_data(display_report)
+    publish_interactive_data(interactive_display_report)
 
     desktop_table = build_desktop_summary_table(display_report)
     mobile_cards = build_mobile_cards(display_report)
