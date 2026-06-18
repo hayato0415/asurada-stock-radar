@@ -1,242 +1,840 @@
 {
   "AI伺服器": {
     "group": "電子概念",
-    "aliases": ["AI Server", "AI資料中心", "AI機櫃", "CSP"],
-    "keywords": ["AI伺服器", "NVIDIA", "輝達", "GB200", "GB300", "Blackwell", "ASIC", "CSP", "AI資料中心"],
+    "aliases": [
+      "AI Server",
+      "AI資料中心",
+      "AI機櫃",
+      "CSP"
+    ],
+    "keywords": [
+      "AI伺服器",
+      "NVIDIA",
+      "輝達",
+      "GB200",
+      "GB300",
+      "Blackwell",
+      "ASIC",
+      "CSP",
+      "AI資料中心"
+    ],
     "description": "AI伺服器題材主要連動伺服器 ODM、PCB、高速傳輸、散熱、電源與相關零組件。",
-    "related_stocks": ["2356", "2368", "2376", "2382", "3022", "3231", "6669"],
-    "source_links": []
+    "related_stocks": [
+      "2356",
+      "2368",
+      "2376",
+      "2382",
+      "3022",
+      "3231",
+      "6669"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "AI PC": {
     "group": "電子概念",
-    "aliases": ["AI筆電", "AIPC", "Copilot PC"],
-    "keywords": ["AI PC", "AI筆電", "NPU", "Copilot", "邊緣AI"],
+    "aliases": [
+      "AI筆電",
+      "AIPC",
+      "Copilot PC"
+    ],
+    "keywords": [
+      "AI PC",
+      "AI筆電",
+      "NPU",
+      "Copilot",
+      "邊緣AI"
+    ],
     "description": "AI PC 連動品牌、代工、散熱、電源與相關零組件。",
-    "related_stocks": ["2357", "2356", "2382", "4938", "3231"],
-    "source_links": []
+    "related_stocks": [
+      "2357",
+      "2356",
+      "2382",
+      "4938",
+      "3231"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "AI手機": {
     "group": "電子概念",
-    "aliases": ["AI Phone", "端側AI"],
-    "keywords": ["AI手機", "端側AI", "NPU", "智慧手機AI"],
+    "aliases": [
+      "AI Phone",
+      "端側AI"
+    ],
+    "keywords": [
+      "AI手機",
+      "端側AI",
+      "NPU",
+      "智慧手機AI"
+    ],
     "description": "AI手機題材連動手機供應鏈、鏡頭、組裝與邊緣運算晶片。",
-    "related_stocks": ["2317", "4938", "3406", "2382"],
-    "source_links": []
+    "related_stocks": [
+      "2317",
+      "4938",
+      "3406",
+      "2382"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
-  "AI智慧眼鏡": {
+  "AI智慧型眼鏡": {
     "group": "電子概念",
-    "aliases": ["智慧眼鏡", "AR眼鏡", "XR"],
-    "keywords": ["AI智慧眼鏡", "智慧眼鏡", "AR", "XR", "穿戴裝置"],
-    "description": "AI智慧眼鏡連動光學、組裝、感測與穿戴裝置供應鏈。",
-    "related_stocks": ["2382", "2357", "3406", "3673"],
-    "source_links": []
+    "aliases": [
+      "AI眼鏡",
+      "智慧眼鏡",
+      "AR眼鏡",
+      "智慧穿戴",
+      "XR"
+    ],
+    "keywords": [
+      "AI智慧型眼鏡",
+      "AI眼鏡",
+      "智慧眼鏡",
+      "AR眼鏡",
+      "穿戴裝置"
+    ],
+    "description": "AI智慧型眼鏡題材主要連動光學鏡頭、感測、面板、聲學、連接器、電池與智慧穿戴供應鏈。",
+    "related_stocks": [
+      "2382",
+      "2357",
+      "3406",
+      "3673"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "AI資料中心": {
     "group": "電子概念",
-    "aliases": ["AI Data Center", "AI機櫃", "CSP"],
-    "keywords": ["AI資料中心", "AI機櫃", "CSP", "高速傳輸", "液冷", "電源", "散熱"],
+    "aliases": [
+      "AI Data Center",
+      "AI機櫃",
+      "CSP"
+    ],
+    "keywords": [
+      "AI資料中心",
+      "AI機櫃",
+      "CSP",
+      "高速傳輸",
+      "液冷",
+      "電源",
+      "散熱"
+    ],
     "description": "AI資料中心連動伺服器、網通、PCB、光通訊、散熱與電源供應鏈。",
-    "related_stocks": ["2382", "3231", "6669", "2368", "3450", "3017", "2308"],
-    "source_links": []
+    "related_stocks": [
+      "2382",
+      "3231",
+      "6669",
+      "2368",
+      "3450",
+      "3017",
+      "2308"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "AI邊緣運算": {
     "group": "電子概念",
-    "aliases": ["Edge AI", "邊緣AI"],
-    "keywords": ["AI邊緣運算", "Edge AI", "邊緣AI", "NPU", "端側AI"],
+    "aliases": [
+      "Edge AI",
+      "邊緣AI"
+    ],
+    "keywords": [
+      "AI邊緣運算",
+      "Edge AI",
+      "邊緣AI",
+      "NPU",
+      "端側AI"
+    ],
     "description": "AI邊緣運算連動 AI PC、AI手機、工業電腦與端側運算裝置。",
-    "related_stocks": ["2395", "2357", "4938", "3231", "3406"],
-    "source_links": []
+    "related_stocks": [
+      "2395",
+      "2357",
+      "4938",
+      "3231",
+      "3406"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "PCB": {
     "group": "電子概念",
-    "aliases": ["印刷電路板", "高階板材"],
-    "keywords": ["PCB", "印刷電路板", "伺服器板", "HDI", "HLC", "ABF", "CCL", "高頻高速材料"],
+    "aliases": [
+      "印刷電路板",
+      "高階板材"
+    ],
+    "keywords": [
+      "PCB",
+      "印刷電路板",
+      "伺服器板",
+      "HDI",
+      "HLC",
+      "ABF",
+      "CCL",
+      "高頻高速材料"
+    ],
     "description": "PCB 題材連動 AI 伺服器、交換器、載板與高階材料。",
-    "related_stocks": ["2383", "2368", "3037", "8046", "4958", "2313"],
-    "source_links": []
+    "related_stocks": [
+      "2383",
+      "2368",
+      "3037",
+      "8046",
+      "4958",
+      "2313"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "CPO": {
     "group": "電子概念",
-    "aliases": ["共同封裝光學", "Co-Packaged Optics", "光通訊", "矽光子"],
-    "keywords": ["CPO", "光通訊", "矽光子", "800G", "1.6T", "AOC", "COS", "光模組", "雷射封測", "AI資料中心"],
+    "aliases": [
+      "共同封裝光學",
+      "Co-Packaged Optics",
+      "光通訊",
+      "矽光子"
+    ],
+    "keywords": [
+      "CPO",
+      "光通訊",
+      "矽光子",
+      "800G",
+      "1.6T",
+      "AOC",
+      "COS",
+      "光模組",
+      "雷射封測",
+      "AI資料中心"
+    ],
     "description": "CPO 連動 AI 資料中心高速傳輸、光模組與矽光子封裝。",
-    "related_stocks": ["3450", "3081", "4979", "3163", "4908", "3363", "6442"],
-    "source_links": []
+    "related_stocks": [
+      "3450",
+      "3081",
+      "4979",
+      "3163",
+      "4908",
+      "3363",
+      "6442"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "光通訊": {
     "group": "電子概念",
-    "aliases": ["光模組", "光收發"],
-    "keywords": ["光通訊", "光模組", "800G", "1.6T", "AOC", "COS"],
+    "aliases": [
+      "光模組",
+      "光收發"
+    ],
+    "keywords": [
+      "光通訊",
+      "光模組",
+      "800G",
+      "1.6T",
+      "AOC",
+      "COS"
+    ],
     "description": "光通訊題材連動資料中心高速傳輸與光模組供應鏈。",
-    "related_stocks": ["3450", "3081", "4979", "3163", "4908", "3363", "6442"],
-    "source_links": []
+    "related_stocks": [
+      "3450",
+      "3081",
+      "4979",
+      "3163",
+      "4908",
+      "3363",
+      "6442"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "矽光子": {
     "group": "電子概念",
-    "aliases": ["Silicon Photonics", "CPO"],
-    "keywords": ["矽光子", "Silicon Photonics", "CPO", "光通訊", "800G", "1.6T"],
+    "aliases": [
+      "Silicon Photonics",
+      "CPO"
+    ],
+    "keywords": [
+      "矽光子",
+      "Silicon Photonics",
+      "CPO",
+      "光通訊",
+      "800G",
+      "1.6T"
+    ],
     "description": "矽光子連動先進封裝、光通訊與 AI 資料中心高速傳輸。",
-    "related_stocks": ["3450", "3081", "4979", "3163", "4908", "3363", "6442"],
-    "source_links": []
+    "related_stocks": [
+      "3450",
+      "3081",
+      "4979",
+      "3163",
+      "4908",
+      "3363",
+      "6442"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "玻璃基板": {
     "group": "電子概念",
-    "aliases": ["TGV", "先進封裝材料"],
-    "keywords": ["玻璃基板", "TGV", "先進封裝材料", "Glass substrate"],
+    "aliases": [
+      "TGV",
+      "先進封裝材料"
+    ],
+    "keywords": [
+      "玻璃基板",
+      "TGV",
+      "先進封裝材料",
+      "Glass substrate"
+    ],
     "description": "玻璃基板連動先進封裝材料、載板與面板玻璃供應鏈。",
-    "related_stocks": ["3673", "1802", "1810", "3044", "3149"],
-    "source_links": []
+    "related_stocks": [
+      "3673",
+      "1802",
+      "1810",
+      "3044",
+      "3149"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "記憶體": {
     "group": "電子概念",
-    "aliases": ["DRAM", "NAND", "HBM", "SSD"],
-    "keywords": ["記憶體", "DRAM", "NAND", "HBM", "SSD", "美光", "Micron"],
+    "aliases": [
+      "DRAM",
+      "NAND",
+      "HBM",
+      "SSD"
+    ],
+    "keywords": [
+      "記憶體",
+      "DRAM",
+      "NAND",
+      "HBM",
+      "SSD",
+      "美光",
+      "Micron"
+    ],
     "description": "記憶體連動景氣循環、AI 儲存需求與模組/控制晶片供應鏈。",
-    "related_stocks": ["2337", "2344", "2408", "8299", "3260", "2451"],
-    "source_links": []
+    "related_stocks": [
+      "2337",
+      "2344",
+      "2408",
+      "8299",
+      "3260",
+      "2451"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "半導體設備": {
     "group": "電子概念",
-    "aliases": ["設備", "先進封裝"],
-    "keywords": ["半導體設備", "EUV", "CoWoS", "先進封裝", "台積電ADR"],
+    "aliases": [
+      "設備",
+      "先進封裝"
+    ],
+    "keywords": [
+      "半導體設備",
+      "EUV",
+      "CoWoS",
+      "先進封裝",
+      "台積電ADR"
+    ],
     "description": "半導體設備連動晶圓廠資本支出、先進封裝與材料設備。",
-    "related_stocks": ["3131", "3167", "3583", "6187", "7556", "3041"],
-    "source_links": []
+    "related_stocks": [
+      "3131",
+      "3167",
+      "3583",
+      "6187",
+      "7556",
+      "3041"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "低軌衛星": {
     "group": "電子概念",
-    "aliases": ["衛星", "SpaceX", "Starlink"],
-    "keywords": ["低軌衛星", "衛星", "SpaceX", "Starlink"],
+    "aliases": [
+      "衛星",
+      "SpaceX",
+      "Starlink"
+    ],
+    "keywords": [
+      "低軌衛星",
+      "衛星",
+      "SpaceX",
+      "Starlink"
+    ],
     "description": "低軌衛星連動通訊、天線、PCB 與航太零組件。",
-    "related_stocks": ["2313", "6285", "3491", "3596"],
-    "source_links": []
+    "related_stocks": [
+      "2313",
+      "6285",
+      "3491",
+      "3596"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "重電": {
     "group": "電子概念",
-    "aliases": ["電網", "電力設備"],
-    "keywords": ["重電", "電網", "變壓器", "電力設備", "綠電"],
+    "aliases": [
+      "電網",
+      "電力設備"
+    ],
+    "keywords": [
+      "重電",
+      "電網",
+      "變壓器",
+      "電力設備",
+      "綠電"
+    ],
     "description": "重電連動電網建設、AI 用電需求與能源基礎建設。",
-    "related_stocks": ["1504", "1513", "1514", "1605", "1618"],
-    "source_links": []
+    "related_stocks": [
+      "1504",
+      "1513",
+      "1514",
+      "1605",
+      "1618"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "被動元件": {
     "group": "電子概念",
-    "aliases": ["MLCC"],
-    "keywords": ["被動元件", "MLCC", "電容", "電阻", "電感"],
+    "aliases": [
+      "MLCC"
+    ],
+    "keywords": [
+      "被動元件",
+      "MLCC",
+      "電容",
+      "電阻",
+      "電感"
+    ],
     "description": "被動元件連動電子終端需求、車用與 AI 硬體供應鏈。",
-    "related_stocks": ["2327", "2492", "3042", "6173"],
-    "source_links": []
+    "related_stocks": [
+      "2327",
+      "2492",
+      "3042",
+      "6173"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "散熱": {
     "group": "電子概念",
-    "aliases": ["液冷", "水冷"],
-    "keywords": ["散熱", "液冷", "水冷", "熱管理", "AI機櫃"],
+    "aliases": [
+      "液冷",
+      "水冷"
+    ],
+    "keywords": [
+      "散熱",
+      "液冷",
+      "水冷",
+      "熱管理",
+      "AI機櫃"
+    ],
     "description": "散熱連動 AI 伺服器高功耗與液冷機櫃需求。",
-    "related_stocks": ["3017", "3324", "3653", "2308"],
-    "source_links": []
+    "related_stocks": [
+      "3017",
+      "3324",
+      "3653",
+      "2308"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "電源": {
     "group": "電子概念",
-    "aliases": ["電源供應器", "PSU"],
-    "keywords": ["電源", "PSU", "電源供應器", "高功率"],
+    "aliases": [
+      "電源供應器",
+      "PSU"
+    ],
+    "keywords": [
+      "電源",
+      "PSU",
+      "電源供應器",
+      "高功率"
+    ],
     "description": "電源題材連動 AI 伺服器、資料中心與高功率設備。",
-    "related_stocks": ["2308", "3017", "3324"],
-    "source_links": []
+    "related_stocks": [
+      "2308",
+      "3017",
+      "3324"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "機器人": {
     "group": "電子概念",
-    "aliases": ["Robot"],
-    "keywords": ["機器人", "Robot", "自動化", "伺服馬達"],
+    "aliases": [
+      "Robot"
+    ],
+    "keywords": [
+      "機器人",
+      "Robot",
+      "自動化",
+      "伺服馬達"
+    ],
     "description": "機器人連動自動化、控制器、伺服馬達與機構件。",
-    "related_stocks": ["2317", "2359", "2049"],
-    "source_links": []
+    "related_stocks": [
+      "2317",
+      "2359",
+      "2049"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "無人機": {
     "group": "電子概念",
-    "aliases": ["Drone"],
-    "keywords": ["無人機", "Drone", "航太", "軍工"],
+    "aliases": [
+      "Drone"
+    ],
+    "keywords": [
+      "無人機",
+      "Drone",
+      "航太",
+      "軍工"
+    ],
     "description": "無人機連動國防、航太、通訊與控制模組。",
-    "related_stocks": ["8033", "2634", "4572"],
-    "source_links": []
+    "related_stocks": [
+      "8033",
+      "2634",
+      "4572"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "軍工電子": {
     "group": "電子概念",
-    "aliases": ["國防電子", "航太"],
-    "keywords": ["軍工電子", "軍工", "國防", "航太", "無人機"],
+    "aliases": [
+      "國防電子",
+      "航太"
+    ],
+    "keywords": [
+      "軍工電子",
+      "軍工",
+      "國防",
+      "航太",
+      "無人機"
+    ],
     "description": "軍工電子連動國防預算、航太與通訊電子。",
-    "related_stocks": ["2634", "8033", "8222", "4572"],
-    "source_links": []
+    "related_stocks": [
+      "2634",
+      "8033",
+      "8222",
+      "4572"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "營建資產": {
     "group": "非電子概念",
-    "aliases": ["營建", "資產"],
-    "keywords": ["營建", "資產", "土地", "建案"],
+    "aliases": [
+      "營建",
+      "資產"
+    ],
+    "keywords": [
+      "營建",
+      "資產",
+      "土地",
+      "建案"
+    ],
     "description": "營建資產連動土地資產、都更、利率與政策題材。",
-    "related_stocks": ["2536", "2539", "5534", "5522", "2537", "2543", "1316", "2548"],
-    "source_links": []
+    "related_stocks": [
+      "2536",
+      "2539",
+      "5534",
+      "5522",
+      "2537",
+      "2543",
+      "1316",
+      "2548"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "都更": {
     "group": "非電子概念",
-    "aliases": ["都市更新"],
-    "keywords": ["都更", "都市更新", "危老", "土地開發"],
+    "aliases": [
+      "都市更新"
+    ],
+    "keywords": [
+      "都更",
+      "都市更新",
+      "危老",
+      "土地開發"
+    ],
     "description": "都更題材連動政策、土地開發與資產重估。",
-    "related_stocks": ["2536", "2539", "5534", "2548"],
-    "source_links": []
+    "related_stocks": [
+      "2536",
+      "2539",
+      "5534",
+      "2548"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "金融壽險": {
     "group": "金融資產概念",
-    "aliases": ["金融", "壽險"],
-    "keywords": ["金融", "壽險", "美債", "利率", "匯率"],
+    "aliases": [
+      "金融",
+      "壽險"
+    ],
+    "keywords": [
+      "金融",
+      "壽險",
+      "美債",
+      "利率",
+      "匯率"
+    ],
     "description": "金融壽險連動利率、美債殖利率、匯率與股債評價。",
-    "related_stocks": ["2820", "2881", "2882", "2885", "2886", "2889"],
-    "source_links": []
+    "related_stocks": [
+      "2820",
+      "2881",
+      "2882",
+      "2885",
+      "2886",
+      "2889"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "銀行": {
     "group": "金融資產概念",
-    "aliases": ["金控", "銀行股"],
-    "keywords": ["銀行", "放款", "利差", "金融"],
+    "aliases": [
+      "金控",
+      "銀行股"
+    ],
+    "keywords": [
+      "銀行",
+      "放款",
+      "利差",
+      "金融"
+    ],
     "description": "銀行題材連動利率、利差、授信與景氣循環。",
-    "related_stocks": ["2881", "2882", "2886", "2885"],
-    "source_links": []
+    "related_stocks": [
+      "2881",
+      "2882",
+      "2886",
+      "2885"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "航運": {
     "group": "非電子概念",
-    "aliases": ["貨櫃航運", "散裝航運"],
-    "keywords": ["航運", "運價", "SCFI", "BDI"],
+    "aliases": [
+      "貨櫃航運",
+      "散裝航運"
+    ],
+    "keywords": [
+      "航運",
+      "運價",
+      "SCFI",
+      "BDI"
+    ],
     "description": "航運連動運價、油價、塞港與全球貿易循環。",
-    "related_stocks": ["2603", "2609", "2615"],
-    "source_links": []
+    "related_stocks": [
+      "2603",
+      "2609",
+      "2615"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "原物料": {
     "group": "原物料概念",
-    "aliases": ["能源", "金屬"],
-    "keywords": ["原物料", "油價", "銅價", "黃金", "鋼鐵", "塑化"],
+    "aliases": [
+      "能源",
+      "金屬"
+    ],
+    "keywords": [
+      "原物料",
+      "油價",
+      "銅價",
+      "黃金",
+      "鋼鐵",
+      "塑化"
+    ],
     "description": "原物料題材連動油價、銅價、金屬與能源價格。",
-    "related_stocks": ["2002", "1301", "1303"],
-    "source_links": []
+    "related_stocks": [
+      "2002",
+      "1301",
+      "1303"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "生技": {
     "group": "非電子概念",
-    "aliases": ["生醫"],
-    "keywords": ["生技", "生醫", "新藥", "醫材"],
+    "aliases": [
+      "生醫"
+    ],
+    "keywords": [
+      "生技",
+      "生醫",
+      "新藥",
+      "醫材"
+    ],
     "description": "生技題材連動新藥、醫材、授權與法規進度。",
-    "related_stocks": ["1707"],
-    "source_links": []
+    "related_stocks": [
+      "1707"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "觀光": {
     "group": "非電子概念",
-    "aliases": ["餐飲", "旅遊"],
-    "keywords": ["觀光", "旅遊", "飯店", "餐飲"],
+    "aliases": [
+      "餐飲",
+      "旅遊"
+    ],
+    "keywords": [
+      "觀光",
+      "旅遊",
+      "飯店",
+      "餐飲"
+    ],
     "description": "觀光題材連動旅遊需求、餐飲消費與政策開放。",
-    "related_stocks": ["2727"],
-    "source_links": []
+    "related_stocks": [
+      "2727"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   },
   "食品": {
     "group": "非電子概念",
-    "aliases": ["民生消費"],
-    "keywords": ["食品", "飲料", "民生消費"],
+    "aliases": [
+      "民生消費"
+    ],
+    "keywords": [
+      "食品",
+      "飲料",
+      "民生消費"
+    ],
     "description": "食品題材連動原物料成本、通路與民生消費。",
-    "related_stocks": ["1216"],
-    "source_links": []
+    "related_stocks": [
+      "1216"
+    ],
+    "source_links": [
+      {
+        "name": "MoneyDJ 概念股參考",
+        "url": "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+      }
+    ]
   }
 }

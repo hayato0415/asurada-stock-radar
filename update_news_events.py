@@ -241,7 +241,7 @@ def make_analysis(title: str, category: str, related_stocks: list[str]) -> str:
 
 
 TECH_MARKET_KEYWORDS = [
-    "AI伺服器", "AI PC", "AI手機", "AI智慧眼鏡", "PCB", "CPO", "光通訊", "矽光子",
+    "AI伺服器", "AI PC", "AI手機", "AI智慧型眼鏡", "AI智慧眼鏡", "PCB", "CPO", "光通訊", "矽光子",
     "玻璃基板", "記憶體", "半導體", "半導體設備", "低軌衛星", "重電", "被動元件",
     "散熱", "電源", "機器人", "無人機", "軍工電子", "NVIDIA", "輝達", "美光",
     "AMD", "Broadcom", "ASML", "台積電",
