@@ -98,6 +98,75 @@
       font-size: 16px;
       margin-top: 4px;
     }
+    .news-events-list {
+      display: grid;
+      gap: 12px;
+    }
+    .event-card {
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+    }
+    .event-card h3 {
+      color: var(--ink);
+      font-size: 18px;
+      margin: 8px 0;
+    }
+    .event-meta,
+    .event-chip-row,
+    .event-hit-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .event-chip,
+    .stock-chip {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      display: inline-flex;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 5px 9px;
+    }
+    .event-chip.positive { background: #ecfdf5; border-color: #bbf7d0; color: #166534; }
+    .event-chip.negative { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
+    .event-chip.neutral { background: #f8fafc; border-color: var(--line); color: var(--muted); }
+    .event-chip.strong { background: #fff7ed; border-color: #fed7aa; color: #9a3412; }
+    .event-logic {
+      color: var(--ink);
+      line-height: 1.65;
+      margin: 10px 0;
+    }
+    .event-label {
+      color: var(--muted);
+      display: block;
+      font-size: 13px;
+      font-weight: 800;
+      margin-top: 10px;
+    }
+    .event-source {
+      background: #152238;
+      border-radius: 999px;
+      color: white;
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 800;
+      margin-top: 12px;
+      padding: 7px 12px;
+      text-decoration: none;
+    }
+    .empty-events {
+      background: #f8fafc;
+      border: 1px dashed var(--line);
+      border-radius: 14px;
+      color: var(--muted);
+      font-weight: 800;
+      padding: 14px;
+    }
     .basis-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -528,6 +597,18 @@
       </div>
       <div class="overview-grid"><div class="overview-card"><span>今日入選檔數</span><strong>30 檔</strong></div><div class="overview-card"><span>A級以上檔數</span><strong>3 檔</strong></div><div class="overview-card"><span>A-級檔數</span><strong>7 檔</strong></div><div class="overview-card"><span>B級檔數</span><strong>20 檔</strong></div></div>
       <div class="theme-strip"><span>今日主要強勢題材</span><strong>營建、資產、都更、金融、壽險</strong></div>
+    </section>
+
+
+    <section class="panel news-events-panel">
+      <div class="section-title">
+        <h2>今日重大事件雷達</h2>
+        <span>讀取 news-events.json，自動比對雷達與我的持股</span>
+      </div>
+      <p class="panel-note">僅顯示事件摘要、連動邏輯與原文連結，不收錄新聞全文。</p>
+      <div id="newsEventsList" class="news-events-list">
+        <div class="empty-events">事件資料載入中...</div>
+      </div>
     </section>
 
 
@@ -1571,6 +1652,9 @@
     const exportHoldings = document.getElementById('exportHoldings');
     const importHoldings = document.getElementById('importHoldings');
     const importHoldingsFile = document.getElementById('importHoldingsFile');
+    const newsEventsList = document.getElementById('newsEventsList');
+    const newsEventsUrl = window.location.pathname.includes('/reports/') ? '../news-events.json' : 'news-events.json';
+    let latestNewsEvents = [];
 
     const radarByCode = new Map(radarData.map((stock) => [stock.code, stock]));
 
@@ -1624,6 +1708,84 @@
       return parts.map((tag) => `<span class="risk-pill">${escapeHtml(tag)}</span>`).join('');
     }
 
+    function eventChipClass(value) {
+      if (value === '偏多') return 'positive';
+      if (value === '偏空') return 'negative';
+      return 'neutral';
+    }
+
+    function eventStrengthClass(value) {
+      return value === '高' ? 'strong' : 'neutral';
+    }
+
+    function stockLabel(code) {
+      const normalized = normalizeHoldingCode(code);
+      const stock = radarByCode.get(normalized);
+      return stock ? `${normalized} ${stock.name}` : normalized;
+    }
+
+    function stockChips(codes, emptyText = '無') {
+      const normalizedCodes = (codes || []).map(normalizeHoldingCode).filter(Boolean);
+      if (!normalizedCodes.length) return `<span class="stock-chip">${escapeHtml(emptyText)}</span>`;
+      return normalizedCodes.map((code) => `<span class="stock-chip">${escapeHtml(stockLabel(code))}</span>`).join('');
+    }
+
+    function renderNewsEvents(events) {
+      if (!newsEventsList) return;
+      if (!Array.isArray(events) || !events.length) {
+        newsEventsList.innerHTML = '<div class="empty-events">今日尚無重大事件資料</div>';
+        return;
+      }
+
+      const holdingSet = new Set(getStoredHoldings());
+      newsEventsList.innerHTML = events.map((event) => {
+        const relatedStocks = (event.related_stocks || []).map(normalizeHoldingCode).filter(Boolean);
+        const radarHits = relatedStocks.filter((code) => radarByCode.has(code));
+        const holdingHits = relatedStocks.filter((code) => holdingSet.has(code));
+        const sourceUrl = String(event.url || '').trim();
+        const sourceName = String(event.source_name || '查看來源').trim();
+        const sourceButton = sourceUrl
+          ? `<a class="event-source" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">查看來源</a>`
+          : '';
+
+        return `
+          <article class="event-card">
+            <div class="event-meta">
+              <span class="event-chip">${escapeHtml(event.date || '日期未標示')}</span>
+              <span class="event-chip">${escapeHtml(event.region || '地區未標示')}</span>
+              <span class="event-chip ${eventChipClass(event.impact)}">影響方向：${escapeHtml(event.impact || '中性')}</span>
+              <span class="event-chip ${eventStrengthClass(event.event_strength)}">事件強度：${escapeHtml(event.event_strength || '未標示')}</span>
+            </div>
+            <h3>${escapeHtml(event.title || '未命名事件')}</h3>
+            <div class="event-chip-row">
+              <span class="event-chip">題材分類：${escapeHtml(event.category || '未分類')}</span>
+              <span class="event-chip">來源：${escapeHtml(sourceName)}</span>
+            </div>
+            <p class="event-logic">${escapeHtml(event.logic || '尚無連動邏輯說明')}</p>
+            <span class="event-label">相關台股</span>
+            <div class="event-hit-row">${stockChips(relatedStocks, '無相關台股')}</div>
+            <span class="event-label">雷達命中股票</span>
+            <div class="event-hit-row">${stockChips(radarHits, '未命中今日雷達')}</div>
+            <span class="event-label">我的持股命中股票</span>
+            <div class="event-hit-row">${stockChips(holdingHits, '未命中我的持股')}</div>
+            ${sourceButton}
+          </article>
+        `;
+      }).join('');
+    }
+
+    async function loadNewsEvents() {
+      try {
+        const response = await fetch(newsEventsUrl, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        latestNewsEvents = await response.json();
+      } catch (error) {
+        console.warn('Unable to load news events', error);
+        latestNewsEvents = [];
+      }
+      renderNewsEvents(latestNewsEvents);
+    }
+
     function renderHoldings(codes) {
       if (!holdingsResults || !holdingsSummary) return;
       if (!codes.length) {
@@ -1668,12 +1830,14 @@
       setStoredHoldings(codes);
       if (holdingsInput) holdingsInput.value = codes.join('\n');
       renderHoldings(codes);
+      renderNewsEvents(latestNewsEvents);
     });
 
     clearHoldings?.addEventListener('click', () => {
       localStorage.removeItem(holdingsStorageKey);
       if (holdingsInput) holdingsInput.value = '';
       renderHoldings([]);
+      renderNewsEvents(latestNewsEvents);
     });
 
     exportHoldings?.addEventListener('click', () => {
@@ -1706,6 +1870,7 @@
           setStoredHoldings(normalized);
           if (holdingsInput) holdingsInput.value = normalized.join('\n');
           renderHoldings(normalized);
+          renderNewsEvents(latestNewsEvents);
         } catch (error) {
           alert('匯入失敗，請確認 JSON 格式是否正確。');
         } finally {
@@ -1757,6 +1922,7 @@
       control?.addEventListener('change', applyFilters);
     });
     loadHoldings();
+    loadNewsEvents();
     applyFilters();
   </script>
 </body>
