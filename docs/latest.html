@@ -149,6 +149,38 @@
       font-size: 22px;
       margin-top: 4px;
     }
+    .v3-table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .v3-table {
+      border-collapse: collapse;
+      min-width: 980px;
+      width: 100%;
+      font-size: 13px;
+    }
+    .v3-table th,
+    .v3-table td {
+      border: 1px solid var(--line);
+      padding: 8px;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .v3-table th {
+      background: #152238;
+      color: white;
+      font-weight: 800;
+    }
+    .v3-table td {
+      background: #ffffff;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .v3-table td:nth-child(1),
+    .v3-table td:nth-child(2) {
+      color: var(--ink);
+      font-weight: 800;
+    }
     .filter-grid {
       display: grid;
       grid-template-columns: 1.2fr .7fr 1fr .8fr;
@@ -416,6 +448,21 @@
       <div class="score-weight-grid"><div class="score-weight"><span>營收動能</span><strong>40%</strong></div><div class="score-weight"><span>量能活躍</span><strong>20%</strong></div><div class="score-weight"><span>題材關聯</span><strong>15%</strong></div><div class="score-weight"><span>股價位置</span><strong>15%</strong></div><div class="score-weight"><span>風險扣分</span><strong>10%</strong></div></div>
     </section>
 
+
+
+    <section class="panel v3-panel">
+      <div class="section-title">
+        <h2>V3 預留：排名變化與技術面確認</h2>
+        <span>待歷史資料建立後啟用</span>
+      </div>
+      <p class="panel-note">目前尚未建立可驗證的歷史排名資料與完整歷史股價資料，因此以下欄位先顯示 N/A，不自行編造數字。</p>
+      <div class="v3-table-wrap">
+        <table class="v3-table">
+          <thead><tr><th>股票代號</th><th>股票名稱</th><th>昨日排名</th><th>排名變化</th><th>分數變化</th><th>連續入選天數</th><th>5日漲跌幅</th><th>20日漲跌幅</th><th>股價距20日線</th><th>股價距60日線</th><th>成交量倍率</th></tr></thead>
+          <tbody><tr><td>2536</td><td>宏普</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>8422</td><td>可寧衛*</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>2539</td><td>櫻花建</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>2537</td><td>聯上發</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>2543</td><td>皇昌</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>5534</td><td>長虹</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>8112</td><td>至上</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>3041</td><td>揚智</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>3022</td><td>威強電</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>4967</td><td>十銓</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>2885</td><td>元大金</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>6901</td><td>鑽石投資</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>2889</td><td>國票金</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>1316</td><td>上曜</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>2101</td><td>南港</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>6446</td><td>藥華藥</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>2347</td><td>聯強</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>2548</td><td>華固</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>4739</td><td>康普</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>2383</td><td>台光電</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>2368</td><td>金像電</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>2337</td><td>旺宏</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>2820</td><td>華票</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>2404</td><td>漢唐</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>2425</td><td>承啟</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>2851</td><td>中再保</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>9946</td><td>三發地產</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>2305</td><td>全友</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>2547</td><td>日勝生</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>2890</td><td>永豐金</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr></tbody>
+        </table>
+      </div>
+    </section>
 
     <section class="panel overview-panel">
       <div class="section-title">

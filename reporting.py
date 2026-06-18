@@ -428,6 +428,42 @@ def build_score_explanation_section() -> str:
 """
 
 
+def build_v3_placeholder_section(display_report: pd.DataFrame) -> str:
+    columns = [
+        "昨日排名",
+        "排名變化",
+        "分數變化",
+        "連續入選天數",
+        "5日漲跌幅",
+        "20日漲跌幅",
+        "股價距20日線",
+        "股價距60日線",
+        "成交量倍率",
+    ]
+    headers = "".join(f"<th>{escape(column)}</th>" for column in ["股票代號", "股票名稱", *columns])
+    rows: list[str] = []
+    for _, row in display_report.iterrows():
+        code = _value(row, "股票代號")
+        name = _value(row, "股票名稱")
+        placeholders = "".join("<td>N/A</td>" for _ in columns)
+        rows.append(f"<tr><td>{escape(code)}</td><td>{escape(name)}</td>{placeholders}</tr>")
+    return f"""
+    <section class="panel v3-panel">
+      <div class="section-title">
+        <h2>V3 預留：排名變化與技術面確認</h2>
+        <span>待歷史資料建立後啟用</span>
+      </div>
+      <p class="panel-note">目前尚未建立可驗證的歷史排名資料與完整歷史股價資料，因此以下欄位先顯示 N/A，不自行編造數字。</p>
+      <div class="v3-table-wrap">
+        <table class="v3-table">
+          <thead><tr>{headers}</tr></thead>
+          <tbody>{"".join(rows)}</tbody>
+        </table>
+      </div>
+    </section>
+"""
+
+
 def build_holdings_section(display_report: pd.DataFrame) -> str:
     rows: list[str] = []
     if "股票代號" not in display_report.columns:
@@ -500,6 +536,7 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
     overview_section = build_overview_section(display_report)
     data_basis_section = build_data_basis_section()
     score_explanation_section = build_score_explanation_section()
+    v3_placeholder_section = build_v3_placeholder_section(display_report)
     filter_section = build_filter_section()
     holdings_section = build_holdings_section(display_report)
     html = f"""<!doctype html>
@@ -652,6 +689,38 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
       display: block;
       font-size: 22px;
       margin-top: 4px;
+    }}
+    .v3-table-wrap {{
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }}
+    .v3-table {{
+      border-collapse: collapse;
+      min-width: 980px;
+      width: 100%;
+      font-size: 13px;
+    }}
+    .v3-table th,
+    .v3-table td {{
+      border: 1px solid var(--line);
+      padding: 8px;
+      text-align: center;
+      white-space: nowrap;
+    }}
+    .v3-table th {{
+      background: #152238;
+      color: white;
+      font-weight: 800;
+    }}
+    .v3-table td {{
+      background: #ffffff;
+      color: var(--muted);
+      font-weight: 700;
+    }}
+    .v3-table td:nth-child(1),
+    .v3-table td:nth-child(2) {{
+      color: var(--ink);
+      font-weight: 800;
     }}
     .filter-grid {{
       display: grid;
@@ -903,6 +972,7 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
     </section>
 {data_basis_section}
 {score_explanation_section}
+{v3_placeholder_section}
 {overview_section}
 {holdings_section}
 {filter_section}
