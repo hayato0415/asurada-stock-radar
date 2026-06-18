@@ -277,6 +277,20 @@ def _rank_change_label(current_rank: object, previous_rank: object) -> str:
     return "持平"
 
 
+def _revenue_month_header_label(display_report: pd.DataFrame) -> str:
+    month_value = ""
+    for column in ["revenue_month", "年月"]:
+        if column in display_report.columns:
+            values = [str(value).strip() for value in display_report[column].dropna() if str(value).strip() not in {"", "-"}]
+            if values:
+                month_value = max(values)
+                break
+    match = re.search(r"(?:\d{4}-)?0?(\d{1,2})$", month_value)
+    if match:
+        return f"{int(match.group(1))}月營收"
+    return "月營收"
+
+
 def build_mobile_cards(display_report: pd.DataFrame) -> str:
     cards: list[str] = []
     for _, row in display_report.iterrows():
@@ -345,7 +359,6 @@ def build_desktop_summary_table(display_report: pd.DataFrame) -> str:
         "雷達等級",
         "收盤價",
         "當天成交量(張)",
-        "資料版本",
         "月營收年增率",
         "月營收月增率",
         "風險標籤",
@@ -358,6 +371,7 @@ def build_desktop_summary_table(display_report: pd.DataFrame) -> str:
     summary = display_report[available].copy()
     price_date = display_report.attrs.get("price_date_label")
     price_header = f"收盤價<br>{price_date}" if price_date else "收盤價"
+    revenue_month_header = _revenue_month_header_label(display_report)
     header_labels = {
         "股票代號": "股票<br>代號",
         "股票名稱": "股票<br>名稱",
@@ -365,9 +379,8 @@ def build_desktop_summary_table(display_report: pd.DataFrame) -> str:
         "雷達等級": "雷達<br>等級",
         "收盤價": price_header,
         "當天成交量(張)": "當天成交量<br>(張)",
-        "資料版本": "資料<br>版本",
-        "月營收年增率": "營收年增<br>(%)",
-        "月營收月增率": "營收月增<br>(%)",
+        "月營收年增率": f"{escape(revenue_month_header)}<br>年增(%)",
+        "月營收月增率": f"{escape(revenue_month_header)}<br>月增(%)",
         "風險標籤": "風險<br>標籤",
         "追蹤狀態": "追蹤<br>狀態",
         "前次排名": "較前次<br>排名",
@@ -619,7 +632,6 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
     v3_placeholder_section = build_v3_placeholder_section(display_report)
     filter_section = build_filter_section()
     holdings_section = build_holdings_section(display_report)
-    data_version_label = display_report.attrs.get("data_version_label", "待資料建立")
     html = f"""<!doctype html>
 <html lang="zh-Hant">
 <head>
@@ -661,17 +673,6 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
       color: #e0f2fe;
       font-size: 13px;
       margin: 10px 0 0;
-    }}
-    .data-version {{
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.28);
-      border-radius: 999px;
-      color: #f8fafc;
-      display: inline-block;
-      font-size: 13px;
-      font-weight: 800;
-      margin-top: 12px;
-      padding: 6px 12px;
     }}
     .panel {{
       background: var(--card);
@@ -970,14 +971,13 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
     .summary-table th:nth-child(6), .summary-table td:nth-child(6) {{ width: 5%; text-align: center; }}
     .summary-table th:nth-child(7), .summary-table td:nth-child(7) {{ width: 6%; text-align: right; }}
     .summary-table th:nth-child(8), .summary-table td:nth-child(8) {{ width: 7%; text-align: right; }}
-    .summary-table th:nth-child(9), .summary-table td:nth-child(9) {{ width: 10%; text-align: center; }}
-    .summary-table th:nth-child(10), .summary-table td:nth-child(10) {{ width: 7%; text-align: right; }}
-    .summary-table th:nth-child(11), .summary-table td:nth-child(11) {{ width: 7%; text-align: right; }}
-    .summary-table th:nth-child(12), .summary-table td:nth-child(12) {{ width: 8%; text-align: center; }}
-    .summary-table th:nth-child(13), .summary-table td:nth-child(13) {{ width: 6%; text-align: center; }}
-    .summary-table th:nth-child(14), .summary-table td:nth-child(14) {{ width: 14%; }}
+    .summary-table th:nth-child(9), .summary-table td:nth-child(9) {{ width: 8%; text-align: right; }}
+    .summary-table th:nth-child(10), .summary-table td:nth-child(10) {{ width: 8%; text-align: right; }}
+    .summary-table th:nth-child(11), .summary-table td:nth-child(11) {{ width: 8%; text-align: center; }}
+    .summary-table th:nth-child(12), .summary-table td:nth-child(12) {{ width: 6%; text-align: center; }}
+    .summary-table th:nth-child(13), .summary-table td:nth-child(13) {{ width: 22%; }}
     .summary-table td:nth-child(4),
-    .summary-table td:nth-child(14) {{
+    .summary-table td:nth-child(13) {{
       line-height: 1.45;
     }}
     tr:nth-child(even) {{ background: #f8fafc; }}
@@ -1071,7 +1071,6 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
         <a href="latest.csv">下載 CSV</a>
         <button type="button" onclick="alert('本雷達依據營收成長、成交量、股價位置、題材概念與技術強度進行初步篩選，僅供研究與風險控管參考，不構成投資建議。')">資料說明</button>
       </div>
-      <div class="data-version">資料版本：{escape(data_version_label)}</div>
     </section>
 {data_basis_section}
 {score_explanation_section}
