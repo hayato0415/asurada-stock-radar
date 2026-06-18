@@ -111,12 +111,19 @@ def format_report_for_output(report: pd.DataFrame) -> pd.DataFrame:
             pd.to_numeric(output["當天成交量"], errors="coerce").div(1000).round(0).astype("Int64")
         )
         output = output.rename(columns={"當天成交量": "當天成交量(張)"})
+    if "年月" in output.columns:
+        output["月資料"] = output["年月"].map(_month_data_label)
+    else:
+        output["月資料"] = "最新月營收"
     if "收盤價" in output.columns and "股價最後日期" in output.columns:
         dates = pd.to_datetime(output["股價最後日期"], errors="coerce")
+        output["日資料"] = dates.dt.strftime("%Y-%m-%d").map(_day_data_label)
         latest_date = dates.max()
         if pd.notna(latest_date):
             output.attrs["price_date_label"] = latest_date.strftime("%m/%d")
         output = output.drop(columns=["股價最後日期"])
+    else:
+        output["日資料"] = "資料日期未標示"
     output = output.rename(columns=DISPLAY_COLUMN_RENAMES)
     if "是否適合慢慢買" in output.columns:
         output = output.drop(columns=["是否適合慢慢買"])
@@ -179,6 +186,18 @@ def _risk_tag_html(tags: str) -> str:
     return "".join(f'<span class="risk-pill">{escape(tag.strip())}</span>' for tag in tags.split("、") if tag.strip())
 
 
+def _month_data_label(value: object) -> str:
+    if pd.isna(value) or str(value).strip() in {"", "-"}:
+        return "最新月營收"
+    return f"{str(value).strip()} 月營收"
+
+
+def _day_data_label(value: object) -> str:
+    if pd.isna(value) or str(value).strip() in {"", "-"}:
+        return "資料日期未標示"
+    return f"{str(value).strip()} 收盤價/成交量"
+
+
 def build_mobile_cards(display_report: pd.DataFrame) -> str:
     cards: list[str] = []
     for _, row in display_report.iterrows():
@@ -197,6 +216,8 @@ def build_mobile_cards(display_report: pd.DataFrame) -> str:
         mom = _format_percent(row, "月營收月增率")
         rhythm = _value(row, "觀察節奏")
         risk_tags = _value(row, "風險標籤")
+        month_data = _value(row, "月資料")
+        day_data = _value(row, "日資料")
         attrs = _filter_attrs(row)
         cards.append(
             f"""
@@ -219,6 +240,10 @@ def build_mobile_cards(display_report: pd.DataFrame) -> str:
         <div><span>觀察節奏</span><strong>{escape(rhythm)}</strong></div>
       </div>
       <div class="risk-tags">{_risk_tag_html(risk_tags)}</div>
+      <div class="date-tags">
+        <span>月資料：{escape(month_data)}</span>
+        <span>日資料：{escape(day_data)}</span>
+      </div>
       <p class="concept"><span>概念股：</span>{escape(concept)}</p>
       <p><strong>入選理由：</strong>{escape(reason)}</p>
       <details>
@@ -242,6 +267,8 @@ def build_desktop_summary_table(display_report: pd.DataFrame) -> str:
         "觀察評等",
         "收盤價",
         "當天成交量(張)",
+        "月資料",
+        "日資料",
         "月營收年增率",
         "月營收月增率",
         "風險標籤",
@@ -259,6 +286,8 @@ def build_desktop_summary_table(display_report: pd.DataFrame) -> str:
         "觀察評等": "觀察<br>評等",
         "收盤價": price_header,
         "當天成交量(張)": "當天成交量<br>(張)",
+        "月資料": "月<br>資料",
+        "日資料": "日<br>資料",
         "月營收年增率": "營收年增<br>(%)",
         "月營收月增率": "營收月增<br>(%)",
         "風險標籤": "風險<br>標籤",
@@ -703,6 +732,21 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
       padding: 4px 8px;
       white-space: nowrap;
     }}
+    .date-tags {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }}
+    .date-tags span {{
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 8px;
+    }}
     .no-results {{
       background: #fff7ed;
       border: 1px solid #fed7aa;
@@ -746,21 +790,23 @@ def write_reports(report: pd.DataFrame, output_dir: Path = OUTPUT_DIR) -> tuple[
       z-index: 5;
       box-shadow: 0 2px 0 rgba(15, 35, 70, 0.18);
     }}
-    .summary-table th:nth-child(1), .summary-table td:nth-child(1) {{ width: 4%; text-align: center; }}
+    .summary-table th:nth-child(1), .summary-table td:nth-child(1) {{ width: 3%; text-align: center; }}
     .summary-table th:nth-child(2), .summary-table td:nth-child(2) {{ width: 5%; text-align: center; }}
-    .summary-table th:nth-child(3), .summary-table td:nth-child(3) {{ width: 7%; text-align: center; }}
-    .summary-table th:nth-child(4), .summary-table td:nth-child(4) {{ width: 13%; }}
+    .summary-table th:nth-child(3), .summary-table td:nth-child(3) {{ width: 6%; text-align: center; }}
+    .summary-table th:nth-child(4), .summary-table td:nth-child(4) {{ width: 11%; }}
     .summary-table th:nth-child(5), .summary-table td:nth-child(5) {{ width: 5%; text-align: right; }}
     .summary-table th:nth-child(6), .summary-table td:nth-child(6) {{ width: 5%; text-align: center; }}
-    .summary-table th:nth-child(7), .summary-table td:nth-child(7) {{ width: 7%; text-align: right; }}
-    .summary-table th:nth-child(8), .summary-table td:nth-child(8) {{ width: 8%; text-align: right; }}
-    .summary-table th:nth-child(9), .summary-table td:nth-child(9) {{ width: 7%; text-align: right; }}
-    .summary-table th:nth-child(10), .summary-table td:nth-child(10) {{ width: 7%; text-align: right; }}
-    .summary-table th:nth-child(11), .summary-table td:nth-child(11) {{ width: 8%; text-align: center; }}
-    .summary-table th:nth-child(12), .summary-table td:nth-child(12) {{ width: 6%; text-align: center; }}
-    .summary-table th:nth-child(13), .summary-table td:nth-child(13) {{ width: 18%; }}
+    .summary-table th:nth-child(7), .summary-table td:nth-child(7) {{ width: 6%; text-align: right; }}
+    .summary-table th:nth-child(8), .summary-table td:nth-child(8) {{ width: 7%; text-align: right; }}
+    .summary-table th:nth-child(9), .summary-table td:nth-child(9) {{ width: 7%; text-align: center; }}
+    .summary-table th:nth-child(10), .summary-table td:nth-child(10) {{ width: 8%; text-align: center; }}
+    .summary-table th:nth-child(11), .summary-table td:nth-child(11) {{ width: 7%; text-align: right; }}
+    .summary-table th:nth-child(12), .summary-table td:nth-child(12) {{ width: 7%; text-align: right; }}
+    .summary-table th:nth-child(13), .summary-table td:nth-child(13) {{ width: 7%; text-align: center; }}
+    .summary-table th:nth-child(14), .summary-table td:nth-child(14) {{ width: 6%; text-align: center; }}
+    .summary-table th:nth-child(15), .summary-table td:nth-child(15) {{ width: 13%; }}
     .summary-table td:nth-child(4),
-    .summary-table td:nth-child(13) {{
+    .summary-table td:nth-child(15) {{
       line-height: 1.45;
     }}
     tr:nth-child(even) {{ background: #f8fafc; }}
