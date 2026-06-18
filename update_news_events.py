@@ -55,7 +55,8 @@ THEME_KEYWORDS: dict[str, list[str]] = {
     "記憶體": ["記憶體", "DRAM", "NAND", "HBM", "SSD", "美光", "Micron", "海力士", "SK hynix", "三星"],
     "AI伺服器": AI_SERVER_KEYWORDS,
     "PCB": PCB_KEYWORDS,
-    "CPO": ["CPO", "光通訊", "矽光子", "光模組", "CoWoS"],
+    "CPO / 光通訊 / AI資料中心": ["聯鈞", "3450", "CPO", "光通訊", "矽光子", "800G", "1.6T", "AOC", "COS", "光模組", "雷射封測", "AI資料中心", "源傑科技"],
+    "CPO": ["CPO", "光通訊", "矽光子", "光模組", "CoWoS", "800G", "1.6T", "AOC", "COS", "雷射封測", "AI資料中心"],
     "玻璃基板": ["玻璃基板", "TGV", "Glass substrate"],
     "低軌衛星": ["低軌衛星", "衛星", "SpaceX", "Starlink"],
     "重電": ["重電", "電網", "變壓器", "電力設備", "綠電"],
@@ -73,7 +74,8 @@ MANUAL_RELATED_STOCKS: dict[str, list[str]] = {
     "AI伺服器": ["2382", "3231", "6669", "2356", "2376", "3022", "2368"],
     "PCB": ["2383", "2368", "3037", "8046", "4958"],
     "AI伺服器 + PCB": ["2382", "3231", "6669", "2356", "2376", "3022", "2383", "2368", "3037", "8046", "4958"],
-    "CPO": ["3450", "3163", "3081", "4979", "3535", "4934"],
+    "CPO / 光通訊 / AI資料中心": ["3450", "3081", "4979", "3163", "4908", "3363", "6442"],
+    "CPO": ["3450", "3081", "4979", "3163", "4908", "3363", "6442"],
     "玻璃基板": ["1802", "1810", "3044"],
     "低軌衛星": ["2313", "6285", "3491", "3596"],
     "重電": ["1504", "1513", "1514", "1605", "1618"],
@@ -170,6 +172,9 @@ def infer_category(title: str) -> str | None:
     pcb_hit = any(keyword.upper() in upper_title for keyword in PCB_KEYWORDS)
     if ai_hit and pcb_hit:
         return "AI伺服器 + PCB"
+    cpo_hit = any(keyword.upper() in upper_title for keyword in THEME_KEYWORDS["CPO / 光通訊 / AI資料中心"])
+    if cpo_hit:
+        return "CPO / 光通訊 / AI資料中心"
     for category, keywords in THEME_KEYWORDS.items():
         if any(keyword.upper() in upper_title for keyword in keywords):
             return category
@@ -271,6 +276,7 @@ def build_events(limit: int = MAX_NEWS) -> list[dict[str, object]]:
                     "summary": make_summary(title, category, source.name),
                     "asurada_analysis": make_analysis(title, category, related_stocks),
                     "source_name": source.name,
+                    "source_url": url,
                     "url": url,
                 }
             )
