@@ -31,11 +31,11 @@ function parseCsv(text) {
   let row = [];
   let field = "";
   let inQuotes = false;
-  const source = String(text || "").replace(/^\uFEFF/, "");
+  const csvText = String(text || "").replace(/^\uFEFF/, "");
 
-  for (let index = 0; index < source.length; index += 1) {
-    const char = source[index];
-    const next = source[index + 1];
+  for (let index = 0; index < csvText.length; index += 1) {
+    const char = csvText[index];
+    const next = csvText[index + 1];
     if (inQuotes) {
       if (char === '"' && next === '"') {
         field += '"';
@@ -102,29 +102,28 @@ function selectConcept(conceptCode) {
 
 function renderLayout() {
   const options = state.categories.map((category) =>
-    `<option value="${escapeHtml(category.concept_code)}">${escapeHtml(category.display_order)}. ${escapeHtml(category.concept_name)}</option>`
+    `<option value="${escapeHtml(category.concept_code)}">${escapeHtml(category.concept_name)}</option>`
   ).join("");
 
   app.innerHTML = `
     <section class="panel">
       <div class="section-title">
-        <h2>MoneyDJ 概念股資料庫</h2>
+        <h2>概念股資料庫</h2>
         <span>資料日期 ${escapeHtml(quoteDate())}</span>
       </div>
-      <div class="grid cols-4">
+      <div class="grid cols-3">
         <div class="metric"><span>概念分類數量</span><strong>${state.categories.length}</strong></div>
-        <div class="metric"><span>概念個股筆數</span><strong>${state.stocks.length}</strong></div>
-        <div class="metric"><span>目前選取個股數量</span><strong id="activeStockCount">-</strong></div>
-        <div class="metric"><span>資料來源</span><strong>MoneyDJ</strong></div>
+        <div class="metric"><span>目前成分股數</span><strong id="activeStockCount">-</strong></div>
+        <div class="metric"><span>資料日期</span><strong>${escapeHtml(quoteDate())}</strong></div>
       </div>
       <div class="filters">
         <label>概念搜尋<input id="conceptSearch" placeholder="AI、Apple、CoWoS、Google TPU、HDI、IC基板、眼鏡、3D全息投影"></label>
-        <label>概念分類<select id="conceptSelect">${options}</select></label>
+        <label>概念名稱<select id="conceptSelect">${options}</select></label>
       </div>
     </section>
     <section class="grid cols-2">
       <div class="panel">
-        <div class="section-title"><h2>概念分類</h2><span id="conceptListCount"></span></div>
+        <div class="section-title"><h2>概念名稱</h2><span id="conceptListCount"></span></div>
         <div id="conceptList" class="chip-row"></div>
       </div>
       <div id="conceptDetail" class="panel"></div>
@@ -150,9 +149,9 @@ function renderConceptList() {
   if (!list) return;
   list.innerHTML = filtered.map((category) => `
     <button class="secondary ${category.concept_code === state.activeCode ? "active" : ""}" data-code="${escapeHtml(category.concept_code)}">
-      ${escapeHtml(category.display_order)}. ${escapeHtml(category.concept_name)}
+      ${escapeHtml(category.concept_name)}
     </button>
-  `).join("") || `<div class="empty">找不到符合關鍵字的概念分類</div>`;
+  `).join("") || `<div class="empty">找不到符合關鍵字的概念名稱</div>`;
   list.querySelectorAll("button[data-code]").forEach((button) => {
     button.addEventListener("click", () => selectConcept(button.dataset.code));
   });
@@ -164,7 +163,7 @@ function renderActiveConcept() {
   if (!detail) return;
   const category = state.categories.find((item) => item.concept_code === state.activeCode) || state.categories[0];
   if (!category) {
-    detail.innerHTML = `<div class="error">沒有可顯示的概念分類。</div>`;
+    detail.innerHTML = `<div class="error">沒有可顯示的概念資料。</div>`;
     return;
   }
   state.activeCode = category.concept_code;
@@ -173,12 +172,11 @@ function renderActiveConcept() {
   detail.innerHTML = `
     <div class="section-title">
       <h2>${escapeHtml(category.concept_name)}</h2>
-      <span>${escapeHtml(category.concept_code)}</span>
+      <span>成分股數 ${stocks.length}</span>
     </div>
-    <div class="grid cols-3">
-      <div class="metric"><span>概念代碼</span><strong>${escapeHtml(category.concept_code)}</strong></div>
-      <div class="metric"><span>個股數量</span><strong>${stocks.length}</strong></div>
-      <div class="metric"><span>更新日期</span><strong>${escapeHtml(category.updated_at || "-")}</strong></div>
+    <div class="grid cols-2">
+      <div class="metric"><span>資料日期</span><strong>${escapeHtml(stocks[0]?.quote_date || quoteDate())}</strong></div>
+      <div class="metric"><span>成分股數</span><strong>${stocks.length}</strong></div>
     </div>
     ${renderStockTable(stocks)}
   `;
@@ -240,8 +238,8 @@ async function bootConcepts() {
   } catch (error) {
     app.innerHTML = `
       <section class="panel">
-        <div class="section-title"><h2>MoneyDJ 概念股資料庫</h2><span>CSV 載入失敗</span></div>
-        <div class="error">無法載入 MoneyDJ CSV：${escapeHtml(error.message)}</div>
+        <div class="section-title"><h2>概念股資料庫</h2><span>CSV 載入失敗</span></div>
+        <div class="error">無法載入概念股資料：${escapeHtml(error.message)}</div>
       </section>
     `;
   }
