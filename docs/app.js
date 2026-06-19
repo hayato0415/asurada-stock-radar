@@ -99,6 +99,60 @@ async function loadJson(path, fallback) {
   }
 }
 
+async function loadText(path) {
+  const response = await fetch(path, { cache: "no-store" });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  return await response.text();
+}
+
+function parseCsv(text) {
+  const rows = [];
+  let row = [];
+  let field = "";
+  let inQuotes = false;
+  const source = String(text || "").replace(/^\uFEFF/, "");
+  for (let i = 0; i < source.length; i += 1) {
+    const char = source[i];
+    const next = source[i + 1];
+    if (inQuotes) {
+      if (char === '"' && next === '"') {
+        field += '"';
+        i += 1;
+      } else if (char === '"') {
+        inQuotes = false;
+      } else {
+        field += char;
+      }
+      continue;
+    }
+    if (char === '"') {
+      inQuotes = true;
+    } else if (char === ",") {
+      row.push(field);
+      field = "";
+    } else if (char === "\n") {
+      row.push(field);
+      rows.push(row);
+      row = [];
+      field = "";
+    } else if (char !== "\r") {
+      field += char;
+    }
+  }
+  if (field || row.length) {
+    row.push(field);
+    rows.push(row);
+  }
+  const headers = (rows.shift() || []).map((header) => header.trim());
+  return rows
+    .filter((items) => items.some((item) => String(item || "").trim()))
+    .map((items) => Object.fromEntries(headers.map((header, index) => [header, items[index] ?? ""])));
+}
+
+async function loadCsv(path) {
+  return parseCsv(await loadText(path));
+}
+
 async function loadAllData() {
   const [stocks, news, themes, concepts, themeCandidates, technical, profiles, master] = await Promise.all([
     loadJson("data/stocks-latest.json", []),
@@ -506,9 +560,7 @@ function renderHeader(active) {
     ["index.html", "首頁", "index"],
     ["radar.html", "全股雷達", "radar"],
     ["news.html", "重大新聞", "news"],
-    ["themes.html", "題材概念股", "themes"],
     ["concepts.html", "概念股資料庫", "concepts"],
-    ["concept-category.html", "MoneyDJ 概念分類", "concept-category"],
     ["stock.html", "個股查詢", "stock"],
     ["portfolio.html", "我的持股", "portfolio"],
   ];
@@ -549,14 +601,12 @@ function renderHome() {
   const hitHoldings = holdings.filter((code) => stockByCode(code));
   const techStocks = sortedStocks("tech").slice(0, 30);
   const topStocks = techStocks.slice(0, 10);
-  const nonTech = sortedStocks("nontech").slice(0, 30);
-  const navEntrances = [
-    ["radar.html", "全股雷達"],
-    ["themes.html", "題材概念股"],
-    ["concepts.html", "概念股資料庫"],
-    ["concept-category.html", "MoneyDJ 概念分類"],
-    ["news.html", "重大新聞"],
-    ["stock.html", "個股查詢"],
+    const nonTech = sortedStocks("nontech").slice(0, 30);
+    const navEntrances = [
+      ["radar.html", "全股雷達"],
+      ["concepts.html", "概念股資料庫"],
+      ["news.html", "重大新聞"],
+      ["stock.html", "個股查詢"],
     ["portfolio.html", "我的持股"],
   ];
   main.innerHTML = `
@@ -768,45 +818,122 @@ function conceptStockTable(concept) {
   `;
 }
 
-function renderConcepts() {
+async function renderConcepts() {
   renderHeader("concepts");
   const main = $("#app");
-  const concepts = conceptEntries();
-  const groups = ["全部概念", "電子概念", "非電子概念", "政策概念", "原物料概念", "金融資產概念"];
-  const selectOptions = concepts.map((concept) => `<option value="${escapeHtml(concept.name)}">${escapeHtml(concept.name)}</option>`).join("");
-  const options = concepts.flatMap((concept) => [concept.name, ...(concept.aliases || []), ...(concept.keywords || [])])
-    .filter(Boolean)
-    .filter((value, index, array) => array.indexOf(value) === index)
-    .map((value) => `<option value="${escapeHtml(value)}"></option>`)
-    .join("");
+  main.innerHTML = `<section class="panel"><div class="section-title"><h2>概念股資料庫</h2><span>MoneyDJ 概念分類載入中...</span></div></section>`;
+  let categories = [];
+  let stocks = [];
+  try {
+    [categories, stocks] = await Promise.all([
+      loadCsv("data/moneydj_concept_categories.csv"),
+      loadCsv("data/moneydj_concept_stocks.csv"),
+    ]);
+  } catch (error) {
+    main.innerHTML = `
+      <section class="panel">
+        <div class="section-title"><h2>概念股資料庫</h2><span>MoneyDJ CSV 載入失敗</span></div>
+        <div class="error">無法載入 data/moneydj_concept_categories.csv 或 data/moneydj_concept_stocks.csv，請先執行 MoneyDJ 抓取腳本。</div>
+      </section>
+    `;
+    console.warn("MoneyDJ CSV load failed", error);
+    return;
+  }
+  categories = categories
+    .filter((row) => row.concept_code && row.concept_name)
+    .sort((a, b) => toNumber(a.display_order) - toNumber(b.display_order));
+  stocks = stocks
+    .filter((row) => row.concept_code && row.stock_id)
+    .sort((a, b) =>
+      toNumber(a.display_order) - toNumber(b.display_order) ||
+      toNumber(a.stock_order) - toNumber(b.stock_order)
+    );
+  if (!categories.length) {
+    main.innerHTML = `
+      <section class="panel">
+        <div class="section-title"><h2>概念股資料庫</h2><span>MoneyDJ CSV 無分類資料</span></div>
+        <div class="error">moneydj_concept_categories.csv 沒有可顯示的概念分類。</div>
+      </section>
+    `;
+    return;
+  }
+  const selectOptions = categories.map((concept) =>
+    `<option value="${escapeHtml(concept.concept_code)}">${escapeHtml(concept.display_order)}. ${escapeHtml(concept.concept_name)}</option>`
+  ).join("");
+  const suggestions = categories.map((concept) => `<option value="${escapeHtml(concept.concept_name)}"></option>`).join("");
   main.innerHTML = `
     <section class="panel">
-      <div class="section-title"><h2>概念股資料庫</h2><span>完整概念分類，不限今日雷達命中</span></div>
+      <div class="section-title"><h2>概念股資料庫</h2><span>資料來源：MoneyDJ，依原始 display_order 排序</span></div>
       <div class="filters">
-        <label>概念股分類<select id="conceptSelect">${selectOptions}</select></label>
-        <label>關鍵字搜尋<input id="conceptSearch" list="conceptSuggestions" placeholder="輸入 AI、玻璃、光..."></label>
-        <label>分類<select id="conceptGroup">${groups.map((group) => `<option>${escapeHtml(group)}</option>`).join("")}</select></label>
+        <label>概念分類<select id="conceptSelect">${selectOptions}</select></label>
+        <label>可搜尋下拉框<input id="conceptSearch" list="conceptSuggestions" placeholder="AI、Apple、CoWoS、Google TPU、HDI、IC基板、眼鏡"></label>
       </div>
-      <datalist id="conceptSuggestions">${options}</datalist>
+      <datalist id="conceptSuggestions">${suggestions}</datalist>
+      <p class="muted">目前個股 CSV 先完成最小驗收：只含第一個概念 EH001276。其他概念會顯示「尚未抓取」。</p>
     </section>
-    <section id="conceptList" class="grid cols-2"></section>
+    <section id="conceptResult"></section>
   `;
   const render = () => {
     const query = $("#conceptSearch").value.trim();
-    const group = $("#conceptGroup").value;
-    const selected = $("#conceptSelect").value;
-    const list = query
-      ? concepts.filter((concept) => conceptMatches(concept, query, group))
-      : concepts.filter((concept) => concept.name === selected && conceptMatches(concept, "", group));
-    $("#conceptList").innerHTML = list.length ? list.map(conceptCard).join("") : `<div class="empty">找不到符合條件的概念股分類</div>`;
+    const selectedCode = $("#conceptSelect").value;
+    const filtered = query
+      ? categories.filter((concept) => {
+        const text = `${concept.concept_code} ${concept.concept_name}`.toLowerCase();
+        return text.includes(query.toLowerCase());
+      })
+      : categories.filter((concept) => concept.concept_code === selectedCode);
+    $("#conceptResult").innerHTML = filtered.length
+      ? filtered.map((concept) => moneyDjConceptCard(concept, stocks)).join("")
+      : `<div class="empty">找不到符合條件的 MoneyDJ 概念分類</div>`;
   };
   $("#conceptSearch").addEventListener("input", render);
-  $("#conceptGroup").addEventListener("change", render);
   $("#conceptSelect").addEventListener("change", () => {
     $("#conceptSearch").value = "";
     render();
   });
   render();
+}
+
+function moneyDjConceptCard(concept, stocks) {
+  const conceptStocks = stocks.filter((stock) => stock.concept_code === concept.concept_code);
+  return `
+    <article class="card theme-card">
+      <div class="section-title">
+        <h3>${escapeHtml(concept.concept_name)}</h3>
+        ${chip(concept.concept_code)}
+      </div>
+      <div class="grid cols-4">
+        <div class="metric"><span>概念代碼</span><strong>${escapeHtml(concept.concept_code)}</strong></div>
+        <div class="metric"><span>原始排序</span><strong>${escapeHtml(concept.display_order)}</strong></div>
+        <div class="metric"><span>個股數量</span><strong>${conceptStocks.length} 檔</strong></div>
+        <div class="metric"><span>更新日期</span><strong>${escapeHtml(concept.updated_at || "-")}</strong></div>
+      </div>
+      ${moneyDjStockTable(conceptStocks)}
+    </article>
+  `;
+}
+
+function moneyDjStockTable(stocks) {
+  if (!stocks.length) {
+    return `<div class="empty">此概念個股尚未抓取，請先執行下一階段 MoneyDJ 全量個股抓取。</div>`;
+  }
+  return `
+    <div class="table-wrap">
+      <table class="concept-stock-table">
+        <thead><tr><th>順序</th><th>股票代號</th><th>股票名稱</th><th>更新日期</th></tr></thead>
+        <tbody>
+          ${stocks.map((stock) => `
+            <tr>
+              <td>${escapeHtml(stock.stock_order)}</td>
+              <td><a class="stock-link" href="stock.html?code=${encodeURIComponent(stock.stock_id)}">${escapeHtml(stock.stock_id)}</a></td>
+              <td><a class="stock-link" href="stock.html?code=${encodeURIComponent(stock.stock_id)}">${escapeHtml(stock.stock_name)}</a></td>
+              <td>${escapeHtml(stock.updated_at || "-")}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    </div>
+  `;
 }
 
 function conceptCard(concept) {
@@ -999,7 +1126,7 @@ async function boot(page) {
   if (page === "radar") renderRadar();
   if (page === "news") renderNews();
   if (page === "themes") renderThemes();
-  if (page === "concepts") renderConcepts();
+  if (page === "concepts") await renderConcepts();
   if (page === "stock") renderStock();
   if (page === "portfolio") renderPortfolio();
 }
