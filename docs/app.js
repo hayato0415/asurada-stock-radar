@@ -321,8 +321,6 @@ function externalLinks(code) {
   const links = [
     ["CMoney 概覽", `https://www.cmoney.tw/finance/${safeCode}/f00025`],
     ["CMoney 營收", `https://www.cmoney.tw/finance/${safeCode}/f00029`],
-    ["CMoney 技術分析", `https://www.cmoney.tw/finance/${safeCode}/technicalanalysis`],
-    ["CMoney 籌碼K線", `https://www.cmoney.tw/finance/${safeCode}/stockmainkline`],
     ["Yahoo 股市", `https://tw.stock.yahoo.com/quote/${safeCode}.TW`],
     ["PChome 股市", `https://pchome.megatime.com.tw/stock/sto0/ock1/sid${normalized}.html`],
   ];
