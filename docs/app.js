@@ -508,6 +508,7 @@ function renderHeader(active) {
     ["news.html", "重大新聞", "news"],
     ["themes.html", "題材概念股", "themes"],
     ["concepts.html", "概念股資料庫", "concepts"],
+    ["concept-category.html", "MoneyDJ 概念分類", "concept-category"],
     ["stock.html", "個股查詢", "stock"],
     ["portfolio.html", "我的持股", "portfolio"],
   ];
@@ -553,6 +554,7 @@ function renderHome() {
     ["radar.html", "全股雷達"],
     ["themes.html", "題材概念股"],
     ["concepts.html", "概念股資料庫"],
+    ["concept-category.html", "MoneyDJ 概念分類"],
     ["news.html", "重大新聞"],
     ["stock.html", "個股查詢"],
     ["portfolio.html", "我的持股"],

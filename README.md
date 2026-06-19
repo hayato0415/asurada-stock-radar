@@ -265,3 +265,64 @@ docs/data/news-events.json
 - 新聞池最多 50 則。
 - 不儲存新聞全文，只保留標題、時間、來源名稱、來源連結、簡短摘要、阿斯拉連動分析與相關股票代號。
 - 不顯示 `example.com`、空連結、測試連結或假連結。
+
+## MoneyDJ 概念股分類抓取
+
+第一階段只抓 MoneyDJ 概念股分類名稱與代碼，不處理每日行情、成交量、月營收或雷達分數。
+
+執行方式：
+
+```powershell
+node scripts/crawl_moneydj_concepts.js
+```
+
+預設讀取 MoneyDJ 概念股表現頁：
+
+```text
+https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm
+```
+
+也可以指定來源網址：
+
+```powershell
+node scripts/crawl_moneydj_concepts.js "https://www.moneydj.com/z/zg/zge/zge_E_E.djhtm"
+```
+
+輸出檔案：
+
+```text
+data/moneydj_concept_categories.csv
+data/moneydj_concept_categories_report.json
+docs/data/moneydj_concept_categories.csv
+docs/data/moneydj_concept_categories_report.json
+data/concept_source_compare.csv
+docs/data/concept_source_compare.csv
+```
+
+網站搜尋頁：
+
+```text
+docs/concept-category.html
+```
+
+GitHub Pages 網址：
+
+```text
+https://hayato0415.github.io/jtgame-search/concept-category.html
+```
+
+套件需求：
+
+- 建議使用 Node.js 18 以上，因為腳本使用內建 `fetch`。
+- 第一段會直接解析 HTML 裡的 `select / option`，不需要 `axios` 或 `cheerio`。
+- 如果 MoneyDJ 頁面改成前端動態載入，腳本會 fallback 嘗試 Playwright；此時才需要安裝：
+
+```powershell
+npm install playwright
+```
+
+注意事項：
+
+- GitHub Pages 前端只能讀取 CSV，不能直接寫回 GitHub。
+- 抓取器是本機腳本；執行後產生 CSV，再 commit / push 到 GitHub Pages。
+- `concept_source_compare.csv` 只是預留多來源比對欄位，尚未實作完整比對邏輯。
