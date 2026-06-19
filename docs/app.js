@@ -317,14 +317,41 @@ function stockChips(codes, emptyText = "無") {
 function externalLinks(code) {
   const safeCode = encodeURIComponent(normalizeCode(code));
   const normalized = normalizeCode(code);
+  if (!normalized) return "";
   const links = [
     ["CMoney 概覽", `https://www.cmoney.tw/finance/${safeCode}/f00025`],
+    ["CMoney 營收", `https://www.cmoney.tw/finance/${safeCode}/f00029`],
     ["CMoney 技術分析", `https://www.cmoney.tw/finance/${safeCode}/technicalanalysis`],
     ["CMoney 籌碼K線", `https://www.cmoney.tw/finance/${safeCode}/stockmainkline`],
     ["Yahoo 股市", `https://tw.stock.yahoo.com/quote/${safeCode}.TW`],
     ["PChome 股市", `https://pchome.megatime.com.tw/stock/sto0/ock1/sid${normalized}.html`],
   ];
   return `<div class="button-row">${links.map(([label, href]) => `<a class="solid-link" href="${href}" target="_blank" rel="noopener noreferrer">${label}</a>`).join("")}</div>`;
+}
+
+function cleanDisplay(value) {
+  if (value === null || value === undefined) return "—";
+  const text = String(value).trim();
+  if (!text || text === "undefined" || text === "null" || text === "NaN") return "—";
+  return text;
+}
+
+function infoItem(label, value, extra = "") {
+  return `
+    <div class="info-item ${extra}">
+      <span>${escapeHtml(label)}</span>
+      <strong>${escapeHtml(cleanDisplay(value))}</strong>
+    </div>
+  `;
+}
+
+function infoBadge(label, value, tone = "") {
+  return `
+    <div class="info-item">
+      <span>${escapeHtml(label)}</span>
+      <strong>${chip(cleanDisplay(value), tone)}</strong>
+    </div>
+  `;
 }
 
 function radarScore(stock, mode = "main") {
@@ -429,44 +456,42 @@ function stockTable(stocks, mode = "main", compact = false) {
 function stockRadarDetail(stock) {
   const labels = revenueLabels(stock);
   const rows = [
-    ["雷達排名", stock.rank || "-"],
+    ["雷達排名", stock.rank],
     ["雷達評分", radarScore(stock, "market")],
-    ["收盤價", stock.close || "-"],
-    ["成交量", stock.volume || "-"],
+    ["收盤價", stock.close],
+    ["成交量", stock.volume],
     [labels.current, revenueAmount(stock)],
-    [labels.mom, stock.revenue_mom || "-"],
-    [labels.yoy, stock.revenue_yoy || "-"],
-    ["概念股", stock.concept || "-"],
-    ["入選理由", stock.reason || "-"],
-    ["風險標籤", stock.risk_tags || "一般觀察"],
+    [labels.mom, stock.revenue_mom],
+    [labels.yoy, stock.revenue_yoy],
   ];
   return `
-    <div class="table-wrap">
-      <table class="detail-table">
-        <tbody>
-          ${rows.map(([label, value]) => `<tr><th>${escapeHtml(label)}</th><td>${escapeHtml(value)}</td></tr>`).join("")}
-        </tbody>
-      </table>
+    <div class="stock-info-card">
+      <h3>雷達資訊</h3>
+      <div class="stock-info-grid">
+        ${rows.map(([label, value]) => infoItem(label, value)).join("")}
+      </div>
+      <div class="stock-notes">
+        <p><span class="label">概念股</span>${escapeHtml(cleanDisplay(stock.concept))}</p>
+        <p><span class="label">入選理由</span>${escapeHtml(cleanDisplay(stock.reason))}</p>
+        <p><span class="label">風險標籤</span>${escapeHtml(cleanDisplay(stock.risk_tags || "一般觀察"))}</p>
+      </div>
     </div>
   `;
 }
 
 function stockMasterDetail(code, stock) {
   const record = masterRecord(code);
-  const rows = [
-    ["股票代號", normalizeCode(code)],
-    ["股票名稱", record?.name || "名稱待補"],
-    ["市場別", record?.market || "-"],
-    ["產業別", record?.industry || "-"],
-    ["今日雷達狀態", stock ? "命中今日雷達" : "今日未入選雷達"],
-  ];
+  const status = stock ? "命中今日雷達" : "今日未入選雷達";
   return `
-    <div class="table-wrap">
-      <table class="detail-table">
-        <tbody>
-          ${rows.map(([label, value]) => `<tr><th>${escapeHtml(label)}</th><td>${escapeHtml(value)}</td></tr>`).join("")}
-        </tbody>
-      </table>
+    <div class="stock-info-card">
+      <h3>基本資料</h3>
+      <div class="stock-info-grid">
+        ${infoItem("股票代號", normalizeCode(code))}
+        ${infoItem("股票名稱", record?.name || "名稱待補")}
+        ${infoItem("市場別", record?.market)}
+        ${infoItem("產業別", record?.industry)}
+        ${infoBadge("今日雷達狀態", status, stock ? "good" : "warn")}
+      </div>
     </div>
   `;
 }
@@ -968,8 +993,8 @@ function renderStock() {
   const main = $("#app");
   main.innerHTML = `
     <section class="panel">
-      <div class="section-title"><h2>個股查詢</h2><span>支援 stock.html?code=2337</span></div>
-      <div class="filters"><label>股票代號<input id="stockSearch" value="${escapeHtml(initialCode)}" placeholder="2337"></label></div>
+      <div class="section-title"><h2>個股查詢</h2></div>
+      <div class="filters stock-search-form"><label>股票代號<input id="stockSearch" value="${escapeHtml(initialCode)}" placeholder="請輸入股票代號"></label></div>
     </section>
     <section id="stockResult"></section>
   `;
@@ -988,7 +1013,7 @@ function renderStock() {
     if (!stock) {
       $("#stockResult").innerHTML = `
         <section class="panel">
-          <div class="section-title"><h2>${escapeHtml(code)} ${escapeHtml(name)}</h2><span>今日未入選雷達</span></div>
+          <div class="section-title"><h2>${escapeHtml(code)} ${escapeHtml(name)}</h2>${chip("今日未入選雷達", "warn")}</div>
           ${stockMasterDetail(code, stock)}
           <p class="muted">尚無內部雷達資料。</p>
         </section>
@@ -1001,7 +1026,7 @@ function renderStock() {
     const tech = state.technical[code];
     $("#stockResult").innerHTML = `
       <section class="panel">
-        <div class="section-title"><h2>${escapeHtml(code)} ${escapeHtml(name)}</h2><span>命中今日雷達</span></div>
+        <div class="section-title"><h2>${escapeHtml(code)} ${escapeHtml(name)}</h2>${chip("命中今日雷達", "good")}</div>
         ${stockMasterDetail(code, stock)}
         ${stockRadarDetail(stock)}
       </section>
