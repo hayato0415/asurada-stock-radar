@@ -28,6 +28,20 @@ const NON_TECH_THEMES = [
   "營建", "資產", "都更", "金融", "壽險", "銀行", "生醫", "生技", "觀光", "食品", "航運", "鋼鐵", "塑化", "原物料", "傳產",
 ];
 
+const ELECTRONIC_INDUSTRY_CODES = new Set(["24", "25", "26", "27", "28", "29", "30", "31"]);
+const NON_ELECTRONIC_INDUSTRY_CODES = new Set([
+  "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "32", "33", "35", "37", "38",
+]);
+const ELECTRONIC_INDUSTRY_NAMES = [
+  "半導體", "電腦及週邊設備", "光電", "通信網路", "電子零組件", "電子通路", "資訊服務", "其他電子",
+  "PCB", "記憶體", "AI伺服器", "CPO", "IC設計", "半導體設備", "面板", "連接器", "散熱", "電源供應器", "網通",
+];
+const NON_ELECTRONIC_INDUSTRY_NAMES = [
+  "金融保險", "營建", "水泥", "食品", "塑膠", "紡織", "電機機械", "電器電纜", "玻璃陶瓷", "造紙", "鋼鐵", "橡膠", "汽車", "航運", "觀光", "貿易百貨", "油電燃氣", "生技醫療", "農業科技", "文化創意", "綠能環保", "其他非電子",
+];
+const ELECTRONIC_STOCK_OVERRIDES = new Set(["2317", "2330", "2303", "2382", "3231", "3673"]);
+const NON_ELECTRONIC_STOCK_OVERRIDES = new Set(["1802", "1504", "1513", "1605"]);
+
 const constructionThemes = ["營建", "資產", "都更"];
 const financeThemes = ["金融", "壽險", "銀行"];
 const newsFilterAliases = {
@@ -252,6 +266,36 @@ function isTechStock(stock) {
 
 function isNonTechStock(stock) {
   return conceptIncludes(stock, NON_TECH_THEMES) && !isTechStock(stock);
+}
+
+function getStockGroup(stock) {
+  const code = normalizeCode(stock?.code);
+  if (ELECTRONIC_STOCK_OVERRIDES.has(code)) return "electronics";
+  if (NON_ELECTRONIC_STOCK_OVERRIDES.has(code)) return "non-electronics";
+
+  const master = masterRecord(code) || {};
+  const industryValues = [
+    stock?.industry, stock?.sector, stock?.category,
+    master.industry, master.sector, master.category,
+  ].filter((value) => value !== null && value !== undefined && String(value).trim());
+  for (const value of industryValues) {
+    const text = String(value).trim();
+    const codeMatch = text.match(/^0?(\d{1,2})(?:\D|$)/);
+    const industryCode = codeMatch ? codeMatch[1].padStart(2, "0") : "";
+    if (ELECTRONIC_INDUSTRY_CODES.has(industryCode)) return "electronics";
+    if (NON_ELECTRONIC_INDUSTRY_CODES.has(industryCode)) return "non-electronics";
+    if (ELECTRONIC_INDUSTRY_NAMES.some((name) => text.includes(name))) return "electronics";
+    if (NON_ELECTRONIC_INDUSTRY_NAMES.some((name) => text.includes(name))) return "non-electronics";
+  }
+
+  const fallbackText = `${stock?.concept || ""} ${stock?.business || ""} ${stock?.reason || ""}`;
+  if (NON_ELECTRONIC_INDUSTRY_NAMES.some((name) => fallbackText.includes(name)) || /重電|電機|電纜|資產|都更|金融|壽險|銀行|生技|新藥/.test(fallbackText)) {
+    return "non-electronics";
+  }
+  if (ELECTRONIC_INDUSTRY_NAMES.some((name) => fallbackText.toUpperCase().includes(name.toUpperCase())) || isTechStock(stock)) {
+    return "electronics";
+  }
+  return "non-electronics";
 }
 
 function eventCodes() {
@@ -878,6 +922,11 @@ function renderRadar() {
       </div>
       <datalist id="conceptOptions">${conceptOptions}</datalist>
       <p id="modeNote" class="mode-note"></p>
+      <div class="radar-group-filters" role="group" aria-label="股票產業分類">
+        <button type="button" class="radar-group-button active" data-stock-group="all">全部 <span data-group-count="all">0</span></button>
+        <button type="button" class="radar-group-button" data-stock-group="electronics">電子股 <span data-group-count="electronics">0</span></button>
+        <button type="button" class="radar-group-button" data-stock-group="non-electronics">非電子股 <span data-group-count="non-electronics">0</span></button>
+      </div>
     </section>
     <section class="panel transparency-note">
       <div class="section-title"><h2>選股機制透明化</h2></div>
@@ -886,6 +935,7 @@ function renderRadar() {
     </section>
     <section id="radarList"></section>
   `;
+  let selectedStockGroup = "all";
   const render = () => {
     const mode = $("#mode").value;
     const search = $("#search").value.trim().toLowerCase();
@@ -899,13 +949,35 @@ function renderRadar() {
       return true;
     });
     if (!hasUserFilter) list = list.slice(0, 30);
-    list = list.map((stock, index) => ({ ...stock, display_rank: index + 1 }));
+    const rankedList = list.map((stock, index) => ({ ...stock, display_rank: index + 1 }));
+    const counts = {
+      all: rankedList.length,
+      electronics: rankedList.filter((stock) => getStockGroup(stock) === "electronics").length,
+      "non-electronics": rankedList.filter((stock) => getStockGroup(stock) === "non-electronics").length,
+    };
+    $all("[data-group-count]").forEach((node) => {
+      node.textContent = counts[node.dataset.groupCount] ?? 0;
+    });
+    $all(".radar-group-button").forEach((button) => {
+      const active = button.dataset.stockGroup === selectedStockGroup;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    list = selectedStockGroup === "all"
+      ? rankedList
+      : rankedList.filter((stock) => getStockGroup(stock) === selectedStockGroup);
     $("#radarCount").textContent = `顯示 ${list.length} 檔`;
     $("#modeNote").textContent = dataGapNote(null, mode);
     $("#radarList").innerHTML = radarEvidenceTable(list, mode);
   };
   ["mode", "search", "concept"].forEach((id) => $(`#${id}`).addEventListener("input", render));
   ["mode"].forEach((id) => $(`#${id}`).addEventListener("change", render));
+  $all(".radar-group-button").forEach((button) => {
+    button.addEventListener("click", () => {
+      selectedStockGroup = button.dataset.stockGroup || "all";
+      render();
+    });
+  });
   render();
 }
 

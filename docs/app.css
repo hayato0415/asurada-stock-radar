@@ -135,6 +135,34 @@ a { color: inherit; }
   gap: 10px;
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
+.radar-group-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+.radar-group-button {
+  background: #ffffff;
+  border-color: var(--line);
+  color: var(--ink);
+  min-width: 112px;
+}
+.radar-group-button span {
+  background: #e8eef7;
+  border-radius: 999px;
+  display: inline-block;
+  margin-left: 4px;
+  min-width: 26px;
+  padding: 2px 7px;
+}
+.radar-group-button.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+.radar-group-button.active span {
+  background: rgba(255, 255, 255, .2);
+}
 input,
 select,
 textarea {
@@ -294,7 +322,14 @@ tr:nth-child(even) { background: #f8fafc; }
   overflow-wrap: anywhere;
 }
 .stock-search-form {
-  max-width: 420px;
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 560px;
+  width: 100%;
+}
+.stock-search-form label,
+.stock-search-form input {
+  min-width: 0;
+  width: 100%;
 }
 .revenue-summary {
   margin-bottom: 14px;
@@ -463,6 +498,13 @@ tr:nth-child(even) { background: #f8fafc; }
   .button-row {
     align-items: stretch;
     flex-direction: column;
+  }
+  .radar-group-filters {
+    flex-wrap: wrap;
+  }
+  .radar-group-button {
+    flex: 1 1 105px;
+    min-width: 0;
   }
   .button-row .solid-link,
   .button-row button {
