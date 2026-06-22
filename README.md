@@ -326,3 +326,44 @@ npm install playwright
 - GitHub Pages 前端只能讀取 CSV，不能直接寫回 GitHub。
 - 抓取器是本機腳本；執行後產生 CSV，再 commit / push 到 GitHub Pages。
 - `concept_source_compare.csv` 只是預留多來源比對欄位，尚未實作完整比對邏輯。
+
+## 本機預覽與上線
+
+正式專案目錄：
+
+```text
+C:\Users\Jasper\Documents\asurada-stock-lab\阿斯拉台股主升段雷達
+```
+
+在正式專案根目錄啟動本機伺服器：
+
+```powershell
+python -m http.server 8001 --bind 127.0.0.1 --directory docs
+```
+
+預覽全股雷達：
+
+```text
+http://127.0.0.1:8001/radar.html
+```
+
+確認差異並提交：
+
+```powershell
+git status -sb
+git diff --check
+git add <本次修改檔案>
+git commit -m "提交訊息"
+```
+
+推送至 GitHub：
+
+```powershell
+git push origin main
+```
+
+推送成功後，GitHub Actions 會將 `docs/` 部署到 GitHub Pages。正式網址：
+
+```text
+https://hayato0415.github.io/asurada-stock-radar/
+```

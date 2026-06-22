@@ -28,46 +28,7 @@ const NON_TECH_THEMES = [
   "營建", "資產", "都更", "金融", "壽險", "銀行", "生醫", "生技", "觀光", "食品", "航運", "鋼鐵", "塑化", "原物料", "傳產",
 ];
 
-const INDUSTRY_CODE_NAMES = {
-  "01": "水泥", "02": "食品", "03": "塑膠", "04": "紡織", "05": "電機機械", "06": "電器電纜",
-  "07": "化學生技醫療", "08": "玻璃陶瓷", "09": "造紙", "10": "鋼鐵", "11": "橡膠", "12": "汽車",
-  "14": "營建", "15": "航運", "16": "觀光", "17": "金融保險", "18": "貿易百貨", "20": "其他",
-  "21": "化學", "22": "生技醫療", "23": "油電燃氣", "24": "半導體", "25": "電腦及週邊設備",
-  "26": "光電", "27": "通信網路", "28": "電子零組件", "29": "電子通路", "30": "資訊服務", "31": "其他電子",
-  "32": "文化創意", "33": "農業科技", "35": "綠能環保", "36": "數位雲端", "37": "運動休閒", "38": "居家生活",
-};
-
-const NON_ELECTRONIC_POOL_KEYWORDS = [
-  "金融", "壽險", "銀行", "金融保險", "輪胎", "橡膠", "橡膠材料", "營建", "營造", "資產", "都更",
-  "生技醫療", "生技", "醫材", "新藥",
-];
-
-const RADAR_POOL_OVERRIDES = {
-  "1802": { industryName: "玻璃陶瓷", themeTags: ["AI玻璃基板", "TGV", "先進封裝", "AI材料"] },
-  "1504": { industryName: "電機機械 / 重電", themeTags: ["AI電力", "資料中心", "重電"] },
-  "1513": { industryName: "重電", themeTags: ["AI電力", "電網", "資料中心"] },
-  "1605": { industryName: "電器電纜", themeTags: ["AI電力", "銅價", "資料中心"] },
-};
-
-const themeTaxonomy = {
-  "AI伺服器": ["AI伺服器", "GB200", "GB300", "伺服器", "液冷", "散熱", "電源供應器", "BMC", "ODM"],
-  "半導體": ["半導體", "晶圓代工", "先進製程", "封測", "CoWoS", "先進封裝"],
-  "IC設計": ["IC設計", "ASIC", "MCU", "PMIC", "驅動IC", "AI晶片"],
-  "記憶體": ["DRAM", "NAND", "NOR", "HBM", "記憶體"],
-  "PCB": ["PCB", "HDI", "ABF", "載板", "高頻高速板"],
-  "CPO光通訊": ["CPO", "矽光子", "光通訊", "光模組", "800G", "1.6T"],
-  "低軌衛星": ["低軌衛星", "衛星通訊", "SpaceX", "Starlink"],
-  "AI電力": ["重電", "變壓器", "電網", "電力設備", "資料中心", "電線電纜"],
-  "玻璃基板": ["玻璃基板", "TGV", "AI玻璃基板", "先進封裝材料"],
-  "智慧眼鏡": ["AI眼鏡", "智慧眼鏡", "AR", "VR", "Micro LED", "光學"],
-  "軍工": ["軍工", "無人機", "航太", "國防"],
-  "機器人": ["機器人", "自動化", "伺服馬達", "減速機"],
-  "半導體材料": ["電子級化學品", "特化", "矽晶圓", "光阻", "濕製程", "特用材料"],
-  "金融": ["金融", "壽險", "銀行", "金控"],
-  "營建資產": ["營建", "營造", "資產", "都更", "土地"],
-  "橡膠輪胎": ["輪胎", "橡膠", "橡膠材料"],
-  "生技醫療": ["生技", "醫材", "新藥", "醫療"],
-};
+const themeTaxonomy = globalThis.AsuradaThemeTaxonomy?.themeTaxonomy || {};
 
 const constructionThemes = ["營建", "資產", "都更"];
 const financeThemes = ["金融", "壽險", "銀行"];
@@ -295,82 +256,31 @@ function isNonTechStock(stock) {
   return conceptIncludes(stock, NON_TECH_THEMES) && !isTechStock(stock);
 }
 
-function getIndustryName(stock) {
-  const code = normalizeCode(stock?.code);
-  if (RADAR_POOL_OVERRIDES[code]?.industryName) return RADAR_POOL_OVERRIDES[code].industryName;
-  const master = masterRecord(code) || {};
-  const values = [stock?.industryName, stock?.industry, stock?.sector, stock?.category, master.industryName, master.industry, master.sector, master.category];
-  for (const value of values) {
-    const text = String(value || "").trim();
-    if (!text) continue;
-    const codeMatch = text.match(/^0?(\d{1,2})(?:\D|$)/);
-    if (codeMatch) {
-      const name = INDUSTRY_CODE_NAMES[codeMatch[1].padStart(2, "0")];
-      if (name) return name;
-    } else {
-      return text;
-    }
+let radarClassifierInstance = null;
+
+function radarClassifier() {
+  if (!radarClassifierInstance) {
+    const factory = globalThis.AsuradaStockClassifier?.createStockClassifier;
+    if (!factory) throw new Error("stockClassifier.js 尚未載入");
+    radarClassifierInstance = factory({
+      getMasterRecord: masterRecord,
+      getStockName: displayStockName,
+      themeTaxonomy,
+    });
   }
-  return "";
+  return radarClassifierInstance;
 }
 
-function radarText(stock) {
-  return [stock?.industryName, stock?.industry, stock?.sector, stock?.category, stock?.concept, stock?.themeTags, stock?.themes, stock?.reason, stock?.news, stock?.description, stock?.business, getIndustryName(stock)]
-    .map((value) => {
-      if (Array.isArray(value)) return value.join(" ");
-      if (value && typeof value === "object") return JSON.stringify(value);
-      return String(value || "");
-    })
-    .join(" ");
+function getIndustryName(stock) {
+  return radarClassifier().getIndustryName(stock);
 }
 
 function getRadarPool(stock) {
-  const code = normalizeCode(stock?.code);
-  if (RADAR_POOL_OVERRIDES[code]) return "electronicTechPool";
-  const text = radarText(stock);
-  if (NON_ELECTRONIC_POOL_KEYWORDS.some((keyword) => text.includes(keyword))) return "nonElectronicPool";
-  if (!text.trim()) {
-    console.warn("雷達分類資料不足，預設歸入 electronicTechPool", {
-      code,
-      name: displayStockName(code),
-      industry: stock?.industryName || stock?.industry || stock?.sector || stock?.category || "",
-    });
-  }
-  return "electronicTechPool";
-}
-
-function splitThemeValues(value) {
-  if (Array.isArray(value)) return value.flatMap(splitThemeValues);
-  return String(value || "").split(/[;,、|/]+/).map((item) => item.trim()).filter(Boolean);
-}
-
-function themeKeywordMatches(text, keyword) {
-  const value = String(keyword || "").toUpperCase();
-  if (/^[A-Z0-9.]+$/.test(value) && value.length <= 3) {
-    const escaped = value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(`(^|[^A-Z0-9])${escaped}([^A-Z0-9]|$)`).test(text);
-  }
-  return text.includes(value);
+  return radarClassifier().getRadarPool(stock);
 }
 
 function inferThemeTags(stock) {
-  const tags = [];
-  const add = (value) => {
-    const text = String(value || "").trim();
-    if (text && !tags.includes(text)) tags.push(text);
-  };
-  splitThemeValues(stock?.themeTags).forEach(add);
-  splitThemeValues(stock?.themes).forEach(add);
-  (RADAR_POOL_OVERRIDES[normalizeCode(stock?.code)]?.themeTags || []).forEach(add);
-  const text = radarText(stock).toUpperCase();
-  Object.entries(themeTaxonomy).forEach(([theme, keywords]) => {
-    if (keywords.some((keyword) => themeKeywordMatches(text, keyword))) add(theme);
-  });
-  if (!tags.length) {
-    const concept = String(stock?.concept || "").trim();
-    add(concept && !/^\d+$/.test(concept) ? concept : getIndustryName(stock));
-  }
-  return tags;
+  return radarClassifier().inferThemeTags(stock);
 }
 
 function radarScoreValue(stock) {
