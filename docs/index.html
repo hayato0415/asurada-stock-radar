@@ -7,31 +7,9 @@
   <link rel="stylesheet" href="app.css">
 </head>
 <body>
-  <header class="home-header">
-    <div class="home-header-inner">
-      <a class="home-brand" href="index.html">霆隼AI選股網</a>
-      <nav class="nav home-nav" aria-label="主要導覽">
-        <a class="active" href="index.html">首頁</a>
-        <a href="radar.html">全股雷達</a>
-        <a href="concepts.html">概念股資料庫</a>
-        <a href="news.html">新聞雷達</a>
-        <a href="portfolio.html">持股追蹤</a>
-        <a href="stock.html">個股查詢</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="page home-page">
-    <section class="home-hero">
-      <div class="home-hero-copy">
-        <h1>霆隼AI選股網</h1>
-        <p>整合全股雷達、概念股資料庫、新聞雷達、持股追蹤與個股查詢，協助快速整理台股題材、候選股票與研究線索。</p>
-        <div class="home-actions">
-          <a class="home-primary-action" href="radar.html">開始全股雷達</a>
-          <a class="home-secondary-action" href="concepts.html">查看概念股資料庫</a>
-        </div>
-      </div>
-    </section>
-  </main>
+  <header id="siteHeader"></header>
+  <main class="page"></main>
+  <script src="app.js"></script>
+  <script>renderHeader("index");</script>
 </body>
 </html>
