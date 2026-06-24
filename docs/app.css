@@ -480,6 +480,132 @@ button.secondary {
   margin-top: 14px;
   text-align: right;
 }
+.home-dashboard-page {
+  background: #050b14;
+}
+.home-war-room {
+  color: #dbeafe;
+}
+.war-room-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.war-room-section {
+  background: linear-gradient(145deg, #0b1728, #0e2038);
+  border-color: #1e3a5f;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .28);
+  color: #e5efff;
+}
+.war-room-section .section-title span,
+.war-room-section small {
+  color: #8fa9c8;
+}
+.war-room-market {
+  margin-top: 0;
+}
+.war-room-market-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.war-room-stat {
+  background: rgba(8, 23, 42, .78);
+  border: 1px solid #24476e;
+  border-radius: 12px;
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+  padding: 13px;
+}
+.war-room-stat span {
+  color: #89a6c8;
+  font-size: 13px;
+}
+.war-room-stat strong {
+  color: #f8fbff;
+  font-size: 18px;
+  overflow-wrap: anywhere;
+}
+.war-room-ranking,
+.war-room-condition-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.war-room-ranking {
+  display: grid;
+  gap: 8px;
+}
+.war-room-ranking li {
+  align-items: center;
+  background: rgba(8, 23, 42, .68);
+  border: 1px solid #1c3b61;
+  border-radius: 10px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  padding: 10px;
+}
+.war-room-ranking li div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.war-room-rank {
+  align-items: center;
+  background: #2563eb;
+  border-radius: 50%;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 900;
+  height: 26px;
+  justify-content: center;
+  width: 26px;
+}
+.war-room-ranking b {
+  color: #67e8f9;
+}
+.war-room-signal-list,
+.war-room-alert-list {
+  display: grid;
+  gap: 8px;
+}
+.war-room-signal-list > div,
+.war-room-alert-list > div {
+  align-items: center;
+  background: rgba(8, 23, 42, .68);
+  border: 1px solid #1c3b61;
+  border-radius: 10px;
+  display: grid;
+  gap: 6px 10px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 10px;
+}
+.war-room-signal-list small {
+  grid-column: 1 / -1;
+}
+.war-room-warning {
+  border-color: #713f12;
+}
+.war-room-alert-list span {
+  color: #fbbf24;
+}
+.war-room-condition-list {
+  display: grid;
+  gap: 8px;
+}
+.war-room-condition-list li {
+  background: rgba(8, 23, 42, .68);
+  border-left: 3px solid #38bdf8;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.home-war-room .dashboard-empty {
+  background: rgba(8, 23, 42, .68);
+  border-color: #24476e;
+  color: #8fa9c8;
+}
 table {
   border-collapse: collapse;
   min-width: 1100px;
@@ -758,6 +884,10 @@ tr:nth-child(even) { background: #f8fafc; }
   .dashboard-more .solid-link {
     text-align: center;
     width: 100%;
+  }
+  .war-room-grid,
+  .war-room-market-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
   .home-header {
     padding: 8px 10px;

@@ -951,31 +951,85 @@ function majorNewsList(data) {
   }).join("")}</div>`;
 }
 
+function dashboardFirstValue(source, keys) {
+  for (const key of keys) {
+    const value = source?.[key];
+    if (value !== null && value !== undefined && String(value).trim() !== "") return value;
+  }
+  return "-";
+}
+
+function marketSnapshotCards(data) {
+  if (!data.available) return dashboardEmpty("大盤狀態資料尚未更新");
+  const fields = [
+    ["台股收盤", dashboardNumber(dashboardFirstValue(data, ["taiex", "close", "index_close"]), 2)],
+    ["漲跌點數", dashboardNumber(dashboardFirstValue(data, ["change_points", "change", "taiex_change"]), 2)],
+    ["漲跌幅", dashboardPercent(dashboardFirstValue(data, ["change_percent", "change_pct", "taiex_change_percent"]))],
+    ["成交值", dashboardFirstValue(data, ["turnover", "turnover_value", "trading_value"])],
+    ["外資買賣超", dashboardFirstValue(data, ["foreign_net", "foreign_net_buy", "foreign_buy_sell"])],
+    ["盤勢判讀", dashboardFirstValue(data, ["market_status", "market_view", "interpretation", "status"])],
+  ];
+  return `<div class="war-room-market-grid">${fields.map(([label, value]) => `<div class="war-room-stat"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`).join("")}</div>`;
+}
+
+function capitalThemeRanking(data) {
+  const items = data.available ? data.items.slice(0, 5) : [];
+  if (!items.length) return dashboardEmpty("今日資金主題資料尚未更新");
+  return `<ol class="war-room-ranking">${items.map((item, index) => `<li><span class="war-room-rank">${escapeHtml(item.rank || index + 1)}</span><div><strong>${escapeHtml(item.theme || "題材未標示")}</strong><small>${escapeHtml(item.reason || dashboardList(item.stocks))}</small></div><b>${escapeHtml(dashboardNumber(item.score))}</b></li>`).join("")}</ol>`;
+}
+
+function limitUpGroups(data) {
+  if (!data.available) return dashboardEmpty("今日漲停集中族群資料尚未更新");
+  const groups = new Map();
+  data.items.filter((item) => item.is_limit_up === true || toNumber(item.change_percent) >= 9).forEach((item) => {
+    const theme = String(item.theme || "題材未標示").trim();
+    const group = groups.get(theme) || [];
+    group.push(`${item.code || ""} ${item.name || ""}`.trim());
+    groups.set(theme, group);
+  });
+  const ranked = [...groups.entries()].sort((left, right) => right[1].length - left[1].length).slice(0, 5);
+  if (!ranked.length) return dashboardEmpty("今日尚無可辨識的漲停集中族群資料");
+  return `<div class="war-room-signal-list">${ranked.map(([theme, stocks]) => `<div><strong>${escapeHtml(theme)}</strong><span>${stocks.length} 檔</span><small>${escapeHtml(stocks.join("、"))}</small></div>`).join("")}</div>`;
+}
+
+function retreatAlerts(data) {
+  if (!data.available) return dashboardEmpty("退潮警示資料尚未更新");
+  const alerts = data.items.filter((item) => {
+    const status = `${item.status || ""} ${item.signal || ""} ${item.warning || ""}`;
+    return /退潮|轉弱|降溫|量縮|跌破/.test(status) || toNumber(item.change_percent) < 0;
+  }).slice(0, 5);
+  if (!alerts.length) return dashboardEmpty("目前資料未標示明確退潮警示");
+  return `<div class="war-room-alert-list">${alerts.map((item) => `<div><strong>${escapeHtml(item.theme || "題材未標示")}</strong><span>${escapeHtml(item.warning || item.status || item.signal || "轉弱觀察")}</span></div>`).join("")}</div>`;
+}
+
+function tomorrowConditions(snapshot, themes) {
+  const raw = snapshot.tomorrow_conditions || themes.tomorrow_conditions || [];
+  const conditions = Array.isArray(raw) ? raw.map((item) => String(item || "").trim()).filter(Boolean) : [];
+  if (!conditions.length) return dashboardEmpty("明日作戰條件資料尚未更新");
+  return `<ul class="war-room-condition-list">${conditions.slice(0, 6).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+}
+
 async function renderHome() {
   const main = $("#app");
-  const [snapshotRaw, stocksRaw, sectorsRaw, themesRaw, newsRaw] = await Promise.all([
+  const [snapshotRaw, stocksRaw, themesRaw] = await Promise.all([
     loadJson("data/daily_market_snapshot.json", null),
     loadJson("data/daily_hot_stocks.json", null),
-    loadJson("data/daily_hot_sectors.json", null),
     loadJson("data/daily_hot_themes.json", null),
-    loadJson("data/daily_major_news.json", null),
   ]);
   const snapshot = normalizeDashboardData(snapshotRaw);
   const hotStocks = normalizeDashboardData(stocksRaw);
-  const hotSectors = normalizeDashboardData(sectorsRaw);
   const hotThemes = normalizeDashboardData(themesRaw);
-  const majorNews = normalizeDashboardData(newsRaw);
   main.innerHTML = `
-    <section class="panel dashboard-section">
-      ${dashboardSectionTitle("今日市場快照", snapshot)}
-      ${snapshot.available ? `<div class="dashboard-metrics"><div class="metric"><span>資料更新時間</span><strong>${escapeHtml(snapshot.updated_at || snapshot.date || "更新時間未標示")}</strong></div><div class="metric"><span>加權指數</span><strong>${escapeHtml(dashboardNumber(snapshot.taiex, 2))}</strong></div><div class="metric"><span>櫃買指數</span><strong>${escapeHtml(dashboardNumber(snapshot.otc, 2))}</strong></div><div class="metric"><span>上漲家數</span><strong>${escapeHtml(dashboardNumber(snapshot.up_count))}</strong></div><div class="metric"><span>下跌家數</span><strong>${escapeHtml(dashboardNumber(snapshot.down_count))}</strong></div></div>` : dashboardEmpty("今日市場快照資料尚未更新")}
+    <section class="panel dashboard-section war-room-section war-room-market">
+      ${dashboardSectionTitle("大盤狀態", snapshot)}
+      ${marketSnapshotCards(snapshot)}
     </section>
-    <div class="dashboard-grid">
-      <section class="panel dashboard-section">${dashboardSectionTitle("今日熱門股", hotStocks)}${hotStocksTable(hotStocks)}</section>
-      <section class="panel dashboard-section">${dashboardSectionTitle("今日熱門類股", hotSectors)}${hotSectorsTable(hotSectors)}</section>
+    <div class="war-room-grid">
+      <section class="panel dashboard-section war-room-section">${dashboardSectionTitle("今日資金主題排序", hotThemes)}${capitalThemeRanking(hotThemes)}</section>
+      <section class="panel dashboard-section war-room-section">${dashboardSectionTitle("今日漲停集中族群", hotStocks)}${limitUpGroups(hotStocks)}</section>
+      <section class="panel dashboard-section war-room-section war-room-warning">${dashboardSectionTitle("退潮警示", hotThemes)}${retreatAlerts(hotThemes)}</section>
+      <section class="panel dashboard-section war-room-section">${dashboardSectionTitle("明日作戰條件", snapshot.available ? snapshot : hotThemes)}${tomorrowConditions(snapshot, hotThemes)}</section>
     </div>
-    <section class="panel dashboard-section">${dashboardSectionTitle("今日熱門題材", hotThemes)}${hotThemesTable(hotThemes)}</section>
-    <section class="panel dashboard-section">${dashboardSectionTitle("今日重大新聞", majorNews)}${majorNewsList(majorNews)}<div class="dashboard-more"><a class="solid-link" href="news.html">查看全部重大新聞</a></div></section>
   `;
 }
 
