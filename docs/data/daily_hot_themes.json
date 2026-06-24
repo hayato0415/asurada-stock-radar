@@ -1,54 +1,423 @@
 {
   "date": "2026-06-24",
   "session": "盤後",
-  "updated_at": "2026-06-24 16:10 Asia/Taipei",
+  "updated_at": "2026-06-24 16:37 Asia/Taipei",
   "source_type": "market_objective",
   "items": [
     {
       "rank": 1,
-      "theme": "塑化",
-      "sector": "傳產 / 原物料",
-      "market_group": "非電子",
-      "score": 92,
-      "change_percent_avg": 6.8,
-      "up_count": 12,
-      "limit_up_count": 3,
+      "theme": "綠能環保",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 82.0,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
       "volume_status": "放量",
-      "stocks": ["1301 台塑", "1303 南亞", "1326 台化"],
-      "reason": "權值科技股轉弱，資金轉往低位階傳產避風港",
-      "signal": "強勢延續"
+      "stocks": [
+        "8422 可寧衛*"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "強勢"
     },
     {
       "rank": 2,
-      "theme": "成熟製程",
-      "sector": "電子 / 半導體",
-      "market_group": "電子",
-      "score": 86,
-      "change_percent_avg": 4.2,
-      "up_count": 8,
-      "limit_up_count": 1,
+      "theme": "營建",
+      "sector": "傳產",
+      "market_group": "非電子",
+      "score": 67.9,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
       "volume_status": "放量",
-      "stocks": ["2303 聯電", "6770 力積電"],
-      "reason": "高估值AI權值轉弱，資金轉往低位階半導體",
+      "stocks": [
+        "5522 遠雄",
+        "2543 皇昌",
+        "2537 聯上發",
+        "1316 上曜",
+        "1808 潤隆"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
       "signal": "轉強"
+    },
+    {
+      "rank": 3,
+      "theme": "生技醫療",
+      "sector": "電子",
+      "market_group": "非電子",
+      "score": 65.04,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "6589 台康生技",
+        "6446 藥華藥",
+        "6550 北極星藥業-KY",
+        "1795 美時",
+        "6472 保瑞"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "轉強"
+    },
+    {
+      "rank": 4,
+      "theme": "輪胎",
+      "sector": "傳產",
+      "market_group": "非電子",
+      "score": 58.4,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "觀察",
+      "stocks": [
+        "2101 南港"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 5,
+      "theme": "04",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 54.0,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "觀察",
+      "stocks": [
+        "1444 力麗",
+        "1449 佳和"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 6,
+      "theme": "光電",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 53.98,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "3535 晶彩科",
+        "4934 太極",
+        "6405 悅城",
+        "2406 國碩",
+        "3576 聯合再生"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 7,
+      "theme": "其他",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 53.8,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "6901 鑽石投資",
+        "9945 潤泰新"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 8,
+      "theme": "記憶體",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 53.7,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "2337 旺宏"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 9,
+      "theme": "電子通路",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 53.48,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "8112 至上",
+        "2347 聯強",
+        "3036 文曄",
+        "3028 增你強",
+        "3702 大聯大"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 10,
+      "theme": "AI伺服器供應鏈",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 52.49,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "6691 洋基工程",
+        "8021 尖點",
+        "2404 漢唐",
+        "2359 所羅門",
+        "6139 亞翔"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 11,
+      "theme": "金融",
+      "sector": "金融",
+      "market_group": "非電子",
+      "score": 52.35,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "2885 元大金",
+        "2889 國票金",
+        "2820 華票",
+        "2851 中再保",
+        "2890 永豐金"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 12,
+      "theme": "半導體",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 51.59,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "3041 揚智",
+        "4967 十銓",
+        "6770 力積電",
+        "3443 創意",
+        "2408 南亞科"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 13,
+      "theme": "PCB",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 50.22,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "2368 金像電",
+        "2383 台光電",
+        "3715 定穎投控",
+        "3003 健和興",
+        "6834 天二科技"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 14,
+      "theme": "化工材料",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 47.4,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "4739 康普",
+        "1714 和桐",
+        "1727 中華化"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 15,
+      "theme": "AI伺服器",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 47.14,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "3022 威強電",
+        "4916 事欣科",
+        "2425 承啟",
+        "2465 麗臺",
+        "2305 全友"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 16,
+      "theme": "網通",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 47.0,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "6442 光聖",
+        "5388 中磊",
+        "2345 智邦"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 17,
+      "theme": "能源",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 44.2,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "8926 台汽電"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 18,
+      "theme": "05",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 42.3,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "4526 東台"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 19,
+      "theme": "光通訊",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 32.3,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "3450 聯鈞"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 20,
+      "theme": "鋼鐵",
+      "sector": "傳產",
+      "market_group": "非電子",
+      "score": 32.0,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "觀察",
+      "stocks": [
+        "2030 彰源"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
     }
   ],
   "sector_summary": [
     {
-      "sector": "傳產",
-      "status": "轉強",
-      "change_percent": 1.8,
-      "themes": ["塑化", "原物料"],
-      "stocks": ["1301 台塑", "1326 台化"],
-      "reason": "資金避開權值科技，轉入低位階傳產"
+      "sector": "電子",
+      "status": "觀察",
+      "change_percent": 0.0,
+      "themes": [
+        "綠能環保",
+        "生技醫療",
+        "04",
+        "光電",
+        "其他"
+      ],
+      "stocks": [
+        "8422 可寧衛*",
+        "6589 台康生技",
+        "6446 藥華藥",
+        "1444 力麗",
+        "1449 佳和"
+      ],
+      "reason": "依題材強度、代表股與候選股同步性彙整"
     },
     {
-      "sector": "電子",
-      "status": "分化",
-      "change_percent": -1.2,
-      "themes": ["成熟製程", "面板", "安控"],
-      "stocks": ["2303 聯電", "6770 力積電", "3481 群創"],
-      "reason": "AI權值弱，但低位階電子題材輪動"
+      "sector": "傳產",
+      "status": "觀察",
+      "change_percent": 0.0,
+      "themes": [
+        "營建",
+        "輪胎",
+        "鋼鐵",
+        "航運"
+      ],
+      "stocks": [
+        "5522 遠雄",
+        "2543 皇昌",
+        "2101 南港",
+        "2030 彰源"
+      ],
+      "reason": "依題材強度、代表股與候選股同步性彙整"
+    },
+    {
+      "sector": "金融",
+      "status": "觀察",
+      "change_percent": 0.0,
+      "themes": [
+        "金融"
+      ],
+      "stocks": [
+        "2885 元大金",
+        "2889 國票金"
+      ],
+      "reason": "依題材強度、代表股與候選股同步性彙整"
     }
   ]
 }

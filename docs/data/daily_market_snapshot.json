@@ -1,34 +1,129 @@
 {
   "date": "2026-06-24",
   "session": "盤後",
-  "updated_at": "2026-06-24 16:10 Asia/Taipei",
-  "next_update_at": "2026-06-24 20:30 Asia/Taipei",
+  "updated_at": "2026-06-24 16:37 Asia/Taipei",
+  "next_update_at": "依 GitHub Actions 排程更新",
   "source_type": "market_objective",
-  "taiex": 46043.6,
-  "taiex_change": -1057.05,
-  "taiex_change_percent": -2.24,
-  "otc_change_percent": 0.29,
+  "taiex": "資料待補",
+  "taiex_change": "資料待補",
+  "taiex_change_percent": "資料待補",
   "turnover": "資料待補",
-  "up_count": 920,
-  "down_count": 956,
-  "limit_up_count": 53,
-  "limit_down_count": 0,
-  "market_status": "權值科技股轉弱，中小型題材股輪動",
-  "fund_flow": "資金由AI權值轉向塑化、面板、安控、成熟製程等低位階題材",
+  "up_count": "資料待補",
+  "down_count": "資料待補",
+  "limit_up_count": 0,
+  "limit_down_count": "資料待補",
+  "market_status": "依全市場候選股、題材同步性與新聞風險自動彙整；大盤即時數值待後續資料源補強。",
+  "fund_flow": "依題材候選股分布推估市場資金焦點，未納入個人持股或自選股。",
   "international_risks": [
     {
-      "title": "美股科技股與半導體賣壓升高",
+      "title": "基金/ETF/期貨/原物料",
+      "impact": "中性",
+      "related_markets": [
+        "油價",
+        "銅價",
+        "黃金",
+        "原物料",
+        "能源"
+      ],
+      "reason": "CMoney 美股新聞快訊 消息指出：基金/ETF/期貨/原物料。此事件被歸類為 原物料 題材，需觀察是否帶動相關族群資金輪動。",
+      "source_name": "CMoney 美股新聞快訊",
+      "url": "https://www.cmoney.tw/notes/?navId=twstock_fund_etf_future_material"
+    },
+    {
+      "title": "FedEx Q4 財報亮眼：營收年增13.7%，未來展望樂觀！",
+      "impact": "偏多",
+      "related_markets": [
+        "金融",
+        "壽險",
+        "銀行",
+        "Fed",
+        "美債",
+        "利率",
+        "匯率",
+        "美元",
+        "台幣"
+      ],
+      "reason": "CMoney 美股新聞快訊 消息指出：FedEx Q4 財報亮眼：營收年增13.7%，未來展望樂觀！。此事件被歸類為 金融壽險 題材，需觀察是否帶動相關族群資金輪動。",
+      "source_name": "CMoney 美股新聞快訊",
+      "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1223662"
+    },
+    {
+      "title": "【即時新聞】AI概念股跳水！美光(MU)財報前崩跌13%，輝達(NVDA)與晶片巨頭全倒",
       "impact": "偏空",
-      "related_markets": ["費半", "Nasdaq", "台積電ADR"],
-      "reason": "AI估值與半導體股修正壓力影響台股權值股",
-      "source_name": "待接新聞源",
-      "url": ""
+      "related_markets": [
+        "記憶體",
+        "DRAM",
+        "NAND",
+        "HBM",
+        "SSD",
+        "美光",
+        "Micron",
+        "海力士",
+        "SK hynix",
+        "三星"
+      ],
+      "reason": "CMoney 美股新聞快訊 消息指出：【即時新聞】AI概念股跳水！美光(MU)財報前崩跌13%，輝達(NVDA)與晶片巨頭全倒。此事件被歸類為 記憶體 題材，需觀察是否帶動相關族群資金輪動。",
+      "source_name": "CMoney 美股新聞快訊",
+      "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1223658"
+    },
+    {
+      "title": "Nvidia股價回撥，是否該進場？專家分析顯示未來成長潛力驚人！",
+      "impact": "偏多",
+      "related_markets": [
+        "AI伺服器",
+        "AI 伺服器",
+        "NVIDIA",
+        "輝達",
+        "GB200",
+        "GB300",
+        "B200",
+        "Blackwell",
+        "Rubin",
+        "H100",
+        "H200",
+        "ASIC",
+        "TPU",
+        "AWS",
+        "Google",
+        "Meta",
+        "Microsoft",
+        "CSP",
+        "AI機櫃",
+        "液冷",
+        "散熱",
+        "高功耗",
+        "高速傳輸",
+        "800G",
+        "1.6T",
+        "AI資料中心"
+      ],
+      "reason": "CMoney 美股新聞快訊 消息指出：Nvidia股價回撥，是否該進場？專家分析顯示未來成長潛力驚人！。此事件被歸類為 AI伺服器 題材，需觀察是否帶動相關族群資金輪動。",
+      "source_name": "CMoney 美股新聞快訊",
+      "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1223656"
+    },
+    {
+      "title": "歐洲數位歐元拍板試行、MSCI砸1.2億美元買氣候數據：全球金融體系正悄悄改寫",
+      "impact": "中性",
+      "related_markets": [
+        "金融",
+        "壽險",
+        "銀行",
+        "Fed",
+        "美債",
+        "利率",
+        "匯率",
+        "美元",
+        "台幣"
+      ],
+      "reason": "CMoney 美股新聞快訊 消息指出：歐洲數位歐元拍板試行、MSCI砸1.2億美元買氣候數據：全球金融體系正悄悄改寫。此事件被歸類為 金融壽險 題材，需觀察是否帶動相關族群資金輪動。",
+      "source_name": "CMoney 美股新聞快訊",
+      "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1223651"
     }
   ],
   "tomorrow_conditions": [
-    "若台積電續弱且費半續跌，權值股壓力仍大",
-    "若櫃買指數續強且漲停家數維持，中小型題材仍有輪動空間",
-    "若塑化、面板、安控隔日開高走低，視為短線退潮警訊",
-    "若外資續賣權值股，指數反彈力道會受壓抑"
+    "若權值股續弱且國際科技股修正，指數壓力仍需觀察。",
+    "若強勢題材隔日量能延續，短線資金仍可能輪動。",
+    "若候選股開高走低或量縮，視為短線退潮訊號。",
+    "若外資續賣權值股，指數反彈力道會受壓抑。"
   ]
 }
