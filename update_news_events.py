@@ -313,8 +313,6 @@ def build_events(limit: int = MAX_NEWS) -> list[dict[str, object]]:
 def write_events(events: list[dict[str, object]], output: Path = NEWS_OUTPUT_PATH) -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(events, ensure_ascii=False, indent=2), encoding="utf-8")
-    legacy_path = BASE_DIR / "docs" / "news-events.json"
-    legacy_path.write_text(json.dumps(events, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 def load_concepts() -> dict[str, object]:

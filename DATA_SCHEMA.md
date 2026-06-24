@@ -52,6 +52,21 @@
 | `revenue_yoy_value` | number | 年增率運算值，單位百分點 | `175.8` |
 | `data_version` | string | 前端資料版本摘要 | `"營收 2026-05｜行情 2026-06-18"` |
 
+## 資料可信度欄位（選填）
+
+以下欄位為非破壞性新增欄位；舊資料可能不存在，前端必須以保守方式顯示為缺資料或來源待確認。
+
+| 欄位 | 型別 | 用途 | 可能值／範例 |
+| --- | --- | --- | --- |
+| `eps_signal_status` | string | EPS 轉虧為盈或獲利訊號來源狀態 | `verified`、`estimated`、`manual`、`missing` |
+| `gross_margin_signal_status` | string | 毛利率改善訊號來源狀態 | `verified`、`estimated`、`manual`、`missing` |
+| `institutional_target_status` | string | 法人目標價或目標上修訊號來源狀態 | `verified`、`manual`、`missing` |
+| `price_source_status` | string | 價量資料來源狀態 | `verified`、`fallback`、`missing` |
+| `data_confidence_level` | string | 前端資料可信度彙整 | `high`、`medium`、`low` |
+| `data_confidence_reasons` | string[] | 可信度原因清單 | `["EPS signal estimated from proxy rules"]` |
+
+`verified` 只能用於已有明確外部資料來源驗證的欄位。若 EPS、毛利率或法人目標價只是代理規則、人工補值或來源未標示，前端不得顯示為已驗證。
+
 ## 前端衍生欄位
 
 以下欄位由 `docs/js/stockClassifier.js` 即時計算，不應回寫或偽造到原始 JSON。
@@ -65,7 +80,7 @@
 
 ## 相容規則
 
-1. `score`、`rating` 不得作為單一投資判斷，只保留相容與排序用途。
+1. `score`、`rating` 不得作為單一投資判斷，只保留相容、排序與研究參考用途，不構成單一投資決策依據。
 2. 股票名稱優先由 `docs/data/stock-master.json` 補齊。
 3. 題材只能根據現有文字欄位與 taxonomy 推斷，不得自行編造。
 4. 無法分類時預設 `electronicTechPool`，並在 console 留下警告供補資料。

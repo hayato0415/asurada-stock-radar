@@ -55,6 +55,81 @@ def _parse_number(value: object) -> float | None:
         return None
 
 
+def _is_missing_public_value(value: object) -> bool:
+    if value is None or pd.isna(value):
+        return True
+    text = str(value).strip()
+    return text == "" or text.lower() in {"-", "undefined", "null", "nan"}
+
+
+def _is_positive_signal(value: object) -> bool:
+    if _is_missing_public_value(value):
+        return False
+    text = str(value).strip().lower()
+    if text in {"true", "1", "yes", "y", "是"}:
+        return True
+    if text in {"false", "0", "no", "n", "否"}:
+        return False
+    return bool(_parse_number(value))
+
+
+def _validated_status(value: object, allowed: set[str]) -> str | None:
+    text = str(value or "").strip().lower()
+    return text if text in allowed else None
+
+
+def _signal_status(row: pd.Series, status_column: str, value_columns: list[str], fallback_status: str) -> str:
+    explicit = _validated_status(row.get(status_column), {"verified", "estimated", "manual", "missing"})
+    if explicit:
+        return explicit
+    return fallback_status if any(_is_positive_signal(row.get(column)) for column in value_columns) else "missing"
+
+
+def _price_source_status(row: pd.Series) -> str:
+    explicit = _validated_status(row.get("price_source_status"), {"verified", "fallback", "missing"})
+    if explicit:
+        return explicit
+    if _is_missing_public_value(row.get("收盤價")):
+        return "missing"
+    return "verified" if not _is_missing_public_value(row.get("market_date")) else "fallback"
+
+
+def _data_confidence(
+    eps_status: str,
+    gross_margin_status: str,
+    institutional_status: str,
+    price_status: str,
+) -> tuple[str, list[str]]:
+    reasons: list[str] = []
+    if eps_status == "missing":
+        reasons.append("EPS signal missing")
+    elif eps_status == "estimated":
+        reasons.append("EPS signal estimated from proxy rules")
+    elif eps_status == "manual":
+        reasons.append("EPS signal supplied manually")
+    if gross_margin_status == "missing":
+        reasons.append("Gross margin signal missing")
+    elif gross_margin_status == "estimated":
+        reasons.append("Gross margin signal estimated from proxy rules")
+    elif gross_margin_status == "manual":
+        reasons.append("Gross margin signal supplied manually")
+    if institutional_status == "missing":
+        reasons.append("Institutional target signal missing")
+    elif institutional_status == "manual":
+        reasons.append("Institutional target signal supplied manually")
+    if price_status == "fallback":
+        reasons.append("Price/volume data came from fallback logic")
+    elif price_status == "missing":
+        reasons.append("Price/volume data missing")
+
+    statuses = [eps_status, gross_margin_status, institutional_status, price_status]
+    if price_status == "verified" and all(status == "verified" for status in statuses):
+        return "high", reasons or ["All tracked data sources are verified"]
+    if price_status == "verified" and statuses.count("missing") <= 1:
+        return "medium", reasons or ["Some signals are manual or estimated"]
+    return "low", reasons or ["Data source status is incomplete"]
+
+
 def _build_risk_tags(row: pd.Series) -> str:
     tags: list[str] = []
     yoy = _parse_number(row.get("月營收年增率"))
@@ -317,6 +392,16 @@ def publish_interactive_data(display_report: pd.DataFrame, site_dir: Path = SITE
         code = _value(row, "股票代號")
         revenue_thousand = _parse_number(row.get("單月營收_千元"))
         revenue_million = None if revenue_thousand is None else round(revenue_thousand / 1000, 2)
+        eps_status = _signal_status(row, "eps_signal_status", ["EPS 是否轉虧為盈"], "estimated")
+        gross_margin_status = _signal_status(row, "gross_margin_signal_status", ["毛利率是否改善"], "estimated")
+        institutional_status = _signal_status(row, "institutional_target_status", ["法人是否上修目標價"], "manual")
+        price_status = _price_source_status(row)
+        confidence_level, confidence_reasons = _data_confidence(
+            eps_status,
+            gross_margin_status,
+            institutional_status,
+            price_status,
+        )
         record = {
             "rank": int(_parse_number(row.get("排名")) or 0),
             "code": code,
@@ -344,6 +429,12 @@ def publish_interactive_data(display_report: pd.DataFrame, site_dir: Path = SITE
             "tracking_status": _value(row, "追蹤狀態"),
             "market": _value(row, "市場"),
             "daily_change": _value(row, "今日漲跌幅"),
+            "eps_signal_status": eps_status,
+            "gross_margin_signal_status": gross_margin_status,
+            "institutional_target_status": institutional_status,
+            "price_source_status": price_status,
+            "data_confidence_level": confidence_level,
+            "data_confidence_reasons": confidence_reasons,
         }
         records.append(record)
         profiles[code] = {

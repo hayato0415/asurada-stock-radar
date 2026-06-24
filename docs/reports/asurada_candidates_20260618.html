@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>阿斯拉台股月營收轉強雷達</title>
+  <title>霆隼AI選股網</title>
   <style>
     :root {
       color-scheme: light;
@@ -603,7 +603,7 @@
 <body>
   <main class="page">
     <section class="hero">
-      <h1>阿斯拉台股月營收轉強雷達</h1>
+      <h1>霆隼AI選股網</h1>
       <p class="note">本雷達以最新月營收年增率、月增率作為基本面初篩，再結合當日收盤價、成交量、題材分類與風險標籤進行排序。月營收通常不會每日變動，股價與成交量則依交易日更新，因此每日排名可能小幅變動，月營收公告期則可能大幅變動。</p>
       <p class="note disclaimer">本報告僅供研究與風險控管，不構成投資建議，也不包含自動下單功能。</p>
       <p class="score-note">雷達強度為 0-100 分，用來排序候選股強弱；雷達等級依分數分級，方便快速判斷觀察優先順序。</p>
@@ -1784,7 +1784,7 @@
     const importHoldings = document.getElementById('importHoldings');
     const importHoldingsFile = document.getElementById('importHoldingsFile');
     const newsEventsList = document.getElementById('newsEventsList');
-    const newsEventsUrl = window.location.pathname.includes('/reports/') ? '../news-events.json' : 'news-events.json';
+    const newsEventsUrl = window.location.pathname.includes('/reports/') ? '../data/news-events.json' : 'data/news-events.json';
     const modeInputs = Array.from(document.querySelectorAll('input[name="radarMode"]'));
     const radarModeNote = document.getElementById('radarModeNote');
     let latestNewsEvents = [];

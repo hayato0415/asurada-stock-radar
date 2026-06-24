@@ -1,7 +1,7 @@
 const HOLDINGS_KEY = "asurada_holdings";
 const WATCHLIST_KEY = "asurada_watchlist";
-const BUILD_VERSION = "20260624-marketflow-v2";
-const APP_VERSION = "20260624-marketflow-v2";
+const BUILD_VERSION = "20260624-trust-labels";
+const APP_VERSION = "20260624-trust-labels";
 
 const state = {
   stocks: [],
@@ -512,6 +512,111 @@ function evidenceTheme(stock) {
   return `${industryName ? `產業：${industryName}` : "產業待補"}${tags.length ? `；題材：${tags.join("、")}` : ""}`;
 }
 
+const SIGNAL_STATUS_LABELS = {
+  verified: "已驗證",
+  estimated: "推估",
+  manual: "手動",
+  missing: "缺資料",
+  fallback: "替代來源",
+  unknown: "推估或手動，來源待確認",
+};
+
+const TRUST_LEVEL_LABELS = {
+  high: "資料完整",
+  medium: "部分推估",
+  low: "資料缺口",
+};
+
+function hasOwn(object, key) {
+  return Object.prototype.hasOwnProperty.call(object || {}, key);
+}
+
+function isMissingSignalValue(value) {
+  if (value === null || value === undefined) return true;
+  const text = String(value).trim();
+  return !text || ["-", "undefined", "null", "nan"].includes(text.toLowerCase());
+}
+
+function isPositiveSignalValue(value) {
+  if (isMissingSignalValue(value)) return false;
+  const text = String(value).trim().toLowerCase();
+  if (["true", "1", "yes", "y", "是"].includes(text)) return true;
+  if (["false", "0", "no", "n", "否"].includes(text)) return false;
+  const number = evidenceNumber(value);
+  return number !== null && number !== 0;
+}
+
+function signalStatus(stock, statusField, valueFields, allowedStatuses) {
+  const rawStatus = String(stock?.[statusField] || "").trim().toLowerCase();
+  if (allowedStatuses.includes(rawStatus)) return rawStatus;
+  const existingValueField = valueFields.find((field) => hasOwn(stock, field));
+  if (!existingValueField) return "missing";
+  return isPositiveSignalValue(stock[existingValueField]) ? "unknown" : "missing";
+}
+
+function priceSourceStatus(stock) {
+  const rawStatus = String(stock?.price_source_status || "").trim().toLowerCase();
+  if (["verified", "fallback", "missing"].includes(rawStatus)) return rawStatus;
+  if (isMissingSignalValue(stock?.close)) return "missing";
+  return isMissingSignalValue(stock?.market_date) ? "fallback" : "verified";
+}
+
+function trustInfo(stock) {
+  const signals = [
+    {
+      key: "eps",
+      label: "EPS",
+      status: signalStatus(stock, "eps_signal_status", ["eps_signal", "eps_turnaround", "eps_turnaround_signal"], ["verified", "estimated", "manual", "missing"]),
+    },
+    {
+      key: "gross",
+      label: "毛利率",
+      status: signalStatus(stock, "gross_margin_signal_status", ["gross_margin_signal", "gross_margin_improvement"], ["verified", "estimated", "manual", "missing"]),
+    },
+    {
+      key: "target",
+      label: "法人目標",
+      status: signalStatus(stock, "institutional_target_status", ["institutional_target_signal", "institutional_target_revision"], ["verified", "manual", "missing"]),
+    },
+    {
+      key: "price",
+      label: "價量",
+      status: priceSourceStatus(stock),
+    },
+  ];
+  const statuses = signals.map((signal) => signal.status);
+  const explicitLevel = String(stock?.data_confidence_level || "").trim().toLowerCase();
+  const level = ["high", "medium", "low"].includes(explicitLevel)
+    ? explicitLevel
+    : (statuses.includes("missing") || statuses.includes("fallback") ? "low" : statuses.includes("estimated") || statuses.includes("manual") || statuses.includes("unknown") ? "medium" : "high");
+  const explicitReasons = Array.isArray(stock?.data_confidence_reasons)
+    ? stock.data_confidence_reasons.map((reason) => String(reason || "").trim()).filter(Boolean)
+    : [];
+  const reasons = explicitReasons.length
+    ? explicitReasons
+    : signals
+        .filter((signal) => signal.status !== "verified")
+        .map((signal) => `${signal.label}：${SIGNAL_STATUS_LABELS[signal.status] || SIGNAL_STATUS_LABELS.unknown}`);
+  return { level, signals, reasons };
+}
+
+function trustBadge(stock) {
+  const info = trustInfo(stock);
+  const label = TRUST_LEVEL_LABELS[info.level] || TRUST_LEVEL_LABELS.low;
+  return `<span class="trust-badge trust-${escapeHtml(info.level)}">${escapeHtml(label)}</span>`;
+}
+
+function trustSourceLine(stock) {
+  return trustInfo(stock).signals
+    .map((signal) => `${signal.label}：${SIGNAL_STATUS_LABELS[signal.status] || SIGNAL_STATUS_LABELS.unknown}`)
+    .join("；");
+}
+
+function trustReasonText(stock) {
+  const reasons = trustInfo(stock).reasons;
+  return reasons.length ? reasons.join("；") : "資料來源狀態完整";
+}
+
 const TRANSPARENT_RADAR_NAMES = {
   mid: "中線主升段",
   short: "短線爆發",
@@ -616,7 +721,7 @@ function stockCard(stock, mode = "main", compact = false) {
     <article class="card stock-card">
       <div class="section-title">
         <h3><a class="stock-link" href="stock.html?code=${encodeURIComponent(stock.code)}">#${escapeHtml(stock.rank)} ${escapeHtml(stock.code)} ${escapeHtml(displayStockName(stock.code))}</a></h3>
-        ${chip(radarScore(stock, mode), "good")}
+        <div class="chip-row">${chip(radarScore(stock, mode), "good")}${trustBadge(stock)}</div>
       </div>
       <div class="grid ${compact ? "cols-3" : "cols-4"}">
         <div class="metric"><span>雷達評分</span><strong>${escapeHtml(radarScore(stock, mode))}</strong></div>
@@ -634,6 +739,7 @@ function stockCard(stock, mode = "main", compact = false) {
       </div>`}
       <p><span class="label">概念股</span>${escapeHtml(stock.concept || "-")}</p>
       <p><span class="label">入選理由</span>${escapeHtml(stock.reason || "-")}</p>
+      <p><span class="label">資料來源狀態</span>${escapeHtml(trustSourceLine(stock))}</p>
       <div class="chip-row">${String(stock.risk_tags || "一般觀察").split("、").map((x) => chip(x)).join("")}</div>
     </article>
   `;
@@ -682,25 +788,28 @@ function radarEvidenceTable(stocks, mode = "mid") {
     const themeText = evidenceTheme(stock);
     const warningText = warningReason(stock);
     const gapText = dataGapNote(stock, mode);
+    const sourceText = `資料來源狀態：${trustSourceLine(stock)}。${gapText}`;
+    const trustText = trustReasonText(stock);
     return `
       <tr title="${escapeHtml(scoreHint)}">
         <td class="cell-nowrap cell-number" data-label="排名">${escapeHtml(stock.display_rank ?? stock.rank)}</td>
         <td class="cell-nowrap" data-label="股票代號"><a class="stock-link" href="stock.html?code=${encodeURIComponent(stock.code)}">${escapeHtml(stock.code)}</a></td>
         <td class="cell-nowrap" data-label="股票名稱">${escapeHtml(displayStockName(stock.code))}</td>
         <td class="cell-nowrap" data-label="雷達分區"><span class="evidence-section">${getRadarPool(stock) === "nonElectronicPool" ? "非電子防守" : "電子 / AI科技"}</span></td>
+        <td class="cell-nowrap" data-label="資料可信度" title="${escapeHtml(trustText)}">${trustBadge(stock)}</td>
         <td class="cell-reason" data-label="條件命中" title="${escapeHtml(matchedText)}"><span class="cell-clamp">${escapeHtml(matchedText)}</span></td>
         <td class="cell-reason" data-label="營收證據" title="${escapeHtml(revenueText)}"><span class="cell-clamp">${escapeHtml(revenueText)}</span></td>
         <td class="cell-nowrap cell-number" data-label="量能證據" title="${escapeHtml(volumeText)}">${escapeHtml(volumeText)}</td>
         <td class="cell-theme" data-label="題材證據" title="${escapeHtml(themeText)}"><span class="cell-clamp">${escapeHtml(themeText)}</span></td>
         <td class="cell-reason" data-label="警示原因" title="${escapeHtml(warningText)}"><span class="cell-clamp">${escapeHtml(warningText)}</span></td>
-        <td class="cell-reason" data-label="資料缺口" title="${escapeHtml(gapText)}"><span class="cell-clamp">${escapeHtml(gapText)}</span></td>
+        <td class="cell-reason" data-label="資料來源狀態" title="${escapeHtml(sourceText)}"><span class="cell-clamp">${escapeHtml(sourceText)}</span></td>
       </tr>
     `;
   }).join("");
   return `
     <div class="table-wrap radar-evidence-wrap radar-table-wrap">
       <table class="radar-evidence-table radar-table">
-        <thead><tr><th>排名</th><th>股票代號</th><th>股票名稱</th><th>雷達分區</th><th>條件命中</th><th>營收證據</th><th>量能證據</th><th>題材證據</th><th>警示原因</th><th>資料缺口</th></tr></thead>
+        <thead><tr><th>排名</th><th>股票代號</th><th>股票名稱</th><th>雷達分區</th><th>資料可信度</th><th>條件命中</th><th>營收證據</th><th>量能證據</th><th>題材證據</th><th>警示原因</th><th>資料來源狀態</th></tr></thead>
         <tbody>${rows}</tbody>
       </table>
     </div>
@@ -721,10 +830,13 @@ function stockRadarDetail(stock) {
   return `
     <div class="stock-info-card">
       <h3>雷達資訊</h3>
+      <div class="chip-row trust-row">${trustBadge(stock)}</div>
       <div class="stock-info-grid">
         ${rows.map(([label, value]) => infoItem(label, value)).join("")}
       </div>
       <div class="stock-notes">
+        <p><span class="label">資料來源狀態</span>${escapeHtml(trustSourceLine(stock))}</p>
+        <p><span class="label">資料可信度說明</span>${escapeHtml(trustReasonText(stock))}</p>
         <p><span class="label">概念股</span>${escapeHtml(cleanDisplay(stock.concept))}</p>
         <p><span class="label">入選理由</span>${escapeHtml(cleanDisplay(stock.reason))}</p>
         <p><span class="label">風險標籤</span>${escapeHtml(cleanDisplay(stock.risk_tags || "一般觀察"))}</p>
@@ -768,7 +880,7 @@ function eventCard(event) {
       </div>
       <h3>${escapeHtml(event.title || "未命名事件")}</h3>
       <p><span class="label">新聞摘要</span>${escapeHtml(event.summary || event.logic || "尚無摘要")}</p>
-      <p class="analysis"><span class="label">阿斯拉連動分析</span>${escapeHtml(event.asurada_analysis || event.logic || "尚無連動分析")}</p>
+      <p class="analysis"><span class="label">題材連動分析</span>${escapeHtml(event.asurada_analysis || event.logic || "尚無連動分析")}</p>
       <p><span class="label">相關台股代號與名稱</span></p>
       <div class="chip-row">${stockChips(related, "無相關台股")}</div>
       <p><span class="label">雷達命中</span></p>
@@ -1205,7 +1317,7 @@ function renderRadar() {
         <label>簡單題材篩選<input id="concept" list="conceptOptions" placeholder="AI、PCB、記憶體..."></label>
       </div>
       <datalist id="conceptOptions">${conceptOptions}</datalist>
-      <p class="mode-note">各雷達池依原始阿斯拉分數由高至低排序；分數只供排序，判斷請搭配條件與資料證據。</p>
+      <p class="mode-note">各雷達池依原始雷達分數由高至低排序；分數只供排序，判斷請搭配條件與資料證據。</p>
       <div class="radar-pool-label">篩選區</div>
       <div class="radar-pool-filters" role="group" aria-label="雷達池篩選">
         <button type="button" class="radar-pool-button" data-radar-pool="electronicTechPool">電子 / AI科技前30 <span data-pool-count="electronicTechPool">0</span></button>
@@ -1712,7 +1824,7 @@ function renderStock() {
         ${stockMasterDetail(code, stock)}
         ${stockRadarDetail(stock)}
       </section>
-      <section class="panel"><div class="section-title"><h2>阿斯拉方針</h2></div>${chip(asuradaStance(stock), "warn")}</section>
+      <section class="panel"><div class="section-title"><h2>研究追蹤狀態</h2></div>${chip(cleanDisplay(stock.tracking_status || asuradaStance(stock)), "warn")}</section>
       ${revenuePanel(code)}
       <section class="panel"><div class="section-title"><h2>技術圖表</h2></div>${externalLinks(code)}</section>
       <section class="panel"><div class="section-title"><h2>相關重大新聞</h2></div>${relatedNews.length ? relatedNews.map(eventCard).join("") : `<div class="empty">目前沒有該股相關重大新聞</div>`}</section>
