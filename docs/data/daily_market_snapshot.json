@@ -4,14 +4,14 @@
   "updated_at": "2026-06-24 16:37 Asia/Taipei",
   "next_update_at": "依 GitHub Actions 排程更新",
   "source_type": "market_objective",
-  "taiex": "資料待補",
-  "taiex_change": "資料待補",
-  "taiex_change_percent": "資料待補",
+  "taiex": 46043.6,
+  "taiex_change": -1057.05,
+  "taiex_change_percent": -2.24,
   "turnover": "資料待補",
-  "up_count": "資料待補",
-  "down_count": "資料待補",
-  "limit_up_count": 0,
-  "limit_down_count": "資料待補",
+  "up_count": 920,
+  "down_count": 956,
+  "limit_up_count": 53,
+  "limit_down_count": 0,
   "market_status": "依全市場候選股、題材同步性與新聞風險自動彙整；大盤即時數值待後續資料源補強。",
   "fund_flow": "依題材候選股分布推估市場資金焦點，未納入個人持股或自選股。",
   "international_risks": [
@@ -125,5 +125,8 @@
     "若強勢題材隔日量能延續，短線資金仍可能輪動。",
     "若候選股開高走低或量縮，視為短線退潮訊號。",
     "若外資續賣權值股，指數反彈力道會受壓抑。"
-  ]
+  ],
+  "build_version": "20260624-marketflow-v2",
+  "app_version": "20260624-marketflow-v2",
+  "data_quality_warning": []
 }

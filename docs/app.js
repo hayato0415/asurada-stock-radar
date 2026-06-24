@@ -1,5 +1,7 @@
 const HOLDINGS_KEY = "asurada_holdings";
 const WATCHLIST_KEY = "asurada_watchlist";
+const BUILD_VERSION = "20260624-marketflow-v2";
+const APP_VERSION = "20260624-marketflow-v2";
 
 const state = {
   stocks: [],
@@ -916,6 +918,39 @@ function dashboardSectionTitle(title, data) {
   return `<div class="section-title dashboard-title"><h2>${escapeHtml(title)}</h2><span class="dashboard-meta">${escapeHtml(dashboardUpdateText(data))}</span></div>`;
 }
 
+function dashboardQualityWarnings(...datasets) {
+  return datasets.flatMap((data) => {
+    const warnings = data?.data_quality_warning;
+    if (Array.isArray(warnings)) return warnings.filter(Boolean);
+    if (warnings) return [String(warnings)];
+    return [];
+  });
+}
+
+function warnDashboardQuality(...datasets) {
+  const warnings = [...new Set(dashboardQualityWarnings(...datasets))];
+  if (warnings.length) console.warn("Dashboard data quality warning", warnings);
+}
+
+function homeVersionDiagnostics(snapshot, hotThemes, hotStocks) {
+  const diagnostics = {
+    build_version: BUILD_VERSION,
+    app_version: APP_VERSION,
+    data_updated_at: snapshot?.updated_at || hotThemes?.updated_at || hotStocks?.updated_at || "",
+    snapshot_updated_at: snapshot?.updated_at || "",
+    themes_updated_at: hotThemes?.updated_at || "",
+    stocks_updated_at: hotStocks?.updated_at || "",
+    current_page_url: window.location.href,
+    source_type: snapshot?.source_type || hotThemes?.source_type || hotStocks?.source_type || "",
+  };
+  return `
+    <section class="panel dashboard-section war-room-section version-diagnostics">
+      <div class="section-title dashboard-title"><h2>資料版本診斷</h2><span class="dashboard-meta">${escapeHtml(BUILD_VERSION)}</span></div>
+      <pre>${escapeHtml(JSON.stringify(diagnostics, null, 2))}</pre>
+    </section>
+  `;
+}
+
 function hotStocksTable(data) {
   const items = data.available ? data.items.slice(0, 10) : [];
   if (!items.length) return dashboardEmpty("今日熱門股資料尚未更新");
@@ -1137,6 +1172,7 @@ async function renderHome() {
   const snapshot = normalizeDashboardData(snapshotRaw);
   const hotStocks = normalizeDashboardData(stocksRaw);
   const hotThemes = normalizeDashboardData(themesRaw);
+  warnDashboardQuality(snapshot, hotStocks, hotThemes);
   main.innerHTML = `
     <section class="panel dashboard-section war-room-section war-room-market">
       ${dashboardSectionTitle("今日市場總覽", snapshot)}
@@ -1152,6 +1188,7 @@ async function renderHome() {
       <section class="panel dashboard-section war-room-section">${dashboardSectionTitle("明日作戰條件", snapshot.available ? snapshot : hotThemes)}${tomorrowConditions(snapshot, hotThemes)}</section>
     </div>
     ${objectiveNote()}
+    ${homeVersionDiagnostics(snapshot, hotThemes, hotStocks)}
   `;
   bindHomeFilters(hotThemes, hotStocks);
 }

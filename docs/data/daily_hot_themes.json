@@ -419,5 +419,183 @@
       ],
       "reason": "依題材強度、代表股與候選股同步性彙整"
     }
-  ]
+  ],
+  "build_version": "20260624-marketflow-v2",
+  "app_version": "20260624-marketflow-v2",
+  "capital_inflow_themes": [
+    {
+      "rank": 1,
+      "theme": "綠能環保",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 82.0,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "8422 可寧衛*"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "強勢"
+    },
+    {
+      "rank": 2,
+      "theme": "營建",
+      "sector": "傳產",
+      "market_group": "非電子",
+      "score": 67.9,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "5522 遠雄",
+        "2543 皇昌",
+        "2537 聯上發",
+        "1316 上曜",
+        "1808 潤隆"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "轉強"
+    },
+    {
+      "rank": 3,
+      "theme": "生技醫療",
+      "sector": "電子",
+      "market_group": "非電子",
+      "score": 65.04,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "6589 台康生技",
+        "6446 藥華藥",
+        "6550 北極星藥業-KY",
+        "1795 美時",
+        "6472 保瑞"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "轉強"
+    },
+    {
+      "rank": 4,
+      "theme": "輪胎",
+      "sector": "傳產",
+      "market_group": "非電子",
+      "score": 58.4,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "觀察",
+      "stocks": [
+        "2101 南港"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 5,
+      "theme": "04",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 54.0,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "觀察",
+      "stocks": [
+        "1444 力麗",
+        "1449 佳和"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    }
+  ],
+  "capital_outflow_themes": [
+    {
+      "rank": 20,
+      "theme": "鋼鐵",
+      "sector": "傳產",
+      "market_group": "非電子",
+      "score": 32.0,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "觀察",
+      "stocks": [
+        "2030 彰源"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 19,
+      "theme": "光通訊",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 32.3,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "3450 聯鈞"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 18,
+      "theme": "05",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 42.3,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "4526 東台"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 17,
+      "theme": "能源",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 44.2,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "8926 台汽電"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 16,
+      "theme": "網通",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 47.0,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "6442 光聖",
+        "5388 中磊",
+        "2345 智邦"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    }
+  ],
+  "data_quality_warning": []
 }

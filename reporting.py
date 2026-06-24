@@ -21,6 +21,8 @@ BOOLEAN_DISPLAY_COLUMNS = [
     "成交量是否溫和放大",
 ]
 
+DASHBOARD_BUILD_VERSION = "20260624-marketflow-v2"
+
 DISPLAY_COLUMN_RENAMES = {
     "阿斯拉分數": "強度分數",
     "阿斯拉評級": "觀察評等",
@@ -540,6 +542,74 @@ def _dashboard_international_risks(data_dir: Path) -> list[dict[str, object]]:
     return risks[:5]
 
 
+def _is_missing_dashboard_value(value: object) -> bool:
+    if value is None:
+        return True
+    text = str(value).strip()
+    if not text:
+        return True
+    return text in {"-", "資料待補", "尚未更新", "N/A"}
+
+
+def _preserve_existing_snapshot_values(snapshot: dict[str, object], existing: object) -> dict[str, object]:
+    if not isinstance(existing, dict):
+        return snapshot
+    preserve_keys = [
+        "taiex",
+        "taiex_change",
+        "taiex_change_percent",
+        "otc_change_percent",
+        "turnover",
+        "up_count",
+        "down_count",
+        "limit_up_count",
+        "limit_down_count",
+        "market_status",
+        "fund_flow",
+        "international_risks",
+        "tomorrow_conditions",
+    ]
+    for key in preserve_keys:
+        old_value = existing.get(key)
+        new_value = snapshot.get(key)
+        if not _is_missing_dashboard_value(old_value) and _is_missing_dashboard_value(new_value):
+            snapshot[key] = old_value
+        elif not _is_missing_dashboard_value(old_value) and key in {"market_status", "fund_flow", "international_risks", "tomorrow_conditions"}:
+            snapshot[key] = old_value
+    return snapshot
+
+
+def _dashboard_list_count(payload: dict[str, object], key: str) -> int:
+    value = payload.get(key)
+    return len(value) if isinstance(value, list) else 0
+
+
+def validate_dashboard_data(
+    snapshot: dict[str, object],
+    hot_themes_payload: dict[str, object],
+    hot_stocks_payload: dict[str, object],
+) -> list[str]:
+    warnings: list[str] = []
+    for key in ["updated_at", "session", "up_count", "down_count", "limit_up_count", "limit_down_count"]:
+        if _is_missing_dashboard_value(snapshot.get(key)):
+            warnings.append(f"daily_market_snapshot missing {key}")
+
+    inflow_count = _dashboard_list_count(hot_themes_payload, "capital_inflow_themes")
+    outflow_count = _dashboard_list_count(hot_themes_payload, "capital_outflow_themes")
+    if inflow_count < 5:
+        warnings.append(f"daily_hot_themes capital_inflow_themes has {inflow_count}/5")
+    if outflow_count < 5:
+        warnings.append(f"daily_hot_themes capital_outflow_themes has {outflow_count}/5")
+
+    strong_count = _dashboard_list_count(hot_stocks_payload, "strong_stocks")
+    weak_count = _dashboard_list_count(hot_stocks_payload, "weak_stocks")
+    if strong_count < 5:
+        warnings.append(f"daily_hot_stocks strong_stocks has {strong_count}/5")
+    if weak_count < 5:
+        warnings.append(f"daily_hot_stocks weak_stocks has {weak_count}/5")
+    return warnings
+
+
 def write_home_dashboard_data(site_dir: Path = SITE_DIR) -> list[Path]:
     data_dir = site_dir / "data"
     data_dir.mkdir(parents=True, exist_ok=True)
@@ -548,12 +618,15 @@ def write_home_dashboard_data(site_dir: Path = SITE_DIR) -> list[Path]:
     date_text = now.strftime("%Y-%m-%d")
     stocks_raw = _read_json_file(data_dir / "stocks-latest.json", [])
     stocks = stocks_raw if isinstance(stocks_raw, list) else []
+    existing_snapshot = _read_json_file(data_dir / "daily_market_snapshot.json", {})
     hot_stocks = _dashboard_hot_stocks(stocks)
     hot_themes, sector_summary = _dashboard_themes(stocks)
     snapshot = {
         "date": date_text,
         "session": _market_session(now),
         "updated_at": updated_at,
+        "build_version": DASHBOARD_BUILD_VERSION,
+        "app_version": DASHBOARD_BUILD_VERSION,
         "next_update_at": "依 GitHub Actions 排程更新",
         "source_type": "market_objective",
         "taiex": "資料待補",
@@ -574,21 +647,44 @@ def write_home_dashboard_data(site_dir: Path = SITE_DIR) -> list[Path]:
             "若外資續賣權值股，指數反彈力道會受壓抑。",
         ],
     }
+    snapshot = _preserve_existing_snapshot_values(snapshot, existing_snapshot)
+    ranked_stocks = sorted(hot_stocks, key=lambda item: _json_number(item.get("change_percent"), 0), reverse=True)
+    strong_stocks = ranked_stocks[:5]
+    weak_stocks = list(reversed(ranked_stocks[-5:])) if ranked_stocks else []
+    ranked_themes = sorted(hot_themes, key=lambda item: _json_number(item.get("change_percent_avg"), 0), reverse=True)
+    capital_inflow_themes = ranked_themes[:5]
+    capital_outflow_themes = list(reversed(ranked_themes[-5:])) if ranked_themes else []
     hot_stocks_payload = {
         "date": date_text,
         "session": snapshot["session"],
         "updated_at": updated_at,
+        "build_version": DASHBOARD_BUILD_VERSION,
+        "app_version": DASHBOARD_BUILD_VERSION,
         "source_type": "market_objective",
         "items": hot_stocks,
+        "strong_stocks": strong_stocks,
+        "weak_stocks": weak_stocks,
     }
     hot_themes_payload = {
         "date": date_text,
         "session": snapshot["session"],
         "updated_at": updated_at,
+        "build_version": DASHBOARD_BUILD_VERSION,
+        "app_version": DASHBOARD_BUILD_VERSION,
         "source_type": "market_objective",
         "items": hot_themes,
+        "capital_inflow_themes": capital_inflow_themes,
+        "capital_outflow_themes": capital_outflow_themes,
         "sector_summary": sector_summary,
     }
+    warnings = validate_dashboard_data(snapshot, hot_themes_payload, hot_stocks_payload)
+    if warnings:
+        print("Dashboard data warnings:")
+        for warning in warnings:
+            print(f"- {warning}")
+    snapshot["data_quality_warning"] = warnings
+    hot_stocks_payload["data_quality_warning"] = warnings
+    hot_themes_payload["data_quality_warning"] = warnings
     outputs = [
         (data_dir / "daily_market_snapshot.json", snapshot),
         (data_dir / "daily_hot_stocks.json", hot_stocks_payload),
