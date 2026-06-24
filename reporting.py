@@ -554,7 +554,7 @@ def _is_missing_dashboard_value(value: object) -> bool:
 def _preserve_existing_snapshot_values(snapshot: dict[str, object], existing: object) -> dict[str, object]:
     if not isinstance(existing, dict):
         return snapshot
-    preserve_keys = [
+    market_keys = [
         "taiex",
         "taiex_change",
         "taiex_change_percent",
@@ -564,11 +564,17 @@ def _preserve_existing_snapshot_values(snapshot: dict[str, object], existing: ob
         "down_count",
         "limit_up_count",
         "limit_down_count",
+    ]
+    preserve_keys = [
         "market_status",
         "fund_flow",
         "international_risks",
         "tomorrow_conditions",
     ]
+    for key in market_keys:
+        old_value = existing.get(key)
+        if not _is_missing_dashboard_value(old_value):
+            snapshot[key] = old_value
     for key in preserve_keys:
         old_value = existing.get(key)
         new_value = snapshot.get(key)
