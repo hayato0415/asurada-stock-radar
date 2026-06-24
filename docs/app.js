@@ -1,7 +1,7 @@
 const HOLDINGS_KEY = "asurada_holdings";
 const WATCHLIST_KEY = "asurada_watchlist";
-const BUILD_VERSION = "20260624-dashboard-v3";
-const APP_VERSION = "20260624-dashboard-v3";
+const BUILD_VERSION = "20260625-home-no-brief";
+const APP_VERSION = "20260625-home-no-brief";
 
 const state = {
   stocks: [],
@@ -1333,21 +1333,6 @@ function homePanelTitle(title, data) {
   `;
 }
 
-function homeUpdateLine(snapshot, hotThemes, hotStocks) {
-  const source = snapshot.available ? snapshot : (hotThemes.available ? hotThemes : hotStocks);
-  const marketView = dashboardFirstValue(snapshot, ["market_status", "market_view", "interpretation", "status"]);
-  const text = marketView === "-" ? "盤勢資料尚未更新" : marketView;
-  return `
-    <section class="home-dashboard-panel home-brief">
-      <div>
-        <span class="home-kicker">${escapeHtml(dashboardUpdateText(source))}</span>
-        <strong>盤勢一句話</strong>
-      </div>
-      <p>${escapeHtml(text)}</p>
-    </section>
-  `;
-}
-
 function homeMarketOverview(snapshot) {
   if (!snapshot.available) return dashboardEmpty("今日市場總覽資料尚未更新");
   const metrics = [
@@ -2127,7 +2112,6 @@ async function renderHomeDashboard() {
   const majorNews = normalizeDashboardData(newsRaw);
   warnDashboardQuality(snapshot, hotStocks, hotThemes, majorNews);
   main.innerHTML = `
-    ${homeUpdateLine(snapshot, hotThemes, hotStocks)}
     <section class="home-dashboard-panel">
       ${homePanelTitle("今日市場總覽", snapshot)}
       ${homeMarketOverview(snapshot)}
