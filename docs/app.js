@@ -975,7 +975,42 @@ function marketSnapshotCards(data) {
 function capitalThemeRanking(data) {
   const items = data.available ? data.items.slice(0, 5) : [];
   if (!items.length) return dashboardEmpty("今日資金主題資料尚未更新");
-  return `<ol class="war-room-ranking">${items.map((item, index) => `<li><span class="war-room-rank">${escapeHtml(item.rank || index + 1)}</span><div><strong>${escapeHtml(item.theme || "題材未標示")}</strong><small>${escapeHtml(item.reason || dashboardList(item.stocks))}</small></div><b>${escapeHtml(dashboardNumber(item.score))}</b></li>`).join("")}</ol>`;
+  return `<ol class="war-room-ranking">${items.map((item, index) => {
+    const stocks = dashboardList(item.stocks);
+    return `<li>
+      <span class="war-room-rank">${escapeHtml(item.rank || index + 1)}</span>
+      <div>
+        <strong>${escapeHtml(item.theme || "題材未標示")}</strong>
+        <small>強度：${escapeHtml(item.strength || "-")}｜分數：${escapeHtml(dashboardNumber(item.score))}</small>
+        <small>${escapeHtml(item.reason || "-")}</small>
+        <small>代表股：${escapeHtml(stocks)}</small>
+      </div>
+      <b>${escapeHtml(item.signal || item.status || "")}</b>
+    </li>`;
+  }).join("")}</ol>`;
+}
+
+function radarPickCards(data) {
+  const items = data.available ? data.items.slice(0, 10) : [];
+  if (!items.length) return dashboardEmpty("目前尚無主升段候選資料");
+  return `<div class="war-room-pick-list">${items.map((item, index) => {
+    const codeName = `${item.code || ""} ${item.name || ""}`.trim() || "股票未標示";
+    return `<article class="war-room-pick-card">
+      <div class="war-room-pick-head">
+        <span class="war-room-rank">${escapeHtml(item.rank || index + 1)}</span>
+        <div>
+          <strong>${escapeHtml(codeName)}</strong>
+          <small>${escapeHtml(item.type || "候選觀察")}</small>
+        </div>
+        <b class="war-room-pick-score">${escapeHtml(dashboardNumber(item.score))}</b>
+      </div>
+      <div class="war-room-stock-tags">
+        <span>${escapeHtml(item.theme || "題材未標示")}</span>
+      </div>
+      <p>${escapeHtml(item.reason || "尚未標示關注原因")}</p>
+      <small class="war-room-pick-risk">風險：${escapeHtml(item.risk || "尚未標示")}</small>
+    </article>`;
+  }).join("")}</div>`;
 }
 
 function limitUpGroups(data) {
@@ -1026,7 +1061,7 @@ async function renderHome() {
     </section>
     <div class="war-room-grid">
       <section class="panel dashboard-section war-room-section">${dashboardSectionTitle("今日資金主題排序", hotThemes)}${capitalThemeRanking(hotThemes)}</section>
-      <section class="panel dashboard-section war-room-section">${dashboardSectionTitle("今日漲停集中族群", hotStocks)}${limitUpGroups(hotStocks)}</section>
+      <section class="panel dashboard-section war-room-section">${dashboardSectionTitle("主升段候選 / 雷達精選", hotStocks)}${radarPickCards(hotStocks)}</section>
       <section class="panel dashboard-section war-room-section war-room-warning">${dashboardSectionTitle("退潮警示", hotThemes)}${retreatAlerts(hotThemes)}</section>
       <section class="panel dashboard-section war-room-section">${dashboardSectionTitle("明日作戰條件", snapshot.available ? snapshot : hotThemes)}${tomorrowConditions(snapshot, hotThemes)}</section>
     </div>

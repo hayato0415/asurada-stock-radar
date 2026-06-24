@@ -566,6 +566,57 @@ button.secondary {
 .war-room-ranking b {
   color: #67e8f9;
 }
+.war-room-pick-list {
+  display: grid;
+  gap: 10px;
+}
+.war-room-pick-card {
+  background: rgba(8, 23, 42, .68);
+  border: 1px solid #1c3b61;
+  border-radius: 12px;
+  display: grid;
+  gap: 9px;
+  min-width: 0;
+  padding: 12px;
+}
+.war-room-pick-head {
+  align-items: center;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+}
+.war-room-pick-head div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.war-room-pick-head strong,
+.war-room-pick-card p,
+.war-room-pick-risk {
+  overflow-wrap: anywhere;
+}
+.war-room-pick-head small,
+.war-room-pick-risk {
+  color: #8fa9c8;
+}
+.war-room-pick-score {
+  color: #67e8f9;
+  white-space: nowrap;
+}
+.war-room-stock-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.war-room-stock-tags span {
+  background: rgba(37, 99, 235, .18);
+  border: 1px solid rgba(96, 165, 250, .35);
+  border-radius: 999px;
+  color: #bfdbfe;
+  font-size: 12px;
+  line-height: 1.4;
+  padding: 4px 8px;
+}
 .war-room-signal-list,
 .war-room-alert-list {
   display: grid;
