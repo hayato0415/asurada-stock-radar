@@ -617,6 +617,90 @@ button.secondary {
   line-height: 1.4;
   padding: 4px 8px;
 }
+.home-filter-panel {
+  margin-bottom: 14px;
+}
+.home-filter-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.home-dashboard-grid .home-wide {
+  grid-column: 1 / -1;
+}
+.market-summary-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.market-summary-card {
+  background: rgba(8, 23, 42, .78);
+  border: 1px solid #24476e;
+  border-radius: 12px;
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+  padding: 13px;
+}
+.market-summary-card span {
+  color: #89a6c8;
+  font-size: 13px;
+}
+.market-summary-card strong {
+  color: #f8fbff;
+  font-size: 17px;
+  overflow-wrap: anywhere;
+}
+.theme-ranking,
+.hot-stock-table {
+  min-width: 980px;
+}
+.sector-summary,
+.risk-news-list {
+  display: grid;
+  gap: 10px;
+}
+.sector-summary article,
+.risk-news-list article {
+  background: rgba(8, 23, 42, .68);
+  border: 1px solid #1c3b61;
+  border-radius: 12px;
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+  padding: 12px;
+}
+.sector-summary article div,
+.risk-news-list article div {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: space-between;
+}
+.sector-summary span,
+.risk-news-list span {
+  background: rgba(37, 99, 235, .18);
+  border: 1px solid rgba(96, 165, 250, .35);
+  border-radius: 999px;
+  color: #bfdbfe;
+  font-size: 12px;
+  padding: 3px 8px;
+}
+.sector-summary p,
+.risk-news-list p,
+.objective-note p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.sector-summary small,
+.risk-news-list small {
+  color: #8fa9c8;
+}
+.risk-news-list a {
+  color: #93c5fd;
+}
+.objective-note {
+  border-color: #24476e;
+}
 .war-room-signal-list,
 .war-room-alert-list {
   display: grid;
@@ -939,6 +1023,19 @@ tr:nth-child(even) { background: #f8fafc; }
   .war-room-grid,
   .war-room-market-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+  .home-filter-grid,
+  .market-summary-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .theme-ranking,
+  .hot-stock-table {
+    min-width: 920px;
+  }
+  .sector-summary article div,
+  .risk-news-list article div {
+    align-items: flex-start;
+    flex-direction: column;
   }
   .home-header {
     padding: 8px 10px;

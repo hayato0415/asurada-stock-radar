@@ -1,49 +1,25 @@
 {
   "date": "2026-06-24",
-  "updated_at": "2026-06-24 盤後人工維護",
+  "session": "盤後",
+  "updated_at": "2026-06-24 16:10 Asia/Taipei",
+  "source_type": "market_objective",
   "items": [
     {
       "rank": 1,
-      "code": "2337",
-      "name": "旺宏",
-      "theme": "記憶體",
-      "type": "低位階補漲",
-      "score": 86,
-      "price": "",
-      "change_percent": "",
-      "volume": "",
-      "reason": "記憶體循環題材，股價相對低位階，適合列入主升段觀察。",
-      "risk": "跌破近期整理區間需降評",
-      "is_limit_up": false
-    },
-    {
-      "rank": 2,
-      "code": "2313",
-      "name": "華通",
-      "theme": "PCB / 低軌衛星",
-      "type": "中線趨勢",
-      "score": 83,
-      "price": "",
-      "change_percent": "",
-      "volume": "",
-      "reason": "PCB 與低軌題材具延續性，需觀察量能是否維持。",
-      "risk": "若題材退燒或量縮跌破支撐，需轉觀察",
-      "is_limit_up": false
-    },
-    {
-      "rank": 3,
-      "code": "3673",
-      "name": "TPK-KY",
-      "theme": "玻璃基板 / TGV",
-      "type": "題材潛伏",
-      "score": 80,
-      "price": "",
-      "change_percent": "",
-      "volume": "",
-      "reason": "具玻璃基板題材想像空間，但仍需追蹤實際送樣與客戶進度。",
-      "risk": "題材若無新聞續航，容易震盪回測",
-      "is_limit_up": false
+      "code": "1301",
+      "name": "台塑",
+      "market": "上市",
+      "sector": "傳產",
+      "market_group": "非電子",
+      "theme": "塑化",
+      "price": 0,
+      "change_percent": 10.0,
+      "volume": 0,
+      "volume_ratio": 0,
+      "is_limit_up": true,
+      "score": 95,
+      "reason": "漲停、族群同步、資金輪動明確",
+      "source_type": "market_objective"
     }
-  ],
-  "data_note": "首頁第二階段人工維護主升段候選資料。"
+  ]
 }

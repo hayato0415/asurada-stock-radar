@@ -1,19 +1,34 @@
 {
   "date": "2026-06-24",
-  "updated_at": "2026-06-24 盤後人工維護",
-  "market": "上市",
-  "index_close": "",
-  "change_points": "",
-  "change_percent": "",
-  "turnover": "待人工補值",
-  "foreign_net": "待人工補值",
-  "market_status": "第二階段人工維護資料：本頁先聚焦資金題材、主升段候選與隔日作戰條件；大盤數值待盤後人工補值。",
-  "tomorrow_conditions": [
-    "記憶體族群需觀察成交量是否連續放大，不追單日急拉。",
-    "PCB / CCL 題材若量能續強，可列入中線主升段追蹤。",
-    "玻璃基板 / TGV 題材需確認送樣、客戶進度或量產新聞是否續航。",
-    "熱門題材若隔日量縮或跌破整理區，先降為觀察。",
-    "優先觀察低位階、營收轉強、量能溫和放大的上市股票。"
+  "session": "盤後",
+  "updated_at": "2026-06-24 16:10 Asia/Taipei",
+  "next_update_at": "2026-06-24 20:30 Asia/Taipei",
+  "source_type": "market_objective",
+  "taiex": 46043.6,
+  "taiex_change": -1057.05,
+  "taiex_change_percent": -2.24,
+  "otc_change_percent": 0.29,
+  "turnover": "資料待補",
+  "up_count": 920,
+  "down_count": 956,
+  "limit_up_count": 53,
+  "limit_down_count": 0,
+  "market_status": "權值科技股轉弱，中小型題材股輪動",
+  "fund_flow": "資金由AI權值轉向塑化、面板、安控、成熟製程等低位階題材",
+  "international_risks": [
+    {
+      "title": "美股科技股與半導體賣壓升高",
+      "impact": "偏空",
+      "related_markets": ["費半", "Nasdaq", "台積電ADR"],
+      "reason": "AI估值與半導體股修正壓力影響台股權值股",
+      "source_name": "待接新聞源",
+      "url": ""
+    }
   ],
-  "data_note": "首頁第二階段人工維護資料，第三階段再接自動更新。"
+  "tomorrow_conditions": [
+    "若台積電續弱且費半續跌，權值股壓力仍大",
+    "若櫃買指數續強且漲停家數維持，中小型題材仍有輪動空間",
+    "若塑化、面板、安控隔日開高走低，視為短線退潮警訊",
+    "若外資續賣權值股，指數反彈力道會受壓抑"
+  ]
 }

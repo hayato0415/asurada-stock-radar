@@ -959,89 +959,172 @@ function dashboardFirstValue(source, keys) {
   return "-";
 }
 
+function dashboardMetric(label, value) {
+  return `<div class="market-summary-card"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`;
+}
+
 function marketSnapshotCards(data) {
   if (!data.available) return dashboardEmpty("大盤狀態資料尚未更新");
   const fields = [
-    ["台股收盤", dashboardNumber(dashboardFirstValue(data, ["taiex", "close", "index_close"]), 2)],
-    ["漲跌點數", dashboardNumber(dashboardFirstValue(data, ["change_points", "change", "taiex_change"]), 2)],
-    ["漲跌幅", dashboardPercent(dashboardFirstValue(data, ["change_percent", "change_pct", "taiex_change_percent"]))],
+    ["資料狀態", dashboardFirstValue(data, ["session"])],
+    ["更新時間", dashboardFirstValue(data, ["updated_at"])],
+    ["下一次更新", dashboardFirstValue(data, ["next_update_at"])],
+    ["加權指數", dashboardNumber(dashboardFirstValue(data, ["taiex", "close", "index_close"]), 2)],
+    ["漲跌點數", dashboardNumber(dashboardFirstValue(data, ["taiex_change", "change_points", "change"]), 2)],
+    ["漲跌幅", dashboardPercent(dashboardFirstValue(data, ["taiex_change_percent", "change_percent", "change_pct"]))],
     ["成交值", dashboardFirstValue(data, ["turnover", "turnover_value", "trading_value"])],
-    ["外資買賣超", dashboardFirstValue(data, ["foreign_net", "foreign_net_buy", "foreign_buy_sell"])],
+    ["上漲家數", dashboardNumber(dashboardFirstValue(data, ["up_count"]))],
+    ["下跌家數", dashboardNumber(dashboardFirstValue(data, ["down_count"]))],
+    ["漲停家數", dashboardNumber(dashboardFirstValue(data, ["limit_up_count"]))],
+    ["跌停家數", dashboardNumber(dashboardFirstValue(data, ["limit_down_count"]))],
     ["盤勢判讀", dashboardFirstValue(data, ["market_status", "market_view", "interpretation", "status"])],
+    ["資金流向", dashboardFirstValue(data, ["fund_flow"])],
   ];
-  return `<div class="war-room-market-grid">${fields.map(([label, value]) => `<div class="war-room-stat"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`).join("")}</div>`;
+  return `<div class="war-room-market-grid market-summary-grid">${fields.map(([label, value]) => dashboardMetric(label, value)).join("")}</div>`;
 }
 
-function capitalThemeRanking(data) {
-  const items = data.available ? data.items.slice(0, 5) : [];
-  if (!items.length) return dashboardEmpty("今日資金主題資料尚未更新");
-  return `<ol class="war-room-ranking">${items.map((item, index) => {
-    const stocks = dashboardList(item.stocks);
-    return `<li>
-      <span class="war-room-rank">${escapeHtml(item.rank || index + 1)}</span>
-      <div>
-        <strong>${escapeHtml(item.theme || "題材未標示")}</strong>
-        <small>強度：${escapeHtml(item.strength || "-")}｜分數：${escapeHtml(dashboardNumber(item.score))}</small>
-        <small>${escapeHtml(item.reason || "-")}</small>
-        <small>代表股：${escapeHtml(stocks)}</small>
+function homeFilters() {
+  return `
+    <section class="panel dashboard-section war-room-section home-filter-panel" aria-label="首頁篩選器">
+      <div class="section-title dashboard-title"><h2>首頁篩選</h2><span class="dashboard-meta">只作用於題材排行與市場候選股</span></div>
+      <div class="home-filter-grid">
+        <label>市場<select id="homeMarketFilter"><option value="all">全部</option><option value="上市">上市</option><option value="上櫃">上櫃</option></select></label>
+        <label>類別<select id="homeGroupFilter"><option value="all">全部</option><option value="electronics">電子</option><option value="non-electronics">非電子</option><option value="finance">金融</option><option value="traditional">傳產</option></select></label>
+        <label>強弱<select id="homeStrengthFilter"><option value="all">全部</option><option value="strong">強勢</option><option value="turning">轉強</option><option value="limit-up">漲停集中</option><option value="retreat">退潮</option></select></label>
+        <label>題材關鍵字搜尋<input id="homeKeywordFilter" placeholder="AI、PCB、記憶體、塑化、面板、安控"></label>
       </div>
-      <b>${escapeHtml(item.signal || item.status || "")}</b>
-    </li>`;
-  }).join("")}</ol>`;
+    </section>
+  `;
 }
 
-function radarPickCards(data) {
-  const items = data.available ? data.items.slice(0, 10) : [];
-  if (!items.length) return dashboardEmpty("目前尚無主升段候選資料");
-  return `<div class="war-room-pick-list">${items.map((item, index) => {
-    const codeName = `${item.code || ""} ${item.name || ""}`.trim() || "股票未標示";
-    return `<article class="war-room-pick-card">
-      <div class="war-room-pick-head">
-        <span class="war-room-rank">${escapeHtml(item.rank || index + 1)}</span>
-        <div>
-          <strong>${escapeHtml(codeName)}</strong>
-          <small>${escapeHtml(item.type || "候選觀察")}</small>
-        </div>
-        <b class="war-room-pick-score">${escapeHtml(dashboardNumber(item.score))}</b>
-      </div>
-      <div class="war-room-stock-tags">
-        <span>${escapeHtml(item.theme || "題材未標示")}</span>
-      </div>
-      <p>${escapeHtml(item.reason || "尚未標示關注原因")}</p>
-      <small class="war-room-pick-risk">風險：${escapeHtml(item.risk || "尚未標示")}</small>
-    </article>`;
-  }).join("")}</div>`;
+function homeFilterValues() {
+  return {
+    market: $("#homeMarketFilter")?.value || "all",
+    group: $("#homeGroupFilter")?.value || "all",
+    strength: $("#homeStrengthFilter")?.value || "all",
+    keyword: ($("#homeKeywordFilter")?.value || "").trim().toLowerCase(),
+  };
 }
 
-function limitUpGroups(data) {
-  if (!data.available) return dashboardEmpty("今日漲停集中族群資料尚未更新");
-  const groups = new Map();
-  data.items.filter((item) => item.is_limit_up === true || toNumber(item.change_percent) >= 9).forEach((item) => {
-    const theme = String(item.theme || "題材未標示").trim();
-    const group = groups.get(theme) || [];
-    group.push(`${item.code || ""} ${item.name || ""}`.trim());
-    groups.set(theme, group);
+function homeTextBlob(item) {
+  return [
+    item.theme,
+    item.sector,
+    item.market_group,
+    item.market,
+    item.code,
+    item.name,
+    item.reason,
+    item.signal,
+    item.status,
+    dashboardList(item.stocks),
+  ].join(" ").toLowerCase();
+}
+
+function isHomeRetreat(item) {
+  const status = `${item.status || ""} ${item.signal || ""} ${item.warning || ""}`;
+  const change = toNumber(item.change_percent_avg ?? item.change_percent);
+  return /退潮|轉弱|降溫|量縮|跌破/.test(status) || (Number.isFinite(change) && change < 0);
+}
+
+function matchHomeGroup(item, group) {
+  if (group === "all") return true;
+  const text = homeTextBlob(item);
+  if (group === "electronics") return /電子|半導體|面板|安控|成熟製程|AI|PCB|記憶體|光電|網通/.test(text);
+  if (group === "non-electronics") return /非電子|傳產|金融|塑化|原物料|營建|航運|鋼鐵|觀光|生技/.test(text);
+  if (group === "finance") return /金融|銀行|壽險|金控/.test(text);
+  if (group === "traditional") return /傳產|塑化|原物料|營建|航運|鋼鐵|觀光|食品|水泥|橡膠/.test(text);
+  return true;
+}
+
+function matchHomeStrength(item, strength) {
+  if (strength === "all") return true;
+  const text = homeTextBlob(item);
+  if (strength === "strong") return /強勢|強/.test(text) || toNumber(item.score) >= 80;
+  if (strength === "turning") return /轉強/.test(text);
+  if (strength === "limit-up") return toNumber(item.limit_up_count) > 0 || item.is_limit_up === true;
+  if (strength === "retreat") return isHomeRetreat(item);
+  return true;
+}
+
+function filterHomeItems(items, filters, kind) {
+  return (items || []).filter((item) => {
+    if (filters.market !== "all" && kind === "stock" && String(item.market || "") !== filters.market) return false;
+    if (!matchHomeGroup(item, filters.group)) return false;
+    if (!matchHomeStrength(item, filters.strength)) return false;
+    if (filters.keyword && !homeTextBlob(item).includes(filters.keyword)) return false;
+    return true;
   });
-  const ranked = [...groups.entries()].sort((left, right) => right[1].length - left[1].length).slice(0, 5);
-  if (!ranked.length) return dashboardEmpty("今日尚無可辨識的漲停集中族群資料");
-  return `<div class="war-room-signal-list">${ranked.map(([theme, stocks]) => `<div><strong>${escapeHtml(theme)}</strong><span>${stocks.length} 檔</span><small>${escapeHtml(stocks.join("、"))}</small></div>`).join("")}</div>`;
+}
+
+function strongestThemeRanking(data, filters = homeFilterValues()) {
+  const items = data.available ? filterHomeItems(data.items, filters, "theme").slice(0, 10) : [];
+  if (!items.length) return dashboardEmpty("今日最強題材資料尚未更新");
+  return `<div class="table-wrap"><table class="theme-ranking"><thead><tr><th>排名</th><th>題材</th><th>產業類別</th><th>強度</th><th>平均漲跌幅</th><th>上漲家數</th><th>漲停</th><th>代表股</th><th>觸發原因</th><th>訊號</th></tr></thead><tbody>${items.map((item, index) => `<tr><td>${escapeHtml(item.rank || index + 1)}</td><td>${escapeHtml(item.theme || "-")}</td><td>${escapeHtml(item.sector || item.market_group || "-")}</td><td>${escapeHtml(dashboardNumber(item.score))}</td><td>${escapeHtml(dashboardPercent(item.change_percent_avg))}</td><td>${escapeHtml(dashboardNumber(item.up_count))}</td><td>${escapeHtml(dashboardNumber(item.limit_up_count))}</td><td>${escapeHtml(dashboardList(item.stocks))}</td><td>${escapeHtml(item.reason || "-")}</td><td>${escapeHtml(item.signal || item.status || "-")}</td></tr>`).join("")}</tbody></table></div>`;
+}
+
+function sectorSummary(data, filters = homeFilterValues()) {
+  const raw = data.available && Array.isArray(data.sector_summary) ? data.sector_summary : [];
+  const items = filterHomeItems(raw, filters, "sector").slice(0, 8);
+  if (!items.length) return dashboardEmpty("產業強弱資料尚未更新");
+  return `<div class="sector-summary">${items.map((item) => `<article><div><strong>${escapeHtml(item.sector || "類別未標示")}</strong><span>${escapeHtml(item.status || "-")}</span></div><p>漲跌幅：${escapeHtml(dashboardPercent(item.change_percent))}</p><p>代表題材：${escapeHtml(dashboardList(item.themes))}</p><p>代表股：${escapeHtml(dashboardList(item.stocks))}</p><small>${escapeHtml(item.reason || "-")}</small></article>`).join("")}</div>`;
+}
+
+function hotStockTable(data, filters = homeFilterValues()) {
+  const items = data.available ? filterHomeItems(data.items, filters, "stock").slice(0, 20) : [];
+  if (!items.length) return dashboardEmpty("今日市場候選股資料尚未更新");
+  return `<div class="table-wrap"><table class="hot-stock-table"><thead><tr><th>排名</th><th>股票代號</th><th>股票名稱</th><th>市場</th><th>產業</th><th>題材</th><th>股價</th><th>漲跌幅</th><th>成交量</th><th>量比</th><th>漲停</th><th>分數</th><th>入選原因</th></tr></thead><tbody>${items.map((item, index) => {
+    const code = normalizeCode(item.code);
+    return `<tr><td>${escapeHtml(item.rank || index + 1)}</td><td>${code ? `<a href="stock.html?code=${encodeURIComponent(code)}">${escapeHtml(code)}</a>` : "-"}</td><td>${escapeHtml(item.name || "-")}</td><td>${escapeHtml(item.market || "-")}</td><td>${escapeHtml(item.sector || item.market_group || "-")}</td><td>${escapeHtml(item.theme || "-")}</td><td>${escapeHtml(dashboardNumber(item.price, 2))}</td><td>${escapeHtml(dashboardPercent(item.change_percent))}</td><td>${escapeHtml(dashboardNumber(item.volume))}</td><td>${escapeHtml(dashboardNumber(item.volume_ratio, 2))}</td><td>${escapeHtml(item.is_limit_up ? "是" : "否")}</td><td>${escapeHtml(dashboardNumber(item.score))}</td><td>${escapeHtml(item.reason || "-")}</td></tr>`;
+  }).join("")}</tbody></table></div>`;
 }
 
 function retreatAlerts(data) {
   if (!data.available) return dashboardEmpty("退潮警示資料尚未更新");
-  const alerts = data.items.filter((item) => {
-    const status = `${item.status || ""} ${item.signal || ""} ${item.warning || ""}`;
-    return /退潮|轉弱|降溫|量縮|跌破/.test(status) || toNumber(item.change_percent) < 0;
-  }).slice(0, 5);
+  const alerts = data.items.filter(isHomeRetreat).slice(0, 5);
   if (!alerts.length) return dashboardEmpty("目前資料未標示明確退潮警示");
   return `<div class="war-room-alert-list">${alerts.map((item) => `<div><strong>${escapeHtml(item.theme || "題材未標示")}</strong><span>${escapeHtml(item.warning || item.status || item.signal || "轉弱觀察")}</span></div>`).join("")}</div>`;
+}
+
+function internationalRiskList(data) {
+  const items = data.available && Array.isArray(data.international_risks) ? data.international_risks.slice(0, 5) : [];
+  if (!items.length) return dashboardEmpty("國際新聞風險尚未更新");
+  return `<div class="risk-news-list">${items.map((item) => {
+    const title = escapeHtml(item.title || "未命名風險");
+    const headline = isRealSourceUrl(item.url)
+      ? `<a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">${title}</a>`
+      : `<span>${title}</span>`;
+    return `<article><h3>${headline}</h3><div><span>${escapeHtml(item.impact || "中性")}</span><small>${escapeHtml(item.source_name || "來源未標示")}</small></div><p>相關市場：${escapeHtml(dashboardList(item.related_markets))}</p><p>${escapeHtml(item.reason || "-")}</p></article>`;
+  }).join("")}</div>`;
 }
 
 function tomorrowConditions(snapshot, themes) {
   const raw = snapshot.tomorrow_conditions || themes.tomorrow_conditions || [];
   const conditions = Array.isArray(raw) ? raw.map((item) => String(item || "").trim()).filter(Boolean) : [];
   if (!conditions.length) return dashboardEmpty("明日作戰條件資料尚未更新");
-  return `<ul class="war-room-condition-list">${conditions.slice(0, 6).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+  return `<ul class="tomorrow-condition-list war-room-condition-list">${conditions.slice(0, 8).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+}
+
+function objectiveNote() {
+  return `<section class="panel dashboard-section war-room-section objective-note"><p>首頁排名僅依全市場當日資料、題材同步性、產業漲跌、量能變化與新聞催化計算；個人持股與自選股不得參與分數、排序與首頁預設呈現。</p></section>`;
+}
+
+function renderHomeFilteredSections(hotThemes, hotStocks) {
+  const filters = homeFilterValues();
+  const themeEl = $("#homeThemeRanking");
+  const sectorEl = $("#homeSectorSummary");
+  const stockEl = $("#homeHotStocks");
+  if (themeEl) themeEl.innerHTML = strongestThemeRanking(hotThemes, filters);
+  if (sectorEl) sectorEl.innerHTML = sectorSummary(hotThemes, filters);
+  if (stockEl) stockEl.innerHTML = hotStockTable(hotStocks, filters);
+}
+
+function bindHomeFilters(hotThemes, hotStocks) {
+  ["#homeMarketFilter", "#homeGroupFilter", "#homeStrengthFilter", "#homeKeywordFilter"].forEach((selector) => {
+    const control = $(selector);
+    control?.addEventListener("input", () => renderHomeFilteredSections(hotThemes, hotStocks));
+    control?.addEventListener("change", () => renderHomeFilteredSections(hotThemes, hotStocks));
+  });
 }
 
 async function renderHome() {
@@ -1056,16 +1139,21 @@ async function renderHome() {
   const hotThemes = normalizeDashboardData(themesRaw);
   main.innerHTML = `
     <section class="panel dashboard-section war-room-section war-room-market">
-      ${dashboardSectionTitle("大盤狀態", snapshot)}
+      ${dashboardSectionTitle("今日市場總覽", snapshot)}
       ${marketSnapshotCards(snapshot)}
     </section>
-    <div class="war-room-grid">
-      <section class="panel dashboard-section war-room-section">${dashboardSectionTitle("今日資金主題排序", hotThemes)}${capitalThemeRanking(hotThemes)}</section>
-      <section class="panel dashboard-section war-room-section">${dashboardSectionTitle("主升段候選 / 雷達精選", hotStocks)}${radarPickCards(hotStocks)}</section>
-      <section class="panel dashboard-section war-room-section war-room-warning">${dashboardSectionTitle("退潮警示", hotThemes)}${retreatAlerts(hotThemes)}</section>
+    ${homeFilters()}
+    <div class="war-room-grid home-dashboard-grid">
+      <section class="panel dashboard-section war-room-section"><div class="section-title dashboard-title"><h2>今日最強題材排行</h2><span class="dashboard-meta">${escapeHtml(dashboardUpdateText(hotThemes))}</span></div><div id="homeThemeRanking">${strongestThemeRanking(hotThemes)}</div></section>
+      <section class="panel dashboard-section war-room-section"><div class="section-title dashboard-title"><h2>今日產業類別強弱</h2><span class="dashboard-meta">${escapeHtml(dashboardUpdateText(hotThemes))}</span></div><div id="homeSectorSummary">${sectorSummary(hotThemes)}</div></section>
+      <section class="panel dashboard-section war-room-section home-wide"><div class="section-title dashboard-title"><h2>今日市場候選股</h2><span class="dashboard-meta">${escapeHtml(dashboardUpdateText(hotStocks))}</span></div><div id="homeHotStocks">${hotStockTable(hotStocks)}</div></section>
+      <section class="panel dashboard-section war-room-section war-room-warning">${dashboardSectionTitle("今日退潮警示", hotThemes)}${retreatAlerts(hotThemes)}</section>
+      <section class="panel dashboard-section war-room-section">${dashboardSectionTitle("國際新聞風險", snapshot)}${internationalRiskList(snapshot)}</section>
       <section class="panel dashboard-section war-room-section">${dashboardSectionTitle("明日作戰條件", snapshot.available ? snapshot : hotThemes)}${tomorrowConditions(snapshot, hotThemes)}</section>
     </div>
+    ${objectiveNote()}
   `;
+  bindHomeFilters(hotThemes, hotStocks);
 }
 
 function renderRadar() {

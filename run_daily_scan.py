@@ -4,7 +4,7 @@ import argparse
 import json
 
 from data_sources import DataProvider
-from reporting import write_reports
+from reporting import write_home_dashboard_data, write_reports
 from scoring_model import build_candidates, prefilter_by_revenue, top_report
 from update_news_events import NEWS_OUTPUT_PATH, build_events, write_events
 
@@ -43,11 +43,16 @@ def run_scan(
             news_count = f"{len(events)}（保留既有新聞資料）"
     except Exception as exc:
         news_count = f"新聞更新失敗：{exc}"
+    try:
+        home_dashboard_files = [str(path) for path in write_home_dashboard_data()]
+    except Exception as exc:
+        home_dashboard_files = [f"首頁戰情資料更新失敗：{exc}"]
     return {
         "股票清單檔": str(provider.data_dir / "tw_stock_list.csv"),
         "候選股數": len(candidates),
         "輸出前N名": len(report),
         "新聞事件數": news_count,
+        "首頁戰情資料": home_dashboard_files,
         "網站互動資料筆數": len(interactive_report),
         "CSV": str(csv_path),
         "HTML": str(html_path),

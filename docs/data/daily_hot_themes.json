@@ -1,45 +1,54 @@
 {
   "date": "2026-06-24",
-  "updated_at": "2026-06-24 盤後人工維護",
+  "session": "盤後",
+  "updated_at": "2026-06-24 16:10 Asia/Taipei",
+  "source_type": "market_objective",
   "items": [
     {
       "rank": 1,
-      "theme": "記憶體",
-      "score": 86,
-      "strength": "強",
-      "reason": "族群成交量放大，市場資金持續關注報價與庫存循環。",
-      "stocks": ["2337 旺宏", "2344 華邦電", "2408 南亞科"],
-      "status": "強勢觀察",
-      "signal": "量能續強",
-      "warning": ""
+      "theme": "塑化",
+      "sector": "傳產 / 原物料",
+      "market_group": "非電子",
+      "score": 92,
+      "change_percent_avg": 6.8,
+      "up_count": 12,
+      "limit_up_count": 3,
+      "volume_status": "放量",
+      "stocks": ["1301 台塑", "1303 南亞", "1326 台化"],
+      "reason": "權值科技股轉弱，資金轉往低位階傳產避風港",
+      "signal": "強勢延續"
     },
     {
       "rank": 2,
-      "theme": "PCB / CCL",
-      "score": 83,
-      "strength": "強",
-      "reason": "AI 伺服器、高階材料與低軌衛星需求帶動。",
-      "stocks": ["2313 華通", "2383 台光電", "6213 聯茂"],
-      "status": "強勢觀察",
-      "signal": "族群輪動",
-      "warning": ""
-    },
-    {
-      "rank": 3,
-      "theme": "玻璃基板 / TGV",
-      "score": 74,
-      "strength": "觀察",
-      "reason": "先進封裝題材延續，但需確認實際送樣與量產進度。",
-      "stocks": ["3673 TPK-KY", "1802 台玻", "3481 群創"],
-      "status": "觀察",
-      "signal": "題材潛伏",
-      "warning": "若無新聞續航，容易量縮降溫"
+      "theme": "成熟製程",
+      "sector": "電子 / 半導體",
+      "market_group": "電子",
+      "score": 86,
+      "change_percent_avg": 4.2,
+      "up_count": 8,
+      "limit_up_count": 1,
+      "volume_status": "放量",
+      "stocks": ["2303 聯電", "6770 力積電"],
+      "reason": "高估值AI權值轉弱，資金轉往低位階半導體",
+      "signal": "轉強"
     }
   ],
-  "tomorrow_conditions": [
-    "強題材隔日若開高量縮，不追高。",
-    "題材股若量增但股價不過前高，先觀察不加碼。",
-    "低位階補漲股優先看整理區不破。"
-  ],
-  "data_note": "首頁第二階段人工維護題材資料。"
+  "sector_summary": [
+    {
+      "sector": "傳產",
+      "status": "轉強",
+      "change_percent": 1.8,
+      "themes": ["塑化", "原物料"],
+      "stocks": ["1301 台塑", "1326 台化"],
+      "reason": "資金避開權值科技，轉入低位階傳產"
+    },
+    {
+      "sector": "電子",
+      "status": "分化",
+      "change_percent": -1.2,
+      "themes": ["成熟製程", "面板", "安控"],
+      "stocks": ["2303 聯電", "6770 力積電", "3481 群創"],
+      "reason": "AI權值弱，但低位階電子題材輪動"
+    }
+  ]
 }

@@ -7,8 +7,20 @@ on:
     paths-ignore:
       - "docs/**"
   schedule:
-    # 08:10 UTC = 16:10 Asia/Taipei. GitHub cron uses UTC.
+    # 08:20 Asia/Taipei - 開盤前資料檢查
+    - cron: "20 0 * * 1-5"
+    # 09:35 Asia/Taipei - 早盤強勢題材
+    - cron: "35 1 * * 1-5"
+    # 11:30 Asia/Taipei - 盤中資金輪動
+    - cron: "30 3 * * 1-5"
+    # 13:50 Asia/Taipei - 收盤初步資料
+    - cron: "50 5 * * 1-5"
+    # 16:10 Asia/Taipei - 盤後正式整理
     - cron: "10 8 * * 1-5"
+    # 20:30 Asia/Taipei - 晚間國際新聞與風險
+    - cron: "30 12 * * 1-5"
+    # 07:40 Asia/Taipei - 隔日早盤作戰條件
+    - cron: "40 23 * * 0-4"
   workflow_dispatch:
 
 permissions:

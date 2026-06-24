@@ -6,6 +6,7 @@ import re
 import shutil
 from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import pandas as pd
 
@@ -355,6 +356,247 @@ def publish_interactive_data(display_report: pd.DataFrame, site_dir: Path = SITE
     technical_path = data_dir / "technical-latest.json"
     if not technical_path.exists():
         technical_path.write_text("{}", encoding="utf-8")
+
+
+def _taipei_now() -> datetime:
+    return datetime.now(ZoneInfo("Asia/Taipei"))
+
+
+def _market_session(now: datetime) -> str:
+    minutes = now.hour * 60 + now.minute
+    if 8 * 60 <= minutes < 9 * 60:
+        return "開盤前"
+    if 9 * 60 <= minutes < 13 * 60 + 30:
+        return "盤中"
+    if 13 * 60 + 30 <= minutes < 17 * 60:
+        return "盤後"
+    if 17 * 60 <= minutes <= 23 * 60 + 59:
+        return "晚間"
+    return "隔日早晨"
+
+
+def _read_json_file(path: Path, fallback: object) -> object:
+    if not path.exists():
+        return fallback
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return fallback
+
+
+def _is_valid_public_url(value: object) -> bool:
+    text = str(value or "").strip()
+    if not text or text == "#" or "example.com" in text.lower():
+        return False
+    return text.startswith("https://") or text.startswith("http://")
+
+
+def _first_theme(value: object) -> str:
+    text = str(value or "").strip()
+    if not text or text == "-":
+        return "未分類"
+    parts = re.split(r"[;/、,，｜|]+", text)
+    return next((part.strip() for part in parts if part.strip()), text)
+
+
+def _market_group_from_text(value: object) -> str:
+    text = str(value or "")
+    non_electronics = ["金融", "壽險", "銀行", "營建", "資產", "都更", "塑化", "原物料", "航運", "鋼鐵", "觀光", "食品", "水泥", "橡膠", "生技"]
+    return "非電子" if any(keyword in text for keyword in non_electronics) else "電子"
+
+
+def _sector_from_theme(theme: str, concept: object = "") -> str:
+    text = f"{theme} {concept}"
+    if any(keyword in text for keyword in ["金融", "壽險", "銀行"]):
+        return "金融"
+    if any(keyword in text for keyword in ["塑化", "原物料", "營建", "資產", "航運", "鋼鐵", "觀光", "食品", "水泥", "橡膠"]):
+        return "傳產"
+    return "電子"
+
+
+def _json_number(value: object, default: float = 0.0) -> float:
+    number = _parse_number(value)
+    return default if number is None else float(number)
+
+
+def _dashboard_hot_stocks(stocks: list[dict[str, object]]) -> list[dict[str, object]]:
+    def sort_key(stock: dict[str, object]) -> tuple[float, float, float]:
+        change = _json_number(stock.get("daily_change"), float("-inf"))
+        volume = _json_number(stock.get("volume_value"), 0)
+        score = _json_number(stock.get("score_value"), 0)
+        return (change, volume, score)
+
+    ranked = sorted(stocks, key=sort_key, reverse=True)[:20]
+    items: list[dict[str, object]] = []
+    for rank, stock in enumerate(ranked, start=1):
+        concept = stock.get("concept", "")
+        theme = _first_theme(concept)
+        change = _json_number(stock.get("daily_change"), 0)
+        market_group = _market_group_from_text(concept)
+        items.append(
+            {
+                "rank": rank,
+                "code": str(stock.get("code", "")).strip(),
+                "name": str(stock.get("name", "")).strip(),
+                "market": str(stock.get("market", "上市")).strip() or "上市",
+                "sector": _sector_from_theme(theme, concept),
+                "market_group": market_group,
+                "theme": theme,
+                "price": _json_number(stock.get("close"), 0),
+                "change_percent": change,
+                "volume": _json_number(stock.get("volume_value"), 0),
+                "volume_ratio": 0,
+                "is_limit_up": change >= 9,
+                "score": _json_number(stock.get("score_value"), 0),
+                "reason": str(stock.get("reason", "依全市場候選股分數、量能與題材歸屬排序")).strip(),
+                "source_type": "market_objective",
+            }
+        )
+    return items
+
+
+def _dashboard_themes(stocks: list[dict[str, object]]) -> tuple[list[dict[str, object]], list[dict[str, object]]]:
+    groups: dict[str, list[dict[str, object]]] = {}
+    for stock in stocks:
+        theme = _first_theme(stock.get("concept", ""))
+        groups.setdefault(theme, []).append(stock)
+
+    theme_items: list[dict[str, object]] = []
+    for theme, group in groups.items():
+        scores = [_json_number(stock.get("score_value"), 0) for stock in group]
+        changes = [_json_number(stock.get("daily_change"), 0) for stock in group]
+        volumes = [_json_number(stock.get("volume_value"), 0) for stock in group]
+        score = round((sum(scores) / len(scores) if scores else 0) + min(len(group), 5) * 2, 2)
+        avg_change = round(sum(changes) / len(changes), 2) if changes else 0
+        up_count = sum(1 for value in changes if value > 0)
+        limit_up_count = sum(1 for value in changes if value >= 9)
+        representatives = sorted(group, key=lambda stock: _json_number(stock.get("score_value"), 0), reverse=True)[:5]
+        concept_text = " ".join(str(stock.get("concept", "")) for stock in group)
+        sector = _sector_from_theme(theme, concept_text)
+        market_group = _market_group_from_text(concept_text)
+        theme_items.append(
+            {
+                "rank": 0,
+                "theme": theme,
+                "sector": sector,
+                "market_group": market_group,
+                "score": score,
+                "change_percent_avg": avg_change,
+                "up_count": up_count,
+                "limit_up_count": limit_up_count,
+                "volume_status": "放量" if sum(volumes) >= 3000 else "觀察",
+                "stocks": [f"{stock.get('code', '')} {stock.get('name', '')}".strip() for stock in representatives],
+                "reason": "依全市場候選股分數、量能與題材同步性彙整",
+                "signal": "強勢" if score >= 80 else ("轉強" if score >= 60 else "觀察"),
+            }
+        )
+    theme_items.sort(key=lambda item: _json_number(item.get("score"), 0), reverse=True)
+    for rank, item in enumerate(theme_items, start=1):
+        item["rank"] = rank
+
+    sector_groups: dict[str, list[dict[str, object]]] = {}
+    for item in theme_items:
+        sector_groups.setdefault(str(item["sector"]), []).append(item)
+    sector_summary: list[dict[str, object]] = []
+    for sector, items in sector_groups.items():
+        avg_change = round(sum(_json_number(item.get("change_percent_avg"), 0) for item in items) / len(items), 2)
+        score = sum(_json_number(item.get("score"), 0) for item in items) / len(items)
+        sector_summary.append(
+            {
+                "sector": sector,
+                "status": "轉強" if score >= 70 else "觀察",
+                "change_percent": avg_change,
+                "themes": [str(item.get("theme", "")) for item in items[:5]],
+                "stocks": [stock for item in items[:3] for stock in item.get("stocks", [])[:2]],
+                "reason": "依題材強度、代表股與候選股同步性彙整",
+            }
+        )
+    sector_summary.sort(key=lambda item: _json_number(item.get("change_percent"), 0), reverse=True)
+    return theme_items[:20], sector_summary[:8]
+
+
+def _dashboard_international_risks(data_dir: Path) -> list[dict[str, object]]:
+    events = _read_json_file(data_dir / "news-events.json", [])
+    if not isinstance(events, list):
+        return []
+    risks: list[dict[str, object]] = []
+    for event in events:
+        if not isinstance(event, dict):
+            continue
+        region = f"{event.get('region', '')} {event.get('news_region', '')}"
+        if "國際" not in region:
+            continue
+        url = event.get("url") or event.get("source_url") or ""
+        risks.append(
+            {
+                "title": event.get("title", "未命名國際事件"),
+                "impact": event.get("impact", "中性"),
+                "related_markets": event.get("related_keywords") or event.get("category") or [],
+                "reason": event.get("summary") or event.get("asurada_analysis") or event.get("logic") or "需觀察是否影響台股相關族群",
+                "source_name": event.get("source_name", "來源未標示"),
+                "url": url if _is_valid_public_url(url) else "",
+            }
+        )
+    return risks[:5]
+
+
+def write_home_dashboard_data(site_dir: Path = SITE_DIR) -> list[Path]:
+    data_dir = site_dir / "data"
+    data_dir.mkdir(parents=True, exist_ok=True)
+    now = _taipei_now()
+    updated_at = now.strftime("%Y-%m-%d %H:%M Asia/Taipei")
+    date_text = now.strftime("%Y-%m-%d")
+    stocks_raw = _read_json_file(data_dir / "stocks-latest.json", [])
+    stocks = stocks_raw if isinstance(stocks_raw, list) else []
+    hot_stocks = _dashboard_hot_stocks(stocks)
+    hot_themes, sector_summary = _dashboard_themes(stocks)
+    snapshot = {
+        "date": date_text,
+        "session": _market_session(now),
+        "updated_at": updated_at,
+        "next_update_at": "依 GitHub Actions 排程更新",
+        "source_type": "market_objective",
+        "taiex": "資料待補",
+        "taiex_change": "資料待補",
+        "taiex_change_percent": "資料待補",
+        "turnover": "資料待補",
+        "up_count": "資料待補",
+        "down_count": "資料待補",
+        "limit_up_count": sum(1 for item in hot_stocks if item.get("is_limit_up")),
+        "limit_down_count": "資料待補",
+        "market_status": "依全市場候選股、題材同步性與新聞風險自動彙整；大盤即時數值待後續資料源補強。",
+        "fund_flow": "依題材候選股分布推估市場資金焦點，未納入個人持股或自選股。",
+        "international_risks": _dashboard_international_risks(data_dir),
+        "tomorrow_conditions": [
+            "若權值股續弱且國際科技股修正，指數壓力仍需觀察。",
+            "若強勢題材隔日量能延續，短線資金仍可能輪動。",
+            "若候選股開高走低或量縮，視為短線退潮訊號。",
+            "若外資續賣權值股，指數反彈力道會受壓抑。",
+        ],
+    }
+    hot_stocks_payload = {
+        "date": date_text,
+        "session": snapshot["session"],
+        "updated_at": updated_at,
+        "source_type": "market_objective",
+        "items": hot_stocks,
+    }
+    hot_themes_payload = {
+        "date": date_text,
+        "session": snapshot["session"],
+        "updated_at": updated_at,
+        "source_type": "market_objective",
+        "items": hot_themes,
+        "sector_summary": sector_summary,
+    }
+    outputs = [
+        (data_dir / "daily_market_snapshot.json", snapshot),
+        (data_dir / "daily_hot_stocks.json", hot_stocks_payload),
+        (data_dir / "daily_hot_themes.json", hot_themes_payload),
+    ]
+    for path, payload in outputs:
+        path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    return [path for path, _ in outputs]
 
 
 def _month_data_label(value: object) -> str:
