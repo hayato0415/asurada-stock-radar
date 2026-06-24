@@ -1,7 +1,7 @@
 const HOLDINGS_KEY = "asurada_holdings";
 const WATCHLIST_KEY = "asurada_watchlist";
-const BUILD_VERSION = "20260624-price-source";
-const APP_VERSION = "20260624-price-source";
+const BUILD_VERSION = "20260624-dashboard-v3";
+const APP_VERSION = "20260624-dashboard-v3";
 
 const state = {
   stocks: [],
@@ -1315,6 +1315,140 @@ function bindHomeFilters(hotThemes, hotStocks) {
   });
 }
 
+function homeJoinList(value, limit = 4) {
+  if (Array.isArray(value)) {
+    const items = value.map((item) => String(item || "").trim()).filter(Boolean).slice(0, limit);
+    return items.length ? items.join("、") : "-";
+  }
+  const text = String(value || "").trim();
+  return text || "-";
+}
+
+function homePanelTitle(title, data) {
+  return `
+    <div class="home-panel-title">
+      <h2>${escapeHtml(title)}</h2>
+      <span>${escapeHtml(dashboardUpdateText(data))}</span>
+    </div>
+  `;
+}
+
+function homeUpdateLine(snapshot, hotThemes, hotStocks) {
+  const source = snapshot.available ? snapshot : (hotThemes.available ? hotThemes : hotStocks);
+  const marketView = dashboardFirstValue(snapshot, ["market_status", "market_view", "interpretation", "status"]);
+  const text = marketView === "-" ? "盤勢資料尚未更新" : marketView;
+  return `
+    <section class="home-dashboard-panel home-brief">
+      <div>
+        <span class="home-kicker">${escapeHtml(dashboardUpdateText(source))}</span>
+        <strong>盤勢一句話</strong>
+      </div>
+      <p>${escapeHtml(text)}</p>
+    </section>
+  `;
+}
+
+function homeMarketOverview(snapshot) {
+  if (!snapshot.available) return dashboardEmpty("今日市場總覽資料尚未更新");
+  const metrics = [
+    ["台股收盤", dashboardNumber(dashboardFirstValue(snapshot, ["taiex", "close", "index_close"]), 2)],
+    ["漲跌點數", dashboardNumber(dashboardFirstValue(snapshot, ["taiex_change", "change_points", "change"]), 2)],
+    ["漲跌幅", dashboardPercent(dashboardFirstValue(snapshot, ["taiex_change_percent", "change_percent", "change_pct"]))],
+    ["成交值", dashboardFirstValue(snapshot, ["turnover", "turnover_value", "trading_value"])],
+    ["上漲家數", dashboardNumber(dashboardFirstValue(snapshot, ["up_count"]))],
+    ["下跌家數", dashboardNumber(dashboardFirstValue(snapshot, ["down_count"]))],
+    ["漲停家數", dashboardNumber(dashboardFirstValue(snapshot, ["limit_up_count"]))],
+    ["跌停家數", dashboardNumber(dashboardFirstValue(snapshot, ["limit_down_count"]))],
+  ];
+  return `<div class="home-market-grid">${metrics.map(([label, value]) => `<article><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></article>`).join("")}</div>`;
+}
+
+function homeThemeTopTable(data) {
+  const items = data.available ? data.items.slice(0, 5) : [];
+  if (!items.length) return dashboardEmpty("熱門題材資料尚未更新");
+  return `
+    <div class="table-wrap home-table-wrap">
+      <table class="home-dashboard-table">
+        <thead><tr><th>排名</th><th>題材</th><th>熱度分數</th><th>代表股</th><th>今日表現</th><th>催化原因</th><th>狀態</th></tr></thead>
+        <tbody>${items.map((item, index) => `
+          <tr>
+            <td>${escapeHtml(item.rank || index + 1)}</td>
+            <td>${escapeHtml(item.theme || "-")}</td>
+            <td class="home-number">${escapeHtml(dashboardNumber(item.score))}</td>
+            <td>${escapeHtml(homeJoinList(item.stocks, 5))}</td>
+            <td>${escapeHtml(`漲跌 ${dashboardPercent(item.change_percent_avg)}｜漲停 ${dashboardNumber(item.limit_up_count)}`)}</td>
+            <td>${escapeHtml(item.reason || "-")}</td>
+            <td>${escapeHtml(item.signal || item.status || item.volume_status || "-")}</td>
+          </tr>
+        `).join("")}</tbody>
+      </table>
+    </div>
+  `;
+}
+
+function homeAiStockTable(data) {
+  const items = data.available ? data.items.slice(0, 10) : [];
+  if (!items.length) return dashboardEmpty("AI選股觀察資料尚未更新");
+  return `
+    <div class="table-wrap home-table-wrap">
+      <table class="home-dashboard-table">
+        <thead><tr><th>排名</th><th>代號</th><th>名稱</th><th>題材</th><th>漲幅</th><th>量比</th><th>AI分數</th><th>觀察原因</th><th>風險</th></tr></thead>
+        <tbody>${items.map((item, index) => {
+          const code = normalizeCode(item.code);
+          const risk = item.risk || item.risk_tag || item.risk_tags || item.warning || (item.is_limit_up ? "漲停追價風險" : "-");
+          return `
+            <tr>
+              <td>${escapeHtml(item.rank || index + 1)}</td>
+              <td>${code ? `<a href="stock.html?code=${encodeURIComponent(code)}">${escapeHtml(code)}</a>` : "-"}</td>
+              <td>${escapeHtml(item.name || "-")}</td>
+              <td>${escapeHtml(item.theme || item.sector || "-")}</td>
+              <td class="home-number">${escapeHtml(dashboardPercent(item.change_percent))}</td>
+              <td class="home-number">${escapeHtml(dashboardNumber(item.volume_ratio, 2))}</td>
+              <td class="home-number">${escapeHtml(dashboardNumber(item.score))}</td>
+              <td>${escapeHtml(item.reason || "-")}</td>
+              <td>${escapeHtml(homeJoinList(risk, 3))}</td>
+            </tr>
+          `;
+        }).join("")}</tbody>
+      </table>
+    </div>
+  `;
+}
+
+function homeMajorNewsTable(data) {
+  const items = data.available ? [...data.items]
+    .sort((left, right) => {
+      const score = (item) => Number(item.priority || item.impact_score || 0) + (isRealSourceUrl(eventUrl(item)) ? 10 : 0);
+      return score(right) - score(left) || String(right.date || right.time || "").localeCompare(String(left.date || left.time || ""));
+    })
+    .slice(0, 5) : [];
+  if (!items.length) return dashboardEmpty("重大新聞資料尚未更新");
+  return `
+    <div class="table-wrap home-table-wrap">
+      <table class="home-dashboard-table home-news-table">
+        <thead><tr><th>時間</th><th>標題</th><th>影響題材</th><th>影響個股</th><th>來源</th></tr></thead>
+        <tbody>${items.map((item) => {
+          const url = eventUrl(item);
+          const title = escapeHtml(item.title || "未命名新聞");
+          const headline = isRealSourceUrl(url)
+            ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${title}</a>`
+            : `<span>${title}</span>`;
+          return `
+            <tr>
+              <td>${escapeHtml(item.time || item.date || "-")}</td>
+              <td>${headline}</td>
+              <td>${escapeHtml(homeJoinList(item.themes || item.category || item.related_keywords, 4))}</td>
+              <td>${escapeHtml(homeJoinList(item.stocks || item.related_stocks, 5))}</td>
+              <td>${escapeHtml(item.source || item.source_name || "-")}</td>
+            </tr>
+          `;
+        }).join("")}</tbody>
+      </table>
+    </div>
+    <div class="home-news-more"><a href="news.html">查看全部重大新聞</a></div>
+  `;
+}
+
 async function renderHome() {
   const main = $("#app");
   const [snapshotRaw, stocksRaw, themesRaw] = await Promise.all([
@@ -1979,10 +2113,44 @@ function renderCodeHits(selector, codes) {
   }).join("");
 }
 
+async function renderHomeDashboard() {
+  const main = $("#app");
+  const [snapshotRaw, stocksRaw, themesRaw, newsRaw] = await Promise.all([
+    loadJson("data/daily_market_snapshot.json", null),
+    loadJson("data/daily_hot_stocks.json", null),
+    loadJson("data/daily_hot_themes.json", null),
+    loadJson("data/news-events.json", null),
+  ]);
+  const snapshot = normalizeDashboardData(snapshotRaw);
+  const hotStocks = normalizeDashboardData(stocksRaw);
+  const hotThemes = normalizeDashboardData(themesRaw);
+  const majorNews = normalizeDashboardData(newsRaw);
+  warnDashboardQuality(snapshot, hotStocks, hotThemes, majorNews);
+  main.innerHTML = `
+    ${homeUpdateLine(snapshot, hotThemes, hotStocks)}
+    <section class="home-dashboard-panel">
+      ${homePanelTitle("今日市場總覽", snapshot)}
+      ${homeMarketOverview(snapshot)}
+    </section>
+    <section class="home-dashboard-panel">
+      ${homePanelTitle("熱門題材排行 Top 5", hotThemes)}
+      ${homeThemeTopTable(hotThemes)}
+    </section>
+    <section class="home-dashboard-panel">
+      ${homePanelTitle("AI選股觀察 Top 10", hotStocks)}
+      ${homeAiStockTable(hotStocks)}
+    </section>
+    <section class="home-dashboard-panel">
+      ${homePanelTitle("重大新聞 Top 5", majorNews)}
+      ${homeMajorNewsTable(majorNews)}
+    </section>
+  `;
+}
+
 async function boot(page) {
   renderHeader(page);
   if (page === "index") {
-    await renderHome();
+    await renderHomeDashboard();
     return;
   }
   await loadAllData();
