@@ -233,6 +233,7 @@ function masterRecord(code) {
     name: record.name || record.stock_name || record["股票名稱"] || "",
     market: record.market || record["市場"] || "",
     industry: record.industry || record.industry_code || record["產業別"] || "",
+    source_date: record.source_date || record.updated_at || record.date || "",
   };
 }
 
@@ -247,6 +248,46 @@ function knownStock(code) {
 function displayStockName(code) {
   const normalized = normalizeCode(code);
   return masterName(normalized) || "名稱待補";
+}
+
+function resolveStockQuery(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+  const codeCandidate = normalizeCode(raw);
+  if (/^\d{4}$/.test(codeCandidate)) return codeCandidate;
+  const normalizedName = raw.toLowerCase();
+  const masterEntries = Object.keys(state.master || {}).map((code) => {
+    const record = masterRecord(code);
+    return { code: normalizeCode(code), name: String(record?.name || "").trim() };
+  }).filter((item) => item.code && item.name);
+  const exact = masterEntries.find((item) => item.name.toLowerCase() === normalizedName);
+  if (exact) return exact.code;
+  const starts = masterEntries.find((item) => item.name.toLowerCase().startsWith(normalizedName));
+  if (starts) return starts.code;
+  const partial = masterEntries.find((item) => item.name.toLowerCase().includes(normalizedName));
+  if (partial) return partial.code;
+  const stockMatch = state.stocks.find((stock) => String(stock.name || "").toLowerCase().includes(normalizedName));
+  return stockMatch ? normalizeCode(stockMatch.code) : "";
+}
+
+function industryLabel(value) {
+  const raw = cleanDisplay(value);
+  if (raw === "—") return "產業待補";
+  const code = /^\d+$/.test(raw) ? raw.padStart(2, "0") : "";
+  if (code && TWSE_INDUSTRY_LABELS[code]) return TWSE_INDUSTRY_LABELS[code];
+  return raw;
+}
+
+function formatMasterDate(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+  const roc = raw.match(/^(\d{3})(\d{2})(\d{2})$/);
+  if (roc) return `${Number(roc[1]) + 1911}-${roc[2]}-${roc[3]}`;
+  return raw;
+}
+
+function stockUpdateText(stock, record) {
+  return cleanDisplay(stock?.data_version || stock?.market_date || formatMasterDate(record?.source_date));
 }
 
 function stockLabel(code) {
@@ -413,7 +454,6 @@ function externalLinks(code) {
   if (!normalized) return "";
   const links = [
     ["CMoney 概覽", `https://www.cmoney.tw/finance/${safeCode}/f00025`],
-    ["CMoney 營收", `https://www.cmoney.tw/finance/${safeCode}/f00029`],
     ["Yahoo 股市", `https://tw.stock.yahoo.com/quote/${safeCode}.TW`],
     ["PChome 股市", `https://pchome.megatime.com.tw/stock/sto0/ock1/sid${normalized}.html`],
   ];
@@ -868,8 +908,10 @@ function radarEvidenceTable(stocks, mode = "mid") {
 function stockRadarDetail(stock) {
   const labels = revenueLabels(stock);
   const rows = [
-    ["雷達排名", stock.rank],
-    ["雷達評分", radarScore(stock, "market")],
+    ["資料版本", stock.data_version],
+    ["行情日期", stock.market_date],
+    ["AI選股排名", stock.rank],
+    ["AI觀察分數", radarScore(stock, "market")],
     ["收盤價", displayClose(stock)],
     ["成交量", displayVolume(stock)],
     [labels.current, revenueAmount(stock)],
@@ -878,7 +920,7 @@ function stockRadarDetail(stock) {
   ];
   return `
     <div class="stock-info-card">
-      <h3>雷達資訊</h3>
+      <h3>價格與資料狀態</h3>
       <div class="chip-row trust-row">${trustBadge(stock)}</div>
       <div class="stock-info-grid">
         ${rows.map(([label, value]) => infoItem(label, value)).join("")}
@@ -887,9 +929,6 @@ function stockRadarDetail(stock) {
         <p><span class="label">價格資料</span>${escapeHtml(priceStatusLine(stock))}</p>
         <p><span class="label">資料來源狀態</span>${escapeHtml(trustSourceLine(stock))}</p>
         <p><span class="label">資料可信度說明</span>${escapeHtml(trustReasonText(stock))}</p>
-        <p><span class="label">概念股</span>${escapeHtml(cleanDisplay(stock.concept))}</p>
-        <p><span class="label">入選理由</span>${escapeHtml(cleanDisplay(stock.reason))}</p>
-        <p><span class="label">風險標籤</span>${escapeHtml(cleanDisplay(stock.risk_tags || "一般觀察"))}</p>
       </div>
     </div>
   `;
@@ -898,6 +937,9 @@ function stockRadarDetail(stock) {
 function stockMasterDetail(code, stock) {
   const record = masterRecord(code);
   const status = stock ? "命中今日雷達" : "今日未入選雷達";
+  const industry = industryLabel(record?.industry || stock?.industry || stock?.category);
+  const supplyChain = stock ? cleanDisplay(stock.business || stock.concept) : industry;
+  const relatedThemes = stock ? cleanDisplay(stock.concept) : "—";
   return `
     <div class="stock-info-card">
       <h3>基本資料</h3>
@@ -905,7 +947,9 @@ function stockMasterDetail(code, stock) {
         ${infoItem("股票代號", normalizeCode(code))}
         ${infoItem("股票名稱", record?.name || "名稱待補")}
         ${infoItem("市場別", record?.market)}
-        ${infoItem("產業別", record?.industry)}
+        ${infoItem("產業別", industry)}
+        ${infoItem("類股 / 供應鏈", supplyChain)}
+        ${infoItem("概念股相關", relatedThemes)}
         ${infoBadge("今日雷達狀態", status, stock ? "good" : "warn")}
       </div>
     </div>
@@ -2771,26 +2815,33 @@ function renderStock() {
   main.innerHTML = `
     <section class="panel">
       <div class="section-title"><h2>個股查詢</h2></div>
-      <div class="filters stock-search-form"><label>股票代號<input id="stockSearch" value="${escapeHtml(initialCode)}" placeholder="請輸入股票代號"></label></div>
+      <div class="filters stock-search-form"><label>股票代號 / 名稱<input id="stockSearch" value="${escapeHtml(initialCode)}" placeholder="請輸入股票代號或名稱"></label></div>
     </section>
     <section id="stockResult"></section>
   `;
   const render = () => {
-    const code = normalizeCode($("#stockSearch").value);
+    const query = $("#stockSearch").value;
+    const code = resolveStockQuery(query);
     const stock = stockByCode(code);
     const name = displayStockName(code);
+    if (!String(query || "").trim()) {
+      $("#stockResult").innerHTML = `<div class="empty">請輸入股票代號或名稱</div>`;
+      return;
+    }
     if (!code) {
-      $("#stockResult").innerHTML = `<div class="empty">請輸入股票代號</div>`;
+      $("#stockResult").innerHTML = `<div class="empty">找不到此股票代號或名稱，請確認是否輸入錯誤。</div>`;
       return;
     }
     if (!knownStock(code)) {
-      $("#stockResult").innerHTML = `<div class="empty">找不到此股票代號，請確認是否輸入錯誤。</div>`;
+      $("#stockResult").innerHTML = `<div class="empty">找不到此股票代號或名稱，請確認是否輸入錯誤。</div>`;
       return;
     }
+    const record = masterRecord(code);
+    const updateText = stockUpdateText(stock, record);
     if (!stock) {
       $("#stockResult").innerHTML = `
         <section class="panel">
-          <div class="section-title"><h2>${escapeHtml(code)} ${escapeHtml(name)}</h2>${chip("今日未入選雷達", "warn")}</div>
+          <div class="section-title"><h2>${escapeHtml(code)} ${escapeHtml(name)}</h2><span>更新日期：${escapeHtml(updateText)}</span>${chip("今日未入選雷達", "warn")}</div>
           ${stockMasterDetail(code, stock)}
           <p class="muted">尚無內部雷達資料。</p>
         </section>
@@ -2800,7 +2851,7 @@ function renderStock() {
       bindRevenueTabs();
       if (!state.revenueLoaded) {
         loadRevenueHistory().then(() => {
-          if (normalizeCode($("#stockSearch")?.value) === code) render();
+          if (resolveStockQuery($("#stockSearch")?.value) === code) render();
         });
       }
       return;
@@ -2810,11 +2861,10 @@ function renderStock() {
     const tech = state.technical[code];
     $("#stockResult").innerHTML = `
       <section class="panel">
-        <div class="section-title"><h2>${escapeHtml(code)} ${escapeHtml(name)}</h2>${chip("命中今日雷達", "good")}</div>
+        <div class="section-title"><h2>${escapeHtml(code)} ${escapeHtml(name)}</h2><span>更新日期：${escapeHtml(updateText)}</span>${chip("命中今日雷達", "good")}</div>
         ${stockMasterDetail(code, stock)}
         ${stockRadarDetail(stock)}
       </section>
-      <section class="panel"><div class="section-title"><h2>研究追蹤狀態</h2></div>${chip(cleanDisplay(stock.tracking_status || asuradaStance(stock)), "warn")}</section>
       ${revenuePanel(code)}
       <section class="panel"><div class="section-title"><h2>技術圖表</h2></div>${externalLinks(code)}</section>
       <section class="panel"><div class="section-title"><h2>相關重大新聞</h2></div>${relatedNews.length ? relatedNews.map(eventCard).join("") : `<div class="empty">目前沒有該股相關重大新聞</div>`}</section>
@@ -2824,7 +2874,7 @@ function renderStock() {
     bindRevenueTabs();
     if (!state.revenueLoaded) {
       loadRevenueHistory().then(() => {
-        if (normalizeCode($("#stockSearch")?.value) === code) render();
+        if (resolveStockQuery($("#stockSearch")?.value) === code) render();
       });
     }
   };
