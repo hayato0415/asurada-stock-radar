@@ -1,15 +1,19 @@
 {
-  "date": "2026-06-24",
-  "session": "盤後",
-  "updated_at": "2026-06-24 13:30 Asia/Taipei",
-  "build_version": "20260625-taiex-summary",
-  "app_version": "20260625-taiex-summary",
+  "date": "2026-06-25",
+  "session": "盤中",
+  "updated_at": "2026-06-25 11:39 Asia/Taipei",
+  "build_version": "20260624-marketflow-v2",
+  "app_version": "20260624-marketflow-v2",
   "next_update_at": "依 GitHub Actions 排程更新",
   "source_type": "twse_official",
   "taiex": 46043.6,
   "taiex_change": -1057.05,
   "taiex_change_percent": -2.24,
   "turnover": "15,390.46 億",
+  "up_count": "資料待補",
+  "down_count": "資料待補",
+  "limit_up_count": 0,
+  "limit_down_count": "資料待補",
   "market_status": "台股加權指數 2026-06-24 收 46,043.60，下跌 1,057.05 點，跌幅 2.24%。",
   "fund_flow": "依題材候選股分布推估市場資金焦點，未納入個人持股或自選股。",
   "international_risks": [
@@ -111,12 +115,13 @@
     "若外資續賣權值股，指數反彈力道會受壓抑。"
   ],
   "market_date": "2026-06-24",
-  "source_name": "臺灣證券交易所 FMTQIK",
-  "source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/FMTQIK?date=20260624&response=json",
   "turnover_billion": 15390.46,
   "turnover_value": 1539046268153,
   "previous_market_date": "2026-06-23",
   "previous_close": 47100.65,
   "previous_turnover_billion": 16723.55,
-  "previous_turnover_value": 1672355337665
+  "previous_turnover_value": 1672355337665,
+  "source_name": "臺灣證券交易所 FMTQIK",
+  "source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/FMTQIK?date=20260624&response=json",
+  "data_quality_warning": []
 }
