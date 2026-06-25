@@ -1719,6 +1719,42 @@ function radarStockSearchText(stock) {
   ].join(" ").toLowerCase();
 }
 
+function radarFormatTimestamp(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
+  const date = new Date(raw);
+  if (Number.isNaN(date.getTime())) return formatDashboardTime(raw);
+  const parts = new Intl.DateTimeFormat("zh-TW", {
+    timeZone: "Asia/Taipei",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(date).reduce((acc, part) => {
+    acc[part.type] = part.value;
+    return acc;
+  }, {});
+  return `${parts.year}-${parts.month}-${parts.day} ${parts.hour}:${parts.minute}`;
+}
+
+function radarLatestDataText(stocks, news) {
+  const timestamps = [];
+  stocks.forEach((stock) => {
+    if (stock.market_date) timestamps.push(`${stock.market_date}T00:00:00+08:00`);
+  });
+  news.forEach((event) => {
+    if (event.date) timestamps.push(event.date);
+  });
+  const latest = timestamps
+    .map((value) => ({ value, time: new Date(value).getTime() }))
+    .filter((item) => Number.isFinite(item.time))
+    .sort((a, b) => b.time - a.time)[0];
+  return latest ? `資料時間：${radarFormatTimestamp(latest.value)}` : "資料時間未標示";
+}
+
 function radarCleanThemeLabel(value) {
   const text = cleanDisplay(value);
   if (/^\d{2}$/.test(text)) return TWSE_INDUSTRY_LABELS[text] || `產業代碼 ${text}`;
@@ -1898,8 +1934,8 @@ function renderRadar() {
       <p class="mode-note">此頁改為題材與低基期觀察清單；目前以內部雷達資料與新聞題材資料彙整，完整 1,780 檔全市場資料會隨後續資料源補齊。</p>
     </section>
     <section class="panel ai-selection-panel">
-      <div class="section-title"><h2>五天最強題材股</h2><span id="themeStockCount"></span></div>
-      <p class="mode-note">依現有營收、成交量、題材與雷達分數暫代五日強弱排序；正式五日漲跌與量價資料待資料源補齊。</p>
+      <div class="section-title"><h2>近五個交易日最強題材股</h2><span id="themeStockCount"></span></div>
+      <p class="mode-note">近五個交易日會綜合新聞熱度、族群擴散、個股漲幅/量能與技術位置一起打分，避免只抓到當天煙火；目前缺少完整五日價量與技術資料時，先以現有營收、成交量、題材與新聞資料暫代。</p>
       <div id="themeStockList"></div>
     </section>
     <section class="panel ai-selection-panel">
@@ -1931,9 +1967,10 @@ function renderRadar() {
     const themeGroups = radarTopStocksByTheme(filteredStocks);
     const newsGroups = radarRecentNewsThemes(filteredNews);
     const lowBase = radarLowBaseStocks(filteredStocks);
-    $("#themeStockCount").textContent = `${themeGroups.length} 組題材`;
-    $("#newsThemeCount").textContent = `${newsGroups.length} 組題材`;
-    $("#lowBaseCount").textContent = `${lowBase.length} 檔`;
+    const dataTime = radarLatestDataText(filteredStocks, filteredNews);
+    $("#themeStockCount").textContent = `${dataTime}｜${themeGroups.length} 組題材`;
+    $("#newsThemeCount").textContent = `${dataTime}｜${newsGroups.length} 組題材`;
+    $("#lowBaseCount").textContent = `${dataTime}｜${lowBase.length} 檔`;
     $("#themeStockList").innerHTML = radarThemeGroupsTable(themeGroups);
     $("#newsThemeList").innerHTML = radarNewsThemesTable(newsGroups);
     $("#lowBaseList").innerHTML = radarLowBaseTable(lowBase);
