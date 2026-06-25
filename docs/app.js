@@ -2014,7 +2014,7 @@ function renderRadar() {
       <p class="mode-note">此頁改為題材與低基期觀察清單；股票名稱與市場別以官方上市、上櫃主檔為準，題材與觀察清單則依目前內部雷達資料與新聞題材資料彙整。</p>
     </section>
     <section class="panel ai-selection-panel">
-      <div class="section-title"><h2>近五個交易日最強題材股</h2><span id="themeStockCount"></span></div>
+      <div class="section-title"><h2>近五個交易日最強題材</h2><span id="themeStockCount"></span></div>
       <p class="mode-note">近五個交易日會綜合新聞熱度、族群擴散、個股漲幅/量能與技術位置一起打分，避免只抓到當天煙火；目前缺少完整五日價量與技術資料時，先以現有營收、成交量、題材與新聞資料暫代。</p>
       <div id="themeStockList"></div>
     </section>
