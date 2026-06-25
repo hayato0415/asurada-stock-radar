@@ -1,7 +1,7 @@
 const HOLDINGS_KEY = "asurada_holdings";
 const WATCHLIST_KEY = "asurada_watchlist";
-const BUILD_VERSION = "20260625-home-links";
-const APP_VERSION = "20260625-home-links";
+const BUILD_VERSION = "20260625-verified-themes";
+const APP_VERSION = "20260625-verified-themes";
 
 const state = {
   stocks: [],
@@ -1430,10 +1430,28 @@ function homeStockLinks(value, limit = 5) {
   return links.length ? links.join("、") : "-";
 }
 
+function homeThemeQuery(theme) {
+  const label = String(theme || "").trim();
+  const aliases = [
+    ["記憶體", "記憶體"],
+    ["DRAM", "記憶體"],
+    ["AI 伺服器", "AI伺服器"],
+    ["AI伺服器", "AI伺服器"],
+    ["滑軌", "AI伺服器"],
+    ["半導體", "半導體"],
+    ["AI 晶片", "半導體"],
+    ["航空", "航空"],
+    ["雲端", "雲端"],
+    ["算力", "AI伺服器"],
+  ];
+  const hit = aliases.find(([keyword]) => label.includes(keyword));
+  return hit ? hit[1] : label.split(/[／/|｜]/)[0].trim();
+}
+
 function homeThemeLink(theme) {
   const label = String(theme || "").trim() || "-";
   if (label === "-") return "-";
-  return `<a href="concepts.html?q=${encodeURIComponent(label)}">${escapeHtml(label)}</a>`;
+  return `<a href="concepts.html?q=${encodeURIComponent(homeThemeQuery(label))}">${escapeHtml(label)}</a>`;
 }
 
 function isExcludedHomeObservation(item) {
@@ -1507,14 +1525,17 @@ function homeMarketOverview(snapshot) {
 }
 
 function homeThemeTopTable(data) {
-  const items = data.available ? data.items.slice(0, 5) : [];
+  const sourceItems = Array.isArray(data.verified_hot_themes) && data.verified_hot_themes.length
+    ? data.verified_hot_themes
+    : data.items;
+  const items = data.available ? sourceItems.slice(0, 5) : [];
   if (!items.length) return dashboardEmpty("熱門題材資料尚未更新");
   const rows = items.map((item, index) => ({
     rank: item.rank || index + 1,
     theme: homeDisplayTheme(item),
-    strength: dashboardNumber(item.score),
+    strength: item.fund_strength || item.strength || dashboardNumber(item.score),
     leaders: item.stocks || [],
-    judge: homeFlowJudge(item),
+    judge: item.judgement || item.reason || homeFlowJudge(item),
   }));
   return `
     <p class="home-section-note">當下最新交叉核對盤中資金流、類股漲跌、漲停與強勢股，再整理出最強題材前五。</p>
@@ -1576,6 +1597,46 @@ function homeAiStockTable(data) {
           </article>
         `;
       }).join("")}
+    </div>
+  `;
+}
+
+function homeThreeDayThemeTable(data) {
+  const items = data.available && Array.isArray(data.three_day_limit_themes)
+    ? data.three_day_limit_themes.slice(0, 10)
+    : [];
+  if (!items.length) return dashboardEmpty("前三天漲停題材統計尚未建立");
+  const rows = items.map((item, index) => ({
+    rank: item.rank || index + 1,
+    theme: item.theme || "-",
+    limitCount: item.limit_up_count_3d ?? item.limit_up_count ?? "-",
+    stocks: item.stocks || [],
+    judgement: item.judgement || item.reason || "-",
+  }));
+  return `
+    <p class="home-section-note">依前三個交易日漲停最多的題材排序，並列出目前資料庫可辨識的相關概念股。</p>
+    <div class="table-wrap home-table-wrap home-desktop-only">
+      <table class="home-dashboard-table">
+        <thead><tr><th>排名</th><th>題材</th><th>三日漲停統計</th><th>相關概念股</th><th>判斷</th></tr></thead>
+        <tbody>${rows.map((item) => `
+          <tr>
+            <td>${escapeHtml(item.rank)}</td>
+            <td>${homeThemeLink(item.theme)}</td>
+            <td class="home-number">${escapeHtml(item.limitCount)}</td>
+            <td>${homeStockLinks(item.stocks, 20)}</td>
+            <td>${escapeHtml(item.judgement)}</td>
+          </tr>
+        `).join("")}</tbody>
+      </table>
+    </div>
+    <div class="home-mobile-cards">
+      ${rows.map((item) => `
+        <article>
+          <div><strong>${escapeHtml(item.rank)}. ${homeThemeLink(item.theme)}</strong><span>三日漲停 ${escapeHtml(item.limitCount)}</span></div>
+          <p><b>相關概念股</b>${homeStockLinks(item.stocks, 20)}</p>
+          <p><b>判斷</b>${escapeHtml(item.judgement)}</p>
+        </article>
+      `).join("")}
     </div>
   `;
 }
@@ -2297,12 +2358,12 @@ async function renderHomeDashboard() {
       ${homeMarketOverview(snapshot)}
     </section>
     <section class="home-dashboard-panel">
-      ${homePanelTitle("熱門題材排行 Top 5", hotThemes)}
+      ${homePanelTitle("今日最強題材 Top 5", hotThemes)}
       ${homeThemeTopTable(hotThemes)}
     </section>
     <section class="home-dashboard-panel">
-      ${homePanelTitle("AI選股觀察 Top 10", hotStocks)}
-      ${homeAiStockTable(hotStocks)}
+      ${homePanelTitle("前三天最強題材", hotThemes)}
+      ${homeThreeDayThemeTable(hotThemes)}
     </section>
     <section class="home-dashboard-panel">
       ${homePanelTitle("重大新聞 Top 5", majorNews)}

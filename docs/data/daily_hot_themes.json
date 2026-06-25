@@ -5,6 +5,169 @@
   "build_version": "20260624-marketflow-v2",
   "app_version": "20260624-marketflow-v2",
   "source_type": "market_objective",
+  "verified_hot_themes": [
+    {
+      "rank": 1,
+      "theme": "記憶體 / DRAM",
+      "fund_strength": "★★★★★",
+      "stocks": [
+        "2344 華邦電",
+        "2408 南亞科",
+        "2337 旺宏",
+        "3006 晶豪科",
+        "2363 矽統"
+      ],
+      "judgement": "美光財報優於預期帶動記憶體族群反彈，華邦電、南亞科等台廠成為盤中擴散主軸。",
+      "sources": [
+        {
+          "name": "Goodinfo 台股盤中排行",
+          "url": "https://goodinfo.tw/tw/index.asp"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "theme": "AI伺服器零組件 / 滑軌 / 機構件",
+      "fund_strength": "★★★★★",
+      "stocks": [
+        "6584 南俊國際",
+        "2415 錩新",
+        "2059 川湖",
+        "2382 廣達",
+        "3231 緯創"
+      ],
+      "judgement": "AI伺服器滑軌與機構件出貨題材帶動資金攻擊，南俊國際、錩新為代表觀察股。",
+      "sources": [
+        {
+          "name": "Goodinfo 台股盤中排行",
+          "url": "https://goodinfo.tw/tw/index.asp"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "theme": "權值半導體 / AI晶片",
+      "fund_strength": "★★★★☆",
+      "stocks": [
+        "2330 台積電",
+        "2454 聯發科",
+        "3443 創意",
+        "3661 世芯-KY",
+        "3034 聯詠"
+      ],
+      "judgement": "台積電與聯發科帶動指數反彈，屬於撐指數與AI晶片評價主軸。",
+      "sources": [
+        {
+          "name": "Goodinfo 台股盤中排行",
+          "url": "https://goodinfo.tw/tw/index.asp"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "theme": "航空 / 油價回落 / 客貨雙旺",
+      "fund_strength": "★★★★☆",
+      "stocks": [
+        "2610 華航",
+        "2618 長榮航",
+        "6757 台灣虎航"
+      ],
+      "judgement": "油價回落、暑期客運旺季與AI/半導體高附加價值空運需求延續，華航股價創15個月新高。",
+      "sources": [
+        {
+          "name": "鉅亨網",
+          "url": "https://news.cnyes.com/news/id/6511463?utm_medium=NewsApi&utm_source=RWtaTXdQNjF2MkRWZDBscg%3D%3D"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "theme": "AI算力 / 雲端題材",
+      "fund_strength": "★★★☆☆",
+      "stocks": [
+        "2357 華碩",
+        "2382 廣達",
+        "6669 緯穎",
+        "3231 緯創",
+        "3022 威強電"
+      ],
+      "judgement": "華碩旗下台智雲超級電腦題材具熱度，但盤中攻擊性低於記憶體與AI零組件。",
+      "sources": [
+        {
+          "name": "Goodinfo 台股盤中排行",
+          "url": "https://goodinfo.tw/tw/index.asp"
+        }
+      ]
+    }
+  ],
+  "three_day_limit_themes": [
+    {
+      "rank": 1,
+      "theme": "記憶體 / DRAM",
+      "limit_up_count_3d": "待自動統計",
+      "stocks": [
+        "2344 華邦電",
+        "2408 南亞科",
+        "2337 旺宏",
+        "3006 晶豪科",
+        "2363 矽統",
+        "4967 十銓"
+      ],
+      "judgement": "先列入三日漲停題材觀察池，待自動統計補入近三日漲停家數。"
+    },
+    {
+      "rank": 2,
+      "theme": "AI伺服器零組件 / 滑軌 / 機構件",
+      "limit_up_count_3d": "待自動統計",
+      "stocks": [
+        "6584 南俊國際",
+        "2415 錩新",
+        "2059 川湖",
+        "2382 廣達",
+        "3231 緯創",
+        "6669 緯穎"
+      ],
+      "judgement": "AI伺服器機構件與滑軌列入三日漲停題材觀察池。"
+    },
+    {
+      "rank": 3,
+      "theme": "權值半導體 / AI晶片",
+      "limit_up_count_3d": "待自動統計",
+      "stocks": [
+        "2330 台積電",
+        "2454 聯發科",
+        "3443 創意",
+        "3661 世芯-KY",
+        "3034 聯詠",
+        "2379 瑞昱"
+      ],
+      "judgement": "權值半導體偏指數支撐與AI晶片評價題材，等待三日漲停統計確認攻擊性。"
+    },
+    {
+      "rank": 4,
+      "theme": "航空 / 油價回落 / 客貨雙旺",
+      "limit_up_count_3d": "待自動統計",
+      "stocks": [
+        "2610 華航",
+        "2618 長榮航",
+        "6757 台灣虎航"
+      ],
+      "judgement": "航空題材受油價與暑期客貨需求帶動，列入非電子三日強勢觀察。"
+    },
+    {
+      "rank": 5,
+      "theme": "AI算力 / 雲端題材",
+      "limit_up_count_3d": "待自動統計",
+      "stocks": [
+        "2357 華碩",
+        "2382 廣達",
+        "6669 緯穎",
+        "3231 緯創",
+        "3022 威強電"
+      ],
+      "judgement": "AI算力與雲端基建列入三日題材追蹤，需等待自動統計確認是否轉為主攻族群。"
+    }
+  ],
   "items": [
     {
       "rank": 1,
