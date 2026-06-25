@@ -1,7 +1,7 @@
 const HOLDINGS_KEY = "asurada_holdings";
 const WATCHLIST_KEY = "asurada_watchlist";
-const BUILD_VERSION = "20260625-verified-themes";
-const APP_VERSION = "20260625-verified-themes";
+const BUILD_VERSION = "20260625-theme-top5-json";
+const APP_VERSION = "20260625-theme-top5-json";
 
 const state = {
   stocks: [],
@@ -13,6 +13,7 @@ const state = {
   profiles: {},
   master: {},
   hotThemes: { date: "", updated_at: "", items: [], available: false },
+  themeTop5: { date: "", updated_at: "", items: [], available: false },
   monthlyRevenue: [],
   quarterlyRevenue: [],
   revenueLoaded: false,
@@ -189,7 +190,7 @@ async function loadRevenueHistory() {
 }
 
 async function loadAllData() {
-  const [stocks, news, themes, concepts, themeCandidates, technical, profiles, master, dailyHotThemes] = await Promise.all([
+  const [stocks, news, themes, concepts, themeCandidates, technical, profiles, master, dailyHotThemes, themeTop5] = await Promise.all([
     loadJson("data/stocks-latest.json", []),
     loadJson("data/news-events.json", []),
     loadJson("data/themes-map.json", {}),
@@ -199,6 +200,7 @@ async function loadAllData() {
     loadJson("data/stock-profiles.json", {}),
     loadJson("data/stock-master.json", {}),
     loadJson("data/daily_hot_themes.json", null),
+    loadJson("data/theme-top5.json", null),
   ]);
   state.stocks = Array.isArray(stocks) ? stocks : [];
   state.news = Array.isArray(news) ? news : [];
@@ -211,6 +213,7 @@ async function loadAllData() {
   state.profiles = profiles && typeof profiles === "object" ? profiles : {};
   state.master = master && typeof master === "object" ? master : {};
   state.hotThemes = normalizeDashboardData(dailyHotThemes);
+  state.themeTop5 = normalizeDashboardData(themeTop5);
 }
 
 function stockByCode(code) {
@@ -1883,50 +1886,67 @@ function radarStockLinks(stocks, limit = 5) {
   return links.length ? links.join("、") : "-";
 }
 
-function radarVerifiedThemeItems(data = state.hotThemes) {
-  if (!data?.available) return [];
-  const source = Array.isArray(data.five_day_strong_themes) && data.five_day_strong_themes.length
-    ? data.five_day_strong_themes
-    : (Array.isArray(data.verified_hot_themes) && data.verified_hot_themes.length
-      ? data.verified_hot_themes
-      : (Array.isArray(data.three_day_limit_themes) && data.three_day_limit_themes.length ? data.three_day_limit_themes : data.items));
-  return source.slice(0, 5).map((item, index) => ({
+function radarTop5ThemeItems(data = state.themeTop5) {
+  if (!data?.available || !Array.isArray(data.items)) return [];
+  return data.items.slice(0, 5).map((item, index) => ({
     rank: item.rank || index + 1,
-    theme: item.theme || item.category || "-",
-    strength: item.fund_strength || item.score || item.limit_up_count_3d || "-",
-    stocks: item.stocks || item.related_stocks || [],
-    judgement: item.judgement || item.reason || item.signal || "依已核對題材資料彙整",
-    sources: item.sources || [],
+    theme: item.theme || "-",
+    score: item.score ?? "-",
+    status: item.status || "",
+    stocks: item.stocks || [],
+    evidence: item.evidence && typeof item.evidence === "object" ? item.evidence : {},
+    conclusion: item.conclusion || "",
   }));
 }
 
-function radarVerifiedThemeSearchText(item) {
+function radarTop5ThemeSearchText(item) {
   return [
     item.theme,
-    item.strength,
-    item.judgement,
-    ...(item.stocks || []),
-    ...(item.sources || []).map((source) => source.name || ""),
+    item.score,
+    item.status,
+    item.conclusion,
+    ...(item.stocks || []).map((stock) => `${stock.code || ""} ${stock.name || ""}`),
+    ...Object.values(item.evidence || {}),
   ].join(" ").toLowerCase();
 }
 
-function radarVerifiedThemeTable(items) {
-  if (!items.length) return `<div class="empty">五日內最強題材資料尚未更新</div>`;
-  const rows = items.map((item, index) => `
-    <tr>
-      <td class="cell-number">${escapeHtml(item.rank || index + 1)}</td>
-      <td>${radarThemeLink(item.theme)}</td>
-      <td class="cell-number">${escapeHtml(item.strength || "-")}</td>
-      <td>${radarStockLinks(item.stocks, 5)}</td>
-      <td>${escapeHtml(item.judgement || "-")}</td>
-    </tr>
+function radarThemeEvidenceList(evidence = {}) {
+  const fields = [
+    ["新聞面", evidence.news],
+    ["技術面", evidence.technical],
+    ["漲跌面", evidence.price],
+    ["資金面", evidence.flow],
+    ["基本面 / 產業催化", evidence.fundamental],
+  ];
+  return fields.map(([label, text]) => `
+    <div class="theme-evidence-item">
+      <strong>${escapeHtml(label)}</strong>
+      <span>${escapeHtml(text || "資料待補")}</span>
+    </div>
   `).join("");
+}
+
+function radarTop5ThemeCards(items) {
+  if (!items.length) return `<div class="empty">五日內最強題材資料尚未更新</div>`;
   return `
-    <div class="table-wrap ai-selection-table-wrap">
-      <table class="ai-selection-table">
-        <thead><tr><th>排名</th><th>題材</th><th>綜合強度</th><th>代表個股</th><th>多面向判斷</th></tr></thead>
-        <tbody>${rows}</tbody>
-      </table>
+    <div class="theme-top5-grid">
+      ${items.map((item) => `
+        <article class="theme-top5-card">
+          <div class="theme-top5-head">
+            <div>
+              <span class="theme-rank">#${escapeHtml(item.rank)}</span>
+              <h3>${radarThemeLink(item.theme)}</h3>
+            </div>
+            <div class="theme-score">
+              <strong>${escapeHtml(item.score)}</strong>
+              <span>${escapeHtml(item.status || "觀察")}</span>
+            </div>
+          </div>
+          <div class="theme-stock-row">${radarStockLinks(item.stocks, 8)}</div>
+          <div class="theme-evidence-grid">${radarThemeEvidenceList(item.evidence)}</div>
+          <p class="theme-conclusion"><strong>結論</strong>${escapeHtml(item.conclusion || "資料待補")}</p>
+        </article>
+      `).join("")}
     </div>
   `;
 }
@@ -2015,7 +2035,7 @@ function renderRadar() {
     </section>
     <section class="panel ai-selection-panel">
       <div class="section-title"><h2>五日內最強題材 TOP 5</h2><span id="themeStockCount"></span></div>
-      <p class="mode-note">以近五個交易日為觀察區間，綜合新聞面、技術面、漲跌面、量能面與族群擴散一起評估，避免只抓到單日煙火。</p>
+      <p class="mode-note">選出前五強後，拆成新聞面、技術面、漲跌面、資金面、基本面 / 產業催化，讓盤面依據一眼看懂。</p>
       <div id="themeStockList"></div>
     </section>
     <section class="panel ai-selection-panel">
@@ -2044,8 +2064,8 @@ function renderRadar() {
       if (search && !haystack.includes(search)) return false;
       return true;
     });
-    const verifiedThemes = radarVerifiedThemeItems().filter((item) => {
-      const haystack = radarVerifiedThemeSearchText(item);
+    const top5Themes = radarTop5ThemeItems().filter((item) => {
+      const haystack = radarTop5ThemeSearchText(item);
       if (search && !haystack.includes(search)) return false;
       if (concept && !haystack.includes(concept)) return false;
       return true;
@@ -2053,10 +2073,11 @@ function renderRadar() {
     const newsGroups = radarRecentNewsThemes(filteredNews);
     const lowBase = radarLowBaseStocks(filteredStocks);
     const dataTime = state.hotThemes?.available ? dashboardUpdateText(state.hotThemes) : radarLatestDataText(filteredStocks, filteredNews);
-    $("#themeStockCount").textContent = `${dataTime}｜${verifiedThemes.length} 組題材`;
+    const top5Time = state.themeTop5?.updated_at || state.themeTop5?.date ? `${dashboardUpdateText(state.themeTop5)}｜` : "";
+    $("#themeStockCount").textContent = `${top5Time}${top5Themes.length} 組題材`;
     $("#newsThemeCount").textContent = `${dataTime}｜${newsGroups.length} 組題材`;
     $("#lowBaseCount").textContent = `${dataTime}｜${lowBase.length} 檔`;
-    $("#themeStockList").innerHTML = radarVerifiedThemeTable(verifiedThemes);
+    $("#themeStockList").innerHTML = radarTop5ThemeCards(top5Themes);
     $("#newsThemeList").innerHTML = radarNewsThemesTable(newsGroups);
     $("#lowBaseList").innerHTML = radarLowBaseTable(lowBase);
   };

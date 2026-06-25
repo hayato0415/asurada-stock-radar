@@ -435,6 +435,93 @@ a { color: inherit; }
   border-radius: 14px;
   overflow-x: auto;
 }
+.radar-page .theme-top5-grid {
+  display: grid;
+  gap: 14px;
+}
+.radar-page .theme-top5-card {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px;
+}
+.radar-page .theme-top5-head {
+  align-items: flex-start;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+.radar-page .theme-top5-head h3 {
+  font-size: 20px;
+  line-height: 1.35;
+  margin: 4px 0 0;
+}
+.radar-page .theme-rank {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 900;
+}
+.radar-page .theme-score {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 14px;
+  min-width: 88px;
+  padding: 8px 10px;
+  text-align: center;
+}
+.radar-page .theme-score strong {
+  color: var(--accent);
+  display: block;
+  font-size: 24px;
+  line-height: 1;
+}
+.radar-page .theme-score span {
+  color: var(--muted);
+  display: block;
+  font-size: 12px;
+  font-weight: 900;
+  margin-top: 4px;
+}
+.radar-page .theme-stock-row {
+  border-top: 1px solid var(--line);
+  margin-top: 12px;
+  padding-top: 12px;
+}
+.radar-page .theme-evidence-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 12px;
+}
+.radar-page .theme-evidence-item {
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+.radar-page .theme-evidence-item strong {
+  color: #1f2f46;
+  display: block;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+.radar-page .theme-evidence-item span {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.radar-page .theme-conclusion {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 12px;
+  color: #7c2d12;
+  line-height: 1.6;
+  margin: 12px 0 0;
+  padding: 10px 12px;
+}
+.radar-page .theme-conclusion strong {
+  margin-right: 8px;
+}
 input,
 select,
 textarea {
@@ -1273,6 +1360,19 @@ tr:nth-child(even) { background: #f8fafc; }
     display: block;
     overflow: visible;
     white-space: normal;
+  }
+  .radar-page .theme-top5-card {
+    padding: 13px;
+  }
+  .radar-page .theme-top5-head {
+    flex-direction: column;
+  }
+  .radar-page .theme-score {
+    min-width: 0;
+    width: 100%;
+  }
+  .radar-page .theme-evidence-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
   table {
     min-width: 900px;
