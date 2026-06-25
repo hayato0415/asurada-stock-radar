@@ -1,7 +1,7 @@
 const HOLDINGS_KEY = "asurada_holdings";
 const WATCHLIST_KEY = "asurada_watchlist";
-const BUILD_VERSION = "20260625-market-breadth";
-const APP_VERSION = "20260625-market-breadth";
+const BUILD_VERSION = "20260625-home-flow-cards";
+const APP_VERSION = "20260625-home-flow-cards";
 
 const state = {
   stocks: [],
@@ -1374,6 +1374,42 @@ function homeJoinList(value, limit = 4) {
   return text || "-";
 }
 
+function homeFlowJudge(item) {
+  const signal = item.signal || item.status || item.volume_status || "";
+  const limitUp = toNumber(item.limit_up_count);
+  const change = toNumber(item.change_percent_avg ?? item.change_percent);
+  const parts = [];
+  if (dashboardHasValue(signal)) parts.push(signal);
+  if (Number.isFinite(limitUp) && limitUp > 0) parts.push(`漲停 ${dashboardNumber(limitUp)}`);
+  if (Number.isFinite(change) && change !== 0) parts.push(`漲跌 ${dashboardPercent(change)}`);
+  return parts.length ? parts.join("｜") : "觀察";
+}
+
+function homeStockFlowGroups(data) {
+  const items = data.available ? data.items : [];
+  const groups = new Map();
+  items.forEach((item) => {
+    const key = `${item.sector || item.market_group || "未分類"}|${item.theme || "題材未標示"}`;
+    const current = groups.get(key) || {
+      sector: item.sector || item.market_group || "未分類",
+      theme: item.theme || "題材未標示",
+      score: 0,
+      stocks: [],
+      reasons: [],
+    };
+    current.score = Math.max(current.score, toNumber(item.score) || 0);
+    if (current.stocks.length < 5) {
+      const code = normalizeCode(item.code);
+      current.stocks.push(code ? `${code} ${item.name || ""}`.trim() : item.name || "-");
+    }
+    if (dashboardHasValue(item.reason) && current.reasons.length < 2) current.reasons.push(item.reason);
+    groups.set(key, current);
+  });
+  return [...groups.values()]
+    .sort((left, right) => right.score - left.score)
+    .slice(0, 10);
+}
+
 function homePanelTitle(title, data) {
   return `
     <div class="home-panel-title">
@@ -1405,51 +1441,73 @@ function homeMarketOverview(snapshot) {
 function homeThemeTopTable(data) {
   const items = data.available ? data.items.slice(0, 5) : [];
   if (!items.length) return dashboardEmpty("熱門題材資料尚未更新");
+  const rows = items.map((item, index) => ({
+    rank: item.rank || index + 1,
+    theme: item.theme || "-",
+    strength: dashboardNumber(item.score),
+    leaders: homeJoinList(item.stocks, 5),
+    judge: homeFlowJudge(item),
+  }));
   return `
-    <div class="table-wrap home-table-wrap">
+    <p class="home-section-note">當下最新交叉核對盤中資金流、類股漲跌、漲停與強勢股，再整理出最強題材前五。</p>
+    <div class="table-wrap home-table-wrap home-desktop-only">
       <table class="home-dashboard-table">
-        <thead><tr><th>排名</th><th>題材</th><th>熱度分數</th><th>代表股</th><th>今日表現</th><th>催化原因</th><th>狀態</th></tr></thead>
-        <tbody>${items.map((item, index) => `
+        <thead><tr><th>排名</th><th>題材</th><th>資金強度</th><th>最強代表股</th><th>判斷</th></tr></thead>
+        <tbody>${rows.map((item) => `
           <tr>
-            <td>${escapeHtml(item.rank || index + 1)}</td>
-            <td>${escapeHtml(item.theme || "-")}</td>
-            <td class="home-number">${escapeHtml(dashboardNumber(item.score))}</td>
-            <td>${escapeHtml(homeJoinList(item.stocks, 5))}</td>
-            <td>${escapeHtml(`漲跌 ${dashboardPercent(item.change_percent_avg)}｜漲停 ${dashboardNumber(item.limit_up_count)}`)}</td>
-            <td>${escapeHtml(item.reason || "-")}</td>
-            <td>${escapeHtml(item.signal || item.status || item.volume_status || "-")}</td>
+            <td>${escapeHtml(item.rank)}</td>
+            <td>${escapeHtml(item.theme)}</td>
+            <td class="home-number">${escapeHtml(item.strength)}</td>
+            <td>${escapeHtml(item.leaders)}</td>
+            <td>${escapeHtml(item.judge)}</td>
           </tr>
         `).join("")}</tbody>
       </table>
+    </div>
+    <div class="home-mobile-cards">
+      ${rows.map((item) => `
+        <article>
+          <div><strong>${escapeHtml(item.rank)}. ${escapeHtml(item.theme)}</strong><span>資金強度 ${escapeHtml(item.strength)}</span></div>
+          <p><b>最強代表股</b>${escapeHtml(item.leaders)}</p>
+          <p><b>判斷</b>${escapeHtml(item.judge)}</p>
+        </article>
+      `).join("")}
     </div>
   `;
 }
 
 function homeAiStockTable(data) {
-  const items = data.available ? data.items.slice(0, 10) : [];
+  const items = homeStockFlowGroups(data);
   if (!items.length) return dashboardEmpty("AI選股觀察資料尚未更新");
   return `
-    <div class="table-wrap home-table-wrap">
+    <p class="home-section-note">當下最新交叉核對盤中資金流、類股漲跌、漲停與強勢股，再整理出最強資金方向和代表個股。</p>
+    <div class="table-wrap home-table-wrap home-desktop-only">
       <table class="home-dashboard-table">
-        <thead><tr><th>排名</th><th>代號</th><th>名稱</th><th>題材</th><th>漲幅</th><th>量比</th><th>AI分數</th><th>觀察原因</th><th>風險</th></tr></thead>
+        <thead><tr><th>產業別</th><th>題材</th><th>最強代表股(5檔)</th><th>阿斯拉評語</th></tr></thead>
         <tbody>${items.map((item, index) => {
-          const code = normalizeCode(item.code);
-          const risk = item.risk || item.risk_tag || item.risk_tags || item.warning || (item.is_limit_up ? "漲停追價風險" : "-");
+          const comment = item.reasons.length ? item.reasons.join("；") : `依候選股分數與量能同步性排序，第 ${index + 1} 組資金方向。`;
           return `
             <tr>
-              <td>${escapeHtml(item.rank || index + 1)}</td>
-              <td>${code ? `<a href="stock.html?code=${encodeURIComponent(code)}">${escapeHtml(code)}</a>` : "-"}</td>
-              <td>${escapeHtml(item.name || "-")}</td>
-              <td>${escapeHtml(item.theme || item.sector || "-")}</td>
-              <td class="home-number">${escapeHtml(dashboardPercent(item.change_percent))}</td>
-              <td class="home-number">${escapeHtml(dashboardNumber(item.volume_ratio, 2))}</td>
-              <td class="home-number">${escapeHtml(dashboardNumber(item.score))}</td>
-              <td>${escapeHtml(item.reason || "-")}</td>
-              <td>${escapeHtml(homeJoinList(risk, 3))}</td>
+              <td>${escapeHtml(item.sector)}</td>
+              <td>${escapeHtml(item.theme)}</td>
+              <td>${escapeHtml(homeJoinList(item.stocks, 5))}</td>
+              <td>${escapeHtml(comment)}</td>
             </tr>
           `;
         }).join("")}</tbody>
       </table>
+    </div>
+    <div class="home-mobile-cards">
+      ${items.map((item, index) => {
+        const comment = item.reasons.length ? item.reasons[0] : `依候選股分數與量能同步性排序，第 ${index + 1} 組資金方向。`;
+        return `
+          <article>
+            <div><strong>${escapeHtml(item.sector)}｜${escapeHtml(item.theme)}</strong><span>第 ${index + 1} 組</span></div>
+            <p><b>最強代表股</b>${escapeHtml(homeJoinList(item.stocks, 5))}</p>
+            <p><b>阿斯拉評語</b>${escapeHtml(comment)}</p>
+          </article>
+        `;
+      }).join("")}
     </div>
   `;
 }
