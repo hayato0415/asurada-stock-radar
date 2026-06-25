@@ -1,7 +1,7 @@
 {
-  "date": "2026-06-24",
+  "date": "2026-06-25",
   "session": "盤後",
-  "updated_at": "2026-06-24 13:30 Asia/Taipei",
+  "updated_at": "2026-06-25 14:41 Asia/Taipei",
   "build_version": "20260625-market-breadth",
   "app_version": "20260625-market-breadth",
   "next_update_at": "依 GitHub Actions 排程更新",
@@ -115,14 +115,15 @@
     "若外資續賣權值股，指數反彈力道會受壓抑。"
   ],
   "market_date": "2026-06-24",
-  "source_name": "臺灣證券交易所 FMTQIK",
-  "source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/FMTQIK?date=20260624&response=json",
-  "breadth_source_name": "臺灣證券交易所 MI_INDEX 漲跌證券數合計",
-  "breadth_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260624&type=ALLBUT0999&response=json",
   "turnover_billion": 15390.46,
   "turnover_value": 1539046268153,
   "previous_market_date": "2026-06-23",
   "previous_close": 47100.65,
   "previous_turnover_billion": 16723.55,
-  "previous_turnover_value": 1672355337665
+  "previous_turnover_value": 1672355337665,
+  "source_name": "臺灣證券交易所 FMTQIK",
+  "source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/FMTQIK?date=20260624&response=json",
+  "breadth_source_name": "臺灣證券交易所 MI_INDEX 漲跌證券數合計",
+  "breadth_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260624&type=ALLBUT0999&response=json",
+  "data_quality_warning": []
 }
