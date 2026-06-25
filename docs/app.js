@@ -2015,7 +2015,7 @@ function renderRadar() {
     </section>
     <section class="panel ai-selection-panel">
       <div class="section-title"><h2>近五個交易日最強題材</h2><span id="themeStockCount"></span></div>
-      <p class="mode-note">近五個交易日會綜合新聞熱度、族群擴散、個股漲幅/量能與技術位置一起打分，避免只抓到當天煙火；目前缺少完整五日價量與技術資料時，先以現有營收、成交量、題材與新聞資料暫代。</p>
+      <p class="mode-note">「近五個交易日」來判斷，不只看單日漲停；排序會把新聞熱度、族群擴散、個股漲幅/量能、技術位置一起打分，避免只抓到當天煙火。</p>
       <div id="themeStockList"></div>
     </section>
     <section class="panel ai-selection-panel">
