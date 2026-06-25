@@ -399,6 +399,66 @@ a { color: inherit; }
 .radar-page .radar-pool-button.active span {
   background: rgba(255, 255, 255, .2);
 }
+.radar-page .radar-tabs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 0 0 16px;
+  overflow-x: auto;
+  padding: 4px 2px 10px;
+}
+.radar-page .radar-tab {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  cursor: pointer;
+  flex: 0 0 auto;
+  font-weight: 900;
+  padding: 10px 16px;
+  white-space: nowrap;
+}
+.radar-page .radar-tab.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+  box-shadow: 0 10px 20px rgba(37, 99, 235, .18);
+}
+.radar-page .radar-panel {
+  display: none;
+}
+.radar-page .radar-panel.is-active {
+  display: block;
+}
+.radar-page .overview-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.radar-page .overview-card {
+  background: #fbfdff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px;
+}
+.radar-page .overview-card span {
+  color: var(--muted);
+  display: block;
+  font-size: 13px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+.radar-page .overview-card strong {
+  color: var(--ink);
+  display: block;
+  font-size: 18px;
+  line-height: 1.35;
+}
+.radar-page .overview-card p {
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 8px 0 0;
+}
 .radar-page .ai-selection-panel .section-title span {
   color: var(--muted);
   font-size: 14px;
@@ -663,6 +723,13 @@ a { color: inherit; }
 }
 .radar-page .ranking-toggle {
   margin-top: 12px;
+}
+.radar-page .ranking-detail {
+  display: none;
+}
+.radar-page .ranking-card.is-expanded .ranking-detail,
+.radar-page .theme-top5-card.is-expanded .ranking-detail {
+  display: block;
 }
 input,
 select,
@@ -1452,6 +1519,19 @@ tr:nth-child(even) { background: #f8fafc; }
   }
   .radar-page .radar-pool-filters {
     flex-wrap: wrap;
+  }
+  .radar-page .radar-tabs {
+    justify-content: flex-start;
+    margin-left: -2px;
+    margin-right: -2px;
+    scrollbar-width: thin;
+  }
+  .radar-page .radar-tab {
+    min-height: 42px;
+    padding: 9px 13px;
+  }
+  .radar-page .overview-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
   .radar-page .radar-pool-button {
     flex: 1 1 170px;

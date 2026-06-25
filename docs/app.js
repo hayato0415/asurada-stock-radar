@@ -1,7 +1,7 @@
 const HOLDINGS_KEY = "asurada_holdings";
 const WATCHLIST_KEY = "asurada_watchlist";
-const BUILD_VERSION = "20260625-radar-rankings";
-const APP_VERSION = "20260625-radar-rankings";
+const BUILD_VERSION = "20260625-radar-tabs";
+const APP_VERSION = "20260625-radar-tabs";
 
 const state = {
   stocks: [],
@@ -14,6 +14,8 @@ const state = {
   master: {},
   hotThemes: { date: "", updated_at: "", items: [], available: false },
   themeTop5: { date: "", updated_at: "", items: [], available: false },
+  newsThemeRanking: { generated_at: "", items: [], available: false },
+  lowBaseRanking: { generated_at: "", items: [], available: false },
   monthlyRevenue: [],
   quarterlyRevenue: [],
   revenueLoaded: false,
@@ -21,6 +23,7 @@ const state = {
 };
 
 let revenueLoadPromise = null;
+let rankingAccordionsReady = false;
 
 const TECH_THEMES = [
   "AI伺服器", "AI PC", "AI手機", "AI智慧型眼鏡", "智慧眼鏡", "PCB", "CPO", "光通訊", "矽光子", "記憶體", "半導體", "半導體設備", "玻璃基板",
@@ -1926,6 +1929,10 @@ function radarThemeEvidenceList(evidence = {}) {
   `).join("");
 }
 
+function rankingAccordionButton() {
+  return `<button class="ranking-toggle" type="button">展開依據</button>`;
+}
+
 function radarTop5ThemeCards(items) {
   if (!items.length) return `<div class="empty">五日內最強題材資料尚未更新</div>`;
   return `
@@ -1943,8 +1950,11 @@ function radarTop5ThemeCards(items) {
             </div>
           </div>
           <div class="theme-stock-row">${radarStockLinks(item.stocks, 8)}</div>
-          <div class="theme-evidence-grid">${radarThemeEvidenceList(item.evidence)}</div>
-          <p class="theme-conclusion"><strong>結論</strong>${escapeHtml(item.conclusion || "資料待補")}</p>
+          ${rankingAccordionButton()}
+          <div class="ranking-detail">
+            <div class="theme-evidence-grid">${radarThemeEvidenceList(item.evidence)}</div>
+            <p class="theme-conclusion"><strong>結論</strong>${escapeHtml(item.conclusion || "資料待補")}</p>
+          </div>
         </article>
       `).join("")}
     </div>
@@ -2000,13 +2010,20 @@ function renderNewsThemeRankingCards(items, showAll = false) {
             <div class="ranking-score"><strong>${escapeHtml(item.theme_score ?? "-")}</strong><span>綜合分數</span></div>
           </div>
           <div class="ranking-stock-row">${rankingStockChips(item.representative_stocks, 6)}</div>
-          <div class="evidence-grid">
-            <div class="supply-demand-box"><strong>需求訊號</strong><ul>${rankingList(item.supply_demand?.demand)}</ul></div>
-            <div class="supply-demand-box"><strong>供給訊號</strong><ul>${rankingList(item.supply_demand?.supply)}</ul></div>
-            <div class="supply-demand-box"><strong>盤面依據</strong><p>${escapeHtml(item.evidence?.price || item.evidence?.volume || "資料待補")}</p></div>
-            <div class="supply-demand-box"><strong>阿斯拉判斷 ${qualityBadge(item)}</strong><p>${escapeHtml(item.asurada_comment || item.supply_demand?.conclusion || "資料待補")}</p></div>
+          ${rankingAccordionButton()}
+          <div class="ranking-detail">
+            <div class="evidence-grid">
+              <div class="supply-demand-box"><strong>新聞面</strong><p>${escapeHtml(item.evidence?.news || "資料待補")}</p></div>
+              <div class="supply-demand-box"><strong>技術面</strong><p>${escapeHtml(item.evidence?.technical || "資料待補")}</p></div>
+              <div class="supply-demand-box"><strong>漲跌面</strong><p>${escapeHtml(item.evidence?.price || "資料待補")}</p></div>
+              <div class="supply-demand-box"><strong>資金面</strong><p>${escapeHtml(item.evidence?.volume || "資料待補")}</p></div>
+              <div class="supply-demand-box"><strong>供需面：需求</strong><ul>${rankingList(item.supply_demand?.demand)}</ul></div>
+              <div class="supply-demand-box"><strong>供需面：供給</strong><ul>${rankingList(item.supply_demand?.supply)}</ul></div>
+              <div class="supply-demand-box"><strong>基本面</strong><p>${escapeHtml(item.evidence?.fundamental || item.supply_demand?.price_power || "資料待補")}</p></div>
+              <div class="supply-demand-box"><strong>阿斯拉判斷 ${qualityBadge(item)}</strong><p>${escapeHtml(item.asurada_comment || item.supply_demand?.conclusion || "資料待補")}</p></div>
+            </div>
+            ${item.data_quality_note ? `<p class="risk-note">${escapeHtml(item.data_quality_note)}</p>` : ""}
           </div>
-          ${item.data_quality_note ? `<p class="risk-note">${escapeHtml(item.data_quality_note)}</p>` : ""}
         </article>
       `).join("")}
     </div>
@@ -2031,15 +2048,19 @@ function renderLowBaseRankingCards(items, market = "上市") {
             </div>
             <div class="ranking-score"><strong>${escapeHtml(item.score ?? "-")}</strong><span>綜合分數</span></div>
           </div>
-          <div class="evidence-grid">
-            <div class="supply-demand-box"><strong>五日漲跌</strong><p>${item.five_day_change_pct === null || item.five_day_change_pct === undefined ? "資料待補" : escapeHtml(dashboardPercent(item.five_day_change_pct))}</p></div>
-            <div class="supply-demand-box"><strong>20 日量比</strong><p>${item.volume_ratio_20d === null || item.volume_ratio_20d === undefined ? "資料待補" : escapeHtml(dashboardNumber(item.volume_ratio_20d, 2))}</p></div>
-            <div class="supply-demand-box"><strong>低位階位置</strong><p>${item.position?.range_position_pct === null || item.position?.range_position_pct === undefined ? "資料待補" : escapeHtml(`${dashboardNumber(item.position.range_position_pct, 1)}%`)}</p></div>
-            <div class="supply-demand-box"><strong>技術狀態</strong><p>${escapeHtml(item.technical?.note || "資料待補")}</p></div>
-            <div class="supply-demand-box"><strong>供需催化</strong><p>${escapeHtml(item.supply_demand?.conclusion || item.supply_demand?.demand || "資料待補")}</p></div>
-            <div class="supply-demand-box"><strong>判斷理由 ${qualityBadge(item)}</strong><p>${escapeHtml(item.reason || "資料待補")}</p></div>
+          ${rankingAccordionButton()}
+          <div class="ranking-detail">
+            <div class="evidence-grid">
+              <div class="supply-demand-box"><strong>漲跌面</strong><p>${item.five_day_change_pct === null || item.five_day_change_pct === undefined ? "資料待補" : escapeHtml(dashboardPercent(item.five_day_change_pct))}</p></div>
+              <div class="supply-demand-box"><strong>資金面</strong><p>${item.volume_ratio_20d === null || item.volume_ratio_20d === undefined ? "20 日量比資料待補" : escapeHtml(dashboardNumber(item.volume_ratio_20d, 2))}</p></div>
+              <div class="supply-demand-box"><strong>低位階位置</strong><p>${item.position?.range_position_pct === null || item.position?.range_position_pct === undefined ? "資料待補" : escapeHtml(`${dashboardNumber(item.position.range_position_pct, 1)}%`)}</p></div>
+              <div class="supply-demand-box"><strong>技術面</strong><p>${escapeHtml(item.technical?.note || "資料待補")}</p></div>
+              <div class="supply-demand-box"><strong>供需面</strong><p>${escapeHtml(item.supply_demand?.conclusion || item.supply_demand?.demand || "資料待補")}</p></div>
+              <div class="supply-demand-box"><strong>基本面</strong><p>${escapeHtml(item.fundamental?.turnaround_note || "資料待補")}</p></div>
+              <div class="supply-demand-box"><strong>判斷理由 ${qualityBadge(item)}</strong><p>${escapeHtml(item.reason || "資料待補")}</p></div>
+            </div>
+            <p class="risk-note"><strong>風險</strong>${escapeHtml(item.risk || "風險資料待補")}</p>
           </div>
-          <p class="risk-note"><strong>風險線</strong>${escapeHtml(item.risk || "風險資料待補")}</p>
         </article>
       `).join("")}
     </div>
@@ -2055,6 +2076,7 @@ async function renderNewsThemeRanking(showAll = false) {
     return;
   }
   const data = rankingDataItems(raw);
+  state.newsThemeRanking = { ...data, available: true };
   const items = data.items
     .slice()
     .sort((a, b) => (Number(b.theme_score) || 0) - (Number(a.theme_score) || 0))
@@ -2083,6 +2105,7 @@ async function renderLowBaseThemeRanking(market = "上市") {
     return;
   }
   const data = rankingDataItems(raw);
+  state.lowBaseRanking = { ...data, available: true };
   const items = data.items
     .slice()
     .sort((a, b) => (Number(b.score) || 0) - (Number(a.score) || 0));
@@ -2106,6 +2129,100 @@ async function renderLowBaseThemeRanking(market = "上市") {
   `;
   const select = $("#lowBaseMarketFilter");
   if (select) select.addEventListener("change", (event) => renderLowBaseThemeRanking(event.target.value));
+}
+
+function renderRadarOverview() {
+  const root = $("#radarOverviewRoot");
+  if (!root) return;
+  const topTheme = radarTop5ThemeItems()[0];
+  const newsTheme = (state.newsThemeRanking?.items || [])[0];
+  const lowBase = (state.lowBaseRanking?.items || [])[0];
+  const aiTop = state.stocks
+    .slice()
+    .sort((a, b) => radarScoreValue(b) - radarScoreValue(a))[0];
+  const latest = [
+    state.themeTop5,
+    state.newsThemeRanking,
+    state.lowBaseRanking,
+    state.hotThemes,
+  ].find((data) => data?.available);
+  root.innerHTML = `
+    <div class="section-title">
+      <div>
+        <h2>盤勢總覽</h2>
+        <p class="mode-note">快速看目前 AI 選股頁的核心排行摘要，切換上方分類可看完整內容。</p>
+      </div>
+      <span>${latest ? dashboardUpdateText(latest) : "資料待更新"}</span>
+    </div>
+    <div class="overview-grid">
+      <article class="overview-card">
+        <span>今日最強主流題材</span>
+        <strong>${topTheme ? radarThemeLink(topTheme.theme) : "資料待更新"}</strong>
+        <p>${topTheme ? `綜合分數 ${escapeHtml(topTheme.score)}｜${escapeHtml(topTheme.status || "觀察")}` : "請確認 theme-top5.json 是否已產生。"}</p>
+      </article>
+      <article class="overview-card">
+        <span>新聞最多題材第一名</span>
+        <strong>${newsTheme ? radarThemeLink(newsTheme.theme) : "資料待更新"}</strong>
+        <p>${newsTheme ? `新聞 ${escapeHtml(newsTheme.news_count || 0)} 篇｜分數 ${escapeHtml(newsTheme.theme_score || "-")}` : "請確認 news-theme-ranking.json 是否已產生。"}</p>
+      </article>
+      <article class="overview-card">
+        <span>低基期排行第一名</span>
+        <strong>${lowBase ? radarStockLabelLink(lowBase.code, lowBase.name) : "資料待更新"}</strong>
+        <p>${lowBase ? `${radarThemeLink(lowBase.theme || "題材待補")}｜分數 ${escapeHtml(lowBase.score || "-")}` : "請確認 low-base-theme-ranking.json 是否已產生。"}</p>
+      </article>
+      <article class="overview-card">
+        <span>AI選股分數最高個股</span>
+        <strong>${aiTop ? radarStockLink(aiTop) : "資料待更新"}</strong>
+        <p>${aiTop ? `原始排序分數 ${escapeHtml(radarScoreValue(aiTop))}` : "請確認 stocks-latest.json 是否已產生。"}</p>
+      </article>
+      <article class="overview-card">
+        <span>最後更新時間</span>
+        <strong>${latest ? dashboardUpdateText(latest) : "資料待更新"}</strong>
+        <p>若時間未更新，請重新執行資料產生腳本。</p>
+      </article>
+    </div>
+  `;
+}
+
+function activateRadarTab(name, updateHash = true) {
+  const fallback = "overview";
+  const panelNames = $all(".radar-panel").map((panel) => panel.dataset.radarPanel);
+  const target = panelNames.includes(name) ? name : fallback;
+  $all(".radar-tab").forEach((tab) => {
+    const active = tab.dataset.radarTab === target;
+    tab.classList.toggle("is-active", active);
+    tab.setAttribute("aria-selected", active ? "true" : "false");
+  });
+  $all(".radar-panel").forEach((panel) => {
+    panel.classList.toggle("is-active", panel.dataset.radarPanel === target);
+  });
+  if (updateHash && window.location.hash.slice(1) !== target) {
+    history.replaceState(null, "", `#${target}`);
+  }
+}
+
+function initRadarTabs() {
+  const tabs = $all(".radar-tab");
+  if (!tabs.length) return;
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => activateRadarTab(tab.dataset.radarTab || "overview"));
+  });
+  const hash = window.location.hash.replace("#", "");
+  activateRadarTab(hash || "overview", Boolean(hash));
+  window.addEventListener("hashchange", () => activateRadarTab(window.location.hash.replace("#", "") || "overview", false));
+}
+
+function initRankingAccordions() {
+  if (rankingAccordionsReady) return;
+  rankingAccordionsReady = true;
+  document.addEventListener("click", (event) => {
+    const button = event.target.closest(".ranking-toggle");
+    if (!button) return;
+    const card = button.closest(".ranking-card, .theme-top5-card");
+    if (!card) return;
+    const expanded = card.classList.toggle("is-expanded");
+    button.textContent = expanded ? "收合依據" : "展開依據";
+  });
 }
 
 function radarThemeGroupsTable(groups) {
@@ -2181,29 +2298,44 @@ function renderRadar() {
   const main = $("#app");
   const conceptOptions = conceptEntries().map((concept) => `<option value="${escapeHtml(concept.name)}"></option>`).join("");
   main.innerHTML = `
-    <section id="newsThemeRankingSection" class="radar-section news-theme-ranking">
-      <div id="newsThemeRankingRoot"></div>
+    <nav class="radar-tabs" aria-label="AI選股分類">
+      <button class="radar-tab is-active" type="button" data-radar-tab="overview">盤勢總覽</button>
+      <button class="radar-tab" type="button" data-radar-tab="themeTop5">五日最強題材</button>
+      <button class="radar-tab" type="button" data-radar-tab="newsTheme">新聞最多題材</button>
+      <button class="radar-tab" type="button" data-radar-tab="lowBase">低基期排行</button>
+      <button class="radar-tab" type="button" data-radar-tab="aiRanking">AI選股清單</button>
+    </nav>
+    <section class="radar-panel is-active" data-radar-panel="overview">
+      <div id="radarOverviewRoot" class="radar-section"></div>
     </section>
-    <section id="lowBaseThemeRankingSection" class="radar-section low-base-theme-ranking">
-      <div id="lowBaseThemeRankingRoot"></div>
-    </section>
-    <section class="panel">
-      <div class="section-title"><h2>AI選股清單</h2><span>${escapeHtml(stockMasterCountText())}</span></div>
-      <div class="filters">
-        <label>股票搜尋<input id="search" placeholder="代號、名稱或概念股，例如 2337、旺宏、CPO"></label>
-        <label>題材搜尋<input id="concept" list="conceptOptions" placeholder="AI、PCB、記憶體、玻璃基板..."></label>
+    <section class="radar-panel" data-radar-panel="themeTop5">
+      <div class="radar-section ai-selection-panel">
+        <div class="section-title"><h2>五日內最強題材 TOP 5</h2><span id="themeStockCount"></span></div>
+        <p class="mode-note">選出前五強後，拆成新聞面、技術面、漲跌面、資金面、基本面 / 產業催化，讓盤面依據一眼看懂。</p>
+        <div id="themeStockList"></div>
       </div>
-      <datalist id="conceptOptions">${conceptOptions}</datalist>
-      <p class="mode-note">此頁改為題材與低基期觀察清單；股票名稱與市場別以官方上市、上櫃主檔為準，題材與觀察清單則依目前內部雷達資料與新聞題材資料彙整。</p>
     </section>
-    <section class="panel ai-selection-panel">
-      <div class="section-title"><h2>五日內最強題材 TOP 5</h2><span id="themeStockCount"></span></div>
-      <p class="mode-note">選出前五強後，拆成新聞面、技術面、漲跌面、資金面、基本面 / 產業催化，讓盤面依據一眼看懂。</p>
-      <div id="themeStockList"></div>
+    <section class="radar-panel" data-radar-panel="newsTheme">
+      <div id="newsThemeRankingRoot" class="radar-section news-theme-ranking"></div>
+    </section>
+    <section class="radar-panel" data-radar-panel="lowBase">
+      <div id="lowBaseThemeRankingRoot" class="radar-section low-base-theme-ranking"></div>
+    </section>
+    <section class="radar-panel" data-radar-panel="aiRanking">
+      <div class="panel">
+        <div class="section-title"><h2>AI選股清單</h2><span>${escapeHtml(stockMasterCountText())}</span></div>
+        <div class="filters">
+          <label>股票搜尋<input id="search" placeholder="代號、名稱或概念股，例如 2337、旺宏、CPO"></label>
+          <label>題材搜尋<input id="concept" list="conceptOptions" placeholder="AI、PCB、記憶體、玻璃基板..."></label>
+        </div>
+        <datalist id="conceptOptions">${conceptOptions}</datalist>
+        <p class="mode-note">此頁改為題材與低基期觀察清單；股票名稱與市場別以官方上市、上櫃主檔為準，題材與觀察清單則依目前內部雷達資料與新聞題材資料彙整。</p>
+      </div>
     </section>
   `;
-  renderNewsThemeRanking();
-  renderLowBaseThemeRanking();
+  renderNewsThemeRanking().then(renderRadarOverview);
+  renderLowBaseThemeRanking().then(renderRadarOverview);
+  initRadarTabs();
   const render = () => {
     const search = $("#search").value.trim().toLowerCase();
     const concept = $("#concept").value.trim().toLowerCase();
@@ -2216,6 +2348,7 @@ function renderRadar() {
     const top5Time = state.themeTop5?.updated_at || state.themeTop5?.date ? `${dashboardUpdateText(state.themeTop5)}｜` : "";
     $("#themeStockCount").textContent = `${top5Time}${top5Themes.length} 組題材`;
     $("#themeStockList").innerHTML = radarTop5ThemeCards(top5Themes);
+    renderRadarOverview();
   };
   ["search", "concept"].forEach((id) => $(`#${id}`).addEventListener("input", render));
   render();
@@ -2842,7 +2975,10 @@ async function boot(page) {
     renderError("#app", `資料載入失敗或尚未建立：${missing.join("、")}`);
     return;
   }
-  if (page === "radar") renderRadar();
+  if (page === "radar") {
+    initRankingAccordions();
+    renderRadar();
+  }
   if (page === "news") renderNews();
   if (page === "themes") renderThemes();
   if (page === "concepts") await renderConcepts();
