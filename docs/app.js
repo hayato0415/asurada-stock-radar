@@ -2187,7 +2187,10 @@ function lowBaseOptionalMetric(item, keys, options = {}) {
       if (text && !["missing", "null", "undefined", "-"].includes(text.toLowerCase())) {
         const number = toNumber(value);
         if (Number.isFinite(number)) {
-          if (options.percent) return dashboardPercent(number);
+          if (options.percent) {
+            if (options.signed === false) return `${number.toFixed(options.digits ?? 2)}%`;
+            return dashboardPercent(number);
+          }
           return dashboardNumber(number, options.digits ?? 2);
         }
         return cleanDisplay(value);
@@ -2225,7 +2228,7 @@ function renderLowBaseRankingCards(items, market = "上市") {
               <div class="supply-demand-box"><strong>當月營收(百萬)</strong><p>${escapeHtml(lowBaseRevenueAmount(item))}</p></div>
               <div class="supply-demand-box"><strong>月增率(${escapeHtml(lowBaseRevenueMonthLabel(item))})</strong><p>${escapeHtml(lowBaseRevenuePercent(item, "mom"))}</p></div>
               <div class="supply-demand-box"><strong>年增率(${escapeHtml(lowBaseRevenueMonthLabel(item))})</strong><p>${escapeHtml(lowBaseRevenuePercent(item, "yoy"))}</p></div>
-              <div class="supply-demand-box"><strong>毛利率</strong><p>${escapeHtml(lowBaseOptionalMetric(item, ["gross_margin", "gross_margin_value", "gross_margin_pct"], { percent: true }))}</p></div>
+              <div class="supply-demand-box"><strong>毛利率</strong><p>${escapeHtml(lowBaseOptionalMetric(item, ["gross_margin", "gross_margin_value", "gross_margin_pct"], { percent: true, signed: false }))}</p></div>
               <div class="supply-demand-box"><strong>EPS</strong><p>${escapeHtml(lowBaseOptionalMetric(item, ["eps", "eps_value", "latest_eps"], { digits: 2 }))}</p></div>
               <div class="supply-demand-box"><strong>本益比</strong><p>${escapeHtml(lowBaseOptionalMetric(item, ["pe_ratio", "per", "price_earnings_ratio"], { digits: 2 }))}</p></div>
               <div class="supply-demand-box"><strong>法人預估目標價</strong><p>${escapeHtml(lowBaseOptionalMetric(item, ["institutional_target_price", "target_price", "consensus_target_price"], { digits: 2 }))}</p></div>

@@ -45,7 +45,19 @@
       "quote_date": "2026-06-26",
       "market_data_source": "TWSE STOCK_DAY",
       "market_data_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date=20260626&stockNo=7711&response=json",
-      "market_data_status": "official_verified"
+      "market_data_status": "official_verified",
+      "pe_ratio": 28.62,
+      "pe_ratio_source": "TWSE BWIBBU_ALL",
+      "pe_ratio_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "eps": 11.2,
+      "eps_source": "derived_from_twse_close_and_pe_ratio",
+      "eps_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "dividend_yield_pct": 2.8,
+      "pb_ratio": 4.84,
+      "gross_margin": 12.39,
+      "gross_margin_period": "latest_quarter",
+      "gross_margin_source": "Goodinfo quarterly financial ratios",
+      "gross_margin_source_url": "https://goodinfo.tw/tw/StockFinDetail.asp?RPT_CAT=XX_M_QUAR&STOCK_ID=7711"
     },
     {
       "rank": 2,
@@ -89,7 +101,15 @@
       "quote_date": "2026-06-26",
       "market_data_source": "TWSE STOCK_DAY",
       "market_data_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date=20260626&stockNo=6442&response=json",
-      "market_data_status": "official_verified"
+      "market_data_status": "official_verified",
+      "pe_ratio": 63.37,
+      "pe_ratio_source": "TWSE BWIBBU_ALL",
+      "pe_ratio_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "eps": 26.51,
+      "eps_source": "derived_from_twse_close_and_pe_ratio",
+      "eps_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "dividend_yield_pct": 0.7,
+      "pb_ratio": 18.56
     },
     {
       "rank": 3,
@@ -133,7 +153,15 @@
       "quote_date": "2026-06-26",
       "market_data_source": "TWSE STOCK_DAY",
       "market_data_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date=20260626&stockNo=3025&response=json",
-      "market_data_status": "official_verified"
+      "market_data_status": "official_verified",
+      "pe_ratio": 16.78,
+      "pe_ratio_source": "TWSE BWIBBU_ALL",
+      "pe_ratio_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "eps": 4.0,
+      "eps_source": "derived_from_twse_close_and_pe_ratio",
+      "eps_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "dividend_yield_pct": 4.77,
+      "pb_ratio": 4.14
     },
     {
       "rank": 4,
@@ -177,7 +205,15 @@
       "quote_date": "2026-06-26",
       "market_data_source": "TWSE STOCK_DAY",
       "market_data_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date=20260626&stockNo=3576&response=json",
-      "market_data_status": "official_verified"
+      "market_data_status": "official_verified",
+      "pe_ratio": 39.29,
+      "pe_ratio_source": "TWSE BWIBBU_ALL",
+      "pe_ratio_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "eps": 0.42,
+      "eps_source": "derived_from_twse_close_and_pe_ratio",
+      "eps_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "dividend_yield_pct": 0.0,
+      "pb_ratio": 2.05
     },
     {
       "rank": 5,
@@ -221,7 +257,15 @@
       "quote_date": "2026-06-26",
       "market_data_source": "TWSE STOCK_DAY",
       "market_data_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date=20260626&stockNo=4588&response=json",
-      "market_data_status": "official_verified"
+      "market_data_status": "official_verified",
+      "pe_ratio": 16.12,
+      "pe_ratio_source": "TWSE BWIBBU_ALL",
+      "pe_ratio_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "eps": 3.56,
+      "eps_source": "derived_from_twse_close_and_pe_ratio",
+      "eps_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "dividend_yield_pct": 5.23,
+      "pb_ratio": 2.58
     },
     {
       "rank": 6,
@@ -265,7 +309,15 @@
       "quote_date": "2026-06-26",
       "market_data_source": "TWSE STOCK_DAY",
       "market_data_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date=20260626&stockNo=2547&response=json",
-      "market_data_status": "official_verified"
+      "market_data_status": "official_verified",
+      "pe_ratio": 77.86,
+      "pe_ratio_source": "TWSE BWIBBU_ALL",
+      "pe_ratio_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "eps": 0.14,
+      "eps_source": "derived_from_twse_close_and_pe_ratio",
+      "eps_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "dividend_yield_pct": 7.34,
+      "pb_ratio": 0.79
     },
     {
       "rank": 7,
@@ -309,7 +361,15 @@
       "quote_date": "2026-06-26",
       "market_data_source": "TWSE STOCK_DAY",
       "market_data_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date=20260626&stockNo=2408&response=json",
-      "market_data_status": "official_verified"
+      "market_data_status": "official_verified",
+      "pe_ratio": 40.2,
+      "pe_ratio_source": "TWSE BWIBBU_ALL",
+      "pe_ratio_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "eps": 11.17,
+      "eps_source": "derived_from_twse_close_and_pe_ratio",
+      "eps_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "dividend_yield_pct": 0.3,
+      "pb_ratio": 7.21
     },
     {
       "rank": 8,
@@ -353,7 +413,15 @@
       "quote_date": "2026-06-26",
       "market_data_source": "TWSE STOCK_DAY",
       "market_data_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date=20260626&stockNo=2359&response=json",
-      "market_data_status": "official_verified"
+      "market_data_status": "official_verified",
+      "pe_ratio": 65.21,
+      "pe_ratio_source": "TWSE BWIBBU_ALL",
+      "pe_ratio_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "eps": 1.94,
+      "eps_source": "derived_from_twse_close_and_pe_ratio",
+      "eps_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "dividend_yield_pct": 0.79,
+      "pb_ratio": 3.77
     },
     {
       "rank": 9,
@@ -397,7 +465,15 @@
       "quote_date": "2026-06-26",
       "market_data_source": "TWSE STOCK_DAY",
       "market_data_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date=20260626&stockNo=3535&response=json",
-      "market_data_status": "official_verified"
+      "market_data_status": "official_verified",
+      "pe_ratio": 280.0,
+      "pe_ratio_source": "TWSE BWIBBU_ALL",
+      "pe_ratio_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "eps": 0.4,
+      "eps_source": "derived_from_twse_close_and_pe_ratio",
+      "eps_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "dividend_yield_pct": 0.0,
+      "pb_ratio": 7.95
     },
     {
       "rank": 10,
@@ -441,7 +517,15 @@
       "quote_date": "2026-06-26",
       "market_data_source": "TWSE STOCK_DAY",
       "market_data_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date=20260626&stockNo=1618&response=json",
-      "market_data_status": "official_verified"
+      "market_data_status": "official_verified",
+      "pe_ratio": 8.7,
+      "pe_ratio_source": "TWSE BWIBBU_ALL",
+      "pe_ratio_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "eps": 4.55,
+      "eps_source": "derived_from_twse_close_and_pe_ratio",
+      "eps_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "dividend_yield_pct": 4.29,
+      "pb_ratio": 1.19
     },
     {
       "rank": 11,
@@ -485,7 +569,9 @@
       "quote_date": "2026-06-26",
       "market_data_source": "TWSE STOCK_DAY",
       "market_data_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date=20260626&stockNo=3432&response=json",
-      "market_data_status": "official_verified"
+      "market_data_status": "official_verified",
+      "dividend_yield_pct": 0.0,
+      "pb_ratio": 2.51
     },
     {
       "rank": 12,
@@ -529,7 +615,15 @@
       "quote_date": "2026-06-26",
       "market_data_source": "TWSE STOCK_DAY",
       "market_data_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date=20260626&stockNo=2537&response=json",
-      "market_data_status": "official_verified"
+      "market_data_status": "official_verified",
+      "pe_ratio": 33.91,
+      "pe_ratio_source": "TWSE BWIBBU_ALL",
+      "pe_ratio_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "eps": 0.32,
+      "eps_source": "derived_from_twse_close_and_pe_ratio",
+      "eps_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "dividend_yield_pct": 0.0,
+      "pb_ratio": 0.72
     },
     {
       "rank": 13,
@@ -573,7 +667,15 @@
       "quote_date": "2026-06-26",
       "market_data_source": "TWSE STOCK_DAY",
       "market_data_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date=20260626&stockNo=5531&response=json",
-      "market_data_status": "official_verified"
+      "market_data_status": "official_verified",
+      "pe_ratio": 157.6,
+      "pe_ratio_source": "TWSE BWIBBU_ALL",
+      "pe_ratio_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "eps": 0.05,
+      "eps_source": "derived_from_twse_close_and_pe_ratio",
+      "eps_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "dividend_yield_pct": 0.0,
+      "pb_ratio": 0.77
     },
     {
       "rank": 14,
@@ -617,7 +719,15 @@
       "quote_date": "2026-06-26",
       "market_data_source": "TWSE STOCK_DAY",
       "market_data_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date=20260626&stockNo=1436&response=json",
-      "market_data_status": "official_verified"
+      "market_data_status": "official_verified",
+      "pe_ratio": 10.36,
+      "pe_ratio_source": "TWSE BWIBBU_ALL",
+      "pe_ratio_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "eps": 4.3,
+      "eps_source": "derived_from_twse_close_and_pe_ratio",
+      "eps_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "dividend_yield_pct": 11.34,
+      "pb_ratio": 1.58
     },
     {
       "rank": 15,
@@ -661,7 +771,15 @@
       "quote_date": "2026-06-26",
       "market_data_source": "TWSE STOCK_DAY",
       "market_data_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date=20260626&stockNo=5522&response=json",
-      "market_data_status": "official_verified"
+      "market_data_status": "official_verified",
+      "pe_ratio": 6.78,
+      "pe_ratio_source": "TWSE BWIBBU_ALL",
+      "pe_ratio_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "eps": 9.45,
+      "eps_source": "derived_from_twse_close_and_pe_ratio",
+      "eps_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "dividend_yield_pct": 8.58,
+      "pb_ratio": 1.05
     },
     {
       "rank": 16,
@@ -705,7 +823,9 @@
       "quote_date": "2026-06-26",
       "market_data_source": "TWSE STOCK_DAY",
       "market_data_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date=20260626&stockNo=6225&response=json",
-      "market_data_status": "official_verified"
+      "market_data_status": "official_verified",
+      "dividend_yield_pct": 0.0,
+      "pb_ratio": 7.17
     },
     {
       "rank": 17,
@@ -749,7 +869,15 @@
       "quote_date": "2026-06-26",
       "market_data_source": "TWSE STOCK_DAY",
       "market_data_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date=20260626&stockNo=2059&response=json",
-      "market_data_status": "official_verified"
+      "market_data_status": "official_verified",
+      "pe_ratio": 61.61,
+      "pe_ratio_source": "TWSE BWIBBU_ALL",
+      "pe_ratio_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "eps": 113.46,
+      "eps_source": "derived_from_twse_close_and_pe_ratio",
+      "eps_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "dividend_yield_pct": 0.73,
+      "pb_ratio": 21.13
     },
     {
       "rank": 18,
@@ -793,7 +921,15 @@
       "quote_date": "2026-06-26",
       "market_data_source": "TWSE STOCK_DAY",
       "market_data_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date=20260626&stockNo=6770&response=json",
-      "market_data_status": "official_verified"
+      "market_data_status": "official_verified",
+      "pe_ratio": 44.24,
+      "pe_ratio_source": "TWSE BWIBBU_ALL",
+      "pe_ratio_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "eps": 1.77,
+      "eps_source": "derived_from_twse_close_and_pe_ratio",
+      "eps_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "dividend_yield_pct": 0.0,
+      "pb_ratio": 3.44
     },
     {
       "rank": 19,
@@ -837,7 +973,15 @@
       "quote_date": "2026-06-26",
       "market_data_source": "TWSE STOCK_DAY",
       "market_data_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date=20260626&stockNo=2528&response=json",
-      "market_data_status": "official_verified"
+      "market_data_status": "official_verified",
+      "pe_ratio": 8.74,
+      "pe_ratio_source": "TWSE BWIBBU_ALL",
+      "pe_ratio_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "eps": 2.39,
+      "eps_source": "derived_from_twse_close_and_pe_ratio",
+      "eps_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "dividend_yield_pct": 14.35,
+      "pb_ratio": 1.27
     },
     {
       "rank": 20,
@@ -881,7 +1025,15 @@
       "quote_date": "2026-06-26",
       "market_data_source": "TWSE STOCK_DAY",
       "market_data_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date=20260626&stockNo=5534&response=json",
-      "market_data_status": "official_verified"
+      "market_data_status": "official_verified",
+      "pe_ratio": 16.06,
+      "pe_ratio_source": "TWSE BWIBBU_ALL",
+      "pe_ratio_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "eps": 4.9,
+      "eps_source": "derived_from_twse_close_and_pe_ratio",
+      "eps_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+      "dividend_yield_pct": 6.99,
+      "pb_ratio": 1.1
     }
   ],
   "market_data_note": {
@@ -910,5 +1062,33 @@
       "5534"
     ],
     "errors": []
+  },
+  "valuation_data_note": {
+    "pe_ratio_source": "TWSE BWIBBU_ALL",
+    "pe_ratio_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_ALL?date=20260626&response=json",
+    "eps_method": "derived_from_twse_close_and_pe_ratio_when_pe_available",
+    "gross_margin_source_for_7711": "Goodinfo quarterly financial ratios",
+    "gross_margin_source_url_for_7711": "https://goodinfo.tw/tw/StockFinDetail.asp?RPT_CAT=XX_M_QUAR&STOCK_ID=7711",
+    "institutional_target_price": "not_filled_without_reliable_public_source",
+    "updated_codes_for_pe": [
+      "7711",
+      "6442",
+      "3025",
+      "3576",
+      "4588",
+      "2547",
+      "2408",
+      "2359",
+      "3535",
+      "1618",
+      "2537",
+      "5531",
+      "1436",
+      "5522",
+      "2059",
+      "6770",
+      "2528",
+      "5534"
+    ]
   }
 }
