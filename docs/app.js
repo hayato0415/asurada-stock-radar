@@ -2119,6 +2119,73 @@ function renderLowBaseRankingCards(items, market = "上市") {
   `;
 }
 
+function lowBaseStockRecord(item) {
+  return stockByCode(item?.code);
+}
+
+function lowBasePrice(item) {
+  const stock = lowBaseStockRecord(item);
+  const value = item?.current_price ?? item?.price ?? stock?.close_price ?? stock?.close ?? stock?.price;
+  const number = toNumber(value);
+  return Number.isFinite(number) ? dashboardNumber(number, 2) : cleanDisplay(value);
+}
+
+function lowBaseChangePct(item) {
+  const stock = lowBaseStockRecord(item);
+  const value = item?.change_percent ?? item?.daily_change ?? item?.five_day_change_pct ?? stock?.change_percent ?? stock?.daily_change;
+  const number = toNumber(value);
+  if (Number.isFinite(number)) return dashboardPercent(number);
+  return cleanDisplay(value);
+}
+
+function lowBaseVolume(item) {
+  const stock = lowBaseStockRecord(item);
+  const value = item?.volume ?? item?.volume_value ?? stock?.volume_value ?? stock?.volume;
+  const number = toNumber(value);
+  return Number.isFinite(number) ? dashboardNumber(number) : cleanDisplay(value);
+}
+
+function renderLowBaseRankingCards(items, market = "上市") {
+  const filtered = items
+    .filter((item) => market === "全部" || (item.market || "") === market)
+    .slice(0, 10);
+  if (!filtered.length) return `<div class="empty">低基期題材資料載入失敗，請確認 docs/data/low-base-theme-ranking.json 是否存在。</div>`;
+  return `
+    <div class="ranking-card-list">
+      ${filtered.map((item) => `
+        <article class="ranking-card">
+          <div class="ranking-card-head">
+            <div>
+              <span class="theme-rank">#${escapeHtml(item.rank || "")}</span>
+              <h3>${radarStockLabelLink(item.code, item.name)}</h3>
+              <div class="ranking-submeta">${radarThemeLink(item.theme || "題材待補")}｜${escapeHtml(item.market || "市場別待補")}</div>
+            </div>
+            <div class="ranking-score"><strong>${escapeHtml(item.score ?? "-")}</strong><span>綜合分數</span></div>
+          </div>
+          <div class="ranking-stock-metrics">
+            <div><span>當天現價</span><strong>${escapeHtml(lowBasePrice(item))}</strong></div>
+            <div><span>漲幅%</span><strong>${escapeHtml(lowBaseChangePct(item))}</strong></div>
+            <div><span>成交量</span><strong>${escapeHtml(lowBaseVolume(item))}</strong></div>
+          </div>
+          ${rankingAccordionButton()}
+          <div class="ranking-detail">
+            <div class="evidence-grid">
+              <div class="supply-demand-box"><strong>收盤價</strong><p>${escapeHtml(lowBasePrice(item))}</p></div>
+              <div class="supply-demand-box"><strong>漲幅%</strong><p>${escapeHtml(lowBaseChangePct(item))}</p></div>
+              <div class="supply-demand-box"><strong>成交量</strong><p>${escapeHtml(lowBaseVolume(item))}</p></div>
+              <div class="supply-demand-box"><strong>技術面</strong><p>${escapeHtml(item.technical?.note || "資料待補")}</p></div>
+              <div class="supply-demand-box"><strong>供需面</strong><p>${escapeHtml(item.supply_demand?.conclusion || item.supply_demand?.demand || "資料待補")}</p></div>
+              <div class="supply-demand-box"><strong>基本面</strong><p>${escapeHtml(item.fundamental?.turnaround_note || "資料待補")}</p></div>
+              <div class="supply-demand-box"><strong>判斷理由 ${qualityBadge(item)}</strong><p>${escapeHtml(item.reason || "資料待補")}</p></div>
+            </div>
+            <p class="risk-note"><strong>風險</strong>${escapeHtml(item.risk || "風險資料待補")}</p>
+          </div>
+        </article>
+      `).join("")}
+    </div>
+  `;
+}
+
 async function renderNewsThemeRanking(showAll = false) {
   const root = $("#newsThemeRankingRoot");
   if (!root) return;

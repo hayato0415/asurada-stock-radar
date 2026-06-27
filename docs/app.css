@@ -649,6 +649,31 @@ a { color: inherit; }
   gap: 8px;
   margin-top: 12px;
 }
+.radar-page .ranking-stock-metrics {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 12px;
+}
+.radar-page .ranking-stock-metrics div {
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+.radar-page .ranking-stock-metrics span {
+  color: var(--muted);
+  display: block;
+  font-size: 12px;
+  font-weight: 900;
+  margin-bottom: 5px;
+}
+.radar-page .ranking-stock-metrics strong {
+  color: var(--ink);
+  display: block;
+  font-size: 18px;
+  line-height: 1.2;
+}
 .radar-page .ranking-chip {
   background: #eef2ff;
   border: 1px solid #c7d2fe;
@@ -2350,6 +2375,9 @@ tr:nth-child(even) { background: #f8fafc; }
   .radar-page .ranking-score {
     min-width: 0;
     width: 100%;
+  }
+  .radar-page .ranking-stock-metrics {
+    grid-template-columns: minmax(0, 1fr);
   }
   .radar-page .evidence-grid {
     grid-template-columns: minmax(0, 1fr);
