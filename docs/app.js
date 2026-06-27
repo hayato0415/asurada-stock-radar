@@ -2600,6 +2600,122 @@ function renderNews() {
   });
 }
 
+function newsLatestDateValue() {
+  const dates = (state.news || [])
+    .map((event) => String(event.date || event.updated_at || "").trim())
+    .filter(Boolean)
+    .sort((a, b) => b.localeCompare(a));
+  return dates[0] || "";
+}
+
+function newsLatestUpdateText() {
+  const latest = newsLatestDateValue();
+  return latest ? `每日更新時間：${formatDashboardTime(latest)}` : "每日更新時間：資料尚未更新";
+}
+
+function newsImportanceScore(event) {
+  const strength = event.event_strength === "高" ? 40 : event.event_strength === "中高" ? 28 : event.event_strength === "中" ? 14 : 0;
+  const source = isRealSourceUrl(eventUrl(event)) ? 15 : 0;
+  const stocks = Math.min((event.related_stocks || []).length, 8) * 3;
+  const keywords = Math.min((event.related_keywords || []).length, 10);
+  const impact = event.impact && event.impact !== "中性" ? 8 : 0;
+  return strength + source + stocks + keywords + impact;
+}
+
+function newsAccordionItem(event, index) {
+  const related = (event.related_stocks || []).map(normalizeCode).filter(Boolean);
+  const url = eventUrl(event);
+  const hasSource = isRealSourceUrl(url);
+  const sourceLabel = event.source_name || sourceHostLabel(url) || "來源未標示";
+  const title = event.title || "未命名事件";
+  const impactTone = newsImpactTone(event.impact);
+  const strengthTone = newsStrengthTone(event.event_strength);
+  return `
+    <details class="news-accordion-item">
+      <summary>
+        <span class="news-rank">#${index + 1}</span>
+        <span class="news-summary-main">
+          <span class="news-summary-title">
+            ${hasSource ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>` : escapeHtml(title)}
+          </span>
+          <span class="news-summary-meta">
+            ${escapeHtml(formatDate(event.date))} · ${escapeHtml(sourceLabel)} · ${escapeHtml(event.category || "未分類")}
+          </span>
+        </span>
+        <span class="news-summary-tags">
+          <span class="chip ${strengthTone}">強度：${escapeHtml(event.event_strength || "未標示")}</span>
+          <span class="chip ${impactTone}">方向：${escapeHtml(event.impact || "中性")}</span>
+        </span>
+      </summary>
+      <div class="news-accordion-body">
+        <div class="news-evidence-grid">
+          <div><strong>事件強度依據</strong><p>${escapeHtml(newsStrengthBasis(event))}</p></div>
+          <div><strong>影響方向說明</strong><p>${escapeHtml(newsImpactBasis(event))}</p></div>
+        </div>
+        <p><span class="label">新聞摘要</span>${escapeHtml(event.summary || event.logic || "尚缺摘要")}</p>
+        <p class="analysis"><span class="label">題材連動分析</span>${escapeHtml(event.asurada_analysis || event.logic || "尚缺連動分析")}</p>
+        <p><span class="label">相關台股</span></p>
+        <div class="chip-row">${stockChips(related, "無相關台股")}</div>
+        <div class="button-row">
+          ${hasSource ? `<a class="solid-link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">查看原文</a>` : `<span class="chip">來源待補</span>`}
+        </div>
+      </div>
+    </details>
+  `;
+}
+
+function renderNews() {
+  renderHeader("news");
+  const main = $("#app");
+  const sections = [
+    ["國際", "國際重大新聞"],
+    ["台股", "台股重大新聞"],
+  ];
+  main.innerHTML = `
+    <section class="panel news-radar-intro compact">
+      <div class="section-title">
+        <h2>重大新聞雷達</h2>
+        <span>${newsLatestUpdateText()}</span>
+      </div>
+      <div class="news-rule-grid">
+        <div>
+          <h3>事件強度依據</h3>
+          <p>依真實來源、事件明確度、題材關聯股票數、供需 / 報價 / 財報 / 政策訊號與族群資金輪動排序。每區只挑最重要 5 則。</p>
+        </div>
+        <div>
+          <h3>影響方向說明</h3>
+          <p>偏多代表需求、報價、訂單、政策或資金面可能改善；偏空代表風險升高；中性代表仍需後續確認。</p>
+        </div>
+      </div>
+      <div class="news-source-panel compact">
+        <strong>新聞搜尋入口</strong>
+        <div class="news-source-links">${newsSourceSearchLinks()}</div>
+      </div>
+    </section>
+    ${sections.map(([region, title]) => {
+      const key = newsSectionKey("all", region);
+      return `
+        <section class="panel news-section-card">
+          <div class="section-title"><h2>${title}</h2><span id="count-${key}"></span></div>
+          <div id="news-${key}" class="news-accordion-list"></div>
+        </section>
+      `;
+    }).join("")}
+  `;
+  sections.forEach(([region]) => {
+    const key = newsSectionKey("all", region);
+    const list = state.news
+      .filter((event) => isRealSourceUrl(eventUrl(event)) && eventNewsRegion(event) === region)
+      .filter((event) => ["高", "中高"].includes(event.event_strength))
+      .sort((a, b) => newsImportanceScore(b) - newsImportanceScore(a) || String(b.date || "").localeCompare(String(a.date || "")))
+      .slice(0, 5);
+    const target = $(`#news-${key}`);
+    const count = $(`#count-${key}`);
+    if (count) count.textContent = `${list.length} 則`;
+    if (target) target.innerHTML = list.length ? list.map(newsAccordionItem).join("") : `<div class="empty">目前沒有此分區新聞</div>`;
+  });
+}
+
 function themeEntries() {
   return Object.entries(state.themes).map(([key, theme]) => ({
     theme_name: theme.theme_name || theme.name || key,

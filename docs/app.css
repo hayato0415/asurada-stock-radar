@@ -1215,6 +1215,9 @@ tr:nth-child(even) { background: #f8fafc; }
   display: grid;
   gap: 16px;
 }
+.news-radar-intro.compact {
+  gap: 12px;
+}
 .news-rule-grid {
   display: grid;
   gap: 12px;
@@ -1239,6 +1242,9 @@ tr:nth-child(even) { background: #f8fafc; }
 .news-source-panel strong {
   display: block;
   margin-bottom: 10px;
+}
+.news-source-panel.compact {
+  padding: 12px;
 }
 .news-source-links {
   display: flex;
@@ -1267,6 +1273,83 @@ tr:nth-child(even) { background: #f8fafc; }
 .news-grid {
   display: grid;
   gap: 14px;
+}
+.news-accordion-list {
+  display: grid;
+  gap: 10px;
+}
+.news-accordion-item {
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.news-accordion-item summary {
+  align-items: center;
+  cursor: pointer;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  list-style: none;
+  padding: 14px 16px;
+}
+.news-accordion-item summary::-webkit-details-marker {
+  display: none;
+}
+.news-accordion-item summary::after {
+  color: var(--accent);
+  content: "展開";
+  font-size: 13px;
+  font-weight: 900;
+}
+.news-accordion-item[open] summary::after {
+  content: "收合";
+}
+.news-rank {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 900;
+}
+.news-summary-main {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+.news-summary-title {
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.news-summary-title a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.news-summary-title a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.news-summary-meta {
+  color: var(--muted);
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.news-summary-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+}
+.news-accordion-body {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 10px;
+  padding: 14px 16px 16px;
 }
 .news-event-card {
   box-shadow: none;
@@ -1331,6 +1414,22 @@ tr:nth-child(even) { background: #f8fafc; }
   }
   .news-source-link {
     text-align: center;
+  }
+  .news-accordion-item summary {
+    align-items: start;
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .news-accordion-item summary::after {
+    grid-column: 2;
+    justify-self: start;
+  }
+  .news-summary-tags {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+  .news-summary-title,
+  .news-summary-meta {
+    white-space: normal;
   }
 }
 .stock-link {
