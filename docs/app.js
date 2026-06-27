@@ -2132,10 +2132,16 @@ function lowBasePrice(item) {
 
 function lowBaseChangePct(item) {
   const stock = lowBaseStockRecord(item);
-  const value = item?.change_percent ?? item?.daily_change ?? item?.five_day_change_pct ?? stock?.change_percent ?? stock?.daily_change;
-  const number = toNumber(value);
-  if (Number.isFinite(number)) return dashboardPercent(number);
-  return cleanDisplay(value);
+  const changeValue = item?.price_change ?? item?.change_value ?? stock?.price_change ?? stock?.change;
+  const percentValue = item?.change_percent ?? item?.daily_change ?? item?.five_day_change_pct ?? stock?.change_percent ?? stock?.daily_change;
+  const changeNumber = toNumber(changeValue);
+  const percentNumber = toNumber(percentValue);
+  if (Number.isFinite(changeNumber) && Number.isFinite(percentNumber)) {
+    const changeText = `${changeNumber > 0 ? "+" : ""}${changeNumber.toFixed(2)}`;
+    return `${changeText} (${dashboardPercent(percentNumber)})`;
+  }
+  if (Number.isFinite(percentNumber)) return dashboardPercent(percentNumber);
+  return cleanDisplay(percentValue);
 }
 
 function lowBaseVolume(item) {
