@@ -391,6 +391,7 @@ def _build_radar_data_json(display_report: pd.DataFrame) -> str:
 def publish_interactive_data(display_report: pd.DataFrame, site_dir: Path = SITE_DIR) -> None:
     data_dir = site_dir / "data"
     data_dir.mkdir(parents=True, exist_ok=True)
+    updated_at = _taipei_now().strftime("%Y-%m-%d %H:%M Asia/Taipei")
     records: list[dict[str, object]] = []
     profiles: dict[str, dict[str, str]] = {}
     for _, row in display_report.iterrows():
@@ -442,6 +443,7 @@ def publish_interactive_data(display_report: pd.DataFrame, site_dir: Path = SITE
             "official_rank_eligible": str(row.get("official_rank_eligible", "")).strip().lower() == "true",
             "data_confidence_level": confidence_level,
             "data_confidence_reasons": confidence_reasons,
+            "updated_at": updated_at,
         }
         records.append(record)
         profiles[code] = {
@@ -450,9 +452,23 @@ def publish_interactive_data(display_report: pd.DataFrame, site_dir: Path = SITE
             "business": record["business"],
             "concept": record["concept"],
             "market": record["market"],
+            "updated_at": updated_at,
         }
     (data_dir / "stocks-latest.json").write_text(json.dumps(records, ensure_ascii=False, indent=2), encoding="utf-8")
     (data_dir / "stock-profiles.json").write_text(json.dumps(profiles, ensure_ascii=False, indent=2), encoding="utf-8")
+    (data_dir / "stock-data-meta.json").write_text(
+        json.dumps(
+            {
+                "updated_at": updated_at,
+                "stock_count": len(records),
+                "source": "run_daily_scan.py",
+                "description": "個股概覽與 AI 選股清單互動資料更新時間",
+            },
+            ensure_ascii=False,
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
     technical_path = data_dir / "technical-latest.json"
     if not technical_path.exists():
         technical_path.write_text("{}", encoding="utf-8")

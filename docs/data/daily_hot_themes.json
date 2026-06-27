@@ -1,7 +1,7 @@
 {
   "date": "2026-06-27",
-  "session": "隔日早晨",
-  "updated_at": "2026-06-27 02:17 Asia/Taipei",
+  "session": "盤中",
+  "updated_at": "2026-06-27 11:40 Asia/Taipei",
   "build_version": "20260625-market-breadth",
   "app_version": "20260625-market-breadth",
   "source_type": "market_objective",
@@ -43,7 +43,7 @@
       "theme": "營建",
       "sector": "傳產",
       "market_group": "非電子",
-      "score": 69.55,
+      "score": 70.2,
       "change_percent_avg": 0.0,
       "up_count": 0,
       "limit_up_count": 0,
@@ -135,6 +135,46 @@
     },
     {
       "rank": 8,
+      "theme": "網通",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 63.5,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "6442 光聖",
+        "3025 星通",
+        "6863 永道-KY",
+        "5388 中磊",
+        "6152 百一"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "轉強"
+    },
+    {
+      "rank": 9,
+      "theme": "光電",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 62.23,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "3535 晶彩科",
+        "5484 慧友",
+        "6225 天瀚",
+        "4934 太極",
+        "3576 聯合再生"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "轉強"
+    },
+    {
+      "rank": 10,
       "theme": "居家生活",
       "sector": "電子",
       "market_group": "電子",
@@ -150,7 +190,7 @@
       "signal": "觀察"
     },
     {
-      "rank": 9,
+      "rank": 11,
       "theme": "其他",
       "sector": "電子",
       "market_group": "電子",
@@ -170,7 +210,27 @@
       "signal": "觀察"
     },
     {
-      "rank": 10,
+      "rank": 12,
+      "theme": "AI伺服器供應鏈",
+      "sector": "電子",
+      "market_group": "電子",
+      "score": 59.0,
+      "change_percent_avg": 0.0,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "volume_status": "放量",
+      "stocks": [
+        "6691 洋基工程",
+        "8499 鼎炫-KY",
+        "2359 所羅門",
+        "7631 聚賢研發-創",
+        "4588 玖鼎電力"
+      ],
+      "reason": "依全市場候選股分數、量能與題材同步性彙整",
+      "signal": "觀察"
+    },
+    {
+      "rank": 13,
       "theme": "輪胎",
       "sector": "傳產",
       "market_group": "非電子",
@@ -186,27 +246,7 @@
       "signal": "觀察"
     },
     {
-      "rank": 11,
-      "theme": "AI伺服器供應鏈",
-      "sector": "電子",
-      "market_group": "電子",
-      "score": 57.64,
-      "change_percent_avg": 0.0,
-      "up_count": 0,
-      "limit_up_count": 0,
-      "volume_status": "放量",
-      "stocks": [
-        "6691 洋基工程",
-        "8499 鼎炫-KY",
-        "7631 聚賢研發-創",
-        "4588 玖鼎電力",
-        "8021 尖點"
-      ],
-      "reason": "依全市場候選股分數、量能與題材同步性彙整",
-      "signal": "觀察"
-    },
-    {
-      "rank": 12,
+      "rank": 14,
       "theme": "05",
       "sector": "電子",
       "market_group": "電子",
@@ -226,27 +266,7 @@
       "signal": "觀察"
     },
     {
-      "rank": 13,
-      "theme": "網通",
-      "sector": "電子",
-      "market_group": "電子",
-      "score": 56.93,
-      "change_percent_avg": 0.0,
-      "up_count": 0,
-      "limit_up_count": 0,
-      "volume_status": "放量",
-      "stocks": [
-        "6442 光聖",
-        "3025 星通",
-        "6863 永道-KY",
-        "5388 中磊",
-        "6152 百一"
-      ],
-      "reason": "依全市場候選股分數、量能與題材同步性彙整",
-      "signal": "觀察"
-    },
-    {
-      "rank": 14,
+      "rank": 15,
       "theme": "PCB",
       "sector": "電子",
       "market_group": "電子",
@@ -266,11 +286,11 @@
       "signal": "觀察"
     },
     {
-      "rank": 15,
+      "rank": 16,
       "theme": "電子通路",
       "sector": "電子",
       "market_group": "電子",
-      "score": 56.67,
+      "score": 55.42,
       "change_percent_avg": 0.0,
       "up_count": 0,
       "limit_up_count": 0,
@@ -281,26 +301,6 @@
         "3028 增你強",
         "2414 精技",
         "3036 文曄"
-      ],
-      "reason": "依全市場候選股分數、量能與題材同步性彙整",
-      "signal": "觀察"
-    },
-    {
-      "rank": 16,
-      "theme": "光電",
-      "sector": "電子",
-      "market_group": "電子",
-      "score": 56.23,
-      "change_percent_avg": 0.0,
-      "up_count": 0,
-      "limit_up_count": 0,
-      "volume_status": "放量",
-      "stocks": [
-        "6225 天瀚",
-        "3535 晶彩科",
-        "5484 慧友",
-        "4934 太極",
-        "6405 悅城"
       ],
       "reason": "依全市場候選股分數、量能與題材同步性彙整",
       "signal": "觀察"
@@ -348,7 +348,7 @@
       "theme": "半導體",
       "sector": "電子",
       "market_group": "電子",
-      "score": 53.17,
+      "score": 53.44,
       "change_percent_avg": 0.0,
       "up_count": 0,
       "limit_up_count": 0,
@@ -356,8 +356,8 @@
       "stocks": [
         "3041 揚智",
         "4967 十銓",
-        "2408 南亞科",
         "6515 穎崴",
+        "7749 意騰-KY",
         "6770 力積電"
       ],
       "reason": "依全市場候選股分數、量能與題材同步性彙整",
@@ -421,7 +421,7 @@
       "theme": "營建",
       "sector": "傳產",
       "market_group": "非電子",
-      "score": 69.55,
+      "score": 70.2,
       "change_percent_avg": 0.0,
       "up_count": 0,
       "limit_up_count": 0,
@@ -502,7 +502,7 @@
       "theme": "半導體",
       "sector": "電子",
       "market_group": "電子",
-      "score": 53.17,
+      "score": 53.44,
       "change_percent_avg": 0.0,
       "up_count": 0,
       "limit_up_count": 0,
@@ -510,8 +510,8 @@
       "stocks": [
         "3041 揚智",
         "4967 十銓",
-        "2408 南亞科",
         "6515 穎崴",
+        "7749 意騰-KY",
         "6770 力積電"
       ],
       "reason": "依全市場候選股分數、量能與題材同步性彙整",
@@ -557,20 +557,20 @@
     },
     {
       "rank": 16,
-      "theme": "光電",
+      "theme": "電子通路",
       "sector": "電子",
       "market_group": "電子",
-      "score": 56.23,
+      "score": 55.42,
       "change_percent_avg": 0.0,
       "up_count": 0,
       "limit_up_count": 0,
       "volume_status": "放量",
       "stocks": [
-        "6225 天瀚",
-        "3535 晶彩科",
-        "5484 慧友",
-        "4934 太極",
-        "6405 悅城"
+        "8112 至上",
+        "2347 聯強",
+        "3028 增你強",
+        "2414 精技",
+        "3036 文曄"
       ],
       "reason": "依全市場候選股分數、量能與題材同步性彙整",
       "signal": "觀察"

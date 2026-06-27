@@ -287,7 +287,7 @@ function formatMasterDate(value) {
 }
 
 function stockUpdateText(stock, record) {
-  return cleanDisplay(stock?.data_version || stock?.market_date || formatMasterDate(record?.source_date));
+  return cleanDisplay(stock?.updated_at || stock?.data_version || stock?.market_date || formatMasterDate(record?.source_date));
 }
 
 function stockLabel(code) {

@@ -2,11 +2,70 @@ from __future__ import annotations
 
 import argparse
 import json
+import subprocess
+import sys
+from datetime import datetime
+from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from data_sources import DataProvider
 from reporting import write_home_dashboard_data, write_reports
 from scoring_model import build_candidates, prefilter_by_revenue, top_report
 from update_news_events import NEWS_OUTPUT_PATH, build_events, write_events
+
+ROOT = Path(__file__).resolve().parent
+TAIPEI_TZ = ZoneInfo("Asia/Taipei")
+
+
+def run_helper_script(script_name: str) -> dict[str, object]:
+    script_path = ROOT / "scripts" / script_name
+    if not script_path.exists():
+        return {
+            "script": script_name,
+            "success": False,
+            "skipped": True,
+            "message": "script not found",
+        }
+    completed = subprocess.run(
+        [sys.executable, str(script_path)],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    return {
+        "script": script_name,
+        "success": completed.returncode == 0,
+        "skipped": False,
+        "returncode": completed.returncode,
+        "stdout": completed.stdout.strip()[-2000:],
+        "stderr": completed.stderr.strip()[-2000:],
+    }
+
+
+def write_update_report(payload: dict[str, object]) -> list[str]:
+    updated_at = datetime.now(TAIPEI_TZ).strftime("%Y-%m-%d %H:%M:%S Asia/Taipei")
+    report = {
+        "updated_at": updated_at,
+        "success": True,
+        "schedule_policy": "daily; no trading-day skip",
+        "pages_data_scope": [
+            "首頁儀表板",
+            "AI選股清單",
+            "產業題材庫",
+            "重大新聞",
+            "個股概覽",
+            "持股追蹤資料參照",
+        ],
+        **payload,
+    }
+    outputs: list[str] = []
+    for folder in (ROOT / "data", ROOT / "docs" / "data"):
+        folder.mkdir(parents=True, exist_ok=True)
+        path = folder / "update_report.json"
+        path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        outputs.append(str(path))
+    return outputs
 
 
 def run_scan(
@@ -15,6 +74,9 @@ def run_scan(
     top_n: int = 30,
     site_top_n: int = 180,
 ) -> dict[str, object]:
+    pre_update_results = [
+        run_helper_script("update_stock_master.py"),
+    ]
     provider = DataProvider()
     stocks = provider.load_or_fetch_stock_list(refresh=refresh)
     revenue = provider.load_or_fetch_revenue(refresh=refresh)
@@ -70,7 +132,12 @@ def run_scan(
         home_dashboard_files = [str(path) for path in write_home_dashboard_data()]
     except Exception as exc:
         home_dashboard_files = [f"首頁戰情資料更新失敗：{exc}"]
-    return {
+    post_update_results = [
+        run_helper_script("build_source_catalog.py"),
+        run_helper_script("build_concepts_taxonomy.py"),
+        run_helper_script("build_radar_rankings.py"),
+    ]
+    result = {
         "股票清單檔": str(provider.data_dir / "tw_stock_list.csv"),
         "候選股數": len(candidates),
         "輸出前N名": len(report),
@@ -78,9 +145,13 @@ def run_scan(
         "首頁戰情資料": home_dashboard_files,
         "網站互動資料筆數": len(interactive_report),
         "price_data_qa": price_qa,
+        "pre_update_scripts": pre_update_results,
+        "post_update_scripts": post_update_results,
         "CSV": str(csv_path),
         "HTML": str(html_path),
     }
+    result["update_report_files"] = write_update_report(result)
+    return result
 
 
 def main() -> None:
