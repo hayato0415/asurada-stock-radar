@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-06-27 11:40",
+  "generated_at": "2026-06-27 03:45",
   "range": "近五個交易日",
   "source_note": "依公開新聞、題材關鍵字、個股提及次數、供需訊號與盤面表現統計",
   "items": [
     {
       "rank": 1,
       "theme": "記憶體／DRAM／NAND",
-      "theme_score": 77,
-      "news_count": 6,
-      "weighted_news_score": 100,
-      "unique_sources": 4,
-      "mentioned_stock_count": 15,
+      "theme_score": 61,
+      "news_count": 4,
+      "weighted_news_score": 62,
+      "unique_sources": 2,
+      "mentioned_stock_count": 8,
       "representative_stocks": [
         {
           "code": "2408",
@@ -35,7 +35,79 @@
       ],
       "supply_demand": {
         "demand": [
-          "AI需求",
+          "訂單"
+        ],
+        "supply": [
+          "供給訊號待補"
+        ],
+        "price_power": "報價 / 利差訊號待補",
+        "inventory": "庫存下降或補庫存訊號待確認",
+        "conclusion": "目前供需證據不足，僅列為觀察"
+      },
+      "evidence": {
+        "news": "近五日命中 4 則新聞，來源 2 個。",
+        "price": "以現有日資料與營收動能輔助判斷，完整五日漲跌待資料源補齊。",
+        "technical": "完整 MA5 / MA10 / MA20 與新高資料待資料源補齊。",
+        "volume": "以現有成交量欄位輔助判斷，20 日均量倍率待資料源補齊。",
+        "fundamental": "以營收、報價、訂單、供需關鍵字輔助判斷。"
+      },
+      "top_news": [
+        {
+          "title": "【台股盤後】美光財報救市，加權延續盤堅 2026/6/25 下午 05:01:03 40562",
+          "source": "CMoney 台股即時消息",
+          "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1224575",
+          "published_at": "2026-06-27"
+        },
+        {
+          "title": "記憶體大缺 美光不背鍋、控特定客戶狂砍價肇禍",
+          "source": "MoneyDJ 即時新聞總表",
+          "url": "https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=61aff2a8-3bc0-4968-858d-133ffc057657&c=MB010000",
+          "published_at": "2026-06-27"
+        },
+        {
+          "title": "三星LG包辦iPhone 18 Pro面板訂單 京東方出局...",
+          "source": "MoneyDJ 即時新聞總表",
+          "url": "https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=0138af61-1855-4f5c-8499-eef8b3cacbdd&c=MB010000",
+          "published_at": "2026-06-27"
+        }
+      ],
+      "asurada_comment": "此題材依新聞熱度、來源數、個股擴散與供需關鍵字綜合排序。",
+      "data_quality": "medium",
+      "data_quality_note": "已具多來源或多個股擴散訊號，但仍待完整量價資料補強"
+    },
+    {
+      "rank": 2,
+      "theme": "PCB／ABF／CCL",
+      "theme_score": 51,
+      "news_count": 3,
+      "weighted_news_score": 43,
+      "unique_sources": 1,
+      "mentioned_stock_count": 48,
+      "representative_stocks": [
+        {
+          "code": "3037",
+          "name": "欣興"
+        },
+        {
+          "code": "3189",
+          "name": "景碩"
+        },
+        {
+          "code": "8046",
+          "name": "南電"
+        },
+        {
+          "code": "6213",
+          "name": "聯茂"
+        },
+        {
+          "code": "6274",
+          "name": "台燿"
+        }
+      ],
+      "supply_demand": {
+        "demand": [
+          "伺服器需求",
           "資料中心",
           "需求"
         ],
@@ -47,7 +119,7 @@
         "conclusion": "目前供需證據不足，僅列為觀察"
       },
       "evidence": {
-        "news": "近五日命中 6 則新聞，來源 4 個。",
+        "news": "近五日命中 3 則新聞，來源 1 個。",
         "price": "以現有日資料與營收動能輔助判斷，完整五日漲跌待資料源補齊。",
         "technical": "完整 MA5 / MA10 / MA20 與新高資料待資料源補齊。",
         "volume": "以現有成交量欄位輔助判斷，20 日均量倍率待資料源補齊。",
@@ -55,22 +127,86 @@
       },
       "top_news": [
         {
-          "title": "美光財報前瞻：記憶體產業風向球，台股記憶體族群提前表態 2026/6/22 下午 05:38:34 9110",
-          "source": "CMoney 美股新聞快訊",
-          "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1221775",
-          "published_at": "2026-06-25"
-        },
-        {
-          "title": "【台股盤後】美光財報救市，加權延續盤堅",
+          "title": "【13:11 即時新聞】全科(3209)股價小升至60.9元，受電子通路族群輪動與AI伺服器需求支撐＋主力與法人偏空調節下的高檔壓力測試",
           "source": "CMoney 台股即時消息",
-          "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1224575",
-          "published_at": "2026-06-25"
+          "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1225371",
+          "published_at": "2026-06-27"
         },
         {
-          "title": "3. 美光Q3財報會議全文：CEO看好AI需求續強 供需緊張延續至2027年後 估Q4獲利再創高",
+          "title": "南亞、台玻、富喬再度大漲——玻纖布憑什麼搶走AI最大紅利？ 2026/6/22 下午 01:56:08 15934",
+          "source": "CMoney 台股即時消息",
+          "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1221703",
+          "published_at": "2026-06-27"
+        },
+        {
+          "title": "輝達 Halos 點名台廠五虎，機器人兆元商機誰受惠最深？ 2026/6/25 上午 10:08:05 8045",
+          "source": "CMoney 台股即時消息",
+          "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1224424",
+          "published_at": "2026-06-27"
+        }
+      ],
+      "asurada_comment": "此題材依新聞熱度、來源數、個股擴散與供需關鍵字綜合排序。",
+      "data_quality": "low",
+      "data_quality_note": "缺少完整近五日漲跌、20日量比與均線資料"
+    },
+    {
+      "rank": 3,
+      "theme": "航空／油價回落",
+      "theme_score": 50,
+      "news_count": 4,
+      "weighted_news_score": 69,
+      "unique_sources": 3,
+      "mentioned_stock_count": 7,
+      "representative_stocks": [
+        {
+          "code": "2610",
+          "name": "華航"
+        },
+        {
+          "code": "2618",
+          "name": "長榮航"
+        },
+        {
+          "code": "6757",
+          "name": "台灣虎航"
+        }
+      ],
+      "supply_demand": {
+        "demand": [
+          "需求訊號待補"
+        ],
+        "supply": [
+          "供給訊號待補"
+        ],
+        "price_power": "報價 / 利差訊號待補",
+        "inventory": "庫存下降或補庫存訊號待確認",
+        "conclusion": "目前供需證據不足，僅列為觀察"
+      },
+      "evidence": {
+        "news": "近五日命中 4 則新聞，來源 3 個。",
+        "price": "以現有日資料與營收動能輔助判斷，完整五日漲跌待資料源補齊。",
+        "technical": "完整 MA5 / MA10 / MA20 與新高資料待資料源補齊。",
+        "volume": "以現有成交量欄位輔助判斷，20 日均量倍率待資料源補齊。",
+        "fundamental": "以營收、報價、訂單、供需關鍵字輔助判斷。"
+      },
+      "top_news": [
+        {
+          "title": "基金/ETF/期貨/原物料",
+          "source": "CMoney 台股即時消息",
+          "url": "https://www.cmoney.tw/notes/?navId=twstock_fund_etf_future_material",
+          "published_at": "2026-06-27"
+        },
+        {
+          "title": "原物料即時消息 729",
+          "source": "CMoney 台股即時消息",
+          "url": "https://www.cmoney.tw/notes/?tag=79383",
+          "published_at": "2026-06-27"
+        },
+        {
+          "title": "5. 油價跌幅收斂！伊朗聲稱挫敗美軍空襲 警告任何新挑釁都將遭嚴厲回應",
           "source": "鉅亨網美股新聞",
-          "url": "https://news.cnyes.com/news/id/6511277",
-          "published_at": "2026-06-25"
+          "url": "https://news.cnyes.com/news/id/6514625",
+          "published_at": "2026-06-27"
         }
       ],
       "asurada_comment": "此題材依新聞熱度、來源數、個股擴散與供需關鍵字綜合排序。",
@@ -78,12 +214,276 @@
       "data_quality_note": "已具多來源或多個股擴散訊號，但仍待完整量價資料補強"
     },
     {
-      "rank": 2,
+      "rank": 4,
+      "theme": "功率半導體",
+      "theme_score": 48,
+      "news_count": 2,
+      "weighted_news_score": 31,
+      "unique_sources": 1,
+      "mentioned_stock_count": 37,
+      "representative_stocks": [
+        {
+          "code": "2481",
+          "name": "強茂"
+        },
+        {
+          "code": "3675",
+          "name": "德微"
+        },
+        {
+          "code": "8261",
+          "name": "富鼎"
+        },
+        {
+          "code": "5425",
+          "name": "台半"
+        },
+        {
+          "code": "3707",
+          "name": "漢磊"
+        }
+      ],
+      "supply_demand": {
+        "demand": [
+          "伺服器需求",
+          "資料中心",
+          "需求"
+        ],
+        "supply": [
+          "供給訊號待補"
+        ],
+        "price_power": "報價 / 利差訊號待補",
+        "inventory": "庫存下降或補庫存訊號待確認",
+        "conclusion": "目前供需證據不足，僅列為觀察"
+      },
+      "evidence": {
+        "news": "近五日命中 2 則新聞，來源 1 個。",
+        "price": "以現有日資料與營收動能輔助判斷，完整五日漲跌待資料源補齊。",
+        "technical": "完整 MA5 / MA10 / MA20 與新高資料待資料源補齊。",
+        "volume": "以現有成交量欄位輔助判斷，20 日均量倍率待資料源補齊。",
+        "fundamental": "以營收、報價、訂單、供需關鍵字輔助判斷。"
+      },
+      "top_news": [
+        {
+          "title": "【13:11 即時新聞】全科(3209)股價小升至60.9元，受電子通路族群輪動與AI伺服器需求支撐＋主力與法人偏空調節下的高檔壓力測試",
+          "source": "CMoney 台股即時消息",
+          "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1225371",
+          "published_at": "2026-06-27"
+        },
+        {
+          "title": "輝達 Halos 點名台廠五虎，機器人兆元商機誰受惠最深？ 2026/6/25 上午 10:08:05 8045",
+          "source": "CMoney 台股即時消息",
+          "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1224424",
+          "published_at": "2026-06-27"
+        }
+      ],
+      "asurada_comment": "此題材依新聞熱度、來源數、個股擴散與供需關鍵字綜合排序。",
+      "data_quality": "low",
+      "data_quality_note": "缺少完整近五日漲跌、20日量比與均線資料"
+    },
+    {
+      "rank": 5,
+      "theme": "重電／AI電力",
+      "theme_score": 48,
+      "news_count": 2,
+      "weighted_news_score": 31,
+      "unique_sources": 1,
+      "mentioned_stock_count": 37,
+      "representative_stocks": [
+        {
+          "code": "1504",
+          "name": "東元"
+        },
+        {
+          "code": "1513",
+          "name": "中興電"
+        },
+        {
+          "code": "1605",
+          "name": "華新"
+        },
+        {
+          "code": "1618",
+          "name": "合機"
+        },
+        {
+          "code": "3708",
+          "name": "上緯投控"
+        }
+      ],
+      "supply_demand": {
+        "demand": [
+          "伺服器需求",
+          "資料中心",
+          "需求"
+        ],
+        "supply": [
+          "供給訊號待補"
+        ],
+        "price_power": "報價 / 利差訊號待補",
+        "inventory": "庫存下降或補庫存訊號待確認",
+        "conclusion": "目前供需證據不足，僅列為觀察"
+      },
+      "evidence": {
+        "news": "近五日命中 2 則新聞，來源 1 個。",
+        "price": "以現有日資料與營收動能輔助判斷，完整五日漲跌待資料源補齊。",
+        "technical": "完整 MA5 / MA10 / MA20 與新高資料待資料源補齊。",
+        "volume": "以現有成交量欄位輔助判斷，20 日均量倍率待資料源補齊。",
+        "fundamental": "以營收、報價、訂單、供需關鍵字輔助判斷。"
+      },
+      "top_news": [
+        {
+          "title": "【13:11 即時新聞】全科(3209)股價小升至60.9元，受電子通路族群輪動與AI伺服器需求支撐＋主力與法人偏空調節下的高檔壓力測試",
+          "source": "CMoney 台股即時消息",
+          "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1225371",
+          "published_at": "2026-06-27"
+        },
+        {
+          "title": "輝達 Halos 點名台廠五虎，機器人兆元商機誰受惠最深？ 2026/6/25 上午 10:08:05 8045",
+          "source": "CMoney 台股即時消息",
+          "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1224424",
+          "published_at": "2026-06-27"
+        }
+      ],
+      "asurada_comment": "此題材依新聞熱度、來源數、個股擴散與供需關鍵字綜合排序。",
+      "data_quality": "low",
+      "data_quality_note": "缺少完整近五日漲跌、20日量比與均線資料"
+    },
+    {
+      "rank": 6,
+      "theme": "AI伺服器／零組件",
+      "theme_score": 48,
+      "news_count": 2,
+      "weighted_news_score": 31,
+      "unique_sources": 1,
+      "mentioned_stock_count": 34,
+      "representative_stocks": [
+        {
+          "code": "6584",
+          "name": "南俊國際"
+        },
+        {
+          "code": "2415",
+          "name": "錩新"
+        },
+        {
+          "code": "2382",
+          "name": "廣達"
+        },
+        {
+          "code": "3231",
+          "name": "緯創"
+        },
+        {
+          "code": "6669",
+          "name": "緯穎"
+        }
+      ],
+      "supply_demand": {
+        "demand": [
+          "伺服器需求",
+          "資料中心",
+          "需求"
+        ],
+        "supply": [
+          "供給訊號待補"
+        ],
+        "price_power": "報價 / 利差訊號待補",
+        "inventory": "庫存下降或補庫存訊號待確認",
+        "conclusion": "目前供需證據不足，僅列為觀察"
+      },
+      "evidence": {
+        "news": "近五日命中 2 則新聞，來源 1 個。",
+        "price": "以現有日資料與營收動能輔助判斷，完整五日漲跌待資料源補齊。",
+        "technical": "完整 MA5 / MA10 / MA20 與新高資料待資料源補齊。",
+        "volume": "以現有成交量欄位輔助判斷，20 日均量倍率待資料源補齊。",
+        "fundamental": "以營收、報價、訂單、供需關鍵字輔助判斷。"
+      },
+      "top_news": [
+        {
+          "title": "【13:11 即時新聞】全科(3209)股價小升至60.9元，受電子通路族群輪動與AI伺服器需求支撐＋主力與法人偏空調節下的高檔壓力測試",
+          "source": "CMoney 台股即時消息",
+          "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1225371",
+          "published_at": "2026-06-27"
+        },
+        {
+          "title": "輝達 Halos 點名台廠五虎，機器人兆元商機誰受惠最深？ 2026/6/25 上午 10:08:05 8045",
+          "source": "CMoney 台股即時消息",
+          "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1224424",
+          "published_at": "2026-06-27"
+        }
+      ],
+      "asurada_comment": "此題材依新聞熱度、來源數、個股擴散與供需關鍵字綜合排序。",
+      "data_quality": "low",
+      "data_quality_note": "缺少完整近五日漲跌、20日量比與均線資料"
+    },
+    {
+      "rank": 7,
+      "theme": "面板／光電／低價轉型",
+      "theme_score": 48,
+      "news_count": 1,
+      "weighted_news_score": 19,
+      "unique_sources": 1,
+      "mentioned_stock_count": 12,
+      "representative_stocks": [
+        {
+          "code": "3481",
+          "name": "群創"
+        },
+        {
+          "code": "2409",
+          "name": "友達"
+        },
+        {
+          "code": "6116",
+          "name": "彩晶"
+        },
+        {
+          "code": "3149",
+          "name": "正達"
+        },
+        {
+          "code": "6456",
+          "name": "GIS-KY"
+        }
+      ],
+      "supply_demand": {
+        "demand": [
+          "訂單"
+        ],
+        "supply": [
+          "供給訊號待補"
+        ],
+        "price_power": "報價 / 利差訊號待補",
+        "inventory": "庫存下降或補庫存訊號待確認",
+        "conclusion": "目前供需證據不足，僅列為觀察"
+      },
+      "evidence": {
+        "news": "近五日命中 1 則新聞，來源 1 個。",
+        "price": "以現有日資料與營收動能輔助判斷，完整五日漲跌待資料源補齊。",
+        "technical": "完整 MA5 / MA10 / MA20 與新高資料待資料源補齊。",
+        "volume": "以現有成交量欄位輔助判斷，20 日均量倍率待資料源補齊。",
+        "fundamental": "以營收、報價、訂單、供需關鍵字輔助判斷。"
+      },
+      "top_news": [
+        {
+          "title": "三星LG包辦iPhone 18 Pro面板訂單 京東方出局...",
+          "source": "MoneyDJ 即時新聞總表",
+          "url": "https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=0138af61-1855-4f5c-8499-eef8b3cacbdd&c=MB010000",
+          "published_at": "2026-06-27"
+        }
+      ],
+      "asurada_comment": "此題材依新聞熱度、來源數、個股擴散與供需關鍵字綜合排序。",
+      "data_quality": "low",
+      "data_quality_note": "缺少完整近五日漲跌、20日量比與均線資料"
+    },
+    {
+      "rank": 8,
       "theme": "營建資產",
-      "theme_score": 55,
-      "news_count": 3,
-      "weighted_news_score": 57,
-      "unique_sources": 3,
+      "theme_score": 43,
+      "news_count": 1,
+      "weighted_news_score": 19,
+      "unique_sources": 1,
       "mentioned_stock_count": 9,
       "representative_stocks": [
         {
@@ -119,110 +519,32 @@
         "conclusion": "目前供需證據不足，僅列為觀察"
       },
       "evidence": {
-        "news": "近五日命中 3 則新聞，來源 3 個。",
+        "news": "近五日命中 1 則新聞，來源 1 個。",
         "price": "以現有日資料與營收動能輔助判斷，完整五日漲跌待資料源補齊。",
         "technical": "完整 MA5 / MA10 / MA20 與新高資料待資料源補齊。",
         "volume": "以現有成交量欄位輔助判斷，20 日均量倍率待資料源補齊。",
         "fundamental": "以營收、報價、訂單、供需關鍵字輔助判斷。"
       },
       "top_news": [
-        {
-          "title": "【13:24 即時新聞】建國(5515)股價上漲近半根，營建題材加上月營收連兩月成長支撐、短線主力調節後出現回補買盤",
-          "source": "CMoney 台股即時消息",
-          "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1224526",
-          "published_at": "2026-06-25"
-        },
         {
           "title": "傳統資產，數位跨界：佈局2026 鏈上美股 RWA財富變革",
           "source": "鉅亨網美股新聞",
           "url": "https://events.cnyes.com/bingxxanue2026-39621",
-          "published_at": "2026-06-25"
-        },
-        {
-          "title": "投資信託、股票大增 日本家庭金融資產創歷史次高",
-          "source": "MoneyDJ 即時新聞總表",
-          "url": "https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=3812df9f-6d9e-4f36-9ec0-9bc520c24d36&c=MB010000",
-          "published_at": "2026-06-25"
+          "published_at": "2026-06-27"
         }
       ],
       "asurada_comment": "此題材依新聞熱度、來源數、個股擴散與供需關鍵字綜合排序。",
-      "data_quality": "medium",
-      "data_quality_note": "已具多來源或多個股擴散訊號，但仍待完整量價資料補強"
+      "data_quality": "low",
+      "data_quality_note": "缺少完整近五日漲跌、20日量比與均線資料"
     },
     {
-      "rank": 3,
-      "theme": "PCB／ABF／CCL",
-      "theme_score": 45,
-      "news_count": 2,
-      "weighted_news_score": 38,
-      "unique_sources": 2,
-      "mentioned_stock_count": 47,
-      "representative_stocks": [
-        {
-          "code": "3037",
-          "name": "欣興"
-        },
-        {
-          "code": "3189",
-          "name": "景碩"
-        },
-        {
-          "code": "8046",
-          "name": "南電"
-        },
-        {
-          "code": "6213",
-          "name": "聯茂"
-        },
-        {
-          "code": "6274",
-          "name": "台燿"
-        }
-      ],
-      "supply_demand": {
-        "demand": [
-          "資料中心"
-        ],
-        "supply": [
-          "供給訊號待補"
-        ],
-        "price_power": "報價 / 利差訊號待補",
-        "inventory": "庫存下降或補庫存訊號待確認",
-        "conclusion": "目前供需證據不足，僅列為觀察"
-      },
-      "evidence": {
-        "news": "近五日命中 2 則新聞，來源 2 個。",
-        "price": "以現有日資料與營收動能輔助判斷，完整五日漲跌待資料源補齊。",
-        "technical": "完整 MA5 / MA10 / MA20 與新高資料待資料源補齊。",
-        "volume": "以現有成交量欄位輔助判斷，20 日均量倍率待資料源補齊。",
-        "fundamental": "以營收、報價、訂單、供需關鍵字輔助判斷。"
-      },
-      "top_news": [
-        {
-          "title": "南亞、台玻、富喬再度大漲——玻纖布憑什麼搶走AI最大紅利？ 2026/6/22 下午 01:56:08 15924",
-          "source": "CMoney 台股即時消息",
-          "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1221703",
-          "published_at": "2026-06-25"
-        },
-        {
-          "title": "2. 輝達為何漲不動？分析師點出真正原因",
-          "source": "鉅亨網美股新聞",
-          "url": "https://news.cnyes.com/news/id/6511242",
-          "published_at": "2026-06-25"
-        }
-      ],
-      "asurada_comment": "此題材依新聞熱度、來源數、個股擴散與供需關鍵字綜合排序。",
-      "data_quality": "medium",
-      "data_quality_note": "已具多來源或多個股擴散訊號，但仍待完整量價資料補強"
-    },
-    {
-      "rank": 4,
+      "rank": 9,
       "theme": "塑化／台塑四寶",
-      "theme_score": 45,
-      "news_count": 2,
-      "weighted_news_score": 38,
-      "unique_sources": 2,
-      "mentioned_stock_count": 26,
+      "theme_score": 36,
+      "news_count": 1,
+      "weighted_news_score": 19,
+      "unique_sources": 1,
+      "mentioned_stock_count": 18,
       "representative_stocks": [
         {
           "code": "1301",
@@ -247,7 +569,7 @@
       ],
       "supply_demand": {
         "demand": [
-          "資料中心"
+          "需求訊號待補"
         ],
         "supply": [
           "供給訊號待補"
@@ -257,7 +579,7 @@
         "conclusion": "目前供需證據不足，僅列為觀察"
       },
       "evidence": {
-        "news": "近五日命中 2 則新聞，來源 2 個。",
+        "news": "近五日命中 1 則新聞，來源 1 個。",
         "price": "以現有日資料與營收動能輔助判斷，完整五日漲跌待資料源補齊。",
         "technical": "完整 MA5 / MA10 / MA20 與新高資料待資料源補齊。",
         "volume": "以現有成交量欄位輔助判斷，20 日均量倍率待資料源補齊。",
@@ -265,332 +587,10 @@
       },
       "top_news": [
         {
-          "title": "南亞、台玻、富喬再度大漲——玻纖布憑什麼搶走AI最大紅利？ 2026/6/22 下午 01:56:08 15924",
+          "title": "南亞、台玻、富喬再度大漲——玻纖布憑什麼搶走AI最大紅利？ 2026/6/22 下午 01:56:08 15934",
           "source": "CMoney 台股即時消息",
           "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1221703",
-          "published_at": "2026-06-25"
-        },
-        {
-          "title": "4. 高通AI資料中心報捷 供應鏈聯電、南亞科受惠",
-          "source": "鉅亨網美股新聞",
-          "url": "https://news.cnyes.com/news/id/6511779",
-          "published_at": "2026-06-25"
-        }
-      ],
-      "asurada_comment": "此題材依新聞熱度、來源數、個股擴散與供需關鍵字綜合排序。",
-      "data_quality": "medium",
-      "data_quality_note": "已具多來源或多個股擴散訊號，但仍待完整量價資料補強"
-    },
-    {
-      "rank": 5,
-      "theme": "航空／油價回落",
-      "theme_score": 44,
-      "news_count": 3,
-      "weighted_news_score": 50,
-      "unique_sources": 2,
-      "mentioned_stock_count": 7,
-      "representative_stocks": [
-        {
-          "code": "2610",
-          "name": "華航"
-        },
-        {
-          "code": "2618",
-          "name": "長榮航"
-        },
-        {
-          "code": "6757",
-          "name": "台灣虎航"
-        }
-      ],
-      "supply_demand": {
-        "demand": [
-          "需求訊號待補"
-        ],
-        "supply": [
-          "供給訊號待補"
-        ],
-        "price_power": "報價 / 利差訊號待補",
-        "inventory": "庫存下降或補庫存訊號待確認",
-        "conclusion": "目前供需證據不足，僅列為觀察"
-      },
-      "evidence": {
-        "news": "近五日命中 3 則新聞，來源 2 個。",
-        "price": "以現有日資料與營收動能輔助判斷，完整五日漲跌待資料源補齊。",
-        "technical": "完整 MA5 / MA10 / MA20 與新高資料待資料源補齊。",
-        "volume": "以現有成交量欄位輔助判斷，20 日均量倍率待資料源補齊。",
-        "fundamental": "以營收、報價、訂單、供需關鍵字輔助判斷。"
-      },
-      "top_news": [
-        {
-          "title": "基金/ETF/期貨/原物料",
-          "source": "CMoney 美股新聞快訊",
-          "url": "https://www.cmoney.tw/notes/?navId=twstock_fund_etf_future_material",
-          "published_at": "2026-06-25"
-        },
-        {
-          "title": "原物料即時消息 729",
-          "source": "CMoney 美股新聞快訊",
-          "url": "https://www.cmoney.tw/notes/?tag=79383",
-          "published_at": "2026-06-25"
-        },
-        {
-          "title": "油價回落、燃油成本估大減/機票仍貴 航空股起飛",
-          "source": "MoneyDJ 即時新聞總表",
-          "url": "https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=a4f6428e-9719-430e-8f59-076d7b10f5c4&c=MB010000",
-          "published_at": "2026-06-25"
-        }
-      ],
-      "asurada_comment": "此題材依新聞熱度、來源數、個股擴散與供需關鍵字綜合排序。",
-      "data_quality": "medium",
-      "data_quality_note": "已具多來源或多個股擴散訊號，但仍待完整量價資料補強"
-    },
-    {
-      "rank": 6,
-      "theme": "重電／AI電力",
-      "theme_score": 44,
-      "news_count": 2,
-      "weighted_news_score": 31,
-      "unique_sources": 1,
-      "mentioned_stock_count": 44,
-      "representative_stocks": [
-        {
-          "code": "1504",
-          "name": "東元"
-        },
-        {
-          "code": "1513",
-          "name": "中興電"
-        },
-        {
-          "code": "1605",
-          "name": "華新"
-        },
-        {
-          "code": "1618",
-          "name": "合機"
-        },
-        {
-          "code": "3708",
-          "name": "上緯投控"
-        }
-      ],
-      "supply_demand": {
-        "demand": [
-          "資料中心"
-        ],
-        "supply": [
-          "供給訊號待補"
-        ],
-        "price_power": "報價 / 利差訊號待補",
-        "inventory": "庫存下降或補庫存訊號待確認",
-        "conclusion": "目前供需證據不足，僅列為觀察"
-      },
-      "evidence": {
-        "news": "近五日命中 2 則新聞，來源 1 個。",
-        "price": "以現有日資料與營收動能輔助判斷，完整五日漲跌待資料源補齊。",
-        "technical": "完整 MA5 / MA10 / MA20 與新高資料待資料源補齊。",
-        "volume": "以現有成交量欄位輔助判斷，20 日均量倍率待資料源補齊。",
-        "fundamental": "以營收、報價、訂單、供需關鍵字輔助判斷。"
-      },
-      "top_news": [
-        {
-          "title": "2. 輝達為何漲不動？分析師點出真正原因",
-          "source": "鉅亨網美股新聞",
-          "url": "https://news.cnyes.com/news/id/6511242",
-          "published_at": "2026-06-25"
-        },
-        {
-          "title": "4. 高通AI資料中心報捷 供應鏈聯電、南亞科受惠",
-          "source": "鉅亨網美股新聞",
-          "url": "https://news.cnyes.com/news/id/6511779",
-          "published_at": "2026-06-25"
-        }
-      ],
-      "asurada_comment": "此題材依新聞熱度、來源數、個股擴散與供需關鍵字綜合排序。",
-      "data_quality": "low",
-      "data_quality_note": "缺少完整近五日漲跌、20日量比與均線資料"
-    },
-    {
-      "rank": 7,
-      "theme": "AI伺服器／零組件",
-      "theme_score": 44,
-      "news_count": 2,
-      "weighted_news_score": 31,
-      "unique_sources": 1,
-      "mentioned_stock_count": 41,
-      "representative_stocks": [
-        {
-          "code": "6584",
-          "name": "南俊國際"
-        },
-        {
-          "code": "2415",
-          "name": "錩新"
-        },
-        {
-          "code": "2382",
-          "name": "廣達"
-        },
-        {
-          "code": "3231",
-          "name": "緯創"
-        },
-        {
-          "code": "6669",
-          "name": "緯穎"
-        }
-      ],
-      "supply_demand": {
-        "demand": [
-          "資料中心"
-        ],
-        "supply": [
-          "供給訊號待補"
-        ],
-        "price_power": "報價 / 利差訊號待補",
-        "inventory": "庫存下降或補庫存訊號待確認",
-        "conclusion": "目前供需證據不足，僅列為觀察"
-      },
-      "evidence": {
-        "news": "近五日命中 2 則新聞，來源 1 個。",
-        "price": "以現有日資料與營收動能輔助判斷，完整五日漲跌待資料源補齊。",
-        "technical": "完整 MA5 / MA10 / MA20 與新高資料待資料源補齊。",
-        "volume": "以現有成交量欄位輔助判斷，20 日均量倍率待資料源補齊。",
-        "fundamental": "以營收、報價、訂單、供需關鍵字輔助判斷。"
-      },
-      "top_news": [
-        {
-          "title": "2. 輝達為何漲不動？分析師點出真正原因",
-          "source": "鉅亨網美股新聞",
-          "url": "https://news.cnyes.com/news/id/6511242",
-          "published_at": "2026-06-25"
-        },
-        {
-          "title": "4. 高通AI資料中心報捷 供應鏈聯電、南亞科受惠",
-          "source": "鉅亨網美股新聞",
-          "url": "https://news.cnyes.com/news/id/6511779",
-          "published_at": "2026-06-25"
-        }
-      ],
-      "asurada_comment": "此題材依新聞熱度、來源數、個股擴散與供需關鍵字綜合排序。",
-      "data_quality": "low",
-      "data_quality_note": "缺少完整近五日漲跌、20日量比與均線資料"
-    },
-    {
-      "rank": 8,
-      "theme": "功率半導體",
-      "theme_score": 40,
-      "news_count": 1,
-      "weighted_news_score": 19,
-      "unique_sources": 1,
-      "mentioned_stock_count": 36,
-      "representative_stocks": [
-        {
-          "code": "2481",
-          "name": "強茂"
-        },
-        {
-          "code": "3675",
-          "name": "德微"
-        },
-        {
-          "code": "8261",
-          "name": "富鼎"
-        },
-        {
-          "code": "5425",
-          "name": "台半"
-        },
-        {
-          "code": "3707",
-          "name": "漢磊"
-        }
-      ],
-      "supply_demand": {
-        "demand": [
-          "資料中心"
-        ],
-        "supply": [
-          "供給訊號待補"
-        ],
-        "price_power": "報價 / 利差訊號待補",
-        "inventory": "庫存下降或補庫存訊號待確認",
-        "conclusion": "目前供需證據不足，僅列為觀察"
-      },
-      "evidence": {
-        "news": "近五日命中 1 則新聞，來源 1 個。",
-        "price": "以現有日資料與營收動能輔助判斷，完整五日漲跌待資料源補齊。",
-        "technical": "完整 MA5 / MA10 / MA20 與新高資料待資料源補齊。",
-        "volume": "以現有成交量欄位輔助判斷，20 日均量倍率待資料源補齊。",
-        "fundamental": "以營收、報價、訂單、供需關鍵字輔助判斷。"
-      },
-      "top_news": [
-        {
-          "title": "2. 輝達為何漲不動？分析師點出真正原因",
-          "source": "鉅亨網美股新聞",
-          "url": "https://news.cnyes.com/news/id/6511242",
-          "published_at": "2026-06-25"
-        }
-      ],
-      "asurada_comment": "此題材依新聞熱度、來源數、個股擴散與供需關鍵字綜合排序。",
-      "data_quality": "low",
-      "data_quality_note": "缺少完整近五日漲跌、20日量比與均線資料"
-    },
-    {
-      "rank": 9,
-      "theme": "面板／光電／低價轉型",
-      "theme_score": 36,
-      "news_count": 1,
-      "weighted_news_score": 19,
-      "unique_sources": 1,
-      "mentioned_stock_count": 11,
-      "representative_stocks": [
-        {
-          "code": "3481",
-          "name": "群創"
-        },
-        {
-          "code": "2409",
-          "name": "友達"
-        },
-        {
-          "code": "6116",
-          "name": "彩晶"
-        },
-        {
-          "code": "3149",
-          "name": "正達"
-        },
-        {
-          "code": "6456",
-          "name": "GIS-KY"
-        }
-      ],
-      "supply_demand": {
-        "demand": [
-          "需求訊號待補"
-        ],
-        "supply": [
-          "供給訊號待補"
-        ],
-        "price_power": "報價 / 利差訊號待補",
-        "inventory": "庫存下降或補庫存訊號待確認",
-        "conclusion": "目前供需證據不足，僅列為觀察"
-      },
-      "evidence": {
-        "news": "近五日命中 1 則新聞，來源 1 個。",
-        "price": "以現有日資料與營收動能輔助判斷，完整五日漲跌待資料源補齊。",
-        "technical": "完整 MA5 / MA10 / MA20 與新高資料待資料源補齊。",
-        "volume": "以現有成交量欄位輔助判斷，20 日均量倍率待資料源補齊。",
-        "fundamental": "以營收、報價、訂單、供需關鍵字輔助判斷。"
-      },
-      "top_news": [
-        {
-          "title": "2. 〈觀察〉FOPLP填補關鍵技術缺口 群創如何在先進封裝「方形革命」扮要角？",
-          "source": "鉅亨網台股新聞",
-          "url": "https://news.cnyes.com/news/id/6507854",
-          "published_at": "2026-06-25"
+          "published_at": "2026-06-27"
         }
       ],
       "asurada_comment": "此題材依新聞熱度、來源數、個股擴散與供需關鍵字綜合排序。",

@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-27 11:40:42 Asia/Taipei",
+  "updated_at": "2026-06-27 11:45:34 Asia/Taipei",
   "success": true,
   "schedule_policy": "daily; no trading-day skip",
   "pages_data_scope": [
@@ -10,14 +10,14 @@
     "個股概覽",
     "持股追蹤資料參照"
   ],
-  "股票清單檔": "C:\\Users\\Jasper\\Documents\\asurada-stock-lab\\阿斯拉台股主升段雷達\\data\\tw_stock_list.csv",
+  "股票清單檔": "/home/runner/work/asurada-stock-radar/asurada-stock-radar/data/tw_stock_list.csv",
   "候選股數": 1082,
   "輸出前N名": 30,
-  "新聞事件數": "6（保留既有新聞資料）",
+  "新聞事件數": 20,
   "首頁戰情資料": [
-    "C:\\Users\\Jasper\\Documents\\asurada-stock-lab\\阿斯拉台股主升段雷達\\docs\\data\\daily_market_snapshot.json",
-    "C:\\Users\\Jasper\\Documents\\asurada-stock-lab\\阿斯拉台股主升段雷達\\docs\\data\\daily_hot_stocks.json",
-    "C:\\Users\\Jasper\\Documents\\asurada-stock-lab\\阿斯拉台股主升段雷達\\docs\\data\\daily_hot_themes.json"
+    "/home/runner/work/asurada-stock-radar/asurada-stock-radar/docs/data/daily_market_snapshot.json",
+    "/home/runner/work/asurada-stock-radar/asurada-stock-radar/docs/data/daily_hot_stocks.json",
+    "/home/runner/work/asurada-stock-radar/asurada-stock-radar/docs/data/daily_hot_themes.json"
   ],
   "網站互動資料筆數": 180,
   "price_data_qa": {
@@ -51,7 +51,7 @@
       "success": true,
       "skipped": false,
       "returncode": 0,
-      "stdout": "concept categories: 9\noutput: C:\\Users\\Jasper\\Documents\\asurada-stock-lab\\阿斯拉台股主升段雷達\\docs\\data\\concepts-taxonomy.json",
+      "stdout": "concept categories: 9\noutput: /home/runner/work/asurada-stock-radar/asurada-stock-radar/docs/data/concepts-taxonomy.json",
       "stderr": ""
     },
     {
@@ -63,6 +63,6 @@
       "stderr": ""
     }
   ],
-  "CSV": "C:\\Users\\Jasper\\Documents\\asurada-stock-lab\\阿斯拉台股主升段雷達\\output\\asurada_candidates_20260627.csv",
-  "HTML": "C:\\Users\\Jasper\\Documents\\asurada-stock-lab\\阿斯拉台股主升段雷達\\output\\asurada_candidates_20260627.html"
+  "CSV": "/home/runner/work/asurada-stock-radar/asurada-stock-radar/output/asurada_candidates_20260627.csv",
+  "HTML": "/home/runner/work/asurada-stock-radar/asurada-stock-radar/output/asurada_candidates_20260627.html"
 }
