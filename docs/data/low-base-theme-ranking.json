@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-28 12:01",
+  "generated_at": "2026-06-28 16:46",
   "range": "近五個交易日",
   "source_note": "依低位階、題材熱度、量價轉強、營收改善與供需催化排序",
   "items": [
@@ -9,7 +9,7 @@
       "name": "永擎",
       "market": "上市",
       "theme": "PCB／ABF／CCL",
-      "score": 78,
+      "score": 81,
       "price": 320.5,
       "five_day_change_pct": null,
       "volume_ratio_20d": null,
@@ -46,7 +46,7 @@
       "name": "玖鼎電力",
       "market": "上市",
       "theme": "PCB／ABF／CCL",
-      "score": 76,
+      "score": 79,
       "price": 57.4,
       "five_day_change_pct": null,
       "volume_ratio_20d": null,
@@ -79,85 +79,11 @@
     },
     {
       "rank": 3,
-      "code": "6442",
-      "name": "光聖",
-      "market": "上市",
-      "theme": "記憶體／DRAM／NAND",
-      "score": 75,
-      "price": 1680.0,
-      "five_day_change_pct": null,
-      "volume_ratio_20d": null,
-      "position": {
-        "near_120d_low": null,
-        "distance_from_120d_high_pct": null,
-        "range_position_pct": null
-      },
-      "technical": {
-        "above_ma5": null,
-        "above_ma10": null,
-        "above_ma20": null,
-        "breakout": null,
-        "note": "完整五日技術位置待資料源補齊；目前以營收、成交量與題材強度輔助排序"
-      },
-      "fundamental": {
-        "revenue_yoy": 116.02,
-        "revenue_mom": 94.67,
-        "turnaround_note": "營收年增 116.0%，月增 94.7%，符合低基期轉強預篩"
-      },
-      "supply_demand": {
-        "demand": "對應強題材需求或資金輪動",
-        "supply": "供需細項待新聞與產業資料補齊",
-        "conclusion": "題材有熱度，需確認供需與量價是否延續"
-      },
-      "reason": "營收年增 116.0%，月增 94.7%，符合低基期轉強預篩",
-      "risk": "若量能退潮、跌回關鍵均線或題材新聞消退，代表低基期補漲失敗。",
-      "data_quality": "low",
-      "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
-    },
-    {
-      "rank": 4,
-      "code": "3025",
-      "name": "星通",
-      "market": "上市",
-      "theme": "記憶體／DRAM／NAND",
-      "score": 75,
-      "price": 67.1,
-      "five_day_change_pct": null,
-      "volume_ratio_20d": null,
-      "position": {
-        "near_120d_low": null,
-        "distance_from_120d_high_pct": null,
-        "range_position_pct": null
-      },
-      "technical": {
-        "above_ma5": null,
-        "above_ma10": null,
-        "above_ma20": null,
-        "breakout": null,
-        "note": "完整五日技術位置待資料源補齊；目前以營收、成交量與題材強度輔助排序"
-      },
-      "fundamental": {
-        "revenue_yoy": 134.59,
-        "revenue_mom": 49.52,
-        "turnaround_note": "營收年增 134.6%，月增 49.5%，符合低基期轉強預篩"
-      },
-      "supply_demand": {
-        "demand": "對應強題材需求或資金輪動",
-        "supply": "供需細項待新聞與產業資料補齊",
-        "conclusion": "題材有熱度，需確認供需與量價是否延續"
-      },
-      "reason": "營收年增 134.6%，月增 49.5%，符合低基期轉強預篩",
-      "risk": "若量能退潮、跌回關鍵均線或題材新聞消退，代表低基期補漲失敗。",
-      "data_quality": "low",
-      "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
-    },
-    {
-      "rank": 5,
       "code": "2359",
       "name": "所羅門",
       "market": "上市",
       "theme": "PCB／ABF／CCL",
-      "score": 75,
+      "score": 78,
       "price": 126.5,
       "five_day_change_pct": null,
       "volume_ratio_20d": null,
@@ -189,12 +115,12 @@
       "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
     },
     {
-      "rank": 6,
+      "rank": 4,
       "code": "3432",
       "name": "台端",
       "market": "上市",
       "theme": "PCB／ABF／CCL",
-      "score": 74,
+      "score": 77,
       "price": 17.9,
       "five_day_change_pct": null,
       "volume_ratio_20d": null,
@@ -226,234 +152,12 @@
       "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
     },
     {
-      "rank": 7,
-      "code": "2408",
-      "name": "南亞科",
-      "market": "上市",
-      "theme": "記憶體／DRAM／NAND",
-      "score": 74,
-      "price": 449.0,
-      "five_day_change_pct": null,
-      "volume_ratio_20d": null,
-      "position": {
-        "near_120d_low": null,
-        "distance_from_120d_high_pct": null,
-        "range_position_pct": null
-      },
-      "technical": {
-        "above_ma5": null,
-        "above_ma10": null,
-        "above_ma20": null,
-        "breakout": null,
-        "note": "完整五日技術位置待資料源補齊；目前以營收、成交量與題材強度輔助排序"
-      },
-      "fundamental": {
-        "revenue_yoy": 730.14,
-        "revenue_mom": 8.55,
-        "turnaround_note": "營收年增 730.1%，月增 8.5%，符合低基期轉強預篩"
-      },
-      "supply_demand": {
-        "demand": "對應強題材需求或資金輪動",
-        "supply": "供需細項待新聞與產業資料補齊",
-        "conclusion": "題材有熱度，需確認供需與量價是否延續"
-      },
-      "reason": "營收年增 730.1%，月增 8.5%，符合低基期轉強預篩",
-      "risk": "若量能退潮、跌回關鍵均線或題材新聞消退，代表低基期補漲失敗。",
-      "data_quality": "low",
-      "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
-    },
-    {
-      "rank": 8,
-      "code": "3576",
-      "name": "聯合再生",
-      "market": "上市",
-      "theme": "面板／光電／低價轉型",
-      "score": 74,
-      "price": 16.5,
-      "five_day_change_pct": null,
-      "volume_ratio_20d": null,
-      "position": {
-        "near_120d_low": null,
-        "distance_from_120d_high_pct": null,
-        "range_position_pct": null
-      },
-      "technical": {
-        "above_ma5": null,
-        "above_ma10": null,
-        "above_ma20": null,
-        "breakout": null,
-        "note": "完整五日技術位置待資料源補齊；目前以營收、成交量與題材強度輔助排序"
-      },
-      "fundamental": {
-        "revenue_yoy": 27.63,
-        "revenue_mom": 43.95,
-        "turnaround_note": "營收年增 27.6%，月增 43.9%，符合低基期轉強預篩"
-      },
-      "supply_demand": {
-        "demand": "對應強題材需求或資金輪動",
-        "supply": "供需細項待新聞與產業資料補齊",
-        "conclusion": "題材有熱度，需確認供需與量價是否延續"
-      },
-      "reason": "營收年增 27.6%，月增 43.9%，符合低基期轉強預篩",
-      "risk": "若量能退潮、跌回關鍵均線或題材新聞消退，代表低基期補漲失敗。",
-      "data_quality": "low",
-      "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
-    },
-    {
-      "rank": 9,
-      "code": "2059",
-      "name": "川湖",
-      "market": "上市",
-      "theme": "PCB／ABF／CCL",
-      "score": 73,
-      "price": 6990.0,
-      "five_day_change_pct": null,
-      "volume_ratio_20d": null,
-      "position": {
-        "near_120d_low": null,
-        "distance_from_120d_high_pct": null,
-        "range_position_pct": null
-      },
-      "technical": {
-        "above_ma5": null,
-        "above_ma10": null,
-        "above_ma20": null,
-        "breakout": null,
-        "note": "完整五日技術位置待資料源補齊；目前以營收、成交量與題材強度輔助排序"
-      },
-      "fundamental": {
-        "revenue_yoy": 172.05,
-        "revenue_mom": 46.05,
-        "turnaround_note": "營收年增 172.1%，月增 46.1%，符合低基期轉強預篩"
-      },
-      "supply_demand": {
-        "demand": "對應強題材需求或資金輪動",
-        "supply": "供需細項待新聞與產業資料補齊",
-        "conclusion": "題材有熱度，需確認供需與量價是否延續"
-      },
-      "reason": "營收年增 172.1%，月增 46.1%，符合低基期轉強預篩",
-      "risk": "若量能退潮、跌回關鍵均線或題材新聞消退，代表低基期補漲失敗。",
-      "data_quality": "low",
-      "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
-    },
-    {
-      "rank": 10,
-      "code": "3535",
-      "name": "晶彩科",
-      "market": "上市",
-      "theme": "面板／光電／低價轉型",
-      "score": 72,
-      "price": 112.0,
-      "five_day_change_pct": null,
-      "volume_ratio_20d": null,
-      "position": {
-        "near_120d_low": null,
-        "distance_from_120d_high_pct": null,
-        "range_position_pct": null
-      },
-      "technical": {
-        "above_ma5": null,
-        "above_ma10": null,
-        "above_ma20": null,
-        "breakout": null,
-        "note": "完整五日技術位置待資料源補齊；目前以營收、成交量與題材強度輔助排序"
-      },
-      "fundamental": {
-        "revenue_yoy": 2229.03,
-        "revenue_mom": 458.51,
-        "turnaround_note": "營收年增 2229.0%，月增 458.5%，符合低基期轉強預篩"
-      },
-      "supply_demand": {
-        "demand": "對應強題材需求或資金輪動",
-        "supply": "供需細項待新聞與產業資料補齊",
-        "conclusion": "題材有熱度，需確認供需與量價是否延續"
-      },
-      "reason": "營收年增 2229.0%，月增 458.5%，符合低基期轉強預篩",
-      "risk": "若量能退潮、跌回關鍵均線或題材新聞消退，代表低基期補漲失敗。",
-      "data_quality": "low",
-      "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
-    },
-    {
-      "rank": 11,
-      "code": "3022",
-      "name": "威強電",
-      "market": "上市",
-      "theme": "PCB／ABF／CCL",
-      "score": 72,
-      "price": 81.3,
-      "five_day_change_pct": null,
-      "volume_ratio_20d": null,
-      "position": {
-        "near_120d_low": null,
-        "distance_from_120d_high_pct": null,
-        "range_position_pct": null
-      },
-      "technical": {
-        "above_ma5": null,
-        "above_ma10": null,
-        "above_ma20": null,
-        "breakout": null,
-        "note": "完整五日技術位置待資料源補齊；目前以營收、成交量與題材強度輔助排序"
-      },
-      "fundamental": {
-        "revenue_yoy": 92.4,
-        "revenue_mom": 39.29,
-        "turnaround_note": "營收年增 92.4%，月增 39.3%，符合低基期轉強預篩"
-      },
-      "supply_demand": {
-        "demand": "對應強題材需求或資金輪動",
-        "supply": "供需細項待新聞與產業資料補齊",
-        "conclusion": "題材有熱度，需確認供需與量價是否延續"
-      },
-      "reason": "營收年增 92.4%，月增 39.3%，符合低基期轉強預篩",
-      "risk": "若量能退潮、跌回關鍵均線或題材新聞消退，代表低基期補漲失敗。",
-      "data_quality": "low",
-      "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
-    },
-    {
-      "rank": 12,
-      "code": "2547",
-      "name": "日勝生",
-      "market": "上市",
-      "theme": "營建資產",
-      "score": 72,
-      "price": 10.9,
-      "five_day_change_pct": null,
-      "volume_ratio_20d": null,
-      "position": {
-        "near_120d_low": null,
-        "distance_from_120d_high_pct": null,
-        "range_position_pct": null
-      },
-      "technical": {
-        "above_ma5": null,
-        "above_ma10": null,
-        "above_ma20": null,
-        "breakout": null,
-        "note": "完整五日技術位置待資料源補齊；目前以營收、成交量與題材強度輔助排序"
-      },
-      "fundamental": {
-        "revenue_yoy": 69.9,
-        "revenue_mom": 112.93,
-        "turnaround_note": "營收年增 69.9%，月增 112.9%，符合低基期轉強預篩"
-      },
-      "supply_demand": {
-        "demand": "對應強題材需求或資金輪動",
-        "supply": "供需細項待新聞與產業資料補齊",
-        "conclusion": "題材有熱度，需確認供需與量價是否延續"
-      },
-      "reason": "營收年增 69.9%，月增 112.9%，符合低基期轉強預篩",
-      "risk": "若量能退潮、跌回關鍵均線或題材新聞消退，代表低基期補漲失敗。",
-      "data_quality": "low",
-      "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
-    },
-    {
-      "rank": 13,
+      "rank": 5,
       "code": "1618",
       "name": "合機",
       "market": "上市",
       "theme": "重電／AI電力",
-      "score": 71,
+      "score": 76,
       "price": 39.6,
       "five_day_change_pct": null,
       "volume_ratio_20d": null,
@@ -485,13 +189,13 @@
       "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
     },
     {
-      "rank": 14,
-      "code": "6225",
-      "name": "天瀚",
+      "rank": 6,
+      "code": "2059",
+      "name": "川湖",
       "market": "上市",
-      "theme": "面板／光電／低價轉型",
-      "score": 71,
-      "price": 21.5,
+      "theme": "PCB／ABF／CCL",
+      "score": 76,
+      "price": 6990.0,
       "five_day_change_pct": null,
       "volume_ratio_20d": null,
       "position": {
@@ -507,28 +211,65 @@
         "note": "完整五日技術位置待資料源補齊；目前以營收、成交量與題材強度輔助排序"
       },
       "fundamental": {
-        "revenue_yoy": 87.32,
-        "revenue_mom": 188.98,
-        "turnaround_note": "營收年增 87.3%，月增 189.0%，符合低基期轉強預篩"
+        "revenue_yoy": 172.05,
+        "revenue_mom": 46.05,
+        "turnaround_note": "營收年增 172.1%，月增 46.1%，符合低基期轉強預篩"
       },
       "supply_demand": {
         "demand": "對應強題材需求或資金輪動",
         "supply": "供需細項待新聞與產業資料補齊",
         "conclusion": "題材有熱度，需確認供需與量價是否延續"
       },
-      "reason": "營收年增 87.3%，月增 189.0%，符合低基期轉強預篩",
+      "reason": "營收年增 172.1%，月增 46.1%，符合低基期轉強預篩",
       "risk": "若量能退潮、跌回關鍵均線或題材新聞消退，代表低基期補漲失敗。",
       "data_quality": "low",
       "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
     },
     {
-      "rank": 15,
-      "code": "6770",
-      "name": "力積電",
+      "rank": 7,
+      "code": "3022",
+      "name": "威強電",
+      "market": "上市",
+      "theme": "PCB／ABF／CCL",
+      "score": 75,
+      "price": 81.3,
+      "five_day_change_pct": null,
+      "volume_ratio_20d": null,
+      "position": {
+        "near_120d_low": null,
+        "distance_from_120d_high_pct": null,
+        "range_position_pct": null
+      },
+      "technical": {
+        "above_ma5": null,
+        "above_ma10": null,
+        "above_ma20": null,
+        "breakout": null,
+        "note": "完整五日技術位置待資料源補齊；目前以營收、成交量與題材強度輔助排序"
+      },
+      "fundamental": {
+        "revenue_yoy": 92.4,
+        "revenue_mom": 39.29,
+        "turnaround_note": "營收年增 92.4%，月增 39.3%，符合低基期轉強預篩"
+      },
+      "supply_demand": {
+        "demand": "對應強題材需求或資金輪動",
+        "supply": "供需細項待新聞與產業資料補齊",
+        "conclusion": "題材有熱度，需確認供需與量價是否延續"
+      },
+      "reason": "營收年增 92.4%，月增 39.3%，符合低基期轉強預篩",
+      "risk": "若量能退潮、跌回關鍵均線或題材新聞消退，代表低基期補漲失敗。",
+      "data_quality": "low",
+      "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
+    },
+    {
+      "rank": 8,
+      "code": "6442",
+      "name": "光聖",
       "market": "上市",
       "theme": "記憶體／DRAM／NAND",
-      "score": 71,
-      "price": 78.3,
+      "score": 73,
+      "price": 1680.0,
       "five_day_change_pct": null,
       "volume_ratio_20d": null,
       "position": {
@@ -544,64 +285,27 @@
         "note": "完整五日技術位置待資料源補齊；目前以營收、成交量與題材強度輔助排序"
       },
       "fundamental": {
-        "revenue_yoy": 58.86,
-        "revenue_mom": 14.36,
-        "turnaround_note": "營收年增 58.9%，月增 14.4%，符合低基期轉強預篩"
+        "revenue_yoy": 116.02,
+        "revenue_mom": 94.67,
+        "turnaround_note": "營收年增 116.0%，月增 94.7%，符合低基期轉強預篩"
       },
       "supply_demand": {
         "demand": "對應強題材需求或資金輪動",
         "supply": "供需細項待新聞與產業資料補齊",
         "conclusion": "題材有熱度，需確認供需與量價是否延續"
       },
-      "reason": "營收年增 58.9%，月增 14.4%，符合低基期轉強預篩",
+      "reason": "營收年增 116.0%，月增 94.7%，符合低基期轉強預篩",
       "risk": "若量能退潮、跌回關鍵均線或題材新聞消退，代表低基期補漲失敗。",
       "data_quality": "low",
       "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
     },
     {
-      "rank": 16,
-      "code": "5484",
-      "name": "慧友",
-      "market": "上市",
-      "theme": "面板／光電／低價轉型",
-      "score": 70,
-      "price": 43.9,
-      "five_day_change_pct": null,
-      "volume_ratio_20d": null,
-      "position": {
-        "near_120d_low": null,
-        "distance_from_120d_high_pct": null,
-        "range_position_pct": null
-      },
-      "technical": {
-        "above_ma5": null,
-        "above_ma10": null,
-        "above_ma20": null,
-        "breakout": null,
-        "note": "完整五日技術位置待資料源補齊；目前以營收、成交量與題材強度輔助排序"
-      },
-      "fundamental": {
-        "revenue_yoy": 152.32,
-        "revenue_mom": 50.33,
-        "turnaround_note": "營收年增 152.3%，月增 50.3%，符合低基期轉強預篩"
-      },
-      "supply_demand": {
-        "demand": "對應強題材需求或資金輪動",
-        "supply": "供需細項待新聞與產業資料補齊",
-        "conclusion": "題材有熱度，需確認供需與量價是否延續"
-      },
-      "reason": "營收年增 152.3%，月增 50.3%，符合低基期轉強預篩",
-      "risk": "若量能退潮、跌回關鍵均線或題材新聞消退，代表低基期補漲失敗。",
-      "data_quality": "low",
-      "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
-    },
-    {
-      "rank": 17,
+      "rank": 9,
       "code": "6691",
       "name": "洋基工程",
       "market": "上市",
       "theme": "PCB／ABF／CCL",
-      "score": 70,
+      "score": 73,
       "price": 793.0,
       "five_day_change_pct": null,
       "volume_ratio_20d": null,
@@ -633,12 +337,123 @@
       "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
     },
     {
-      "rank": 18,
+      "rank": 10,
+      "code": "3025",
+      "name": "星通",
+      "market": "上市",
+      "theme": "記憶體／DRAM／NAND",
+      "score": 73,
+      "price": 67.1,
+      "five_day_change_pct": null,
+      "volume_ratio_20d": null,
+      "position": {
+        "near_120d_low": null,
+        "distance_from_120d_high_pct": null,
+        "range_position_pct": null
+      },
+      "technical": {
+        "above_ma5": null,
+        "above_ma10": null,
+        "above_ma20": null,
+        "breakout": null,
+        "note": "完整五日技術位置待資料源補齊；目前以營收、成交量與題材強度輔助排序"
+      },
+      "fundamental": {
+        "revenue_yoy": 134.59,
+        "revenue_mom": 49.52,
+        "turnaround_note": "營收年增 134.6%，月增 49.5%，符合低基期轉強預篩"
+      },
+      "supply_demand": {
+        "demand": "對應強題材需求或資金輪動",
+        "supply": "供需細項待新聞與產業資料補齊",
+        "conclusion": "題材有熱度，需確認供需與量價是否延續"
+      },
+      "reason": "營收年增 134.6%，月增 49.5%，符合低基期轉強預篩",
+      "risk": "若量能退潮、跌回關鍵均線或題材新聞消退，代表低基期補漲失敗。",
+      "data_quality": "low",
+      "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
+    },
+    {
+      "rank": 11,
+      "code": "2547",
+      "name": "日勝生",
+      "market": "上市",
+      "theme": "營建資產",
+      "score": 73,
+      "price": 10.9,
+      "five_day_change_pct": null,
+      "volume_ratio_20d": null,
+      "position": {
+        "near_120d_low": null,
+        "distance_from_120d_high_pct": null,
+        "range_position_pct": null
+      },
+      "technical": {
+        "above_ma5": null,
+        "above_ma10": null,
+        "above_ma20": null,
+        "breakout": null,
+        "note": "完整五日技術位置待資料源補齊；目前以營收、成交量與題材強度輔助排序"
+      },
+      "fundamental": {
+        "revenue_yoy": 69.9,
+        "revenue_mom": 112.93,
+        "turnaround_note": "營收年增 69.9%，月增 112.9%，符合低基期轉強預篩"
+      },
+      "supply_demand": {
+        "demand": "對應強題材需求或資金輪動",
+        "supply": "供需細項待新聞與產業資料補齊",
+        "conclusion": "題材有熱度，需確認供需與量價是否延續"
+      },
+      "reason": "營收年增 69.9%，月增 112.9%，符合低基期轉強預篩",
+      "risk": "若量能退潮、跌回關鍵均線或題材新聞消退，代表低基期補漲失敗。",
+      "data_quality": "low",
+      "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
+    },
+    {
+      "rank": 12,
+      "code": "3576",
+      "name": "聯合再生",
+      "market": "上市",
+      "theme": "面板／光電／低價轉型",
+      "score": 73,
+      "price": 16.5,
+      "five_day_change_pct": null,
+      "volume_ratio_20d": null,
+      "position": {
+        "near_120d_low": null,
+        "distance_from_120d_high_pct": null,
+        "range_position_pct": null
+      },
+      "technical": {
+        "above_ma5": null,
+        "above_ma10": null,
+        "above_ma20": null,
+        "breakout": null,
+        "note": "完整五日技術位置待資料源補齊；目前以營收、成交量與題材強度輔助排序"
+      },
+      "fundamental": {
+        "revenue_yoy": 27.63,
+        "revenue_mom": 43.95,
+        "turnaround_note": "營收年增 27.6%，月增 43.9%，符合低基期轉強預篩"
+      },
+      "supply_demand": {
+        "demand": "對應強題材需求或資金輪動",
+        "supply": "供需細項待新聞與產業資料補齊",
+        "conclusion": "題材有熱度，需確認供需與量價是否延續"
+      },
+      "reason": "營收年增 27.6%，月增 43.9%，符合低基期轉強預篩",
+      "risk": "若量能退潮、跌回關鍵均線或題材新聞消退，代表低基期補漲失敗。",
+      "data_quality": "low",
+      "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
+    },
+    {
+      "rank": 13,
       "code": "2537",
       "name": "聯上發",
       "market": "上市",
       "theme": "營建資產",
-      "score": 70,
+      "score": 72,
       "price": 10.85,
       "five_day_change_pct": null,
       "volume_ratio_20d": null,
@@ -670,12 +485,160 @@
       "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
     },
     {
-      "rank": 19,
+      "rank": 14,
+      "code": "2408",
+      "name": "南亞科",
+      "market": "上市",
+      "theme": "記憶體／DRAM／NAND",
+      "score": 72,
+      "price": 449.0,
+      "five_day_change_pct": null,
+      "volume_ratio_20d": null,
+      "position": {
+        "near_120d_low": null,
+        "distance_from_120d_high_pct": null,
+        "range_position_pct": null
+      },
+      "technical": {
+        "above_ma5": null,
+        "above_ma10": null,
+        "above_ma20": null,
+        "breakout": null,
+        "note": "完整五日技術位置待資料源補齊；目前以營收、成交量與題材強度輔助排序"
+      },
+      "fundamental": {
+        "revenue_yoy": 730.14,
+        "revenue_mom": 8.55,
+        "turnaround_note": "營收年增 730.1%，月增 8.5%，符合低基期轉強預篩"
+      },
+      "supply_demand": {
+        "demand": "對應強題材需求或資金輪動",
+        "supply": "供需細項待新聞與產業資料補齊",
+        "conclusion": "題材有熱度，需確認供需與量價是否延續"
+      },
+      "reason": "營收年增 730.1%，月增 8.5%，符合低基期轉強預篩",
+      "risk": "若量能退潮、跌回關鍵均線或題材新聞消退，代表低基期補漲失敗。",
+      "data_quality": "low",
+      "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
+    },
+    {
+      "rank": 15,
+      "code": "3715",
+      "name": "定穎投控",
+      "market": "上市",
+      "theme": "PCB／ABF／CCL",
+      "score": 72,
+      "price": 168.5,
+      "five_day_change_pct": null,
+      "volume_ratio_20d": null,
+      "position": {
+        "near_120d_low": null,
+        "distance_from_120d_high_pct": null,
+        "range_position_pct": null
+      },
+      "technical": {
+        "above_ma5": null,
+        "above_ma10": null,
+        "above_ma20": null,
+        "breakout": null,
+        "note": "完整五日技術位置待資料源補齊；目前以營收、成交量與題材強度輔助排序"
+      },
+      "fundamental": {
+        "revenue_yoy": 69.11,
+        "revenue_mom": 21.81,
+        "turnaround_note": "營收年增 69.1%，月增 21.8%，符合低基期轉強預篩"
+      },
+      "supply_demand": {
+        "demand": "對應強題材需求或資金輪動",
+        "supply": "供需細項待新聞與產業資料補齊",
+        "conclusion": "題材有熱度，需確認供需與量價是否延續"
+      },
+      "reason": "營收年增 69.1%，月增 21.8%，符合低基期轉強預篩",
+      "risk": "若量能退潮、跌回關鍵均線或題材新聞消退，代表低基期補漲失敗。",
+      "data_quality": "low",
+      "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
+    },
+    {
+      "rank": 16,
+      "code": "5522",
+      "name": "遠雄",
+      "market": "上市",
+      "theme": "營建資產",
+      "score": 71,
+      "price": 64.1,
+      "five_day_change_pct": null,
+      "volume_ratio_20d": null,
+      "position": {
+        "near_120d_low": null,
+        "distance_from_120d_high_pct": null,
+        "range_position_pct": null
+      },
+      "technical": {
+        "above_ma5": null,
+        "above_ma10": null,
+        "above_ma20": null,
+        "breakout": null,
+        "note": "完整五日技術位置待資料源補齊；目前以營收、成交量與題材強度輔助排序"
+      },
+      "fundamental": {
+        "revenue_yoy": 191.64,
+        "revenue_mom": 182.24,
+        "turnaround_note": "營收年增 191.6%，月增 182.2%，符合低基期轉強預篩"
+      },
+      "supply_demand": {
+        "demand": "對應強題材需求或資金輪動",
+        "supply": "供需細項待新聞與產業資料補齊",
+        "conclusion": "題材有熱度，需確認供需與量價是否延續"
+      },
+      "reason": "營收年增 191.6%，月增 182.2%，符合低基期轉強預篩",
+      "risk": "若量能退潮、跌回關鍵均線或題材新聞消退，代表低基期補漲失敗。",
+      "data_quality": "low",
+      "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
+    },
+    {
+      "rank": 17,
+      "code": "7631",
+      "name": "聚賢研發-創",
+      "market": "上市",
+      "theme": "PCB／ABF／CCL",
+      "score": 71,
+      "price": 164.0,
+      "five_day_change_pct": null,
+      "volume_ratio_20d": null,
+      "position": {
+        "near_120d_low": null,
+        "distance_from_120d_high_pct": null,
+        "range_position_pct": null
+      },
+      "technical": {
+        "above_ma5": null,
+        "above_ma10": null,
+        "above_ma20": null,
+        "breakout": null,
+        "note": "完整五日技術位置待資料源補齊；目前以營收、成交量與題材強度輔助排序"
+      },
+      "fundamental": {
+        "revenue_yoy": 140.82,
+        "revenue_mom": 31.25,
+        "turnaround_note": "營收年增 140.8%，月增 31.3%，符合低基期轉強預篩"
+      },
+      "supply_demand": {
+        "demand": "對應強題材需求或資金輪動",
+        "supply": "供需細項待新聞與產業資料補齊",
+        "conclusion": "題材有熱度，需確認供需與量價是否延續"
+      },
+      "reason": "營收年增 140.8%，月增 31.3%，符合低基期轉強預篩",
+      "risk": "若量能退潮、跌回關鍵均線或題材新聞消退，代表低基期補漲失敗。",
+      "data_quality": "low",
+      "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
+    },
+    {
+      "rank": 18,
       "code": "5531",
       "name": "鄉林",
       "market": "上市",
       "theme": "營建資產",
-      "score": 70,
+      "score": 71,
       "price": 7.88,
       "five_day_change_pct": null,
       "volume_ratio_20d": null,
@@ -707,12 +670,12 @@
       "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
     },
     {
-      "rank": 20,
+      "rank": 19,
       "code": "1436",
       "name": "華友聯",
       "market": "上市",
       "theme": "營建資產",
-      "score": 70,
+      "score": 71,
       "price": 44.55,
       "five_day_change_pct": null,
       "volume_ratio_20d": null,
@@ -739,6 +702,43 @@
         "conclusion": "題材有熱度，需確認供需與量價是否延續"
       },
       "reason": "營收年增 44.6%，月增 106.3%，符合低基期轉強預篩",
+      "risk": "若量能退潮、跌回關鍵均線或題材新聞消退，代表低基期補漲失敗。",
+      "data_quality": "low",
+      "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
+    },
+    {
+      "rank": 20,
+      "code": "3706",
+      "name": "神達",
+      "market": "上市",
+      "theme": "PCB／ABF／CCL",
+      "score": 71,
+      "price": 83.5,
+      "five_day_change_pct": null,
+      "volume_ratio_20d": null,
+      "position": {
+        "near_120d_low": null,
+        "distance_from_120d_high_pct": null,
+        "range_position_pct": null
+      },
+      "technical": {
+        "above_ma5": null,
+        "above_ma10": null,
+        "above_ma20": null,
+        "breakout": null,
+        "note": "完整五日技術位置待資料源補齊；目前以營收、成交量與題材強度輔助排序"
+      },
+      "fundamental": {
+        "revenue_yoy": 49.3,
+        "revenue_mom": 17.24,
+        "turnaround_note": "營收年增 49.3%，月增 17.2%，符合低基期轉強預篩"
+      },
+      "supply_demand": {
+        "demand": "對應強題材需求或資金輪動",
+        "supply": "供需細項待新聞與產業資料補齊",
+        "conclusion": "題材有熱度，需確認供需與量價是否延續"
+      },
+      "reason": "營收年增 49.3%，月增 17.2%，符合低基期轉強預篩",
       "risk": "若量能退潮、跌回關鍵均線或題材新聞消退，代表低基期補漲失敗。",
       "data_quality": "low",
       "data_quality_note": "缺少 120 日位階、五日漲跌、20 日量比與均線完整資料"
