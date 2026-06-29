@@ -80,6 +80,8 @@ jobs:
                   docs/data/market-latest.json \
                   docs/data/themes-latest.json \
                   docs/data/news-latest.json \
+                  docs/data/stocks-latest.json \
+                  docs/data/stock-data-meta.json \
                   docs/data/update-log.json \
                   docs/data/archive
           if git diff --cached --quiet; then

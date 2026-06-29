@@ -1,33 +1,45 @@
 {
-  "updated_at": "2026-06-29 16:32:15 Asia/Taipei",
-  "stage": "intraday",
-  "stage_label": "盤中更新",
+  "updated_at": "2026-06-29 17:13:06 Asia/Taipei",
+  "stage": "afterhours",
+  "stage_label": "盤後更新",
   "timezone": "Asia/Taipei",
-  "source_count": 4,
-  "data_version": "20260629-1632-intraday",
+  "source_count": 3,
+  "data_version": "20260629-1713-afterhours",
   "warnings": [],
-  "news_fetch_status": {
+  "news_fetch_status": {},
+  "quote_refresh_status": {
     "success": true,
-    "generated_at": "2026-06-29 16:32:17 Asia/Taipei",
-    "events_count": 17,
-    "new_items_count": 5,
-    "content_latest_at": "2026-06-29 16:19",
-    "sources_attempted": 6,
-    "sources_success": 5,
-    "errors": [
-      "CMoney 台股即時消息: 500 Server Error: Internal Server Error for url: https://www.cmoney.tw/notes/?navId=twstock_news"
-    ],
-    "warnings": [
-      "CMoney 美股新聞快訊: SSL 驗證失敗，已使用 verify=False 重試",
-      "CMoney 台股即時消息: SSL 驗證失敗，已使用 verify=False 重試",
-      "MoneyDJ 產業分析新聞: SSL 驗證失敗，已使用 verify=False 重試",
-      "MoneyDJ 即時新聞總表: SSL 驗證失敗，已使用 verify=False 重試"
-    ],
-    "output": "docs/data/news-events.json",
-    "status": "fetch_ok",
-    "stderr": ""
+    "market_date": "2026-06-29",
+    "quote_count": 1978,
+    "source": "TWSE/TPEX official quote",
+    "errors": [],
+    "updated_stock_count": 180,
+    "missing_stock_count": 0
   },
   "entries": [
+    {
+      "updated_at": "2026-06-29 17:13:06 Asia/Taipei",
+      "stage": "afterhours",
+      "stage_label": "盤後更新",
+      "schedule_time": "17:07",
+      "timezone": "Asia/Taipei",
+      "source_count": 3,
+      "data_version": "20260629-1713-afterhours",
+      "updated_files": [
+        "docs/data/radar-latest.json",
+        "docs/data/stocks-latest.json",
+        "docs/data/stock-data-meta.json"
+      ],
+      "quote_refresh_status": {
+        "success": true,
+        "market_date": "2026-06-29",
+        "quote_count": 1978,
+        "source": "TWSE/TPEX official quote",
+        "errors": [],
+        "updated_stock_count": 180,
+        "missing_stock_count": 0
+      }
+    },
     {
       "updated_at": "2026-06-29 16:32:15 Asia/Taipei",
       "stage": "intraday",
