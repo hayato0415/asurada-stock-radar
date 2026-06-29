@@ -3030,6 +3030,173 @@ tr:nth-child(even) { background: #f8fafc; }
   border: 1px dashed #cbd5e1;
   color: #64748b;
 }
+
+.portfolio-summary-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.portfolio-summary-card {
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  padding: 14px;
+}
+
+.portfolio-summary-card span,
+.portfolio-note {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.portfolio-summary-card strong {
+  color: var(--ink);
+  font-size: 22px;
+  overflow-wrap: anywhere;
+}
+
+.portfolio-summary-card.is-profit strong,
+.portfolio-table .is-profit {
+  color: #dc2626;
+}
+
+.portfolio-summary-card.is-loss strong,
+.portfolio-table .is-loss {
+  color: #16a34a;
+}
+
+.portfolio-table {
+  background: #ffffff;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 1160px;
+  width: 100%;
+}
+
+.portfolio-table th,
+.portfolio-table td {
+  border: 1px solid var(--line);
+  padding: 10px 12px;
+  vertical-align: middle;
+}
+
+.portfolio-table th {
+  background: #f8fafc;
+  color: #1f2f46;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.portfolio-table .cell-number {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.portfolio-allocation {
+  display: grid;
+  gap: 12px;
+}
+
+.allocation-row {
+  display: grid;
+  gap: 7px;
+}
+
+.allocation-label {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.allocation-label strong {
+  color: var(--ink);
+}
+
+.allocation-label span {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.allocation-track {
+  background: #e8eef7;
+  border-radius: 999px;
+  height: 12px;
+  overflow: hidden;
+}
+
+.allocation-track span {
+  background: #2563eb;
+  display: block;
+  height: 100%;
+}
+
+.allocation-track span.warn {
+  background: #f59e0b;
+}
+
+.allocation-track span.cash {
+  background: #0f766e;
+}
+
+.portfolio-calculator {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr auto;
+}
+
+.portfolio-calculator label {
+  display: grid;
+  gap: 6px;
+}
+
+.portfolio-calculator button {
+  align-self: end;
+}
+
+.portfolio-calc-result {
+  margin-top: 14px;
+}
+
+.portfolio-calc-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.portfolio-note {
+  border-top: 1px solid var(--line);
+  line-height: 1.7;
+  margin-top: 16px;
+  padding-top: 12px;
+}
+
+.portfolio-note code {
+  background: #eef6ff;
+  border-radius: 6px;
+  color: #0f4f8f;
+  padding: 2px 6px;
+}
+
+@media (max-width: 900px) {
+  .portfolio-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .portfolio-calculator,
+  .portfolio-calc-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .portfolio-calculator button {
+    width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
   .home-war-room .home-dashboard-panel {
     border-radius: 12px;

@@ -1,7 +1,7 @@
 const HOLDINGS_KEY = "asurada_holdings";
 const WATCHLIST_KEY = "asurada_watchlist";
-const BUILD_VERSION = "20260625-radar-tabs";
-const APP_VERSION = "20260625-radar-tabs";
+const BUILD_VERSION = "20260629-portfolio";
+const APP_VERSION = "20260629-portfolio";
 
 const state = {
   stocks: [],
@@ -3629,76 +3629,242 @@ function renderStock() {
   }
 }
 
-function renderPortfolio() {
+function moneyText(value, digits = 0) {
+  const number = toNumber(value);
+  if (!Number.isFinite(number)) return "-";
+  return number.toLocaleString("zh-TW", { minimumFractionDigits: digits, maximumFractionDigits: digits });
+}
+
+function signedMoneyText(value, digits = 0) {
+  const number = toNumber(value);
+  if (!Number.isFinite(number)) return "-";
+  return `${number > 0 ? "+" : ""}${moneyText(number, digits)}`;
+}
+
+function signedPercentText(value) {
+  const number = toNumber(value);
+  if (!Number.isFinite(number)) return "-";
+  return `${number > 0 ? "+" : ""}${number.toFixed(2)}%`;
+}
+
+function safeNumber(value, fallback = 0) {
+  const number = toNumber(value);
+  return Number.isFinite(number) ? number : fallback;
+}
+
+function portfolioHoldingMetrics(holding, totalValue) {
+  const shares = Math.max(0, safeNumber(holding.shares));
+  const avgCost = safeNumber(holding.avg_cost);
+  const currentPrice = safeNumber(holding.current_price);
+  const cost = shares * avgCost;
+  const marketValue = shares * currentPrice;
+  const pnl = marketValue - cost;
+  const pnlPct = cost > 0 ? (pnl / cost) * 100 : NaN;
+  const weight = totalValue > 0 ? (marketValue / totalValue) * 100 : 0;
+  return { shares, avgCost, currentPrice, cost, marketValue, pnl, pnlPct, weight };
+}
+
+function portfolioStatus(weight) {
+  if (weight >= 40) return { text: "過度集中", tone: "warn" };
+  if (weight >= 25) return { text: "主力持股", tone: "good" };
+  if (weight >= 10) return { text: "中等部位", tone: "" };
+  return { text: "觀察部位", tone: "" };
+}
+
+function portfolioStockLink(holding) {
+  const code = normalizeCode(holding.symbol || holding.code);
+  const name = holding.name || displayStockName(code);
+  return code ? `<a class="stock-link" href="stock.html?code=${encodeURIComponent(code)}">${escapeHtml(code)}</a>` : "-";
+}
+
+function portfolioAllocationBar(label, percent, tone = "") {
+  const safePercent = Math.max(0, Math.min(100, Number.isFinite(percent) ? percent : 0));
+  return `
+    <div class="allocation-row">
+      <div class="allocation-label"><strong>${escapeHtml(label)}</strong><span>${safePercent.toFixed(2)}%</span></div>
+      <div class="allocation-track"><span class="${tone}" style="width:${safePercent.toFixed(2)}%"></span></div>
+    </div>
+  `;
+}
+
+function portfolioSummaryCards(summary) {
+  const cards = [
+    ["現金餘額", moneyText(summary.cash)],
+    ["股票總成本", moneyText(summary.totalCost)],
+    ["股票目前總市值", moneyText(summary.totalMarketValue)],
+    ["總損益金額", signedMoneyText(summary.totalPnl), summary.totalPnl >= 0 ? "is-profit" : "is-loss"],
+    ["總損益率", signedPercentText(summary.totalPnlPct), summary.totalPnl >= 0 ? "is-profit" : "is-loss"],
+    ["股票部位", `${summary.stockWeight.toFixed(2)}%`],
+    ["現金部位", `${summary.cashWeight.toFixed(2)}%`],
+  ];
+  return cards.map(([label, value, tone]) => `
+    <article class="portfolio-summary-card ${tone || ""}">
+      <span>${escapeHtml(label)}</span>
+      <strong>${escapeHtml(value)}</strong>
+    </article>
+  `).join("");
+}
+
+function portfolioTable(holdings, totalValue) {
+  const rows = holdings.map((holding) => {
+    const code = normalizeCode(holding.symbol || holding.code);
+    const metrics = portfolioHoldingMetrics(holding, totalValue);
+    const status = portfolioStatus(metrics.weight);
+    return `
+      <tr>
+        <td>${portfolioStockLink(holding)}</td>
+        <td>${escapeHtml(holding.name || displayStockName(code))}</td>
+        <td>${escapeHtml(holding.theme || "-")}</td>
+        <td class="cell-number">${escapeHtml(moneyText(metrics.shares, 0))}</td>
+        <td class="cell-number">${escapeHtml(moneyText(metrics.avgCost, 2))}</td>
+        <td class="cell-number">${escapeHtml(moneyText(metrics.currentPrice, 2))}</td>
+        <td class="cell-number">${escapeHtml(moneyText(metrics.cost, 0))}</td>
+        <td class="cell-number">${escapeHtml(moneyText(metrics.marketValue, 0))}</td>
+        <td class="cell-number ${metrics.pnl >= 0 ? "is-profit" : "is-loss"}">${escapeHtml(signedMoneyText(metrics.pnl, 0))}</td>
+        <td class="cell-number ${metrics.pnl >= 0 ? "is-profit" : "is-loss"}">${escapeHtml(signedPercentText(metrics.pnlPct))}</td>
+        <td class="cell-number">${escapeHtml(`${metrics.weight.toFixed(2)}%`)}</td>
+        <td>${chip(status.text, status.tone)}</td>
+      </tr>
+    `;
+  }).join("");
+  return `
+    <div class="table-wrap portfolio-table-wrap">
+      <table class="portfolio-table">
+        <thead>
+          <tr><th>代號</th><th>名稱</th><th>題材</th><th>持有股數</th><th>平均成本</th><th>現價</th><th>投資成本</th><th>目前市值</th><th>損益金額</th><th>損益率</th><th>持股占比</th><th>狀態</th></tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+  `;
+}
+
+function portfolioAllocation(holdings, summary) {
+  const stockBars = holdings.map((holding) => {
+    const code = normalizeCode(holding.symbol || holding.code);
+    const metrics = portfolioHoldingMetrics(holding, summary.totalValue);
+    const label = `${code} ${holding.name || displayStockName(code)}`.trim();
+    return portfolioAllocationBar(label, metrics.weight, metrics.weight >= 40 ? "warn" : "");
+  }).join("");
+  return `${stockBars}${portfolioAllocationBar("現金", summary.cashWeight, "cash")}`;
+}
+
+function portfolioCalculator(holdings) {
+  const options = holdings.map((holding) => {
+    const code = normalizeCode(holding.symbol || holding.code);
+    return `<option value="${escapeHtml(code)}">${escapeHtml(`${code} ${holding.name || displayStockName(code)}`.trim())}</option>`;
+  }).join("");
+  return `
+    <div class="portfolio-calculator">
+      <label>選擇股票<select id="portfolioCalcSymbol">${options}</select></label>
+      <label>操作類型<select id="portfolioCalcAction"><option value="buy">買進</option><option value="sell">賣出</option></select></label>
+      <label>股數<input id="portfolioCalcShares" type="number" min="0" step="1" placeholder="例如 100"></label>
+      <label>價格<input id="portfolioCalcPrice" type="number" min="0" step="0.01" placeholder="例如 145.5"></label>
+      <button id="portfolioCalcButton" type="button">試算</button>
+    </div>
+    <div id="portfolioCalcResult" class="portfolio-calc-result empty">輸入股數與價格後按下試算。</div>
+  `;
+}
+
+function bindPortfolioCalculator(portfolio, summary) {
+  const button = $("#portfolioCalcButton");
+  if (!button) return;
+  button.addEventListener("click", () => {
+    const symbol = normalizeCode($("#portfolioCalcSymbol")?.value);
+    const action = $("#portfolioCalcAction")?.value || "buy";
+    const shares = Math.max(0, safeNumber($("#portfolioCalcShares")?.value));
+    const price = Math.max(0, safeNumber($("#portfolioCalcPrice")?.value));
+    const holding = (portfolio.holdings || []).find((item) => normalizeCode(item.symbol || item.code) === symbol);
+    const result = $("#portfolioCalcResult");
+    if (!holding || !shares || !price || !result) {
+      if (result) result.innerHTML = "請選擇股票，並輸入有效股數與價格。";
+      return;
+    }
+    const metrics = portfolioHoldingMetrics(holding, summary.totalValue);
+    if (action === "buy") {
+      const buyAmount = shares * price;
+      const newShares = metrics.shares + shares;
+      const newCost = metrics.cost + buyAmount;
+      const newAvgCost = newShares > 0 ? newCost / newShares : 0;
+      const newMarketValue = newShares * price;
+      const newTotalValue = summary.totalValue;
+      const newWeight = newTotalValue > 0 ? (newMarketValue / newTotalValue) * 100 : 0;
+      result.innerHTML = `
+        <div class="portfolio-calc-grid">
+          ${infoItem("新持股股數", moneyText(newShares, 0))}
+          ${infoItem("新平均成本", moneyText(newAvgCost, 2))}
+          ${infoItem("新投資成本", moneyText(newCost, 0))}
+          ${infoItem("新市值估算", moneyText(newMarketValue, 0))}
+          ${infoItem("新持股占比", `${newWeight.toFixed(2)}%`)}
+        </div>
+      `;
+      return;
+    }
+    const sellShares = Math.min(shares, metrics.shares);
+    const recovered = sellShares * price;
+    const remainShares = metrics.shares - sellShares;
+    const remainMarketValue = remainShares * price;
+    const newTotalValue = summary.totalValue;
+    const newWeight = newTotalValue > 0 ? (remainMarketValue / newTotalValue) * 100 : 0;
+    result.innerHTML = `
+      <div class="portfolio-calc-grid">
+        ${infoItem("剩餘股數", moneyText(remainShares, 0))}
+        ${infoItem("回收金額", moneyText(recovered, 0))}
+        ${infoItem("剩餘市值", moneyText(remainMarketValue, 0))}
+        ${infoItem("新持股占比", `${newWeight.toFixed(2)}%`)}
+      </div>
+    `;
+  });
+}
+
+async function renderPortfolio() {
   renderHeader("portfolio");
   const main = $("#app");
-  const holdings = readStoredCodes(HOLDINGS_KEY);
-  const watchlist = readStoredCodes(WATCHLIST_KEY);
+  const portfolio = await loadJson("data/portfolio.json", null);
+  const holdings = Array.isArray(portfolio?.holdings) ? portfolio.holdings : [];
+  if (!portfolio || !holdings.length) {
+    main.innerHTML = `<section class="panel"><div class="empty">投資組合資料尚未建立或讀取失敗</div></section>`;
+    return;
+  }
+  const cash = Math.max(0, safeNumber(portfolio.cash));
+  const holdingMetrics = holdings.map((holding) => portfolioHoldingMetrics(holding, 0));
+  const totalCost = holdingMetrics.reduce((sum, item) => sum + item.cost, 0);
+  const totalMarketValue = holdingMetrics.reduce((sum, item) => sum + item.marketValue, 0);
+  const totalValue = cash + totalMarketValue;
+  const totalPnl = totalMarketValue - totalCost;
+  const totalPnlPct = totalCost > 0 ? (totalPnl / totalCost) * 100 : NaN;
+  const summary = {
+    cash,
+    totalCost,
+    totalMarketValue,
+    totalValue,
+    totalPnl,
+    totalPnlPct,
+    stockWeight: totalValue > 0 ? (totalMarketValue / totalValue) * 100 : 0,
+    cashWeight: totalValue > 0 ? (cash / totalValue) * 100 : 0,
+  };
   main.innerHTML = `
-    <section class="panel">
-      <div class="section-title"><h2>我的持股與觀察清單</h2><span>儲存在此瀏覽器 localStorage</span></div>
-      <div class="grid cols-2">
-        <label>我的持股<textarea id="holdingsInput" placeholder="2337,2313 或每行一檔">${escapeHtml(holdings.join("\n"))}</textarea></label>
-        <label>觀察清單<textarea id="watchlistInput" placeholder="2383,2368 或每行一檔">${escapeHtml(watchlist.join("\n"))}</textarea></label>
-      </div>
-      <div class="button-row">
-        <button id="savePortfolio">儲存</button>
-        <button id="clearPortfolio" class="secondary">清除</button>
-        <button id="exportPortfolio" class="secondary">匯出設定</button>
-        <button id="importPortfolio" class="secondary">匯入設定</button>
-        <input id="importFile" type="file" accept="application/json,.json" hidden>
+    <section class="panel portfolio-page">
+      <div class="section-title"><h2>投資組合總覽</h2><span>更新日期：${escapeHtml(portfolio.updated_at || "未標示")}</span></div>
+      <div class="portfolio-summary-grid">${portfolioSummaryCards(summary)}</div>
+    </section>
+    <section class="panel portfolio-page">
+      <div class="section-title"><h2>持股明細表</h2><span>${escapeHtml(`${holdings.length} 檔持股`)}</span></div>
+      ${portfolioTable(holdings, totalValue)}
+    </section>
+    <section class="panel portfolio-page">
+      <div class="section-title"><h2>資金分配</h2><span>股票 ${summary.stockWeight.toFixed(2)}%｜現金 ${summary.cashWeight.toFixed(2)}%</span></div>
+      <div class="portfolio-allocation">${portfolioAllocation(holdings, summary)}</div>
+    </section>
+    <section class="panel portfolio-page">
+      <div class="section-title"><h2>加碼 / 減碼試算器</h2><span>試算不會寫回 JSON</span></div>
+      ${portfolioCalculator(holdings)}
+      <div class="portfolio-note">
+        手動修改持股請編輯 <code>docs/data/portfolio.json</code>，欄位包含 cash、updated_at、holdings、symbol、name、shares、avg_cost、current_price、theme。
       </div>
     </section>
-    <section class="panel"><div class="section-title"><h2>持股命中</h2></div><div id="holdingsResult"></div></section>
-    <section class="panel"><div class="section-title"><h2>觀察清單命中</h2></div><div id="watchlistResult"></div></section>
   `;
-  const renderHits = () => {
-    renderCodeHits("#holdingsResult", readStoredCodes(HOLDINGS_KEY));
-    renderCodeHits("#watchlistResult", readStoredCodes(WATCHLIST_KEY));
-  };
-  $("#savePortfolio").addEventListener("click", () => {
-    writeStoredCodes(HOLDINGS_KEY, parseCodes($("#holdingsInput").value));
-    writeStoredCodes(WATCHLIST_KEY, parseCodes($("#watchlistInput").value));
-    renderHits();
-  });
-  $("#clearPortfolio").addEventListener("click", () => {
-    localStorage.removeItem(HOLDINGS_KEY);
-    localStorage.removeItem(WATCHLIST_KEY);
-    $("#holdingsInput").value = "";
-    $("#watchlistInput").value = "";
-    renderHits();
-  });
-  $("#exportPortfolio").addEventListener("click", () => {
-    const blob = new Blob([JSON.stringify({ holdings: parseCodes($("#holdingsInput").value), watchlist: parseCodes($("#watchlistInput").value) }, null, 2)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "asurada_portfolio.json";
-    link.click();
-    URL.revokeObjectURL(url);
-  });
-  $("#importPortfolio").addEventListener("click", () => $("#importFile").click());
-  $("#importFile").addEventListener("change", () => {
-    const file = $("#importFile").files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      try {
-        const parsed = JSON.parse(String(reader.result || "{}"));
-        const holdingsCodes = Array.isArray(parsed.holdings) ? parsed.holdings : parsed.codes || [];
-        const watchCodes = Array.isArray(parsed.watchlist) ? parsed.watchlist : [];
-        writeStoredCodes(HOLDINGS_KEY, holdingsCodes.map(normalizeCode).filter(Boolean));
-        writeStoredCodes(WATCHLIST_KEY, watchCodes.map(normalizeCode).filter(Boolean));
-        $("#holdingsInput").value = readStoredCodes(HOLDINGS_KEY).join("\n");
-        $("#watchlistInput").value = readStoredCodes(WATCHLIST_KEY).join("\n");
-        renderHits();
-      } catch {
-        alert("匯入失敗，請確認 JSON 格式是否正確。");
-      }
-    };
-    reader.readAsText(file, "utf-8");
-  });
-  renderHits();
+  bindPortfolioCalculator(portfolio, summary);
 }
 
 function renderCodeHits(selector, codes) {
@@ -3786,5 +3952,5 @@ async function boot(page) {
   if (page === "themes") renderThemes();
   if (page === "concepts") await renderConcepts();
   if (page === "stock") renderStock();
-  if (page === "portfolio") renderPortfolio();
+  if (page === "portfolio") await renderPortfolio();
 }
