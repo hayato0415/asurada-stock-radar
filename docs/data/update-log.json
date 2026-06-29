@@ -1,22 +1,144 @@
 {
-  "updated_at": "2026-06-29 17:13:06 Asia/Taipei",
-  "stage": "afterhours",
-  "stage_label": "盤後更新",
-  "timezone": "Asia/Taipei",
-  "source_count": 3,
-  "data_version": "20260629-1713-afterhours",
-  "warnings": [],
-  "news_fetch_status": {},
-  "quote_refresh_status": {
-    "success": true,
-    "market_date": "2026-06-29",
-    "quote_count": 1978,
-    "source": "TWSE/TPEX official quote",
-    "errors": [],
-    "updated_stock_count": 180,
-    "missing_stock_count": 0
-  },
+  "build_id": "20260629-2035-full",
+  "updated_at": "2026-06-29T20:35:34+08:00",
+  "content_latest_at": "2026-06-29T20:35:34+08:00",
+  "mode": "full",
+  "items_count": 7,
+  "stale": true,
+  "stale_reason": "部分資料集保留上一版內容",
+  "warnings": [
+    "fetch_news_sources.py failed"
+  ],
+  "source_runs": [
+    {
+      "script": "fetch_news_sources.py",
+      "success": false,
+      "status": "failed",
+      "stdout_tail": "",
+      "stderr_tail": "Traceback (most recent call last):\n  File \"C:\\Users\\Jasper\\Documents\\asurada-stock-lab\\��˹��̨�����������_\\scripts\\fetch_news_sources.py\", line 12, in <module>\n    import requests\nModuleNotFoundError: No module named 'requests'\n"
+    }
+  ],
   "entries": [
+    {
+      "build_id": "20260629-2035-full",
+      "updated_at": "2026-06-29T20:35:34+08:00",
+      "mode": "full",
+      "status": "ok",
+      "datasets": {
+        "daily_market_snapshot.json": {
+          "items_count": 0,
+          "stale": false
+        },
+        "daily_hot_stocks.json": {
+          "items_count": 20,
+          "stale": false
+        },
+        "daily_hot_themes.json": {
+          "items_count": 20,
+          "stale": false
+        },
+        "market-latest.json": {
+          "items_count": 0,
+          "stale": false
+        },
+        "radar-latest.json": {
+          "items_count": 180,
+          "stale": false
+        },
+        "news-latest.json": {
+          "items_count": 17,
+          "stale": true
+        },
+        "concepts-moneydj.json": {
+          "items_count": 171,
+          "stale": false
+        }
+      },
+      "warnings": [
+        "fetch_news_sources.py failed"
+      ],
+      "source_runs": [
+        {
+          "script": "fetch_news_sources.py",
+          "success": false,
+          "status": "failed",
+          "stdout_tail": "",
+          "stderr_tail": "Traceback (most recent call last):\n  File \"C:\\Users\\Jasper\\Documents\\asurada-stock-lab\\��˹��̨�����������_\\scripts\\fetch_news_sources.py\", line 12, in <module>\n    import requests\nModuleNotFoundError: No module named 'requests'\n"
+        }
+      ]
+    },
+    {
+      "build_id": "20260629-2030-full",
+      "updated_at": "2026-06-29T20:30:16+08:00",
+      "mode": "full",
+      "status": "ok",
+      "datasets": {
+        "market-latest.json": {
+          "items_count": 0,
+          "stale": false
+        },
+        "radar-latest.json": {
+          "items_count": 180,
+          "stale": false
+        },
+        "news-latest.json": {
+          "items_count": 17,
+          "stale": true
+        },
+        "concepts-moneydj.json": {
+          "items_count": 171,
+          "stale": false
+        }
+      },
+      "warnings": [
+        "fetch_news_sources.py failed"
+      ],
+      "source_runs": [
+        {
+          "script": "fetch_news_sources.py",
+          "success": false,
+          "status": "failed",
+          "stdout_tail": "",
+          "stderr_tail": "Traceback (most recent call last):\n  File \"C:\\Users\\Jasper\\Documents\\asurada-stock-lab\\��˹��̨�����������_\\scripts\\fetch_news_sources.py\", line 12, in <module>\n    import requests\nModuleNotFoundError: No module named 'requests'\n"
+        }
+      ]
+    },
+    {
+      "build_id": "20260629-2028-full",
+      "updated_at": "2026-06-29T20:28:11+08:00",
+      "mode": "full",
+      "status": "ok",
+      "datasets": {
+        "market-latest.json": {
+          "items_count": 0,
+          "stale": false
+        },
+        "radar-latest.json": {
+          "items_count": 180,
+          "stale": false
+        },
+        "news-latest.json": {
+          "items_count": 17,
+          "stale": false
+        },
+        "concepts-moneydj.json": {
+          "items_count": 171,
+          "stale": false
+        }
+      },
+      "warnings": [
+        "fetch_news_sources.py failed"
+      ],
+      "source_runs": [
+        {
+          "script": "fetch_news_sources.py",
+          "success": false,
+          "status": "failed",
+          "stdout_tail": "",
+          "stderr_tail": "Traceback (most recent call last):\n  File \"C:\\Users\\Jasper\\Documents\\asurada-stock-lab\\��˹��̨�����������_\\scripts\\fetch_news_sources.py\", line 12, in <module>\n    import requests\nModuleNotFoundError: No module named 'requests'\n"
+        }
+      ]
+    },
     {
       "updated_at": "2026-06-29 17:13:06 Asia/Taipei",
       "stage": "afterhours",

@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-29 14:38:17 Asia/Taipei",
+  "updated_at": "2026-06-29T20:35:34+08:00",
   "stage": "evening",
   "stage_label": "晚間總結",
   "schedule_time": "19:07",
@@ -8,7 +8,7 @@
   "source_files": [
     "daily_market_snapshot.json"
   ],
-  "data_version": "20260629-1438-evening",
+  "data_version": "20260629-2035-full",
   "date": "2026-06-27",
   "snapshot": {
     "date": "2026-06-27",
@@ -138,5 +138,11 @@
     "breadth_source_name": "臺灣證券交易所 MI_INDEX 漲跌證券數合計",
     "breadth_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260624&type=ALLBUT0999&response=json",
     "data_quality_warning": []
-  }
+  },
+  "build_id": "20260629-2035-full",
+  "content_latest_at": "2026-06-29T14:38:17+08:00",
+  "items_count": 0,
+  "stale": false,
+  "stale_reason": "",
+  "items": []
 }

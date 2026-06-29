@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-29 16:32:15 Asia/Taipei",
+  "updated_at": "2026-06-29T20:35:34+08:00",
   "stage": "intraday",
   "stage_label": "盤中更新",
   "schedule_time": "10:07",
@@ -8,12 +8,12 @@
   "source_files": [
     "news-events.json"
   ],
-  "data_version": "20260629-1632-intraday",
-  "content_latest_at": "2026-06-29 16:19",
+  "data_version": "20260629-2035-full",
+  "content_latest_at": "2026-06-29T16:19:00+08:00",
   "items_count": 17,
   "new_items_count": 5,
-  "stale": false,
-  "stale_reason": "",
+  "stale": true,
+  "stale_reason": "新聞抓取流程失敗，以下保留上一版成功取得的新聞",
   "news_fetch_status": {
     "success": true,
     "generated_at": "2026-06-29 16:32:17 Asia/Taipei",
@@ -731,5 +731,6 @@
       "carried_forward": true
     }
   ],
-  "total_available": 17
+  "total_available": 17,
+  "build_id": "20260629-2035-full"
 }

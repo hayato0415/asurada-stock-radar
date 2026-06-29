@@ -57,6 +57,28 @@ a { color: inherit; }
   background: white;
   color: var(--ink);
 }
+.site-version-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 14px;
+  padding: 10px 14px;
+  border: 1px solid rgba(148, 163, 184, .24);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .08);
+  color: rgba(255, 255, 255, .88);
+  font-size: .9rem;
+}
+.page > .site-version-bar {
+  margin: 0 0 18px;
+  background: #fff;
+  color: var(--muted);
+  border-color: var(--border);
+}
+.site-version-warning {
+  color: #d97706;
+  font-weight: 700;
+}
 .page {
   margin: 0 auto;
   max-width: 1280px;

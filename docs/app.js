@@ -32,6 +32,16 @@ const state = {
 let revenueLoadPromise = null;
 let stockConceptLoadPromise = null;
 let rankingAccordionsReady = false;
+let siteVersionPromise = null;
+let siteVersionState = {
+  build_id: "",
+  updated_at: "",
+  status: "",
+  mode: "",
+  slot_label: "",
+  datasets: {},
+  warnings: [],
+};
 
 const TECH_THEMES = [
   "AI伺服器", "AI PC", "AI手機", "AI智慧型眼鏡", "智慧眼鏡", "PCB", "CPO", "光通訊", "矽光子", "記憶體", "半導體", "半導體設備", "玻璃基板",
@@ -111,9 +121,62 @@ function writeStoredCodes(key, codes) {
   localStorage.setItem(key, JSON.stringify({ codes }));
 }
 
+function shouldVersionDataPath(path) {
+  const text = String(path || "");
+  return text.includes("data/") && !text.includes("site-version.json") && !text.includes("?") && !/^https?:/i.test(text);
+}
+
+function withBuildVersion(path) {
+  if (!shouldVersionDataPath(path) || !siteVersionState.build_id) return path;
+  return `${path}?v=${encodeURIComponent(siteVersionState.build_id)}`;
+}
+
+async function loadSiteVersion() {
+  if (siteVersionPromise) return siteVersionPromise;
+  siteVersionPromise = (async () => {
+    try {
+      const response = await fetch("data/site-version.json", { cache: "no-store" });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data = await response.json();
+      siteVersionState = data && typeof data === "object" ? { ...siteVersionState, ...data } : siteVersionState;
+      renderSiteVersionBar();
+      return siteVersionState;
+    } catch (error) {
+      console.warn("Failed to load data/site-version.json", error);
+      renderSiteVersionBar();
+      return siteVersionState;
+    }
+  })();
+  return siteVersionPromise;
+}
+
+function siteVersionStatusHtml() {
+  const updatedAt = siteVersionState.updated_at ? String(siteVersionState.updated_at).replace("T", " ").replace("+08:00", "") : "尚未取得";
+  const buildId = siteVersionState.build_id || "未標示";
+  const status = siteVersionState.status || "等待同步狀態";
+  const staleNames = Object.entries(siteVersionState.datasets || {})
+    .filter(([, info]) => info && info.status === "stale")
+    .map(([name]) => name);
+  const warning = staleNames.length ? `<span class="site-version-warning">部分資料沿用上一版：${escapeHtml(staleNames.join("、"))}</span>` : "";
+  return `
+    <div class="site-version-bar">
+      <span>全站更新：${escapeHtml(updatedAt)}</span>
+      <span>版本：${escapeHtml(buildId)}</span>
+      <span>狀態：${escapeHtml(status)}</span>
+      ${warning}
+    </div>
+  `;
+}
+
+function renderSiteVersionBar() {
+  const el = $("#siteVersionBar");
+  if (el) el.innerHTML = siteVersionStatusHtml();
+}
+
 async function loadJson(path, fallback) {
   try {
-    const response = await fetch(path, { cache: "no-store" });
+    if (shouldVersionDataPath(path)) await loadSiteVersion();
+    const response = await fetch(withBuildVersion(path), { cache: "no-store" });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return await response.json();
   } catch (error) {
@@ -123,7 +186,8 @@ async function loadJson(path, fallback) {
 }
 
 async function loadText(path) {
-  const response = await fetch(path, { cache: "no-store" });
+  if (shouldVersionDataPath(path)) await loadSiteVersion();
+  const response = await fetch(withBuildVersion(path), { cache: "no-store" });
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   return await response.text();
 }
@@ -1229,8 +1293,10 @@ function renderHeader(active) {
       <h1>霆隼AI選股網</h1>
       <p>台股題材研究與候選股整理平台</p>
       <nav class="nav">${nav.map(([href, label, key]) => `<a class="${active === key ? "active" : ""}" href="${href}">${label}</a>`).join("")}</nav>
+      <div id="siteVersionBar"></div>
     </div>
   `;
+  renderSiteVersionBar();
 }
 
 function renderError(target, message) {

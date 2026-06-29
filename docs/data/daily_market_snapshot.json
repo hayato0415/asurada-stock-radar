@@ -1,7 +1,7 @@
 {
   "date": "2026-06-29",
   "session": "隔日早晨",
-  "updated_at": "2026-06-29 00:46 Asia/Taipei",
+  "updated_at": "2026-06-29T20:35:34+08:00",
   "build_version": "20260625-market-breadth",
   "app_version": "20260625-market-breadth",
   "next_update_at": "依 GitHub Actions 排程更新",
@@ -125,5 +125,12 @@
   "source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/FMTQIK?date=20260624&response=json",
   "breadth_source_name": "臺灣證券交易所 MI_INDEX 漲跌證券數合計",
   "breadth_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260624&type=ALLBUT0999&response=json",
-  "data_quality_warning": []
+  "data_quality_warning": [],
+  "build_id": "20260629-2035-full",
+  "content_latest_at": "2026-06-29T00:46:00+08:00",
+  "items_count": 0,
+  "stale": false,
+  "stale_reason": "",
+  "data_version": "20260629-2035-full",
+  "items": []
 }

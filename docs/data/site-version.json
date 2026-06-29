@@ -1,0 +1,76 @@
+{
+  "build_id": "20260629-2035-full",
+  "updated_at": "2026-06-29T20:35:34+08:00",
+  "timezone": "Asia/Taipei",
+  "mode": "full",
+  "slot_label": "整站全量更新",
+  "status": "整站同步完成，部分資料保留上一版",
+  "pages": {
+    "index": "ok",
+    "radar": "ok",
+    "news": "ok",
+    "concepts": "ok"
+  },
+  "datasets": {
+    "daily_market_snapshot.json": {
+      "status": "ok",
+      "items_count": 0,
+      "content_latest_at": "2026-06-29T00:46:00+08:00",
+      "stale_reason": ""
+    },
+    "daily_hot_stocks.json": {
+      "status": "ok",
+      "items_count": 20,
+      "content_latest_at": "2026-06-29T00:46:00+08:00",
+      "stale_reason": ""
+    },
+    "daily_hot_themes.json": {
+      "status": "ok",
+      "items_count": 20,
+      "content_latest_at": "2026-06-29T00:46:00+08:00",
+      "stale_reason": ""
+    },
+    "market-latest.json": {
+      "status": "ok",
+      "items_count": 0,
+      "content_latest_at": "2026-06-29T14:38:17+08:00",
+      "stale_reason": ""
+    },
+    "radar-latest.json": {
+      "status": "ok",
+      "items_count": 180,
+      "content_latest_at": "2026-06-29T17:13:06+08:00",
+      "stale_reason": ""
+    },
+    "news-latest.json": {
+      "status": "stale",
+      "items_count": 17,
+      "content_latest_at": "2026-06-29T16:19:00+08:00",
+      "stale_reason": "新聞抓取流程失敗，以下保留上一版成功取得的新聞"
+    },
+    "concepts-moneydj.json": {
+      "status": "ok",
+      "items_count": 171,
+      "content_latest_at": "2026-06-19T00:00:00+08:00",
+      "stale_reason": ""
+    },
+    "update-log.json": {
+      "status": "stale",
+      "items_count": 7,
+      "content_latest_at": "2026-06-29T20:35:34+08:00",
+      "stale_reason": "部分資料集保留上一版內容"
+    }
+  },
+  "warnings": [
+    "fetch_news_sources.py failed"
+  ],
+  "source_runs": [
+    {
+      "script": "fetch_news_sources.py",
+      "success": false,
+      "status": "failed",
+      "stdout_tail": "",
+      "stderr_tail": "Traceback (most recent call last):\n  File \"C:\\Users\\Jasper\\Documents\\asurada-stock-lab\\��˹��̨�����������_\\scripts\\fetch_news_sources.py\", line 12, in <module>\n    import requests\nModuleNotFoundError: No module named 'requests'\n"
+    }
+  ]
+}

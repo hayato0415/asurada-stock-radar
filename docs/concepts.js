@@ -7,6 +7,7 @@ const state = {
   sourceLinks: {},
   query: "",
   selectedId: "",
+  siteVersion: { build_id: "", updated_at: "", status: "", datasets: {} },
 };
 
 function escapeHtml(value) {
@@ -40,9 +41,39 @@ function sourceHref(url) {
   return text;
 }
 
+let siteVersionPromise = null;
+
+function shouldVersionDataPath(path) {
+  const text = String(path || "");
+  return text.includes("data/") && !text.includes("site-version.json") && !text.includes("?") && !/^https?:/i.test(text);
+}
+
+function withBuildVersion(path) {
+  if (!shouldVersionDataPath(path) || !state.siteVersion.build_id) return path;
+  return `${path}?v=${encodeURIComponent(state.siteVersion.build_id)}`;
+}
+
+async function loadSiteVersion() {
+  if (siteVersionPromise) return siteVersionPromise;
+  siteVersionPromise = (async () => {
+    try {
+      const response = await fetch("data/site-version.json", { cache: "no-store" });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data = await response.json();
+      state.siteVersion = data && typeof data === "object" ? { ...state.siteVersion, ...data } : state.siteVersion;
+      return state.siteVersion;
+    } catch (error) {
+      console.warn("Failed to load data/site-version.json", error);
+      return state.siteVersion;
+    }
+  })();
+  return siteVersionPromise;
+}
+
 async function loadJson(path, fallback) {
   try {
-    const response = await fetch(path, { cache: "no-store" });
+    if (shouldVersionDataPath(path)) await loadSiteVersion();
+    const response = await fetch(withBuildVersion(path), { cache: "no-store" });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return await response.json();
   } catch (error) {
@@ -53,13 +84,30 @@ async function loadJson(path, fallback) {
 
 async function loadText(path, fallback = "") {
   try {
-    const response = await fetch(path, { cache: "no-store" });
+    if (shouldVersionDataPath(path)) await loadSiteVersion();
+    const response = await fetch(withBuildVersion(path), { cache: "no-store" });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return await response.text();
   } catch (error) {
     console.warn(`Failed to load ${path}`, error);
     return fallback;
   }
+}
+
+function siteVersionStatusHtml() {
+  const updatedAt = state.siteVersion.updated_at ? String(state.siteVersion.updated_at).replace("T", " ").replace("+08:00", "") : "尚未取得";
+  const buildId = state.siteVersion.build_id || "未標示";
+  const status = state.siteVersion.status || "等待同步狀態";
+  const conceptsStatus = state.siteVersion.datasets?.["concepts-moneydj.json"]?.status || "";
+  const staleText = conceptsStatus === "stale" ? `<span class="site-version-warning">產業題材資料沿用上一版</span>` : "";
+  return `
+    <div class="site-version-bar">
+      <span>全站更新：${escapeHtml(updatedAt)}</span>
+      <span>版本：${escapeHtml(buildId)}</span>
+      <span>狀態：${escapeHtml(status)}</span>
+      ${staleText}
+    </div>
+  `;
 }
 
 function parseCsv(text) {
@@ -281,6 +329,7 @@ function render() {
   const concept = selectedConcept();
   const updated = state.moneydj.updated_at ? state.moneydj.updated_at.replace("T00:00:00+08:00", "") : "未標示";
   app.innerHTML = `
+    ${siteVersionStatusHtml()}
     <section class="panel concept-lite-hero">
       <div class="section-title">
         <div>

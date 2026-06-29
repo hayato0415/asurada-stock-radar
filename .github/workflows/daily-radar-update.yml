@@ -1,14 +1,8 @@
-name: Daily Radar Latest Data Update
+name: Legacy Daily Radar Latest Data Update
 
 on:
-  schedule:
-    # GitHub Actions cron uses UTC. The matching Asia/Taipei times are:
-    # 08:07 premarket, 10:07 intraday, 13:37 close, 17:07 afterhours, 19:07 evening.
-    - cron: "7 0 * * *"
-    - cron: "7 2 * * *"
-    - cron: "37 5 * * *"
-    - cron: "7 9 * * *"
-    - cron: "7 11 * * *"
+  # Legacy manual-only workflow. The scheduled data update is now
+  # .github/workflows/full-site-update.yml so all pages share one build_id.
   workflow_dispatch:
     inputs:
       stage:

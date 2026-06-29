@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-29 17:13:06 Asia/Taipei",
+  "updated_at": "2026-06-29T20:35:34+08:00",
   "stage": "afterhours",
   "stage_label": "盤後更新",
   "schedule_time": "17:07",
@@ -10,7 +10,7 @@
     "stock-data-meta.json",
     "stock-master.json"
   ],
-  "data_version": "20260629-1713-afterhours",
+  "data_version": "20260629-2035-full",
   "date": "2026-06-29",
   "items": [
     {
@@ -7953,5 +7953,10 @@
     "errors": [],
     "updated_stock_count": 180,
     "missing_stock_count": 0
-  }
+  },
+  "build_id": "20260629-2035-full",
+  "content_latest_at": "2026-06-29T17:13:06+08:00",
+  "items_count": 180,
+  "stale": false,
+  "stale_reason": ""
 }
