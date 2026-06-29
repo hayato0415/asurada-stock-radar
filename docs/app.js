@@ -3826,6 +3826,11 @@ function portfolioHoldingCard(holding, totalValue) {
   const metrics = portfolioHoldingMetrics(holding, totalValue);
   const status = portfolioStatus(metrics.weight);
   const name = holding.name || displayStockName(code);
+  const summaryFields = [
+    ["現價", moneyText(metrics.currentPrice, 2)],
+    ["損益率", signedPercentText(metrics.pnlPct), metrics.pnl >= 0 ? "is-profit" : "is-loss"],
+    ["持股占比", `${metrics.weight.toFixed(2)}%`],
+  ];
   const fields = [
     ["題材", holding.theme || "-"],
     ["持有股數", moneyText(metrics.shares, 0)],
@@ -3838,26 +3843,35 @@ function portfolioHoldingCard(holding, totalValue) {
     ["持股占比", `${metrics.weight.toFixed(2)}%`],
   ];
   return `
-    <article class="portfolio-holding-card">
-      <div class="portfolio-holding-card-head">
+    <details class="portfolio-holding-card">
+      <summary class="portfolio-holding-card-summary">
         <div>
-          <span class="portfolio-card-rank">${escapeHtml(code)}</span>
           <h3>${portfolioStockLink(holding)} <span>${escapeHtml(name)}</span></h3>
-        </div>
-        ${chip(status.text, status.tone)}
-      </div>
-      <div class="portfolio-card-metrics">
-        ${fields.map(([label, value, tone]) => `
-          <div class="portfolio-card-metric ${tone || ""}">
-            <span>${escapeHtml(label)}</span>
-            <strong>${escapeHtml(value)}</strong>
+          <div class="portfolio-card-summary-metrics">
+            ${summaryFields.map(([label, value, tone]) => `
+              <span class="${tone || ""}">${escapeHtml(label)} ${escapeHtml(value)}</span>
+            `).join("")}
           </div>
-        `).join("")}
+        </div>
+        <div class="portfolio-card-summary-side">
+          ${chip(status.text, status.tone)}
+          <span class="portfolio-card-toggle">展開明細</span>
+        </div>
+      </summary>
+      <div class="portfolio-card-detail">
+        <div class="portfolio-card-metrics">
+          ${fields.map(([label, value, tone]) => `
+            <div class="portfolio-card-metric ${tone || ""}">
+              <span>${escapeHtml(label)}</span>
+              <strong>${escapeHtml(value)}</strong>
+            </div>
+          `).join("")}
+        </div>
+        <div class="portfolio-card-actions">
+          ${portfolioActionButtons(holding)}
+        </div>
       </div>
-      <div class="portfolio-card-actions">
-        ${portfolioActionButtons(holding)}
-      </div>
-    </article>
+    </details>
   `;
 }
 

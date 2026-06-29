@@ -3159,16 +3159,20 @@ tr:nth-child(even) { background: #f8fafc; }
   background: #ffffff;
   border: 1px solid var(--line);
   border-radius: 16px;
-  display: grid;
-  gap: 14px;
   padding: 14px;
 }
 
-.portfolio-holding-card-head {
+.portfolio-holding-card-summary {
   align-items: flex-start;
+  cursor: pointer;
   display: flex;
   gap: 10px;
   justify-content: space-between;
+  list-style: none;
+}
+
+.portfolio-holding-card-summary::-webkit-details-marker {
+  display: none;
 }
 
 .portfolio-holding-card h3 {
@@ -3184,10 +3188,68 @@ tr:nth-child(even) { background: #f8fafc; }
   font-size: 17px;
 }
 
-.portfolio-card-rank {
+.portfolio-card-summary-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  margin-top: 8px;
+}
+
+.portfolio-card-summary-metrics span {
   color: var(--muted);
   font-size: 13px;
   font-weight: 800;
+}
+
+.portfolio-card-summary-metrics .is-profit {
+  color: #dc2626;
+}
+
+.portfolio-card-summary-metrics .is-loss {
+  color: #16a34a;
+}
+
+.portfolio-card-summary-side {
+  align-items: flex-end;
+  display: grid;
+  gap: 10px;
+  justify-items: end;
+}
+
+.portfolio-card-toggle {
+  background: #10233f;
+  border-radius: 999px;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 900;
+  padding: 8px 12px;
+  white-space: nowrap;
+}
+
+.portfolio-holding-card[open] .portfolio-card-toggle {
+  background: #eaf2ff;
+  color: #1450a3;
+}
+
+.portfolio-holding-card[open] .portfolio-card-toggle::before {
+  content: "收合明細";
+}
+
+.portfolio-holding-card[open] .portfolio-card-toggle {
+  font-size: 0;
+}
+
+.portfolio-holding-card[open] .portfolio-card-toggle::before {
+  font-size: 13px;
+}
+
+.portfolio-card-detail {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+  padding-top: 14px;
 }
 
 .portfolio-card-metrics {
@@ -3339,13 +3401,23 @@ tr:nth-child(even) { background: #f8fafc; }
 }
 
 @media (max-width: 768px) {
-  .portfolio-holding-card-head {
+  .portfolio-holding-card-summary {
     align-items: stretch;
     flex-direction: column;
   }
 
   .portfolio-holding-card .chip {
     align-self: flex-start;
+  }
+
+  .portfolio-card-summary-side {
+    align-items: flex-start;
+    justify-items: start;
+  }
+
+  .portfolio-card-toggle {
+    justify-content: center;
+    width: 100%;
   }
 }
 
