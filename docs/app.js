@@ -215,6 +215,7 @@ async function loadAllData() {
   ]);
   const radarItems = latestItems(radarLatest);
   state.stocks = radarItems.length ? radarItems : (Array.isArray(stocks) ? stocks : latestItems(stocks));
+  state.latestUpdate = latestMeta(radarLatest);
   const latestNewsItems = latestItems(newsLatest);
   state.news = latestNewsItems.length ? latestNewsItems : (Array.isArray(news) ? news : []);
   state.newsLatestMeta = latestMeta(newsLatest);
@@ -333,6 +334,29 @@ function formatMasterDate(value) {
 
 function stockUpdateText(stock, record) {
   return cleanDisplay(stock?.updated_at || stock?.data_version || stock?.market_date || formatMasterDate(record?.source_date));
+}
+
+function stockMarketTradeDate(stock) {
+  return cleanDisplay(stock?.market_date || stock?.quote_date || stock?.date);
+}
+
+function stockMarketUpdateText(stock) {
+  const meta = state.latestUpdate || {};
+  const updated = formatDashboardTime(meta.updated_at || stock?.updated_at || "");
+  const stage = meta.stage_label || meta.stage || "";
+  const schedule = meta.schedule_time || "";
+  const parts = [];
+  if (updated) parts.push(updated);
+  if (stage) parts.push(stage);
+  if (schedule) parts.push(`排程 ${schedule}`);
+  return parts.length ? parts.join("｜") : stockMarketTradeDate(stock);
+}
+
+function stockDataVersionText(stock) {
+  const revenueMonth = String(stock?.revenue_month || "").trim();
+  if (revenueMonth) return `營收 ${revenueMonth}`;
+  const dataVersion = cleanDisplay(stock?.data_version);
+  return dataVersion === "—" ? "資料版本待補" : dataVersion.replace(/｜行情.*$/, "");
 }
 
 function stockLabel(code) {
@@ -985,8 +1009,9 @@ function radarEvidenceTable(stocks, mode = "mid") {
 function stockRadarDetail(stock) {
   const labels = revenueLabels(stock);
   const rows = [
-    ["資料版本", stock.data_version],
-    ["行情日期", stock.market_date],
+    ["資料版本", stockDataVersionText(stock)],
+    ["行情更新時間", stockMarketUpdateText(stock)],
+    ["市場交易日", stockMarketTradeDate(stock)],
     ["AI選股排名", stock.rank],
     ["AI觀察分數", radarScore(stock, "market")],
     ["收盤價", displayClose(stock)],
