@@ -1,7 +1,8 @@
 const HOLDINGS_KEY = "asurada_holdings";
 const WATCHLIST_KEY = "asurada_watchlist";
-const BUILD_VERSION = "20260629-portfolio";
-const APP_VERSION = "20260629-portfolio";
+const PORTFOLIO_STORAGE_KEY = "asuradaPortfolioDraft";
+const BUILD_VERSION = "20260629-portfolio-live";
+const APP_VERSION = "20260629-portfolio-live";
 
 const state = {
   stocks: [],
@@ -3666,6 +3667,40 @@ function portfolioHoldingMetrics(holding, totalValue) {
   return { shares, avgCost, currentPrice, cost, marketValue, pnl, pnlPct, weight };
 }
 
+function portfolioFromStorage(basePortfolio) {
+  try {
+    const raw = localStorage.getItem(PORTFOLIO_STORAGE_KEY);
+    if (!raw) return basePortfolio;
+    const stored = JSON.parse(raw);
+    if (!stored || !Array.isArray(stored.holdings)) return basePortfolio;
+    return {
+      ...basePortfolio,
+      ...stored,
+      cash: Math.max(0, safeNumber(stored.cash, basePortfolio.cash || 0)),
+      holdings: stored.holdings,
+      updated_at: stored.updated_at || basePortfolio.updated_at,
+      source: "localStorage",
+    };
+  } catch (error) {
+    console.warn("portfolio localStorage 讀取失敗", error);
+    return basePortfolio;
+  }
+}
+
+function savePortfolioDraft(portfolio) {
+  try {
+    localStorage.setItem(PORTFOLIO_STORAGE_KEY, JSON.stringify({
+      cash: Math.max(0, safeNumber(portfolio.cash)),
+      updated_at: new Date().toISOString().slice(0, 10),
+      holdings: Array.isArray(portfolio.holdings) ? portfolio.holdings : [],
+    }));
+    return true;
+  } catch (error) {
+    console.warn("portfolio localStorage 寫入失敗", error);
+    return false;
+  }
+}
+
 function portfolioStatus(weight) {
   if (weight >= 40) return { text: "過度集中", tone: "warn" };
   if (weight >= 25) return { text: "主力持股", tone: "good" };
@@ -3779,13 +3814,50 @@ function portfolioCalculator(holdings) {
       <label>操作類型<select id="portfolioCalcAction"><option value="buy">買進</option><option value="sell">賣出</option></select></label>
       <label>股數<input id="portfolioCalcShares" type="number" min="0" step="1" placeholder="例如 100"></label>
       <label>價格<input id="portfolioCalcPrice" type="number" min="0" step="0.01" placeholder="例如 145.5"></label>
-      <button id="portfolioCalcButton" type="button">試算</button>
+      <button id="portfolioCalcButton" type="button">新增 / 更新持股</button>
     </div>
-    <div id="portfolioCalcResult" class="portfolio-calc-result empty">輸入股數與價格後按下試算。</div>
+    <div id="portfolioCalcResult" class="portfolio-calc-result empty">輸入股數與價格後，會即時更新本機持股與資金配置。</div>
   `;
 }
 
-function bindPortfolioCalculator(portfolio, summary) {
+function upsertPortfolioHolding(portfolio, symbol, action, shares, price) {
+  const holdings = Array.isArray(portfolio.holdings) ? [...portfolio.holdings] : [];
+  const index = holdings.findIndex((item) => normalizeCode(item.symbol || item.code) === symbol);
+  const existing = index >= 0 ? holdings[index] : null;
+  const currentShares = existing ? Math.max(0, safeNumber(existing.shares)) : 0;
+  const currentCost = existing ? currentShares * safeNumber(existing.avg_cost) : 0;
+  const tradeAmount = shares * price;
+  if (action === "sell") {
+    if (!existing) return { error: "此股票目前不在持股內，無法做賣出更新。" };
+    const sellShares = Math.min(shares, currentShares);
+    const remainShares = currentShares - sellShares;
+    if (remainShares <= 0) holdings.splice(index, 1);
+    else holdings[index] = { ...existing, shares: remainShares, current_price: price };
+    return {
+      portfolio: { ...portfolio, cash: Math.max(0, safeNumber(portfolio.cash)) + (sellShares * price), holdings },
+      message: `已賣出 ${symbol} ${moneyText(sellShares, 0)} 股，總覽已更新。`,
+    };
+  }
+  const newShares = currentShares + shares;
+  const newAvgCost = newShares > 0 ? (currentCost + tradeAmount) / newShares : 0;
+  const nextHolding = {
+    ...(existing || {}),
+    symbol,
+    name: existing?.name || displayStockName(symbol),
+    shares: newShares,
+    avg_cost: newAvgCost,
+    current_price: price,
+    theme: existing?.theme || "",
+  };
+  if (index >= 0) holdings[index] = nextHolding;
+  else holdings.push(nextHolding);
+  return {
+    portfolio: { ...portfolio, cash: Math.max(0, safeNumber(portfolio.cash) - tradeAmount), holdings },
+    message: `已買進 / 更新 ${symbol} ${displayStockName(symbol)}，總覽已更新。`,
+  };
+}
+
+function bindPortfolioCalculator(portfolio) {
   const button = $("#portfolioCalcButton");
   if (!button) return;
   button.addEventListener("click", () => {
@@ -3804,59 +3876,25 @@ function bindPortfolioCalculator(portfolio, summary) {
       result.innerHTML = "請輸入有效股數與價格。";
       return;
     }
-    if (action === "sell" && !existingHolding) {
-      result.innerHTML = "此股票目前不在持股內，無法做賣出試算。";
+    const next = upsertPortfolioHolding(portfolio, symbol, action, shares, price);
+    if (next.error) {
+      result.innerHTML = next.error;
       return;
     }
-    const holding = existingHolding || {
-      symbol,
-      name: displayStockName(symbol),
-      shares: 0,
-      avg_cost: 0,
-      current_price: price,
-      theme: "",
-    };
-    const metrics = portfolioHoldingMetrics(holding, summary.totalValue);
-    if (action === "buy") {
-      const buyAmount = shares * price;
-      const newShares = metrics.shares + shares;
-      const newCost = metrics.cost + buyAmount;
-      const newAvgCost = newShares > 0 ? newCost / newShares : 0;
-      const newMarketValue = newShares * price;
-      const newTotalValue = summary.totalValue + buyAmount;
-      const newWeight = newTotalValue > 0 ? (newMarketValue / newTotalValue) * 100 : 0;
-      result.innerHTML = `
-        <div class="portfolio-calc-grid">
-          ${infoItem("新持股股數", moneyText(newShares, 0))}
-          ${infoItem("新平均成本", moneyText(newAvgCost, 2))}
-          ${infoItem("新投資成本", moneyText(newCost, 0))}
-          ${infoItem("新市值估算", moneyText(newMarketValue, 0))}
-          ${infoItem("新持股占比", `${newWeight.toFixed(2)}%`)}
-        </div>
-      `;
+    if (!savePortfolioDraft(next.portfolio)) {
+      result.innerHTML = "瀏覽器無法儲存本機持股資料，請確認 localStorage 權限。";
       return;
     }
-    const sellShares = Math.min(shares, metrics.shares);
-    const recovered = sellShares * price;
-    const remainShares = metrics.shares - sellShares;
-    const remainMarketValue = remainShares * price;
-    const newTotalValue = summary.totalValue;
-    const newWeight = newTotalValue > 0 ? (remainMarketValue / newTotalValue) * 100 : 0;
-    result.innerHTML = `
-      <div class="portfolio-calc-grid">
-        ${infoItem("剩餘股數", moneyText(remainShares, 0))}
-        ${infoItem("回收金額", moneyText(recovered, 0))}
-        ${infoItem("剩餘市值", moneyText(remainMarketValue, 0))}
-        ${infoItem("新持股占比", `${newWeight.toFixed(2)}%`)}
-      </div>
-    `;
+    result.innerHTML = next.message;
+    renderPortfolio();
   });
 }
 
 async function renderPortfolio() {
   renderHeader("portfolio");
   const main = $("#app");
-  const portfolio = await loadJson("data/portfolio.json", null);
+  const basePortfolio = await loadJson("data/portfolio.json", null);
+  const portfolio = basePortfolio ? portfolioFromStorage(basePortfolio) : null;
   const holdings = Array.isArray(portfolio?.holdings) ? portfolio.holdings : [];
   if (!portfolio) {
     main.innerHTML = `<section class="panel"><div class="empty">投資組合資料尚未建立或讀取失敗</div></section>`;
@@ -3893,14 +3931,14 @@ async function renderPortfolio() {
       <div class="portfolio-allocation">${portfolioAllocation(holdings, summary)}</div>
     </section>
     <section class="panel portfolio-page">
-      <div class="section-title"><h2>加碼 / 減碼試算器</h2><span>試算不會寫回 JSON</span></div>
+      <div class="section-title"><h2>加碼 / 減碼試算器</h2><span>即時更新本機資料，不寫回 JSON</span></div>
       ${portfolioCalculator(holdings)}
       <div class="portfolio-note">
-        手動修改持股請編輯 <code>docs/data/portfolio.json</code>，欄位包含 cash、updated_at、holdings、symbol、name、shares、avg_cost、current_price、theme。
+        本頁新增 / 更新持股會儲存在此瀏覽器 localStorage；若要修改網站預設模板，才需要編輯 <code>docs/data/portfolio.json</code>。
       </div>
     </section>
   `;
-  bindPortfolioCalculator(portfolio, summary);
+  bindPortfolioCalculator(portfolio);
 }
 
 function renderCodeHits(selector, codes) {
