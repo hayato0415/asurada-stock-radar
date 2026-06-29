@@ -2947,7 +2947,16 @@ function majorNewsForRegion(region) {
   const base = state.news.filter((event) => isRealSourceUrl(eventUrl(event)) && eventNewsRegion(event) === region);
   const primary = sortedNewsItems(base.filter((event) => ["高", "中高"].includes(event.event_strength)));
   const fallback = sortedNewsItems(base.filter((event) => event.event_strength === "中"));
-  return (primary.length ? primary : fallback).slice(0, 5);
+  const selected = primary.slice();
+  const seen = new Set(selected.map((event) => eventUrl(event) || event.title || ""));
+  fallback.forEach((event) => {
+    const key = eventUrl(event) || event.title || "";
+    if (selected.length < 5 && !seen.has(key)) {
+      selected.push(event);
+      seen.add(key);
+    }
+  });
+  return selected.slice(0, 5);
 }
 
 function renderNewsLists(filter = "major") {
