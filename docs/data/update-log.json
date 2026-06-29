@@ -1,11 +1,91 @@
 {
-  "updated_at": "2026-06-29 14:38:17 Asia/Taipei",
-  "stage": "evening",
-  "stage_label": "晚間總結",
+  "updated_at": "2026-06-29 16:10:24 Asia/Taipei",
+  "stage": "intraday",
+  "stage_label": "盤中更新",
   "timezone": "Asia/Taipei",
   "source_count": 4,
-  "data_version": "20260629-1438-evening",
+  "data_version": "20260629-1610-intraday",
+  "warnings": [],
+  "news_fetch_status": {
+    "success": true,
+    "generated_at": "2026-06-29 16:10:26 Asia/Taipei",
+    "events_count": 21,
+    "new_items_count": 1,
+    "content_latest_at": "2026-06-29 14:05",
+    "sources_attempted": 6,
+    "sources_success": 6,
+    "errors": [],
+    "warnings": [
+      "CMoney 美股新聞快訊: SSL 驗證失敗，已使用 verify=False 重試",
+      "CMoney 台股即時消息: SSL 驗證失敗，已使用 verify=False 重試",
+      "MoneyDJ 產業分析新聞: SSL 驗證失敗，已使用 verify=False 重試",
+      "MoneyDJ 即時新聞總表: SSL 驗證失敗，已使用 verify=False 重試"
+    ],
+    "output": "docs/data/news-events.json",
+    "status": "fetch_ok",
+    "stderr": ""
+  },
   "entries": [
+    {
+      "updated_at": "2026-06-29 16:10:24 Asia/Taipei",
+      "stage": "intraday",
+      "stage_label": "盤中更新",
+      "schedule_time": "10:07",
+      "timezone": "Asia/Taipei",
+      "source_count": 4,
+      "data_version": "20260629-1610-intraday",
+      "updated_files": [
+        "docs/data/market-latest.json",
+        "docs/data/themes-latest.json",
+        "docs/data/news-latest.json",
+        "docs/data/radar-latest.json"
+      ]
+    },
+    {
+      "updated_at": "2026-06-29 16:09:19 Asia/Taipei",
+      "stage": "intraday",
+      "stage_label": "盤中更新",
+      "schedule_time": "10:07",
+      "timezone": "Asia/Taipei",
+      "source_count": 4,
+      "data_version": "20260629-1609-intraday",
+      "updated_files": [
+        "docs/data/market-latest.json",
+        "docs/data/themes-latest.json",
+        "docs/data/news-latest.json",
+        "docs/data/radar-latest.json"
+      ]
+    },
+    {
+      "updated_at": "2026-06-29 16:08:10 Asia/Taipei",
+      "stage": "intraday",
+      "stage_label": "盤中更新",
+      "schedule_time": "10:07",
+      "timezone": "Asia/Taipei",
+      "source_count": 4,
+      "data_version": "20260629-1608-intraday",
+      "updated_files": [
+        "docs/data/market-latest.json",
+        "docs/data/themes-latest.json",
+        "docs/data/news-latest.json",
+        "docs/data/radar-latest.json"
+      ]
+    },
+    {
+      "updated_at": "2026-06-29 16:07:08 Asia/Taipei",
+      "stage": "intraday",
+      "stage_label": "盤中更新",
+      "schedule_time": "10:07",
+      "timezone": "Asia/Taipei",
+      "source_count": 4,
+      "data_version": "20260629-1607-intraday",
+      "updated_files": [
+        "docs/data/market-latest.json",
+        "docs/data/themes-latest.json",
+        "docs/data/news-latest.json",
+        "docs/data/radar-latest.json"
+      ]
+    },
     {
       "updated_at": "2026-06-29 14:38:17 Asia/Taipei",
       "stage": "evening",

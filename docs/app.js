@@ -1144,10 +1144,16 @@ function latestMeta(raw) {
   if (!raw || typeof raw !== "object" || Array.isArray(raw)) return {};
   return {
     updated_at: raw.updated_at || raw.generated_at || raw.date || "",
+    content_latest_at: raw.content_latest_at || "",
     stage: raw.stage || "",
     stage_label: raw.stage_label || "",
     schedule_time: raw.schedule_time || "",
     data_version: raw.data_version || "",
+    items_count: raw.items_count ?? raw.total_available ?? "",
+    new_items_count: raw.new_items_count ?? "",
+    source_count: raw.source_count ?? "",
+    stale: Boolean(raw.stale),
+    stale_reason: raw.stale_reason || "",
   };
 }
 
@@ -2832,6 +2838,8 @@ function effectiveNewsDateValue(event) {
 }
 
 function newsLatestDateValue() {
+  const metaDate = state.newsLatestMeta?.content_latest_at || "";
+  if (metaDate) return metaDate;
   const dates = (state.news || [])
     .map((event) => effectiveNewsDateValue(event))
     .filter(Boolean)
@@ -2854,10 +2862,14 @@ function newsContentLatestText() {
 }
 
 function newsFreshnessWarningText() {
-  const packageDate = isoDateOnly(state.newsLatestMeta?.updated_at);
+  const meta = state.newsLatestMeta || {};
+  if (meta.stale) {
+    return meta.stale_reason || "新聞來源目前未取得新資料，以下為上次成功取得的新聞。";
+  }
+  const packageDate = isoDateOnly(meta.updated_at);
   const contentDate = newsLatestDateValue();
   if (!packageDate || !contentDate || contentDate >= packageDate) return "";
-  return `提醒：目前新聞來源內容最新日期為 ${formatDashboardTime(contentDate)}，但資料檔整理時間為 ${formatDashboardTime(state.newsLatestMeta.updated_at)}；代表排程已執行，但來源尚未抓到同日新聞。`;
+  return `提醒：目前新聞來源內容最新日期為 ${formatDashboardTime(contentDate)}，但資料檔整理時間為 ${formatDashboardTime(meta.updated_at)}；代表排程已執行，但來源尚未抓到同日新聞。`;
 }
 
 function newsImportanceScore(event) {
@@ -2911,12 +2923,71 @@ function newsAccordionItem(event, index) {
   `;
 }
 
+function sortedNewsItems(items) {
+  return items
+    .slice()
+    .sort((a, b) => {
+      const dateOrder = String(effectiveNewsDateValue(b) || b.date || "").localeCompare(String(effectiveNewsDateValue(a) || a.date || ""));
+      return dateOrder || newsImportanceScore(b) - newsImportanceScore(a);
+    });
+}
+
+function newsPassesFilter(event, filter) {
+  if (!isRealSourceUrl(eventUrl(event))) return false;
+  const region = eventNewsRegion(event);
+  const impact = String(event.impact || "");
+  if (filter === "positive") return impact.includes("偏多");
+  if (filter === "negative") return impact.includes("偏空");
+  if (filter === "taiwan") return region === "台股";
+  if (filter === "international") return region === "國際";
+  return true;
+}
+
+function majorNewsForRegion(region) {
+  const base = state.news.filter((event) => isRealSourceUrl(eventUrl(event)) && eventNewsRegion(event) === region);
+  const primary = sortedNewsItems(base.filter((event) => ["高", "中高"].includes(event.event_strength)));
+  const fallback = sortedNewsItems(base.filter((event) => event.event_strength === "中"));
+  return (primary.length ? primary : fallback).slice(0, 5);
+}
+
+function renderNewsLists(filter = "major") {
+  const sections = [
+    ["國際", "國際重大新聞"],
+    ["台股", "台股重大新聞"],
+  ];
+  const globalList = filter === "major"
+    ? []
+    : sortedNewsItems(state.news.filter((event) => newsPassesFilter(event, filter))).slice(0, 30);
+  sections.forEach(([region]) => {
+    const key = newsSectionKey("all", region);
+    const list = filter === "major"
+      ? majorNewsForRegion(region)
+      : globalList.filter((event) => eventNewsRegion(event) === region);
+    const target = $(`#news-${key}`);
+    const count = $(`#count-${key}`);
+    if (count) count.textContent = `${list.length} 則`;
+    if (target) {
+      target.innerHTML = list.length
+        ? list.map(newsAccordionItem).join("")
+        : `<div class="empty">${filter === "major" ? "目前沒有高 / 中高新聞，且沒有可補位的中強度新聞" : "目前沒有符合此篩選的新聞"}</div>`;
+    }
+  });
+}
+
 function renderNews() {
   renderHeader("news");
   const main = $("#app");
   const sections = [
     ["國際", "國際重大新聞"],
     ["台股", "台股重大新聞"],
+  ];
+  const filters = [
+    ["major", "重大新聞"],
+    ["all", "全部新聞"],
+    ["positive", "偏多"],
+    ["negative", "偏空"],
+    ["taiwan", "台股"],
+    ["international", "國際"],
   ];
   main.innerHTML = `
     <section class="panel news-radar-intro compact">
@@ -2926,10 +2997,13 @@ function renderNews() {
       </div>
       <p class="muted">${newsContentLatestText()}</p>
       ${newsFreshnessWarningText() ? `<div class="empty">${escapeHtml(newsFreshnessWarningText())}</div>` : ""}
+      <div class="news-filter-tabs" role="tablist" aria-label="新聞篩選">
+        ${filters.map(([key, label], index) => `<button class="news-filter-btn ${index === 0 ? "is-active" : ""}" type="button" data-news-filter="${key}">${label}</button>`).join("")}
+      </div>
       <div class="news-rule-grid">
         <div>
           <h3>事件強度依據</h3>
-          <p>依真實來源、事件明確度、題材關聯股票數、供需 / 報價 / 財報 / 政策訊號與族群資金輪動排序。每區只挑最重要 5 則。</p>
+          <p>依真實來源、事件明確度、題材關聯股票數、供需 / 報價 / 財報 / 政策訊號與族群資金輪動排序。重大新聞預設每區 5 則；若沒有高 / 中高，會補上最新中強度新聞。</p>
         </div>
         <div>
           <h3>影響方向說明</h3>
@@ -2951,17 +3025,13 @@ function renderNews() {
       `;
     }).join("")}
   `;
-  sections.forEach(([region]) => {
-    const key = newsSectionKey("all", region);
-    const list = state.news
-      .filter((event) => isRealSourceUrl(eventUrl(event)) && eventNewsRegion(event) === region)
-      .filter((event) => ["高", "中高"].includes(event.event_strength))
-      .sort((a, b) => newsImportanceScore(b) - newsImportanceScore(a) || String(effectiveNewsDateValue(b) || b.date || "").localeCompare(String(effectiveNewsDateValue(a) || a.date || "")))
-      .slice(0, 5);
-    const target = $(`#news-${key}`);
-    const count = $(`#count-${key}`);
-    if (count) count.textContent = `${list.length} 則`;
-    if (target) target.innerHTML = list.length ? list.map(newsAccordionItem).join("") : `<div class="empty">目前沒有此分區新聞</div>`;
+  renderNewsLists("major");
+  document.querySelectorAll(".news-filter-btn").forEach((button) => {
+    button.addEventListener("click", () => {
+      document.querySelectorAll(".news-filter-btn").forEach((item) => item.classList.remove("is-active"));
+      button.classList.add("is-active");
+      renderNewsLists(button.dataset.newsFilter || "major");
+    });
   });
 }
 

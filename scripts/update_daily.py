@@ -2,14 +2,20 @@ from __future__ import annotations
 
 import argparse
 import json
+import subprocess
+import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS_DATA = ROOT / "docs" / "data"
 ARCHIVE_DIR = DOCS_DATA / "archive"
 TAIPEI_TZ = timezone(timedelta(hours=8), "Asia/Taipei")
+NEWS_FETCH_STATUS: dict = {}
 
 STAGES = {
     "premarket": {
@@ -66,6 +72,73 @@ def as_items(raw) -> list:
     return []
 
 
+def parse_news_datetime(value: str) -> datetime | None:
+    if not value:
+        return None
+    text = str(value).replace("T", " ").replace("+08:00", "").replace("Asia/Taipei", "").strip()
+    formats = [
+        "%Y-%m-%d %H:%M:%S",
+        "%Y-%m-%d %H:%M",
+        "%Y-%m-%d",
+    ]
+    for fmt in formats:
+        try:
+            parsed = datetime.strptime(text[:len(datetime.now().strftime(fmt))], fmt)
+            if fmt == "%Y-%m-%d":
+                parsed = parsed.replace(hour=0, minute=0)
+            return parsed.replace(tzinfo=TAIPEI_TZ)
+        except ValueError:
+            continue
+    return None
+
+
+def event_datetime(event: dict) -> datetime | None:
+    if not isinstance(event, dict):
+        return None
+    for key in ("date", "published_at", "created_at", "updated_at"):
+        parsed = parse_news_datetime(str(event.get(key) or ""))
+        if parsed:
+            return parsed
+    return None
+
+
+def refresh_news_events() -> dict:
+    script = ROOT / "scripts" / "fetch_news_sources.py"
+    if not script.exists():
+        return {
+            "success": False,
+            "status": "missing_fetcher",
+            "error": "scripts/fetch_news_sources.py 不存在",
+        }
+    command = [sys.executable, str(script), "--limit", "80"]
+    try:
+        result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=180)
+    except Exception as exc:
+        return {"success": False, "status": "fetch_failed", "error": str(exc)}
+
+    stdout = (result.stdout or "").strip()
+    parsed = {}
+    if stdout:
+        try:
+            parsed = json.loads(stdout)
+        except Exception:
+            parsed = {"raw_stdout": stdout[-1000:]}
+
+    if result.returncode != 0:
+        return {
+            **parsed,
+            "success": False,
+            "status": "fetch_failed",
+            "error": (result.stderr or parsed.get("error") or "新聞抓取腳本執行失敗").strip(),
+        }
+    return {
+        **parsed,
+        "success": bool(parsed.get("success", True)),
+        "status": "fetch_ok",
+        "stderr": result.stderr.strip(),
+    }
+
+
 def stock_master_count() -> int:
     master = read_json(DOCS_DATA / "stock-master.json", {})
     return len(master) if isinstance(master, dict) else 0
@@ -119,9 +192,50 @@ def build_news_latest(stage: str, updated_at: str, data_version: str) -> dict:
     source_files = ["news-events.json"]
     news = read_json(DOCS_DATA / "news-events.json", [])
     items = as_items(news) if isinstance(news, dict) else (news if isinstance(news, list) else [])
+    items = [item for item in items if isinstance(item, dict)]
+    items.sort(key=lambda item: event_datetime(item) or datetime(1900, 1, 1, tzinfo=TAIPEI_TZ), reverse=True)
+    visible_items = items[:80]
+    latest_dt = next((event_datetime(item) for item in visible_items if event_datetime(item)), None)
+    content_latest_at = latest_dt.strftime("%Y-%m-%d %H:%M") if latest_dt else ""
+    updated_dt = parse_news_datetime(updated_at) or now_taipei()
+    old_latest = read_json(DOCS_DATA / "news-latest.json", {})
+    old_items = as_items(old_latest)
+    old_urls = {
+        str(item.get("source_url") or item.get("url") or "")
+        for item in old_items
+        if isinstance(item, dict)
+    }
+    new_items_count = len([
+        item for item in visible_items
+        if str(item.get("source_url") or item.get("url") or "") not in old_urls
+    ])
+    fetch_ok = NEWS_FETCH_STATUS.get("success", True)
+    stale = False
+    stale_reason = ""
+    if not fetch_ok:
+        stale = True
+        stale_reason = f"新聞抓取失敗：{NEWS_FETCH_STATUS.get('error') or NEWS_FETCH_STATUS.get('status') or '未知錯誤'}"
+    elif not latest_dt:
+        stale = True
+        stale_reason = "新聞內容沒有可判讀的來源時間"
+    elif updated_dt - latest_dt > timedelta(hours=12):
+        stale = True
+        stale_reason = f"最新新聞時間 {content_latest_at} 距離本次整理時間超過 12 小時"
+    source_count = len({
+        str(item.get("source_name") or "")
+        for item in visible_items
+        if item.get("source_name")
+    })
     payload = base_payload(stage, source_files, updated_at, data_version)
     payload.update({
-        "items": items[:80],
+        "content_latest_at": content_latest_at,
+        "items_count": len(items),
+        "new_items_count": new_items_count,
+        "stale": stale,
+        "stale_reason": stale_reason,
+        "source_count": source_count,
+        "news_fetch_status": NEWS_FETCH_STATUS,
+        "items": visible_items,
         "total_available": len(items),
     })
     return payload
@@ -173,6 +287,10 @@ def update_log(stage: str, updated_at: str, data_version: str, updated_files: li
         "data_version": data_version,
         "updated_files": updated_files,
     }
+    warnings = []
+    if NEWS_FETCH_STATUS and not NEWS_FETCH_STATUS.get("success", False):
+        warnings.append("news_fetch_failed")
+        entry["news_fetch_status"] = NEWS_FETCH_STATUS
     payload = {
         "updated_at": updated_at,
         "stage": stage,
@@ -180,6 +298,8 @@ def update_log(stage: str, updated_at: str, data_version: str, updated_files: li
         "timezone": "Asia/Taipei",
         "source_count": len(updated_files),
         "data_version": data_version,
+        "warnings": warnings,
+        "news_fetch_status": NEWS_FETCH_STATUS,
         "entries": [entry, *entries][:80],
     }
     write_json(path, payload)
@@ -187,6 +307,7 @@ def update_log(stage: str, updated_at: str, data_version: str, updated_files: li
 
 
 def run(stage: str) -> dict:
+    global NEWS_FETCH_STATUS
     if stage not in STAGES:
         raise SystemExit(f"unknown stage: {stage}")
     current = now_taipei()
@@ -196,6 +317,13 @@ def run(stage: str) -> dict:
     updated_files: list[str] = []
 
     DOCS_DATA.mkdir(parents=True, exist_ok=True)
+    if "news" in STAGES[stage]["targets"]:
+        NEWS_FETCH_STATUS = refresh_news_events()
+        if not NEWS_FETCH_STATUS.get("success", False):
+            print(f"[warn] news fetch failed: {NEWS_FETCH_STATUS.get('error') or NEWS_FETCH_STATUS.get('status')}")
+    else:
+        NEWS_FETCH_STATUS = {}
+
     for target in STAGES[stage]["targets"]:
         filename, builder = BUILDERS[target]
         payload = builder(stage, updated_at, data_version)
@@ -213,6 +341,7 @@ def run(stage: str) -> dict:
         "stage": stage,
         "stage_label": STAGES[stage]["label"],
         "data_version": data_version,
+        "news_fetch_status": NEWS_FETCH_STATUS,
         "updated_files": updated_files,
     }
 
