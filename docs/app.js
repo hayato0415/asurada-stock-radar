@@ -12,6 +12,7 @@ const state = {
   technical: {},
   profiles: {},
   master: {},
+  stockConcepts: {},
   hotThemes: { date: "", updated_at: "", items: [], available: false },
   themeTop5: { date: "", updated_at: "", items: [], available: false },
   newsThemeRanking: { generated_at: "", items: [], available: false },
@@ -24,9 +25,11 @@ const state = {
   quarterlyRevenue: [],
   revenueLoaded: false,
   revenueError: "",
+  stockConceptsLoaded: false,
 };
 
 let revenueLoadPromise = null;
+let stockConceptLoadPromise = null;
 let rankingAccordionsReady = false;
 
 const TECH_THEMES = [
@@ -194,6 +197,23 @@ async function loadRevenueHistory() {
     }
   })();
   return revenueLoadPromise;
+}
+
+async function loadStockConceptsIndex() {
+  if (state.stockConceptsLoaded) return;
+  if (stockConceptLoadPromise) return stockConceptLoadPromise;
+  stockConceptLoadPromise = (async () => {
+    try {
+      const stockConcepts = await loadJson("data/stock-concepts-index.json", {});
+      state.stockConcepts = stockConcepts && typeof stockConcepts === "object" ? stockConcepts : {};
+    } catch (error) {
+      console.warn("Failed to load stock concept index", error);
+      state.stockConcepts = {};
+    } finally {
+      state.stockConceptsLoaded = true;
+    }
+  })();
+  return stockConceptLoadPromise;
 }
 
 async function loadAllData() {
@@ -541,6 +561,15 @@ function infoItem(label, value, extra = "") {
     <div class="info-item ${extra}">
       <span>${escapeHtml(label)}</span>
       <strong>${escapeHtml(cleanDisplay(value))}</strong>
+    </div>
+  `;
+}
+
+function infoHtmlItem(label, html, extra = "") {
+  return `
+    <div class="info-item ${extra}">
+      <span>${escapeHtml(label)}</span>
+      <strong>${html || "—"}</strong>
     </div>
   `;
 }
@@ -1037,12 +1066,49 @@ function stockRadarDetail(stock) {
   `;
 }
 
+function stockConceptPayload(code) {
+  const records = state.stockConcepts?.stocks || {};
+  return records[normalizeCode(code)] || null;
+}
+
+function stockConceptItems(code) {
+  const payload = stockConceptPayload(code);
+  const concepts = Array.isArray(payload?.concepts) ? payload.concepts : [];
+  return concepts.filter((item) => item && item.concept_name);
+}
+
+function stockConceptNames(code, limit = 12) {
+  const items = stockConceptItems(code);
+  return items.slice(0, limit).map((item) => item.concept_name);
+}
+
+function stockConceptLinks(code, limit = 12) {
+  const items = stockConceptItems(code);
+  if (!items.length) return "—";
+  const links = items.slice(0, limit).map((item) => {
+    const name = item.concept_name || "";
+    const href = item.source_url || `concepts.html?q=${encodeURIComponent(name)}`;
+    return `<a class="stock-link" href="${escapeHtml(href)}" target="${item.source_url ? "_blank" : "_self"}" rel="noopener">${escapeHtml(name)}</a>`;
+  });
+  const extra = items.length > limit ? ` <span class="muted">另 ${items.length - limit} 項</span>` : "";
+  return `${links.join("、")}${extra}`;
+}
+
+function stockConceptSourceText(code) {
+  const payload = stockConceptPayload(code);
+  if (!payload) return "概念資料待補";
+  const count = payload.concept_count ?? stockConceptItems(code).length;
+  const updated = state.stockConcepts?.updated_at || "";
+  return `MoneyDJ 主資料庫反查 ${count} 項${updated ? `｜更新 ${formatDashboardTime(updated)}` : ""}`;
+}
+
 function stockMasterDetail(code, stock) {
   const record = masterRecord(code);
   const status = stock ? "命中今日雷達" : "今日未入選雷達";
   const industry = industryLabel(record?.industry || stock?.industry || stock?.category);
-  const supplyChain = stock ? cleanDisplay(stock.business || stock.concept) : industry;
-  const relatedThemes = stock ? cleanDisplay(stock.concept) : "—";
+  const conceptNames = stockConceptNames(code, 6);
+  const supplyChain = stock ? cleanDisplay(stock.business || stock.concept) : cleanDisplay(conceptNames.slice(0, 4).join("、") || industry);
+  const relatedThemes = stockConceptLinks(code, 14);
   return `
     <div class="stock-info-card">
       <h3>基本資料</h3>
@@ -1052,7 +1118,8 @@ function stockMasterDetail(code, stock) {
         ${infoItem("市場別", record?.market)}
         ${infoItem("產業別", industry)}
         ${infoItem("類股 / 供應鏈", supplyChain)}
-        ${infoItem("概念股相關", relatedThemes)}
+        ${infoHtmlItem("概念股相關", relatedThemes)}
+        ${infoItem("概念資料來源", stockConceptSourceText(code))}
         ${infoBadge("今日雷達狀態", status, stock ? "good" : "warn")}
       </div>
     </div>
@@ -3554,6 +3621,12 @@ function renderStock() {
   };
   $("#stockSearch").addEventListener("input", render);
   render();
+  if (!state.stockConceptsLoaded) {
+    loadStockConceptsIndex().then(() => {
+      const input = $("#stockSearch");
+      if (input && String(input.value || "").trim()) render();
+    });
+  }
 }
 
 function renderPortfolio() {
