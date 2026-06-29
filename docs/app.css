@@ -3082,13 +3082,23 @@ tr:nth-child(even) { background: #f8fafc; }
 }
 
 .portfolio-summary-card.is-profit strong,
-.portfolio-table .is-profit {
+.portfolio-table .is-profit,
+.portfolio-holding-card .is-profit {
   color: #dc2626;
 }
 
 .portfolio-summary-card.is-loss strong,
-.portfolio-table .is-loss {
+.portfolio-table .is-loss,
+.portfolio-holding-card .is-loss {
   color: #16a34a;
+}
+
+.portfolio-desktop-table {
+  display: block;
+}
+
+.portfolio-mobile-cards {
+  display: none;
 }
 
 .portfolio-table {
@@ -3143,6 +3153,79 @@ tr:nth-child(even) { background: #f8fafc; }
 
 .portfolio-row-action:hover {
   filter: brightness(.97);
+}
+
+.portfolio-holding-card {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  display: grid;
+  gap: 14px;
+  padding: 14px;
+}
+
+.portfolio-holding-card-head {
+  align-items: flex-start;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.portfolio-holding-card h3 {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 4px 0 0;
+}
+
+.portfolio-holding-card h3 span {
+  color: var(--ink);
+  font-size: 17px;
+}
+
+.portfolio-card-rank {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.portfolio-card-metrics {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.portfolio-card-metric {
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  padding: 10px;
+}
+
+.portfolio-card-metric span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.portfolio-card-metric strong {
+  color: var(--ink);
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+
+.portfolio-card-actions .portfolio-row-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  white-space: normal;
+}
+
+.portfolio-card-actions .portfolio-row-action {
+  min-height: 40px;
+  text-align: center;
 }
 
 .portfolio-allocation {
@@ -3236,6 +3319,15 @@ tr:nth-child(even) { background: #f8fafc; }
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .portfolio-desktop-table {
+    display: none;
+  }
+
+  .portfolio-mobile-cards {
+    display: grid;
+    gap: 12px;
+  }
+
   .portfolio-calculator,
   .portfolio-calc-grid {
     grid-template-columns: minmax(0, 1fr);
@@ -3243,6 +3335,17 @@ tr:nth-child(even) { background: #f8fafc; }
 
   .portfolio-calculator button {
     width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-holding-card-head {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .portfolio-holding-card .chip {
+    align-self: flex-start;
   }
 }
 

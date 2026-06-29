@@ -3821,6 +3821,46 @@ function portfolioSummaryCards(summary) {
   `).join("");
 }
 
+function portfolioHoldingCard(holding, totalValue) {
+  const code = normalizeCode(holding.symbol || holding.code);
+  const metrics = portfolioHoldingMetrics(holding, totalValue);
+  const status = portfolioStatus(metrics.weight);
+  const name = holding.name || displayStockName(code);
+  const fields = [
+    ["題材", holding.theme || "-"],
+    ["持有股數", moneyText(metrics.shares, 0)],
+    ["平均成本", moneyText(metrics.avgCost, 2)],
+    ["現價", moneyText(metrics.currentPrice, 2)],
+    ["投資成本", moneyText(metrics.cost, 0)],
+    ["目前市值", moneyText(metrics.marketValue, 0)],
+    ["損益金額", signedMoneyText(metrics.pnl, 0), metrics.pnl >= 0 ? "is-profit" : "is-loss"],
+    ["損益率", signedPercentText(metrics.pnlPct), metrics.pnl >= 0 ? "is-profit" : "is-loss"],
+    ["持股占比", `${metrics.weight.toFixed(2)}%`],
+  ];
+  return `
+    <article class="portfolio-holding-card">
+      <div class="portfolio-holding-card-head">
+        <div>
+          <span class="portfolio-card-rank">${escapeHtml(code)}</span>
+          <h3>${portfolioStockLink(holding)} <span>${escapeHtml(name)}</span></h3>
+        </div>
+        ${chip(status.text, status.tone)}
+      </div>
+      <div class="portfolio-card-metrics">
+        ${fields.map(([label, value, tone]) => `
+          <div class="portfolio-card-metric ${tone || ""}">
+            <span>${escapeHtml(label)}</span>
+            <strong>${escapeHtml(value)}</strong>
+          </div>
+        `).join("")}
+      </div>
+      <div class="portfolio-card-actions">
+        ${portfolioActionButtons(holding)}
+      </div>
+    </article>
+  `;
+}
+
 function portfolioTable(holdings, totalValue) {
   if (!holdings.length) {
     return `<div class="empty">尚未新增持股。請編輯 <code>docs/data/portfolio.json</code> 加入 holdings 後，這裡才會顯示持股明細。</div>`;
@@ -3847,15 +3887,19 @@ function portfolioTable(holdings, totalValue) {
       </tr>
     `;
   }).join("");
+  const cards = holdings.map((holding) => portfolioHoldingCard(holding, totalValue)).join("");
   return `
-    <div class="table-wrap portfolio-table-wrap">
-      <table class="portfolio-table">
-        <thead>
-          <tr><th>代號</th><th>名稱</th><th>題材</th><th>持有股數</th><th>平均成本</th><th>現價</th><th>投資成本</th><th>目前市值</th><th>損益金額</th><th>損益率</th><th>持股占比</th><th>狀態</th><th>操作</th></tr>
-        </thead>
-        <tbody>${rows}</tbody>
-      </table>
+    <div class="portfolio-desktop-table">
+      <div class="table-wrap portfolio-table-wrap">
+        <table class="portfolio-table">
+          <thead>
+            <tr><th>代號</th><th>名稱</th><th>題材</th><th>持有股數</th><th>平均成本</th><th>現價</th><th>投資成本</th><th>目前市值</th><th>損益金額</th><th>損益率</th><th>持股占比</th><th>狀態</th><th>操作</th></tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
     </div>
+    <div class="portfolio-mobile-cards" aria-label="手機版持股明細">${cards}</div>
   `;
 }
 
