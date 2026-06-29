@@ -1,0 +1,87 @@
+name: Daily Radar Latest Data Update
+
+on:
+  schedule:
+    # GitHub Actions cron uses UTC. The matching Asia/Taipei times are:
+    # 08:07 premarket, 10:07 intraday, 13:37 close, 17:07 afterhours, 19:07 evening.
+    - cron: "7 0 * * *"
+    - cron: "7 2 * * *"
+    - cron: "37 5 * * *"
+    - cron: "7 9 * * *"
+    - cron: "7 11 * * *"
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: "Update stage"
+        required: true
+        default: "evening"
+        type: choice
+        options:
+          - premarket
+          - intraday
+          - close
+          - afterhours
+          - evening
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-radar-update
+  cancel-in-progress: false
+
+env:
+  TZ: Asia/Taipei
+
+jobs:
+  update-latest-json:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Resolve update stage
+        id: stage
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            STAGE="${{ inputs.stage }}"
+          else
+            case "${{ github.event.schedule }}" in
+              "7 0 * * *") STAGE="premarket" ;;
+              "7 2 * * *") STAGE="intraday" ;;
+              "37 5 * * *") STAGE="close" ;;
+              "7 9 * * *") STAGE="afterhours" ;;
+              "7 11 * * *") STAGE="evening" ;;
+              *) echo "Unknown schedule: ${{ github.event.schedule }}"; exit 1 ;;
+            esac
+          fi
+          echo "stage=$STAGE" >> "$GITHUB_OUTPUT"
+          echo "Resolved stage: $STAGE"
+          date
+
+      - name: Update latest JSON
+        run: python scripts/update_daily.py --stage "${{ steps.stage.outputs.stage }}"
+
+      - name: Commit latest data
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/radar-latest.json \
+                  docs/data/market-latest.json \
+                  docs/data/themes-latest.json \
+                  docs/data/news-latest.json \
+                  docs/data/update-log.json \
+                  docs/data/archive
+          if git diff --cached --quiet; then
+            echo "No latest data changes to commit."
+          else
+            git commit -m "Update radar latest data (${{ steps.stage.outputs.stage }})"
+            git push
+          fi

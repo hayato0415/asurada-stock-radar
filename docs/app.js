@@ -16,6 +16,9 @@ const state = {
   themeTop5: { date: "", updated_at: "", items: [], available: false },
   newsThemeRanking: { generated_at: "", items: [], available: false },
   lowBaseRanking: { generated_at: "", items: [], available: false },
+  latestUpdate: { updated_at: "", stage: "", stage_label: "", schedule_time: "", data_version: "" },
+  updateLog: { entries: [], available: false },
+  universeCount: 0,
   monthlyRevenue: [],
   quarterlyRevenue: [],
   revenueLoaded: false,
@@ -225,6 +228,33 @@ async function loadAllData() {
   if (!state.themeTop5.date) {
     state.themeTop5.date = updateReport?.date || stockDataMeta?.date || "";
   }
+}
+
+async function loadRadarData() {
+  const [radarLatest, marketLatest, themesLatest, newsLatest, updateLog] = await Promise.all([
+    loadJson("data/radar-latest.json", null),
+    loadJson("data/market-latest.json", null),
+    loadJson("data/themes-latest.json", null),
+    loadJson("data/news-latest.json", null),
+    loadJson("data/update-log.json", null),
+  ]);
+  let radarItems = latestItems(radarLatest);
+  if (!radarItems.length) {
+    const stocksLegacy = await loadJson("data/stocks-latest.json", []);
+    radarItems = Array.isArray(stocksLegacy) ? stocksLegacy : latestItems(stocksLegacy);
+  }
+  state.stocks = radarItems;
+  state.news = latestItems(newsLatest);
+  state.hotThemes = normalizeDashboardData(themesLatest);
+  if (themesLatest?.items?.length) {
+    state.themeTop5 = normalizeDashboardData(themesLatest);
+  } else {
+    state.themeTop5 = normalizeDashboardData(await loadJson("data/theme-top5.json", null));
+  }
+  state.updateLog = updateLog && typeof updateLog === "object" ? { ...updateLog, available: true } : { entries: [], available: false };
+  state.latestUpdate = latestMeta(radarLatest);
+  state.universeCount = Number(radarLatest?.universe_count || 0);
+  mergeLatestMeta(radarLatest, marketLatest, themesLatest, newsLatest, updateLog);
 }
 
 function stockByCode(code) {
@@ -1099,6 +1129,28 @@ function normalizeDashboardData(raw) {
   };
 }
 
+function latestItems(raw) {
+  if (Array.isArray(raw)) return raw;
+  if (raw && typeof raw === "object" && Array.isArray(raw.items)) return raw.items;
+  return [];
+}
+
+function latestMeta(raw) {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return {};
+  return {
+    updated_at: raw.updated_at || raw.generated_at || raw.date || "",
+    stage: raw.stage || "",
+    stage_label: raw.stage_label || "",
+    schedule_time: raw.schedule_time || "",
+    data_version: raw.data_version || "",
+  };
+}
+
+function mergeLatestMeta(...payloads) {
+  const meta = payloads.map(latestMeta).find((item) => item.updated_at || item.stage || item.data_version) || {};
+  state.latestUpdate = { ...state.latestUpdate, ...meta };
+}
+
 function formatDashboardTime(value) {
   return String(value || "")
     .replace(/\s*Asia\/Taipei\b/g, "")
@@ -1781,7 +1833,7 @@ function radarStockSearchText(stock) {
 }
 
 function stockMasterCountText() {
-  const count = Object.keys(state.master || {}).length;
+  const count = state.universeCount || Object.keys(state.master || {}).length;
   return count ? `全台股 ${dashboardNumber(count)} 檔上市櫃股票` : "全台股上市櫃股票";
 }
 
@@ -2023,6 +2075,15 @@ function rankingDataItems(raw) {
     source_note: /\?{4,}/.test(sourceNote) ? "" : sourceNote,
     items: Array.isArray(raw?.items) ? raw.items : [],
   };
+}
+
+function radarStageUpdateText() {
+  const meta = state.latestUpdate || {};
+  const stage = meta.stage_label || meta.stage || "";
+  const time = formatDashboardTime(meta.updated_at || "");
+  if (stage && time) return `${stage} ${time}`;
+  if (time) return `最後更新 ${time}`;
+  return "資料更新時間未標示";
 }
 
 function rankingMetaText(data) {
@@ -2501,7 +2562,7 @@ function renderRadar() {
     </section>
     <section class="radar-panel" data-radar-panel="aiRanking">
       <div class="panel">
-        <div class="section-title"><h2>AI選股清單</h2><span>${escapeHtml(stockMasterCountText())}</span></div>
+        <div class="section-title"><h2>AI選股清單</h2><span>${escapeHtml(`${stockMasterCountText()}｜${radarStageUpdateText()}`)}</span></div>
         <div class="filters">
           <label>股票搜尋<input id="search" placeholder="代號、名稱或概念股，例如 2337、旺宏、CPO"></label>
           <label>題材搜尋<input id="concept" list="conceptOptions" placeholder="AI、PCB、記憶體、玻璃基板..."></label>
@@ -3417,6 +3478,16 @@ async function boot(page) {
     await renderHomeDashboard();
     return;
   }
+  if (page === "radar") {
+    await loadRadarData();
+    if (!state.stocks.length) {
+      renderError("#app", "資料載入失敗或尚未建立：data/radar-latest.json");
+      return;
+    }
+    initRankingAccordions();
+    renderRadar();
+    return;
+  }
   await loadAllData();
   const missing = [];
   if (!state.stocks.length) missing.push("data/stocks-latest.json");
@@ -3425,10 +3496,6 @@ async function boot(page) {
   if (missing.length) {
     renderError("#app", `資料載入失敗或尚未建立：${missing.join("、")}`);
     return;
-  }
-  if (page === "radar") {
-    initRankingAccordions();
-    renderRadar();
   }
   if (page === "news") renderNews();
   if (page === "themes") renderThemes();

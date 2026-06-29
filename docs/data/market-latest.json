@@ -1,0 +1,142 @@
+{
+  "updated_at": "2026-06-29 14:38:17 Asia/Taipei",
+  "stage": "evening",
+  "stage_label": "晚間總結",
+  "schedule_time": "19:07",
+  "timezone": "Asia/Taipei",
+  "source_count": 1,
+  "source_files": [
+    "daily_market_snapshot.json"
+  ],
+  "data_version": "20260629-1438-evening",
+  "date": "2026-06-27",
+  "snapshot": {
+    "date": "2026-06-27",
+    "session": "盤中",
+    "updated_at": "2026-06-27 11:45 Asia/Taipei",
+    "build_version": "20260625-market-breadth",
+    "app_version": "20260625-market-breadth",
+    "next_update_at": "依 GitHub Actions 排程更新",
+    "source_type": "twse_official",
+    "taiex": 46043.6,
+    "taiex_change": -1057.05,
+    "taiex_change_percent": -2.24,
+    "turnover": "15,390.46 億",
+    "up_count": 476,
+    "down_count": 496,
+    "limit_up_count": 23,
+    "limit_down_count": 4,
+    "market_status": "台股加權指數 2026-06-24 收 46,043.60，下跌 1,057.05 點，跌幅 2.24%。",
+    "fund_flow": "依題材候選股分布推估市場資金焦點，未納入個人持股或自選股。",
+    "international_risks": [
+      {
+        "title": "基金/ETF/期貨/原物料",
+        "impact": "中性",
+        "related_markets": [
+          "油價",
+          "銅價",
+          "黃金",
+          "原物料",
+          "能源"
+        ],
+        "reason": "CMoney 美股新聞快訊 消息指出：基金/ETF/期貨/原物料。此事件被歸類為 原物料 題材，需觀察是否帶動相關族群資金輪動。",
+        "source_name": "CMoney 美股新聞快訊",
+        "url": "https://www.cmoney.tw/notes/?navId=twstock_fund_etf_future_material"
+      },
+      {
+        "title": "【即時新聞】AI晶片爆發！美光(MU)與SpaceX(SPCX)大對決，這檔獲利飆升更具吸引力",
+        "impact": "中性",
+        "related_markets": [
+          "記憶體",
+          "DRAM",
+          "NAND",
+          "HBM",
+          "SSD",
+          "美光",
+          "Micron",
+          "海力士",
+          "SK hynix",
+          "三星"
+        ],
+        "reason": "CMoney 美股新聞快訊 消息指出：【即時新聞】AI晶片爆發！美光(MU)與SpaceX(SPCX)大對決，這檔獲利飆升更具吸引力。此事件被歸類為 記憶體 題材，需觀察是否帶動相關族群資金輪動。",
+        "source_name": "CMoney 美股新聞快訊",
+        "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1223699"
+      },
+      {
+        "title": "AI 記憶體大戰失控？SK Hynix 巨額掛牌、Micron 股價暴衝，HBM 軍備競賽點燃新一波泡沫疑慮",
+        "impact": "中性",
+        "related_markets": [
+          "記憶體",
+          "DRAM",
+          "NAND",
+          "HBM",
+          "SSD",
+          "美光",
+          "Micron",
+          "海力士",
+          "SK hynix",
+          "三星"
+        ],
+        "reason": "CMoney 美股新聞快訊 消息指出：AI 記憶體大戰失控？SK Hynix 巨額掛牌、Micron 股價暴衝，HBM 軍備競賽點燃新一波泡沫疑慮。此事件被歸類為 記憶體 題材，需觀察是否帶動相關族群資金輪動。",
+        "source_name": "CMoney 美股新聞快訊",
+        "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1223697"
+      },
+      {
+        "title": "AI 熱潮點燃企業併購與授權戰：從醫藥研發到記憶體晶片、會計事務所全線開打",
+        "impact": "中性",
+        "related_markets": [
+          "記憶體",
+          "DRAM",
+          "NAND",
+          "HBM",
+          "SSD",
+          "美光",
+          "Micron",
+          "海力士",
+          "SK hynix",
+          "三星"
+        ],
+        "reason": "CMoney 美股新聞快訊 消息指出：AI 熱潮點燃企業併購與授權戰：從醫藥研發到記憶體晶片、會計事務所全線開打。此事件被歸類為 記憶體 題材，需觀察是否帶動相關族群資金輪動。",
+        "source_name": "CMoney 美股新聞快訊",
+        "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1223696"
+      },
+      {
+        "title": "美國晶片巨頭Micron表現亮眼，超越競爭對手！財報前景引發市場關注",
+        "impact": "中性",
+        "related_markets": [
+          "記憶體",
+          "DRAM",
+          "NAND",
+          "HBM",
+          "SSD",
+          "美光",
+          "Micron",
+          "海力士",
+          "SK hynix",
+          "三星"
+        ],
+        "reason": "CMoney 美股新聞快訊 消息指出：美國晶片巨頭Micron表現亮眼，超越競爭對手！財報前景引發市場關注。此事件被歸類為 記憶體 題材，需觀察是否帶動相關族群資金輪動。",
+        "source_name": "CMoney 美股新聞快訊",
+        "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=1223695"
+      }
+    ],
+    "tomorrow_conditions": [
+      "若權值股續弱且國際科技股修正，指數壓力仍需觀察。",
+      "若強勢題材隔日量能延續，短線資金仍可能輪動。",
+      "若候選股開高走低或量縮，視為短線退潮訊號。",
+      "若外資續賣權值股，指數反彈力道會受壓抑。"
+    ],
+    "market_date": "2026-06-24",
+    "turnover_billion": 15390.46,
+    "turnover_value": 1539046268153,
+    "previous_market_date": "2026-06-23",
+    "previous_close": 47100.65,
+    "previous_turnover_billion": 16723.55,
+    "previous_turnover_value": 1672355337665,
+    "source_name": "臺灣證券交易所 FMTQIK",
+    "source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/FMTQIK?date=20260624&response=json",
+    "breadth_source_name": "臺灣證券交易所 MI_INDEX 漲跌證券數合計",
+    "breadth_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260624&type=ALLBUT0999&response=json",
+    "data_quality_warning": []
+  }
+}

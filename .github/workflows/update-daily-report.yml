@@ -1,28 +1,6 @@
 name: Update Daily Stock Report
 
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - "docs/**"
-      - "data/**"
-      - "output/**"
-  schedule:
-    # 每天 08:20 Asia/Taipei - 開盤前資料檢查，不跳過假日
-    - cron: "20 0 * * *"
-    # 每天 09:35 Asia/Taipei - 早盤強勢題材，不跳過假日
-    - cron: "35 1 * * *"
-    # 每天 11:30 Asia/Taipei - 盤中資金輪動，不跳過假日
-    - cron: "30 3 * * *"
-    # 每天 13:50 Asia/Taipei - 收盤初步資料，不跳過假日
-    - cron: "50 5 * * *"
-    # 每天 16:10 Asia/Taipei - 盤後正式整理，不跳過假日
-    - cron: "10 8 * * *"
-    # 每天 20:30 Asia/Taipei - 晚間國際新聞與風險，不跳過假日
-    - cron: "30 12 * * *"
-    # 每天 07:40 Asia/Taipei - 隔日早盤作戰條件，不跳過假日
-    - cron: "40 23 * * *"
   workflow_dispatch:
 
 permissions:
@@ -47,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: python -m pip install -r requirements.txt
 
-      - name: Generate daily report
+      - name: Generate full daily report
         run: python run_daily_scan.py --refresh --price-limit 180 --top-n 30
 
       - name: Commit updated report
