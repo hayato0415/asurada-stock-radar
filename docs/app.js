@@ -2061,61 +2061,134 @@ function homeAiStockTable(data) {
   `;
 }
 
-function homeThreeDayThemeFallbackItems(data) {
-  if (!data?.available) return [];
-  if (Array.isArray(data.three_day_limit_themes) && data.three_day_limit_themes.length) {
-    return data.three_day_limit_themes.slice(0, 10);
-  }
-  const sourceItems = Array.isArray(data.verified_hot_themes) && data.verified_hot_themes.length
-    ? data.verified_hot_themes
-    : data.items;
-  return (Array.isArray(sourceItems) ? sourceItems : [])
-    .filter((item) => item && typeof item === "object")
-    .slice(0, 10)
-    .map((item, index) => ({
-      rank: item.rank || index + 1,
-      theme: homeDisplayTheme(item),
-      limit_up_count_3d: item.limit_up_count_3d ?? item.limit_up_count ?? item.limit_count ?? "依強度排序",
-      stocks: item.stocks || item.representative_stocks || [],
-      judgement: item.judgement || item.reason || homeFlowJudge(item) || "依目前題材強度、代表股與盤面資料遞補",
-    }));
+
+async function loadThreeDayThemes() {
+  const raw = await loadJson("data/themes-3d.json", null);
+  return normalizeThreeDayThemesData(raw);
 }
 
-function homeThreeDayThemeTable(data) {
-  const items = homeThreeDayThemeFallbackItems(data);
-  if (!items.length) return dashboardEmpty("前三天強勢題材資料整理中");
-  const rows = items.map((item, index) => ({
-    rank: item.rank || index + 1,
-    theme: item.theme || "-",
-    limitCount: item.limit_up_count_3d ?? item.limit_up_count ?? item.limit_count ?? item.strong_count ?? "依強度排序",
-    stocks: item.stocks || [],
-    judgement: item.judgement || item.reason || "-",
-  }));
+function normalizeThreeDayThemesData(raw) {
+  if (!raw || typeof raw !== "object") {
+    return { available: false, topThemes: [] };
+  }
+  const topThemes = Array.isArray(raw.topThemes)
+    ? raw.topThemes
+    : Array.isArray(raw.items)
+      ? raw.items
+      : [];
+  const rows = topThemes
+    .filter((item) => item && typeof item === "object")
+    .map((item, index) => ({
+      ...item,
+      rank: Number.isFinite(toNumber(item.rank)) ? Number(item.rank) : index + 1,
+      threeDayScore: computeThreeDayScore(item),
+    }))
+    .sort((left, right) => {
+      const leftHasRank = Number.isFinite(toNumber(left.rank));
+      const rightHasRank = Number.isFinite(toNumber(right.rank));
+      if (leftHasRank && rightHasRank) return Number(left.rank) - Number(right.rank);
+      return computeThreeDayScore(right) - computeThreeDayScore(left);
+    })
+    .slice(0, 5);
+  return {
+    ...raw,
+    available: rows.length > 0,
+    topThemes: rows,
+    updated_at: raw.updatedAt || raw.updated_at || raw.generated_at || raw.date,
+    date: raw.dateRange?.to || raw.date,
+  };
+}
+
+function computeThreeDayScore(theme) {
+  const explicit = toNumber(theme?.threeDayScore ?? theme?.three_day_score ?? theme?.score);
+  if (Number.isFinite(explicit) && explicit > 0) return Math.round(explicit);
+  const continuityScore = clampDashboardScore(theme?.continuity_score, String(theme?.continuity || "").includes("\u4e09\u65e5") ? 95 : 70);
+  const todayText = String(theme?.todayStatus || "");
+  const todayScore = clampDashboardScore(theme?.today_score, /\u7206\u767c|\u4e3b|\u7e8c\u5f37/.test(todayText) ? 90 : 70);
+  const limitScore = clampDashboardScore(theme?.limit_up_score ?? theme?.limitUpScore ?? theme?.limit_up_count * 18, 60);
+  const leaderScore = clampDashboardScore(theme?.leader_score ?? theme?.leaderStrength, Array.isArray(theme?.leaderStocks) && theme.leaderStocks.length ? 80 : 50);
+  const newsScore = clampDashboardScore(theme?.news_heat ?? theme?.newsHeat, 60);
+  return Math.round(continuityScore * 0.3 + todayScore * 0.25 + limitScore * 0.2 + leaderScore * 0.15 + newsScore * 0.1);
+}
+
+function getThemeStrengthClass(score) {
+  const value = toNumber(score);
+  if (Number.isFinite(value) && value >= 90) return "strength-high";
+  if (Number.isFinite(value) && value >= 80) return "strength-mid";
+  return "strength-watch";
+}
+
+function getContinuityClass(status) {
+  const text = String(status || "");
+  if (/\u4e09\u65e5|\u7e8c\u5f37|\u4e3b\u653b|\u7206\u767c/.test(text)) return "continuity-strong";
+  if (/\u5169\u65e5|\u8f49\u5f37|\u4eba\u6c23/.test(text)) return "continuity-mid";
+  return "continuity-watch";
+}
+
+function renderThreeDayThemes(data) {
+  const rows = data?.available ? data.topThemes : [];
+  const updateText = data?.updated_at ? `\u8cc7\u6599\u66f4\u65b0\uff1a${formatDashboardTime(data.updated_at)}` : "\u8cc7\u6599\u5c1a\u672a\u66f4\u65b0";
+  if (!rows.length) {
+    return `
+      <section class="home-dashboard-panel three-day-themes-panel">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">\u4e09\u65e5\u8cc7\u91d1\u6d41\u5411</p>
+            <h2>\u8fd1\u4e09\u500b\u4ea4\u6613\u65e5\u6700\u5f37\u984c\u6750 Top 5</h2>
+          </div>
+          <span class="update-time">${escapeHtml(updateText)}</span>
+        </div>
+        ${dashboardEmpty("\u8fd1\u4e09\u500b\u4ea4\u6613\u65e5\u984c\u6750\u8cc7\u6599\u5c1a\u672a\u5efa\u7acb")}
+      </section>
+    `;
+  }
   return `
-    <p class="home-section-note">依前三個交易日漲停最多的題材排序，並列出目前資料庫可辨識的相關概念股。</p>
-    <div class="table-wrap home-table-wrap home-desktop-only">
-      <table class="home-dashboard-table">
-        <thead><tr><th>排名</th><th>題材</th><th>三日漲停統計</th><th>相關概念股</th><th>判斷</th></tr></thead>
-        <tbody>${rows.map((item) => `
-          <tr>
-            <td>${escapeHtml(item.rank)}</td>
-            <td>${homeThemeLink(item.theme)}</td>
-            <td class="home-number">${escapeHtml(item.limitCount)}</td>
-            <td>${homeStockLinks(item.stocks, 20)}</td>
-            <td>${escapeHtml(item.judgement)}</td>
-          </tr>
-        `).join("")}</tbody>
-      </table>
-    </div>
-    <div class="home-mobile-cards">
-      ${rows.map((item) => `
-        <article>
-          <div><strong>${escapeHtml(item.rank)}. ${homeThemeLink(item.theme)}</strong><span>三日漲停 ${escapeHtml(item.limitCount)}</span></div>
-          <p><b>相關概念股</b>${homeStockLinks(item.stocks, 20)}</p>
-          <p><b>判斷</b>${escapeHtml(item.judgement)}</p>
-        </article>
-      `).join("")}
-    </div>
+    <section class="home-dashboard-panel three-day-themes-panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">\u4e09\u65e5\u8cc7\u91d1\u6d41\u5411</p>
+          <h2>\u8fd1\u4e09\u500b\u4ea4\u6613\u65e5\u6700\u5f37\u984c\u6750 Top 5</h2>
+        </div>
+        <span id="threeDayThemesUpdated" class="update-time">${escapeHtml(updateText)}</span>
+      </div>
+      ${data.summary ? `<p class="home-section-note">${escapeHtml(data.summary)}</p>` : ""}
+      <div id="threeDayThemesList" class="three-day-themes-list">
+        ${rows.map((item) => {
+          const score = computeThreeDayScore(item);
+          const strengthClass = getThemeStrengthClass(score);
+          const continuityClass = getContinuityClass(item.continuity);
+          const trace = Array.isArray(item.dailyTrace)
+            ? item.dailyTrace.map((day) => `<span class="theme-trace-chip">${escapeHtml(day.date || "-")} ${escapeHtml(day.status || "")}</span>`).join("")
+            : "";
+          return `
+            <article class="theme-row ${strengthClass}">
+              <div class="theme-rank">#${escapeHtml(item.rank || "")}</div>
+              <div class="theme-main">
+                <div class="theme-title-line">
+                  ${homeThemeLink(item.theme || "-")}
+                  <span class="theme-score ${strengthClass}">${escapeHtml(score)}</span>
+                </div>
+                <div class="theme-tags">
+                  <span class="${continuityClass}">${escapeHtml(item.continuity || "\u9023\u7e8c\u6027\u5f85\u89c0\u5bdf")}</span>
+                  <span>${escapeHtml(item.todayStatus || "\u4eca\u65e5\u72c0\u614b\u5f85\u78ba\u8a8d")}</span>
+                </div>
+                <p>${escapeHtml(item.mainReason || "-")}</p>
+              </div>
+              <div class="theme-stocks">
+                <p><b>\u9f8d\u982d</b>${homeThemeStockChips(item.leaderStocks || item.leader_stocks || [], 4)}</p>
+                <p><b>\u76f8\u95dc\u80a1</b>${homeThemeStockChips(item.relatedStocks || item.related_stocks || [], 8)}</p>
+                <p><b>\u4f4e\u4f4d\u968e\u89c0\u5bdf</b>${homeThemeStockChips(item.lowBaseWatch || item.low_base_watch || [], 5)}</p>
+                ${trace ? `<p class="theme-trace"><b>\u4e09\u65e5\u8ecc\u8de1</b>${trace}</p>` : ""}
+              </div>
+              <div class="theme-risk">
+                <b>\u98a8\u96aa</b>
+                <p>${escapeHtml(item.risk || "-")}</p>
+              </div>
+            </article>
+          `;
+        }).join("")}
+      </div>
+    </section>
   `;
 }
 
@@ -4357,11 +4430,12 @@ function renderCodeHits(selector, codes) {
 
 async function renderHomeDashboard() {
   const main = $("#app");
-  const [snapshotRaw, stocksRaw, themesRaw, themeTopRaw, newsRaw] = await Promise.all([
+  const [snapshotRaw, stocksRaw, themesRaw, themeTopRaw, threeDayThemes, newsRaw] = await Promise.all([
     loadJson("data/daily_market_snapshot.json", null),
     loadJson("data/daily_hot_stocks.json", null),
     loadJson("data/daily_hot_themes.json", null),
     loadJson("data/daily_theme_top5.json", null),
+    loadThreeDayThemes(),
     loadJson("data/news-events.json", null),
   ]);
   const snapshot = normalizeDashboardData(snapshotRaw);
@@ -4379,10 +4453,7 @@ async function renderHomeDashboard() {
       ${homePanelTitle("\u4eca\u65e5\u6700\u5f37\u984c\u6750 Top 5", themeTop5)}
       ${homeThemeTopTable(themeTop5)}
     </section>
-    <section class="home-dashboard-panel">
-      ${homePanelTitle("前三天最強題材", hotThemes)}
-      ${homeThreeDayThemeTable(hotThemes)}
-    </section>
+    ${renderThreeDayThemes(threeDayThemes)}
     <section class="home-dashboard-panel">
       ${homePanelTitle("重大新聞 Top 5", majorNews)}
       ${homeMajorNewsTable(majorNews)}

@@ -3219,6 +3219,167 @@ tr:nth-child(even) { background: #f8fafc; }
   flex-wrap: wrap;
   gap: 4px;
 }
+.home-war-room .three-day-themes-panel .section-head {
+  align-items: flex-start;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.home-war-room .three-day-themes-panel .eyebrow {
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  margin: 0 0 4px;
+}
+.home-war-room .three-day-themes-panel h2 {
+  margin: 0;
+}
+.home-war-room .three-day-themes-panel .update-time {
+  color: #64748b;
+  flex: 0 0 auto;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: right;
+}
+.home-war-room .three-day-themes-list {
+  display: grid;
+  gap: 12px;
+}
+.home-war-room .theme-row {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #38bdf8;
+  border-radius: 14px;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 56px minmax(220px, 1.15fr) minmax(320px, 1.6fr) minmax(220px, .9fr);
+  padding: 14px;
+}
+.home-war-room .theme-row.strength-high {
+  border-left-color: #2563eb;
+}
+.home-war-room .theme-row.strength-mid {
+  border-left-color: #0891b2;
+}
+.home-war-room .theme-row.strength-watch {
+  border-left-color: #f59e0b;
+}
+.home-war-room .theme-rank {
+  align-items: center;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 12px;
+  color: #1d4ed8;
+  display: flex;
+  font-weight: 900;
+  justify-content: center;
+  min-height: 42px;
+}
+.home-war-room .theme-main,
+.home-war-room .theme-stocks,
+.home-war-room .theme-risk {
+  min-width: 0;
+}
+.home-war-room .theme-title-line {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 7px;
+}
+.home-war-room .theme-title-line a {
+  color: #0369a1;
+  font-size: 16px;
+  font-weight: 900;
+  text-decoration: none;
+}
+.home-war-room .theme-score {
+  align-items: center;
+  border-radius: 999px;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 900;
+  justify-content: center;
+  min-width: 42px;
+  padding: 3px 9px;
+}
+.home-war-room .theme-score.strength-high {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+.home-war-room .theme-score.strength-mid {
+  background: #cffafe;
+  color: #0e7490;
+}
+.home-war-room .theme-score.strength-watch {
+  background: #fef3c7;
+  color: #b45309;
+}
+.home-war-room .theme-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.home-war-room .theme-tags span,
+.home-war-room .theme-trace-chip {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  color: #475569;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.35;
+  padding: 4px 8px;
+}
+.home-war-room .theme-tags .continuity-strong {
+  background: #ecfeff;
+  border-color: #67e8f9;
+  color: #0e7490;
+}
+.home-war-room .theme-tags .continuity-mid {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+}
+.home-war-room .theme-tags .continuity-watch {
+  background: #fff7ed;
+  border-color: #fed7aa;
+  color: #c2410c;
+}
+.home-war-room .theme-main p,
+.home-war-room .theme-stocks p,
+.home-war-room .theme-risk p {
+  color: #334155;
+  line-height: 1.55;
+  margin: 0;
+}
+.home-war-room .theme-stocks {
+  display: grid;
+  gap: 7px;
+}
+.home-war-room .theme-stocks b,
+.home-war-room .theme-risk b {
+  color: #0f172a;
+  display: block;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+.home-war-room .theme-trace {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.home-war-room .theme-risk {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 12px;
+  padding: 10px;
+}
 .home-war-room .home-mobile-cards {
   display: none;
 }
@@ -3667,6 +3828,30 @@ tr:nth-child(even) { background: #f8fafc; }
   }
   .home-war-room .theme-expand-toggle {
     width: fit-content;
+  }
+  .home-war-room .three-day-themes-panel .section-head {
+    display: grid;
+    gap: 6px;
+  }
+  .home-war-room .three-day-themes-panel .update-time {
+    text-align: left;
+  }
+  .home-war-room .theme-row {
+    gap: 10px;
+    grid-template-columns: minmax(0, 1fr);
+    padding: 12px;
+  }
+  .home-war-room .theme-rank {
+    justify-content: flex-start;
+    min-height: auto;
+    padding: 7px 10px;
+    width: fit-content;
+  }
+  .home-war-room .theme-title-line a {
+    font-size: 15px;
+  }
+  .home-war-room .theme-risk {
+    padding: 9px;
   }
   .home-war-room .home-news-table {
     min-width: 780px;
