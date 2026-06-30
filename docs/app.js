@@ -1350,9 +1350,16 @@ function formatDashboardDate(value) {
 
 function dashboardUpdateText(data) {
   if (!data?.available) return "資料尚未更新";
-  if (data.updated_at) return `資料日期：${formatDashboardTime(data.updated_at)}`;
+  const updatedAt = data.updated_at || data.updatedAt || data.content_latest_at || data.contentLatestAt;
+  if (updatedAt) return `資料日期：${formatDashboardTime(updatedAt)}`;
   if (data.date) return `資料日期：${formatDashboardDate(data.date)}`;
   return "更新時間未標示";
+}
+
+function homeNewsUpdateText(data) {
+  if (!data?.available) return "新聞尚未更新";
+  const latest = data.content_latest_at || data.contentLatestAt || data.updated_at || data.updatedAt || data.date;
+  return latest ? `新聞更新：${formatDashboardTime(latest)}` : "新聞更新時間未標示";
 }
 
 function dashboardHasValue(value) {
@@ -1802,9 +1809,27 @@ function homePanelTitle(title, data) {
   `;
 }
 
-function homeMarketOverview(snapshot) {
+function homeTopLimitUpTheme(snapshot, hotThemes) {
+  const directTheme = dashboardFirstValue(snapshot, ["limit_up_top_theme", "top_limit_up_theme", "most_limit_up_theme"]);
+  const directIndustry = dashboardFirstValue(snapshot, ["limit_up_top_industry", "top_limit_up_industry", "most_limit_up_industry"]);
+  if (dashboardHasValue(directTheme) || dashboardHasValue(directIndustry)) {
+    return [directTheme, directIndustry].filter(dashboardHasValue).join("｜");
+  }
+  const items = hotThemes?.available ? hotThemes.items : [];
+  const best = items
+    .filter((item) => (toNumber(item.limit_up_count ?? item.limitUpCount ?? item.locked_limit_up_count) || 0) > 0)
+    .sort((left, right) => (toNumber(right.limit_up_count ?? right.limitUpCount ?? right.locked_limit_up_count) || 0) - (toNumber(left.limit_up_count ?? left.limitUpCount ?? left.locked_limit_up_count) || 0))[0];
+  if (!best) return "";
+  const count = toNumber(best.limit_up_count ?? best.limitUpCount ?? best.locked_limit_up_count);
+  const theme = homeDisplayTheme(best);
+  const industry = best.industry || best.sector || best.market_group || "";
+  return `${theme}${dashboardHasValue(industry) && industry !== theme ? `｜${industry}` : ""}${Number.isFinite(count) ? `｜${dashboardNumber(count)} 檔` : ""}`;
+}
+
+function homeMarketOverview(snapshot, hotThemes = null) {
   if (!snapshot.available) return dashboardEmpty("今日市場總覽資料尚未更新");
   const metric = (label, value, toneSource = value) => dashboardHasValue(value) ? [label, value, toneSource] : null;
+  const topLimitUpTheme = homeTopLimitUpTheme(snapshot, hotThemes);
   const metrics = [
     metric("加權指數", dashboardDisplayNumber(snapshot, ["taiex", "close", "index_close"], 2)),
     metric("成交(億)", dashboardDisplayBillion(snapshot, ["turnover_billion", "turnover_value_billion", "trading_value_billion", "turnover"])),
@@ -1814,8 +1839,9 @@ function homeMarketOverview(snapshot) {
     metric("昨量(億)", dashboardDisplayBillion(snapshot, ["previous_turnover_billion", "prev_turnover_billion", "yesterday_turnover_billion"])),
     metric("上漲家數", dashboardDisplayNumber(snapshot, ["up_count", "stock_up_count"], 0), dashboardFirstValue(snapshot, ["up_count", "stock_up_count"])),
     metric("下跌家數", dashboardDisplayNumber(snapshot, ["down_count", "stock_down_count"], 0), -Math.abs(toNumber(dashboardFirstValue(snapshot, ["down_count", "stock_down_count"])) || 0)),
-    metric("漲停家數", dashboardDisplayNumber(snapshot, ["limit_up_count", "stock_limit_up_count"], 0), dashboardFirstValue(snapshot, ["limit_up_count", "stock_limit_up_count"])),
-    metric("跌停家數", dashboardDisplayNumber(snapshot, ["limit_down_count", "stock_limit_down_count"], 0), -Math.abs(toNumber(dashboardFirstValue(snapshot, ["limit_down_count", "stock_limit_down_count"])) || 0)),
+    metric("漲停鎖住家數", dashboardDisplayNumber(snapshot, ["limit_up_locked_count", "locked_limit_up_count", "limit_up_count", "stock_limit_up_count"], 0), dashboardFirstValue(snapshot, ["limit_up_locked_count", "locked_limit_up_count", "limit_up_count", "stock_limit_up_count"])),
+    metric("跌停鎖住家數", dashboardDisplayNumber(snapshot, ["limit_down_locked_count", "locked_limit_down_count", "limit_down_count", "stock_limit_down_count"], 0), -Math.abs(toNumber(dashboardFirstValue(snapshot, ["limit_down_locked_count", "locked_limit_down_count", "limit_down_count", "stock_limit_down_count"])) || 0)),
+    metric("漲停最多題材/產業", topLimitUpTheme, topLimitUpTheme),
   ].filter(Boolean);
   if (!metrics.length) return dashboardEmpty("大盤數值待補，盤後資料會沿用至隔日 09:00 前。");
   return `<div class="home-market-grid">${metrics.map(([label, value, toneSource]) => `<article><span>${escapeHtml(label)}</span><strong class="${dashboardToneClass(toneSource).trim()}">${escapeHtml(value)}</strong></article>`).join("")}</div>`;
@@ -2216,35 +2242,100 @@ function renderThreeDayThemes(data) {
   `;
 }
 
-function homeMajorNewsTable(data) {
-  const items = data.available ? [...data.items]
+function homeNewsTimeValue(item) {
+  return item.published_at || item.date || item.time || item.created_at || "";
+}
+
+function homeNewsRegionLabel(item) {
+  const raw = String(item.news_region || item.region || item.market_group || item.category || "").trim();
+  if (/國際|美股|全球|海外|international/i.test(raw)) return "國際";
+  return "台股";
+}
+
+function homeNewsThemeText(item) {
+  return homeJoinList(item.themes || item.theme || item.category || item.related_keywords, 4);
+}
+
+function homeNewsStockText(item) {
+  const stocks = item.stocks || item.related_stocks || item.relatedStocks || [];
+  if (!Array.isArray(stocks)) return homeJoinList(stocks, 5);
+  const items = stocks.map((stock) => {
+    if (stock && typeof stock === "object") return [stock.name || stock.stock_name || "", stock.code || stock.stock_id || stock.symbol || ""].filter(Boolean).join(" ");
+    return String(stock || "").trim();
+  }).filter(Boolean).slice(0, 5);
+  return items.length ? items.join("、") : "-";
+}
+
+function homeNewsImpactType(item) {
+  const text = String(item.impact || item.direction || item.sentiment || item.asurada_analysis || item.summary || "").trim();
+  if (/偏空|利空|風險|下修|衰退|跌|降溫|制裁|禁令|虧損|違約|裁員/.test(text)) return "bearish";
+  if (/偏多|利多|受惠|改善|成長|上修|漲價|需求|訂單|財報優|買盤|突破/.test(text)) return "bullish";
+  return "neutral";
+}
+
+function homeNewsImportanceScore(item) {
+  const strengthText = String(item.event_strength || item.strength || "").trim();
+  const strengthScore = strengthText === "高" ? 35 : strengthText === "中高" ? 28 : strengthText === "中" ? 18 : 8;
+  const explicit = toNumber(item.priority || item.impact_score || item.score || item.event_score) || 0;
+  const sourceBonus = isRealSourceUrl(eventUrl(item)) ? 8 : 0;
+  const stockCount = Array.isArray(item.related_stocks || item.stocks) ? Math.min((item.related_stocks || item.stocks).length, 5) : 0;
+  const themeBonus = dashboardHasValue(homeNewsThemeText(item)) ? 4 : 0;
+  return explicit + strengthScore + sourceBonus + stockCount + themeBonus;
+}
+
+function homeSortedNewsItems(data) {
+  return data.available ? [...data.items]
     .sort((left, right) => {
-      const score = (item) => Number(item.priority || item.impact_score || 0) + (isRealSourceUrl(eventUrl(item)) ? 10 : 0);
-      return score(right) - score(left) || String(right.date || right.time || "").localeCompare(String(left.date || left.time || ""));
-    })
-    .slice(0, 5) : [];
-  if (!items.length) return dashboardEmpty("重大新聞資料尚未更新");
+      const scoreDiff = homeNewsImportanceScore(right) - homeNewsImportanceScore(left);
+      if (scoreDiff) return scoreDiff;
+      return String(homeNewsTimeValue(right)).localeCompare(String(homeNewsTimeValue(left)));
+    }) : [];
+}
+
+function homeNewsGroupTable(title, items, tone) {
+  const topItems = items.slice(0, 5);
+  if (!topItems.length) return `<section class="home-news-group"><h3>${escapeHtml(title)}</h3>${dashboardEmpty(`目前沒有${title}`)}</section>`;
   return `
-    <div class="table-wrap home-table-wrap">
-      <table class="home-dashboard-table home-news-table">
-        <thead><tr><th>時間</th><th>標題</th><th>影響題材</th><th>影響個股</th><th>來源</th></tr></thead>
-        <tbody>${items.map((item) => {
-          const url = eventUrl(item);
-          const title = escapeHtml(item.title || "未命名新聞");
-          const headline = isRealSourceUrl(url)
-            ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${title}</a>`
-            : `<span>${title}</span>`;
-          return `
-            <tr>
-              <td>${escapeHtml(item.time || item.date || "-")}</td>
-              <td>${headline}</td>
-              <td>${escapeHtml(homeJoinList(item.themes || item.category || item.related_keywords, 4))}</td>
-              <td>${escapeHtml(homeJoinList(item.stocks || item.related_stocks, 5))}</td>
-              <td>${escapeHtml(item.source || item.source_name || "-")}</td>
-            </tr>
-          `;
-        }).join("")}</tbody>
-      </table>
+    <section class="home-news-group home-news-group-${tone}">
+      <div class="home-news-group-head">
+        <h3>${escapeHtml(title)}</h3>
+        <span>${topItems.length} 則</span>
+      </div>
+      <div class="table-wrap home-table-wrap">
+        <table class="home-dashboard-table home-news-table">
+          <thead><tr><th>時間</th><th>地區</th><th>標題</th><th>影響題材</th><th>影響個股</th><th>來源</th></tr></thead>
+          <tbody>${topItems.map((item) => {
+            const url = eventUrl(item);
+            const titleText = escapeHtml(item.title || "未命名新聞");
+            const headline = isRealSourceUrl(url)
+              ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${titleText}</a>`
+              : `<span>${titleText}</span>`;
+            return `
+              <tr>
+                <td>${escapeHtml(formatDashboardTime(homeNewsTimeValue(item)) || "-")}</td>
+                <td><span class="home-news-badge">${escapeHtml(homeNewsRegionLabel(item))}</span></td>
+                <td>${headline}</td>
+                <td>${escapeHtml(homeNewsThemeText(item))}</td>
+                <td>${escapeHtml(homeNewsStockText(item))}</td>
+                <td>${escapeHtml(item.source || item.source_name || "-")}</td>
+              </tr>
+            `;
+          }).join("")}</tbody>
+        </table>
+      </div>
+    </section>
+  `;
+}
+
+function homeMajorNewsTable(data) {
+  const items = homeSortedNewsItems(data).filter((item) => isRealSourceUrl(eventUrl(item)));
+  if (!items.length) return dashboardEmpty("重大新聞資料尚未更新");
+  const bullish = items.filter((item) => homeNewsImpactType(item) === "bullish");
+  const bearish = items.filter((item) => homeNewsImpactType(item) === "bearish");
+  return `
+    <div class="home-news-split-grid">
+      ${homeNewsGroupTable("偏多重大新聞 Top 5", bullish, "bullish")}
+      ${homeNewsGroupTable("偏空重大新聞 Top 5", bearish, "bearish")}
     </div>
     <div class="home-news-more"><a href="news.html">查看全部重大新聞</a></div>
   `;
@@ -4468,7 +4559,7 @@ async function renderHomeDashboard() {
     loadJson("data/daily_hot_themes.json", null),
     loadJson("data/daily_theme_top5.json", null),
     loadThreeDayThemes(),
-    loadJson("data/news-events.json", null),
+    loadJson("data/news-latest.json", null),
   ]);
   const snapshot = normalizeDashboardData(snapshotRaw);
   const hotStocks = normalizeDashboardData(stocksRaw);
@@ -4479,7 +4570,7 @@ async function renderHomeDashboard() {
   main.innerHTML = `
     <section class="home-dashboard-panel">
       ${homePanelTitle("台股大盤最後紀錄", snapshot)}
-      ${homeMarketOverview(snapshot)}
+      ${homeMarketOverview(snapshot, hotThemes)}
     </section>
     <section class="home-dashboard-panel">
       ${homePanelTitle("\u4eca\u65e5\u6700\u5f37\u984c\u6750 Top 5", themeTop5)}
@@ -4487,7 +4578,10 @@ async function renderHomeDashboard() {
     </section>
     ${renderThreeDayThemes(threeDayThemes)}
     <section class="home-dashboard-panel">
-      ${homePanelTitle("重大新聞 Top 5", majorNews)}
+      <div class="home-panel-title">
+        <h2>重大新聞 Top 5</h2>
+        <span>${escapeHtml(homeNewsUpdateText(majorNews))}</span>
+      </div>
       ${homeMajorNewsTable(majorNews)}
     </section>
   `;

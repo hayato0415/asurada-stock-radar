@@ -3147,6 +3147,49 @@ tr:nth-child(even) { background: #f8fafc; }
   margin-top: 12px;
   text-align: right;
 }
+@media (min-width: 980px) {
+  .home-war-room .home-news-split-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+.home-war-room .home-news-split-grid {
+  display: grid;
+  gap: 16px;
+}
+.home-war-room .home-news-group {
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 14px;
+  background: #ffffff;
+}
+.home-war-room .home-news-group-head {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.home-war-room .home-news-group h3 {
+  font-size: 18px;
+  margin: 0;
+}
+.home-war-room .home-news-group-head span,
+.home-war-room .home-news-badge {
+  border: 1px solid #bfdbfe;
+  border-radius: 999px;
+  color: #075985;
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+.home-war-room .home-news-group-bullish {
+  border-left: 4px solid #ef4444;
+}
+.home-war-room .home-news-group-bearish {
+  border-left: 4px solid #16a34a;
+}
 .home-war-room .home-section-note {
   color: #475569;
   font-size: 13px;
