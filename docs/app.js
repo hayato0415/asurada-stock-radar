@@ -1269,7 +1269,6 @@ function renderHeader(active) {
       <h1>霆隼AI選股網</h1>
       <p>台股題材研究與候選股整理平台</p>
       <nav class="nav">${nav.map(([href, label, key]) => `<a class="${active === key ? "active" : ""}" href="${href}">${label}</a>`).join("")}</nav>
-      ${siteVersionMiniHtml()}
     </div>
   `;
 }
@@ -1347,35 +1346,6 @@ function formatDashboardDate(value) {
   const text = formatDashboardTime(value);
   const match = text.match(/\d{4}-\d{2}-\d{2}/);
   return match ? match[0] : text;
-}
-
-function formatSiteVersionTime(value) {
-  const text = formatDashboardTime(value);
-  const match = text.match(/^(\d{4}-\d{2}-\d{2})\s+(\d{2}:\d{2})/);
-  return match ? `${match[1]} ${match[2]}` : (text || "資料尚未更新");
-}
-
-function siteVersionStatusLabel() {
-  const status = String(siteVersionState.status || "");
-  if (status.includes("部分")) return "部分資料保留上一版";
-  if (status.includes("完全") || status.includes("整站同步完成")) return "完全同步";
-  return status || "資料狀態未標示";
-}
-
-function siteVersionMiniHtml() {
-  const updated = formatSiteVersionTime(siteVersionState.updated_at);
-  const slot = siteVersionState.slot_label || "未標示";
-  const schedule = siteVersionState.schedule_time ? ` ${escapeHtml(siteVersionState.schedule_time)}` : "";
-  const build = siteVersionState.build_id || "-";
-  const status = siteVersionStatusLabel();
-  return `
-    <div class="site-version-mini" aria-label="全站資料版本">
-      <span>全站更新：<strong>${escapeHtml(updated)}</strong></span>
-      <span>更新時段：<strong>${escapeHtml(slot)}${schedule}</strong></span>
-      <span>版本：<strong>${escapeHtml(build)}</strong></span>
-      <span>同步狀態：<strong>${escapeHtml(status)}</strong></span>
-    </div>
-  `;
 }
 
 function dashboardUpdateText(data) {
@@ -1928,15 +1898,33 @@ function homeAiStockTable(data) {
   `;
 }
 
+function homeThreeDayThemeFallbackItems(data) {
+  if (!data?.available) return [];
+  if (Array.isArray(data.three_day_limit_themes) && data.three_day_limit_themes.length) {
+    return data.three_day_limit_themes.slice(0, 10);
+  }
+  const sourceItems = Array.isArray(data.verified_hot_themes) && data.verified_hot_themes.length
+    ? data.verified_hot_themes
+    : data.items;
+  return (Array.isArray(sourceItems) ? sourceItems : [])
+    .filter((item) => item && typeof item === "object")
+    .slice(0, 10)
+    .map((item, index) => ({
+      rank: item.rank || index + 1,
+      theme: homeDisplayTheme(item),
+      limit_up_count_3d: item.limit_up_count_3d ?? item.limit_up_count ?? item.limit_count ?? "依強度排序",
+      stocks: item.stocks || item.representative_stocks || [],
+      judgement: item.judgement || item.reason || homeFlowJudge(item) || "依目前題材強度、代表股與盤面資料遞補",
+    }));
+}
+
 function homeThreeDayThemeTable(data) {
-  const items = data.available && Array.isArray(data.three_day_limit_themes)
-    ? data.three_day_limit_themes.slice(0, 10)
-    : [];
-  if (!items.length) return dashboardEmpty("前三天漲停題材統計尚未建立");
+  const items = homeThreeDayThemeFallbackItems(data);
+  if (!items.length) return dashboardEmpty("前三天強勢題材資料整理中");
   const rows = items.map((item, index) => ({
     rank: item.rank || index + 1,
     theme: item.theme || "-",
-    limitCount: item.limit_up_count_3d ?? item.limit_up_count ?? "-",
+    limitCount: item.limit_up_count_3d ?? item.limit_up_count ?? item.limit_count ?? item.strong_count ?? "依強度排序",
     stocks: item.stocks || [],
     judgement: item.judgement || item.reason || "-",
   }));

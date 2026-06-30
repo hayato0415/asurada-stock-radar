@@ -57,23 +57,6 @@ a { color: inherit; }
   background: white;
   color: var(--ink);
 }
-.site-version-mini {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 14px;
-  margin-top: 12px;
-  padding: 9px 12px;
-  border: 1px solid rgba(255, 255, 255, .2);
-  border-radius: 14px;
-  background: rgba(255, 255, 255, .08);
-  color: #dbeafe;
-  font-size: 13px;
-  line-height: 1.55;
-}
-.site-version-mini strong {
-  color: #fff;
-  font-weight: 800;
-}
 .page {
   margin: 0 auto;
   max-width: 1280px;
@@ -2418,12 +2401,6 @@ tr:nth-child(even) { background: #f8fafc; }
     min-height: 42px;
     padding: 10px 13px;
     white-space: nowrap;
-  }
-  .site-version-mini {
-    display: grid;
-    gap: 4px;
-    font-size: 12px;
-    margin-top: 10px;
   }
   .page {
     padding: 10px;
