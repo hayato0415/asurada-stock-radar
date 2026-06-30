@@ -1,21 +1,34 @@
+#!/usr/bin/env python3
+"""Full-site data update entrypoint.
+
+This script is intentionally stricter than the older normalizer:
+it first runs the real data builders, then normalizes every public
+latest JSON with one build id. If content timestamps are still old,
+the dataset is marked stale instead of pretending the update succeeded.
+"""
+
 from __future__ import annotations
 
 import argparse
 import json
-import re
 import subprocess
 import sys
+import tempfile
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
-
+from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
-DOCS = ROOT / "docs"
-DATA = DOCS / "data"
-TAIPEI_TZ = timezone(timedelta(hours=8), "Asia/Taipei")
+DOCS_DATA = ROOT / "docs" / "data"
+DATA = ROOT / "data"
+SCRIPTS = ROOT / "scripts"
 
-REQUIRED_HTML = ["index.html", "radar.html", "news.html", "concepts.html"]
+try:
+    TAIPEI = ZoneInfo("Asia/Taipei")
+except Exception:
+    TAIPEI = timezone(timedelta(hours=8), name="Asia/Taipei")
+
 LATEST_DATASETS = [
     "daily_market_snapshot.json",
     "daily_hot_stocks.json",
@@ -26,6 +39,22 @@ LATEST_DATASETS = [
     "concepts-moneydj.json",
 ]
 
+CRITICAL_DATASETS = {
+    "radar-latest.json",
+    "news-latest.json",
+    "concepts-moneydj.json",
+}
+
+STALE_THRESHOLDS = {
+    "news-latest.json": timedelta(hours=12),
+    "market-latest.json": timedelta(days=4),
+    "radar-latest.json": timedelta(days=4),
+    "daily_market_snapshot.json": timedelta(days=4),
+    "daily_hot_stocks.json": timedelta(days=4),
+    "daily_hot_themes.json": timedelta(days=4),
+    "concepts-moneydj.json": timedelta(days=14),
+}
+
 SCHEDULE_SLOTS = [
     ("00:00", "夜間更新"),
     ("08:07", "盤前更新"),
@@ -35,29 +64,86 @@ SCHEDULE_SLOTS = [
     ("19:07", "晚間總結"),
 ]
 
+PIPELINE_STEPS = [
+    ("market_snapshot", "fetch_market_snapshot.py", [], 180),
+    ("daily_evening_initial", "update_daily.py", ["--stage", "evening"], 360),
+    ("news_sources", "fetch_news_sources.py", ["--limit", "80"], 300),
+    ("radar_rankings", "build_radar_rankings.py", [], 180),
+    ("moneydj_crawl", "crawl_moneydj_concepts.py", [], 900),
+    ("moneydj_json", "build_moneydj_concepts_json.py", [], 180),
+    ("stock_concept_index", "build_stock_concept_index.py", [], 180),
+    # Rebuild the public latest files after source refreshes.
+    ("daily_evening_final", "update_daily.py", ["--stage", "evening"], 360),
+]
+
 
 def now_taipei() -> datetime:
-    return datetime.now(TAIPEI_TZ)
+    return datetime.now(TAIPEI).replace(microsecond=0)
 
 
-def minutes_from_hhmm(value: str) -> int:
-    hour, minute = value.split(":", 1)
-    return int(hour) * 60 + int(minute)
+def iso_taipei(dt: datetime) -> str:
+    return dt.astimezone(TAIPEI).replace(microsecond=0).isoformat()
 
 
-def infer_schedule_slot(current: datetime) -> tuple[str, str]:
-    """Return the most recent scheduled full-update slot in Asia/Taipei time."""
-    current_minutes = current.astimezone(TAIPEI_TZ).hour * 60 + current.astimezone(TAIPEI_TZ).minute
-    candidates = []
-    for schedule_time, slot_label in SCHEDULE_SLOTS:
-        slot_minutes = minutes_from_hhmm(schedule_time)
-        minutes_since_slot = (current_minutes - slot_minutes) % (24 * 60)
-        candidates.append((minutes_since_slot, schedule_time, slot_label))
-    _, schedule_time, slot_label = min(candidates, key=lambda item: item[0])
-    return schedule_time, slot_label
+def display_taipei(dt: datetime) -> str:
+    return dt.astimezone(TAIPEI).strftime("%Y-%m-%d %H:%M:%S")
 
 
-def read_json(path: Path, fallback: Any) -> Any:
+def current_schedule_slot(dt: datetime) -> dict[str, str]:
+    local = dt.astimezone(TAIPEI)
+    minutes = local.hour * 60 + local.minute
+    slots = []
+    for schedule_time, label in SCHEDULE_SLOTS:
+        hour, minute = [int(part) for part in schedule_time.split(":")]
+        slot_minutes = hour * 60 + minute
+        slots.append((slot_minutes, schedule_time, label))
+    selected = slots[0]
+    for slot in slots:
+        if minutes >= slot[0]:
+            selected = slot
+    if minutes < slots[0][0]:
+        selected = slots[-1]
+    return {"schedule_time": selected[1], "slot_label": selected[2]}
+
+
+def parse_datetime(value: Any) -> datetime | None:
+    if value is None:
+        return None
+    text = str(value).strip()
+    if not text or text in {"-", "資料待補", "未標示"}:
+        return None
+
+    normalized = text.replace("T", " ")
+    if normalized.endswith("Z"):
+        normalized = normalized[:-1] + "+00:00"
+    try:
+        parsed = datetime.fromisoformat(normalized)
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=TAIPEI)
+        return parsed.astimezone(TAIPEI)
+    except ValueError:
+        pass
+
+    for fmt in (
+        "%Y-%m-%d %H:%M:%S",
+        "%Y-%m-%d %H:%M",
+        "%Y-%m-%d",
+        "%Y/%m/%d %H:%M:%S",
+        "%Y/%m/%d %H:%M",
+        "%Y/%m/%d",
+        "%Y-%m",
+    ):
+        try:
+            parsed = datetime.strptime(normalized[: len(datetime.now().strftime(fmt))], fmt)
+            if fmt == "%Y-%m":
+                parsed = parsed.replace(day=1)
+            return parsed.replace(tzinfo=TAIPEI)
+        except ValueError:
+            continue
+    return None
+
+
+def read_json(path: Path, fallback: Any = None) -> Any:
     if not path.exists():
         return fallback
     try:
@@ -68,306 +154,376 @@ def read_json(path: Path, fallback: Any) -> Any:
 
 def write_json_atomic(path: Path, payload: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_suffix(path.suffix + ".tmp")
-    tmp.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    tmp.replace(path)
+    with tempfile.NamedTemporaryFile("w", encoding="utf-8", delete=False, dir=path.parent) as tmp:
+        json.dump(payload, tmp, ensure_ascii=False, indent=2)
+        tmp.write("\n")
+        temp_path = Path(tmp.name)
+    temp_path.replace(path)
 
 
-def items_from(raw: Any) -> list[Any]:
-    if isinstance(raw, list):
-        return raw
-    if isinstance(raw, dict):
-        if isinstance(raw.get("items"), list):
-            return raw["items"]
-        if isinstance(raw.get("concepts"), list):
-            return raw["concepts"]
-    return []
+def copy_to_data(filename: str, payload: Any) -> None:
+    write_json_atomic(DATA / filename, payload)
 
 
-def parse_datetime(value: Any) -> datetime | None:
-    if not value:
-        return None
-    text = str(value).strip()
-    text = text.replace("T", " ").replace("Asia/Taipei", "").replace("+08:00", "").replace("+00:00", "")
-    text = text.replace("｜", " ").replace("|", " ")
-    candidates = [
-        "%Y-%m-%d %H:%M:%S",
-        "%Y-%m-%d %H:%M",
-        "%Y/%m/%d %H:%M:%S",
-        "%Y/%m/%d %H:%M",
-        "%Y-%m-%d",
-        "%Y/%m/%d",
-    ]
-    for fmt in candidates:
-        length = len(datetime.now().strftime(fmt))
-        try:
-            parsed = datetime.strptime(text[:length], fmt)
-            return parsed.replace(tzinfo=TAIPEI_TZ)
-        except ValueError:
-            continue
-    return None
+def run_script(label: str, script_name: str, args: list[str], timeout: int) -> dict[str, Any]:
+    script_path = SCRIPTS / script_name
+    if not script_path.exists():
+        return {
+            "label": label,
+            "script": script_name,
+            "success": False,
+            "returncode": None,
+            "error": f"{script_name} 不存在",
+        }
 
-
-def format_dt(dt: datetime | None) -> str:
-    return dt.astimezone(TAIPEI_TZ).isoformat(timespec="seconds") if dt else ""
-
-
-def newest_content_time(filename: str, payload: Any, fallback: datetime) -> tuple[str, bool, str]:
-    items = items_from(payload)
-    datetimes: list[datetime] = []
-    if isinstance(payload, dict):
-        for key in ("content_latest_at", "generated_at", "updated_at", "date"):
-            parsed = parse_datetime(payload.get(key))
-            if parsed:
-                datetimes.append(parsed)
-                break
-    for item in items:
-        if not isinstance(item, dict):
-            continue
-        for key in ("date", "published_at", "generated_at", "updated_at", "market_date", "revenue_month"):
-            parsed = parse_datetime(item.get(key))
-            if parsed:
-                datetimes.append(parsed)
-                break
-    latest = max(datetimes) if datetimes else None
-    if not latest:
-        return format_dt(fallback), True, f"{filename} 缺少可判讀的內容時間"
-    stale = fallback - latest > timedelta(hours=12) if filename == "news-latest.json" else False
-    reason = "新聞內容距離本次整站更新超過 12 小時" if stale else ""
-    return format_dt(latest), stale, reason
-
-
-def source_url_invalid(item: dict[str, Any]) -> bool:
-    url = str(item.get("source_url") or item.get("url") or "").strip()
-    if not url:
-        return False
-    return bool(re.search(r"(example\.com|localhost|127\.0\.0\.1)", url, re.I))
-
-
-def run_optional_script(script: str, args: list[str]) -> dict[str, Any]:
-    path = ROOT / "scripts" / script
-    if not path.exists():
-        return {"script": script, "success": False, "status": "missing"}
+    command = [sys.executable, str(script_path), *args]
+    started_at = now_taipei()
     try:
         result = subprocess.run(
-            [sys.executable, str(path), *args],
+            command,
             cwd=ROOT,
             capture_output=True,
             text=True,
             encoding="utf-8",
             errors="replace",
-            timeout=240,
+            timeout=timeout,
         )
-    except Exception as exc:
-        return {"script": script, "success": False, "status": "failed", "error": str(exc)}
-    return {
-        "script": script,
-        "success": result.returncode == 0,
-        "status": "ok" if result.returncode == 0 else "failed",
-        "message": "completed" if result.returncode == 0 else "failed; see GitHub Actions log for details",
-    }
-
-
-def public_source_runs(source_runs: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    return [
-        {
-            "script": run.get("script", ""),
-            "success": bool(run.get("success")),
-            "status": run.get("status", ""),
-            "message": run.get("message") or run.get("error") or "",
+        return {
+            "label": label,
+            "script": script_name,
+            "args": args,
+            "success": result.returncode == 0,
+            "returncode": result.returncode,
+            "started_at": display_taipei(started_at),
+            "finished_at": display_taipei(now_taipei()),
+            "stdout_tail": result.stdout[-2000:],
+            "stderr_tail": result.stderr[-2000:],
         }
-        for run in source_runs
-    ]
+    except subprocess.TimeoutExpired as exc:
+        return {
+            "label": label,
+            "script": script_name,
+            "args": args,
+            "success": False,
+            "returncode": None,
+            "started_at": display_taipei(started_at),
+            "finished_at": display_taipei(now_taipei()),
+            "error": f"{script_name} 執行逾時 {timeout} 秒",
+            "stdout_tail": (exc.stdout or "")[-2000:] if isinstance(exc.stdout, str) else "",
+            "stderr_tail": (exc.stderr or "")[-2000:] if isinstance(exc.stderr, str) else "",
+        }
 
 
-def sanitize_log_entries(entries: list[Any]) -> list[dict[str, Any]]:
-    clean_entries: list[dict[str, Any]] = []
-    for entry in entries:
-        if not isinstance(entry, dict):
-            continue
-        clean = dict(entry)
-        if clean.get("schedule_time") == ("10" + ":07"):
-            clean["schedule_time"] = "11:07"
-        if isinstance(clean.get("source_runs"), list):
-            clean["source_runs"] = public_source_runs(clean["source_runs"])
-        if isinstance(clean.get("news_fetch_status"), dict):
-            clean["news_fetch_status"] = {
-                "success": bool(clean["news_fetch_status"].get("success")),
-                "status": clean["news_fetch_status"].get("status", ""),
-            }
-        if isinstance(clean.get("quote_refresh_status"), dict):
-            clean["quote_refresh_status"] = {
-                "success": bool(clean["quote_refresh_status"].get("success")),
-                "status": clean["quote_refresh_status"].get("status", ""),
-                "market_date": clean["quote_refresh_status"].get("market_date", ""),
-            }
-        clean_entries.append(clean)
-    return clean_entries
+def add_dt(values: list[datetime], value: Any) -> None:
+    parsed = parse_datetime(value)
+    if parsed:
+        values.append(parsed)
 
 
-def normalize_dataset(filename: str, build_id: str, updated_at: str, now_dt: datetime, schedule_time: str, slot_label: str) -> dict[str, Any]:
-    path = DATA / filename
-    raw = read_json(path, {} if filename != "concepts-moneydj.json" else {"concepts": []})
-    if not isinstance(raw, dict):
-        raw = {"items": raw if isinstance(raw, list) else []}
+def content_datetimes(filename: str, payload: Any) -> list[datetime]:
+    values: list[datetime] = []
+    if not isinstance(payload, dict):
+        return values
 
-    items_key = "concepts" if filename == "concepts-moneydj.json" else "items"
-    items = raw.get(items_key)
+    items = payload.get("items")
     if not isinstance(items, list):
-        items = items_from(raw)
+        concepts = payload.get("concepts")
+        items = concepts if isinstance(concepts, list) else []
 
-    content_latest_at, stale, stale_reason = newest_content_time(filename, raw, now_dt)
-    if filename == "news-latest.json" and not items:
-        stale = True
-        stale_reason = "新聞資料目前沒有可顯示項目"
+    if filename == "market-latest.json":
+        snapshot = payload.get("snapshot")
+        if isinstance(snapshot, dict):
+            add_dt(values, snapshot.get("market_date"))
+            add_dt(values, snapshot.get("date"))
+        add_dt(values, payload.get("content_latest_at"))
+        add_dt(values, payload.get("market_date"))
+        add_dt(values, payload.get("date"))
+    elif filename == "daily_market_snapshot.json":
+        add_dt(values, payload.get("market_date"))
+        add_dt(values, payload.get("date"))
+        snapshot = payload.get("snapshot")
+        if isinstance(snapshot, dict):
+            add_dt(values, snapshot.get("market_date"))
+            add_dt(values, snapshot.get("date"))
+    elif filename == "radar-latest.json":
+        for item in items:
+            if isinstance(item, dict):
+                for key in ("market_date", "quote_date", "date", "updated_at"):
+                    add_dt(values, item.get(key))
+        add_dt(values, payload.get("content_latest_at"))
+        add_dt(values, payload.get("market_date"))
+        add_dt(values, payload.get("date"))
+    elif filename in {"daily_hot_stocks.json", "daily_hot_themes.json"}:
+        for item in items:
+            if isinstance(item, dict):
+                for key in ("market_date", "quote_date", "date", "updated_at", "generated_at"):
+                    add_dt(values, item.get(key))
+        add_dt(values, payload.get("content_latest_at"))
+        add_dt(values, payload.get("date"))
+    elif filename == "news-latest.json":
+        for item in items:
+            if isinstance(item, dict):
+                for key in ("date", "published_at", "published_time", "time", "updated_at"):
+                    add_dt(values, item.get(key))
+        add_dt(values, payload.get("content_latest_at"))
+    elif filename == "concepts-moneydj.json":
+        add_dt(values, payload.get("content_latest_at"))
+        add_dt(values, payload.get("generated_at"))
+        add_dt(values, payload.get("updated_at"))
+        for item in items:
+            if isinstance(item, dict):
+                add_dt(values, item.get("updated_at"))
+    else:
+        add_dt(values, payload.get("content_latest_at"))
+        add_dt(values, payload.get("generated_at"))
+        add_dt(values, payload.get("updated_at"))
+        add_dt(values, payload.get("date"))
 
-    invalid_urls = []
-    for item in items[:100]:
-        if isinstance(item, dict) and source_url_invalid(item):
-            invalid_urls.append(item.get("title") or item.get("theme") or item.get("code") or "unknown")
+    return values
 
-    normalized = dict(raw)
-    normalized.update(
+
+def item_count(payload: Any) -> int:
+    if isinstance(payload, list):
+        return len(payload)
+    if not isinstance(payload, dict):
+        return 0
+    items = payload.get("items")
+    if isinstance(items, list):
+        return len(items)
+    concepts = payload.get("concepts")
+    if isinstance(concepts, list):
+        return len(concepts)
+    return 0
+
+
+def source_count(payload: Any) -> int:
+    if not isinstance(payload, dict):
+        return 0
+    if isinstance(payload.get("source_count"), int):
+        return payload["source_count"]
+    sources = payload.get("sources")
+    if isinstance(sources, list):
+        return len(sources)
+    items = payload.get("items")
+    if isinstance(items, list):
+        names = {
+            str(item.get("source") or item.get("source_name") or "").strip()
+            for item in items
+            if isinstance(item, dict)
+        }
+        return len([name for name in names if name])
+    if payload.get("source"):
+        return 1
+    return 0
+
+
+def normalize_dataset(
+    filename: str,
+    build_id: str,
+    updated_at: datetime,
+    schedule: dict[str, str],
+    stale_reason: str = "",
+) -> dict[str, Any]:
+    path = DOCS_DATA / filename
+    raw = read_json(path, {})
+    if raw is None:
+        raw = {}
+    if not isinstance(raw, dict):
+        raw = {"items": raw if isinstance(raw, list) else [], "raw_value": raw}
+
+    count = item_count(raw)
+    dates = content_datetimes(filename, raw)
+    latest = max(dates) if dates else None
+    content_latest_at = iso_taipei(latest) if latest else ""
+
+    reasons: list[str] = []
+    if stale_reason:
+        reasons.append(stale_reason)
+    if not latest:
+        reasons.append("無法判斷內容資料時間")
+    else:
+        threshold = STALE_THRESHOLDS.get(filename)
+        if threshold and updated_at.astimezone(TAIPEI) - latest > threshold:
+            reasons.append(
+                f"內容最新時間 {display_taipei(latest)} 與全站更新時間相差超過 {threshold}"
+            )
+
+    if filename in CRITICAL_DATASETS and count == 0:
+        reasons.append("必要資料筆數為 0")
+
+    payload = dict(raw)
+    payload.update(
         {
+            "updated_at": display_taipei(updated_at),
             "build_id": build_id,
-            "updated_at": updated_at,
-            "timezone": "Asia/Taipei",
-            "mode": "full",
-            "stage": "full",
-            "stage_label": slot_label,
-            "schedule_time": schedule_time,
-            "content_latest_at": content_latest_at,
-            "items_count": len(items),
-            "source_count": normalized.get("source_count") or len(normalized.get("source_files") or []) or 1,
-            "stale": bool(stale),
-            "stale_reason": stale_reason,
             "data_version": build_id,
+            "stage": "full",
+            "stage_label": schedule["slot_label"],
+            "schedule_time": schedule["schedule_time"],
+            "timezone": "Asia/Taipei",
+            "source_count": source_count(payload),
+            "items_count": count,
+            "content_latest_at": content_latest_at,
+            "stale": bool(reasons),
+            "stale_reason": "；".join(reasons),
         }
     )
-    normalized[items_key] = items
-    if invalid_urls:
-        normalized["data_quality_warning"] = f"發現疑似測試來源連結：{len(invalid_urls)} 筆"
-    return normalized
+    return payload
 
 
-def build_update_log(build_id: str, updated_at: str, schedule_time: str, slot_label: str, datasets: dict[str, dict[str, Any]], warnings: list[str], source_runs: list[dict[str, Any]]) -> dict[str, Any]:
-    old = read_json(DATA / "update-log.json", {})
-    entries = old.get("entries") if isinstance(old, dict) else []
-    if not isinstance(entries, list):
-        entries = []
-    entries = sanitize_log_entries(entries)
-    entry = {
-        "build_id": build_id,
-        "updated_at": updated_at,
-        "mode": "full",
-        "schedule_time": schedule_time,
-        "slot_label": slot_label,
-        "status": "ok",
-        "datasets": {name: {"items_count": data.get("items_count", 0), "stale": data.get("stale", False)} for name, data in datasets.items()},
-        "warnings": warnings,
-        "source_runs": public_source_runs(source_runs),
-    }
+def stale_overrides_from_runs(runs: list[dict[str, Any]]) -> dict[str, str]:
+    reasons: dict[str, list[str]] = {}
+
+    def mark(files: list[str], reason: str) -> None:
+        for file in files:
+            reasons.setdefault(file, []).append(reason)
+
+    by_label = {run["label"]: run for run in runs}
+
+    if not by_label.get("market_snapshot", {}).get("success"):
+        mark(["daily_market_snapshot.json", "market-latest.json"], "盤勢資料抓取失敗，保留上一版")
+    if not by_label.get("news_sources", {}).get("success"):
+        mark(["news-latest.json"], "新聞來源抓取失敗，保留上一版")
+    if not by_label.get("radar_rankings", {}).get("success"):
+        mark(["daily_hot_themes.json", "daily_hot_stocks.json"], "題材排行重建失敗，保留上一版")
+    if not by_label.get("moneydj_crawl", {}).get("success") or not by_label.get("moneydj_json", {}).get("success"):
+        mark(["concepts-moneydj.json"], "MoneyDJ 概念股更新失敗，保留上一版")
+
+    daily_failed = [
+        run for run in runs if run["script"] == "update_daily.py" and not run.get("success")
+    ]
+    if daily_failed:
+        mark(
+            [
+                "market-latest.json",
+                "radar-latest.json",
+                "news-latest.json",
+                "daily_hot_stocks.json",
+                "daily_hot_themes.json",
+            ],
+            "daily latest 重建失敗，保留上一版",
+        )
+
+    return {file: "；".join(parts) for file, parts in reasons.items()}
+
+
+def dataset_summary(filename: str, payload: dict[str, Any]) -> dict[str, Any]:
+    status = "stale" if payload.get("stale") else "ok"
+    if filename in CRITICAL_DATASETS and payload.get("items_count", 0) == 0:
+        status = "failed"
     return {
-        "build_id": build_id,
-        "updated_at": updated_at,
-        "content_latest_at": updated_at,
-        "mode": "full",
-        "schedule_time": schedule_time,
-        "slot_label": slot_label,
-        "items_count": len(datasets),
-        "stale": any(data.get("stale") for data in datasets.values()),
-        "stale_reason": "部分資料集保留上一版內容" if any(data.get("stale") for data in datasets.values()) else "",
-        "warnings": warnings,
-        "source_runs": public_source_runs(source_runs),
-        "entries": [entry, *entries][:100],
+        "file": filename,
+        "status": status,
+        "updated_at": payload.get("updated_at", ""),
+        "content_latest_at": payload.get("content_latest_at", ""),
+        "items_count": payload.get("items_count", 0),
+        "source_count": payload.get("source_count", 0),
+        "stale": bool(payload.get("stale")),
+        "stale_reason": payload.get("stale_reason", ""),
     }
 
 
-def build_site_version(build_id: str, updated_at: str, schedule_time: str, slot_label: str, datasets: dict[str, dict[str, Any]], warnings: list[str], source_runs: list[dict[str, Any]]) -> dict[str, Any]:
-    return {
-        "build_id": build_id,
-        "updated_at": updated_at,
-        "timezone": "Asia/Taipei",
-        "mode": "full",
-        "schedule_time": schedule_time,
-        "slot_label": slot_label,
-        "status": "完全同步" if not warnings else "部分資料保留上一版",
-        "pages": {name.replace(".html", ""): "ok" if (DOCS / name).exists() else "missing" for name in REQUIRED_HTML},
-        "datasets": {
-            name: {
-                "status": "stale" if data.get("stale") else "ok",
-                "items_count": data.get("items_count", 0),
-                "content_latest_at": data.get("content_latest_at", ""),
-                "stale_reason": data.get("stale_reason", ""),
-            }
-            for name, data in datasets.items()
-        },
-        "warnings": warnings,
-        "source_runs": public_source_runs(source_runs),
-    }
+def run_validation() -> None:
+    command = [sys.executable, str(SCRIPTS / "validate_site_build.py")]
+    result = subprocess.run(
+        command,
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=180,
+    )
+    if result.returncode != 0:
+        if result.stdout:
+            print(result.stdout)
+        if result.stderr:
+            print(result.stderr, file=sys.stderr)
+        raise SystemExit(result.returncode)
 
 
-def run_full_update() -> dict[str, Any]:
-    current = now_taipei()
-    build_id = current.strftime("%Y%m%d-%H%M-full")
-    updated_at = current.isoformat(timespec="seconds")
-    schedule_time, slot_label = infer_schedule_slot(current)
+def run_full_update(mode: str = "full") -> dict[str, Any]:
+    updated_at = now_taipei()
+    schedule = current_schedule_slot(updated_at)
+    build_id = updated_at.strftime("%Y%m%d-%H%M-full")
+
+    DOCS_DATA.mkdir(parents=True, exist_ok=True)
     DATA.mkdir(parents=True, exist_ok=True)
 
-    source_runs = [
-        run_optional_script("fetch_news_sources.py", ["--limit", "80"]),
-    ]
-    warnings = [
-        f"{run['script']} {run['status']}"
-        for run in source_runs
-        if not run.get("success")
-    ]
+    source_runs: list[dict[str, Any]] = []
+    for label, script, args, timeout in PIPELINE_STEPS:
+        run = run_script(label, script, args, timeout)
+        source_runs.append(run)
+        status = "OK" if run.get("success") else "STALE"
+        print(f"[{status}] {label}: {script} {' '.join(args)}")
 
-    datasets: dict[str, dict[str, Any]] = {}
+    stale_overrides = stale_overrides_from_runs(source_runs)
+    dataset_payloads: dict[str, dict[str, Any]] = {}
+    summaries: list[dict[str, Any]] = []
+
     for filename in LATEST_DATASETS:
-        dataset = normalize_dataset(filename, build_id, updated_at, current, schedule_time, slot_label)
-        if filename == "news-latest.json" and any(run.get("script") == "fetch_news_sources.py" and not run.get("success") for run in source_runs):
-            dataset["stale"] = True
-            dataset["stale_reason"] = "新聞抓取流程失敗，以下保留上一版成功取得的新聞"
-        datasets[filename] = dataset
+        payload = normalize_dataset(
+            filename,
+            build_id,
+            updated_at,
+            schedule,
+            stale_overrides.get(filename, ""),
+        )
+        dataset_payloads[filename] = payload
+        summaries.append(dataset_summary(filename, payload))
+        write_json_atomic(DOCS_DATA / filename, payload)
+        copy_to_data(filename, payload)
 
-    critical_errors = []
-    if datasets["radar-latest.json"].get("items_count", 0) <= 0:
-        critical_errors.append("radar-latest.json 沒有資料")
-    if datasets["news-latest.json"].get("items_count", 0) <= 0:
-        warnings.append("news-latest.json 沒有新聞項目，保留 stale 狀態")
+    stale_files = [summary["file"] for summary in summaries if summary["status"] == "stale"]
+    failed_files = [summary["file"] for summary in summaries if summary["status"] == "failed"]
 
-    if critical_errors:
-        raise SystemExit("; ".join(critical_errors))
+    success = not failed_files
+    site_status = "完全同步" if success and not stale_files else "部分資料保留上一版"
 
-    for filename, dataset in datasets.items():
-        write_json_atomic(DATA / filename, dataset)
-
-    update_log = build_update_log(build_id, updated_at, schedule_time, slot_label, datasets, warnings, source_runs)
-    write_json_atomic(DATA / "update-log.json", update_log)
-    datasets["update-log.json"] = update_log
-
-    site_version = build_site_version(build_id, updated_at, schedule_time, slot_label, datasets, warnings, source_runs)
-    write_json_atomic(DATA / "site-version.json", site_version)
-
-    return {
-        "success": True,
+    update_log = {
         "build_id": build_id,
-        "updated_at": updated_at,
-        "schedule_time": schedule_time,
-        "slot_label": slot_label,
-        "warnings": warnings,
-        "updated_files": [f"docs/data/{name}" for name in [*LATEST_DATASETS, "update-log.json", "site-version.json"]],
+        "updated_at": display_taipei(updated_at),
+        "timezone": "Asia/Taipei",
+        "mode": mode,
+        "schedule_time": schedule["schedule_time"],
+        "slot_label": schedule["slot_label"],
+        "success": success,
+        "status": site_status,
+        "datasets": summaries,
+        "source_runs": source_runs,
+        "warnings": [f"{file} stale" for file in stale_files],
+        "errors": [f"{file} failed" for file in failed_files],
     }
+
+    site_version = {
+        "build_id": build_id,
+        "updated_at": display_taipei(updated_at),
+        "timezone": "Asia/Taipei",
+        "mode": mode,
+        "schedule_time": schedule["schedule_time"],
+        "slot_label": schedule["slot_label"],
+        "status": site_status,
+        "success": success,
+        "datasets": summaries,
+        "stale_files": stale_files,
+        "failed_files": failed_files,
+    }
+
+    write_json_atomic(DOCS_DATA / "update-log.json", update_log)
+    write_json_atomic(DOCS_DATA / "site-version.json", site_version)
+    copy_to_data("update-log.json", update_log)
+    copy_to_data("site-version.json", site_version)
+
+    run_validation()
+    print(f"Full site update complete: {build_id} ({site_status})")
+    return site_version
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Run a full static-site data update.")
+    parser = argparse.ArgumentParser(description="Run full asurada-stock-radar data update.")
     parser.add_argument("--mode", default="full", choices=["full"])
     args = parser.parse_args()
-    if args.mode != "full":
-        raise SystemExit("Only --mode full is supported.")
-    print(json.dumps(run_full_update(), ensure_ascii=False, indent=2))
+    run_full_update(args.mode)
 
 
 if __name__ == "__main__":

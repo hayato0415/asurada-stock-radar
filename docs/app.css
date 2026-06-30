@@ -424,6 +424,64 @@ a { color: inherit; }
   color: #ffffff;
   box-shadow: 0 10px 20px rgba(37, 99, 235, .18);
 }
+.radar-page .radar-data-status {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  margin: 0 0 16px;
+  padding: 12px 14px;
+}
+.radar-page .radar-data-status-title {
+  display: grid;
+  gap: 2px;
+}
+.radar-page .radar-data-status-title strong {
+  color: var(--ink);
+  font-size: 15px;
+}
+.radar-page .radar-data-status-title span {
+  color: var(--muted);
+  font-size: 13px;
+}
+.radar-page .radar-data-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.radar-page .radar-data-chip {
+  align-items: center;
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  display: inline-flex;
+  gap: 7px;
+  padding: 7px 10px;
+  white-space: nowrap;
+}
+.radar-page .radar-data-chip strong {
+  color: var(--muted);
+  font-size: 12px;
+}
+.radar-page .radar-data-chip span {
+  font-size: 13px;
+  font-weight: 800;
+}
+.radar-page .radar-data-chip em {
+  color: #b45309;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 900;
+}
+.radar-page .radar-data-chip.is-stale {
+  background: #fff7ed;
+  border-color: #fed7aa;
+}
 .radar-page .radar-panel {
   display: none;
 }
@@ -2554,6 +2612,19 @@ tr:nth-child(even) { background: #f8fafc; }
   }
   .radar-page .overview-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+  .radar-page .radar-data-status {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .radar-page .radar-data-chip-row {
+    justify-content: flex-start;
+  }
+  .radar-page .radar-data-chip {
+    border-radius: 14px;
+    flex: 1 1 100%;
+    justify-content: space-between;
+    white-space: normal;
   }
   .radar-page .radar-pool-button {
     flex: 1 1 170px;

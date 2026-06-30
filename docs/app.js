@@ -2734,6 +2734,54 @@ function radarNewsThemesTable(groups) {
   `;
 }
 
+function siteDatasetMeta(filename) {
+  const datasets = siteVersionState?.datasets;
+  if (Array.isArray(datasets)) return datasets.find((item) => item?.file === filename) || {};
+  if (datasets && typeof datasets === "object") return datasets[filename] || {};
+  return {};
+}
+
+function compactTimeText(value) {
+  const text = String(value || "").trim();
+  if (!text) return "未標示";
+  return text
+    .replace("T", " ")
+    .replace("+08:00", "")
+    .replace("+00:00", "")
+    .replace(/:\d{2}$/, "");
+}
+
+function datasetTimeChip(label, filename) {
+  const meta = siteDatasetMeta(filename);
+  const time = compactTimeText(meta.content_latest_at || meta.updated_at);
+  const stale = meta.stale || meta.status === "stale";
+  return `
+    <span class="radar-data-chip ${stale ? "is-stale" : ""}">
+      <strong>${label}</strong>
+      <span>${time}</span>
+      ${stale ? "<em>此區資料保留上一版</em>" : ""}
+    </span>
+  `;
+}
+
+function radarDataStatusHtml() {
+  const siteTime = compactTimeText(siteVersionState.updated_at);
+  const slot = [siteVersionState.slot_label, siteVersionState.schedule_time].filter(Boolean).join(" ");
+  return `
+    <section class="radar-data-status" aria-label="AI選股資料時間">
+      <div class="radar-data-status-title">
+        <strong>資料時間</strong>
+        <span>全站更新 ${siteTime}${slot ? `｜${escapeHtml(slot)}` : ""}</span>
+      </div>
+      <div class="radar-data-chip-row">
+        ${datasetTimeChip("雷達", "radar-latest.json")}
+        ${datasetTimeChip("盤勢", "market-latest.json")}
+        ${datasetTimeChip("新聞", "news-latest.json")}
+      </div>
+    </section>
+  `;
+}
+
 function renderRadar() {
   renderHeader("radar");
   const main = $("#app");
@@ -2774,6 +2822,8 @@ function renderRadar() {
       </div>
     </section>
   `;
+  const radarTabs = main.querySelector(".radar-tabs");
+  if (radarTabs) radarTabs.insertAdjacentHTML("afterend", radarDataStatusHtml());
   renderNewsThemeRanking().then(renderRadarOverview);
   renderLowBaseThemeRanking().then(renderRadarOverview);
   initRadarTabs();
