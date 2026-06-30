@@ -424,6 +424,51 @@ a { color: inherit; }
   color: #ffffff;
   box-shadow: 0 10px 20px rgba(37, 99, 235, .18);
 }
+.radar-page .radar-update-schedule {
+  background: #fbfdff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  display: grid;
+  gap: 10px;
+  margin: 0 0 16px;
+  padding: 14px 16px;
+}
+.radar-page .radar-update-schedule-heading {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  justify-content: space-between;
+}
+.radar-page .radar-update-schedule-heading strong {
+  color: var(--ink);
+  font-size: 16px;
+}
+.radar-page .radar-update-schedule-heading span {
+  color: var(--muted);
+  font-size: 13px;
+}
+.radar-page .radar-update-schedule-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.radar-page .radar-update-schedule-item {
+  align-items: center;
+  background: #eef6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 999px;
+  color: #164e63;
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 800;
+  gap: 6px;
+  padding: 7px 10px;
+}
+.radar-page .radar-update-schedule-item b {
+  color: var(--accent);
+  font-size: 14px;
+}
 .radar-page .radar-panel {
   display: none;
 }
@@ -2551,6 +2596,21 @@ tr:nth-child(even) { background: #f8fafc; }
   .radar-page .radar-tab {
     min-height: 42px;
     padding: 9px 13px;
+  }
+  .radar-page .radar-update-schedule {
+    padding: 12px;
+  }
+  .radar-page .radar-update-schedule-heading {
+    align-items: flex-start;
+    display: grid;
+  }
+  .radar-page .radar-update-schedule-list {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .radar-page .radar-update-schedule-item {
+    justify-content: flex-start;
+    width: 100%;
   }
   .radar-page .overview-grid {
     grid-template-columns: minmax(0, 1fr);

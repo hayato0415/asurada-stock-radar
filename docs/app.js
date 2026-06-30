@@ -2712,6 +2712,29 @@ function radarNewsThemesTable(groups) {
   `;
 }
 
+const RADAR_UPDATE_SCHEDULE = [
+  ["08:07", "盤前更新"],
+  ["10:07", "盤中更新"],
+  ["13:37", "收盤更新"],
+  ["17:07", "盤後籌碼"],
+  ["19:07", "晚間總結"],
+  ["00:00", "夜間新聞"],
+];
+
+function radarUpdateScheduleHtml() {
+  return `
+    <section class="radar-update-schedule" aria-label="AI選股資料每日更新時間">
+      <div class="radar-update-schedule-heading">
+        <strong>資料每日更新時間</strong>
+        <span>Asia/Taipei，分批更新盤前、盤中、收盤、盤後與夜間新聞資料</span>
+      </div>
+      <div class="radar-update-schedule-list">
+        ${RADAR_UPDATE_SCHEDULE.map(([time, label]) => `<span class="radar-update-schedule-item"><b>${time}</b>${label}</span>`).join("")}
+      </div>
+    </section>
+  `;
+}
+
 function renderRadar() {
   renderHeader("radar");
   const main = $("#app");
@@ -2724,6 +2747,7 @@ function renderRadar() {
       <button class="radar-tab" type="button" data-radar-tab="lowBase">低基期排行</button>
       <button class="radar-tab" type="button" data-radar-tab="aiRanking">AI選股清單</button>
     </nav>
+    ${radarUpdateScheduleHtml()}
     <section class="radar-panel is-active" data-radar-panel="overview">
       <div id="radarOverviewRoot" class="radar-section"></div>
     </section>
