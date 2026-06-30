@@ -1821,45 +1821,208 @@ function homeMarketOverview(snapshot) {
   return `<div class="home-market-grid">${metrics.map(([label, value, toneSource]) => `<article><span>${escapeHtml(label)}</span><strong class="${dashboardToneClass(toneSource).trim()}">${escapeHtml(value)}</strong></article>`).join("")}</div>`;
 }
 
-function homeThemeTopTable(data) {
-  const sourceItems = Array.isArray(data.verified_hot_themes) && data.verified_hot_themes.length
-    ? data.verified_hot_themes
-    : data.items;
-  const items = data.available ? sourceItems.slice(0, 5) : [];
-  if (!items.length) return dashboardEmpty("熱門題材資料尚未更新");
-  const rows = items.map((item, index) => ({
-    rank: item.rank || index + 1,
-    theme: homeDisplayTheme(item),
-    strength: item.fund_strength || item.strength || dashboardNumber(item.score),
-    leaders: item.stocks || [],
-    judge: item.judgement || item.reason || homeFlowJudge(item),
-  }));
+const HOME_THEME_LABELS = {
+  limitUp: "\u6f32\u505c",
+  diffusion: "\u64f4\u6563",
+  leader: "\u9f8d\u982d",
+  news: "\u65b0\u805e",
+  lowBase: "\u88dc\u6f32",
+  observe: "\u89c0\u5bdf",
+  fallbackRisk: "\u82e5\u9694\u65e5\u65cf\u7fa4\u91cf\u80fd\u9000\u6f6e\u6216\u53ea\u5269\u55ae\u4e00\u500b\u80a1\u5f37\u52e2\uff0c\u4ee3\u8868\u8ffd\u50f9\u98a8\u96aa\u5347\u9ad8\u3002",
+  reason: "\u4e3b\u56e0",
+  related: "\u76f8\u95dc",
+  lowBaseWatch: "\u4f4e\u4f4d\u968e\u89c0\u5bdf",
+  risk: "\u98a8\u96aa",
+  strengthBreakdown: "\u5f37\u5ea6\u62c6\u89e3",
+  strengthSort: "\u66ab\u4ee5\u984c\u6750\u7d9c\u5408\u5206\u6578\u6392\u5e8f",
+  empty: "\u4eca\u65e5\u6700\u5f37\u984c\u6750\u8cc7\u6599\u5c1a\u672a\u66f4\u65b0",
+  note: "\u76e4\u4e2d / \u76e4\u5f8c\u4f9d\u6f32\u505c\u5bb6\u6578\u3001\u65cf\u7fa4\u64f4\u6563\u3001\u9f8d\u982d\u80a1\u6f32\u5e45\u8207\u6210\u4ea4\u91cf\u3001\u65b0\u805e\u71b1\u5ea6\u3001\u4f4e\u4f4d\u968e\u88dc\u6f32\u80a1\u4ea4\u53c9\u6392\u5e8f\u3002",
+  rank: "\u6392\u540d",
+  theme: "\u984c\u6750",
+  strength: "\u5f37\u5ea6",
+  leaderStock: "\u9f8d\u982d\u80a1",
+  riskLine: "\u98a8\u96aa\u7dda",
+  detail: "\u660e\u7d30",
+  expand: "\u5c55\u958b",
+  collapse: "\u6536\u5408",
+  firstPrefix: "\u7b2c ",
+  firstSuffix: " \u540d\uff5c",
+  strengthPrefix: "\u5f37\u5ea6 ",
+};
+
+function normalizeHomeThemeTop5Data(raw, fallbackData) {
+  const fallback = fallbackData && fallbackData.available ? fallbackData : { available: false, items: [] };
+  if (!raw || typeof raw !== "object") return fallback;
+  const items = Array.isArray(raw.topThemes)
+    ? raw.topThemes
+    : Array.isArray(raw.items)
+      ? raw.items
+      : Array.isArray(raw.verified_hot_themes)
+        ? raw.verified_hot_themes
+        : [];
+  return {
+    available: items.length > 0,
+    date: raw.date || raw.market_date || fallback.date || "",
+    updated_at: raw.updatedAt || raw.updated_at || fallback.updated_at || raw.date || "",
+    marketStatus: raw.marketStatus || raw.market_status || "",
+    items,
+  };
+}
+
+function clampDashboardScore(value, fallback = 0) {
+  const numeric = toNumber(value);
+  if (!Number.isFinite(numeric)) return fallback;
+  return Math.max(0, Math.min(100, numeric));
+}
+
+function scoreHomeThemeStrength(item) {
+  const explicit = toNumber(item.strengthScore ?? item.strength_score ?? item.theme_score ?? item.score);
+  if (Number.isFinite(explicit) && explicit > 0) return Math.round(explicit);
+  const signals = item.signals || {};
+  const limitUpCount = toNumber(signals.limitUpCount ?? item.limitUpCount ?? item.limit_up_count) || 0;
+  const diffusionCount = toNumber(signals.upCount ?? item.up_count ?? item.mentioned_stock_count) || 0;
+  const leaderChange = Math.abs(toNumber(signals.leaderChangePct ?? item.leader_change_pct ?? item.change_percent_avg) || 0);
+  const leaderVolume = toNumber(signals.leaderVolumeRatio ?? item.leader_volume_ratio ?? item.volume_ratio) || 0;
+  const newsHeat = clampDashboardScore(signals.newsHeat ?? item.news_heat_score ?? item.weighted_news_score, 50);
+  const lowBaseCount = Array.isArray(item.lowBaseWatch || item.low_base_watch) ? (item.lowBaseWatch || item.low_base_watch).length : 0;
+  const limitScore = clampDashboardScore(limitUpCount * 25);
+  const diffusionScore = clampDashboardScore(signals.diffusionScore ?? item.diffusion_score ?? diffusionCount * 15);
+  const leaderScore = clampDashboardScore(signals.leaderMomentum ?? item.leader_momentum ?? (leaderChange * 5 + leaderVolume * 12));
+  const lowBaseScore = clampDashboardScore(signals.lowBaseScore ?? item.low_base_score ?? lowBaseCount * 25, lowBaseCount ? 60 : 30);
+  return Math.round(limitScore * 0.3 + diffusionScore * 0.25 + leaderScore * 0.2 + newsHeat * 0.15 + lowBaseScore * 0.1);
+}
+
+function normalizeHomeThemeStock(stock) {
+  if (!stock) return null;
+  if (typeof stock === "object") {
+    const code = normalizeCode(stock.code || stock.stock_id || stock.symbol || "");
+    const name = stock.name || stock.stock_name || stock.stockName || "";
+    return code || name ? { code, name } : null;
+  }
+  const text = String(stock).trim();
+  const code = normalizeCode(text);
+  const name = text.replace(code, "").trim();
+  return code || name ? { code, name } : null;
+}
+
+function homeThemeStockChips(stocks, limit = 8) {
+  const normalized = (Array.isArray(stocks) ? stocks : [])
+    .map(normalizeHomeThemeStock)
+    .filter(Boolean)
+    .slice(0, limit);
+  if (!normalized.length) return `<span class="muted">-</span>`;
+  return normalized.map((stock) => {
+    const label = `${stock.name || ""} ${stock.code || ""}`.trim();
+    if (!stock.code) return `<span class="theme-stock-chip">${escapeHtml(label)}</span>`;
+    return `<a class="theme-stock-chip" href="stock.html?code=${encodeURIComponent(stock.code)}">${escapeHtml(label)}</a>`;
+  }).join(" ");
+}
+
+function homeThemeMetricChips(item) {
+  const signals = item.signals || {};
+  const chips = [
+    [HOME_THEME_LABELS.limitUp, signals.limitUpCount ?? item.limitUpCount ?? item.limit_up_count],
+    [HOME_THEME_LABELS.diffusion, signals.diffusionScore ?? item.diffusion_score],
+    [HOME_THEME_LABELS.leader, signals.leaderMomentum ?? item.leader_momentum],
+    [HOME_THEME_LABELS.news, signals.newsHeat ?? item.news_heat_score ?? item.weighted_news_score],
+    [HOME_THEME_LABELS.lowBase, signals.lowBaseScore ?? item.low_base_score],
+  ];
+  return chips
+    .filter(([, value]) => dashboardHasValue(value))
+    .map(([label, value]) => `<span class="theme-signal-chip">${escapeHtml(label)} ${escapeHtml(dashboardNumber(value))}</span>`)
+    .join("");
+}
+
+function homeThemeTopRows(data) {
+  const sourceItems = data.available ? data.items : [];
+  return sourceItems.slice(0, 5).map((item, index) => {
+    const leaders = item.leaderStocks || item.leader_stocks || item.leaders || item.representative_stocks || item.stocks || [];
+    const related = item.relatedStocks || item.related_stocks || item.stocks || [];
+    const lowBase = item.lowBaseWatch || item.low_base_watch || item.low_base_stocks || [];
+    return {
+      ...item,
+      rank: item.rank || index + 1,
+      theme: item.theme || homeDisplayTheme(item),
+      strength: scoreHomeThemeStrength(item),
+      reason: item.reason || item.judgement || homeFlowJudge(item),
+      leaders,
+      related,
+      lowBase,
+      risk: item.risk || item.risk_note || HOME_THEME_LABELS.fallbackRisk,
+      status: item.status || HOME_THEME_LABELS.observe,
+    };
+  });
+}
+
+function homeThemeDetail(item) {
   return `
-    <p class="home-section-note">當下最新交叉核對盤中資金流、類股漲跌、漲停與強勢股，再整理出最強題材前五。</p>
-    <div class="table-wrap home-table-wrap home-desktop-only">
-      <table class="home-dashboard-table">
-        <thead><tr><th>排名</th><th>題材</th><th>資金強度</th><th>最強代表股</th><th>判斷</th></tr></thead>
-        <tbody>${rows.map((item) => `
-          <tr>
-            <td>${escapeHtml(item.rank)}</td>
-            <td>${homeThemeLink(item.theme)}</td>
-            <td class="home-number">${escapeHtml(item.strength)}</td>
-            <td>${homeStockLinks(item.leaders, 5)}</td>
-            <td>${escapeHtml(item.judge)}</td>
-          </tr>
-        `).join("")}</tbody>
-      </table>
-    </div>
-    <div class="home-mobile-cards">
-      ${rows.map((item) => `
-        <article>
-          <div><strong>${escapeHtml(item.rank)}. ${homeThemeLink(item.theme)}</strong><span>資金強度 ${escapeHtml(item.strength)}</span></div>
-          <p><b>最強代表股</b>${homeStockLinks(item.leaders, 5)}</p>
-          <p><b>判斷</b>${escapeHtml(item.judge)}</p>
-        </article>
-      `).join("")}
+    <div class="theme-detail-grid">
+      <div><b>${HOME_THEME_LABELS.reason}</b><p>${escapeHtml(item.reason || "-")}</p></div>
+      <div><b>${HOME_THEME_LABELS.leader}</b><p>${homeThemeStockChips(item.leaders, 4)}</p></div>
+      <div><b>${HOME_THEME_LABELS.related}</b><p>${homeThemeStockChips(item.related, 8)}</p></div>
+      <div><b>${HOME_THEME_LABELS.lowBaseWatch}</b><p>${homeThemeStockChips(item.lowBase, 6)}</p></div>
+      <div class="theme-detail-risk"><b>${HOME_THEME_LABELS.risk}</b><p>${escapeHtml(item.risk || "-")}</p></div>
+      <div><b>${HOME_THEME_LABELS.strengthBreakdown}</b><p class="theme-signal-row">${homeThemeMetricChips(item) || HOME_THEME_LABELS.strengthSort}</p></div>
     </div>
   `;
+}
+
+function homeThemeTopTable(data) {
+  const rows = homeThemeTopRows(data);
+  if (!rows.length) return dashboardEmpty(HOME_THEME_LABELS.empty);
+  return `
+    <p class="home-section-note">${HOME_THEME_LABELS.note}</p>
+    <div class="table-wrap home-table-wrap home-desktop-only">
+      <table class="home-dashboard-table home-theme-top5-table">
+        <thead><tr><th>${HOME_THEME_LABELS.rank}</th><th>${HOME_THEME_LABELS.theme}</th><th>${HOME_THEME_LABELS.strength}</th><th>${HOME_THEME_LABELS.reason}</th><th>${HOME_THEME_LABELS.leaderStock}</th><th>${HOME_THEME_LABELS.lowBaseWatch}</th><th>${HOME_THEME_LABELS.riskLine}</th><th>${HOME_THEME_LABELS.detail}</th></tr></thead>
+        <tbody>${rows.map((item, index) => {
+          const detailId = `home-theme-detail-${index}`;
+          return `
+            <tr>
+              <td class="home-number">${escapeHtml(item.rank)}</td>
+              <td>${homeThemeLink(item.theme)}<span class="theme-status">${escapeHtml(item.status)}</span></td>
+              <td><span class="theme-score-badge">${escapeHtml(item.strength)}</span></td>
+              <td>${escapeHtml(item.reason)}</td>
+              <td>${homeThemeStockChips(item.leaders, 3)}</td>
+              <td>${homeThemeStockChips(item.lowBase, 3)}</td>
+              <td>${escapeHtml(item.risk)}</td>
+              <td><button class="theme-expand-toggle" type="button" aria-expanded="false" aria-controls="${detailId}" data-target="${detailId}">${HOME_THEME_LABELS.expand}</button></td>
+            </tr>
+            <tr id="${detailId}" class="theme-detail-row"><td colspan="8">${homeThemeDetail(item)}</td></tr>
+          `;
+        }).join("")}</tbody>
+      </table>
+    </div>
+    <div class="home-mobile-cards home-theme-top5-cards">
+      ${rows.map((item, index) => {
+        const detailId = `home-theme-card-detail-${index}`;
+        return `
+          <article>
+            <div><strong>${HOME_THEME_LABELS.firstPrefix}${escapeHtml(item.rank)}${HOME_THEME_LABELS.firstSuffix}${homeThemeLink(item.theme)}</strong><span>${HOME_THEME_LABELS.strengthPrefix}${escapeHtml(item.strength)}</span></div>
+            <p><b>${HOME_THEME_LABELS.reason}</b>${escapeHtml(item.reason)}</p>
+            <p><b>${HOME_THEME_LABELS.leader}</b>${homeThemeStockChips(item.leaders, 3)}</p>
+            <p><b>${HOME_THEME_LABELS.lowBaseWatch}</b>${homeThemeStockChips(item.lowBase, 3)}</p>
+            <p><b>${HOME_THEME_LABELS.risk}</b>${escapeHtml(item.risk)}</p>
+            <button class="theme-expand-toggle" type="button" aria-expanded="false" aria-controls="${detailId}" data-target="${detailId}">${HOME_THEME_LABELS.expand}</button>
+            <div id="${detailId}" class="theme-detail-row">${homeThemeDetail(item)}</div>
+          </article>
+        `;
+      }).join("")}
+    </div>
+  `;
+}
+
+function bindHomeThemeTopToggles() {
+  document.querySelectorAll(".theme-expand-toggle").forEach((button) => {
+    button.addEventListener("click", () => {
+      const targetId = button.dataset.target;
+      const detail = targetId ? document.getElementById(targetId) : null;
+      if (!detail) return;
+      const isOpen = detail.classList.toggle("is-open");
+      button.setAttribute("aria-expanded", String(isOpen));
+      button.textContent = isOpen ? HOME_THEME_LABELS.collapse : HOME_THEME_LABELS.expand;
+    });
+  });
 }
 
 function homeAiStockTable(data) {
@@ -4194,15 +4357,17 @@ function renderCodeHits(selector, codes) {
 
 async function renderHomeDashboard() {
   const main = $("#app");
-  const [snapshotRaw, stocksRaw, themesRaw, newsRaw] = await Promise.all([
+  const [snapshotRaw, stocksRaw, themesRaw, themeTopRaw, newsRaw] = await Promise.all([
     loadJson("data/daily_market_snapshot.json", null),
     loadJson("data/daily_hot_stocks.json", null),
     loadJson("data/daily_hot_themes.json", null),
+    loadJson("data/daily_theme_top5.json", null),
     loadJson("data/news-events.json", null),
   ]);
   const snapshot = normalizeDashboardData(snapshotRaw);
   const hotStocks = normalizeDashboardData(stocksRaw);
   const hotThemes = normalizeDashboardData(themesRaw);
+  const themeTop5 = normalizeHomeThemeTop5Data(themeTopRaw, hotThemes);
   const majorNews = normalizeDashboardData(newsRaw);
   warnDashboardQuality(snapshot, hotStocks, hotThemes, majorNews);
   main.innerHTML = `
@@ -4211,8 +4376,8 @@ async function renderHomeDashboard() {
       ${homeMarketOverview(snapshot)}
     </section>
     <section class="home-dashboard-panel">
-      ${homePanelTitle("今日最強題材 Top 5", hotThemes)}
-      ${homeThemeTopTable(hotThemes)}
+      ${homePanelTitle("\u4eca\u65e5\u6700\u5f37\u984c\u6750 Top 5", themeTop5)}
+      ${homeThemeTopTable(themeTop5)}
     </section>
     <section class="home-dashboard-panel">
       ${homePanelTitle("前三天最強題材", hotThemes)}
@@ -4223,6 +4388,7 @@ async function renderHomeDashboard() {
       ${homeMajorNewsTable(majorNews)}
     </section>
   `;
+  bindHomeThemeTopToggles();
 }
 
 async function boot(page) {

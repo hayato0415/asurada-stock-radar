@@ -3124,6 +3124,101 @@ tr:nth-child(even) { background: #f8fafc; }
   line-height: 1.6;
   margin: -4px 0 12px;
 }
+.home-war-room .home-theme-top5-table {
+  min-width: 1120px;
+}
+.home-war-room .theme-score-badge {
+  align-items: center;
+  background: #e0f2fe;
+  border: 1px solid #7dd3fc;
+  border-radius: 999px;
+  color: #075985;
+  display: inline-flex;
+  font-weight: 900;
+  justify-content: center;
+  min-width: 44px;
+  padding: 4px 10px;
+}
+.home-war-room .theme-status {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  color: #475569;
+  display: inline-flex;
+  font-size: 11px;
+  font-weight: 800;
+  margin-left: 6px;
+  padding: 2px 7px;
+}
+.home-war-room .theme-stock-chip,
+.home-war-room .theme-signal-chip {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 999px;
+  color: #0369a1;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.35;
+  margin: 2px 4px 2px 0;
+  padding: 4px 8px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.home-war-room .theme-expand-toggle {
+  background: #0f172a;
+  border: 0;
+  border-radius: 999px;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 800;
+  padding: 7px 12px;
+  white-space: nowrap;
+}
+.home-war-room .theme-detail-row {
+  display: none;
+}
+.home-war-room .theme-detail-row.is-open {
+  display: table-row;
+}
+.home-war-room .home-theme-top5-cards .theme-detail-row.is-open {
+  display: block;
+}
+.home-war-room .theme-detail-grid {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 12px;
+}
+.home-war-room .theme-detail-grid div {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  min-width: 0;
+  padding: 10px;
+}
+.home-war-room .theme-detail-grid b {
+  color: #334155;
+  display: block;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+.home-war-room .theme-detail-grid p {
+  color: #0f172a;
+  line-height: 1.55;
+  margin: 0;
+}
+.home-war-room .theme-detail-risk {
+  border-color: #fed7aa !important;
+}
+.home-war-room .theme-signal-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
 .home-war-room .home-mobile-cards {
   display: none;
 }
@@ -3559,6 +3654,19 @@ tr:nth-child(even) { background: #f8fafc; }
   }
   .home-war-room .home-dashboard-table {
     min-width: 860px;
+  }
+  .home-war-room .theme-detail-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .home-war-room .theme-detail-row {
+    margin-top: 8px;
+  }
+  .home-war-room .theme-stock-chip,
+  .home-war-room .theme-signal-chip {
+    white-space: normal;
+  }
+  .home-war-room .theme-expand-toggle {
+    width: fit-content;
   }
   .home-war-room .home-news-table {
     min-width: 780px;
