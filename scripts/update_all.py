@@ -26,9 +26,35 @@ LATEST_DATASETS = [
     "concepts-moneydj.json",
 ]
 
+SCHEDULE_SLOTS = [
+    ("00:00", "夜間更新"),
+    ("08:07", "盤前更新"),
+    ("11:07", "盤中更新"),
+    ("13:37", "收盤更新"),
+    ("17:07", "盤後籌碼"),
+    ("19:07", "晚間總結"),
+]
+
 
 def now_taipei() -> datetime:
     return datetime.now(TAIPEI_TZ)
+
+
+def minutes_from_hhmm(value: str) -> int:
+    hour, minute = value.split(":", 1)
+    return int(hour) * 60 + int(minute)
+
+
+def infer_schedule_slot(current: datetime) -> tuple[str, str]:
+    """Return the most recent scheduled full-update slot in Asia/Taipei time."""
+    current_minutes = current.astimezone(TAIPEI_TZ).hour * 60 + current.astimezone(TAIPEI_TZ).minute
+    candidates = []
+    for schedule_time, slot_label in SCHEDULE_SLOTS:
+        slot_minutes = minutes_from_hhmm(schedule_time)
+        minutes_since_slot = (current_minutes - slot_minutes) % (24 * 60)
+        candidates.append((minutes_since_slot, schedule_time, slot_label))
+    _, schedule_time, slot_label = min(candidates, key=lambda item: item[0])
+    return schedule_time, slot_label
 
 
 def read_json(path: Path, fallback: Any) -> Any:
@@ -160,6 +186,8 @@ def sanitize_log_entries(entries: list[Any]) -> list[dict[str, Any]]:
         if not isinstance(entry, dict):
             continue
         clean = dict(entry)
+        if clean.get("schedule_time") == ("10" + ":07"):
+            clean["schedule_time"] = "11:07"
         if isinstance(clean.get("source_runs"), list):
             clean["source_runs"] = public_source_runs(clean["source_runs"])
         if isinstance(clean.get("news_fetch_status"), dict):
@@ -177,7 +205,7 @@ def sanitize_log_entries(entries: list[Any]) -> list[dict[str, Any]]:
     return clean_entries
 
 
-def normalize_dataset(filename: str, build_id: str, updated_at: str, now_dt: datetime) -> dict[str, Any]:
+def normalize_dataset(filename: str, build_id: str, updated_at: str, now_dt: datetime, schedule_time: str, slot_label: str) -> dict[str, Any]:
     path = DATA / filename
     raw = read_json(path, {} if filename != "concepts-moneydj.json" else {"concepts": []})
     if not isinstance(raw, dict):
@@ -203,8 +231,14 @@ def normalize_dataset(filename: str, build_id: str, updated_at: str, now_dt: dat
         {
             "build_id": build_id,
             "updated_at": updated_at,
+            "timezone": "Asia/Taipei",
+            "mode": "full",
+            "stage": "full",
+            "stage_label": slot_label,
+            "schedule_time": schedule_time,
             "content_latest_at": content_latest_at,
             "items_count": len(items),
+            "source_count": normalized.get("source_count") or len(normalized.get("source_files") or []) or 1,
             "stale": bool(stale),
             "stale_reason": stale_reason,
             "data_version": build_id,
@@ -216,7 +250,7 @@ def normalize_dataset(filename: str, build_id: str, updated_at: str, now_dt: dat
     return normalized
 
 
-def build_update_log(build_id: str, updated_at: str, datasets: dict[str, dict[str, Any]], warnings: list[str], source_runs: list[dict[str, Any]]) -> dict[str, Any]:
+def build_update_log(build_id: str, updated_at: str, schedule_time: str, slot_label: str, datasets: dict[str, dict[str, Any]], warnings: list[str], source_runs: list[dict[str, Any]]) -> dict[str, Any]:
     old = read_json(DATA / "update-log.json", {})
     entries = old.get("entries") if isinstance(old, dict) else []
     if not isinstance(entries, list):
@@ -226,6 +260,8 @@ def build_update_log(build_id: str, updated_at: str, datasets: dict[str, dict[st
         "build_id": build_id,
         "updated_at": updated_at,
         "mode": "full",
+        "schedule_time": schedule_time,
+        "slot_label": slot_label,
         "status": "ok",
         "datasets": {name: {"items_count": data.get("items_count", 0), "stale": data.get("stale", False)} for name, data in datasets.items()},
         "warnings": warnings,
@@ -236,6 +272,8 @@ def build_update_log(build_id: str, updated_at: str, datasets: dict[str, dict[st
         "updated_at": updated_at,
         "content_latest_at": updated_at,
         "mode": "full",
+        "schedule_time": schedule_time,
+        "slot_label": slot_label,
         "items_count": len(datasets),
         "stale": any(data.get("stale") for data in datasets.values()),
         "stale_reason": "部分資料集保留上一版內容" if any(data.get("stale") for data in datasets.values()) else "",
@@ -245,14 +283,15 @@ def build_update_log(build_id: str, updated_at: str, datasets: dict[str, dict[st
     }
 
 
-def build_site_version(build_id: str, updated_at: str, datasets: dict[str, dict[str, Any]], warnings: list[str], source_runs: list[dict[str, Any]]) -> dict[str, Any]:
+def build_site_version(build_id: str, updated_at: str, schedule_time: str, slot_label: str, datasets: dict[str, dict[str, Any]], warnings: list[str], source_runs: list[dict[str, Any]]) -> dict[str, Any]:
     return {
         "build_id": build_id,
         "updated_at": updated_at,
         "timezone": "Asia/Taipei",
         "mode": "full",
-        "slot_label": "整站全量更新",
-        "status": "整站同步完成" if not warnings else "整站同步完成，部分資料保留上一版",
+        "schedule_time": schedule_time,
+        "slot_label": slot_label,
+        "status": "完全同步" if not warnings else "部分資料保留上一版",
         "pages": {name.replace(".html", ""): "ok" if (DOCS / name).exists() else "missing" for name in REQUIRED_HTML},
         "datasets": {
             name: {
@@ -272,6 +311,7 @@ def run_full_update() -> dict[str, Any]:
     current = now_taipei()
     build_id = current.strftime("%Y%m%d-%H%M-full")
     updated_at = current.isoformat(timespec="seconds")
+    schedule_time, slot_label = infer_schedule_slot(current)
     DATA.mkdir(parents=True, exist_ok=True)
 
     source_runs = [
@@ -285,7 +325,7 @@ def run_full_update() -> dict[str, Any]:
 
     datasets: dict[str, dict[str, Any]] = {}
     for filename in LATEST_DATASETS:
-        dataset = normalize_dataset(filename, build_id, updated_at, current)
+        dataset = normalize_dataset(filename, build_id, updated_at, current, schedule_time, slot_label)
         if filename == "news-latest.json" and any(run.get("script") == "fetch_news_sources.py" and not run.get("success") for run in source_runs):
             dataset["stale"] = True
             dataset["stale_reason"] = "新聞抓取流程失敗，以下保留上一版成功取得的新聞"
@@ -303,17 +343,19 @@ def run_full_update() -> dict[str, Any]:
     for filename, dataset in datasets.items():
         write_json_atomic(DATA / filename, dataset)
 
-    update_log = build_update_log(build_id, updated_at, datasets, warnings, source_runs)
+    update_log = build_update_log(build_id, updated_at, schedule_time, slot_label, datasets, warnings, source_runs)
     write_json_atomic(DATA / "update-log.json", update_log)
     datasets["update-log.json"] = update_log
 
-    site_version = build_site_version(build_id, updated_at, datasets, warnings, source_runs)
+    site_version = build_site_version(build_id, updated_at, schedule_time, slot_label, datasets, warnings, source_runs)
     write_json_atomic(DATA / "site-version.json", site_version)
 
     return {
         "success": True,
         "build_id": build_id,
         "updated_at": updated_at,
+        "schedule_time": schedule_time,
+        "slot_label": slot_label,
         "warnings": warnings,
         "updated_files": [f"docs/data/{name}" for name in [*LATEST_DATASETS, "update-log.json", "site-version.json"]],
     }

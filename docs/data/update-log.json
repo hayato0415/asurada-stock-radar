@@ -1,8 +1,10 @@
 {
-  "build_id": "20260629-2040-full",
-  "updated_at": "2026-06-29T20:40:15+08:00",
-  "content_latest_at": "2026-06-29T20:40:15+08:00",
+  "build_id": "20260630-1250-full",
+  "updated_at": "2026-06-30T12:50:20+08:00",
+  "content_latest_at": "2026-06-30T12:50:20+08:00",
   "mode": "full",
+  "schedule_time": "11:07",
+  "slot_label": "盤中更新",
   "items_count": 7,
   "stale": true,
   "stale_reason": "部分資料集保留上一版內容",
@@ -18,6 +20,104 @@
     }
   ],
   "entries": [
+    {
+      "build_id": "20260630-1250-full",
+      "updated_at": "2026-06-30T12:50:20+08:00",
+      "mode": "full",
+      "schedule_time": "11:07",
+      "slot_label": "盤中更新",
+      "status": "ok",
+      "datasets": {
+        "daily_market_snapshot.json": {
+          "items_count": 0,
+          "stale": false
+        },
+        "daily_hot_stocks.json": {
+          "items_count": 20,
+          "stale": false
+        },
+        "daily_hot_themes.json": {
+          "items_count": 20,
+          "stale": false
+        },
+        "market-latest.json": {
+          "items_count": 0,
+          "stale": false
+        },
+        "radar-latest.json": {
+          "items_count": 180,
+          "stale": false
+        },
+        "news-latest.json": {
+          "items_count": 17,
+          "stale": true
+        },
+        "concepts-moneydj.json": {
+          "items_count": 171,
+          "stale": false
+        }
+      },
+      "warnings": [
+        "fetch_news_sources.py failed"
+      ],
+      "source_runs": [
+        {
+          "script": "fetch_news_sources.py",
+          "success": false,
+          "status": "failed",
+          "message": "failed; see GitHub Actions log for details"
+        }
+      ]
+    },
+    {
+      "build_id": "20260630-1246-full",
+      "updated_at": "2026-06-30T12:46:01+08:00",
+      "mode": "full",
+      "schedule_time": "11:07",
+      "slot_label": "盤中更新",
+      "status": "ok",
+      "datasets": {
+        "daily_market_snapshot.json": {
+          "items_count": 0,
+          "stale": false
+        },
+        "daily_hot_stocks.json": {
+          "items_count": 20,
+          "stale": false
+        },
+        "daily_hot_themes.json": {
+          "items_count": 20,
+          "stale": false
+        },
+        "market-latest.json": {
+          "items_count": 0,
+          "stale": false
+        },
+        "radar-latest.json": {
+          "items_count": 180,
+          "stale": false
+        },
+        "news-latest.json": {
+          "items_count": 17,
+          "stale": true
+        },
+        "concepts-moneydj.json": {
+          "items_count": 171,
+          "stale": false
+        }
+      },
+      "warnings": [
+        "fetch_news_sources.py failed"
+      ],
+      "source_runs": [
+        {
+          "script": "fetch_news_sources.py",
+          "success": false,
+          "status": "failed",
+          "message": "failed; see GitHub Actions log for details"
+        }
+      ]
+    },
     {
       "build_id": "20260629-2040-full",
       "updated_at": "2026-06-29T20:40:15+08:00",
@@ -205,7 +305,7 @@
       "updated_at": "2026-06-29 16:32:15 Asia/Taipei",
       "stage": "intraday",
       "stage_label": "盤中更新",
-      "schedule_time": "10:07",
+      "schedule_time": "11:07",
       "timezone": "Asia/Taipei",
       "source_count": 4,
       "data_version": "20260629-1632-intraday",
@@ -220,7 +320,7 @@
       "updated_at": "2026-06-29 16:10:24 Asia/Taipei",
       "stage": "intraday",
       "stage_label": "盤中更新",
-      "schedule_time": "10:07",
+      "schedule_time": "11:07",
       "timezone": "Asia/Taipei",
       "source_count": 4,
       "data_version": "20260629-1610-intraday",
@@ -235,7 +335,7 @@
       "updated_at": "2026-06-29 16:09:19 Asia/Taipei",
       "stage": "intraday",
       "stage_label": "盤中更新",
-      "schedule_time": "10:07",
+      "schedule_time": "11:07",
       "timezone": "Asia/Taipei",
       "source_count": 4,
       "data_version": "20260629-1609-intraday",
@@ -250,7 +350,7 @@
       "updated_at": "2026-06-29 16:08:10 Asia/Taipei",
       "stage": "intraday",
       "stage_label": "盤中更新",
-      "schedule_time": "10:07",
+      "schedule_time": "11:07",
       "timezone": "Asia/Taipei",
       "source_count": 4,
       "data_version": "20260629-1608-intraday",
@@ -265,7 +365,7 @@
       "updated_at": "2026-06-29 16:07:08 Asia/Taipei",
       "stage": "intraday",
       "stage_label": "盤中更新",
-      "schedule_time": "10:07",
+      "schedule_time": "11:07",
       "timezone": "Asia/Taipei",
       "source_count": 4,
       "data_version": "20260629-1607-intraday",

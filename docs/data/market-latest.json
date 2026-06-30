@@ -1,14 +1,14 @@
 {
-  "updated_at": "2026-06-29T20:40:15+08:00",
-  "stage": "evening",
-  "stage_label": "晚間總結",
-  "schedule_time": "19:07",
+  "updated_at": "2026-06-30T12:50:20+08:00",
+  "stage": "full",
+  "stage_label": "盤中更新",
+  "schedule_time": "11:07",
   "timezone": "Asia/Taipei",
   "source_count": 1,
   "source_files": [
     "daily_market_snapshot.json"
   ],
-  "data_version": "20260629-2040-full",
+  "data_version": "20260630-1250-full",
   "date": "2026-06-27",
   "snapshot": {
     "date": "2026-06-27",
@@ -139,10 +139,11 @@
     "breadth_source_url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260624&type=ALLBUT0999&response=json",
     "data_quality_warning": []
   },
-  "build_id": "20260629-2040-full",
+  "build_id": "20260630-1250-full",
   "content_latest_at": "2026-06-29T14:38:17+08:00",
   "items_count": 0,
   "stale": false,
   "stale_reason": "",
-  "items": []
+  "items": [],
+  "mode": "full"
 }

@@ -38,6 +38,7 @@ let siteVersionState = {
   updated_at: "",
   status: "",
   mode: "",
+  schedule_time: "",
   slot_label: "",
   datasets: {},
   warnings: [],
@@ -1268,6 +1269,7 @@ function renderHeader(active) {
       <h1>霆隼AI選股網</h1>
       <p>台股題材研究與候選股整理平台</p>
       <nav class="nav">${nav.map(([href, label, key]) => `<a class="${active === key ? "active" : ""}" href="${href}">${label}</a>`).join("")}</nav>
+      ${siteVersionMiniHtml()}
     </div>
   `;
 }
@@ -1333,6 +1335,9 @@ function mergeLatestMeta(...payloads) {
 
 function formatDashboardTime(value) {
   return String(value || "")
+    .replace("T", " ")
+    .replace(/\+08:00\b/g, "")
+    .replace(/\+00:00\b/g, "")
     .replace(/\s*Asia\/Taipei\b/g, "")
     .replace(/\s*\(Asia\/Taipei\)\s*/g, "")
     .trim();
@@ -1342,6 +1347,35 @@ function formatDashboardDate(value) {
   const text = formatDashboardTime(value);
   const match = text.match(/\d{4}-\d{2}-\d{2}/);
   return match ? match[0] : text;
+}
+
+function formatSiteVersionTime(value) {
+  const text = formatDashboardTime(value);
+  const match = text.match(/^(\d{4}-\d{2}-\d{2})\s+(\d{2}:\d{2})/);
+  return match ? `${match[1]} ${match[2]}` : (text || "資料尚未更新");
+}
+
+function siteVersionStatusLabel() {
+  const status = String(siteVersionState.status || "");
+  if (status.includes("部分")) return "部分資料保留上一版";
+  if (status.includes("完全") || status.includes("整站同步完成")) return "完全同步";
+  return status || "資料狀態未標示";
+}
+
+function siteVersionMiniHtml() {
+  const updated = formatSiteVersionTime(siteVersionState.updated_at);
+  const slot = siteVersionState.slot_label || "未標示";
+  const schedule = siteVersionState.schedule_time ? ` ${escapeHtml(siteVersionState.schedule_time)}` : "";
+  const build = siteVersionState.build_id || "-";
+  const status = siteVersionStatusLabel();
+  return `
+    <div class="site-version-mini" aria-label="全站資料版本">
+      <span>全站更新：<strong>${escapeHtml(updated)}</strong></span>
+      <span>更新時段：<strong>${escapeHtml(slot)}${schedule}</strong></span>
+      <span>版本：<strong>${escapeHtml(build)}</strong></span>
+      <span>同步狀態：<strong>${escapeHtml(status)}</strong></span>
+    </div>
+  `;
 }
 
 function dashboardUpdateText(data) {
@@ -3030,10 +3064,11 @@ function newsContentLatestText() {
 }
 
 const NEWS_UPDATE_SCHEDULE = [
+  ["00:00", "夜間更新"],
   ["08:07", "盤前更新"],
-  ["10:07", "盤中更新"],
-  ["13:37", "收盤快照"],
-  ["17:07", "盤後籌碼/新聞補齊"],
+  ["11:07", "盤中更新"],
+  ["13:37", "收盤更新"],
+  ["17:07", "盤後籌碼"],
   ["19:07", "晚間總結"],
 ];
 
@@ -4153,6 +4188,7 @@ async function renderHomeDashboard() {
 }
 
 async function boot(page) {
+  await loadSiteVersion();
   renderHeader(page);
   if (page === "index") {
     await renderHomeDashboard();

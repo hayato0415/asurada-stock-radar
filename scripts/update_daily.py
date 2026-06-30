@@ -31,7 +31,7 @@ STAGES = {
     },
     "intraday": {
         "label": "盤中更新",
-        "schedule_time": "10:07",
+        "schedule_time": "11:07",
         "targets": ["market", "themes", "news", "radar"],
     },
     "close": {

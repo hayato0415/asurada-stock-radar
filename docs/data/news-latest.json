@@ -1,14 +1,14 @@
 {
-  "updated_at": "2026-06-29T20:40:15+08:00",
-  "stage": "intraday",
+  "updated_at": "2026-06-30T12:50:20+08:00",
+  "stage": "full",
   "stage_label": "盤中更新",
-  "schedule_time": "10:07",
+  "schedule_time": "11:07",
   "timezone": "Asia/Taipei",
   "source_count": 4,
   "source_files": [
     "news-events.json"
   ],
-  "data_version": "20260629-2040-full",
+  "data_version": "20260630-1250-full",
   "content_latest_at": "2026-06-29T16:19:00+08:00",
   "items_count": 17,
   "new_items_count": 5,
@@ -732,5 +732,6 @@
     }
   ],
   "total_available": 17,
-  "build_id": "20260629-2040-full"
+  "build_id": "20260630-1250-full",
+  "mode": "full"
 }

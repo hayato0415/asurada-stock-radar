@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-06-29T20:40:15+08:00",
-  "stage": "afterhours",
-  "stage_label": "盤後更新",
-  "schedule_time": "17:07",
+  "updated_at": "2026-06-30T12:50:20+08:00",
+  "stage": "full",
+  "stage_label": "盤中更新",
+  "schedule_time": "11:07",
   "timezone": "Asia/Taipei",
   "source_count": 3,
   "source_files": [
@@ -10,7 +10,7 @@
     "stock-data-meta.json",
     "stock-master.json"
   ],
-  "data_version": "20260629-2040-full",
+  "data_version": "20260630-1250-full",
   "date": "2026-06-29",
   "items": [
     {
@@ -7954,9 +7954,10 @@
     "updated_stock_count": 180,
     "missing_stock_count": 0
   },
-  "build_id": "20260629-2040-full",
+  "build_id": "20260630-1250-full",
   "content_latest_at": "2026-06-29T17:13:06+08:00",
   "items_count": 180,
   "stale": false,
-  "stale_reason": ""
+  "stale_reason": "",
+  "mode": "full"
 }

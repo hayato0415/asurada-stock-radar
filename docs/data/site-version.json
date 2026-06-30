@@ -1,10 +1,11 @@
 {
-  "build_id": "20260629-2040-full",
-  "updated_at": "2026-06-29T20:40:15+08:00",
+  "build_id": "20260630-1250-full",
+  "updated_at": "2026-06-30T12:50:20+08:00",
   "timezone": "Asia/Taipei",
   "mode": "full",
-  "slot_label": "整站全量更新",
-  "status": "整站同步完成，部分資料保留上一版",
+  "schedule_time": "11:07",
+  "slot_label": "盤中更新",
+  "status": "部分資料保留上一版",
   "pages": {
     "index": "ok",
     "radar": "ok",
@@ -57,7 +58,7 @@
     "update-log.json": {
       "status": "stale",
       "items_count": 7,
-      "content_latest_at": "2026-06-29T20:40:15+08:00",
+      "content_latest_at": "2026-06-30T12:50:20+08:00",
       "stale_reason": "部分資料集保留上一版內容"
     }
   },
