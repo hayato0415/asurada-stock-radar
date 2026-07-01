@@ -61,6 +61,25 @@
     },
     {
       "rank": 4,
+      "symbol": "2337",
+      "name": "旺宏",
+      "theme": "記憶體 / NOR Flash / NAND Flash",
+      "pattern": "報價催化",
+      "total_score": 85,
+      "technical_score": 81,
+      "chip_score": 79,
+      "fundamental_score": 86,
+      "news_score": 90,
+      "risk_adjustment": 68,
+      "risk_level": "中",
+      "ai_summary": "旺宏屬記憶體族群，NOR Flash 與 NAND Flash 題材受報價、庫存循環與 AI 邊緣需求帶動。",
+      "entry_reason": "記憶體族群新聞熱度高，若報價改善延續，低基期股具補漲觀察價值。",
+      "risk_reason": "記憶體族群波動大，若報價題材降溫或量能退潮，短線容易回測。",
+      "continuation_condition": "華邦電、南亞科、旺宏同步放量，且記憶體報價新聞延續。",
+      "downgrade_condition": "跌破短均或族群成交量快速萎縮。"
+    },
+    {
+      "rank": 5,
       "symbol": "2327",
       "name": "國巨",
       "theme": "被動元件",
@@ -79,7 +98,7 @@
       "downgrade_condition": "龍頭開高走低且二線股無法接棒。"
     },
     {
-      "rank": 5,
+      "rank": 6,
       "symbol": "8996",
       "name": "高力",
       "theme": "AI 電力 / 散熱",

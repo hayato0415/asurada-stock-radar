@@ -1,19 +1,40 @@
 import { loadProcessedData, getItems } from "./api.js";
-import { $, bySymbol, escapeHtml, renderEmpty, stockChipList } from "./utils.js";
+import { $, escapeHtml, renderEmpty } from "./utils.js";
 import { formatDateTime } from "./formatters.js";
 import { riskBadge, scoreBadge, statusBadge } from "./scoring-ui.js";
 
 let stocks = [];
 let scores = [];
 let news = [];
+let stockDataUpdatedAt = "";
 
 function getSymbolFromUrl() {
-  return new URLSearchParams(window.location.search).get("symbol") || "";
+  const params = new URLSearchParams(window.location.search);
+  return params.get("symbol") || params.get("code") || "";
 }
 
 function findStock(query) {
-  const value = String(query || "").trim().toLowerCase();
-  return stocks.find((stock) => stock.symbol === value || stock.name.toLowerCase().includes(value));
+  const rawValue = String(query || "").trim();
+  const value = rawValue.toLowerCase();
+  const codeMatch = rawValue.match(/\b\d{4,6}\b/);
+
+  if (codeMatch) {
+    return stocks.find((stock) => String(stock.symbol) === codeMatch[0]);
+  }
+
+  if (!value) return null;
+
+  return stocks.find((stock) => String(stock.name || "").toLowerCase() === value)
+    || stocks.find((stock) => String(stock.name || "").toLowerCase().includes(value)
+      || String(stock.symbol || "").includes(value));
+}
+
+function renderStockOptions() {
+  const list = $("#stockOptions");
+  if (!list) return;
+  list.innerHTML = stocks
+    .map((stock) => `<option value="${escapeHtml(stock.symbol)} ${escapeHtml(stock.name)}"></option>`)
+    .join("");
 }
 
 function scoreLine(label, value) {
@@ -34,10 +55,13 @@ function renderStock(stock) {
     return;
   }
 
-  const score = scores.find((item) => item.symbol === stock.symbol) || {};
-  const relatedNews = news.filter((item) => item.stocks?.some((newsStock) => String(newsStock.code ?? newsStock.symbol) === stock.symbol));
+  const score = scores.find((item) => String(item.symbol) === String(stock.symbol)) || {};
+  const relatedNews = news.filter((item) => item.stocks?.some((newsStock) => String(newsStock.code ?? newsStock.symbol) === String(stock.symbol)));
+  const theme = score.theme || stock.theme || "--";
+  const supplyChain = stock.supply_chain || "--";
+  const updatedAt = score.updated_at || score.market_date || stock.updated_at || stockDataUpdatedAt;
 
-  $("#stockUpdatedAt").textContent = `資料更新：${formatDateTime(score.updated_at || score.market_date)}`;
+  $("#stockUpdatedAt").textContent = `資料更新：${formatDateTime(updatedAt)}`;
   root.innerHTML = `
     <section class="panel battle-card">
       <div class="section-head">
@@ -47,11 +71,13 @@ function renderStock(stock) {
         </div>
         ${scoreBadge(score.total_score)}
       </div>
-      <p>${escapeHtml(score.ai_summary || "尚無 AI 總評。")}</p>
+      <p>${escapeHtml(score.ai_summary || "尚未建立 AI 總評。")}</p>
       <div class="metric-grid">
-        <article class="metric-card"><span>市場</span><strong>${escapeHtml(stock.market)}</strong></article>
-        <article class="metric-card"><span>產業</span><strong>${escapeHtml(stock.industry)}</strong></article>
-        <article class="metric-card"><span>題材</span><strong>${escapeHtml(score.theme || stock.theme)}</strong></article>
+        <article class="metric-card"><span>市場別</span><strong>${escapeHtml(stock.market || "--")}</strong></article>
+        <article class="metric-card"><span>產業別</span><strong>${escapeHtml(stock.industry || "--")}</strong></article>
+        <article class="metric-card"><span>題材</span><strong>${escapeHtml(theme)}</strong></article>
+        <article class="metric-card"><span>供應鏈</span><strong>${escapeHtml(supplyChain)}</strong></article>
+        <article class="metric-card"><span>資料來源</span><strong>${escapeHtml(stock.data_source || "樣本主檔")}</strong></article>
         <article class="metric-card"><span>風險</span><strong>${riskBadge(score.risk_level)}</strong></article>
       </div>
     </section>
@@ -82,10 +108,10 @@ function renderStock(stock) {
           <h3>${escapeHtml(item.title)}</h3>
           <div class="news-meta">
             <span>${formatDateTime(item.published_at)}</span>
-            <span>${escapeHtml(item.source_name)}</span>
-            <span>${statusBadge(item.impact, item.impact === "偏空" ? "bad" : "good")}</span>
+            <span>${escapeHtml(item.source_name || "--")}</span>
+            <span>${statusBadge(item.impact || "中性", item.impact === "偏空" ? "bad" : "good")}</span>
           </div>
-          <p>${escapeHtml(item.ai_judgement)}</p>
+          <p>${escapeHtml(item.ai_judgement || item.operation_meaning || "")}</p>
         </article>
       `).join("") : renderEmpty("目前沒有此個股新聞事件")}
     </section>
@@ -94,25 +120,36 @@ function renderStock(stock) {
 
 function bindSearch() {
   const input = $("#stockLookup");
-  input.addEventListener("change", () => {
+  const search = () => {
     const stock = findStock(input.value);
     if (stock) {
       history.replaceState(null, "", `./stock.html?symbol=${encodeURIComponent(stock.symbol)}`);
+      input.value = `${stock.symbol} ${stock.name}`;
     }
     renderStock(stock);
+  };
+
+  input.addEventListener("change", search);
+  input.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      search();
+    }
   });
 }
 
 async function initStockPage() {
   const loaded = await loadProcessedData(["stocks_master.json", "ai_scores_daily.json", "news_events.json"]);
   stocks = getItems(loaded["stocks_master.json"].data);
+  stockDataUpdatedAt = loaded["stocks_master.json"].data?.updated_at || "";
   scores = getItems(loaded["ai_scores_daily.json"].data);
   news = getItems(loaded["news_events.json"].data);
 
+  renderStockOptions();
   bindSearch();
   const querySymbol = getSymbolFromUrl();
-  const initialStock = querySymbol ? findStock(querySymbol) : stocks[0];
-  $("#stockLookup").value = initialStock ? `${initialStock.symbol} ${initialStock.name}` : "";
+  const initialStock = querySymbol ? findStock(querySymbol) : null;
+  $("#stockLookup").value = initialStock ? `${initialStock.symbol} ${initialStock.name}` : querySymbol;
   renderStock(initialStock);
 }
 
