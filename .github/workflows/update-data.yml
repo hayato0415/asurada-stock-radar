@@ -1,0 +1,29 @@
+name: Update Processed Data
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "7 11 * * 1-5"
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Placeholder data update
+        run: |
+          echo "First phase uses sample JSON in data/processed."
+          echo "Future update scripts should write processed files only."
+
+      - name: Show processed data files
+        run: find data/processed -maxdepth 1 -type f -print

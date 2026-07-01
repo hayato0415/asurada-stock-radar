@@ -1,0 +1,46 @@
+.radar-table td:nth-child(2) a,
+.stock-link {
+  color: #7dd3fc;
+  font-weight: 950;
+}
+
+.stock-detail-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 1rem;
+}
+
+.battle-card {
+  border-left: 4px solid var(--brand);
+}
+
+.score-breakdown {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.score-line {
+  display: grid;
+  grid-template-columns: 90px 1fr 52px;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+.bar-track {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.2);
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--brand-2), var(--brand));
+}
+
+@media (max-width: 900px) {
+  .stock-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}

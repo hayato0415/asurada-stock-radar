@@ -1,0 +1,10 @@
+.theme-name {
+  color: #7dd3fc;
+  font-weight: 950;
+}
+
+.stock-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
