@@ -38,6 +38,15 @@
   font-size: 0.88rem;
 }
 
+.news-source-link {
+  color: #93c5fd;
+  font-weight: 800;
+}
+
+.news-source-link:hover {
+  color: #67e8f9;
+}
+
 .tag-cloud {
   display: flex;
   flex-wrap: wrap;

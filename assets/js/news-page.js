@@ -4,16 +4,20 @@ import { formatDateTime } from "./formatters.js";
 import { scoreBadge, statusBadge } from "./scoring-ui.js";
 
 function newsCard(item) {
+  const sourceUrl = item.source_url ? escapeHtml(item.source_url) : "";
   const link = item.source_url
-    ? `<a href="${escapeHtml(item.source_url)}" target="_blank" rel="noreferrer">${escapeHtml(item.title)}</a>`
+    ? `<a href="${sourceUrl}" target="_blank" rel="noreferrer">${escapeHtml(item.title)}</a>`
     : escapeHtml(item.title);
+  const sourceLink = item.source_url
+    ? `<a class="news-source-link" href="${sourceUrl}" target="_blank" rel="noreferrer">新聞來源：${escapeHtml(item.source_name)}</a>`
+    : `<span>新聞來源：${escapeHtml(item.source_name || "未標示")}</span>`;
 
   return `
     <article class="news-card">
       <h3>${link}</h3>
       <div class="news-meta">
         <span>${formatDateTime(item.published_at)}</span>
-        <span>${escapeHtml(item.source_name)}</span>
+        ${sourceLink}
         <span>來源等級 ${escapeHtml(item.source_grade)}</span>
         <span>${scoreBadge(item.news_score)}</span>
         <span>${statusBadge(item.impact, item.impact === "偏空" ? "bad" : "good")}</span>
