@@ -1,5 +1,5 @@
 import { loadProcessedData, getItems } from "./api.js";
-import { $, bySymbol, escapeHtml, renderEmpty, stockLink } from "./utils.js";
+import { $, bySymbol, escapeHtml, initTableFreezeToggles, renderEmpty, stockLink } from "./utils.js";
 import { formatDateTime, formatNumber, formatPercent, formatSignedPercent, valueClass } from "./formatters.js";
 import { populateSelect, textMatches, minScoreMatches } from "./filters.js";
 import { riskBadge, scoreBadge } from "./scoring-ui.js";
@@ -279,6 +279,8 @@ function sortRows(a, b) {
 }
 
 async function initRadar() {
+  initTableFreezeToggles();
+
   const loaded = await loadProcessedData(["stocks_master.json", "ai_scores_daily.json", "stock_metrics_daily.json"]);
   const stocks = getItems(loaded["stocks_master.json"].data).filter((stock) => VALID_MARKETS.has(stock.market));
   const scores = getItems(loaded["ai_scores_daily.json"].data);

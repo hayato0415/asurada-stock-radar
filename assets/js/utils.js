@@ -51,3 +51,25 @@ export function unique(values) {
 export function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
+
+export function initTableFreezeToggles() {
+  const toggles = document.querySelectorAll("[data-table-freeze-toggle]");
+
+  toggles.forEach((toggle) => {
+    const targetSelector = toggle.getAttribute("data-table-freeze-toggle");
+    const table = targetSelector ? document.querySelector(targetSelector) : null;
+    if (!table) return;
+
+    const setFreezeState = (enabled) => {
+      table.classList.toggle("is-freeze-enabled", enabled);
+      toggle.classList.toggle("is-active", enabled);
+      toggle.setAttribute("aria-pressed", String(enabled));
+      toggle.textContent = enabled ? "凍結欄位：開" : "凍結欄位：關";
+    };
+
+    setFreezeState(!toggle.classList.contains("is-off"));
+    toggle.addEventListener("click", () => {
+      setFreezeState(!toggle.classList.contains("is-active"));
+    });
+  });
+}

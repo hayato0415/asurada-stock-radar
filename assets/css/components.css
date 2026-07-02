@@ -267,6 +267,72 @@
   overscroll-behavior-x: contain;
 }
 
+.table-control-row {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0.75rem 0 0.55rem;
+}
+
+.table-freeze-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0.52rem 0.9rem;
+  border: 1px solid rgba(125, 211, 252, 0.34);
+  border-radius: 999px;
+  color: #bae6fd;
+  background: rgba(15, 23, 42, 0.72);
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+.table-freeze-toggle:hover {
+  border-color: rgba(103, 232, 249, 0.72);
+  color: #ecfeff;
+}
+
+.table-freeze-toggle.is-active {
+  border-color: rgba(103, 232, 249, 0.72);
+  color: #07111f;
+  background: linear-gradient(135deg, #67e8f9, #a5f3fc);
+}
+
+.factor-score-table.is-freeze-enabled th:nth-child(-n + 3),
+.factor-score-table.is-freeze-enabled td:nth-child(-n + 3) {
+  position: sticky;
+  z-index: 3;
+  background: rgba(12, 27, 47, 0.98);
+}
+
+.factor-score-table.is-freeze-enabled th:nth-child(-n + 3) {
+  z-index: 5;
+  background: rgba(15, 23, 42, 1);
+}
+
+.factor-score-table.is-freeze-enabled th:nth-child(1),
+.factor-score-table.is-freeze-enabled td:nth-child(1) {
+  left: 0;
+}
+
+.factor-score-table.is-freeze-enabled th:nth-child(2),
+.factor-score-table.is-freeze-enabled td:nth-child(2) {
+  left: 64px;
+}
+
+.factor-score-table.is-freeze-enabled th:nth-child(3),
+.factor-score-table.is-freeze-enabled td:nth-child(3) {
+  left: 150px;
+  box-shadow: 14px 0 18px rgba(2, 6, 23, 0.28);
+}
+
+.factor-score-table.is-freeze-enabled tr:hover td:nth-child(-n + 3) {
+  background: rgba(16, 39, 67, 1);
+}
+
 .factor-card-list {
   display: none;
   gap: 1rem;
@@ -546,6 +612,10 @@
   }
 
   .factor-table-wrap {
+    display: none;
+  }
+
+  .table-control-row {
     display: none;
   }
 

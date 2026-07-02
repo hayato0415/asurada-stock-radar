@@ -1,5 +1,5 @@
 import { loadProcessedData, getItems } from "./api.js";
-import { $, escapeHtml, renderEmpty, stockLink, normalizeText, unique } from "./utils.js";
+import { $, escapeHtml, initTableFreezeToggles, renderEmpty, stockLink, normalizeText, unique } from "./utils.js";
 import { formatDateTime, formatNumber, formatPercent, formatSignedPercent, valueClass } from "./formatters.js";
 import { scoreBadge } from "./scoring-ui.js";
 
@@ -398,6 +398,8 @@ function bindFilters() {
 }
 
 async function initThemes() {
+  initTableFreezeToggles();
+
   const loaded = await loadProcessedData(DATA_FILES);
   const themePayload = loaded["theme_stats.json"].data;
   const stocks = getItems(loaded["stocks_master.json"].data).filter(isValidMarket);
