@@ -32,8 +32,54 @@
       <div>
         <p class="eyebrow">Theme Rotation</p>
         <h1>題材資金輪動</h1>
+        <p class="page-note">
+          上市、上櫃全市場題材資金輪動排行，依題材強度排序顯示前 20；展開可查看所有受惠個股與資料來源。
+        </p>
       </div>
       <span id="themesUpdatedAt" class="meta-pill">讀取中</span>
+    </section>
+
+    <section class="panel filter-panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Filters</p>
+          <h2>篩選題材</h2>
+        </div>
+        <span id="themesCoverage" class="meta-pill theme-coverage">統計中</span>
+      </div>
+      <div class="filter-grid theme-filter-grid">
+        <label>
+          搜尋題材 / 股票
+          <input id="themeSearch" type="search" placeholder="輸入題材、代號或名稱">
+        </label>
+        <label>
+          市場
+          <select id="marketFilter">
+            <option value="">全部市場</option>
+            <option value="上市">上市</option>
+            <option value="上櫃">上櫃</option>
+          </select>
+        </label>
+        <label>
+          來源
+          <select id="sourceFilter">
+            <option value="">全部來源</option>
+            <option value="master">主檔產業 / 供應鏈</option>
+            <option value="ai">AI 題材標籤</option>
+            <option value="news">新聞事件</option>
+            <option value="manual">手動題材對應</option>
+          </select>
+        </label>
+        <label>
+          分數
+          <select id="scoreFilter">
+            <option value="0">全部分數</option>
+            <option value="80">80+</option>
+            <option value="70">70+</option>
+            <option value="60">60+</option>
+          </select>
+        </label>
+      </div>
     </section>
 
     <section class="panel">
@@ -42,9 +88,10 @@
           <p class="eyebrow">Theme Strength</p>
           <h2>題材強度排名</h2>
         </div>
+        <span id="themesCount" class="meta-pill">前 0 / 0 個題材</span>
       </div>
       <div class="table-wrap">
-        <table class="data-table">
+        <table class="data-table theme-table">
           <thead>
             <tr>
               <th>排名</th>
@@ -53,10 +100,11 @@
               <th>題材漲幅</th>
               <th>成交金額</th>
               <th>上漲家數</th>
-              <th>漲停數</th>
-              <th>高分新聞數</th>
-              <th>代表股</th>
-              <th>低基期股</th>
+              <th>漲停家數</th>
+              <th>受惠股數</th>
+              <th>新聞數</th>
+              <th>主要來源</th>
+              <th>受惠個股</th>
             </tr>
           </thead>
           <tbody id="themesTableBody"></tbody>

@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 """Build full-market processed data for the static radar site.
 
-This script keeps the front-end honest: every listed / OTC common stock in the
-stock master receives one processed metrics row and one AI ranking row. Missing
-official data stays null; EPS and gross margin are never fabricated.
+Every listed / OTC common stock in the stock master receives one processed
+metrics row and one AI ranking row. Missing official data stays null; EPS and
+gross margin are never fabricated. Theme rotation is derived from the same full
+market universe plus optional manual membership and existing news events.
 """
 
 from __future__ import annotations
@@ -28,8 +29,11 @@ MANUAL_DIR = ROOT / "data" / "manual"
 STOCK_MASTER = DATA_DIR / "stocks_master.json"
 METRICS = DATA_DIR / "stock_metrics_daily.json"
 AI_SCORES = DATA_DIR / "ai_scores_daily.json"
+THEME_STATS = DATA_DIR / "theme_stats.json"
+NEWS_EVENTS = DATA_DIR / "news_events.json"
 UPDATE_LOG = DATA_DIR / "update_log.json"
 MANUAL_FINANCIALS = MANUAL_DIR / "financial_fundamentals.csv"
+MANUAL_THEMES = MANUAL_DIR / "theme_memberships.csv"
 TAIPEI = timezone(timedelta(hours=8))
 
 
@@ -71,14 +75,63 @@ def score_range(value: Any, min_value: float, max_value: float, fallback: float 
   return clamp(((parsed - min_value) / (max_value - min_value)) * 100)
 
 
+def normalize_score(value: Any, min_value: float, max_value: float) -> float:
+  parsed = number(value)
+  if parsed is None or max_value == min_value:
+    return 0
+  return clamp(((parsed - min_value) / (max_value - min_value)) * 100)
+
+
 def round_score(value: float) -> float:
   return round(clamp(value), 1)
+
+
+def round_number(value: Any, digits: int = 2) -> float | None:
+  parsed = number(value)
+  if parsed is None:
+    return None
+  return round(parsed, digits)
 
 
 def load_items(path: Path) -> list[dict[str, Any]]:
   payload = read_json(path, {})
   items = payload.get("items") if isinstance(payload, dict) else payload
   return [item for item in items or [] if isinstance(item, dict)]
+
+
+def build_map(items: list[dict[str, Any]], key: str = "symbol") -> dict[str, dict[str, Any]]:
+  return {str(item.get(key) or ""): item for item in items if item.get(key)}
+
+
+def is_valid_market(stock: dict[str, Any]) -> bool:
+  return stock.get("market") in {"上市", "上櫃"}
+
+
+def normalize_theme(value: Any) -> str:
+  text = str(value or "").strip()
+  if not text or text.isdigit():
+    return ""
+  return text
+
+
+def source_label(source_type: str) -> str:
+  return {
+    "manual": "手動題材對應",
+    "ai": "AI 題材標籤",
+    "news": "新聞事件",
+    "master": "主檔產業 / 供應鏈",
+  }.get(source_type, source_type)
+
+
+def unique(values: list[Any]) -> list[Any]:
+  seen = set()
+  output = []
+  for value in values:
+    if value in seen or value in (None, ""):
+      continue
+    seen.add(value)
+    output.append(value)
+  return output
 
 
 def load_manual_financials() -> dict[str, dict[str, Any]]:
@@ -103,6 +156,19 @@ def load_manual_financials() -> dict[str, dict[str, Any]]:
         "financial_source_url": (row.get("source_url") or "").strip() or None,
       }
   return manual
+
+
+def load_manual_theme_memberships() -> list[dict[str, Any]]:
+  if not MANUAL_THEMES.exists():
+    MANUAL_THEMES.parent.mkdir(parents=True, exist_ok=True)
+    MANUAL_THEMES.write_text(
+      "symbol,name,theme,role,source_url,source_label,updated_at\n",
+      encoding="utf-8",
+    )
+    return []
+
+  with MANUAL_THEMES.open("r", encoding="utf-8-sig", newline="") as handle:
+    return [row for row in csv.DictReader(handle) if (row.get("symbol") or "").strip() and (row.get("theme") or "").strip()]
 
 
 def build_stock_master_with_fallback() -> dict[str, Any]:
@@ -229,7 +295,7 @@ def entry_reason(metric: dict[str, Any]) -> str:
 def build_ai_scores(stocks_payload: dict[str, Any], metrics_payload: dict[str, Any]) -> dict[str, Any]:
   updated_at = now_taipei().strftime("%Y-%m-%d %H:%M")
   stocks = stocks_payload.get("items", [])
-  metric_map = {str(item.get("symbol")): item for item in metrics_payload.get("items", [])}
+  metric_map = build_map(metrics_payload.get("items", []))
   rows: list[dict[str, Any]] = []
 
   for stock in stocks:
@@ -243,7 +309,7 @@ def build_ai_scores(stocks_payload: dict[str, Any], metrics_payload: dict[str, A
     quality = data_quality_score(metric)
     news = 35
     total = round_score(technical * 0.22 + chip * 0.18 + fundamental * 0.45 + news * 0.05 + quality * 0.10)
-    theme = stock.get("theme") or stock.get("supply_chain") or stock.get("industry") or "未分類"
+    theme = normalize_theme(stock.get("theme")) or normalize_theme(stock.get("supply_chain")) or normalize_theme(stock.get("industry")) or "未分類"
 
     rows.append(
       {
@@ -293,15 +359,285 @@ def build_ai_scores(stocks_payload: dict[str, Any], metrics_payload: dict[str, A
   }
 
 
-def write_update_log(files: list[tuple[str, int, str, str]]) -> None:
+def stock_turnover_billion(metric: dict[str, Any]) -> float | None:
+  price = number(metric.get("trade_price"))
+  volume = number(metric.get("volume"))
+  if price is None or volume is None:
+    return None
+  return round((price * volume) / 100000000, 3)
+
+
+def theme_reason(source_types: list[str], metric: dict[str, Any]) -> str:
+  parts: list[str] = []
+  if "news" in source_types:
+    parts.append("新聞事件帶動")
+  if "ai" in source_types:
+    parts.append("AI 題材標籤")
+  if "manual" in source_types:
+    parts.append("手動題材對應")
+  if "master" in source_types:
+    parts.append("供應鏈 / 產業歸類")
+  if number(metric.get("revenue_yoy_pct")) is not None:
+    parts.append(f"營收年增 {metric['revenue_yoy_pct']:.2f}%")
+  if number(metric.get("change_pct")) is not None:
+    parts.append(f"漲跌 {metric['change_pct']:.2f}%")
+  if number(metric.get("turnover_rate_pct")) is not None:
+    parts.append(f"週轉率 {metric['turnover_rate_pct']:.2f}%")
+  return "；".join(parts[:4]) if parts else "全市場主檔歸類"
+
+
+def add_theme_member(
+  theme_map: dict[str, dict[str, Any]],
+  theme: str,
+  stock: dict[str, Any],
+  metric: dict[str, Any],
+  score: dict[str, Any],
+  source_type: str,
+  news_count: int = 0,
+  role: str = "beneficiary",
+) -> None:
+  clean_theme = normalize_theme(theme)
+  if not clean_theme or clean_theme == "未分類":
+    return
+
+  symbol = str(stock.get("symbol") or stock.get("code") or score.get("symbol") or "")
+  if not symbol or not stock.get("name"):
+    return
+
+  theme_item = theme_map.setdefault(
+    clean_theme,
+    {
+      "theme": clean_theme,
+      "beneficiary_map": {},
+      "high_score_news_count": 0,
+      "source_types": set(),
+    },
+  )
+  existing = theme_item["beneficiary_map"].get(symbol)
+  if not existing:
+    existing = {
+      "symbol": symbol,
+      "name": stock.get("name"),
+      "market": stock.get("market"),
+      "industry": stock.get("industry"),
+      "theme": clean_theme,
+      "trade_price": metric.get("trade_price"),
+      "change_pct": metric.get("change_pct"),
+      "volume": metric.get("volume"),
+      "turnover_rate_pct": metric.get("turnover_rate_pct"),
+      "turnover_billion": stock_turnover_billion(metric),
+      "revenue_yoy_pct": metric.get("revenue_yoy_pct"),
+      "eps": metric.get("eps"),
+      "gross_margin_pct": metric.get("gross_margin_pct"),
+      "total_score": score.get("total_score"),
+      "source_types": [],
+      "source_labels": [],
+      "roles": [],
+      "reason": "",
+    }
+
+  existing["source_types"] = unique([*existing.get("source_types", []), source_type])
+  existing["source_labels"] = [source_label(value) for value in existing["source_types"]]
+  existing["roles"] = unique([*existing.get("roles", []), role])
+  existing["reason"] = theme_reason(existing["source_types"], metric)
+  theme_item["source_types"].add(source_type)
+  theme_item["high_score_news_count"] += news_count
+  theme_item["beneficiary_map"][symbol] = existing
+
+
+def aggregate_theme_map(theme_map: dict[str, dict[str, Any]], updated_at: str, metrics_payload: dict[str, Any], quality_base: dict[str, Any]) -> dict[str, Any]:
+  raw_items: list[dict[str, Any]] = []
+  for theme_item in theme_map.values():
+    beneficiaries = list(theme_item["beneficiary_map"].values())
+    if not beneficiaries:
+      continue
+    change_values = [number(item.get("change_pct")) for item in beneficiaries if number(item.get("change_pct")) is not None]
+    score_values = [number(item.get("total_score")) for item in beneficiaries if number(item.get("total_score")) is not None]
+    turnover_values = [number(item.get("turnover_billion")) for item in beneficiaries if number(item.get("turnover_billion")) is not None]
+    up_count = sum(1 for item in beneficiaries if (number(item.get("change_pct")) or 0) > 0)
+    limit_up_count = sum(1 for item in beneficiaries if (number(item.get("change_pct")) or 0) >= 9.5)
+    turnover_billion = sum(turnover_values)
+    avg_change = sum(change_values) / len(change_values) if change_values else None
+    avg_ai_score = sum(score_values) / len(score_values) if score_values else 0
+
+    raw_items.append(
+      {
+        "theme": theme_item["theme"],
+        "theme_change_pct": round_number(avg_change, 2),
+        "turnover_billion": round(turnover_billion, 2),
+        "up_count": up_count,
+        "limit_up_count": limit_up_count,
+        "beneficiary_count": len(beneficiaries),
+        "high_score_news_count": theme_item["high_score_news_count"],
+        "avg_ai_score": round(avg_ai_score, 1),
+        "source_types": sorted(theme_item["source_types"]),
+        "source_labels": [source_label(value) for value in sorted(theme_item["source_types"])],
+        "beneficiary_stocks": sorted(
+          beneficiaries,
+          key=lambda item: (number(item.get("total_score")) or 0, number(item.get("change_pct")) or -999),
+          reverse=True,
+        ),
+      }
+    )
+
+  max_turnover = max([number(item.get("turnover_billion")) or 0 for item in raw_items] + [1])
+  max_limit_up = max([number(item.get("limit_up_count")) or 0 for item in raw_items] + [1])
+  max_news = max([number(item.get("high_score_news_count")) or 0 for item in raw_items] + [1])
+
+  scored_items: list[dict[str, Any]] = []
+  for item in raw_items:
+    up_ratio = item["up_count"] / item["beneficiary_count"] if item["beneficiary_count"] else 0
+    theme_score = (
+      normalize_score(item.get("theme_change_pct"), -5, 10) * 0.25
+      + normalize_score(item.get("turnover_billion"), 0, max_turnover) * 0.25
+      + up_ratio * 100 * 0.20
+      + normalize_score(item.get("limit_up_count"), 0, max_limit_up) * 0.10
+      + normalize_score(item.get("avg_ai_score"), 0, 100) * 0.10
+      + normalize_score(item.get("high_score_news_count"), 0, max_news) * 0.10
+    )
+    beneficiaries = item["beneficiary_stocks"]
+    leader_stocks = [{"symbol": stock["symbol"], "name": stock["name"]} for stock in beneficiaries[:5]]
+    low_base_stocks = [
+      {"symbol": stock["symbol"], "name": stock["name"]}
+      for stock in beneficiaries
+      if (number(stock.get("change_pct")) or 0) < (number(item.get("theme_change_pct")) or 0)
+    ][:5]
+    scored_items.append(
+      {
+        **item,
+        "theme_score": round(theme_score, 1),
+        "leader_stocks": leader_stocks,
+        "low_base_stocks": low_base_stocks,
+      }
+    )
+
+  scored_items.sort(
+    key=lambda item: (
+      number(item.get("theme_score")) or 0,
+      number(item.get("turnover_billion")) or 0,
+      number(item.get("theme_change_pct")) or -999,
+      number(item.get("beneficiary_count")) or 0,
+    ),
+    reverse=True,
+  )
+  for rank, item in enumerate(scored_items, start=1):
+    item["rank"] = rank
+
+  return {
+    "date": metrics_payload.get("date"),
+    "updated_at": updated_at,
+    "source": {
+      "stock_master": "data/processed/stocks_master.json",
+      "stock_metrics": "data/processed/stock_metrics_daily.json",
+      "ai_scores": "data/processed/ai_scores_daily.json",
+      "news_events": "data/processed/news_events.json",
+      "manual_memberships": "data/manual/theme_memberships.csv",
+    },
+    "quality": quality_base,
+    "items": scored_items,
+  }
+
+
+def build_theme_stats(stocks_payload: dict[str, Any], metrics_payload: dict[str, Any], scores_payload: dict[str, Any]) -> dict[str, Any]:
+  updated_at = now_taipei().strftime("%Y-%m-%d %H:%M")
+  stocks = [stock for stock in stocks_payload.get("items", []) if is_valid_market(stock)]
+  metrics = metrics_payload.get("items", [])
+  scores = scores_payload.get("items", [])
+  news_events = load_items(NEWS_EVENTS)
+  manual_memberships = load_manual_theme_memberships()
+
+  stock_map = build_map(stocks)
+  metric_map = build_map(metrics)
+  score_map = build_map(scores)
+  theme_map: dict[str, dict[str, Any]] = {}
+  missing_theme: list[str] = []
+
+  for row in manual_memberships:
+    symbol = str(row.get("symbol") or "").strip()
+    stock = stock_map.get(symbol)
+    if not stock:
+      continue
+    add_theme_member(
+      theme_map,
+      row.get("theme") or "",
+      stock,
+      metric_map.get(symbol, {}),
+      score_map.get(symbol, {}),
+      "manual",
+      0,
+      row.get("role") or "beneficiary",
+    )
+
+  for stock in stocks:
+    symbol = str(stock.get("symbol"))
+    metric = metric_map.get(symbol, {})
+    score = score_map.get(symbol, {})
+    score_theme = normalize_theme(score.get("theme"))
+    stock_theme = normalize_theme(stock.get("theme"))
+    supply_chain = normalize_theme(stock.get("supply_chain"))
+    industry = normalize_theme(stock.get("industry"))
+    if score_theme:
+      add_theme_member(theme_map, score_theme, stock, metric, score, "ai")
+    master_theme = stock_theme or supply_chain or industry
+    if master_theme:
+      add_theme_member(theme_map, master_theme, stock, metric, score, "master")
+    else:
+      missing_theme.append(symbol)
+
+  for event in news_events:
+    event_theme = normalize_theme(event.get("theme") or event.get("category") or event.get("impact_theme"))
+    related_stocks = event.get("stocks") or event.get("related_stocks") or []
+    high_score = (number(event.get("news_score")) or number(event.get("event_score")) or 0) >= 70
+    if not isinstance(related_stocks, list):
+      continue
+    for news_stock in related_stocks:
+      symbol = str(news_stock.get("symbol") or news_stock.get("code") or "")
+      stock = stock_map.get(symbol)
+      if not stock:
+        continue
+      add_theme_member(theme_map, event_theme, stock, metric_map.get(symbol, {}), score_map.get(symbol, {}), "news", 1 if high_score else 0)
+
+  metrics_quality = metrics_payload.get("quality", {})
+  quality = {
+    "stock_master_count": len(stocks),
+    "theme_count": len(theme_map),
+    "beneficiary_stock_count": sum(len(item["beneficiary_map"]) for item in theme_map.values()),
+    "quote_matched": metrics_quality.get("daily_quote_matched", 0),
+    "revenue_matched": metrics_quality.get("revenue_matched", 0),
+    "eps_matched": metrics_quality.get("eps_matched", 0),
+    "gross_margin_matched": metrics_quality.get("gross_margin_matched", 0),
+    "news_event_count": len(news_events),
+    "manual_membership_count": len(manual_memberships),
+    "missing_theme": missing_theme[:100],
+    "missing_quote": metrics_quality.get("missing_quote", [])[:100],
+    "missing_revenue": metrics_quality.get("missing_revenue", [])[:100],
+    "missing_financials": metrics_quality.get("missing_financials", [])[:100],
+  }
+  payload = aggregate_theme_map(theme_map, updated_at, metrics_payload, quality)
+  payload["quality"]["theme_count"] = len(payload.get("items", []))
+  write_json(THEME_STATS, payload)
+  return payload
+
+
+def write_update_log(files: list[tuple[str, int, str, str, str]]) -> None:
   updated_at = now_taipei().strftime("%Y-%m-%d %H:%M")
   write_json(
     UPDATE_LOG,
     {
       "updated_at": updated_at,
       "items": [
-        {"file": file_name, "updated_at": updated_at, "count": count, "status": status, "error": error}
-        for file_name, count, status, error in files
+        {
+          "name": file_name,
+          "file": file_name,
+          "updated_at": updated_at,
+          "record_count": count,
+          "count": count,
+          "status": status,
+          "source": source,
+          "message": message,
+          "error": "" if status in {"ok", "success", "partial"} else message,
+        }
+        for file_name, count, status, source, message in files
       ],
     },
   )
@@ -313,14 +649,17 @@ def main() -> int:
   metrics_payload = build_metrics_with_manual_financials()
   scores_payload = build_ai_scores(stocks_payload, metrics_payload)
   write_json(AI_SCORES, scores_payload)
+  themes_payload = build_theme_stats(stocks_payload, metrics_payload, scores_payload)
 
   quality = metrics_payload.get("quality", {})
+  theme_quality = themes_payload.get("quality", {})
   write_update_log(
     [
-      ("stocks_master.json", len(stocks_payload.get("items", [])), "ok", ""),
-      ("stock_metrics_daily.json", len(metrics_payload.get("items", [])), "ok", "; ".join(quality.get("errors") or [])),
-      ("ai_scores_daily.json", len(scores_payload.get("items", [])), "ok", ""),
-      ("update_log.json", 4, "ok", ""),
+      ("stocks_master.json", len(stocks_payload.get("items", [])), "ok", "TWSE ISIN public page", ""),
+      ("stock_metrics_daily.json", len(metrics_payload.get("items", [])), "partial" if quality.get("errors") else "ok", "TWSE / TPEx / MOPS", "; ".join(quality.get("errors") or [])),
+      ("ai_scores_daily.json", len(scores_payload.get("items", [])), "ok", "Derived quantitative scoring", ""),
+      ("theme_stats.json", len(themes_payload.get("items", [])), "partial" if theme_quality.get("missing_theme") else "ok", "Full-market stock, metrics, AI scores, news, manual memberships", "全市場題材輪動已更新"),
+      ("update_log.json", 5, "ok", "local builder", ""),
     ]
   )
 
@@ -335,6 +674,7 @@ def main() -> int:
     )
   )
   print(f"ai_scores_daily: {len(scores_payload.get('items', []))} rows")
+  print(f"theme_stats: {len(themes_payload.get('items', []))} themes")
   return 0
 
 
