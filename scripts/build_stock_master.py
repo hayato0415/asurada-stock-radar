@@ -34,7 +34,7 @@ def fetch_text(url: str) -> str:
     context = ssl._create_unverified_context()
     with urlopen(request, timeout=30, context=context) as response:
         raw = response.read()
-    for encoding in ("utf-8", "big5", "cp950"):
+    for encoding in ("cp950", "big5", "utf-8"):
         try:
             return raw.decode(encoding)
         except UnicodeDecodeError:

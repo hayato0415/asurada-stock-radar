@@ -108,10 +108,11 @@ function getRevenueMonthLabel(metric) {
 
 function renderTradingRevenueSnapshot(metric) {
   const monthLabel = getRevenueMonthLabel(metric);
+  const financialPeriod = metric.financial_period || "最新季";
   return `
     <section class="panel">
       <div class="section-head">
-        <h2>交易與營收快照</h2>
+        <h2>交易、營收與獲利快照</h2>
         <span class="muted">資料更新：${formatDateTime(metric.updated_at || metricsUpdatedAt)}</span>
       </div>
       <div class="metric-grid">
@@ -120,8 +121,10 @@ function renderTradingRevenueSnapshot(metric) {
         <article class="metric-card"><span>成交量</span><strong>${formatVolumeLots(metric.volume)}</strong></article>
         <article class="metric-card"><span>週轉率</span><strong>${getTurnoverRate(metric)}</strong></article>
         <article class="metric-card"><span>當月營收(百萬)</span><strong>${formatMetricNumber(metric.revenue_million, 2)}</strong></article>
-        <article class="metric-card"><span>月增率(${monthLabel})</span><strong>${formatMetricSignedPercent(metric.revenue_mom_pct, 2)}</strong></article>
-        <article class="metric-card"><span>年增率(${monthLabel})</span><strong>${formatMetricSignedPercent(metric.revenue_yoy_pct, 2)}</strong></article>
+        <article class="metric-card"><span>月增率(${monthLabel})</span><strong class="${valueClass(metric.revenue_mom_pct)}">${formatMetricSignedPercent(metric.revenue_mom_pct, 2)}</strong></article>
+        <article class="metric-card"><span>年增率(${monthLabel})</span><strong class="${valueClass(metric.revenue_yoy_pct)}">${formatMetricSignedPercent(metric.revenue_yoy_pct, 2)}</strong></article>
+        <article class="metric-card"><span>EPS(${escapeHtml(financialPeriod)})</span><strong>${formatMetricNumber(metric.eps, 2)}</strong></article>
+        <article class="metric-card"><span>毛利率(${escapeHtml(financialPeriod)})</span><strong>${formatMetricPercent(metric.gross_margin_pct, 2)}</strong></article>
       </div>
     </section>
   `;
@@ -137,8 +140,8 @@ function renderStock(stock) {
   const score = scores.find((item) => String(item.symbol) === String(stock.symbol)) || {};
   const metric = findMetric(stock.symbol);
   const relatedNews = news.filter((item) => item.stocks?.some((newsStock) => String(newsStock.code ?? newsStock.symbol) === String(stock.symbol)));
-  const theme = score.theme || stock.theme || "--";
-  const supplyChain = stock.supply_chain || "--";
+  const theme = score.theme || stock.theme || stock.supply_chain || stock.industry || "--";
+  const supplyChain = stock.supply_chain || stock.industry || "--";
   const updatedAt = score.updated_at || score.market_date || metric.updated_at || stock.updated_at || metricsUpdatedAt || stockDataUpdatedAt;
 
   $("#stockUpdatedAt").textContent = `資料更新：${formatDateTime(updatedAt)}`;

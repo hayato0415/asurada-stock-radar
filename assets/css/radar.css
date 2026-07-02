@@ -39,6 +39,34 @@
   background: linear-gradient(90deg, var(--brand-2), var(--brand));
 }
 
+.page-note {
+  max-width: 760px;
+  margin-top: 0.35rem;
+}
+
+.radar-filter-grid {
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+.radar-coverage {
+  margin-top: 0.25rem;
+}
+
+.radar-table {
+  min-width: 1320px;
+}
+
+.radar-table th,
+.radar-table td {
+  white-space: nowrap;
+}
+
+.radar-table .reason-cell {
+  min-width: 260px;
+  max-width: 380px;
+  white-space: normal;
+}
+
 @media (max-width: 900px) {
   .stock-detail-grid {
     grid-template-columns: 1fr;

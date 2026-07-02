@@ -37,10 +37,18 @@
     </section>
 
     <section class="panel filter-panel">
-      <div class="filter-grid">
+      <div class="filter-grid radar-filter-grid">
         <label>
           搜尋股票代號 / 名稱
           <input id="stockSearch" type="search" placeholder="例如 2330 或 台積電">
+        </label>
+        <label>
+          市場篩選
+          <select id="marketFilter">
+            <option value="">全部市場</option>
+            <option value="上市">上市</option>
+            <option value="上櫃">上櫃</option>
+          </select>
         </label>
         <label>
           題材篩選
@@ -60,6 +68,36 @@
           </select>
         </label>
         <label>
+          營收年增率
+          <select id="revenueYoyFilter">
+            <option value="">全部</option>
+            <option value="0">0%以上</option>
+            <option value="10">10%以上</option>
+            <option value="30">30%以上</option>
+            <option value="50">50%以上</option>
+          </select>
+        </label>
+        <label>
+          EPS
+          <select id="epsFilter">
+            <option value="">全部</option>
+            <option value="0">0以上</option>
+            <option value="1">1以上</option>
+            <option value="3">3以上</option>
+            <option value="5">5以上</option>
+          </select>
+        </label>
+        <label>
+          毛利率
+          <select id="grossMarginFilter">
+            <option value="">全部</option>
+            <option value="10">10%以上</option>
+            <option value="20">20%以上</option>
+            <option value="30">30%以上</option>
+            <option value="40">40%以上</option>
+          </select>
+        </label>
+        <label>
           風險篩選
           <select id="riskFilter"></select>
         </label>
@@ -71,6 +109,8 @@
         <div>
           <p class="eyebrow">Score Ranking</p>
           <h2>AI 分數排序表</h2>
+          <p class="page-note">上市、上櫃全市場量化排序，僅顯示前 100 名；未列入前 100 的股票可用個股查詢查看。</p>
+          <p id="radarCoverage" class="factor-note radar-coverage">統計資料讀取中</p>
         </div>
         <span id="radarCount" class="meta-pill">0 檔</span>
       </div>
@@ -80,13 +120,17 @@
             <tr>
               <th>排名</th>
               <th>股票</th>
+              <th>市場</th>
+              <th>產業</th>
               <th>題材</th>
-              <th>型態</th>
               <th>AI 分數</th>
-              <th>技術</th>
-              <th>籌碼</th>
               <th>基本面</th>
-              <th>消息</th>
+              <th>股價</th>
+              <th>漲跌%</th>
+              <th>營收(百萬)</th>
+              <th>營收YoY</th>
+              <th>EPS</th>
+              <th>毛利率</th>
               <th>風險</th>
               <th>入選理由</th>
             </tr>

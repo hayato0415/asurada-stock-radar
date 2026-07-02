@@ -35,6 +35,9 @@ UPDATE_LOG = DATA_DIR / "update_log.json"
 TWSE_STOCK_DAY_ALL = "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL"
 TWSE_MONTHLY_REVENUE = "https://openapi.twse.com.tw/v1/opendata/t187ap05_L"
 TWSE_COMPANY_BASIC = "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+TPEX_STOCK_DAY_ALL = "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes"
+TPEX_MONTHLY_REVENUE = "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap05_O"
+TPEX_COMPANY_BASIC = "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
 
 TAIPEI = timezone(timedelta(hours=8))
 USER_AGENT = "ASURADA-Stock-Radar/1.0 (+https://github.com/hayato0415/asurada-stock-radar)"
@@ -113,11 +116,19 @@ def first_by_keywords(row: dict[str, Any], keyword_groups: list[list[str]]) -> A
 
 def fetch_json(url: str) -> list[dict[str, Any]]:
     if requests is not None:
-        response = requests.get(
-            url,
-            headers={"User-Agent": USER_AGENT, "Accept": "application/json"},
-            timeout=40,
-        )
+        try:
+            response = requests.get(
+                url,
+                headers={"User-Agent": USER_AGENT, "Accept": "application/json"},
+                timeout=40,
+            )
+        except requests.exceptions.SSLError:
+            response = requests.get(
+                url,
+                headers={"User-Agent": USER_AGENT, "Accept": "application/json"},
+                timeout=40,
+                verify=False,
+            )
         response.raise_for_status()
         data = response.json()
     else:
@@ -319,9 +330,18 @@ def build_metrics(args: argparse.Namespace) -> dict[str, Any]:
     stocks = load_stock_master(Path(args.stock_master))
     errors: list[str] = []
 
-    quote_rows = safe_fetch("TWSE STOCK_DAY_ALL", TWSE_STOCK_DAY_ALL, errors)
-    revenue_rows = safe_fetch("MOPS monthly revenue", TWSE_MONTHLY_REVENUE, errors)
-    company_rows = safe_fetch("TWSE company basic", TWSE_COMPANY_BASIC, errors)
+    quote_rows = (
+        safe_fetch("TWSE STOCK_DAY_ALL", TWSE_STOCK_DAY_ALL, errors)
+        + safe_fetch("TPEx daily close quotes", TPEX_STOCK_DAY_ALL, errors)
+    )
+    revenue_rows = (
+        safe_fetch("MOPS monthly revenue listed", TWSE_MONTHLY_REVENUE, errors)
+        + safe_fetch("MOPS monthly revenue OTC", TPEX_MONTHLY_REVENUE, errors)
+    )
+    company_rows = (
+        safe_fetch("TWSE company basic", TWSE_COMPANY_BASIC, errors)
+        + safe_fetch("TPEx company basic", TPEX_COMPANY_BASIC, errors)
+    )
 
     quotes = parse_daily_quotes(quote_rows)
     revenues, revenue_month = parse_monthly_revenue(revenue_rows)
@@ -378,9 +398,9 @@ def build_metrics(args: argparse.Namespace) -> dict[str, Any]:
         "updated_at": updated_at,
         "revenue_month": revenue_month or None,
         "source": {
-            "daily_quote": "TWSE STOCK_DAY_ALL",
-            "monthly_revenue": "MOPS / TWSE monthly revenue OpenAPI",
-            "listed_shares": "TWSE company basic OpenAPI if available",
+            "daily_quote": "TWSE STOCK_DAY_ALL + TPEx daily close quotes",
+            "monthly_revenue": "MOPS / TWSE listed revenue + TPEx OTC revenue OpenAPI",
+            "listed_shares": "TWSE / TPEx company basic OpenAPI if available",
         },
         "quality": {
             "stock_master_count": len(stocks),
