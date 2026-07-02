@@ -1,0 +1,79 @@
+name: Update Factor Scores
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_date:
+        description: "Expected official quote date, YYYY-MM-DD. Leave blank to use latest official date."
+        required: false
+        type: string
+      force_history_refresh:
+        description: "Rebuild quote history from current snapshot only."
+        required: false
+        type: boolean
+        default: false
+  schedule:
+    # Asia/Taipei 15:20, 16:10, 20:30 on weekdays.
+    - cron: "20 7 * * 1-5"
+    - cron: "10 8 * * 1-5"
+    - cron: "30 12 * * 1-5"
+
+permissions:
+  contents: write
+
+jobs:
+  update-factor-scores:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install requests
+
+      - name: Build factor scores
+        shell: bash
+        run: |
+          args=()
+          if [ -n "${{ inputs.target_date }}" ]; then
+            args+=(--target-date "${{ inputs.target_date }}")
+          fi
+          if [ "${{ inputs.force_history_refresh }}" = "true" ]; then
+            args+=(--force-history-refresh)
+          fi
+          python scripts/update_factor_scores.py "${args[@]}"
+
+      - name: Validate factor scores
+        shell: bash
+        run: |
+          args=()
+          if [ -n "${{ inputs.target_date }}" ]; then
+            args+=(--target-date "${{ inputs.target_date }}")
+          fi
+          python scripts/validate_factor_scores.py "${args[@]}"
+
+      - name: Commit factor score data
+        shell: bash
+        run: |
+          files=(
+            data/processed/factor-scores.json
+            data/processed/factor-scores.status.json
+            data/processed/factor-scores.meta.json
+            data/processed/factor-quote-history.json
+          )
+          if git diff --quiet -- "${files[@]}"; then
+            echo "No factor score changes."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add "${files[@]}"
+            git commit -m "Update factor scores"
+            git push
+          fi

@@ -58,6 +58,19 @@
       </div>
     </section>
 
+    <section id="factorStatusPanel" class="panel factor-status-panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Official Data Status</p>
+          <h2 id="factorStatusTitle">官方資料狀態</h2>
+        </div>
+        <span id="factorStatusBadge" class="meta-pill">讀取中</span>
+      </div>
+      <p id="factorStatusText" class="factor-note">正在讀取多因子評分更新狀態。</p>
+      <div id="factorStatusGrid" class="factor-status-grid"></div>
+      <div id="factorSourceList" class="factor-source-list"></div>
+    </section>
+
     <section class="panel filter-panel">
       <div class="filter-grid factor-filter-grid">
         <label>
@@ -93,6 +106,15 @@
             <option value="turnover">週轉率高到低</option>
           </select>
         </label>
+        <label>
+          顯示筆數
+          <select id="factorLimit">
+            <option value="10" selected>Top 10</option>
+            <option value="25">Top 25</option>
+            <option value="50">Top 50</option>
+            <option value="100">Top 100</option>
+          </select>
+        </label>
       </div>
     </section>
 
@@ -104,13 +126,14 @@
         </div>
         <span id="factorCount" class="meta-pill">0 檔</span>
       </div>
-      <div class="table-wrap">
+      <div class="table-wrap factor-table-wrap">
         <table class="data-table factor-score-table">
           <thead>
             <tr>
               <th>排名</th>
               <th>代號</th>
               <th>名稱</th>
+              <th>市場</th>
               <th>產業</th>
               <th>概念股</th>
               <th>收盤價</th>
@@ -130,6 +153,7 @@
           <tbody id="factorTableBody"></tbody>
         </table>
       </div>
+      <div id="factorCardList" class="factor-card-list"></div>
     </section>
   </main>
 
