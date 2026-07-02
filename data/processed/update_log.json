@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-03 00:30",
+  "updated_at": "2026-07-03 01:15",
   "items": [
     {
       "name": "stocks_master.json",
@@ -10,17 +10,6 @@
       "status": "ok",
       "source": "TWSE ISIN public page",
       "message": "",
-      "error": ""
-    },
-    {
-      "name": "stock_metrics_daily.json",
-      "file": "stock_metrics_daily.json",
-      "updated_at": "2026-07-03 00:30",
-      "record_count": 1970,
-      "count": 1970,
-      "status": "partial",
-      "source": "TWSE / TPEx / MOPS",
-      "message": "TPEx daily close quotes fetch failed: Response ended prematurely; TPEx company basic fetch failed: Response ended prematurely",
       "error": ""
     },
     {
@@ -54,6 +43,13 @@
       "status": "ok",
       "source": "local builder",
       "message": "",
+      "error": ""
+    },
+    {
+      "file": "stock_metrics_daily.json",
+      "updated_at": "2026-07-03 01:15",
+      "count": 1970,
+      "status": "ok",
       "error": ""
     }
   ]
