@@ -87,6 +87,15 @@
   margin-top: 0.25rem;
 }
 
+.radar-table-wrap {
+  max-width: 100%;
+  max-height: calc(100vh - 180px);
+  min-height: 520px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  position: relative;
+}
+
 .radar-table {
   min-width: 1180px;
 }
@@ -124,6 +133,22 @@
 .radar-table.is-freeze-enabled th:nth-child(-n + 3) {
   z-index: 5;
   background: rgba(15, 23, 42, 1);
+}
+
+.radar-table.is-freeze-enabled thead th {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(15, 23, 42, 1);
+  box-shadow: 0 2px 0 rgba(148, 163, 184, 0.25), 0 10px 18px rgba(2, 6, 23, 0.22);
+}
+
+.radar-table.is-freeze-enabled thead th:nth-child(-n + 3) {
+  z-index: 30;
+}
+
+.radar-table.is-freeze-enabled tbody td:nth-child(-n + 3) {
+  z-index: 10;
 }
 
 .radar-table.is-freeze-enabled th:nth-child(1),
@@ -215,8 +240,18 @@
     min-width: 1080px;
   }
 
+  .radar-table-wrap {
+    max-height: none;
+    min-height: 0;
+  }
+
   .radar-table.is-freeze-enabled th:nth-child(-n + 3),
   .radar-table.is-freeze-enabled td:nth-child(-n + 3) {
+    position: static;
+    box-shadow: none;
+  }
+
+  .radar-table.is-freeze-enabled thead th {
     position: static;
     box-shadow: none;
   }

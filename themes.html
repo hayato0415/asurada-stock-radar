@@ -91,9 +91,10 @@
         <span id="themesCount" class="meta-pill">前 0 / 0 個題材</span>
       </div>
       <div class="table-control-row">
-        <button class="table-freeze-toggle is-active" type="button" data-table-freeze-toggle=".theme-table" aria-pressed="true">凍結欄位：開</button>
+        <button class="table-freeze-toggle is-active" type="button" data-table-freeze-toggle=".theme-table" data-freeze-label="凍結表頭" aria-pressed="true">凍結表頭：開</button>
       </div>
-      <div class="table-wrap">
+      <p class="factor-scroll-hint">提示：請在下方表格區塊內滾動，表頭會固定在表格最上方。</p>
+      <div class="table-wrap theme-table-wrap">
         <table class="data-table theme-table is-freeze-enabled">
           <thead>
             <tr>
