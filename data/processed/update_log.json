@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-07-02 21:20",
+  "updated_at": "2026-07-03 00:30",
   "items": [
     {
       "name": "stocks_master.json",
       "file": "stocks_master.json",
-      "updated_at": "2026-07-02 12:50",
+      "updated_at": "2026-07-03 00:30",
       "record_count": 1970,
       "count": 1970,
       "status": "ok",
@@ -13,9 +13,20 @@
       "error": ""
     },
     {
+      "name": "stock_metrics_daily.json",
+      "file": "stock_metrics_daily.json",
+      "updated_at": "2026-07-03 00:30",
+      "record_count": 1970,
+      "count": 1970,
+      "status": "partial",
+      "source": "TWSE / TPEx / MOPS",
+      "message": "TPEx daily close quotes fetch failed: Response ended prematurely; TPEx company basic fetch failed: Response ended prematurely",
+      "error": ""
+    },
+    {
       "name": "ai_scores_daily.json",
       "file": "ai_scores_daily.json",
-      "updated_at": "2026-07-02 12:50",
+      "updated_at": "2026-07-03 00:30",
       "record_count": 1970,
       "count": 1970,
       "status": "ok",
@@ -26,7 +37,7 @@
     {
       "name": "theme_stats.json",
       "file": "theme_stats.json",
-      "updated_at": "2026-07-02 12:50",
+      "updated_at": "2026-07-03 00:30",
       "record_count": 39,
       "count": 39,
       "status": "ok",
@@ -37,19 +48,12 @@
     {
       "name": "update_log.json",
       "file": "update_log.json",
-      "updated_at": "2026-07-02 12:50",
+      "updated_at": "2026-07-03 00:30",
       "record_count": 5,
       "count": 5,
       "status": "ok",
       "source": "local builder",
       "message": "",
-      "error": ""
-    },
-    {
-      "file": "stock_metrics_daily.json",
-      "updated_at": "2026-07-02 21:20",
-      "count": 1970,
-      "status": "ok",
       "error": ""
     }
   ]
