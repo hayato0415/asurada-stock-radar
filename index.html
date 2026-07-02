@@ -17,7 +17,7 @@
       <span class="brand-subtitle">AI 台股決策雷達</span>
     </div>
     <nav class="site-nav" aria-label="主要導覽">
-      <a class="active" href="./index.html">市場總覽</a>
+      <a class="active" href="./index.html">首頁</a>
       <a href="./radar.html">AI 選股清單</a>
       <a href="./factor-score.html">多因子評分</a>
       <a href="./news.html">重點新聞雷達</a>
@@ -31,60 +31,25 @@
   <main class="page-shell">
     <section class="page-title-row">
       <div>
-        <p class="eyebrow">Market Command Center</p>
-        <h1>市場總覽</h1>
+        <p class="eyebrow">Method Transparency</p>
+        <h1>各頁面功能分析與計分透明說明</h1>
       </div>
-      <span id="dashboardUpdatedAt" class="meta-pill">讀取中</span>
     </section>
 
-    <section id="marketSnapshot" class="dashboard-grid"></section>
-
-    <section class="panel">
+    <section class="panel transparency-panel" aria-labelledby="transparencyTitle">
       <div class="section-head">
         <div>
-          <p class="eyebrow">AI Radar</p>
-          <h2>今日 AI 雷達摘要</h2>
+          <p class="eyebrow">Method Transparency</p>
+          <h2 id="transparencyTitle">功能分析與資料透明化</h2>
         </div>
+        <span class="meta-pill">研究用途</span>
       </div>
-      <div id="dashboardSummary" class="summary-grid"></div>
+      <p class="transparency-lead">
+        本區說明各功能的用途、資料依據、可判斷範圍與限制。所有分數與訊號都應回到資料來源檢查；資料抓不到時顯示 N/A 或資料尚未更新，不使用假資料補齊。
+      </p>
+      <div id="transparencyCards" class="transparency-grid"></div>
     </section>
 
-    <section class="panel">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Top Ranking</p>
-          <h2>AI 選股 Top 5</h2>
-        </div>
-        <a class="link-button" href="./radar.html">查看完整清單</a>
-      </div>
-      <div class="table-wrap">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>排名</th>
-              <th>股票</th>
-              <th>題材</th>
-              <th>AI 分數</th>
-              <th>型態</th>
-              <th>風險</th>
-              <th>入選理由</th>
-            </tr>
-          </thead>
-          <tbody id="dashboardRadarRows"></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="panel">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">News Radar</p>
-          <h2>重大新聞 Top 5</h2>
-        </div>
-        <a class="link-button" href="./news.html">查看新聞雷達</a>
-      </div>
-      <div id="dashboardNewsList" class="news-compact-list"></div>
-    </section>
   </main>
 
   <footer class="app-footer">

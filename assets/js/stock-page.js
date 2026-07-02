@@ -110,12 +110,12 @@ function renderTradingRevenueSnapshot(metric) {
   const monthLabel = getRevenueMonthLabel(metric);
   const financialPeriod = metric.financial_period || "最新季";
   return `
-    <section class="panel">
+    <section class="panel stock-snapshot-panel">
       <div class="section-head">
         <h2>交易、營收與獲利快照</h2>
         <span class="muted">資料更新：${formatDateTime(metric.updated_at || metricsUpdatedAt)}</span>
       </div>
-      <div class="metric-grid">
+      <div class="metric-grid stock-snapshot-grid">
         <article class="metric-card"><span>成交價</span><strong>${formatMetricNumber(metric.trade_price, 2)}</strong></article>
         <article class="metric-card"><span>漲幅%</span><strong class="${valueClass(metric.change_pct)}">${formatMetricSignedPercent(metric.change_pct, 2)}</strong></article>
         <article class="metric-card"><span>成交量</span><strong>${formatVolumeLots(metric.volume)}</strong></article>

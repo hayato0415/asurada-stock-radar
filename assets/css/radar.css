@@ -14,6 +14,41 @@
   border-left: 4px solid var(--brand);
 }
 
+.stock-snapshot-panel {
+  min-width: 0;
+}
+
+.stock-snapshot-panel .section-head {
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.stock-snapshot-panel .metric-grid.stock-snapshot-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.stock-snapshot-grid .metric-card {
+  min-width: 0;
+  padding: 0.85rem;
+}
+
+.stock-snapshot-grid .metric-card span,
+.stock-snapshot-grid .metric-card strong {
+  overflow-wrap: anywhere;
+}
+
+.stock-snapshot-grid .metric-card strong {
+  font-size: clamp(1.25rem, 2vw, 1.85rem);
+  line-height: 1.18;
+}
+
+@media (max-width: 520px) {
+  .stock-snapshot-panel .metric-grid.stock-snapshot-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .score-breakdown {
   display: grid;
   gap: 0.7rem;
