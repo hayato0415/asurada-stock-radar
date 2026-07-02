@@ -346,6 +346,15 @@ function renderBeneficiaryTable(stocks = []) {
   `;
 }
 
+function themeDetailLink(item) {
+  const params = new URLSearchParams({ theme: item.theme ?? "" });
+  return `
+    <a class="theme-detail-link" href="./theme-detail.html?${params.toString()}">
+      查看 ${formatNumber(item.beneficiary_count)} 檔
+    </a>
+  `;
+}
+
 function renderThemes(themes) {
   const displayRows = themes.slice(0, THEME_DISPLAY_LIMIT);
   $("#themesCount").textContent = `前 ${displayRows.length} / ${themes.length} 個題材`;
@@ -362,12 +371,7 @@ function renderThemes(themes) {
         <td>${formatNumber(item.beneficiary_count)}</td>
         <td>${formatNumber(item.high_score_news_count)}</td>
         <td>${sourceBadges(item.source_types)}</td>
-        <td>
-          <details class="theme-beneficiary-details">
-            <summary>展開 ${formatNumber(item.beneficiary_count)} 檔</summary>
-            ${renderBeneficiaryTable(item.beneficiary_stocks)}
-          </details>
-        </td>
+        <td>${themeDetailLink(item)}</td>
       </tr>
     `).join("")
     : `<tr><td colspan="11">${renderEmpty("目前沒有符合條件的題材資料")}</td></tr>`;
