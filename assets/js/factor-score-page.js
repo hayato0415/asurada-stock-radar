@@ -1,5 +1,5 @@
 import { loadProcessedData, getItems } from "./api.js";
-import { $, escapeHtml, initTableFreezeToggles, renderEmpty } from "./utils.js";
+import { $, escapeHtml, initTableFreezeToggles, renderEmpty, updateStickyTableHeaderOffsets } from "./utils.js";
 import { formatDateTime, formatNumber, formatPercent, formatSignedPercent, valueClass } from "./formatters.js";
 
 const WEIGHTS = {
@@ -315,6 +315,8 @@ function dataArrayFromLoaded(loaded, fileName) {
 }
 
 async function initFactorScorePage() {
+  updateStickyTableHeaderOffsets();
+  window.addEventListener("resize", updateStickyTableHeaderOffsets);
   initTableFreezeToggles();
 
   const loaded = await loadProcessedData([

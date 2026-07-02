@@ -57,6 +57,7 @@ export function initTableFreezeToggles() {
 
   toggles.forEach((toggle) => {
     const targetSelector = toggle.getAttribute("data-table-freeze-toggle");
+    const label = toggle.getAttribute("data-freeze-label") || "凍結欄位";
     const table = targetSelector ? document.querySelector(targetSelector) : null;
     if (!table) return;
 
@@ -64,7 +65,7 @@ export function initTableFreezeToggles() {
       table.classList.toggle("is-freeze-enabled", enabled);
       toggle.classList.toggle("is-active", enabled);
       toggle.setAttribute("aria-pressed", String(enabled));
-      toggle.textContent = enabled ? "凍結欄位：開" : "凍結欄位：關";
+      toggle.textContent = enabled ? `${label}：開` : `${label}：關`;
     };
 
     setFreezeState(!toggle.classList.contains("is-off"));
@@ -72,4 +73,13 @@ export function initTableFreezeToggles() {
       setFreezeState(!toggle.classList.contains("is-active"));
     });
   });
+}
+
+export function updateStickyTableHeaderOffsets() {
+  const header = document.querySelector(".app-header");
+  const offset = header && getComputedStyle(header).position === "sticky"
+    ? Math.ceil(header.getBoundingClientRect().height)
+    : 0;
+
+  document.documentElement.style.setProperty("--factor-table-sticky-top", `${offset}px`);
 }
