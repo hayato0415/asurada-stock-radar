@@ -201,6 +201,34 @@ function formatMaybeSignedPercent(value, digits = 2) {
   return hasValue(value) ? formatSignedPercent(value, digits) : "--";
 }
 
+function detailMetric(label, value, extraClass = "") {
+  return `
+    <div class="radar-detail-item ${extraClass}">
+      <span>${escapeHtml(label)}</span>
+      <strong>${value}</strong>
+    </div>
+  `;
+}
+
+function renderRowDetails(item) {
+  return `
+    <details class="radar-row-details">
+      <summary>展開</summary>
+      <div class="radar-detail-grid">
+        ${detailMetric("成交量", formatMaybeNumber(item.volume, 0))}
+        ${detailMetric("週轉率", formatMaybePercent(item.turnover_rate_pct, 2))}
+        ${detailMetric("營收(百萬)", formatMaybeNumber(item.revenue_million, 2))}
+        ${detailMetric("EPS", formatMaybeNumber(item.eps, 2))}
+        ${detailMetric("毛利率", formatMaybePercent(item.gross_margin_pct, 2))}
+        ${detailMetric("技術面", scoreBadge(item.technical_score))}
+        ${detailMetric("籌碼", scoreBadge(item.chip_score))}
+        ${detailMetric("資料覆蓋", scoreBadge(item.data_quality_score))}
+        ${detailMetric("入選理由", escapeHtml(item.entry_reason), "radar-detail-wide")}
+      </div>
+    </details>
+  `;
+}
+
 function renderTable(filteredRows) {
   const tbody = $("#radarTableBody");
   const displayRows = filteredRows.slice(0, DISPLAY_LIMIT);
@@ -218,15 +246,12 @@ function renderTable(filteredRows) {
         <td>${scoreBadge(item.fundamental_score)}</td>
         <td>${formatMaybeNumber(item.trade_price, 2)}</td>
         <td class="${valueClass(item.change_pct)}">${formatMaybeSignedPercent(item.change_pct, 2)}</td>
-        <td>${formatMaybeNumber(item.revenue_million, 2)}</td>
         <td class="${valueClass(item.revenue_yoy_pct)}">${formatMaybeSignedPercent(item.revenue_yoy_pct, 2)}</td>
-        <td>${formatMaybeNumber(item.eps, 2)}</td>
-        <td>${formatMaybePercent(item.gross_margin_pct, 2)}</td>
         <td>${riskBadge(item.risk_level)}</td>
-        <td class="reason-cell">${escapeHtml(item.entry_reason)}</td>
+        <td class="detail-cell">${renderRowDetails(item)}</td>
       </tr>
     `).join("")
-    : `<tr><td colspan="15">${renderEmpty("沒有符合條件的股票")}</td></tr>`;
+    : `<tr><td colspan="12">${renderEmpty("沒有符合條件的股票")}</td></tr>`;
 }
 
 function bindFilters() {
@@ -283,5 +308,5 @@ async function initRadar() {
 
 initRadar().catch((error) => {
   console.error(error);
-  $("#radarTableBody").innerHTML = `<tr><td colspan="15">${renderEmpty("AI 選股清單載入失敗")}</td></tr>`;
+  $("#radarTableBody").innerHTML = `<tr><td colspan="12">${renderEmpty("AI 選股清單載入失敗")}</td></tr>`;
 });
