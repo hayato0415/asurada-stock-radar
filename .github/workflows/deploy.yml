@@ -28,10 +28,31 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      - name: Prepare Pages artifact
+        shell: bash
+        run: |
+          rm -rf _site
+          mkdir -p _site
+          cp -v *.html _site/
+          cp -v .nojekyll _site/
+          cp -R assets _site/assets
+          mkdir -p _site/data
+          cp -R data/processed _site/data/processed
+          mkdir -p _site/docs
+          cp -R docs/data _site/docs/data
+
+          test -f _site/radar.html
+          test -f _site/assets/js/radar-page.js
+          test -f _site/docs/data/radar.json
+          test -f _site/docs/data/update_status.json
+          test -f _site/data/processed/stocks_master.json
+          test -f _site/data/processed/ai_scores_daily.json
+          test -f _site/data/processed/stock_metrics_daily.json
+
       - name: Upload static site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
       - name: Deploy
         id: deployment
