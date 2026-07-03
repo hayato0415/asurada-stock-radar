@@ -97,7 +97,7 @@
 }
 
 .radar-table {
-  min-width: 1180px;
+  min-width: 1320px;
 }
 
 .radar-table th,
@@ -171,8 +171,9 @@
   background: rgba(16, 39, 67, 1);
 }
 
-.radar-table .detail-cell {
-  min-width: 150px;
+.radar-table .reason-cell {
+  min-width: 260px;
+  max-width: 380px;
   white-space: normal;
 }
 
