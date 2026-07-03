@@ -37,6 +37,27 @@ async function fetchJson(path) {
   return response.json();
 }
 
+async function safeFetchJson(label, path) {
+  try {
+    return {
+      label,
+      path,
+      ok: true,
+      payload: await fetchJson(path),
+      error: null,
+    };
+  } catch (error) {
+    console.warn(`Radar data not available: ${label}`, error);
+    return {
+      label,
+      path,
+      ok: false,
+      payload: null,
+      error: error?.message || String(error),
+    };
+  }
+}
+
 async function loadProcessedFile(fileName) {
   try {
     return await fetchJson(`${PROCESSED_PATH}/${fileName}`);
@@ -52,7 +73,15 @@ function getItems(payload) {
   if (Array.isArray(payload?.data)) return payload.data;
   if (Array.isArray(payload?.scores)) return payload.scores;
   if (Array.isArray(payload?.stocks)) return payload.stocks;
+  if (Array.isArray(payload?.rows)) return payload.rows;
+  if (Array.isArray(payload?.rankings)) return payload.rankings;
   return [];
+}
+
+function formatFailureSummary(failures) {
+  return failures
+    .map((failure) => `${failure.label || failure.path}：${failure.error || "載入失敗"}`)
+    .join("；");
 }
 
 function normalizeSymbol(value) {
@@ -327,6 +356,63 @@ function buildRows({ stocks, scores, metrics, radarItems }) {
   return { rows, coverage };
 }
 
+function buildRowsResilient({ stocks, scores, metrics, radarItems }) {
+  const normalizedRadarItems = (radarItems || []).map(normalizeRadarItem).filter((item) => item.symbol);
+  const normalizedScores = (scores || [])
+    .map((score) => ({
+      ...score,
+      symbol: normalizeSymbol(score.symbol ?? score.code ?? score.stock_id),
+      market: normalizeMarket(score.market),
+    }))
+    .filter((score) => score.symbol);
+  const normalizedMetrics = (metrics || [])
+    .map((metric) => ({
+      ...metric,
+      symbol: normalizeSymbol(metric.symbol ?? metric.code ?? metric.stock_id),
+      market: normalizeMarket(metric.market),
+    }))
+    .filter((metric) => metric.symbol);
+
+  const scoreMap = toSymbolMap(normalizedScores);
+  const metricMap = toSymbolMap(normalizedMetrics);
+  const quoteMap = toSymbolMap(normalizedRadarItems);
+  const stockUniverse = (stocks || [])
+    .map((stock) => ({
+      ...stock,
+      symbol: normalizeSymbol(stock.symbol ?? stock.code ?? stock.stock_id),
+      market: normalizeMarket(stock.market),
+    }))
+    .filter((stock) => stock.symbol && ["上市", "上櫃"].includes(stock.market));
+
+  const universe = stockUniverse.length
+    ? stockUniverse
+    : normalizedRadarItems.length
+      ? normalizedRadarItems
+      : normalizedScores.length
+        ? normalizedScores
+        : normalizedMetrics;
+
+  const rows = universe
+    .map((stock) => {
+      const symbol = normalizeSymbol(stock.symbol ?? stock.code ?? stock.stock_id);
+      return mergeRow(stock, scoreMap.get(symbol), metricMap.get(symbol), quoteMap.get(symbol));
+    })
+    .filter((row) => row.symbol);
+
+  rows.sort((a, b) =>
+    (numeric(b.total_score) ?? -1) - (numeric(a.total_score) ?? -1) ||
+    (numeric(b.fundamental_score) ?? -1) - (numeric(a.fundamental_score) ?? -1) ||
+    (numeric(b.revenue_yoy_pct) ?? -9999) - (numeric(a.revenue_yoy_pct) ?? -9999)
+  );
+
+  const coverage = {
+    stockMaster: stockUniverse.length || universe.length,
+    quoteMatched: rows.filter((row) => numeric(row.trade_price) !== null || numeric(row.volume) !== null).length,
+    revenueMatched: rows.filter((row) => numeric(row.revenue_million) !== null || numeric(row.revenue_yoy_pct) !== null).length,
+  };
+  return { rows, coverage };
+}
+
 function fillSelect(selector, values) {
   const select = $(selector);
   if (!select) return;
@@ -360,6 +446,45 @@ function renderStatus(status, radarPayload) {
   if (reason) reason.textContent = reasonText;
   if (message) message.textContent = reasonText;
   if (pageUpdated) pageUpdated.textContent = `資料更新：${formatDateTime(status?.updated_at || radarPayload?.updated_at)}`;
+}
+
+function renderStatusResilient(status, radarPayload, failures = []) {
+  const statusValue = $("#statusValue");
+  const tradeDate = $("#statusTradeDate");
+  const updatedAt = $("#statusUpdatedAt");
+  const source = $("#statusSource");
+  const reason = $("#statusReason");
+  const message = $("#radarStatusMessage");
+  const pageUpdated = $("#radarUpdatedAt");
+
+  const rawStatus = String(status?.status || radarPayload?.status || (failures.length ? "partial" : "success")).toLowerCase();
+  const statusLabel = ["success", "ok"].includes(rawStatus)
+    ? "成功"
+    : rawStatus === "partial"
+      ? "部分成功"
+      : rawStatus === "loading"
+        ? "載入中"
+        : "失敗";
+  const dateText = status?.trade_date || radarPayload?.trade_date || radarPayload?.date || "--";
+  const updatedText = status?.updated_at || radarPayload?.updated_at || "--";
+  const sources = status?.sources ?? status?.source ?? radarPayload?.source ?? [];
+  const sourceText = Array.isArray(sources)
+    ? sources.filter(Boolean).join("、")
+    : typeof sources === "object"
+      ? Object.values(sources).filter(Boolean).join("、")
+      : String(sources || "--");
+  const failureText = failures.length ? `部分 JSON 載入失敗：${formatFailureSummary(failures)}` : "";
+  const baseReason = status?.message || status?.stale_reason || status?.errors?.[0] || radarPayload?.message || "";
+  const reasonText = [baseReason, failureText].filter(Boolean).join("；")
+    || (["success", "ok"].includes(rawStatus) ? "資料已更新。" : "尚未取得資料。");
+
+  if (statusValue) statusValue.textContent = statusLabel;
+  if (tradeDate) tradeDate.textContent = dateText;
+  if (updatedAt) updatedAt.textContent = formatDateTime(updatedText);
+  if (source) source.textContent = sourceText || "--";
+  if (reason) reason.textContent = reasonText;
+  if (message) message.textContent = reasonText;
+  if (pageUpdated) pageUpdated.textContent = `資料更新：${formatDateTime(updatedText)}`;
 }
 
 function passesFilters(row) {
@@ -460,7 +585,7 @@ function bindFilters() {
     const element = document.getElementById(id);
     if (element) element.addEventListener(element.tagName === "INPUT" ? "input" : "change", applyFilters);
   });
-  $("#reloadRadarData")?.addEventListener("click", () => loadAndRender());
+  $("#reloadRadarData")?.addEventListener("click", () => loadAndRenderResilient());
 }
 
 function initTableFreezeToggles() {
@@ -518,8 +643,63 @@ async function loadAndRender() {
   }
 }
 
+async function loadAndRenderResilient() {
+  renderStatusResilient({ status: "loading", message: "正在讀取最新雷達資料。" }, null);
+  try {
+    const [stocksResult, scoresResult, metricsResult, radarResult, statusResult] = await Promise.all([
+      safeFetchJson("stocks_master.json", `${PROCESSED_PATH}/stocks_master.json`),
+      safeFetchJson("ai_scores_daily.json", `${PROCESSED_PATH}/ai_scores_daily.json`),
+      safeFetchJson("stock_metrics_daily.json", `${PROCESSED_PATH}/stock_metrics_daily.json`),
+      safeFetchJson("radar.json", RADAR_JSON_PATH),
+      safeFetchJson("update_status.json", STATUS_JSON_PATH),
+    ]);
+    const results = [stocksResult, scoresResult, metricsResult, radarResult, statusResult];
+    const failures = results.filter((result) => !result.ok);
+
+    const stocks = getItems(stocksResult.payload);
+    const scores = getItems(scoresResult.payload);
+    const metrics = getItems(metricsResult.payload);
+    const radarPayload = radarResult.payload;
+    const radarItems = getItems(radarPayload);
+    const built = buildRowsResilient({ stocks, scores, metrics, radarItems });
+    state.rows = built.rows;
+    state.coverage = built.coverage;
+    const statusPayload = statusResult.payload || {
+      status: failures.length ? "partial" : "success",
+      message: failures.length ? `部分資料載入失敗：${formatFailureSummary(failures)}` : "資料載入完成。",
+    };
+    state.status = statusPayload;
+
+    fillSelect("#themeFilter", new Set(state.rows.map((row) => row.theme)));
+    fillSelect("#patternFilter", new Set(state.rows.map((row) => row.pattern)));
+
+    if (!state.rows.length) {
+      const failureMessage = failures.length
+        ? formatFailureSummary(failures)
+        : "所有 JSON 都可讀取，但沒有任何可用股票資料。";
+      renderStatusResilient({ status: "failed", message: `沒有可用資料。${failureMessage}` }, radarPayload, failures);
+    } else if (failures.length && ["success", "ok"].includes(String(statusPayload.status || "").toLowerCase())) {
+      renderStatusResilient({
+        ...statusPayload,
+        status: "partial",
+        message: `部分資料載入失敗，但已用可用資料恢復清單：${formatFailureSummary(failures)}`,
+      }, radarPayload, failures);
+    } else {
+      renderStatusResilient(statusPayload, radarPayload, failures);
+    }
+    applyFilters();
+  } catch (error) {
+    console.error(error);
+    state.rows = [];
+    state.coverage = { stockMaster: 0, quoteMatched: 0, revenueMatched: 0 };
+    renderStatusResilient({ status: "failed", message: `雷達資料處理失敗：${error.message}` }, null);
+    renderCoverage(0, 0);
+    renderTable([]);
+  }
+}
+
 export function initRadarPage() {
   initTableFreezeToggles();
   bindFilters();
-  loadAndRender();
+  loadAndRenderResilient();
 }
