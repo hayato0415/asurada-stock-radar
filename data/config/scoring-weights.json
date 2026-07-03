@@ -1,0 +1,39 @@
+{
+  "version": "2026-07-transparent-v1",
+  "updated_at": "2026-07-03T14:19:35+08:00",
+  "description": "ASURADA AI 選股透明計分權重。新聞與題材只作為資訊標籤，不納入分數。",
+  "total_weight": 100,
+  "modules": {
+    "fundamental": {
+      "label": "基本面",
+      "weight": 30,
+      "description": "依營收年增、營收月增、EPS、毛利率評估。"
+    },
+    "technical": {
+      "label": "技術面",
+      "weight": 30,
+      "description": "依當日漲跌、近五日/二十日漲跌與價格資料完整度評估。"
+    },
+    "chip": {
+      "label": "籌碼 / 市場交易力道",
+      "weight": 25,
+      "description": "依成交量、週轉率與五日量能倍率評估市場交易力道。"
+    },
+    "turnover": {
+      "label": "週轉率 / 交易熱度",
+      "weight": 15,
+      "description": "依週轉率評估交易熱度；缺上市股數時不硬算。"
+    }
+  },
+  "formula": "total_score = fundamental_weighted + technical_weighted + chip_weighted + turnover_weighted",
+  "news_scoring": {
+    "included": false,
+    "weight": 0,
+    "note": "新聞通常代表題材已明朗化，因此不納入分數、不參與排名、不作為篩選條件。"
+  },
+  "theme_scoring": {
+    "included": false,
+    "weight": 0,
+    "note": "題材、產業、概念股只顯示為標籤，不納入分數。"
+  }
+}

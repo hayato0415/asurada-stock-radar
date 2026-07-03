@@ -104,6 +104,46 @@
       </div>
     </section>
 
+    <section class="panel ai-score-history-panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Score Transparency</p>
+          <h2>AI 選股透明計分履歷</h2>
+          <p class="page-note">每檔股票保留可追溯 scorecard，列出資料來源、命中規則、缺漏欄位與總分組成；新聞面不納入評分。</p>
+        </div>
+        <span id="aiScoringMeta" class="meta-pill">讀取中</span>
+      </div>
+      <div id="aiScoringQualityNotice" class="score-quality-notice">透明計分資料讀取中。</div>
+      <div id="aiScoringWeights" class="ai-scoring-weights"></div>
+      <div class="table-control-row ai-history-controls" aria-label="透明計分顯示筆數">
+        <button class="pill-button is-active" type="button" data-ai-history-limit="10">Top 10</button>
+        <button class="pill-button" type="button" data-ai-history-limit="50">Top 50</button>
+        <button class="pill-button" type="button" data-ai-history-limit="100">Top 100</button>
+      </div>
+      <div class="table-wrap ai-score-history-wrap">
+        <table class="data-table ai-score-history-table">
+          <thead>
+            <tr>
+              <th>排名</th>
+              <th>股票</th>
+              <th>總分</th>
+              <th>技術</th>
+              <th>基本</th>
+              <th>籌碼</th>
+              <th>題材</th>
+              <th>資料品質</th>
+              <th>更新時間</th>
+              <th>履歷</th>
+            </tr>
+          </thead>
+          <tbody id="aiScoreHistoryBody">
+            <tr><td colspan="10">透明計分資料讀取中。</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="aiScorecardDetail" class="scorecard-detail-root"></div>
+    </section>
+
     <section class="panel">
       <div class="section-head">
         <div>

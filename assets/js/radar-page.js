@@ -84,6 +84,10 @@ function inferChipScore(metric) {
   return roundScore(turnoverScore * 0.55 + volumeScore * 0.45);
 }
 
+function inferTurnoverScore(metric) {
+  return roundScore(scoreFromRange(metric.turnover_rate_pct, 0, 12, 38));
+}
+
 function inferFundamentalScore(metric) {
   const yoyScore = scoreFromRange(metric.revenue_yoy_pct, -30, 80, 38);
   const momScore = scoreFromRange(metric.revenue_mom_pct, -20, 50, 40);
@@ -131,20 +135,22 @@ function buildRow(stock, score = {}, metric = {}) {
   const technical = normalizeScore(score.technical_score) ?? inferTechnicalScore(merged);
   const chip = normalizeScore(score.chip_score) ?? inferChipScore(merged);
   const fundamental = normalizeScore(score.fundamental_score) ?? inferFundamentalScore(merged);
-  const news = normalizeScore(score.news_score) ?? 35;
+  const turnover = normalizeScore(score.turnover_score) ?? inferTurnoverScore(merged);
   const dataQuality = inferDataQualityScore(merged);
 
   merged.technical_score = technical;
   merged.chip_score = chip;
   merged.fundamental_score = fundamental;
-  merged.news_score = news;
+  merged.turnover_score = turnover;
+  merged.news_score = null;
+  merged.news_scoring_included = false;
+  merged.theme_scoring_included = false;
   merged.data_quality_score = dataQuality;
   merged.total_score = normalizeScore(score.total_score) ?? roundScore(
-    technical * 0.22 +
-    chip * 0.18 +
-    fundamental * 0.45 +
-    news * 0.05 +
-    dataQuality * 0.10
+    fundamental * 0.30 +
+    technical * 0.30 +
+    chip * 0.25 +
+    turnover * 0.15
   );
   merged.pattern = getPattern(merged);
   merged.risk_level = inferRisk(merged);
@@ -222,7 +228,7 @@ function renderRowDetails(item) {
         ${detailMetric("毛利率", formatMaybePercent(item.gross_margin_pct, 2))}
         ${detailMetric("技術面", scoreBadge(item.technical_score))}
         ${detailMetric("籌碼", scoreBadge(item.chip_score))}
-        ${detailMetric("資料覆蓋", scoreBadge(item.data_quality_score))}
+        ${detailMetric("週轉率分數", scoreBadge(item.turnover_score))}
         ${detailMetric("入選理由", escapeHtml(item.entry_reason), "radar-detail-wide")}
       </div>
     </details>
