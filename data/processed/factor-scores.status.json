@@ -1,17 +1,18 @@
 {
-  "ok": true,
-  "updated_at": "2026-07-03T02:20:36+08:00",
-  "attempted_at": "2026-07-03T02:20:36+08:00",
-  "target_date": "2026-07-02",
-  "latest_trade_date": "2026-07-02",
-  "revenue_month": "2026-05",
+  "ok": false,
+  "updated_at": "2026-07-03T14:53:22+08:00",
+  "attempted_at": "2026-07-03T14:53:22+08:00",
+  "target_date": null,
+  "latest_trade_date": null,
   "items_count": 100,
-  "rows_written": 100,
-  "stock_master_count": 1970,
-  "twse_quote_matched": 1078,
-  "tpex_quote_matched": 889,
-  "previous_data_preserved": false,
-  "failed_reasons": [],
+  "rows_written": 0,
+  "stock_master_count": null,
+  "twse_quote_matched": 0,
+  "tpex_quote_matched": 0,
+  "previous_data_preserved": true,
+  "failed_reasons": [
+    "TWSE 行情來源失敗：Expecting value: line 1 column 1 (char 0)"
+  ],
   "warnings": [],
   "official_source_used": {
     "daily_quotes": "TWSE STOCK_DAY_ALL / TPEx daily close quotes",
@@ -19,79 +20,15 @@
     "monthly_revenue": "MOPS t187ap05_L / t187ap05_O",
     "company_basic": "MOPS t187ap03_L / t187ap03_O"
   },
-  "quality": {
-    "stock_master_count": 1970,
-    "quote_matched": 1967,
-    "score_candidates": 1076,
-    "missing_quote_count": 3,
-    "missing_score_count": 891,
-    "missing_quote_sample": [
-      "1589",
-      "1591",
-      "4804"
-    ],
-    "missing_score_sample": [
-      "1240",
-      "1259",
-      "1264",
-      "1268",
-      "1294",
-      "1295",
-      "1336",
-      "1538",
-      "1565",
-      "1569",
-      "1570",
-      "1580",
-      "1584",
-      "1586",
-      "1593",
-      "1595",
-      "1599",
-      "1742",
-      "1777",
-      "1780",
-      "1781",
-      "1784",
-      "1785",
-      "1788",
-      "1796",
-      "1799",
-      "1813",
-      "1815",
-      "2035",
-      "2061",
-      "2063",
-      "2064",
-      "2065",
-      "2066",
-      "2067",
-      "2070",
-      "2073",
-      "2221",
-      "2230",
-      "2235",
-      "2321",
-      "2596",
-      "2640",
-      "2641",
-      "2643",
-      "2718",
-      "2719",
-      "2724",
-      "2726",
-      "2729"
-    ]
-  },
   "source_status": [
     {
       "name": "TWSE 上市每日行情",
       "url": "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL",
-      "ok": true,
+      "ok": false,
       "http_status": 200,
-      "source_date": "2026-07-01",
-      "row_count": 1368,
-      "error": "",
+      "source_date": null,
+      "row_count": 0,
+      "error": "Expecting value: line 1 column 1 (char 0)",
       "required_fields_missing": []
     },
     {
@@ -107,11 +44,11 @@
     {
       "name": "TWSE 上市本益比殖利率",
       "url": "https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_ALL",
-      "ok": true,
+      "ok": false,
       "http_status": 200,
       "source_date": null,
-      "row_count": 1078,
-      "error": "",
+      "row_count": 0,
+      "error": "Expecting value: line 1 column 1 (char 0)",
       "required_fields_missing": []
     },
     {
@@ -127,11 +64,11 @@
     {
       "name": "MOPS 上市月營收",
       "url": "https://openapi.twse.com.tw/v1/opendata/t187ap05_L",
-      "ok": true,
+      "ok": false,
       "http_status": 200,
       "source_date": null,
-      "row_count": 1082,
-      "error": "",
+      "row_count": 0,
+      "error": "Expecting value: line 1 column 1 (char 0)",
       "required_fields_missing": []
     },
     {
@@ -147,11 +84,11 @@
     {
       "name": "MOPS 上市公司基本資料",
       "url": "https://openapi.twse.com.tw/v1/opendata/t187ap03_L",
-      "ok": true,
+      "ok": false,
       "http_status": 200,
       "source_date": null,
-      "row_count": 1089,
-      "error": "",
+      "row_count": 0,
+      "error": "Expecting value: line 1 column 1 (char 0)",
       "required_fields_missing": []
     },
     {
@@ -166,9 +103,7 @@
     }
   ],
   "outputs": {
-    "factor-scores.json": "updated",
-    "factor-scores.status.json": "updated",
-    "factor-scores.meta.json": "updated",
-    "factor-quote-history.json": "updated"
+    "factor-scores.json": "preserved",
+    "factor-scores.status.json": "updated"
   }
 }
