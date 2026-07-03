@@ -1,7 +1,7 @@
 {
-  "build_id": "20260703-1419-scorecards",
-  "updated_at": "2026-07-03T14:19:35+08:00",
-  "content_latest_at": "2026-07-03",
+  "build_id": "20260704-0009-scorecards",
+  "updated_at": "2026-07-04T00:09:59+08:00",
+  "content_latest_at": "2026-07-04",
   "symbol": "2887",
   "name": "台新新光金",
   "market": "上市",
@@ -147,8 +147,8 @@
       "key": "chip",
       "label": "籌碼 / 市場交易力道",
       "weight": 25,
-      "score": 0,
-      "raw_score": 0.0,
+      "score": 0.1,
+      "raw_score": 0.4,
       "coverage_pct": 66.7,
       "missing_count": 1,
       "rules": [
@@ -156,9 +156,9 @@
           "id": "volume",
           "label": "成交量",
           "source_field": "volume",
-          "raw_value": 151677,
+          "raw_value": 368056,
           "max_score": 10,
-          "score": 0,
+          "score": 0.1,
           "missing": false,
           "description": "成交量反映市場參與度。"
         },
@@ -206,7 +206,7 @@
       ]
     }
   },
-  "total_score": 19.5,
+  "total_score": 19.6,
   "summary": {
     "symbol": "2887",
     "code": "2887",
@@ -217,7 +217,7 @@
     "supply_chain": "金融保險業",
     "trade_price": 17.85,
     "change_pct": 0.0,
-    "volume": 151677,
+    "volume": 368056,
     "turnover_rate_pct": 0.0,
     "revenue_million": 14843.47,
     "revenue_mom_pct": -13.81,
@@ -227,20 +227,20 @@
     "financial_period": "2026-05",
     "fundamental_score": 34.0,
     "technical_score": 31.0,
-    "chip_score": 0.0,
+    "chip_score": 0.4,
     "turnover_score": 0.0,
     "weighted_scores": {
       "fundamental": 10.2,
       "technical": 9.3,
-      "chip": 0,
+      "chip": 0.1,
       "turnover": 0
     },
-    "total_score": 19.5,
+    "total_score": 19.6,
     "risk_level": "低",
     "entry_reason": "營收年增 317.18%，月增 -13.81%，週轉率 0.00%",
     "data_quality_score": 66.7,
-    "updated_at": "2026-07-03T14:19:35+08:00",
-    "content_latest_at": "2026-07-03",
+    "updated_at": "2026-07-04T00:09:59+08:00",
+    "content_latest_at": "2026-07-04",
     "scorecard_path": "data/scorecards/2887.json",
     "news_scoring_included": false,
     "theme_scoring_included": false

@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-07-03 21:22",
+  "updated_at": "2026-07-04 00:09",
   "items": [
     {
       "name": "stocks_master.json",
       "file": "stocks_master.json",
-      "updated_at": "2026-07-03 00:30",
+      "updated_at": "2026-07-04 00:09",
       "record_count": 1970,
       "count": 1970,
       "status": "ok",
@@ -13,9 +13,20 @@
       "error": ""
     },
     {
+      "name": "stock_metrics_daily.json",
+      "file": "stock_metrics_daily.json",
+      "updated_at": "2026-07-04 00:09",
+      "record_count": 1970,
+      "count": 1970,
+      "status": "ok",
+      "source": "TWSE / TPEx / MOPS",
+      "message": "",
+      "error": ""
+    },
+    {
       "name": "ai_scores_daily.json",
       "file": "ai_scores_daily.json",
-      "updated_at": "2026-07-03 00:30",
+      "updated_at": "2026-07-04 00:09",
       "record_count": 1970,
       "count": 1970,
       "status": "ok",
@@ -26,7 +37,7 @@
     {
       "name": "theme_stats.json",
       "file": "theme_stats.json",
-      "updated_at": "2026-07-03 00:30",
+      "updated_at": "2026-07-04 00:09",
       "record_count": 39,
       "count": 39,
       "status": "ok",
@@ -37,19 +48,12 @@
     {
       "name": "update_log.json",
       "file": "update_log.json",
-      "updated_at": "2026-07-03 00:30",
+      "updated_at": "2026-07-04 00:09",
       "record_count": 5,
       "count": 5,
       "status": "ok",
       "source": "local builder",
       "message": "",
-      "error": ""
-    },
-    {
-      "file": "stock_metrics_daily.json",
-      "updated_at": "2026-07-03 21:22",
-      "count": 1970,
-      "status": "ok",
       "error": ""
     }
   ]
