@@ -12,8 +12,9 @@ export function scoreBadge(score) {
 }
 
 export function riskClass(risk) {
-  if (risk === "低") return "good";
-  if (risk === "中") return "warn";
+  const label = String(risk ?? "");
+  if (["低", "正常", "穩健"].some((word) => label.includes(word))) return "good";
+  if (["中", "觀察"].some((word) => label.includes(word))) return "warn";
   return "bad";
 }
 

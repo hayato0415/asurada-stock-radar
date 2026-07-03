@@ -1,26 +1,23 @@
-export function formatNumber(value, digits = 0) {
-  if (value === null || value === undefined || value === "") return "--";
+export function formatNumber(value, digits = 2) {
   const number = Number(value);
-  if (Number.isNaN(number)) return "--";
-  return new Intl.NumberFormat("zh-Hant-TW", {
+  if (!Number.isFinite(number)) return "--";
+  return number.toLocaleString("zh-TW", {
     maximumFractionDigits: digits,
     minimumFractionDigits: digits
-  }).format(number);
+  });
 }
 
 export function formatPercent(value, digits = 2) {
-  if (value === null || value === undefined || value === "") return "--";
   const number = Number(value);
-  if (Number.isNaN(number)) return "--";
-  return `${formatNumber(number, digits)}%`;
+  if (!Number.isFinite(number)) return "--";
+  return `${number.toFixed(digits)}%`;
 }
 
 export function formatSignedPercent(value, digits = 2) {
-  if (value === null || value === undefined || value === "") return "--";
   const number = Number(value);
-  if (Number.isNaN(number)) return "--";
+  if (!Number.isFinite(number)) return "--";
   const sign = number > 0 ? "+" : "";
-  return `${sign}${formatNumber(number, digits)}%`;
+  return `${sign}${number.toFixed(digits)}%`;
 }
 
 export function formatDateTime(value) {
@@ -28,15 +25,14 @@ export function formatDateTime(value) {
   return String(value).replace("T", " ").replace("+08:00", "");
 }
 
-export function formatCurrency(value, digits = 0) {
-  if (value === null || value === undefined || value === "") return "--";
-  const number = Number(value);
-  if (Number.isNaN(number)) return "--";
-  return formatNumber(number, digits);
+export function formatCurrency(value, unit = "") {
+  const formatted = formatNumber(value, 2);
+  return formatted === "--" ? formatted : `${formatted}${unit}`;
 }
 
 export function valueClass(value) {
   const number = Number(value);
-  if (Number.isNaN(number) || number === 0) return "value-flat";
-  return number > 0 ? "value-up" : "value-down";
+  if (number > 0) return "value-up";
+  if (number < 0) return "value-down";
+  return "value-flat";
 }

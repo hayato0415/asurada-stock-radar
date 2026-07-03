@@ -3,7 +3,7 @@ const DATA_ROOT = "./data/processed/";
 export async function fetchJson(fileName) {
   const response = await fetch(`${DATA_ROOT}${fileName}`, { cache: "no-store" });
   if (!response.ok) {
-    throw new Error(`讀取資料失敗：${fileName} (${response.status})`);
+    throw new Error(`資料讀取失敗：${fileName} (${response.status})`);
   }
   return response.json();
 }

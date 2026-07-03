@@ -18,28 +18,34 @@ export function normalizeText(value) {
   return String(value ?? "").trim().toLowerCase();
 }
 
-export function bySymbol(stocks) {
-  return new Map(stocks.map((stock) => [String(stock.symbol), stock]));
+export function bySymbol(stocks = []) {
+  return new Map(
+    stocks
+      .map((stock) => [String(stock.symbol ?? stock.code ?? stock.stock_id ?? "").trim(), stock])
+      .filter(([symbol]) => symbol)
+  );
 }
 
 export function stockLabel(stockOrSymbol, maybeName) {
-  if (typeof stockOrSymbol === "object") {
-    return `${stockOrSymbol.name ?? ""} ${stockOrSymbol.symbol ?? stockOrSymbol.code ?? ""}`.trim();
+  if (typeof stockOrSymbol === "object" && stockOrSymbol !== null) {
+    const symbol = stockOrSymbol.symbol ?? stockOrSymbol.code ?? stockOrSymbol.stock_id ?? "";
+    return `${stockOrSymbol.name ?? stockOrSymbol.stock_name ?? ""} ${symbol}`.trim();
   }
   return `${maybeName ?? ""} ${stockOrSymbol ?? ""}`.trim();
 }
 
 export function stockLink(symbol, name = "") {
-  const safeSymbol = encodeURIComponent(symbol);
+  const safeSymbol = encodeURIComponent(symbol ?? "");
   return `<a class="stock-link" href="./stock.html?symbol=${safeSymbol}">${escapeHtml(stockLabel(symbol, name))}</a>`;
 }
 
-export function stockChipList(stocks = []) {
-  if (!stocks.length) return `<span class="chip">無資料</span>`;
+export function stockChipList(stocks = [], limit = 6) {
+  if (!stocks.length) return `<span class="chip">--</span>`;
   return stocks
+    .slice(0, limit)
     .map((stock) => {
-      const symbol = stock.symbol ?? stock.code;
-      return `<span class="chip">${stockLink(symbol, stock.name)}</span>`;
+      const symbol = stock.symbol ?? stock.code ?? stock.stock_id;
+      return `<span class="chip">${stockLink(symbol, stock.name ?? stock.stock_name)}</span>`;
     })
     .join("");
 }
@@ -48,8 +54,10 @@ export function unique(values) {
   return Array.from(new Set(values.filter(Boolean)));
 }
 
-export function clamp(value, min, max) {
-  return Math.max(min, Math.min(max, value));
+export function clamp(value, min = 0, max = 100) {
+  const number = Number(value);
+  if (Number.isNaN(number)) return min;
+  return Math.max(min, Math.min(max, number));
 }
 
 export function initTableFreezeToggles() {
@@ -77,9 +85,10 @@ export function initTableFreezeToggles() {
 
 export function updateStickyTableHeaderOffsets() {
   const header = document.querySelector(".app-header");
-  const offset = header && getComputedStyle(header).position === "sticky"
-    ? Math.ceil(header.getBoundingClientRect().height)
-    : 0;
+  const offset =
+    header && getComputedStyle(header).position === "sticky"
+      ? Math.ceil(header.getBoundingClientRect().height)
+      : 0;
 
   document.documentElement.style.setProperty("--factor-table-sticky-top", `${offset}px`);
 }
