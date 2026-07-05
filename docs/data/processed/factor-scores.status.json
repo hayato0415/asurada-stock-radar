@@ -1,20 +1,18 @@
 {
   "ok": true,
-  "updated_at": "2026-07-04T01:07:00+08:00",
-  "attempted_at": "2026-07-04T01:07:00+08:00",
-  "target_date": "2026-07-02",
-  "latest_trade_date": "2026-07-02",
+  "updated_at": "2026-07-05T21:39:06+08:00",
+  "attempted_at": "2026-07-05T21:39:06+08:00",
+  "target_date": "2026-07-03",
+  "latest_trade_date": "2026-07-03",
   "revenue_month": "2026-05",
   "items_count": 100,
   "rows_written": 100,
   "stock_master_count": 1970,
   "twse_quote_matched": 1078,
-  "tpex_quote_matched": 0,
+  "tpex_quote_matched": 889,
   "previous_data_preserved": false,
   "failed_reasons": [],
-  "warnings": [
-    "TPEx 行情來源失敗：IncompleteRead(720489 bytes read, 3150355 more expected)"
-  ],
+  "warnings": [],
   "official_source_used": {
     "daily_quotes": "TWSE STOCK_DAY_ALL / TPEx daily close quotes",
     "valuation": "TWSE BWIBBU_ALL / TPEx peratio analysis",
@@ -23,11 +21,16 @@
   },
   "quality": {
     "stock_master_count": 1970,
-    "quote_matched": 1078,
-    "score_candidates": 1074,
-    "missing_quote_count": 892,
-    "missing_score_count": 4,
+    "quote_matched": 1967,
+    "score_candidates": 1073,
+    "missing_quote_count": 3,
+    "missing_score_count": 894,
     "missing_quote_sample": [
+      "1589",
+      "1591",
+      "4804"
+    ],
+    "missing_score_sample": [
       "1240",
       "1259",
       "1264",
@@ -35,14 +38,14 @@
       "1294",
       "1295",
       "1336",
+      "1522",
+      "1538",
       "1565",
       "1569",
       "1570",
       "1580",
       "1584",
       "1586",
-      "1589",
-      "1591",
       "1593",
       "1595",
       "1599",
@@ -69,6 +72,7 @@
       "2221",
       "2230",
       "2235",
+      "2321",
       "2596",
       "2640",
       "2641",
@@ -76,14 +80,7 @@
       "2718",
       "2719",
       "2724",
-      "2726",
-      "2729"
-    ],
-    "missing_score_sample": [
-      "1341",
-      "1522",
-      "1538",
-      "2321"
+      "2726"
     ]
   },
   "source_status": [
@@ -92,7 +89,7 @@
       "url": "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL",
       "ok": true,
       "http_status": 200,
-      "source_date": "2026-07-02",
+      "source_date": "2026-07-03",
       "row_count": 1368,
       "error": "",
       "required_fields_missing": []
@@ -100,11 +97,11 @@
     {
       "name": "TPEx 上櫃每日行情",
       "url": "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes",
-      "ok": false,
-      "http_status": 520,
-      "source_date": null,
-      "row_count": 0,
-      "error": "IncompleteRead(720489 bytes read, 3150355 more expected)",
+      "ok": true,
+      "http_status": 200,
+      "source_date": "2026-07-03",
+      "row_count": 9882,
+      "error": "",
       "required_fields_missing": []
     },
     {
@@ -144,7 +141,7 @@
       "http_status": 200,
       "source_date": null,
       "row_count": 0,
-      "error": "Expecting value: line 1 column 1 (char 0)",
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Missing Subject Key Identifier (_ssl.c:1028)>",
       "required_fields_missing": []
     },
     {
@@ -164,7 +161,7 @@
       "http_status": 200,
       "source_date": null,
       "row_count": 0,
-      "error": "Expecting value: line 1 column 1 (char 0)",
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Missing Subject Key Identifier (_ssl.c:1028)>",
       "required_fields_missing": []
     }
   ],

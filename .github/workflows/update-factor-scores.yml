@@ -67,6 +67,10 @@ jobs:
             data/processed/factor-scores.status.json
             data/processed/factor-scores.meta.json
             data/processed/factor-quote-history.json
+            docs/data/processed/factor-scores.json
+            docs/data/processed/factor-scores.status.json
+            docs/data/processed/factor-scores.meta.json
+            docs/data/processed/factor-quote-history.json
           )
           if git diff --quiet -- "${files[@]}"; then
             echo "No factor score changes."

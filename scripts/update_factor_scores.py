@@ -35,6 +35,7 @@ except ModuleNotFoundError:  # pragma: no cover - stdlib fallback keeps local ru
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data" / "processed"
+DOCS_DATA_DIR = ROOT / "docs" / "data" / "processed"
 STOCK_MASTER = DATA_DIR / "stocks_master.json"
 OUTPUT = DATA_DIR / "factor-scores.json"
 STATUS_OUTPUT = DATA_DIR / "factor-scores.status.json"
@@ -116,9 +117,24 @@ def read_json(path: Path, default: Any) -> Any:
     return json.loads(path.read_text(encoding="utf-8-sig"))
 
 
+def mirror_factor_output_to_docs(path: Path, text: str) -> None:
+    """Keep GitHub Pages docs/ data in sync with root processed factor data."""
+    try:
+        relative = path.relative_to(DATA_DIR)
+    except ValueError:
+        return
+    if not relative.name.startswith("factor-"):
+        return
+    mirror_path = DOCS_DATA_DIR / relative
+    mirror_path.parent.mkdir(parents=True, exist_ok=True)
+    mirror_path.write_text(text, encoding="utf-8")
+
+
 def write_json(path: Path, payload: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    text = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
+    path.write_text(text, encoding="utf-8")
+    mirror_factor_output_to_docs(path, text)
 
 
 def normalize_text(value: Any) -> str:
