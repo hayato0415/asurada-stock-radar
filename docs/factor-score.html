@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>多因子評分｜ASURADA Stock Radar</title>
+  <link rel="stylesheet" href="./assets/css/base.css">
+  <link rel="stylesheet" href="./assets/css/layout.css">
+  <link rel="stylesheet" href="./assets/css/components.css">
+  <link rel="stylesheet" href="./assets/css/radar.css">
+</head>
+<body data-page="factor-score">
+  <header class="app-header">
+    <div class="brand-block">
+      <a class="brand-title" href="./index.html">ASURADA Stock Radar</a>
+      <span class="brand-subtitle">AI 台股決策雷達</span>
+    </div>
+    <nav class="site-nav" aria-label="主要導覽">
+      <a href="./index.html">首頁</a>
+      <a href="./radar.html">AI 選股清單</a>
+      <a class="active" href="./factor-score.html">多因子評分</a>
+      <a href="./news.html">重點新聞雷達</a>
+      <a href="./themes.html">題材資金輪動</a>
+      <a href="./stock.html">個股 AI 分析</a>
+      <a href="./backtest.html">追蹤驗證</a>
+      <a href="./data-status.html">資料更新狀態</a>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    <section class="page-title-row">
+      <div>
+        <p class="eyebrow">Factor Score</p>
+        <h1>AI選股多因子評分</h1>
+      </div>
+      <span id="factorUpdatedAt" class="meta-pill">讀取中</span>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Scoring Policy</p>
+          <h2>新聞面不納入評分</h2>
+        </div>
+      </div>
+      <p class="factor-note">
+        本頁依基本面、技術面、籌碼/交易力道、週轉率/交易熱度建立綜合評分。新聞面不納入評分，避免追逐已明朗化題材。
+      </p>
+      <p class="factor-note">
+        新聞通常代表題材已被市場明朗化，因此本評分機制不將新聞納入分數，只保留基本面、技術面、籌碼與週轉率作為選股核心。
+      </p>
+      <div class="factor-weight-grid" aria-label="多因子評分權重">
+        <article class="factor-weight-card"><span>基本面</span><strong>30%</strong></article>
+        <article class="factor-weight-card"><span>技術面</span><strong>30%</strong></article>
+        <article class="factor-weight-card"><span>籌碼 / 市場交易力道</span><strong>25%</strong></article>
+        <article class="factor-weight-card"><span>週轉率 / 交易熱度</span><strong>15%</strong></article>
+        <article class="factor-weight-card muted-weight"><span>新聞面</span><strong>0%</strong><small>不納入</small></article>
+      </div>
+    </section>
+
+    <section id="factorStatusPanel" class="panel factor-status-panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Official Data Status</p>
+          <h2 id="factorStatusTitle">官方資料狀態</h2>
+        </div>
+        <span id="factorStatusBadge" class="meta-pill">讀取中</span>
+      </div>
+      <p id="factorStatusText" class="factor-note">正在讀取多因子評分更新狀態。</p>
+      <div id="factorStatusGrid" class="factor-status-grid"></div>
+      <div id="factorSourceList" class="factor-source-list"></div>
+    </section>
+
+    <section class="panel filter-panel">
+      <div class="filter-grid factor-filter-grid">
+        <label>
+          搜尋股票代號或名稱
+          <input id="factorSearch" type="search" placeholder="例如 2337 或 旺宏">
+        </label>
+        <label>
+          操作屬性
+          <select id="tradeTypeFilter">
+            <option value="">全部</option>
+            <option value="短線">短線</option>
+            <option value="波段">波段</option>
+            <option value="中長期">中長期</option>
+          </select>
+        </label>
+        <label>
+          風險標籤
+          <select id="factorRiskFilter">
+            <option value="">全部</option>
+            <option value="過熱">過熱</option>
+            <option value="正常">正常</option>
+            <option value="冷門">冷門</option>
+            <option value="低流動">低流動</option>
+          </select>
+        </label>
+        <label>
+          排序
+          <select id="factorSort">
+            <option value="total">綜合分數高到低</option>
+            <option value="fundamental">基本面高到低</option>
+            <option value="technical">技術面高到低</option>
+            <option value="chip">籌碼高到低</option>
+            <option value="turnover">週轉率高到低</option>
+          </select>
+        </label>
+        <label>
+          顯示筆數
+          <select id="factorLimit">
+            <option value="10" selected>Top 10</option>
+            <option value="25">Top 25</option>
+            <option value="50">Top 50</option>
+            <option value="100">Top 100</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Factor Ranking</p>
+          <h2>多因子評分表</h2>
+        </div>
+        <span id="factorCount" class="meta-pill">0 檔</span>
+      </div>
+      <div class="table-control-row">
+        <button class="table-freeze-toggle is-active" type="button" data-table-freeze-toggle=".factor-score-table" data-freeze-label="凍結表頭" aria-pressed="true">凍結表頭：開</button>
+      </div>
+      <p class="factor-scroll-hint">提示：請在下方表格區塊內滾動，表頭會固定在表格最上方。</p>
+      <div class="table-wrap factor-table-wrap">
+        <table class="data-table factor-score-table is-freeze-enabled">
+          <thead>
+            <tr>
+              <th>排名</th>
+              <th>代號</th>
+              <th>名稱</th>
+              <th>市場</th>
+              <th>產業</th>
+              <th>概念股</th>
+              <th>收盤價</th>
+              <th>漲跌幅</th>
+              <th>成交量</th>
+              <th>週轉率</th>
+              <th>基本面</th>
+              <th>技術面</th>
+              <th>籌碼</th>
+              <th>週轉率分數</th>
+              <th>綜合分數</th>
+              <th>操作屬性</th>
+              <th>風險標籤</th>
+              <th>更新日期</th>
+            </tr>
+          </thead>
+          <tbody id="factorTableBody"></tbody>
+        </table>
+      </div>
+      <div id="factorCardList" class="factor-card-list"></div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    本網站內容僅供研究與資訊整理使用，不構成任何投資建議、買賣建議或獲利保證。
+  </footer>
+
+  <script type="module" src="./assets/js/factor-score-page.js"></script>
+</body>
+</html>

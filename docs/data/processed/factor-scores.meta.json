@@ -1,0 +1,35 @@
+{
+  "updated_at": "2026-07-04T01:07:00+08:00",
+  "latest_trade_date": "2026-07-02",
+  "revenue_month": "2026-05",
+  "score_version": "official-multifactor-v1",
+  "weights": {
+    "fundamentalScore": 0.3,
+    "technicalScore": 0.3,
+    "chipScore": 0.25,
+    "turnoverScore": 0.15
+  },
+  "news_score": {
+    "weight": 0,
+    "included": false,
+    "reason": "新聞面不納入分數、不納入排名、不作為篩選條件。"
+  },
+  "sources": {
+    "daily_quotes": [
+      "TWSE STOCK_DAY_ALL",
+      "TPEx daily close quotes"
+    ],
+    "valuation": [
+      "TWSE BWIBBU_ALL",
+      "TPEx peratio analysis"
+    ],
+    "monthly_revenue": [
+      "MOPS / TWSE OpenAPI t187ap05_L",
+      "MOPS / TWSE OpenAPI t187ap05_O"
+    ],
+    "company_basic": [
+      "MOPS / TWSE OpenAPI t187ap03_L",
+      "MOPS / TWSE OpenAPI t187ap03_O"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ASURADA Stock Radar｜AI 台股決策雷達</title>
+  <meta name="description" content="ASURADA Stock Radar，AI 台股決策雷達靜態儀表板。">
+  <link rel="stylesheet" href="./assets/css/base.css">
+  <link rel="stylesheet" href="./assets/css/layout.css">
+  <link rel="stylesheet" href="./assets/css/components.css">
+  <link rel="stylesheet" href="./assets/css/dashboard.css">
+</head>
+<body data-page="dashboard">
+  <header class="app-header">
+    <div class="brand-block">
+      <a class="brand-title" href="./index.html">ASURADA Stock Radar</a>
+      <span class="brand-subtitle">AI 台股決策雷達</span>
+    </div>
+    <nav class="site-nav" aria-label="主要導覽">
+      <a class="active" href="./index.html">首頁</a>
+      <a href="./radar.html">AI 選股清單</a>
+      <a href="./factor-score.html">多因子評分</a>
+      <a href="./news.html">重點新聞雷達</a>
+      <a href="./themes.html">題材資金輪動</a>
+      <a href="./stock.html">個股 AI 分析</a>
+      <a href="./backtest.html">追蹤驗證</a>
+      <a href="./data-status.html">資料更新狀態</a>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    <section class="page-title-row">
+      <div>
+        <p class="eyebrow">Method Transparency</p>
+        <h1>各頁面功能分析與計分透明說明</h1>
+      </div>
+    </section>
+
+    <section class="panel transparency-panel" aria-labelledby="transparencyTitle">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Method Transparency</p>
+          <h2 id="transparencyTitle">功能分析與資料透明化</h2>
+        </div>
+        <span class="meta-pill">研究用途</span>
+      </div>
+      <p class="transparency-lead">
+        本區說明各功能的用途、資料依據、可判斷範圍與限制。所有分數與訊號都應回到資料來源檢查；資料抓不到時顯示 N/A 或資料尚未更新，不使用假資料補齊。
+      </p>
+      <div id="transparencyCards" class="transparency-grid"></div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    本網站內容僅供研究與資訊整理使用，不構成任何投資建議、買賣建議或獲利保證。
+  </footer>
+
+  <script type="module" src="./assets/js/dashboard-page.js"></script>
+</body>
+</html>

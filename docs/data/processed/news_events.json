@@ -1,0 +1,100 @@
+{
+  "updated_at": "2026-07-01 09:00",
+  "items": [
+    {
+      "id": "n001",
+      "published_at": "2026-07-01 08:30",
+      "title": "AI 伺服器需求延續，光通訊供應鏈接單能見度提升",
+      "summary": "Sample data：市場關注 CPO、光模組與高速傳輸供應鏈。",
+      "source_name": "相關新聞搜尋",
+      "source_grade": "B",
+      "source_url": "https://news.google.com/search?q=AI%20%E4%BC%BA%E6%9C%8D%E5%99%A8%20%E5%85%89%E9%80%9A%E8%A8%8A%20CPO%20%E5%8F%B0%E8%82%A1&hl=zh-TW&gl=TW&ceid=TW%3Azh-Hant",
+      "region": "台股",
+      "impact": "偏多",
+      "news_score": 91,
+      "theme": "CPO / 光通訊",
+      "stocks": [
+        { "code": "6442", "name": "光聖" },
+        { "code": "2330", "name": "台積電" }
+      ],
+      "ai_judgement": "題材與需求能見度同步，屬偏多催化。",
+      "operation_meaning": "適合觀察龍頭是否帶動低位階補漲。"
+    },
+    {
+      "id": "n002",
+      "published_at": "2026-07-01 08:05",
+      "title": "DRAM 報價續強，記憶體族群受惠補庫存需求",
+      "summary": "Sample data：DRAM、NAND 報價改善，記憶體題材熱度升溫。",
+      "source_name": "相關新聞搜尋",
+      "source_grade": "B",
+      "source_url": "https://news.google.com/search?q=DRAM%20%E5%A0%B1%E5%83%B9%20%E8%A8%98%E6%86%B6%E9%AB%94%20%E5%8F%B0%E8%82%A1&hl=zh-TW&gl=TW&ceid=TW%3Azh-Hant",
+      "region": "國際",
+      "impact": "偏多",
+      "news_score": 88,
+      "theme": "記憶體 / DRAM",
+      "stocks": [
+        { "code": "2344", "name": "華邦電" },
+        { "code": "2408", "name": "南亞科" }
+      ],
+      "ai_judgement": "供需改善與報價催化明確。",
+      "operation_meaning": "追價風險高，宜觀察拉回承接。"
+    },
+    {
+      "id": "n003",
+      "published_at": "2026-07-01 07:50",
+      "title": "PCB 高階材料需求升溫，AI 伺服器拉動載板族群",
+      "summary": "Sample data：高階 PCB、ABF 與 CCL 題材同步轉強。",
+      "source_name": "相關新聞搜尋",
+      "source_grade": "B",
+      "source_url": "https://news.google.com/search?q=PCB%20ABF%20%E8%BC%89%E6%9D%BF%20AI%20%E4%BC%BA%E6%9C%8D%E5%99%A8%20%E5%8F%B0%E8%82%A1&hl=zh-TW&gl=TW&ceid=TW%3Azh-Hant",
+      "region": "台股",
+      "impact": "偏多",
+      "news_score": 84,
+      "theme": "PCB / ABF 載板",
+      "stocks": [
+        { "code": "8046", "name": "南電" },
+        { "code": "3037", "name": "欣興" }
+      ],
+      "ai_judgement": "基本面線索支撐中線題材。",
+      "operation_meaning": "留意族群擴散度是否延續。"
+    },
+    {
+      "id": "n004",
+      "published_at": "2026-07-01 07:30",
+      "title": "大型科技股估值升高，市場提醒短線震盪風險",
+      "summary": "Sample data：海外科技股估值高檔，可能造成電子股震盪。",
+      "source_name": "相關新聞搜尋",
+      "source_grade": "B",
+      "source_url": "https://news.google.com/search?q=%E7%A7%91%E6%8A%80%E8%82%A1%20%E4%BC%B0%E5%80%BC%20%E9%9C%87%E7%9B%AA%20%E5%8F%B0%E8%82%A1&hl=zh-TW&gl=TW&ceid=TW%3Azh-Hant",
+      "region": "國際",
+      "impact": "偏空",
+      "news_score": 76,
+      "theme": "AI 半導體",
+      "stocks": [
+        { "code": "2330", "name": "台積電" },
+        { "code": "2454", "name": "聯發科" }
+      ],
+      "ai_judgement": "不是趨勢反轉，但短線風險升高。",
+      "operation_meaning": "避免高檔追價，等待分歧後再觀察。"
+    },
+    {
+      "id": "n005",
+      "published_at": "2026-07-01 07:10",
+      "title": "重電與電網設備訂單能見度提升，資金關注 AI 電力鏈",
+      "summary": "Sample data：AI 資料中心用電需求延伸到重電、電網與備援電源供應鏈。",
+      "source_name": "相關新聞搜尋",
+      "source_grade": "B",
+      "source_url": "https://news.google.com/search?q=AI%20%E9%9B%BB%E5%8A%9B%20%E9%87%8D%E9%9B%BB%20%E9%9B%BB%E7%B6%B2%20%E5%8F%B0%E8%82%A1&hl=zh-TW&gl=TW&ceid=TW%3Azh-Hant",
+      "region": "台股",
+      "impact": "偏多",
+      "news_score": 80,
+      "theme": "AI 電力",
+      "stocks": [
+        { "code": "1504", "name": "東元" },
+        { "code": "8996", "name": "高力" }
+      ],
+      "ai_judgement": "題材具延伸性，但仍需後續訂單與營收驗證。",
+      "operation_meaning": "適合觀察低位階轉強股，不宜只追單日急漲。"
+    }
+  ]
+}
