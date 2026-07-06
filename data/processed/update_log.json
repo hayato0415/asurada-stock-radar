@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-04 00:17",
+  "updated_at": "2026-07-07 01:23",
   "items": [
     {
       "name": "stocks_master.json",
@@ -47,10 +47,10 @@
     },
     {
       "file": "stock_metrics_daily.json",
-      "updated_at": "2026-07-04 00:17",
+      "updated_at": "2026-07-07 01:23",
       "count": 1970,
       "status": "ok",
-      "error": ""
+      "error": "TPEx daily close quotes fetch failed: 520 Server Error: <none> for url: https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes"
     }
   ]
 }
