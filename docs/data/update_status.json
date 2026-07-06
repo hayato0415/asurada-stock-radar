@@ -1,12 +1,13 @@
 {
-  "status": "failed",
-  "message": "2026-07-04 is not a Taiwan trading day. No close data was fetched.",
-  "trade_date": "2026-07-04",
-  "updated_at": "2026-07-04T01:06:43+08:00",
+  "status": "success",
+  "message": "Fetched 1979 TWSE/TPEx close rows.",
+  "trade_date": "2026-07-07",
+  "updated_at": "2026-07-07T01:30:54+08:00",
   "timezone": "Asia/Taipei",
-  "source": [],
-  "items_count": 0,
-  "errors": [
-    "2026-07-04 is not a Taiwan trading day. No close data was fetched."
-  ]
+  "source": [
+    "TWSE STOCK_DAY_ALL",
+    "TPEx daily close quotes"
+  ],
+  "items_count": 1979,
+  "errors": []
 }
