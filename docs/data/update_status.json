@@ -1,13 +1,14 @@
 {
   "status": "success",
-  "message": "Fetched 1979 TWSE/TPEx close rows.",
+  "message": "Fetched 1090 TWSE/TPEx close rows.",
   "trade_date": "2026-07-08",
-  "updated_at": "2026-07-08T00:42:26+08:00",
+  "updated_at": "2026-07-08T00:58:46+08:00",
   "timezone": "Asia/Taipei",
   "source": [
-    "TWSE STOCK_DAY_ALL",
-    "TPEx daily close quotes"
+    "TWSE STOCK_DAY_ALL"
   ],
-  "items_count": 1979,
-  "errors": []
+  "items_count": 1090,
+  "errors": [
+    "TPEx daily close quotes fetch failed: HTTP Error 520: <none>"
+  ]
 }
