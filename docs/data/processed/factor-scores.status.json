@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "updated_at": "2026-07-07T03:17:51+08:00",
-  "attempted_at": "2026-07-07T03:17:51+08:00",
-  "target_date": "2026-07-06",
-  "latest_trade_date": "2026-07-06",
+  "updated_at": "2026-07-08T00:13:28+08:00",
+  "attempted_at": "2026-07-08T00:13:28+08:00",
+  "target_date": "2026-07-07",
+  "latest_trade_date": "2026-07-07",
   "revenue_month": "2026-05",
   "items_count": 100,
   "rows_written": 100,
@@ -22,9 +22,9 @@
   "quality": {
     "stock_master_count": 1970,
     "quote_matched": 1967,
-    "score_candidates": 1073,
+    "score_candidates": 1076,
     "missing_quote_count": 3,
-    "missing_score_count": 894,
+    "missing_score_count": 891,
     "missing_quote_sample": [
       "1589",
       "1591",
@@ -38,8 +38,6 @@
       "1294",
       "1295",
       "1336",
-      "1522",
-      "1538",
       "1565",
       "1569",
       "1570",
@@ -72,7 +70,7 @@
       "2221",
       "2230",
       "2235",
-      "2321",
+      "2438",
       "2596",
       "2640",
       "2641",
@@ -80,7 +78,9 @@
       "2718",
       "2719",
       "2724",
-      "2726"
+      "2726",
+      "2729",
+      "2732"
     ]
   },
   "source_status": [
@@ -89,7 +89,7 @@
       "url": "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL",
       "ok": true,
       "http_status": 200,
-      "source_date": "2026-07-03",
+      "source_date": "2026-07-06",
       "row_count": 1368,
       "error": "",
       "required_fields_missing": []
@@ -99,8 +99,8 @@
       "url": "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes",
       "ok": true,
       "http_status": 200,
-      "source_date": "2026-07-06",
-      "row_count": 9949,
+      "source_date": "2026-07-07",
+      "row_count": 9976,
       "error": "",
       "required_fields_missing": []
     },
