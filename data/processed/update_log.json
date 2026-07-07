@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-08 01:36",
+  "updated_at": "2026-07-08 02:34",
   "items": [
     {
       "name": "stocks_master.json",
@@ -9,17 +9,6 @@
       "count": 1970,
       "status": "ok",
       "source": "TWSE ISIN public page",
-      "message": "",
-      "error": ""
-    },
-    {
-      "name": "stock_metrics_daily.json",
-      "file": "stock_metrics_daily.json",
-      "updated_at": "2026-07-08 01:36",
-      "record_count": 1970,
-      "count": 1970,
-      "status": "ok",
-      "source": "TWSE / TPEx / MOPS",
       "message": "",
       "error": ""
     },
@@ -54,6 +43,13 @@
       "status": "ok",
       "source": "local builder",
       "message": "",
+      "error": ""
+    },
+    {
+      "file": "stock_metrics_daily.json",
+      "updated_at": "2026-07-08 02:34",
+      "count": 1970,
+      "status": "ok",
       "error": ""
     }
   ]
