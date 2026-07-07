@@ -1,7 +1,7 @@
 {
-  "build_id": "20260707-0220-scorecards",
-  "updated_at": "2026-07-07T02:20:38+08:00",
-  "content_latest_at": "2026-07-07",
+  "build_id": "20260708-0136-scorecards",
+  "updated_at": "2026-07-08T01:36:02+08:00",
+  "content_latest_at": "2026-07-08",
   "symbol": "2035",
   "name": "唐榮",
   "market": "上櫃",
@@ -96,19 +96,19 @@
       "key": "technical",
       "label": "技術面",
       "weight": 30,
-      "score": 9.3,
-      "raw_score": 31.0,
-      "coverage_pct": 50.0,
-      "missing_count": 2,
+      "score": 0,
+      "raw_score": 0.0,
+      "coverage_pct": 0.0,
+      "missing_count": 4,
       "rules": [
         {
           "id": "change_1d",
           "label": "當日漲跌幅",
           "source_field": "change_pct",
-          "raw_value": 0.0,
+          "raw_value": null,
           "max_score": 12,
-          "score": 5.3,
-          "missing": false,
+          "score": 0,
+          "missing": true,
           "description": "當日價格強度。"
         },
         {
@@ -135,10 +135,10 @@
           "id": "price_available",
           "label": "成交價可用",
           "source_field": "trade_price",
-          "raw_value": 27.9,
+          "raw_value": null,
           "max_score": 4,
-          "score": 4,
-          "missing": false,
+          "score": 0,
+          "missing": true,
           "description": "有正式成交價才給資料完整分。"
         }
       ]
@@ -156,7 +156,7 @@
           "id": "volume",
           "label": "成交量",
           "source_field": "volume",
-          "raw_value": 1032,
+          "raw_value": 13,
           "max_score": 10,
           "score": 0,
           "missing": false,
@@ -206,7 +206,7 @@
       ]
     }
   },
-  "total_score": 14.8,
+  "total_score": 5.5,
   "summary": {
     "symbol": "2035",
     "code": "2035",
@@ -215,9 +215,9 @@
     "industry": "鋼鐵工業",
     "theme": "鋼鐵工業",
     "supply_chain": "鋼鐵工業",
-    "trade_price": 27.9,
-    "change_pct": 0.0,
-    "volume": 1032,
+    "trade_price": null,
+    "change_pct": null,
+    "volume": 13,
     "turnover_rate_pct": null,
     "revenue_million": 984.71,
     "revenue_mom_pct": -12.68,
@@ -226,21 +226,21 @@
     "gross_margin_pct": null,
     "financial_period": "2026-05",
     "fundamental_score": 18.3,
-    "technical_score": 31.0,
+    "technical_score": 0.0,
     "chip_score": 0.0,
     "turnover_score": 0.0,
     "weighted_scores": {
       "fundamental": 5.5,
-      "technical": 9.3,
+      "technical": 0,
       "chip": 0,
       "turnover": 0
     },
-    "total_score": 14.8,
+    "total_score": 5.5,
     "risk_level": "低",
     "entry_reason": "營收年增 26.59%，月增 -12.68%",
-    "data_quality_score": 33.3,
-    "updated_at": "2026-07-07T02:20:38+08:00",
-    "content_latest_at": "2026-07-07",
+    "data_quality_score": 20.8,
+    "updated_at": "2026-07-08T01:36:02+08:00",
+    "content_latest_at": "2026-07-08",
     "scorecard_path": "data/scorecards/2035.json",
     "news_scoring_included": false,
     "theme_scoring_included": false
@@ -248,8 +248,10 @@
   "missing_fields": [
     "change_20d",
     "change_5d",
+    "change_pct",
     "eps",
     "gross_margin_pct",
+    "trade_price",
     "turnover_rate_pct",
     "volume_ratio_5d"
   ],
