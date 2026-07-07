@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-07 02:27",
+  "updated_at": "2026-07-08 00:12",
   "items": [
     {
       "name": "stocks_master.json",
@@ -47,10 +47,10 @@
     },
     {
       "file": "stock_metrics_daily.json",
-      "updated_at": "2026-07-07 02:27",
+      "updated_at": "2026-07-08 00:12",
       "count": 1970,
       "status": "ok",
-      "error": ""
+      "error": "TWSE STOCK_DAY_ALL fetch failed: Expecting value: line 1 column 1 (char 0); MOPS monthly revenue listed fetch failed: Expecting value: line 1 column 1 (char 0); TWSE company basic fetch failed: Expecting value: line 1 column 1 (char 0)"
     }
   ]
 }
