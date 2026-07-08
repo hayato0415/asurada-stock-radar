@@ -1,6 +1,6 @@
 const DISPLAY_LIMIT = 100;
-const RADAR_JSON_PATH = "./docs/data/radar.json";
-const STATUS_JSON_PATH = "./docs/data/update_status.json";
+const RADAR_JSON_PATH = "./data/radar.json";
+const STATUS_JSON_PATH = "./data/update_status.json";
 const PROCESSED_PATH = "./data/processed";
 
 const state = {
