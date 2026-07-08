@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "updated_at": "2026-07-08T15:53:38+08:00",
-  "attempted_at": "2026-07-08T15:53:38+08:00",
-  "target_date": "2026-07-07",
-  "latest_trade_date": "2026-07-07",
+  "updated_at": "2026-07-09T02:05:12+08:00",
+  "attempted_at": "2026-07-09T02:05:12+08:00",
+  "target_date": "2026-07-08",
+  "latest_trade_date": "2026-07-08",
   "revenue_month": "2026-05",
   "items_count": 100,
   "rows_written": 100,
@@ -99,8 +99,8 @@
       "url": "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes",
       "ok": true,
       "http_status": 200,
-      "source_date": "2026-07-07",
-      "row_count": 9976,
+      "source_date": "2026-07-08",
+      "row_count": 10039,
       "error": "",
       "required_fields_missing": []
     },
@@ -141,7 +141,7 @@
       "http_status": 200,
       "source_date": null,
       "row_count": 0,
-      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Missing Subject Key Identifier (_ssl.c:1028)>",
+      "error": "Expecting value: line 1 column 1 (char 0)",
       "required_fields_missing": []
     },
     {
@@ -161,7 +161,7 @@
       "http_status": 200,
       "source_date": null,
       "row_count": 0,
-      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Missing Subject Key Identifier (_ssl.c:1028)>",
+      "error": "Expecting value: line 1 column 1 (char 0)",
       "required_fields_missing": []
     }
   ],
@@ -171,5 +171,5 @@
     "factor-scores.meta.json": "updated",
     "factor-quote-history.json": "updated"
   },
-  "unified_checked_at": "2026-07-08T15:53:54+08:00"
+  "unified_checked_at": "2026-07-09T02:05:41+08:00"
 }
