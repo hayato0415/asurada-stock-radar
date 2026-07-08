@@ -2,8 +2,6 @@ name: Update full-market stock data
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "10 10 * * 1-5"
 
 permissions:
   contents: write

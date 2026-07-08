@@ -2,11 +2,6 @@ name: Update radar close data
 
 on:
   workflow_dispatch:
-  schedule:
-    # Asia/Taipei 15:20, 16:10, 20:30
-    - cron: "20 7 * * 1-5"
-    - cron: "10 8 * * 1-5"
-    - cron: "30 12 * * 1-5"
 
 permissions:
   contents: write

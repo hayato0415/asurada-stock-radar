@@ -1,54 +1,327 @@
 {
-  "updated_at": "2026-07-08 02:34",
+  "updated_at": "2026-07-08T15:53:54+08:00",
+  "latest_trade_date": "2026-07-08",
+  "status": "ok",
+  "each_file_status": [
+    {
+      "file": "data/processed/stocks_master.json",
+      "exists": true,
+      "status": "ok",
+      "updated_at": "2026-07-08 15:53",
+      "content_latest_at": "",
+      "items_count": 1970,
+      "failed_reasons": [],
+      "previous_data_preserved": false
+    },
+    {
+      "file": "data/processed/stock_metrics_daily.json",
+      "exists": true,
+      "status": "ok",
+      "updated_at": "2026-07-08 15:53",
+      "content_latest_at": "2026-07-08",
+      "items_count": 1970,
+      "failed_reasons": [],
+      "previous_data_preserved": false
+    },
+    {
+      "file": "data/processed/ai_scores_daily.json",
+      "exists": true,
+      "status": "ok",
+      "updated_at": "2026-07-08T15:53:15+08:00",
+      "content_latest_at": "2026-07-08",
+      "items_count": 1970,
+      "failed_reasons": [],
+      "previous_data_preserved": false
+    },
+    {
+      "file": "data/processed/theme_stats.json",
+      "exists": true,
+      "status": "ok",
+      "updated_at": "2026-07-08 15:53",
+      "content_latest_at": "2026-07-08",
+      "items_count": 39,
+      "failed_reasons": [],
+      "previous_data_preserved": false
+    },
+    {
+      "file": "data/processed/news_events.json",
+      "exists": true,
+      "status": "ok",
+      "updated_at": "2026-07-01 09:00",
+      "content_latest_at": "",
+      "items_count": 5,
+      "failed_reasons": [],
+      "previous_data_preserved": false
+    },
+    {
+      "file": "data/processed/factor-scores.json",
+      "exists": true,
+      "status": "ok",
+      "updated_at": "",
+      "content_latest_at": "2026-07-08",
+      "items_count": 100,
+      "failed_reasons": [],
+      "previous_data_preserved": false
+    },
+    {
+      "file": "data/processed/factor-scores.status.json",
+      "exists": true,
+      "status": "ok",
+      "updated_at": "2026-07-08T15:53:38+08:00",
+      "content_latest_at": "2026-07-07",
+      "items_count": 100,
+      "failed_reasons": [],
+      "previous_data_preserved": false
+    },
+    {
+      "file": "data/processed/factor-scores.meta.json",
+      "exists": true,
+      "status": "ok",
+      "updated_at": "2026-07-08T15:53:38+08:00",
+      "content_latest_at": "2026-07-07",
+      "items_count": 0,
+      "failed_reasons": [],
+      "previous_data_preserved": false
+    },
+    {
+      "file": "docs/data/radar.json",
+      "exists": true,
+      "status": "ok",
+      "updated_at": "2026-07-08T15:53:35+08:00",
+      "content_latest_at": "2026-07-08",
+      "items_count": 1979,
+      "failed_reasons": [
+        "Fetched 1979 TWSE/TPEx close rows."
+      ],
+      "previous_data_preserved": false
+    },
+    {
+      "file": "docs/data/update_status.json",
+      "exists": true,
+      "status": "ok",
+      "updated_at": "2026-07-08T15:53:35+08:00",
+      "content_latest_at": "2026-07-08",
+      "items_count": 1979,
+      "failed_reasons": [
+        "Fetched 1979 TWSE/TPEx close rows."
+      ],
+      "previous_data_preserved": false
+    },
+    {
+      "file": "docs/data/processed/factor-scores.json",
+      "exists": true,
+      "status": "ok",
+      "updated_at": "",
+      "content_latest_at": "2026-07-08",
+      "items_count": 100,
+      "failed_reasons": [],
+      "previous_data_preserved": false
+    },
+    {
+      "file": "docs/data/processed/factor-scores.status.json",
+      "exists": true,
+      "status": "ok",
+      "updated_at": "2026-07-08T15:53:38+08:00",
+      "content_latest_at": "2026-07-07",
+      "items_count": 100,
+      "failed_reasons": [],
+      "previous_data_preserved": false
+    },
+    {
+      "file": "docs/data/processed/factor-scores.meta.json",
+      "exists": true,
+      "status": "ok",
+      "updated_at": "2026-07-08T15:53:38+08:00",
+      "content_latest_at": "2026-07-07",
+      "items_count": 0,
+      "failed_reasons": [],
+      "previous_data_preserved": false
+    }
+  ],
+  "stale_files": [],
+  "failed_reasons": [],
+  "warning": [],
+  "source_status": [
+    {
+      "name": "full_market_data",
+      "script": "scripts/update_full_market_data.py",
+      "ok": true,
+      "returncode": 0,
+      "started_at": "2026-07-08T15:52:43+08:00",
+      "finished_at": "2026-07-08T15:53:15+08:00",
+      "stdout_tail": "上市: 1079 stocks\n上櫃: 891 stocks\nTWSE STOCK_DAY_ALL: fetched 1369 rows\nTPEx daily close quotes: fetched 9976 rows\nMOPS monthly revenue listed: fetched 1082 rows\nMOPS monthly revenue OTC: fetched 890 rows\nTWSE company basic: fetched 1089 rows\nTPEx company basic: fetched 891 rows\nstocks_master: 1970 rows\nstock_metrics_daily: 1970 rows; quote=1967; revenue=1969; eps=0; gross_margin=0\nai_scores_daily: 1970 rows\ntheme_stats: 39 themes",
+      "stderr_tail": "",
+      "error": ""
+    },
+    {
+      "name": "ai_scorecards",
+      "script": "scripts/build_ai_scorecards.py",
+      "ok": true,
+      "returncode": 0,
+      "started_at": "2026-07-08T15:53:15+08:00",
+      "finished_at": "2026-07-08T15:53:20+08:00",
+      "stdout_tail": "AI scorecards built: 1970 stocks, top100=100, build_id=20260708-1553-scorecards",
+      "stderr_tail": "",
+      "error": ""
+    },
+    {
+      "name": "validate_ai_scoring",
+      "script": "scripts/validate_ai_scoring.py",
+      "ok": true,
+      "returncode": 0,
+      "started_at": "2026-07-08T15:53:20+08:00",
+      "finished_at": "2026-07-08T15:53:22+08:00",
+      "stdout_tail": "AI scoring validation OK: 100 ranking rows, build_id=20260708-1553-scorecards",
+      "stderr_tail": "",
+      "error": ""
+    },
+    {
+      "name": "stock_metrics",
+      "script": "scripts/update_stock_metrics.py",
+      "ok": true,
+      "returncode": 0,
+      "started_at": "2026-07-08T15:53:22+08:00",
+      "finished_at": "2026-07-08T15:53:35+08:00",
+      "stdout_tail": "TWSE STOCK_DAY_ALL: fetched 1369 rows\nTPEx daily close quotes: fetched 9976 rows\nMOPS monthly revenue listed: fetched 1082 rows\nMOPS monthly revenue OTC: fetched 890 rows\nTWSE company basic: fetched 1089 rows\nTPEx company basic: fetched 891 rows\nwrote 1970 stock metrics to C:\\Users\\Jasper\\Documents\\asurada-stock-lab\\阿斯拉台股主升段雷達\\data\\processed\\stock_metrics_daily.json; quotes=1967; revenue=1969\n2337: {'symbol': '2337', 'name': '旺宏', 'trade_price': 139.0, 'change_pct': -3.81, 'volume': 65871425, 'listed_shares': 1981308820, 'turnover_rate_pct': 3.32, 'revenue_million': 6255.65, 'revenue_mom_pct': 5.8, 'revenue_yoy_pct': 175.8}",
+      "stderr_tail": "",
+      "error": ""
+    },
+    {
+      "name": "radar_close_data",
+      "script": "scripts/update_radar.py",
+      "ok": true,
+      "returncode": 0,
+      "started_at": "2026-07-08T15:53:35+08:00",
+      "finished_at": "2026-07-08T15:53:37+08:00",
+      "stdout_tail": "success: Fetched 1979 TWSE/TPEx close rows.",
+      "stderr_tail": "",
+      "error": ""
+    },
+    {
+      "name": "factor_scores",
+      "script": "scripts/update_factor_scores.py",
+      "ok": true,
+      "returncode": 0,
+      "started_at": "2026-07-08T15:53:37+08:00",
+      "finished_at": "2026-07-08T15:53:54+08:00",
+      "stdout_tail": "factor scores updated: 100 rows\nlatest trade date: 2026-07-07\n#1 3413 京鼎 79.8\n#2 8016 矽創 79.4\n#3 1409 新纖 79.1\n#4 6579 研揚 78.8\n#5 6414 樺漢 78.1\n#6 3046 建碁 77.6\n#7 2059 川湖 76.2\n#8 2458 義隆 75.8\n#9 5388 中磊 75.8\n#10 8114 振樺電 75.3",
+      "stderr_tail": "",
+      "error": ""
+    },
+    {
+      "name": "validate_factor_scores",
+      "script": "scripts/validate_factor_scores.py",
+      "ok": true,
+      "returncode": 0,
+      "started_at": "2026-07-08T15:53:54+08:00",
+      "finished_at": "2026-07-08T15:53:54+08:00",
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "error": ""
+    }
+  ],
   "items": [
     {
-      "name": "stocks_master.json",
-      "file": "stocks_master.json",
-      "updated_at": "2026-07-08 01:36",
-      "record_count": 1970,
+      "file": "data/processed/stocks_master.json",
+      "updated_at": "2026-07-08 15:53",
+      "content_latest_at": "",
       "count": 1970,
       "status": "ok",
-      "source": "TWSE ISIN public page",
-      "message": "",
       "error": ""
     },
     {
-      "name": "ai_scores_daily.json",
-      "file": "ai_scores_daily.json",
-      "updated_at": "2026-07-08 01:36",
-      "record_count": 1970,
+      "file": "data/processed/stock_metrics_daily.json",
+      "updated_at": "2026-07-08 15:53",
+      "content_latest_at": "2026-07-08",
       "count": 1970,
       "status": "ok",
-      "source": "Derived quantitative scoring",
-      "message": "",
       "error": ""
     },
     {
-      "name": "theme_stats.json",
-      "file": "theme_stats.json",
-      "updated_at": "2026-07-08 01:36",
-      "record_count": 39,
+      "file": "data/processed/ai_scores_daily.json",
+      "updated_at": "2026-07-08T15:53:15+08:00",
+      "content_latest_at": "2026-07-08",
+      "count": 1970,
+      "status": "ok",
+      "error": ""
+    },
+    {
+      "file": "data/processed/theme_stats.json",
+      "updated_at": "2026-07-08 15:53",
+      "content_latest_at": "2026-07-08",
       "count": 39,
       "status": "ok",
-      "source": "Full-market stock, metrics, AI scores, news, manual memberships",
-      "message": "全市場題材輪動已更新",
       "error": ""
     },
     {
-      "name": "update_log.json",
-      "file": "update_log.json",
-      "updated_at": "2026-07-08 01:36",
-      "record_count": 5,
+      "file": "data/processed/news_events.json",
+      "updated_at": "2026-07-01 09:00",
+      "content_latest_at": "",
       "count": 5,
       "status": "ok",
-      "source": "local builder",
-      "message": "",
       "error": ""
     },
     {
-      "file": "stock_metrics_daily.json",
-      "updated_at": "2026-07-08 02:34",
-      "count": 1970,
+      "file": "data/processed/factor-scores.json",
+      "updated_at": "",
+      "content_latest_at": "2026-07-08",
+      "count": 100,
+      "status": "ok",
+      "error": ""
+    },
+    {
+      "file": "data/processed/factor-scores.status.json",
+      "updated_at": "2026-07-08T15:53:38+08:00",
+      "content_latest_at": "2026-07-07",
+      "count": 100,
+      "status": "ok",
+      "error": ""
+    },
+    {
+      "file": "data/processed/factor-scores.meta.json",
+      "updated_at": "2026-07-08T15:53:38+08:00",
+      "content_latest_at": "2026-07-07",
+      "count": 0,
+      "status": "ok",
+      "error": ""
+    },
+    {
+      "file": "docs/data/radar.json",
+      "updated_at": "2026-07-08T15:53:35+08:00",
+      "content_latest_at": "2026-07-08",
+      "count": 1979,
+      "status": "ok",
+      "error": "Fetched 1979 TWSE/TPEx close rows."
+    },
+    {
+      "file": "docs/data/update_status.json",
+      "updated_at": "2026-07-08T15:53:35+08:00",
+      "content_latest_at": "2026-07-08",
+      "count": 1979,
+      "status": "ok",
+      "error": "Fetched 1979 TWSE/TPEx close rows."
+    },
+    {
+      "file": "docs/data/processed/factor-scores.json",
+      "updated_at": "",
+      "content_latest_at": "2026-07-08",
+      "count": 100,
+      "status": "ok",
+      "error": ""
+    },
+    {
+      "file": "docs/data/processed/factor-scores.status.json",
+      "updated_at": "2026-07-08T15:53:38+08:00",
+      "content_latest_at": "2026-07-07",
+      "count": 100,
+      "status": "ok",
+      "error": ""
+    },
+    {
+      "file": "docs/data/processed/factor-scores.meta.json",
+      "updated_at": "2026-07-08T15:53:38+08:00",
+      "content_latest_at": "2026-07-07",
+      "count": 0,
       "status": "ok",
       "error": ""
     }

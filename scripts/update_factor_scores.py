@@ -78,6 +78,40 @@ EXCLUDED_NAME_KEYWORDS = (
     "債",
 )
 
+EXCLUDED_NAME_KEYWORDS = (
+    "ETF",
+    "ETN",
+    "指數",
+    "指數投資證券",
+    "受益證券",
+    "認購",
+    "認售",
+    "權證",
+    "牛證",
+    "熊證",
+    "特別股",
+    "可轉債",
+    "債",
+)
+
+FACTOR_NEWS_EXCLUSION_REASON = "新聞面不納入分數、不納入排名、不作為篩選條件。"
+
+
+SOURCE_NAME_MAP = {
+    TWSE_STOCK_DAY_ALL: "TWSE 上市每日行情",
+    TPEX_DAILY_QUOTES: "TPEx 上櫃每日行情",
+    TWSE_VALUATION: "TWSE 上市本益比殖利率",
+    TPEX_VALUATION: "TPEx 上櫃本益比殖利率",
+    TWSE_MONTHLY_REVENUE: "MOPS 上市月營收",
+    TPEX_MONTHLY_REVENUE: "MOPS 上櫃月營收",
+    TWSE_COMPANY_BASIC: "MOPS 上市公司基本資料",
+    TPEX_COMPANY_BASIC: "MOPS 上櫃公司基本資料",
+}
+
+
+def clean_source_name(name: str, url: str) -> str:
+    return SOURCE_NAME_MAP.get(url, name)
+
 
 @dataclass
 class SourceStatus:
@@ -92,7 +126,7 @@ class SourceStatus:
 
     def as_dict(self) -> dict[str, Any]:
         return {
-            "name": self.name,
+            "name": clean_source_name(self.name, self.url),
             "url": self.url,
             "ok": self.ok,
             "http_status": self.http_status,
@@ -927,6 +961,7 @@ def run(target_date: str | None, force_history_refresh: bool) -> int:
             "company_basic": ["MOPS / TWSE OpenAPI t187ap03_L", "MOPS / TWSE OpenAPI t187ap03_O"],
         },
     }
+    meta_payload["news_score"]["reason"] = FACTOR_NEWS_EXCLUSION_REASON
     write_json(META_OUTPUT, meta_payload)
 
     print(f"factor scores updated: {len(rows)} rows")

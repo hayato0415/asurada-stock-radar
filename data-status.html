@@ -31,24 +31,66 @@
       <div>
         <p class="eyebrow">Data Health</p>
         <h1>資料更新狀態</h1>
+        <p class="page-note">同步檢查全市場更新紀錄、雷達收盤狀態、多因子分數狀態與中繼資料。所有 JSON 讀取皆加入 cache busting，避免頁面顯示瀏覽器快取舊資料。</p>
       </div>
       <span id="dataStatusUpdatedAt" class="meta-pill">讀取中</span>
     </section>
 
     <section class="panel">
-      <div class="section-head"><h2>JSON 狀態</h2></div>
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Unified Status</p>
+          <h2>整體同步狀態</h2>
+        </div>
+      </div>
+      <div id="dataStatusSummary" class="status-summary-grid"></div>
+      <div id="dataStatusAlerts" class="status-alert-list"></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">JSON Files</p>
+          <h2>資料檔狀態</h2>
+        </div>
+      </div>
       <div class="table-wrap">
-        <table class="data-table">
+        <table class="data-table status-table">
           <thead>
             <tr>
               <th>資料檔</th>
-              <th>最新更新時間</th>
+              <th>最後更新時間</th>
+              <th>內容日期</th>
               <th>筆數</th>
               <th>狀態</th>
-              <th>錯誤訊息</th>
+              <th>錯誤 / 備註</th>
             </tr>
           </thead>
           <tbody id="dataStatusRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Source Pipeline</p>
+          <h2>更新流程紀錄</h2>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table status-table">
+          <thead>
+            <tr>
+              <th>步驟</th>
+              <th>腳本</th>
+              <th>開始</th>
+              <th>結束</th>
+              <th>狀態</th>
+              <th>錯誤</th>
+            </tr>
+          </thead>
+          <tbody id="sourceStatusRows"></tbody>
         </table>
       </div>
     </section>
