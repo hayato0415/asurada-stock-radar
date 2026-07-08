@@ -1,8 +1,8 @@
 const STATUS_FILES = [
-  { key: "updateLog", label: "全市場更新紀錄", path: "./data/processed/update_log.json" },
-  { key: "radarStatus", label: "雷達收盤狀態", path: "./docs/data/update_status.json" },
-  { key: "factorStatus", label: "多因子狀態", path: "./docs/data/processed/factor-scores.status.json" },
-  { key: "factorMeta", label: "多因子中繼資料", path: "./docs/data/processed/factor-scores.meta.json" },
+  { key: "updateLog", label: "全市場更新紀錄", path: "./data/update_status.json" },
+  { key: "radarStatus", label: "雷達收盤狀態", path: "./data/update_status.json" },
+  { key: "factorStatus", label: "多因子狀態", path: "./data/processed/factor-scores.status.json" },
+  { key: "factorMeta", label: "多因子中繼資料", path: "./data/processed/factor-scores.meta.json" },
 ];
 
 const $ = (selector) => document.querySelector(selector);

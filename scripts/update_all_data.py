@@ -28,7 +28,9 @@ DOCS_DATA = ROOT / "docs" / "data"
 DOCS_PROCESSED = DOCS_DATA / "processed"
 
 UPDATE_LOG = DATA_PROCESSED / "update_log.json"
+DATA_UPDATE_STATUS = ROOT / "data" / "update_status.json"
 DOCS_UPDATE_STATUS = DOCS_DATA / "update_status.json"
+DOCS_UPDATE_LOG = DOCS_PROCESSED / "update_log.json"
 FACTOR_STATUS = DATA_PROCESSED / "factor-scores.status.json"
 FACTOR_META = DATA_PROCESSED / "factor-scores.meta.json"
 DOCS_FACTOR_STATUS = DOCS_PROCESSED / "factor-scores.status.json"
@@ -59,8 +61,10 @@ WATCHED_FILES = [
     DATA_PROCESSED / "factor-scores.json",
     DATA_PROCESSED / "factor-scores.status.json",
     DATA_PROCESSED / "factor-scores.meta.json",
+    DATA_UPDATE_STATUS,
     DOCS_DATA / "radar.json",
     DOCS_DATA / "update_status.json",
+    DOCS_PROCESSED / "update_log.json",
     DOCS_PROCESSED / "factor-scores.json",
     DOCS_PROCESSED / "factor-scores.status.json",
     DOCS_PROCESSED / "factor-scores.meta.json",
@@ -359,6 +363,7 @@ def write_unified_status(step_results: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
     write_json(UPDATE_LOG, payload)
+    write_json(DOCS_UPDATE_LOG, payload)
 
     existing_status = read_json(DOCS_UPDATE_STATUS, {})
     if not isinstance(existing_status, dict):
@@ -375,6 +380,7 @@ def write_unified_status(step_results: list[dict[str, Any]]) -> dict[str, Any]:
         "warning": warning,
         "source_status": step_results,
     })
+    write_json(DATA_UPDATE_STATUS, existing_status)
     write_json(DOCS_UPDATE_STATUS, existing_status)
     return payload
 

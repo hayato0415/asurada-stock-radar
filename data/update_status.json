@@ -1,7 +1,16 @@
 {
-  "updated_at": "2026-07-08T15:53:54+08:00",
-  "latest_trade_date": "2026-07-08",
   "status": "ok",
+  "message": "Unified full refresh completed",
+  "trade_date": "2026-07-08",
+  "updated_at": "2026-07-08T15:53:54+08:00",
+  "timezone": "Asia/Taipei",
+  "source": [
+    "TWSE STOCK_DAY_ALL",
+    "TPEx daily close quotes"
+  ],
+  "items_count": 1979,
+  "errors": [],
+  "latest_trade_date": "2026-07-08",
   "each_file_status": [
     {
       "file": "data/processed/stocks_master.json",
@@ -217,112 +226,6 @@
       "finished_at": "2026-07-08T15:53:54+08:00",
       "stdout_tail": "",
       "stderr_tail": "",
-      "error": ""
-    }
-  ],
-  "items": [
-    {
-      "file": "data/processed/stocks_master.json",
-      "updated_at": "2026-07-08 15:53",
-      "content_latest_at": "",
-      "count": 1970,
-      "status": "ok",
-      "error": ""
-    },
-    {
-      "file": "data/processed/stock_metrics_daily.json",
-      "updated_at": "2026-07-08 15:53",
-      "content_latest_at": "2026-07-08",
-      "count": 1970,
-      "status": "ok",
-      "error": ""
-    },
-    {
-      "file": "data/processed/ai_scores_daily.json",
-      "updated_at": "2026-07-08T15:53:15+08:00",
-      "content_latest_at": "2026-07-08",
-      "count": 1970,
-      "status": "ok",
-      "error": ""
-    },
-    {
-      "file": "data/processed/theme_stats.json",
-      "updated_at": "2026-07-08 15:53",
-      "content_latest_at": "2026-07-08",
-      "count": 39,
-      "status": "ok",
-      "error": ""
-    },
-    {
-      "file": "data/processed/news_events.json",
-      "updated_at": "2026-07-01 09:00",
-      "content_latest_at": "",
-      "count": 5,
-      "status": "ok",
-      "error": ""
-    },
-    {
-      "file": "data/processed/factor-scores.json",
-      "updated_at": "",
-      "content_latest_at": "2026-07-08",
-      "count": 100,
-      "status": "ok",
-      "error": ""
-    },
-    {
-      "file": "data/processed/factor-scores.status.json",
-      "updated_at": "2026-07-08T15:53:38+08:00",
-      "content_latest_at": "2026-07-07",
-      "count": 100,
-      "status": "ok",
-      "error": ""
-    },
-    {
-      "file": "data/processed/factor-scores.meta.json",
-      "updated_at": "2026-07-08T15:53:38+08:00",
-      "content_latest_at": "2026-07-07",
-      "count": 0,
-      "status": "ok",
-      "error": ""
-    },
-    {
-      "file": "docs/data/radar.json",
-      "updated_at": "2026-07-08T15:53:35+08:00",
-      "content_latest_at": "2026-07-08",
-      "count": 1979,
-      "status": "ok",
-      "error": "Fetched 1979 TWSE/TPEx close rows."
-    },
-    {
-      "file": "docs/data/update_status.json",
-      "updated_at": "2026-07-08T15:53:35+08:00",
-      "content_latest_at": "2026-07-08",
-      "count": 1979,
-      "status": "ok",
-      "error": "Fetched 1979 TWSE/TPEx close rows."
-    },
-    {
-      "file": "docs/data/processed/factor-scores.json",
-      "updated_at": "",
-      "content_latest_at": "2026-07-08",
-      "count": 100,
-      "status": "ok",
-      "error": ""
-    },
-    {
-      "file": "docs/data/processed/factor-scores.status.json",
-      "updated_at": "2026-07-08T15:53:38+08:00",
-      "content_latest_at": "2026-07-07",
-      "count": 100,
-      "status": "ok",
-      "error": ""
-    },
-    {
-      "file": "docs/data/processed/factor-scores.meta.json",
-      "updated_at": "2026-07-08T15:53:38+08:00",
-      "content_latest_at": "2026-07-07",
-      "count": 0,
-      "status": "ok",
       "error": ""
     }
   ]

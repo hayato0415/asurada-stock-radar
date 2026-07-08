@@ -37,6 +37,7 @@ jobs:
           cp -v .nojekyll _site/
           cp -R assets _site/assets
           mkdir -p _site/data
+          cp -v docs/data/update_status.json _site/data/update_status.json
           cp -R data/processed _site/data/processed
           mkdir -p _site/docs
           cp -R docs/data _site/docs/data
@@ -45,6 +46,7 @@ jobs:
           test -f _site/assets/js/radar-page.js
           test -f _site/docs/data/radar.json
           test -f _site/docs/data/update_status.json
+          test -f _site/data/update_status.json
           test -f _site/data/processed/stocks_master.json
           test -f _site/data/processed/ai_scores_daily.json
           test -f _site/data/processed/stock_metrics_daily.json
