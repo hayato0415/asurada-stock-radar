@@ -1,4 +1,4 @@
-import { loadProcessedData, getItems } from "./api.js";
+import { loadProcessedData, getItems, loadSiteMeta } from "./api.js";
 import { $, escapeHtml, renderEmpty } from "./utils.js";
 import { formatDateTime, formatNumber, formatPercent, formatSignedPercent, valueClass } from "./formatters.js";
 import { riskBadge, scoreBadge, statusBadge } from "./scoring-ui.js";
@@ -10,6 +10,8 @@ let metrics = [];
 let stockDataUpdatedAt = "";
 let metricsUpdatedAt = "";
 let metricsRevenueMonth = "";
+let metricsLatestTradeDate = "";
+let siteMeta = null;
 
 function getSymbolFromUrl() {
   const params = new URLSearchParams(window.location.search);
@@ -142,9 +144,16 @@ function renderStock(stock) {
   const relatedNews = news.filter((item) => item.stocks?.some((newsStock) => String(newsStock.code ?? newsStock.symbol) === String(stock.symbol)));
   const theme = score.theme || stock.theme || stock.supply_chain || stock.industry || "--";
   const supplyChain = stock.supply_chain || stock.industry || "--";
-  const updatedAt = score.updated_at || score.market_date || metric.updated_at || stock.updated_at || metricsUpdatedAt || stockDataUpdatedAt;
+  const stockDate = score.market_date || metric.latest_trade_date || metric.trade_date || metricsLatestTradeDate || stock.updated_at || "";
+  const siteDate = siteMeta?.latest_trade_date || "";
+  const syncNote = siteDate && stockDate && String(stockDate).slice(0, 10) !== String(siteDate).slice(0, 10)
+    ? "｜個股資料未同步"
+    : "";
+  const updatedAt = siteMeta?.generated_at || score.updated_at || metric.updated_at || metricsUpdatedAt || stockDataUpdatedAt;
 
-  $("#stockUpdatedAt").textContent = `資料更新：${formatDateTime(updatedAt)}`;
+  $("#stockUpdatedAt").textContent = siteMeta?.generated_at
+    ? `全站更新：${formatDateTime(siteMeta.generated_at)}｜個股資料：${formatDateTime(stockDate || siteDate)}${syncNote}`
+    : `資料更新：${formatDateTime(updatedAt)}`;
   root.innerHTML = `
     <section class="panel battle-card">
       <div class="section-head">
@@ -224,6 +233,7 @@ function bindSearch() {
 }
 
 async function initStockPage() {
+  siteMeta = await loadSiteMeta();
   const loaded = await loadProcessedData(["stocks_master.json", "ai_scores_daily.json", "news_events.json", "stock_metrics_daily.json"]);
   stocks = getItems(loaded["stocks_master.json"].data);
   stockDataUpdatedAt = loaded["stocks_master.json"].data?.updated_at || "";
@@ -232,6 +242,10 @@ async function initStockPage() {
   metrics = getItems(loaded["stock_metrics_daily.json"].data);
   metricsUpdatedAt = loaded["stock_metrics_daily.json"].data?.updated_at || "";
   metricsRevenueMonth = loaded["stock_metrics_daily.json"].data?.revenue_month || "";
+  metricsLatestTradeDate = loaded["stock_metrics_daily.json"].data?.latest_trade_date
+    || loaded["stock_metrics_daily.json"].data?.trade_date
+    || loaded["stock_metrics_daily.json"].data?.date
+    || "";
 
   renderStockOptions();
   bindSearch();

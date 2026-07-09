@@ -31,7 +31,7 @@
       <div>
         <p class="eyebrow">Data Health</p>
         <h1>資料更新狀態</h1>
-        <p class="page-note">同步檢查全市場更新紀錄、雷達收盤狀態、多因子分數狀態與中繼資料。所有 JSON 讀取皆加入 cache busting，避免頁面顯示瀏覽器快取舊資料。</p>
+        <p class="page-note">同步檢查全市場更新紀錄、雷達收盤狀態、多因子分數狀態與中繼資料。所有 JSON 讀取都會套用全站資料版本，避免瀏覽器快取造成舊資料誤判。</p>
       </div>
       <span id="dataStatusUpdatedAt" class="meta-pill">讀取中</span>
     </section>

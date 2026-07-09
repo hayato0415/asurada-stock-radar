@@ -1,4 +1,4 @@
-name: Update full-market stock data
+name: Update full-market stock data (Manual Unified)
 
 on:
   workflow_dispatch:
@@ -6,12 +6,18 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: asurada-update-all-site-data
+  cancel-in-progress: false
+
 jobs:
   update-data:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -19,25 +25,44 @@ jobs:
           python-version: "3.11"
 
       - name: Install Python dependencies
-        run: python -m pip install requests
-
-      - name: Build processed data
-        run: python scripts/update_full_market_data.py
-
-      - name: Build AI scorecards
-        run: python scripts/build_ai_scorecards.py
-
-      - name: Validate AI scoring
-        run: python scripts/validate_ai_scoring.py
-
-      - name: Commit processed data changes
         run: |
-          if git diff --quiet -- data/processed data/latest data/scorecards data/config; then
-            echo "No processed data changes."
-            exit 0
-          fi
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then python -m pip install -r requirements.txt; fi
+          python -m pip install requests
+
+      - name: Run unified site data update
+        run: python scripts/update_all_site_data.py
+
+      - name: Validate generated data
+        run: python scripts/validate_site_data.py --strict
+
+      - name: Commit unified data changes
+        shell: bash
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/processed/*.json data/latest/*.json data/scorecards/*.json data/config/*.json
-          git commit -m "Update full-market stock radar data"
-          git push
+
+          paths=(
+            "data/processed/*.json"
+            "data/latest/*.json"
+            "data/scorecards/*.json"
+            "data/config/*.json"
+            "docs/data/*.json"
+            "docs/data/processed/*.json"
+          )
+          staged_any=false
+          for pattern in "${paths[@]}"; do
+            for file in $pattern; do
+              if [ -e "$file" ]; then
+                git add "$file"
+                staged_any=true
+              fi
+            done
+          done
+          if [ "$staged_any" = false ]; then
+            echo "No generated data files found to stage."
+            exit 0
+          fi
+
+          git diff --cached --quiet && echo "No changes to commit" || git commit -m "data: unified full-site update"
+          git push origin main

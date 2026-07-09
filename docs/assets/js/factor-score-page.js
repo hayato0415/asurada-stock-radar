@@ -1,4 +1,4 @@
-import { loadProcessedData, getItems } from "./api.js";
+import { loadProcessedData, getItems, loadSiteMeta } from "./api.js";
 import { $, escapeHtml, initTableFreezeToggles, renderEmpty, updateStickyTableHeaderOffsets } from "./utils.js";
 import { formatDateTime, formatNumber, formatPercent, formatSignedPercent, valueClass } from "./formatters.js";
 
@@ -12,6 +12,7 @@ const WEIGHTS = {
 let factorRows = [];
 let factorStatus = null;
 let factorMeta = null;
+let siteMeta = null;
 
 function hasNumber(value) {
   return value !== null && value !== undefined && value !== "" && Number.isFinite(Number(value));
@@ -319,6 +320,7 @@ async function initFactorScorePage() {
   window.addEventListener("resize", updateStickyTableHeaderOffsets);
   initTableFreezeToggles();
 
+  siteMeta = await loadSiteMeta();
   const loaded = await loadProcessedData([
     "factor-scores.json",
     "factor-scores.status.json",
@@ -336,8 +338,14 @@ async function initFactorScorePage() {
   }
 
   factorRows = dataArrayFromLoaded(loaded, "factor-scores.json").map(normalizeRow);
-  const updatedAt = factorStatus?.latest_trade_date || factorRows.map((row) => row.updatedAt).filter(Boolean).sort().at(-1);
-  $("#factorUpdatedAt").textContent = updatedAt ? `資料日期：${formatDateTime(updatedAt)}` : "更新時間未標示";
+  const factorDate = factorStatus?.latest_trade_date || factorRows.map((row) => row.updatedAt).filter(Boolean).sort().at(-1);
+  const siteDate = siteMeta?.latest_trade_date || "";
+  const syncNote = siteDate && factorDate && String(factorDate).slice(0, 10) !== String(siteDate).slice(0, 10)
+    ? "｜多因子資料未同步"
+    : "";
+  $("#factorUpdatedAt").textContent = siteMeta?.generated_at
+    ? `全站更新：${formatDateTime(siteMeta.generated_at)}｜多因子資料：${formatDateTime(factorDate)}${syncNote}`
+    : (factorDate ? `資料日期：${formatDateTime(factorDate)}${syncNote}` : "更新時間未標示");
 
   if (factorMeta?.weights?.news === 0) {
     console.info("多因子評分：新聞面權重為 0，不參與分數、排名或篩選。");

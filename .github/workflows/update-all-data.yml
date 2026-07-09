@@ -1,19 +1,13 @@
-name: Update all stock radar data
+name: Manual unified data update
 
 on:
   workflow_dispatch:
-  schedule:
-    # Asia/Taipei 08:30, 15:20, 16:10, 20:30
-    - cron: "30 0 * * 1-5"
-    - cron: "20 7 * * 1-5"
-    - cron: "10 8 * * 1-5"
-    - cron: "30 12 * * 1-5"
 
 permissions:
   contents: write
 
 concurrency:
-  group: update-all-data
+  group: asurada-update-all-site-data
   cancel-in-progress: false
 
 jobs:
@@ -40,7 +34,10 @@ jobs:
           python -m pip install requests
 
       - name: Run unified data refresh
-        run: python scripts/update_all_data.py
+        run: python scripts/update_all_site_data.py
+
+      - name: Validate generated data
+        run: python scripts/validate_site_data.py --strict
 
       - name: Commit unified data changes
         shell: bash
@@ -71,5 +68,5 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "Update all stock radar data"
+          git commit -m "data: unified full-site update"
           git push origin main

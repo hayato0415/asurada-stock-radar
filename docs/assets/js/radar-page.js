@@ -2,6 +2,9 @@ const DISPLAY_LIMIT = 100;
 const RADAR_JSON_PATH = "./data/radar.json";
 const STATUS_JSON_PATH = "./data/update_status.json";
 const PROCESSED_PATH = "./data/processed";
+const SITE_META_PATH = "./data/site_meta.json";
+
+let siteMeta = null;
 
 const state = {
   rows: [],
@@ -26,7 +29,8 @@ function escapeHtml(value) {
 
 function cacheBust(path) {
   const joiner = path.includes("?") ? "&" : "?";
-  return `${path}${joiner}t=${Date.now()}`;
+  const version = siteMeta?.data_version || siteMeta?.run_id || Date.now();
+  return `${path}${joiner}v=${encodeURIComponent(version)}`;
 }
 
 async function fetchJson(path) {
@@ -35,6 +39,17 @@ async function fetchJson(path) {
     throw new Error(`${path} HTTP ${response.status}`);
   }
   return response.json();
+}
+
+async function loadSiteMeta() {
+  try {
+    const response = await fetch(`${SITE_META_PATH}?t=${Date.now()}`, { cache: "no-store" });
+    if (!response.ok) return null;
+    return response.json();
+  } catch (error) {
+    console.warn("Site meta not available for radar page.", error);
+    return null;
+  }
 }
 
 async function safeFetchJson(label, path) {
@@ -612,6 +627,7 @@ function initTableFreezeToggles() {
 async function loadAndRender() {
   renderStatus({ status: "loading", message: "正在讀取最新雷達資料。" }, null);
   try {
+    siteMeta = await loadSiteMeta();
     const [stocksPayload, scoresPayload, metricsPayload, radarPayload, statusPayload] = await Promise.all([
       loadProcessedFile("stocks_master.json"),
       loadProcessedFile("ai_scores_daily.json"),
@@ -646,6 +662,7 @@ async function loadAndRender() {
 async function loadAndRenderResilient() {
   renderStatusResilient({ status: "loading", message: "正在讀取最新雷達資料。" }, null);
   try {
+    siteMeta = await loadSiteMeta();
     const [stocksResult, scoresResult, metricsResult, radarResult, statusResult] = await Promise.all([
       safeFetchJson("stocks_master.json", `${PROCESSED_PATH}/stocks_master.json`),
       safeFetchJson("ai_scores_daily.json", `${PROCESSED_PATH}/ai_scores_daily.json`),

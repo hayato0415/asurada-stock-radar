@@ -14,8 +14,14 @@
       "news_score": 91,
       "theme": "CPO / 光通訊",
       "stocks": [
-        { "code": "6442", "name": "光聖" },
-        { "code": "2330", "name": "台積電" }
+        {
+          "code": "6442",
+          "name": "光聖"
+        },
+        {
+          "code": "2330",
+          "name": "台積電"
+        }
       ],
       "ai_judgement": "題材與需求能見度同步，屬偏多催化。",
       "operation_meaning": "適合觀察龍頭是否帶動低位階補漲。"
@@ -33,8 +39,14 @@
       "news_score": 88,
       "theme": "記憶體 / DRAM",
       "stocks": [
-        { "code": "2344", "name": "華邦電" },
-        { "code": "2408", "name": "南亞科" }
+        {
+          "code": "2344",
+          "name": "華邦電"
+        },
+        {
+          "code": "2408",
+          "name": "南亞科"
+        }
       ],
       "ai_judgement": "供需改善與報價催化明確。",
       "operation_meaning": "追價風險高，宜觀察拉回承接。"
@@ -52,8 +64,14 @@
       "news_score": 84,
       "theme": "PCB / ABF 載板",
       "stocks": [
-        { "code": "8046", "name": "南電" },
-        { "code": "3037", "name": "欣興" }
+        {
+          "code": "8046",
+          "name": "南電"
+        },
+        {
+          "code": "3037",
+          "name": "欣興"
+        }
       ],
       "ai_judgement": "基本面線索支撐中線題材。",
       "operation_meaning": "留意族群擴散度是否延續。"
@@ -71,8 +89,14 @@
       "news_score": 76,
       "theme": "AI 半導體",
       "stocks": [
-        { "code": "2330", "name": "台積電" },
-        { "code": "2454", "name": "聯發科" }
+        {
+          "code": "2330",
+          "name": "台積電"
+        },
+        {
+          "code": "2454",
+          "name": "聯發科"
+        }
       ],
       "ai_judgement": "不是趨勢反轉，但短線風險升高。",
       "operation_meaning": "避免高檔追價，等待分歧後再觀察。"
@@ -90,11 +114,22 @@
       "news_score": 80,
       "theme": "AI 電力",
       "stocks": [
-        { "code": "1504", "name": "東元" },
-        { "code": "8996", "name": "高力" }
+        {
+          "code": "1504",
+          "name": "東元"
+        },
+        {
+          "code": "8996",
+          "name": "高力"
+        }
       ],
       "ai_judgement": "題材具延伸性，但仍需後續訂單與營收驗證。",
       "operation_meaning": "適合觀察低位階轉強股，不宜只追單日急漲。"
     }
-  ]
+  ],
+  "run_id": "20260709194923",
+  "generated_at": "2026-07-09T19:49:23+08:00",
+  "latest_trade_date": "2026-07-08",
+  "data_version": "20260708-1949",
+  "source_pipeline": "update_all_site_data"
 }

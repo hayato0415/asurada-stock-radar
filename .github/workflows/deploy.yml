@@ -37,19 +37,26 @@ jobs:
           cp -v .nojekyll _site/
           cp -R assets _site/assets
           mkdir -p _site/data
-          cp -v docs/data/update_status.json _site/data/update_status.json
-          cp -R data/processed _site/data/processed
-          mkdir -p _site/docs
-          cp -R docs/data _site/docs/data
+          cp -R docs/data/. _site/data/
+          if [ -d data/processed ]; then
+            mkdir -p _site/data/processed
+            cp -R data/processed/. _site/data/processed/
+          fi
+          if [ -d docs/data/processed ]; then
+            mkdir -p _site/data/processed
+            cp -R docs/data/processed/. _site/data/processed/
+          fi
 
           test -f _site/radar.html
           test -f _site/assets/js/radar-page.js
-          test -f _site/docs/data/radar.json
-          test -f _site/docs/data/update_status.json
+          test -f _site/data/site_meta.json
+          test -f _site/data/data_status.json
+          test -f _site/data/radar.json
           test -f _site/data/update_status.json
           test -f _site/data/processed/stocks_master.json
           test -f _site/data/processed/ai_scores_daily.json
           test -f _site/data/processed/stock_metrics_daily.json
+          test -f _site/data/processed/factor-scores.json
 
       - name: Upload static site
         uses: actions/upload-pages-artifact@v3
