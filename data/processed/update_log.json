@@ -1,15 +1,15 @@
 {
-  "updated_at": "2026-07-09T02:05:41+08:00",
+  "updated_at": "2026-07-09T19:39:52+08:00",
   "latest_trade_date": "2026-07-09",
-  "status": "ok",
+  "status": "partial_failed",
   "each_file_status": [
     {
       "file": "data/processed/stocks_master.json",
       "exists": true,
       "status": "ok",
-      "updated_at": "2026-07-09 02:04",
+      "updated_at": "2026-07-09 19:38",
       "content_latest_at": "",
-      "items_count": 1970,
+      "items_count": 0,
       "failed_reasons": [],
       "previous_data_preserved": false
     },
@@ -17,9 +17,9 @@
       "file": "data/processed/stock_metrics_daily.json",
       "exists": true,
       "status": "ok",
-      "updated_at": "2026-07-09 02:05",
+      "updated_at": "2026-07-09 19:39",
       "content_latest_at": "2026-07-09",
-      "items_count": 1970,
+      "items_count": 0,
       "failed_reasons": [],
       "previous_data_preserved": false
     },
@@ -27,9 +27,9 @@
       "file": "data/processed/ai_scores_daily.json",
       "exists": true,
       "status": "ok",
-      "updated_at": "2026-07-09T02:04:48+08:00",
+      "updated_at": "2026-07-09T19:39:12+08:00",
       "content_latest_at": "2026-07-09",
-      "items_count": 1970,
+      "items_count": 0,
       "failed_reasons": [],
       "previous_data_preserved": false
     },
@@ -37,9 +37,9 @@
       "file": "data/processed/theme_stats.json",
       "exists": true,
       "status": "ok",
-      "updated_at": "2026-07-09 02:04",
+      "updated_at": "2026-07-09 19:39",
       "content_latest_at": "2026-07-09",
-      "items_count": 39,
+      "items_count": 0,
       "failed_reasons": [],
       "previous_data_preserved": false
     },
@@ -66,12 +66,15 @@
     {
       "file": "data/processed/factor-scores.status.json",
       "exists": true,
-      "status": "ok",
-      "updated_at": "2026-07-09T02:05:12+08:00",
-      "content_latest_at": "2026-07-08",
+      "status": "failed",
+      "updated_at": "2026-07-09T19:39:33+08:00",
+      "content_latest_at": "",
       "items_count": 100,
-      "failed_reasons": [],
-      "previous_data_preserved": false
+      "failed_reasons": [
+        "TWSE 行情來源失敗：Expecting value: line 1 column 1 (char 0)",
+        "官方行情來源沒有可辨識的交易日期"
+      ],
+      "previous_data_preserved": true
     },
     {
       "file": "data/processed/factor-scores.meta.json",
@@ -99,11 +102,12 @@
       "file": "docs/data/radar.json",
       "exists": true,
       "status": "ok",
-      "updated_at": "2026-07-09T02:05:05+08:00",
+      "updated_at": "2026-07-09T19:39:27+08:00",
       "content_latest_at": "2026-07-09",
-      "items_count": 1979,
+      "items_count": 889,
       "failed_reasons": [
-        "Fetched 1979 TWSE/TPEx close rows."
+        "TWSE STOCK_DAY_ALL fetch failed: Expecting value: line 1 column 1 (char 0)",
+        "Fetched 889 TWSE/TPEx close rows."
       ],
       "previous_data_preserved": false
     },
@@ -111,11 +115,12 @@
       "file": "docs/data/update_status.json",
       "exists": true,
       "status": "ok",
-      "updated_at": "2026-07-09T02:05:05+08:00",
+      "updated_at": "2026-07-09T19:39:27+08:00",
       "content_latest_at": "2026-07-09",
-      "items_count": 1979,
+      "items_count": 889,
       "failed_reasons": [
-        "Fetched 1979 TWSE/TPEx close rows."
+        "TWSE STOCK_DAY_ALL fetch failed: Expecting value: line 1 column 1 (char 0)",
+        "Fetched 889 TWSE/TPEx close rows."
       ],
       "previous_data_preserved": false
     },
@@ -123,9 +128,9 @@
       "file": "docs/data/processed/update_log.json",
       "exists": true,
       "status": "ok",
-      "updated_at": "2026-07-08T15:53:54+08:00",
-      "content_latest_at": "2026-07-08",
-      "items_count": 13,
+      "updated_at": "2026-07-09T02:05:41+08:00",
+      "content_latest_at": "2026-07-09",
+      "items_count": 15,
       "failed_reasons": [],
       "previous_data_preserved": false
     },
@@ -142,12 +147,15 @@
     {
       "file": "docs/data/processed/factor-scores.status.json",
       "exists": true,
-      "status": "ok",
-      "updated_at": "2026-07-09T02:05:12+08:00",
-      "content_latest_at": "2026-07-08",
+      "status": "failed",
+      "updated_at": "2026-07-09T19:39:33+08:00",
+      "content_latest_at": "",
       "items_count": 100,
-      "failed_reasons": [],
-      "previous_data_preserved": false
+      "failed_reasons": [
+        "TWSE 行情來源失敗：Expecting value: line 1 column 1 (char 0)",
+        "官方行情來源沒有可辨識的交易日期"
+      ],
+      "previous_data_preserved": true
     },
     {
       "file": "docs/data/processed/factor-scores.meta.json",
@@ -161,19 +169,25 @@
     }
   ],
   "stale_files": [],
-  "failed_reasons": [],
-  "warning": [
-    "Before Taipei 15:20 close-data refresh window; previous trading day is acceptable."
+  "failed_reasons": [
+    "validate_ai_scoring: AI scoring validation failed: ai-ranking-top100.json items must not be empty",
+    "data/processed/factor-scores.status.json: TWSE 行情來源失敗：Expecting value: line 1 column 1 (char 0)",
+    "data/processed/factor-scores.status.json: 官方行情來源沒有可辨識的交易日期",
+    "data/processed/factor-scores.status.json: update failed; previous usable data was preserved.",
+    "docs/data/processed/factor-scores.status.json: TWSE 行情來源失敗：Expecting value: line 1 column 1 (char 0)",
+    "docs/data/processed/factor-scores.status.json: 官方行情來源沒有可辨識的交易日期",
+    "docs/data/processed/factor-scores.status.json: update failed; previous usable data was preserved."
   ],
+  "warning": [],
   "source_status": [
     {
       "name": "full_market_data",
       "script": "scripts/update_full_market_data.py",
       "ok": true,
       "returncode": 0,
-      "started_at": "2026-07-09T02:04:23+08:00",
-      "finished_at": "2026-07-09T02:04:48+08:00",
-      "stdout_tail": "上市: 1079 stocks\n上櫃: 891 stocks\nTWSE STOCK_DAY_ALL: fetched 1369 rows\nTPEx daily close quotes: fetched 10039 rows\nMOPS monthly revenue listed: fetched 1082 rows\nMOPS monthly revenue OTC: fetched 890 rows\nTWSE company basic: fetched 1089 rows\nTPEx company basic: fetched 891 rows\nstocks_master: 1970 rows\nstock_metrics_daily: 1970 rows; quote=1967; revenue=1969; eps=0; gross_margin=0\nai_scores_daily: 1970 rows\ntheme_stats: 39 themes",
+      "started_at": "2026-07-09T19:38:54+08:00",
+      "finished_at": "2026-07-09T19:39:12+08:00",
+      "stdout_tail": "上市: 0 stocks\n上櫃: 0 stocks\nTWSE STOCK_DAY_ALL fetch failed: Expecting value: line 1 column 1 (char 0)\nTPEx daily close quotes: fetched 10093 rows\nMOPS monthly revenue listed fetch failed: Expecting value: line 1 column 1 (char 0)\nMOPS monthly revenue OTC: fetched 890 rows\nTWSE company basic fetch failed: Expecting value: line 1 column 1 (char 0)\nTPEx company basic: fetched 891 rows\nstocks_master: 0 rows\nstock_metrics_daily: 0 rows; quote=0; revenue=0; eps=0; gross_margin=0\nai_scores_daily: 0 rows\ntheme_stats: 0 themes",
       "stderr_tail": "",
       "error": ""
     },
@@ -182,31 +196,31 @@
       "script": "scripts/build_ai_scorecards.py",
       "ok": true,
       "returncode": 0,
-      "started_at": "2026-07-09T02:04:48+08:00",
-      "finished_at": "2026-07-09T02:04:49+08:00",
-      "stdout_tail": "AI scorecards built: 1970 stocks, top100=100, build_id=20260709-0204-scorecards",
+      "started_at": "2026-07-09T19:39:12+08:00",
+      "finished_at": "2026-07-09T19:39:12+08:00",
+      "stdout_tail": "AI scorecards built: 0 stocks, top100=0, build_id=20260709-1939-scorecards",
       "stderr_tail": "",
       "error": ""
     },
     {
       "name": "validate_ai_scoring",
       "script": "scripts/validate_ai_scoring.py",
-      "ok": true,
-      "returncode": 0,
-      "started_at": "2026-07-09T02:04:49+08:00",
-      "finished_at": "2026-07-09T02:04:49+08:00",
-      "stdout_tail": "AI scoring validation OK: 100 ranking rows, build_id=20260709-0204-scorecards",
-      "stderr_tail": "",
-      "error": ""
+      "ok": false,
+      "returncode": 1,
+      "started_at": "2026-07-09T19:39:12+08:00",
+      "finished_at": "2026-07-09T19:39:12+08:00",
+      "stdout_tail": "",
+      "stderr_tail": "AI scoring validation failed: ai-ranking-top100.json items must not be empty",
+      "error": "AI scoring validation failed: ai-ranking-top100.json items must not be empty"
     },
     {
       "name": "stock_metrics",
       "script": "scripts/update_stock_metrics.py",
       "ok": true,
       "returncode": 0,
-      "started_at": "2026-07-09T02:04:49+08:00",
-      "finished_at": "2026-07-09T02:05:05+08:00",
-      "stdout_tail": "TWSE STOCK_DAY_ALL: fetched 1369 rows\nTPEx daily close quotes: fetched 10039 rows\nMOPS monthly revenue listed: fetched 1082 rows\nMOPS monthly revenue OTC: fetched 890 rows\nTWSE company basic: fetched 1089 rows\nTPEx company basic: fetched 891 rows\nwrote 1970 stock metrics to /home/runner/work/asurada-stock-radar/asurada-stock-radar/data/processed/stock_metrics_daily.json; quotes=1967; revenue=1969\n2337: {'symbol': '2337', 'name': '旺宏', 'trade_price': 139.0, 'change_pct': -3.81, 'volume': 65871425, 'listed_shares': 1981308820, 'turnover_rate_pct': 3.32, 'revenue_million': 6255.65, 'revenue_mom_pct': 5.8, 'revenue_yoy_pct': 175.8}",
+      "started_at": "2026-07-09T19:39:12+08:00",
+      "finished_at": "2026-07-09T19:39:27+08:00",
+      "stdout_tail": "TWSE STOCK_DAY_ALL fetch failed: Expecting value: line 1 column 1 (char 0)\nTPEx daily close quotes: fetched 10093 rows\nMOPS monthly revenue listed fetch failed: Expecting value: line 1 column 1 (char 0)\nMOPS monthly revenue OTC: fetched 890 rows\nTWSE company basic fetch failed: Expecting value: line 1 column 1 (char 0)\nTPEx company basic: fetched 891 rows\nwrote 0 stock metrics to /home/runner/work/asurada-stock-radar/asurada-stock-radar/data/processed/stock_metrics_daily.json; quotes=0; revenue=0\n2337: None",
       "stderr_tail": "",
       "error": ""
     },
@@ -215,9 +229,9 @@
       "script": "scripts/update_radar.py",
       "ok": true,
       "returncode": 0,
-      "started_at": "2026-07-09T02:05:05+08:00",
-      "finished_at": "2026-07-09T02:05:12+08:00",
-      "stdout_tail": "success: Fetched 1979 TWSE/TPEx close rows.",
+      "started_at": "2026-07-09T19:39:27+08:00",
+      "finished_at": "2026-07-09T19:39:33+08:00",
+      "stdout_tail": "success: Fetched 889 TWSE/TPEx close rows.\nerrors:\n- TWSE STOCK_DAY_ALL fetch failed: Expecting value: line 1 column 1 (char 0)",
       "stderr_tail": "",
       "error": ""
     },
@@ -226,9 +240,9 @@
       "script": "scripts/update_factor_scores.py",
       "ok": true,
       "returncode": 0,
-      "started_at": "2026-07-09T02:05:12+08:00",
-      "finished_at": "2026-07-09T02:05:41+08:00",
-      "stdout_tail": "factor scores updated: 100 rows\nlatest trade date: 2026-07-08\n#1 3413 京鼎 82.2\n#2 1409 新纖 81.5\n#3 6579 研揚 81.2\n#4 6414 樺漢 80.5\n#5 8016 矽創 80.2\n#6 3046 建碁 80.0\n#7 5388 中磊 78.0\n#8 2059 川湖 77.6\n#9 8114 振樺電 77.2\n#10 2458 義隆 76.6",
+      "started_at": "2026-07-09T19:39:33+08:00",
+      "finished_at": "2026-07-09T19:39:52+08:00",
+      "stdout_tail": "factor score update failed; previous factor-scores.json preserved\n- TWSE 行情來源失敗：Expecting value: line 1 column 1 (char 0)\n- 官方行情來源沒有可辨識的交易日期",
       "stderr_tail": "",
       "error": ""
     },
@@ -237,9 +251,9 @@
       "script": "scripts/validate_factor_scores.py",
       "ok": true,
       "returncode": 0,
-      "started_at": "2026-07-09T02:05:41+08:00",
-      "finished_at": "2026-07-09T02:05:41+08:00",
-      "stdout_tail": "",
+      "started_at": "2026-07-09T19:39:52+08:00",
+      "finished_at": "2026-07-09T19:39:52+08:00",
+      "stdout_tail": "[factor-score validate] WARNING: official update failed; previous factor-scores.json is intentionally preserved.\n[factor-score validate] WARNING: TWSE 行情來源失敗：Expecting value: line 1 column 1 (char 0)\n[factor-score validate] WARNING: 官方行情來源沒有可辨識的交易日期",
       "stderr_tail": "",
       "error": ""
     }
@@ -247,33 +261,33 @@
   "items": [
     {
       "file": "data/processed/stocks_master.json",
-      "updated_at": "2026-07-09 02:04",
+      "updated_at": "2026-07-09 19:38",
       "content_latest_at": "",
-      "count": 1970,
+      "count": 0,
       "status": "ok",
       "error": ""
     },
     {
       "file": "data/processed/stock_metrics_daily.json",
-      "updated_at": "2026-07-09 02:05",
+      "updated_at": "2026-07-09 19:39",
       "content_latest_at": "2026-07-09",
-      "count": 1970,
+      "count": 0,
       "status": "ok",
       "error": ""
     },
     {
       "file": "data/processed/ai_scores_daily.json",
-      "updated_at": "2026-07-09T02:04:48+08:00",
+      "updated_at": "2026-07-09T19:39:12+08:00",
       "content_latest_at": "2026-07-09",
-      "count": 1970,
+      "count": 0,
       "status": "ok",
       "error": ""
     },
     {
       "file": "data/processed/theme_stats.json",
-      "updated_at": "2026-07-09 02:04",
+      "updated_at": "2026-07-09 19:39",
       "content_latest_at": "2026-07-09",
-      "count": 39,
+      "count": 0,
       "status": "ok",
       "error": ""
     },
@@ -295,11 +309,11 @@
     },
     {
       "file": "data/processed/factor-scores.status.json",
-      "updated_at": "2026-07-09T02:05:12+08:00",
-      "content_latest_at": "2026-07-08",
+      "updated_at": "2026-07-09T19:39:33+08:00",
+      "content_latest_at": "",
       "count": 100,
-      "status": "ok",
-      "error": ""
+      "status": "failed",
+      "error": "TWSE 行情來源失敗：Expecting value: line 1 column 1 (char 0); 官方行情來源沒有可辨識的交易日期"
     },
     {
       "file": "data/processed/factor-scores.meta.json",
@@ -319,25 +333,25 @@
     },
     {
       "file": "docs/data/radar.json",
-      "updated_at": "2026-07-09T02:05:05+08:00",
+      "updated_at": "2026-07-09T19:39:27+08:00",
       "content_latest_at": "2026-07-09",
-      "count": 1979,
+      "count": 889,
       "status": "ok",
-      "error": "Fetched 1979 TWSE/TPEx close rows."
+      "error": "TWSE STOCK_DAY_ALL fetch failed: Expecting value: line 1 column 1 (char 0); Fetched 889 TWSE/TPEx close rows."
     },
     {
       "file": "docs/data/update_status.json",
-      "updated_at": "2026-07-09T02:05:05+08:00",
+      "updated_at": "2026-07-09T19:39:27+08:00",
       "content_latest_at": "2026-07-09",
-      "count": 1979,
+      "count": 889,
       "status": "ok",
-      "error": "Fetched 1979 TWSE/TPEx close rows."
+      "error": "TWSE STOCK_DAY_ALL fetch failed: Expecting value: line 1 column 1 (char 0); Fetched 889 TWSE/TPEx close rows."
     },
     {
       "file": "docs/data/processed/update_log.json",
-      "updated_at": "2026-07-08T15:53:54+08:00",
-      "content_latest_at": "2026-07-08",
-      "count": 13,
+      "updated_at": "2026-07-09T02:05:41+08:00",
+      "content_latest_at": "2026-07-09",
+      "count": 15,
       "status": "ok",
       "error": ""
     },
@@ -351,11 +365,11 @@
     },
     {
       "file": "docs/data/processed/factor-scores.status.json",
-      "updated_at": "2026-07-09T02:05:12+08:00",
-      "content_latest_at": "2026-07-08",
+      "updated_at": "2026-07-09T19:39:33+08:00",
+      "content_latest_at": "",
       "count": 100,
-      "status": "ok",
-      "error": ""
+      "status": "failed",
+      "error": "TWSE 行情來源失敗：Expecting value: line 1 column 1 (char 0); 官方行情來源沒有可辨識的交易日期"
     },
     {
       "file": "docs/data/processed/factor-scores.meta.json",
