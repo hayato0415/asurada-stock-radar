@@ -3,13 +3,11 @@ name: Update All Site Data
 on:
   workflow_dispatch:
   schedule:
-    - cron: "32 15 * * 1-5"
+    - cron: "0 0 * * *"
       timezone: "Asia/Taipei"
-    - cron: "22 16 * * 1-5"
+    - cron: "45 13 * * *"
       timezone: "Asia/Taipei"
-    - cron: "42 20 * * 1-5"
-      timezone: "Asia/Taipei"
-    - cron: "17 0 * * 2-6"
+    - cron: "0 18 * * *"
       timezone: "Asia/Taipei"
 
 permissions:

@@ -8,7 +8,7 @@ permissions:
 
 concurrency:
   group: asurada-update-all-site-data
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   update-data:
