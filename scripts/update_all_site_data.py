@@ -14,6 +14,7 @@ import os
 import shutil
 import subprocess
 import sys
+import tempfile
 from datetime import datetime, time, timedelta, timezone
 from pathlib import Path
 from typing import Any
@@ -41,6 +42,7 @@ ROOT_UPDATE_LOG = DATA_PROCESSED / "update_log.json"
 DOCS_UPDATE_LOG = DOCS_PROCESSED / "update_log.json"
 
 STEPS = [
+    ("news_events", "scripts/update_news_events.py"),
     ("full_market_data", "scripts/update_full_market_data.py"),
     ("ai_scorecards", "scripts/build_ai_scorecards.py"),
     ("validate_ai_scoring", "scripts/validate_ai_scoring.py"),
@@ -81,6 +83,14 @@ COMMON_KEYS = {
     "source_pipeline",
 }
 
+FACTOR_OUTPUT_NAMES = {
+    "factor-scores.json",
+    "factor-scores.status.json",
+    "factor-scores.meta.json",
+}
+FACTOR_OUTPUTS = tuple(DATA_PROCESSED / name for name in sorted(FACTOR_OUTPUT_NAMES))
+NEWS_EVENTS_NAME = "news_events.json"
+
 
 def now_taipei() -> datetime:
     return datetime.now(TAIPEI).replace(microsecond=0)
@@ -95,9 +105,43 @@ def read_json(path: Path, default: Any) -> Any:
         return default
 
 
-def write_json(path: Path, payload: Any) -> None:
+def write_bytes_atomic(path: Path, content: bytes) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    temporary: Path | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="wb",
+            dir=path.parent,
+            prefix=f".{path.name}.",
+            suffix=".tmp",
+            delete=False,
+        ) as handle:
+            temporary = Path(handle.name)
+            handle.write(content)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary, path)
+        temporary = None
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
+
+
+def write_json(path: Path, payload: Any) -> None:
+    content = (json.dumps(payload, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    write_bytes_atomic(path, content)
+
+
+def snapshot_files(paths: tuple[Path, ...]) -> dict[Path, bytes | None]:
+    return {path: path.read_bytes() if path.exists() else None for path in paths}
+
+
+def restore_files(snapshot: dict[Path, bytes | None]) -> None:
+    for path, content in snapshot.items():
+        if content is None:
+            path.unlink(missing_ok=True)
+        else:
+            write_bytes_atomic(path, content)
 
 
 def tail(text: str, limit: int = 1800) -> str:
@@ -118,6 +162,11 @@ def run_step(name: str, script: str) -> dict[str, Any]:
             check=False,
         )
         ok = result.returncode == 0
+        failure_output = "\n".join(
+            part
+            for part in (tail(result.stdout), tail(result.stderr))
+            if part
+        ) or f"exit {result.returncode}"
         return {
             "name": name,
             "script": script,
@@ -127,7 +176,7 @@ def run_step(name: str, script: str) -> dict[str, Any]:
             "finished_at": now_taipei().isoformat(),
             "stdout_tail": tail(result.stdout),
             "stderr_tail": tail(result.stderr),
-            "error": "" if ok else tail(result.stderr or result.stdout or f"exit {result.returncode}"),
+            "error": "" if ok else failure_output,
         }
     except Exception as exc:
         return {
@@ -186,8 +235,6 @@ def payload_date(payload: Any) -> str:
             "market_date",
             "date",
             "data_date",
-            "updated_at",
-            "updatedAt",
         ),
     )
     if not value:
@@ -195,7 +242,7 @@ def payload_date(payload: Any) -> str:
         if items and isinstance(items[0], dict):
             value = first_existing(
                 items[0],
-                ("latest_trade_date", "trade_date", "market_date", "date", "dataDate", "data_date", "updatedAt", "updated_at"),
+                ("latest_trade_date", "trade_date", "market_date", "date", "dataDate", "data_date"),
             )
     return normalize_date(value)
 
@@ -218,19 +265,15 @@ def sync_processed_to_docs() -> None:
 
 
 def copy_status_sidecars() -> None:
-    if ROOT_UPDATE_STATUS.exists():
-        shutil.copy2(ROOT_UPDATE_STATUS, DOCS_UPDATE_STATUS)
+    if DOCS_UPDATE_STATUS.exists():
+        shutil.copy2(DOCS_UPDATE_STATUS, ROOT_UPDATE_STATUS)
 
 
 def collect_candidate_dates() -> list[str]:
     dates: list[str] = []
-    candidates = STATUS_TARGETS + [
-        ROOT_UPDATE_STATUS,
-        ROOT_UPDATE_LOG,
+    candidates = [
+        DOCS_DATA / "radar.json",
         DATA_PROCESSED / "stock_metrics_daily.json",
-        DATA_PROCESSED / "ai_scores_daily.json",
-        DATA_PROCESSED / "factor-scores.json",
-        DATA_PROCESSED / "factor-scores.status.json",
     ]
     for path in candidates:
         payload = read_json(path, {})
@@ -246,7 +289,10 @@ def collect_candidate_dates() -> list[str]:
 
 def latest_trade_date() -> str:
     dates = collect_candidate_dates()
-    return max(dates) if dates else ""
+    # The site date represents the newest date shared by both authoritative
+    # market snapshots.  Using the minimum prevents one early/late source from
+    # making the whole site claim a date that part of the market has not reached.
+    return min(dates) if dates else ""
 
 
 def make_metadata(now: datetime, latest: str) -> dict[str, str]:
@@ -454,9 +500,50 @@ def annotate_json_file(path: Path, metadata: dict[str, str]) -> None:
         write_json(path, payload)
 
 
-def annotate_outputs(metadata: dict[str, str]) -> None:
-    for path in STATUS_TARGETS + [ROOT_UPDATE_STATUS, ROOT_UPDATE_LOG]:
-        annotate_json_file(path, metadata)
+def remove_false_unified_news_metadata() -> None:
+    """Undo metadata-only news refreshes left by older unified runs.
+
+    There is no news-source step in ``STEPS``.  The existing event content must
+    therefore keep its own ``updated_at`` / ``published_at`` dates instead of
+    inheriting the current market-data run id and trade date.
+    """
+    for path in (DATA_PROCESSED / NEWS_EVENTS_NAME, DOCS_PROCESSED / NEWS_EVENTS_NAME):
+        payload = read_json(path, None)
+        if not isinstance(payload, dict) or payload.get("source_pipeline") != "update_all_site_data":
+            continue
+        changed = False
+        for key in COMMON_KEYS:
+            if key in payload:
+                del payload[key]
+                changed = True
+        if changed:
+            write_json(path, payload)
+
+
+def annotate_outputs(metadata: dict[str, str], excluded_names: set[str] | None = None) -> None:
+    # News carries its own official disclosure snapshot and publication dates;
+    # never replace them with the market close date from this wrapper.
+    excluded = {NEWS_EVENTS_NAME} | (excluded_names or set())
+    canonical_processed = [DATA_PROCESSED / path.name for path in STATUS_TARGETS if path.parent == DOCS_PROCESSED]
+    for path in canonical_processed + STATUS_TARGETS + [ROOT_UPDATE_STATUS, ROOT_UPDATE_LOG]:
+        if path.name not in excluded:
+            annotate_json_file(path, metadata)
+
+
+def news_content_date(payload: Any) -> str:
+    if not isinstance(payload, dict):
+        return ""
+    values = [
+        normalize_date(first_existing(payload, ("content_latest_at", "last_fetched_at", "updated_at")))
+    ]
+    for item in get_items(payload):
+        if isinstance(item, dict):
+            values.append(
+                normalize_date(
+                    first_existing(item, ("published_at", "publishedAt", "event_date", "date"))
+                )
+            )
+    return max((value for value in values if value), default="")
 
 
 def file_status(path: Path, expected_latest: str) -> dict[str, Any]:
@@ -464,7 +551,15 @@ def file_status(path: Path, expected_latest: str) -> dict[str, Any]:
     payload = read_json(path, {})
     exists = path.exists()
     items = get_items(payload)
-    date = payload_date(payload)
+    is_news = path.name == NEWS_EVENTS_NAME
+    has_live_news_source = bool(
+        is_news
+        and isinstance(payload, dict)
+        and payload.get("source_pipeline") == "update_news_events"
+        and payload.get("ok") is True
+    )
+    is_unfetched_news = is_news and not has_live_news_source
+    date = news_content_date(payload) if is_news else payload_date(payload)
     updated_at = first_existing(payload, ("generated_at", "updated_at", "last_updated", "unified_update_at")) or ""
     count = payload_count(payload)
     failed_reasons: list[str] = []
@@ -491,6 +586,12 @@ def file_status(path: Path, expected_latest: str) -> dict[str, Any]:
         status = "failed"
     elif payload.get("stale") if isinstance(payload, dict) else False:
         status = "stale"
+    elif is_unfetched_news:
+        status = "unavailable"
+        detail = f"; existing content latest at {date}" if date else ""
+        failed_reasons.append(
+            "no news-source refresh step ran; existing news content was preserved" + detail
+        )
     elif expected_latest and date and date != expected_latest and rel in CRITICAL_SYNC_FILES:
         status = "stale"
         failed_reasons.append(f"content date {date} != site latest_trade_date {expected_latest}")
@@ -545,6 +646,7 @@ def build_unified_status(metadata: dict[str, str], step_results: list[dict[str, 
     latest = metadata["latest_trade_date"]
     files = [file_status(path, latest) for path in STATUS_TARGETS]
     stale_files = [item["file"] for item in files if item["status"] == "stale"]
+    unavailable_files = [item["file"] for item in files if item["status"] == "unavailable"]
     failed_reasons: list[str] = [
         f"{step['name']}: {step['error']}"
         for step in step_results
@@ -555,6 +657,11 @@ def build_unified_status(metadata: dict[str, str], step_results: list[dict[str, 
             failed_reasons.extend(f"{item['file']}: {reason}" for reason in item["failed_reasons"])
 
     warnings = freshness_warnings(latest, datetime.fromisoformat(metadata["generated_at"]))
+    warnings.extend(
+        f"{item['file']}: {'; '.join(item['failed_reasons'])}"
+        for item in files
+        if item["status"] == "unavailable"
+    )
     status = "ok"
     if failed_reasons:
         status = "failed"
@@ -568,6 +675,7 @@ def build_unified_status(metadata: dict[str, str], step_results: list[dict[str, 
         "each_file_status": files,
         "files": files,
         "stale_files": sorted(set(stale_files)),
+        "unavailable_files": sorted(set(unavailable_files)),
         "failed_reasons": failed_reasons,
         "warning": warnings,
         "source_status": step_results,
@@ -613,23 +721,43 @@ def write_status_files(status: dict[str, Any]) -> None:
 
 
 def main() -> int:
-    step_results = [run_step(name, script) for name, script in STEPS]
+    factor_snapshot = snapshot_files(FACTOR_OUTPUTS)
+    factor_pipeline_failed = False
+    step_results: list[dict[str, Any]] = []
+    for name, script in STEPS:
+        result = run_step(name, script)
+        step_results.append(result)
+        if name in {"factor_scores", "validate_factor_scores"} and not result["ok"]:
+            factor_pipeline_failed = True
+            # update_factor_scores is expected to preserve old data itself, but
+            # the wrapper also rolls back all three canonical sidecars in case
+            # a process failed between writes.
+            restore_files(factor_snapshot)
 
     now = now_taipei()
     latest = latest_trade_date()
     metadata = make_metadata(now, latest)
 
-    fallback_result = rebuild_factor_scores_from_ai_scores(latest, metadata)
-    if fallback_result:
-        step_results.append(fallback_result)
+    # A source or validation failure must never be hidden by replacing the
+    # canonical factor output with an AI-derived fallback.
+    if not factor_pipeline_failed:
+        fallback_result = rebuild_factor_scores_from_ai_scores(latest, metadata)
+        if fallback_result:
+            step_results.append(fallback_result)
+            if not fallback_result["ok"]:
+                factor_pipeline_failed = True
+                restore_files(factor_snapshot)
 
+    remove_false_unified_news_metadata()
+    excluded_names = FACTOR_OUTPUT_NAMES if factor_pipeline_failed else set()
+    annotate_outputs(metadata, excluded_names)
     sync_processed_to_docs()
     copy_status_sidecars()
 
     latest = latest_trade_date()
     if latest != metadata["latest_trade_date"]:
         metadata = make_metadata(now, latest)
-    annotate_outputs(metadata)
+    annotate_outputs(metadata, excluded_names)
 
     unified_status = build_unified_status(metadata, step_results)
     write_status_files(unified_status)
@@ -645,7 +773,7 @@ def main() -> int:
         print("failed_reasons:")
         for reason in unified_status["failed_reasons"]:
             print(f"- {reason}")
-    return 0
+    return 1 if unified_status["status"] in {"failed", "stale"} else 0
 
 
 if __name__ == "__main__":

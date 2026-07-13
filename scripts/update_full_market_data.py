@@ -12,7 +12,9 @@ from __future__ import annotations
 import csv
 import json
 import math
+import os
 import sys
+import tempfile
 from argparse import Namespace
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -35,6 +37,13 @@ UPDATE_LOG = DATA_DIR / "update_log.json"
 MANUAL_FINANCIALS = MANUAL_DIR / "financial_fundamentals.csv"
 MANUAL_THEMES = MANUAL_DIR / "theme_memberships.csv"
 TAIPEI = timezone(timedelta(hours=8))
+FULL_MARKET_OUTPUTS = (
+  STOCK_MASTER,
+  METRICS,
+  AI_SCORES,
+  THEME_STATS,
+  UPDATE_LOG,
+)
 
 
 def now_taipei() -> datetime:
@@ -47,9 +56,43 @@ def read_json(path: Path, default: Any) -> Any:
   return json.loads(path.read_text(encoding="utf-8-sig"))
 
 
-def write_json(path: Path, payload: Any) -> None:
+def write_bytes_atomic(path: Path, content: bytes) -> None:
   path.parent.mkdir(parents=True, exist_ok=True)
-  path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+  temporary: Path | None = None
+  try:
+    with tempfile.NamedTemporaryFile(
+      mode="wb",
+      dir=path.parent,
+      prefix=f".{path.name}.",
+      suffix=".tmp",
+      delete=False,
+    ) as handle:
+      temporary = Path(handle.name)
+      handle.write(content)
+      handle.flush()
+      os.fsync(handle.fileno())
+    os.replace(temporary, path)
+    temporary = None
+  finally:
+    if temporary is not None:
+      temporary.unlink(missing_ok=True)
+
+
+def write_json(path: Path, payload: Any) -> None:
+  content = (json.dumps(payload, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+  write_bytes_atomic(path, content)
+
+
+def snapshot_files(paths: tuple[Path, ...]) -> dict[Path, bytes | None]:
+  return {path: path.read_bytes() if path.exists() else None for path in paths}
+
+
+def restore_files(snapshot: dict[Path, bytes | None]) -> None:
+  for path, content in snapshot.items():
+    if content is None:
+      path.unlink(missing_ok=True)
+    else:
+      write_bytes_atomic(path, content)
 
 
 def number(value: Any) -> float | None:
@@ -172,19 +215,29 @@ def load_manual_theme_memberships() -> list[dict[str, Any]]:
 
 
 def build_stock_master_with_fallback() -> dict[str, Any]:
+  existing = read_json(STOCK_MASTER, {"items": []})
+  existing_count = len(existing.get("items", [])) if isinstance(existing, dict) else 0
   try:
     payload = build_stock_master.build_master()
+    new_count = len(payload.get("items", [])) if isinstance(payload, dict) else 0
+    minimum_count = max(1000, int(existing_count * 0.8))
+    if new_count < minimum_count:
+      raise ValueError(f"stock master row count {new_count} is below safety threshold {minimum_count}")
     write_json(STOCK_MASTER, payload)
     return payload
   except Exception as exc:  # noqa: BLE001 - preserve last successful master.
-    print(f"stocks_master fetch failed, using existing file: {exc}")
-    payload = read_json(STOCK_MASTER, {"items": []})
-    payload.setdefault("warnings", []).append(f"TWSE ISIN fetch failed: {exc}")
-    return payload
+    print(f"stocks_master fetch failed; previous file preserved: {exc}")
+    raise RuntimeError(f"stock master refresh failed: {exc}") from exc
 
 
 def build_metrics_with_manual_financials() -> dict[str, Any]:
   payload = update_stock_metrics.build_metrics(Namespace(stock_master=str(STOCK_MASTER), date=""))
+  quality = payload.get("quality", {}) if isinstance(payload, dict) else {}
+  errors = quality.get("errors") or []
+  item_count = len(payload.get("items", [])) if isinstance(payload, dict) else 0
+  if errors or item_count < 1000 or not payload.get("date"):
+    reason = "; ".join(str(item) for item in errors) or f"invalid metrics payload: rows={item_count}, date={payload.get('date')}"
+    raise RuntimeError(f"stock metrics refresh failed; previous file preserved: {reason}")
   manual = load_manual_financials()
   items = payload.get("items", [])
 
@@ -645,23 +698,29 @@ def write_update_log(files: list[tuple[str, int, str, str, str]]) -> None:
 
 def main() -> int:
   DATA_DIR.mkdir(parents=True, exist_ok=True)
-  stocks_payload = build_stock_master_with_fallback()
-  metrics_payload = build_metrics_with_manual_financials()
-  scores_payload = build_ai_scores(stocks_payload, metrics_payload)
-  write_json(AI_SCORES, scores_payload)
-  themes_payload = build_theme_stats(stocks_payload, metrics_payload, scores_payload)
+  snapshot = snapshot_files(FULL_MARKET_OUTPUTS)
+  try:
+    stocks_payload = build_stock_master_with_fallback()
+    metrics_payload = build_metrics_with_manual_financials()
+    scores_payload = build_ai_scores(stocks_payload, metrics_payload)
+    write_json(AI_SCORES, scores_payload)
+    themes_payload = build_theme_stats(stocks_payload, metrics_payload, scores_payload)
 
-  quality = metrics_payload.get("quality", {})
-  theme_quality = themes_payload.get("quality", {})
-  write_update_log(
-    [
-      ("stocks_master.json", len(stocks_payload.get("items", [])), "ok", "TWSE ISIN public page", ""),
-      ("stock_metrics_daily.json", len(metrics_payload.get("items", [])), "partial" if quality.get("errors") else "ok", "TWSE / TPEx / MOPS", "; ".join(quality.get("errors") or [])),
-      ("ai_scores_daily.json", len(scores_payload.get("items", [])), "ok", "Derived quantitative scoring", ""),
-      ("theme_stats.json", len(themes_payload.get("items", [])), "partial" if theme_quality.get("missing_theme") else "ok", "Full-market stock, metrics, AI scores, news, manual memberships", "全市場題材輪動已更新"),
-      ("update_log.json", 5, "ok", "local builder", ""),
-    ]
-  )
+    quality = metrics_payload.get("quality", {})
+    theme_quality = themes_payload.get("quality", {})
+    write_update_log(
+      [
+        ("stocks_master.json", len(stocks_payload.get("items", [])), "ok", "TWSE ISIN public page", ""),
+        ("stock_metrics_daily.json", len(metrics_payload.get("items", [])), "partial" if quality.get("errors") else "ok", "TWSE / TPEx / MOPS", "; ".join(quality.get("errors") or [])),
+        ("ai_scores_daily.json", len(scores_payload.get("items", [])), "ok", "Derived quantitative scoring", ""),
+        ("theme_stats.json", len(themes_payload.get("items", [])), "partial" if theme_quality.get("missing_theme") else "ok", "Full-market stock, metrics, AI scores, news, manual memberships", "全市場題材輪動已更新"),
+        ("update_log.json", 5, "ok", "local builder", ""),
+      ]
+    )
+  except Exception as exc:  # noqa: BLE001 - roll back the complete output set.
+    restore_files(snapshot)
+    print(f"Full-market refresh failed; all previous outputs restored: {exc}", file=sys.stderr)
+    return 1
 
   print(f"stocks_master: {len(stocks_payload.get('items', []))} rows")
   print(

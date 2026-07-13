@@ -1,38 +1,189 @@
 {
-  "run_id": "20260709194923",
-  "generated_at": "2026-07-09T19:49:23+08:00",
-  "latest_trade_date": "2026-07-08",
-  "data_version": "20260708-1949",
-  "source_pipeline": "update_all_site_data",
   "ok": true,
-  "status": "ok",
-  "updated_at": "2026-07-09T19:49:23+08:00",
-  "attempted_at": "2026-07-09T19:49:23+08:00",
-  "target_date": "2026-07-08",
+  "updated_at": "2026-07-13T16:19:59+08:00",
+  "attempted_at": "2026-07-13T16:19:59+08:00",
+  "target_date": "2026-07-13",
+  "latest_trade_date": "2026-07-13",
+  "revenue_month": "2026-06",
   "items_count": 100,
   "rows_written": 100,
+  "stock_master_count": 1970,
+  "twse_quote_matched": 1078,
+  "tpex_quote_matched": 889,
   "previous_data_preserved": false,
   "failed_reasons": [],
-  "warnings": [
-    "多因子分數由全市場 AI 分數與行情資料同步重建，未使用新聞面評分。"
-  ],
+  "warnings": [],
+  "official_source_used": {
+    "daily_quotes": "TWSE STOCK_DAY_ALL / TPEx daily close quotes",
+    "valuation": "TWSE BWIBBU_ALL / TPEx peratio analysis",
+    "monthly_revenue": "MOPS t187ap05_L / t187ap05_O",
+    "company_basic": "MOPS t187ap03_L / t187ap03_O"
+  },
   "quality": {
-    "ai_score_rows": 1970,
-    "metrics_rows": 1970,
-    "factor_rows": 100
+    "stock_master_count": 1970,
+    "quote_matched": 1967,
+    "score_candidates": 1913,
+    "missing_quote_count": 3,
+    "missing_score_count": 54,
+    "missing_quote_sample": [
+      "1589",
+      "1591",
+      "4804"
+    ],
+    "missing_score_sample": [
+      "1312",
+      "1341",
+      "1813",
+      "2254",
+      "2724",
+      "2941",
+      "2948",
+      "3064",
+      "3067",
+      "3086",
+      "3115",
+      "3226",
+      "3227",
+      "3288",
+      "3322",
+      "3466",
+      "3499",
+      "3632",
+      "3664",
+      "3691",
+      "3707",
+      "4304",
+      "4417",
+      "4609",
+      "4745",
+      "4946",
+      "5210",
+      "5321",
+      "5381",
+      "5398",
+      "5432",
+      "5493",
+      "5530",
+      "5601",
+      "6111",
+      "6121",
+      "6199",
+      "6236",
+      "6240",
+      "6264",
+      "6276",
+      "6547",
+      "6763",
+      "6767",
+      "6843",
+      "6855",
+      "6875",
+      "6945",
+      "7716",
+      "7772"
+    ]
+  },
+  "quote_coverage": {
+    "minimum_ratio": 0.8,
+    "required": {
+      "twse": 864,
+      "tpex": 713
+    },
+    "matched": {
+      "twse": 1078,
+      "tpex": 889
+    }
   },
   "source_status": [
     {
-      "source": "ai_scores_daily.json",
-      "status": "ok",
-      "latest_trade_date": "2026-07-08",
-      "rows": 1970
+      "name": "TWSE 上市每日行情",
+      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260713&type=ALLBUT0999&response=json",
+      "ok": true,
+      "http_status": null,
+      "source_date": "2026-07-13",
+      "row_count": 1369,
+      "error": "",
+      "required_fields_missing": []
     },
     {
-      "source": "stock_metrics_daily.json",
-      "status": "ok",
-      "latest_trade_date": "2026-07-08",
-      "rows": 1970
+      "name": "TPEx 上櫃每日行情",
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F13&id=&response=json",
+      "ok": true,
+      "http_status": null,
+      "source_date": "2026-07-13",
+      "row_count": 10113,
+      "error": "",
+      "required_fields_missing": []
+    },
+    {
+      "name": "TWSE 上市本益比殖利率",
+      "url": "https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_ALL",
+      "ok": true,
+      "http_status": 200,
+      "source_date": null,
+      "row_count": 1078,
+      "error": "",
+      "required_fields_missing": []
+    },
+    {
+      "name": "TPEx 上櫃本益比殖利率",
+      "url": "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_peratio_analysis",
+      "ok": true,
+      "http_status": 200,
+      "source_date": null,
+      "row_count": 889,
+      "error": "",
+      "required_fields_missing": []
+    },
+    {
+      "name": "MOPS 上市月營收",
+      "url": "https://openapi.twse.com.tw/v1/opendata/t187ap05_L",
+      "ok": true,
+      "http_status": 200,
+      "source_date": null,
+      "row_count": 942,
+      "error": "",
+      "required_fields_missing": []
+    },
+    {
+      "name": "MOPS 上櫃月營收",
+      "url": "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap05_O",
+      "ok": true,
+      "http_status": 200,
+      "source_date": null,
+      "row_count": 810,
+      "error": "",
+      "required_fields_missing": []
+    },
+    {
+      "name": "MOPS 上市公司基本資料",
+      "url": "https://openapi.twse.com.tw/v1/opendata/t187ap03_L",
+      "ok": true,
+      "http_status": 200,
+      "source_date": null,
+      "row_count": 1089,
+      "error": "",
+      "required_fields_missing": []
+    },
+    {
+      "name": "MOPS 上櫃公司基本資料",
+      "url": "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O",
+      "ok": true,
+      "http_status": 200,
+      "source_date": null,
+      "row_count": 891,
+      "error": "",
+      "required_fields_missing": []
     }
-  ]
+  ],
+  "outputs": {
+    "factor-scores.json": "updated",
+    "factor-scores.status.json": "updated",
+    "factor-scores.meta.json": "updated",
+    "factor-quote-history.json": "updated"
+  },
+  "run_id": "20260713162011",
+  "generated_at": "2026-07-13T16:20:11+08:00",
+  "data_version": "20260713-1620",
+  "source_pipeline": "update_all_site_data"
 }

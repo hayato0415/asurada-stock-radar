@@ -25,6 +25,11 @@ try:
 except ModuleNotFoundError:  # Local Windows Python launchers may not share pip envs.
     requests = None
 
+try:
+    from official_daily_quotes import fetch_daily_quotes
+except ModuleNotFoundError:  # Supports importing as scripts.update_stock_metrics in tests.
+    from scripts.official_daily_quotes import fetch_daily_quotes
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data" / "processed"
@@ -41,6 +46,7 @@ TPEX_COMPANY_BASIC = "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
 
 TAIPEI = timezone(timedelta(hours=8))
 USER_AGENT = "ASURADA-Stock-Radar/1.0 (+https://github.com/hayato0415/asurada-stock-radar)"
+MIN_QUOTE_COVERAGE_RATIO = 0.80
 
 
 def now_taipei() -> datetime:
@@ -166,6 +172,45 @@ def load_stock_master(path: Path) -> list[dict[str, Any]]:
             }
         )
     return stocks
+
+
+def quote_market(value: Any) -> str:
+    text = str(value or "").strip().lower()
+    if text in {"上市", "twse", "listed"} or "上市" in text:
+        return "twse"
+    if text in {"上櫃", "tpex", "otc"} or "上櫃" in text:
+        return "tpex"
+    return ""
+
+
+def previous_quote_counts(stocks: list[dict[str, Any]]) -> dict[str, int]:
+    stock_markets = {stock["symbol"]: quote_market(stock.get("market")) for stock in stocks}
+    previous = read_json(OUTPUT, {})
+    items = previous.get("items", []) if isinstance(previous, dict) else []
+    counts = {"twse": 0, "tpex": 0}
+    for item in items if isinstance(items, list) else []:
+        if not isinstance(item, dict):
+            continue
+        symbol = normalize_symbol(item.get("symbol") or item.get("code"))
+        market = stock_markets.get(symbol, "")
+        if market in counts and any(item.get(key) is not None for key in ("trade_price", "change_pct", "volume")):
+            counts[market] += 1
+    return counts
+
+
+def quote_coverage_requirements(stocks: list[dict[str, Any]]) -> tuple[dict[str, set[str]], dict[str, int]]:
+    expected_symbols: dict[str, set[str]] = {"twse": set(), "tpex": set()}
+    for stock in stocks:
+        market = quote_market(stock.get("market"))
+        if market in expected_symbols:
+            expected_symbols[market].add(stock["symbol"])
+
+    previous_counts = previous_quote_counts(stocks)
+    required = {
+        market: math.ceil(max(len(symbols), previous_counts.get(market, 0)) * MIN_QUOTE_COVERAGE_RATIO)
+        for market, symbols in expected_symbols.items()
+    }
+    return expected_symbols, required
 
 
 def parse_daily_quotes(rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
@@ -330,10 +375,29 @@ def build_metrics(args: argparse.Namespace) -> dict[str, Any]:
     stocks = load_stock_master(Path(args.stock_master))
     errors: list[str] = []
 
-    quote_rows = (
-        safe_fetch("TWSE STOCK_DAY_ALL", TWSE_STOCK_DAY_ALL, errors)
-        + safe_fetch("TPEx daily close quotes", TPEX_STOCK_DAY_ALL, errors)
-    )
+    requested_date = args.date or now_taipei().date().isoformat()
+    quote_rows_by_market: dict[str, list[dict[str, Any]]] = {}
+    quote_dates: dict[str, str] = {}
+    quote_sources: dict[str, str] = {}
+    for market, label in (("twse", "TWSE daily close quotes"), ("tpex", "TPEx daily close quotes")):
+        try:
+            rows, source_date, source_url = fetch_daily_quotes(market, requested_date)
+            quote_rows_by_market[market] = rows
+            quote_dates[market] = source_date
+            quote_sources[market] = source_url
+            print(f"{label}: fetched {len(rows)} rows for {source_date}")
+        except Exception as exc:  # noqa: BLE001 - surfaced through strict validation.
+            message = f"{label} fetch failed: {exc}"
+            print(message)
+            errors.append(message)
+
+    unique_quote_dates = sorted(set(quote_dates.values()))
+    if len(unique_quote_dates) > 1:
+        errors.append(f"Official daily quote dates do not match: {quote_dates}")
+    quote_date = unique_quote_dates[0] if len(unique_quote_dates) == 1 else ""
+    if not quote_date:
+        errors.append("Official daily quotes have no single recognizable trade date")
+
     revenue_rows = (
         safe_fetch("MOPS monthly revenue listed", TWSE_MONTHLY_REVENUE, errors)
         + safe_fetch("MOPS monthly revenue OTC", TPEX_MONTHLY_REVENUE, errors)
@@ -343,13 +407,32 @@ def build_metrics(args: argparse.Namespace) -> dict[str, Any]:
         + safe_fetch("TPEx company basic", TPEX_COMPANY_BASIC, errors)
     )
 
-    quotes = parse_daily_quotes(quote_rows)
+    quotes_by_market = {
+        market: parse_daily_quotes(rows)
+        for market, rows in quote_rows_by_market.items()
+    }
+    quotes = {
+        **quotes_by_market.get("twse", {}),
+        **quotes_by_market.get("tpex", {}),
+    }
+    expected_symbols, required_quote_counts = quote_coverage_requirements(stocks)
+    matched_quote_counts = {
+        market: len(set(quotes_by_market.get(market, {})) & symbols)
+        for market, symbols in expected_symbols.items()
+    }
+    for market in ("twse", "tpex"):
+        actual = matched_quote_counts[market]
+        required = required_quote_counts[market]
+        if actual < required:
+            errors.append(
+                f"{market.upper()} daily quote coverage {actual} is below safety threshold {required} "
+                f"({MIN_QUOTE_COVERAGE_RATIO:.0%} of stock master/prior coverage)"
+            )
     revenues, revenue_month = parse_monthly_revenue(revenue_rows)
     shares = parse_listed_shares(company_rows)
 
     now = now_taipei()
     updated_at = now.strftime("%Y-%m-%d %H:%M")
-    quote_date = args.date or now.strftime("%Y-%m-%d")
     missing_quote: list[str] = []
     missing_revenue: list[str] = []
     items: list[dict[str, Any]] = []
@@ -398,13 +481,17 @@ def build_metrics(args: argparse.Namespace) -> dict[str, Any]:
         "updated_at": updated_at,
         "revenue_month": revenue_month or None,
         "source": {
-            "daily_quote": "TWSE STOCK_DAY_ALL + TPEx daily close quotes",
+            "daily_quote": quote_sources,
             "monthly_revenue": "MOPS / TWSE listed revenue + TPEx OTC revenue OpenAPI",
             "listed_shares": "TWSE / TPEx company basic OpenAPI if available",
         },
         "quality": {
             "stock_master_count": len(stocks),
             "daily_quote_matched": matched_quotes,
+            "daily_quote_matched_by_market": matched_quote_counts,
+            "daily_quote_required_by_market": required_quote_counts,
+            "daily_quote_minimum_ratio": MIN_QUOTE_COVERAGE_RATIO,
+            "daily_quote_source_dates": quote_dates,
             "revenue_matched": matched_revenue,
             "missing_quote": missing_quote,
             "missing_revenue": missing_revenue,
@@ -424,10 +511,16 @@ def main() -> int:
 
     payload = build_metrics(args)
     output = Path(args.output)
-    write_json(output, payload)
 
     quality = payload["quality"]
     error_text = "; ".join(quality.get("errors") or [])
+    if error_text or not quality.get("daily_quote_matched") or not payload.get("date"):
+        print(f"stock metrics update failed; previous {output.name} preserved")
+        if error_text:
+            print(error_text)
+        return 1
+
+    write_json(output, payload)
     update_log(
         output.name,
         payload["updated_at"],

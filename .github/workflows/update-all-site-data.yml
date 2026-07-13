@@ -3,11 +3,13 @@ name: Update All Site Data
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 8 * * *"
       timezone: "Asia/Taipei"
     - cron: "45 13 * * *"
       timezone: "Asia/Taipei"
-    - cron: "0 18 * * *"
+    - cron: "30 17 * * *"
+      timezone: "Asia/Taipei"
+    - cron: "0 23 * * *"
       timezone: "Asia/Taipei"
 
 permissions:
@@ -54,13 +56,11 @@ jobs:
 
           paths=(
             "docs/data"
+            "data/*.json"
             "data/processed"
             "data/latest"
             "data/scorecards"
             "data/config"
-            "docs/*.html"
-            "docs/*.js"
-            "docs/*.css"
           )
           for path in "${paths[@]}"; do
             if compgen -G "$path" > /dev/null; then

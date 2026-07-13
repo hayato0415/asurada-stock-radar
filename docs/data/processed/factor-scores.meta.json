@@ -1,17 +1,39 @@
 {
-  "run_id": "20260709194923",
-  "generated_at": "2026-07-09T19:49:23+08:00",
-  "latest_trade_date": "2026-07-08",
-  "data_version": "20260708-1949",
-  "source_pipeline": "update_all_site_data",
-  "updated_at": "2026-07-09T19:49:23+08:00",
-  "items_count": 100,
-  "score_version": "unified-ai-metrics-v1",
+  "updated_at": "2026-07-13T16:19:59+08:00",
+  "latest_trade_date": "2026-07-13",
+  "revenue_month": "2026-06",
+  "score_version": "official-multifactor-v1",
   "weights": {
-    "fundamental": "from ai_scores_daily",
-    "technical": "from ai_scores_daily",
-    "chip": "from ai_scores_daily",
-    "turnover": "from ai_scores_daily",
-    "news": "not used by factor-score page"
-  }
+    "fundamentalScore": 0.3,
+    "technicalScore": 0.3,
+    "chipScore": 0.25,
+    "turnoverScore": 0.15
+  },
+  "news_score": {
+    "weight": 0,
+    "included": false,
+    "reason": "新聞面不納入分數、不納入排名、不作為篩選條件。"
+  },
+  "sources": {
+    "daily_quotes": [
+      "TWSE STOCK_DAY_ALL",
+      "TPEx daily close quotes"
+    ],
+    "valuation": [
+      "TWSE BWIBBU_ALL",
+      "TPEx peratio analysis"
+    ],
+    "monthly_revenue": [
+      "MOPS / TWSE OpenAPI t187ap05_L",
+      "MOPS / TWSE OpenAPI t187ap05_O"
+    ],
+    "company_basic": [
+      "MOPS / TWSE OpenAPI t187ap03_L",
+      "MOPS / TWSE OpenAPI t187ap03_O"
+    ]
+  },
+  "run_id": "20260713162011",
+  "generated_at": "2026-07-13T16:20:11+08:00",
+  "data_version": "20260713-1620",
+  "source_pipeline": "update_all_site_data"
 }

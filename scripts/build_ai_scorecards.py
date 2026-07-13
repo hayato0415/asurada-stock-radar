@@ -279,7 +279,7 @@ def infer_entry_reason(metric: dict[str, Any]) -> str:
     return "，".join(parts[:4])
 
 
-def main() -> None:
+def main() -> int:
     build_time = now_taipei()
     build_id = build_time.strftime("%Y%m%d-%H%M-scorecards")
 
@@ -290,6 +290,16 @@ def main() -> None:
     stocks = [row for row in get_items(stocks_payload) if str(row.get("market") or "").strip() in VALID_MARKETS]
     metrics_by_symbol = {get_symbol(row): row for row in get_items(metrics_payload) if get_symbol(row)}
     old_scores_by_symbol = {get_symbol(row): row for row in get_items(scores_payload) if get_symbol(row)}
+
+    minimum_universe = 1000
+    minimum_metrics = max(minimum_universe, int(len(stocks) * 0.8))
+    if len(stocks) < minimum_universe or len(metrics_by_symbol) < minimum_metrics:
+        print(
+            "AI scorecard build failed; previous outputs preserved: "
+            f"stocks={len(stocks)}, metrics={len(metrics_by_symbol)}, "
+            f"required_stocks={minimum_universe}, required_metrics={minimum_metrics}"
+        )
+        return 1
 
     updated_at = build_time.isoformat()
     content_latest_at = (
@@ -446,7 +456,8 @@ def main() -> None:
     write_json(PROCESSED_DIR / "ai_scores_daily.json", processed_scores)
 
     print(f"AI scorecards built: {len(summaries)} stocks, top100={len(top100)}, build_id={build_id}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

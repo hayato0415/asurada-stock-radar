@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import math
 import re
 import ssl
 import sys
@@ -10,12 +11,19 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
+try:
+    from official_daily_quotes import fetch_daily_quotes
+except ModuleNotFoundError:  # Supports importing as scripts.update_radar in tests.
+    from scripts.official_daily_quotes import fetch_daily_quotes
+
 
 TAIPEI = timezone(timedelta(hours=8))
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "docs" / "data"
 RADAR_PATH = DATA_DIR / "radar.json"
 STATUS_PATH = DATA_DIR / "update_status.json"
+STOCK_MASTER_PATH = ROOT / "data" / "processed" / "stocks_master.json"
+MIN_QUOTE_COVERAGE_RATIO = 0.80
 
 TWSE_STOCK_DAY_ALL = "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL"
 TPEX_DAILY_QUOTES = "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes"
@@ -33,6 +41,47 @@ def iso_datetime(value: datetime) -> str:
 def write_json(path: Path, payload: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def read_json(path: Path, default: Any) -> Any:
+    if not path.exists():
+        return default
+    try:
+        return json.loads(path.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError):
+        return default
+
+
+def market_key(value: Any) -> str:
+    text = str(value or "").strip().lower()
+    if text in {"上市", "twse", "listed"} or "上市" in text:
+        return "twse"
+    if text in {"上櫃", "tpex", "otc"} or "上櫃" in text:
+        return "tpex"
+    return ""
+
+
+def unique_market_counts(items: Any) -> dict[str, int]:
+    symbols: dict[str, set[str]] = {"twse": set(), "tpex": set()}
+    for item in items if isinstance(items, list) else []:
+        if not isinstance(item, dict):
+            continue
+        market = market_key(item.get("market"))
+        symbol = normalize_code(item.get("symbol") or item.get("code"))
+        if market in symbols and symbol:
+            symbols[market].add(symbol)
+    return {market: len(values) for market, values in symbols.items()}
+
+
+def quote_coverage_requirements() -> dict[str, int]:
+    master = read_json(STOCK_MASTER_PATH, {})
+    master_counts = unique_market_counts(master.get("items", []) if isinstance(master, dict) else [])
+    previous = read_json(RADAR_PATH, {})
+    previous_counts = unique_market_counts(previous.get("items", []) if isinstance(previous, dict) else [])
+    return {
+        market: max(1, math.ceil(max(master_counts[market], previous_counts[market]) * MIN_QUOTE_COVERAGE_RATIO))
+        for market in ("twse", "tpex")
+    }
 
 
 def fetch_json(url: str) -> Any:
@@ -162,7 +211,7 @@ def normalize_tpex(rows: list[dict[str, Any]], updated_at: str, trade_date: str)
             continue
         close = parse_number(pick(row, ["Close", "ClosingPrice", "收盤價", "收盤", "close"]))
         volume = parse_int(
-            pick(row, ["TradingVolume", "TradeVolume", "成交股數", "成交股數(股)", "成交量", "volume"])
+            pick(row, ["TradingShares", "TradingVolume", "TradeVolume", "成交股數", "成交股數(股)", "成交量", "volume"])
         )
         change_percent = parse_change_percent(row, close)
         items.append(
@@ -184,89 +233,96 @@ def normalize_tpex(rows: list[dict[str, Any]], updated_at: str, trade_date: str)
     return items
 
 
-def failure_payload(now: datetime, message: str, errors: list[str]) -> tuple[dict[str, Any], dict[str, Any]]:
+def failure_payload(now: datetime, message: str, errors: list[str], previous_trade_date: str) -> dict[str, Any]:
     updated_at = iso_datetime(now)
-    base = {
+    return {
         "status": "failed",
         "message": message,
-        "trade_date": now.date().isoformat(),
+        "trade_date": previous_trade_date,
+        "target_date": now.date().isoformat(),
         "updated_at": updated_at,
         "timezone": "Asia/Taipei",
         "source": [],
         "items_count": 0,
         "errors": errors,
+        "previous_data_preserved": True,
     }
-    return {**base, "items": []}, base
 
 
 def main() -> int:
     now = now_taipei()
     updated_at = iso_datetime(now)
-    trade_date = now.date().isoformat()
+    requested_date = now.date().isoformat()
     errors: list[str] = []
     sources: list[str] = []
+    source_dates: dict[str, str] = {}
     items: list[dict[str, Any]] = []
 
-    if now.weekday() >= 5:
-        message = f"{trade_date} is not a Taiwan trading day. No close data was fetched."
-        radar, status = failure_payload(now, message, [message])
-        write_json(RADAR_PATH, radar)
+    for market in ("twse", "tpex"):
+        try:
+            rows, source_date, source_url = fetch_daily_quotes(market, requested_date)
+            normalized = (
+                normalize_twse(rows, updated_at, source_date)
+                if market == "twse"
+                else normalize_tpex(rows, updated_at, source_date)
+            )
+            if not normalized:
+                raise ValueError("official response returned no normalized stock rows")
+            items.extend(normalized)
+            sources.append(source_url)
+            source_dates[market] = source_date
+        except Exception as exc:  # noqa: BLE001 - preserve old radar and report exact source error.
+            errors.append(f"{market.upper()} daily close fetch failed: {exc}")
+
+    unique_dates = sorted(set(source_dates.values()))
+    if len(unique_dates) != 1:
+        errors.append(f"Official daily quote dates do not match: {source_dates}")
+    trade_date = unique_dates[0] if len(unique_dates) == 1 else ""
+    matched_quote_counts = unique_market_counts(items)
+    required_quote_counts = quote_coverage_requirements()
+    for market in ("twse", "tpex"):
+        actual = matched_quote_counts[market]
+        required = required_quote_counts[market]
+        if actual < required:
+            errors.append(
+                f"{market.upper()} radar quote coverage {actual} is below safety threshold {required} "
+                f"({MIN_QUOTE_COVERAGE_RATIO:.0%} of stock master/prior radar)"
+            )
+
+    if errors or not items or not trade_date:
+        message = "TWSE/TPEx close refresh failed; previous radar.json was preserved."
+        previous = read_json(RADAR_PATH, {})
+        previous_trade_date = str(previous.get("trade_date") or previous.get("latest_trade_date") or "")
+        status = failure_payload(now, message, errors or [message], previous_trade_date)
         write_json(STATUS_PATH, status)
-        print(message)
-        return 0
+        print(f"failed: {message}")
+        for error in status["errors"]:
+            print(f"- {error}")
+        return 1
 
-    try:
-        twse_payload = fetch_json(TWSE_STOCK_DAY_ALL)
-        if isinstance(twse_payload, list):
-            twse_items = normalize_twse(twse_payload, updated_at, trade_date)
-            items.extend(twse_items)
-            if twse_items:
-                sources.append("TWSE STOCK_DAY_ALL")
-            else:
-                errors.append("TWSE STOCK_DAY_ALL returned no normalized listed-stock rows.")
-        else:
-            errors.append("TWSE STOCK_DAY_ALL did not return a JSON array.")
-    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, OSError) as exc:
-        errors.append(f"TWSE STOCK_DAY_ALL fetch failed: {exc}")
-
-    try:
-        tpex_payload = fetch_json(TPEX_DAILY_QUOTES)
-        if isinstance(tpex_payload, list):
-            tpex_items = normalize_tpex(tpex_payload, updated_at, trade_date)
-            items.extend(tpex_items)
-            if tpex_items:
-                sources.append("TPEx daily close quotes")
-            else:
-                errors.append("TPEx daily close quotes returned no normalized OTC-stock rows.")
-        else:
-            errors.append("TPEx daily close quotes did not return a JSON array.")
-    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, OSError) as exc:
-        errors.append(f"TPEx daily close quotes fetch failed: {exc}")
-
-    if not items:
-        message = "No TWSE/TPEx close data was fetched. This may be a non-trading day or official data may not be updated yet."
-        radar, status = failure_payload(now, message, errors or [message])
-    else:
-        message = f"Fetched {len(items)} TWSE/TPEx close rows."
-        status = {
-            "status": "success",
-            "message": message,
-            "trade_date": trade_date,
-            "updated_at": updated_at,
-            "timezone": "Asia/Taipei",
-            "source": sources,
-            "items_count": len(items),
-            "errors": errors,
-        }
-        radar = {**status, "items": sorted(items, key=lambda item: item["code"])}
+    message = f"Fetched {len(items)} TWSE/TPEx close rows for {trade_date}."
+    status = {
+        "status": "success",
+        "message": message,
+        "trade_date": trade_date,
+        "updated_at": updated_at,
+        "timezone": "Asia/Taipei",
+        "source": sources,
+        "source_dates": source_dates,
+        "items_count": len(items),
+        "errors": [],
+        "previous_data_preserved": False,
+        "quality": {
+            "matched_by_market": matched_quote_counts,
+            "required_by_market": required_quote_counts,
+            "minimum_ratio": MIN_QUOTE_COVERAGE_RATIO,
+        },
+    }
+    radar = {**status, "items": sorted(items, key=lambda item: item["code"])}
 
     write_json(RADAR_PATH, radar)
     write_json(STATUS_PATH, status)
     print(f"{status['status']}: {message}")
-    if errors:
-        print("errors:")
-        for error in errors:
-            print(f"- {error}")
     return 0
 
 

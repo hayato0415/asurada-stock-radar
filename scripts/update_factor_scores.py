@@ -32,6 +32,11 @@ try:
 except ModuleNotFoundError:  # pragma: no cover - stdlib fallback keeps local runs working.
     requests = None
 
+try:
+    from official_daily_quotes import fetch_daily_quotes
+except ModuleNotFoundError:  # Supports importing as scripts.update_factor_scores in tests.
+    from scripts.official_daily_quotes import fetch_daily_quotes
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data" / "processed"
@@ -44,6 +49,7 @@ HISTORY_OUTPUT = DATA_DIR / "factor-quote-history.json"
 
 TAIPEI = timezone(timedelta(hours=8))
 USER_AGENT = "ASURADA-Stock-Radar/2.0 (+https://github.com/hayato0415/asurada-stock-radar)"
+MIN_QUOTE_COVERAGE_RATIO = 0.80
 
 TWSE_STOCK_DAY_ALL = "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL"
 TWSE_VALUATION = "https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_ALL"
@@ -52,8 +58,8 @@ TWSE_COMPANY_BASIC = "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
 
 TPEX_DAILY_QUOTES = "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes"
 TPEX_VALUATION = "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_peratio_analysis"
-TPEX_MONTHLY_REVENUE = "https://openapi.twse.com.tw/v1/opendata/t187ap05_O"
-TPEX_COMPANY_BASIC = "https://openapi.twse.com.tw/v1/opendata/t187ap03_O"
+TPEX_MONTHLY_REVENUE = "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap05_O"
+TPEX_COMPANY_BASIC = "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
 
 WEIGHTS = {
     "fundamentalScore": 0.30,
@@ -359,6 +365,34 @@ def load_stock_master() -> list[dict[str, Any]]:
     return stocks
 
 
+def quote_market(value: Any) -> str:
+    text = str(value or "").strip().lower()
+    if text in {"上市", "twse", "listed"} or "上市" in text:
+        return "twse"
+    if text in {"上櫃", "tpex", "otc"} or "上櫃" in text:
+        return "tpex"
+    return ""
+
+
+def quote_coverage_requirements(stocks: list[dict[str, Any]]) -> dict[str, int]:
+    master_counts = {
+        "twse": sum(1 for stock in stocks if quote_market(stock.get("market")) == "twse"),
+        "tpex": sum(1 for stock in stocks if quote_market(stock.get("market")) == "tpex"),
+    }
+    previous_status = read_json(STATUS_OUTPUT, {})
+    previous_counts = {
+        "twse": int(previous_status.get("twse_quote_matched") or 0) if isinstance(previous_status, dict) else 0,
+        "tpex": int(previous_status.get("tpex_quote_matched") or 0) if isinstance(previous_status, dict) else 0,
+    }
+    return {
+        market: max(
+            1,
+            math.ceil(max(master_counts[market], previous_counts[market]) * MIN_QUOTE_COVERAGE_RATIO),
+        )
+        for market in ("twse", "tpex")
+    }
+
+
 def parse_quote_rows(rows: list[dict[str, Any]], market_label: str) -> tuple[dict[str, dict[str, Any]], str | None]:
     quotes: dict[str, dict[str, Any]] = {}
     dates: list[str] = []
@@ -491,7 +525,8 @@ def parse_company_basic(rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]
 
 def merge_source_status(source_status: list[SourceStatus], quotes: dict[str, dict[str, Any]]) -> str | None:
     dates = [quote.get("source_date") for quote in quotes.values() if quote.get("source_date")]
-    latest_trade_date = max(dates) if dates else None
+    unique_dates = sorted(set(dates))
+    latest_trade_date = unique_dates[0] if len(unique_dates) == 1 else None
     for status in source_status:
         if "行情" in status.name and not status.source_date:
             market = "上市" if "TWSE" in status.name else "上櫃"
@@ -832,8 +867,31 @@ def run(target_date: str | None, force_history_refresh: bool) -> int:
 
     stocks = load_stock_master()
 
-    twse_quote_rows, twse_quote_status = fetch_rows("TWSE 上市每日行情", TWSE_STOCK_DAY_ALL)
-    tpex_quote_rows, tpex_quote_status = fetch_rows("TPEx 上櫃每日行情", TPEX_DAILY_QUOTES)
+    requested_quote_date = target_date or now_taipei().date().isoformat()
+    try:
+        twse_quote_rows, twse_source_date, twse_source_url = fetch_daily_quotes("twse", requested_quote_date)
+        twse_quote_status = SourceStatus(
+            name="TWSE 上市每日行情",
+            url=twse_source_url,
+            ok=True,
+            source_date=twse_source_date,
+            row_count=len(twse_quote_rows),
+        )
+    except Exception as exc:  # noqa: BLE001 - failure status preserves the previous scores.
+        twse_quote_rows = []
+        twse_quote_status = SourceStatus(name="TWSE 上市每日行情", url=TWSE_STOCK_DAY_ALL, error=str(exc))
+    try:
+        tpex_quote_rows, tpex_source_date, tpex_source_url = fetch_daily_quotes("tpex", requested_quote_date)
+        tpex_quote_status = SourceStatus(
+            name="TPEx 上櫃每日行情",
+            url=tpex_source_url,
+            ok=True,
+            source_date=tpex_source_date,
+            row_count=len(tpex_quote_rows),
+        )
+    except Exception as exc:  # noqa: BLE001 - failure status preserves the previous scores.
+        tpex_quote_rows = []
+        tpex_quote_status = SourceStatus(name="TPEx 上櫃每日行情", url=TPEX_DAILY_QUOTES, error=str(exc))
     twse_val_rows, twse_val_status = fetch_rows("TWSE 上市本益比殖利率", TWSE_VALUATION)
     tpex_val_rows, tpex_val_status = fetch_rows("TPEx 上櫃本益比殖利率", TPEX_VALUATION)
     twse_rev_rows, twse_rev_status = fetch_rows("MOPS 上市月營收", TWSE_MONTHLY_REVENUE)
@@ -863,11 +921,31 @@ def run(target_date: str | None, force_history_refresh: bool) -> int:
     tpex_quotes = {symbol: quote for symbol, quote in tpex_quotes.items() if symbol in universe_symbols}
     quotes = {**twse_quotes, **tpex_quotes}
     latest_trade_date = merge_source_status(source_status, quotes)
+    required_quote_counts = quote_coverage_requirements(stocks)
 
     if not twse_quote_status.ok:
         failed_reasons.append(f"TWSE 行情來源失敗：{twse_quote_status.error or '無資料'}")
     if not tpex_quote_status.ok:
-        warnings.append(f"TPEx 行情來源失敗：{tpex_quote_status.error or '無資料'}")
+        failed_reasons.append(f"TPEx 行情來源失敗：{tpex_quote_status.error or '無資料'}")
+    if twse_date != tpex_date or not twse_date or not tpex_date:
+        failed_reasons.append(
+            f"TWSE/TPEx 行情日期不一致：TWSE={twse_date or '--'}, TPEx={tpex_date or '--'}"
+        )
+    if len(twse_quotes) < required_quote_counts["twse"]:
+        failed_reasons.append(
+            f"TWSE 行情覆蓋 {len(twse_quotes)} 低於安全門檻 {required_quote_counts['twse']} "
+            f"（股票主檔/前次覆蓋的 {MIN_QUOTE_COVERAGE_RATIO:.0%}）"
+        )
+    if len(tpex_quotes) < required_quote_counts["tpex"]:
+        failed_reasons.append(
+            f"TPEx 行情覆蓋 {len(tpex_quotes)} 低於安全門檻 {required_quote_counts['tpex']} "
+            f"（股票主檔/前次覆蓋的 {MIN_QUOTE_COVERAGE_RATIO:.0%}）"
+        )
+    for status in source_status[2:]:
+        if not status.ok:
+            failed_reasons.append(
+                f"{clean_source_name(status.name, status.url)} source failed: {status.error or 'no data'}"
+            )
     if not latest_trade_date:
         failed_reasons.append("官方行情來源沒有可辨識的交易日期")
     if target_date and latest_trade_date and latest_trade_date != target_date:
@@ -884,7 +962,7 @@ def run(target_date: str | None, force_history_refresh: bool) -> int:
         print("factor score update failed; previous factor-scores.json preserved")
         for reason in failed_reasons:
             print(f"- {reason}")
-        return 0
+        return 1
 
     valuations = {**parse_valuation_rows(twse_val_rows), **parse_valuation_rows(tpex_val_rows)}
     twse_revenue, twse_revenue_month = parse_monthly_revenue(twse_rev_rows)
@@ -907,7 +985,7 @@ def run(target_date: str | None, force_history_refresh: bool) -> int:
             warnings=warnings,
         )
         print("factor score update produced zero ranked rows; previous factor-scores.json preserved")
-        return 0
+        return 1
 
     write_json(OUTPUT, rows)
     write_json(HISTORY_OUTPUT, history)
@@ -934,6 +1012,11 @@ def run(target_date: str | None, force_history_refresh: bool) -> int:
             "company_basic": "MOPS t187ap03_L / t187ap03_O",
         },
         "quality": quality,
+        "quote_coverage": {
+            "minimum_ratio": MIN_QUOTE_COVERAGE_RATIO,
+            "required": required_quote_counts,
+            "matched": {"twse": len(twse_quotes), "tpex": len(tpex_quotes)},
+        },
         "source_status": [status.as_dict() for status in source_status],
         "outputs": {
             "factor-scores.json": "updated",
