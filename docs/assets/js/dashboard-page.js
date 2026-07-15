@@ -59,22 +59,6 @@ const TRANSPARENCY_CARDS = [
     canJudge: "可檢查個股目前資料是否完整、是否進入排名、分數與風險標籤為何。",
     cannotJudge: "不能把缺漏資料自動補成 0；停牌或缺資料應顯示 N/A 或 --。",
     limits: "若 EPS、毛利率、週轉率等資料源缺漏，個股頁會保留查詢但標示缺值。"
-  },
-  {
-    title: "追蹤驗證",
-    purpose: "追蹤每日 AI 前 30 名後續 5 日、10 日、20 日表現與命中率。",
-    source: "data/processed/backtest_results.json",
-    canJudge: "可回頭檢查模型排名後的實際報酬、最大漲幅與最大回撤。",
-    cannotJudge: "歷史回測不代表未來一定有效，也不是獲利保證。",
-    limits: "若歷史行情不足，應標示資料不足，不應推估出完整績效。"
-  },
-  {
-    title: "資料更新狀態",
-    purpose: "檢查每個 processed JSON 的更新時間、筆數、狀態與錯誤訊息。",
-    source: "data/processed/update_log.json 與各資料檔 metadata",
-    canJudge: "可確認哪個資料集已更新、哪個資料集保留上一版或失敗。",
-    cannotJudge: "updated_at 新不代表內容一定新，仍要看 content_latest_at 或資料日期。",
-    limits: "若資料內容時間舊但未標 stale，應視為資料品質問題並修正更新流程。"
   }
 ];
 

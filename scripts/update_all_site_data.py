@@ -671,7 +671,9 @@ def build_unified_status(metadata: dict[str, str], step_results: list[dict[str, 
     payload = {
         **metadata,
         "status": status,
-        "ok": status == "ok",
+        # A pre-close freshness warning is informational: the refresh itself
+        # completed and the previous trading day is the expected baseline.
+        "ok": status in {"ok", "warning"},
         "each_file_status": files,
         "files": files,
         "stale_files": sorted(set(stale_files)),

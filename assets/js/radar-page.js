@@ -439,64 +439,59 @@ function fillSelect(selector, values) {
     .join("")}`;
 }
 
+function getRadarStatusLabel(rawStatus) {
+  if (["success", "ok", "warning"].includes(rawStatus)) return "成功";
+  if (rawStatus === "partial") return "部分成功";
+  if (rawStatus === "stale") return "資料過期";
+  if (rawStatus === "loading") return "載入中";
+  return "失敗";
+}
+
+function isSuccessfulRadarStatus(rawStatus) {
+  return ["success", "ok", "warning"].includes(rawStatus);
+}
+
 function renderStatus(status, radarPayload) {
   const statusValue = $("#statusValue");
   const tradeDate = $("#statusTradeDate");
   const updatedAt = $("#statusUpdatedAt");
-  const source = $("#statusSource");
   const reason = $("#statusReason");
   const message = $("#radarStatusMessage");
   const pageUpdated = $("#radarUpdatedAt");
 
   const rawStatus = String(status?.status || radarPayload?.status || "failed").toLowerCase();
-  const statusLabel = rawStatus === "success" ? "成功" : rawStatus === "partial" ? "部分成功" : rawStatus === "loading" ? "載入中" : "失敗";
-  const sources = status?.sources ?? radarPayload?.source ?? [];
-  const sourceText = Array.isArray(sources) ? sources.join("、") : typeof sources === "object" ? Object.values(sources).join("、") : String(sources || "--");
-  const reasonText = status?.message || status?.stale_reason || status?.errors?.[0] || (rawStatus === "success" ? "資料已更新。" : "尚未取得資料。");
+  const statusLabel = getRadarStatusLabel(rawStatus);
+  const reasonText = status?.message || status?.stale_reason || status?.errors?.[0]
+    || (isSuccessfulRadarStatus(rawStatus) ? "資料已更新。" : "尚未取得資料。");
 
   if (statusValue) statusValue.textContent = statusLabel;
-  if (tradeDate) tradeDate.textContent = status?.trade_date || radarPayload?.trade_date || "--";
-  if (updatedAt) updatedAt.textContent = formatDateTime(status?.updated_at || radarPayload?.updated_at);
-  if (source) source.textContent = sourceText || "--";
+  if (tradeDate) tradeDate.textContent = status?.trade_date || status?.latest_trade_date || radarPayload?.trade_date || "--";
+  if (updatedAt) updatedAt.textContent = formatDateTime(status?.updated_at || status?.generated_at || radarPayload?.updated_at);
   if (reason) reason.textContent = reasonText;
   if (message) message.textContent = reasonText;
-  if (pageUpdated) pageUpdated.textContent = `資料更新：${formatDateTime(status?.updated_at || radarPayload?.updated_at)}`;
+  if (pageUpdated) pageUpdated.textContent = `資料更新：${formatDateTime(status?.updated_at || status?.generated_at || radarPayload?.updated_at)}`;
 }
 
 function renderStatusResilient(status, radarPayload, failures = []) {
   const statusValue = $("#statusValue");
   const tradeDate = $("#statusTradeDate");
   const updatedAt = $("#statusUpdatedAt");
-  const source = $("#statusSource");
   const reason = $("#statusReason");
   const message = $("#radarStatusMessage");
   const pageUpdated = $("#radarUpdatedAt");
 
   const rawStatus = String(status?.status || radarPayload?.status || (failures.length ? "partial" : "success")).toLowerCase();
-  const statusLabel = ["success", "ok"].includes(rawStatus)
-    ? "成功"
-    : rawStatus === "partial"
-      ? "部分成功"
-      : rawStatus === "loading"
-        ? "載入中"
-        : "失敗";
-  const dateText = status?.trade_date || radarPayload?.trade_date || radarPayload?.date || "--";
-  const updatedText = status?.updated_at || radarPayload?.updated_at || "--";
-  const sources = status?.sources ?? status?.source ?? radarPayload?.source ?? [];
-  const sourceText = Array.isArray(sources)
-    ? sources.filter(Boolean).join("、")
-    : typeof sources === "object"
-      ? Object.values(sources).filter(Boolean).join("、")
-      : String(sources || "--");
+  const statusLabel = getRadarStatusLabel(rawStatus);
+  const dateText = status?.trade_date || status?.latest_trade_date || radarPayload?.trade_date || radarPayload?.date || "--";
+  const updatedText = status?.updated_at || status?.generated_at || radarPayload?.updated_at || "--";
   const failureText = failures.length ? `部分 JSON 載入失敗：${formatFailureSummary(failures)}` : "";
   const baseReason = status?.message || status?.stale_reason || status?.errors?.[0] || radarPayload?.message || "";
   const reasonText = [baseReason, failureText].filter(Boolean).join("；")
-    || (["success", "ok"].includes(rawStatus) ? "資料已更新。" : "尚未取得資料。");
+    || (isSuccessfulRadarStatus(rawStatus) ? "資料已更新。" : "尚未取得資料。");
 
   if (statusValue) statusValue.textContent = statusLabel;
   if (tradeDate) tradeDate.textContent = dateText;
   if (updatedAt) updatedAt.textContent = formatDateTime(updatedText);
-  if (source) source.textContent = sourceText || "--";
   if (reason) reason.textContent = reasonText;
   if (message) message.textContent = reasonText;
   if (pageUpdated) pageUpdated.textContent = `資料更新：${formatDateTime(updatedText)}`;
