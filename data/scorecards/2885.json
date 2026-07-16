@@ -1,6 +1,6 @@
 {
-  "build_id": "20260716-1541-scorecards",
-  "updated_at": "2026-07-16T15:41:10+08:00",
+  "build_id": "20260716-1924-scorecards",
+  "updated_at": "2026-07-16T19:24:17+08:00",
   "content_latest_at": "2026-07-16",
   "symbol": "2885",
   "name": "元大金",
@@ -147,8 +147,8 @@
       "key": "chip",
       "label": "籌碼 / 市場交易力道",
       "weight": 25,
-      "score": 4.3,
-      "raw_score": 17.2,
+      "score": 4.4,
+      "raw_score": 17.6,
       "coverage_pct": 66.7,
       "missing_count": 1,
       "rules": [
@@ -156,9 +156,9 @@
           "id": "volume",
           "label": "成交量",
           "source_field": "volume",
-          "raw_value": 21082406,
+          "raw_value": 21625406,
           "max_score": 10,
-          "score": 4.2,
+          "score": 4.3,
           "missing": false,
           "description": "成交量反映市場參與度。"
         },
@@ -206,7 +206,7 @@
       ]
     }
   },
-  "total_score": 13.5,
+  "total_score": 13.6,
   "summary": {
     "symbol": "2885",
     "code": "2885",
@@ -217,7 +217,7 @@
     "supply_chain": "金融保險業",
     "trade_price": 66.7,
     "change_pct": -0.45,
-    "volume": 21082406,
+    "volume": 21625406,
     "turnover_rate_pct": 0.16,
     "revenue_million": null,
     "revenue_mom_pct": null,
@@ -227,19 +227,19 @@
     "financial_period": "2026-06",
     "fundamental_score": 0.0,
     "technical_score": 30.0,
-    "chip_score": 17.2,
+    "chip_score": 17.6,
     "turnover_score": 1.3,
     "weighted_scores": {
       "fundamental": 0,
       "technical": 9.0,
-      "chip": 4.3,
+      "chip": 4.4,
       "turnover": 0.2
     },
-    "total_score": 13.5,
+    "total_score": 13.6,
     "risk_level": "低",
     "entry_reason": "週轉率 0.16%",
     "data_quality_score": 54.2,
-    "updated_at": "2026-07-16T15:41:10+08:00",
+    "updated_at": "2026-07-16T19:24:17+08:00",
     "content_latest_at": "2026-07-16",
     "scorecard_path": "data/scorecards/2885.json",
     "news_scoring_included": false,
