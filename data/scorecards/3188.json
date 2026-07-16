@@ -1,7 +1,7 @@
 {
-  "build_id": "20260716-0246-scorecards",
-  "updated_at": "2026-07-16T02:46:18+08:00",
-  "content_latest_at": "2026-07-15",
+  "build_id": "20260716-1541-scorecards",
+  "updated_at": "2026-07-16T15:41:10+08:00",
+  "content_latest_at": "2026-07-16",
   "symbol": "3188",
   "name": "鑫龍騰",
   "market": "上櫃",
@@ -147,8 +147,8 @@
       "key": "chip",
       "label": "籌碼 / 市場交易力道",
       "weight": 25,
-      "score": 0,
-      "raw_score": 0.0,
+      "score": 0.1,
+      "raw_score": 0.4,
       "coverage_pct": 33.3,
       "missing_count": 2,
       "rules": [
@@ -156,9 +156,9 @@
           "id": "volume",
           "label": "成交量",
           "source_field": "volume",
-          "raw_value": 176509,
+          "raw_value": 391376,
           "max_score": 10,
-          "score": 0,
+          "score": 0.1,
           "missing": false,
           "description": "成交量反映市場參與度。"
         },
@@ -206,7 +206,7 @@
       ]
     }
   },
-  "total_score": 18.3,
+  "total_score": 18.4,
   "summary": {
     "symbol": "3188",
     "code": "3188",
@@ -217,7 +217,7 @@
     "supply_chain": "建材營造業",
     "trade_price": 23.9,
     "change_pct": 0.0,
-    "volume": 176509,
+    "volume": 391376,
     "turnover_rate_pct": null,
     "revenue_million": 239.97,
     "revenue_mom_pct": -40.29,
@@ -227,20 +227,20 @@
     "financial_period": "2026-06",
     "fundamental_score": 30.0,
     "technical_score": 31.0,
-    "chip_score": 0.0,
+    "chip_score": 0.4,
     "turnover_score": 0.0,
     "weighted_scores": {
       "fundamental": 9.0,
       "technical": 9.3,
-      "chip": 0,
+      "chip": 0.1,
       "turnover": 0
     },
-    "total_score": 18.3,
+    "total_score": 18.4,
     "risk_level": "低",
     "entry_reason": "營收年增 228.97%，月增 -40.29%",
     "data_quality_score": 33.3,
-    "updated_at": "2026-07-16T02:46:18+08:00",
-    "content_latest_at": "2026-07-15",
+    "updated_at": "2026-07-16T15:41:10+08:00",
+    "content_latest_at": "2026-07-16",
     "scorecard_path": "data/scorecards/3188.json",
     "news_scoring_included": false,
     "theme_scoring_included": false

@@ -1,7 +1,7 @@
 {
-  "build_id": "20260716-0246-scorecards",
-  "updated_at": "2026-07-16T02:46:18+08:00",
-  "content_latest_at": "2026-07-15",
+  "build_id": "20260716-1541-scorecards",
+  "updated_at": "2026-07-16T15:41:10+08:00",
+  "content_latest_at": "2026-07-16",
   "symbol": "8085",
   "name": "福華",
   "market": "上櫃",
@@ -147,8 +147,8 @@
       "key": "chip",
       "label": "籌碼 / 市場交易力道",
       "weight": 25,
-      "score": 0.1,
-      "raw_score": 0.4,
+      "score": 0,
+      "raw_score": 0.0,
       "coverage_pct": 33.3,
       "missing_count": 2,
       "rules": [
@@ -156,9 +156,9 @@
           "id": "volume",
           "label": "成交量",
           "source_field": "volume",
-          "raw_value": 286267,
+          "raw_value": 98466,
           "max_score": 10,
-          "score": 0.1,
+          "score": 0,
           "missing": false,
           "description": "成交量反映市場參與度。"
         },
@@ -206,7 +206,7 @@
       ]
     }
   },
-  "total_score": 11.6,
+  "total_score": 11.5,
   "summary": {
     "symbol": "8085",
     "code": "8085",
@@ -217,7 +217,7 @@
     "supply_chain": "其他電子業",
     "trade_price": 11.3,
     "change_pct": 0.0,
-    "volume": 286267,
+    "volume": 98466,
     "turnover_rate_pct": null,
     "revenue_million": 46.55,
     "revenue_mom_pct": -3.2,
@@ -227,20 +227,20 @@
     "financial_period": "2026-06",
     "fundamental_score": 7.3,
     "technical_score": 31.0,
-    "chip_score": 0.4,
+    "chip_score": 0.0,
     "turnover_score": 0.0,
     "weighted_scores": {
       "fundamental": 2.2,
       "technical": 9.3,
-      "chip": 0.1,
+      "chip": 0,
       "turnover": 0
     },
-    "total_score": 11.6,
+    "total_score": 11.5,
     "risk_level": "低",
     "entry_reason": "營收年增 -18.00%，月增 -3.20%",
     "data_quality_score": 33.3,
-    "updated_at": "2026-07-16T02:46:18+08:00",
-    "content_latest_at": "2026-07-15",
+    "updated_at": "2026-07-16T15:41:10+08:00",
+    "content_latest_at": "2026-07-16",
     "scorecard_path": "data/scorecards/8085.json",
     "news_scoring_included": false,
     "theme_scoring_included": false

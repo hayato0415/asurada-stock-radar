@@ -1,7 +1,7 @@
 {
-  "build_id": "20260716-0246-scorecards",
-  "updated_at": "2026-07-16T02:46:18+08:00",
-  "content_latest_at": "2026-07-15",
+  "build_id": "20260716-1541-scorecards",
+  "updated_at": "2026-07-16T15:41:10+08:00",
+  "content_latest_at": "2026-07-16",
   "symbol": "4154",
   "name": "樂威科-KY",
   "market": "上櫃",
@@ -96,8 +96,8 @@
       "key": "technical",
       "label": "技術面",
       "weight": 30,
-      "score": 10.8,
-      "raw_score": 36.0,
+      "score": 9.3,
+      "raw_score": 31.0,
       "coverage_pct": 50.0,
       "missing_count": 2,
       "rules": [
@@ -105,9 +105,9 @@
           "id": "change_1d",
           "label": "當日漲跌幅",
           "source_field": "change_pct",
-          "raw_value": 2.14,
+          "raw_value": 0.0,
           "max_score": 12,
-          "score": 6.8,
+          "score": 5.3,
           "missing": false,
           "description": "當日價格強度。"
         },
@@ -206,7 +206,7 @@
       ]
     }
   },
-  "total_score": 22.1,
+  "total_score": 20.6,
   "summary": {
     "symbol": "4154",
     "code": "4154",
@@ -216,7 +216,7 @@
     "theme": "其他業",
     "supply_chain": "其他業",
     "trade_price": 11.95,
-    "change_pct": 2.14,
+    "change_pct": 0.0,
     "volume": 6000,
     "turnover_rate_pct": null,
     "revenue_million": 2.5,
@@ -226,21 +226,21 @@
     "gross_margin_pct": null,
     "financial_period": "2026-06",
     "fundamental_score": 37.7,
-    "technical_score": 36.0,
+    "technical_score": 31.0,
     "chip_score": 0.0,
     "turnover_score": 0.0,
     "weighted_scores": {
       "fundamental": 11.3,
-      "technical": 10.8,
+      "technical": 9.3,
       "chip": 0,
       "turnover": 0
     },
-    "total_score": 22.1,
+    "total_score": 20.6,
     "risk_level": "低",
     "entry_reason": "營收年增 155.25%，月增 0.81%",
     "data_quality_score": 33.3,
-    "updated_at": "2026-07-16T02:46:18+08:00",
-    "content_latest_at": "2026-07-15",
+    "updated_at": "2026-07-16T15:41:10+08:00",
+    "content_latest_at": "2026-07-16",
     "scorecard_path": "data/scorecards/4154.json",
     "news_scoring_included": false,
     "theme_scoring_included": false
