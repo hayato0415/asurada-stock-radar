@@ -1,6 +1,6 @@
 {
   "date": "2026-07-17",
-  "updated_at": "2026-07-18 02:39",
+  "updated_at": "2026-07-19 15:50",
   "source": {
     "stock_master": "data/processed/stocks_master.json",
     "stock_metrics": "data/processed/stock_metrics_daily.json",
@@ -11,12 +11,12 @@
   "quality": {
     "stock_master_count": 1971,
     "theme_count": 35,
-    "beneficiary_stock_count": 2075,
+    "beneficiary_stock_count": 1979,
     "quote_matched": 1968,
     "revenue_matched": 1971,
     "eps_matched": 0,
     "gross_margin_matched": 0,
-    "news_event_count": 155,
+    "news_event_count": 8,
     "manual_membership_count": 0,
     "missing_theme": [],
     "missing_quote": [
@@ -10676,2774 +10676,6 @@
       "rank": 3
     },
     {
-      "theme": "公司重大訊息",
-      "theme_change_pct": -3.91,
-      "turnover_billion": 3032.45,
-      "up_count": 8,
-      "limit_up_count": 0,
-      "beneficiary_count": 104,
-      "high_score_news_count": 0,
-      "avg_ai_score": 36.6,
-      "source_types": [
-        "news"
-      ],
-      "source_labels": [
-        "新聞事件"
-      ],
-      "beneficiary_stocks": [
-        {
-          "symbol": "3491",
-          "name": "昇達科",
-          "market": "上櫃",
-          "industry": "通信網路業",
-          "theme": "公司重大訊息",
-          "trade_price": 1355.0,
-          "change_pct": 3.44,
-          "volume": 7678699,
-          "turnover_rate_pct": null,
-          "turnover_billion": 104.046,
-          "revenue_yoy_pct": 89.38,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 53.2,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 89.38%；漲跌 3.44%"
-        },
-        {
-          "symbol": "4416",
-          "name": "三圓",
-          "market": "上櫃",
-          "industry": "建材營造業",
-          "theme": "公司重大訊息",
-          "trade_price": 10.25,
-          "change_pct": -2.38,
-          "volume": 455393,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.047,
-          "revenue_yoy_pct": 256.72,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 53.2,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 256.72%；漲跌 -2.38%"
-        },
-        {
-          "symbol": "8099",
-          "name": "大世科",
-          "market": "上櫃",
-          "industry": "資訊服務業",
-          "theme": "公司重大訊息",
-          "trade_price": 56.5,
-          "change_pct": -3.09,
-          "volume": 271871,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.154,
-          "revenue_yoy_pct": 85.46,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 52.5,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 85.46%；漲跌 -3.09%"
-        },
-        {
-          "symbol": "2547",
-          "name": "日勝生",
-          "market": "上市",
-          "industry": "建材營造業",
-          "theme": "公司重大訊息",
-          "trade_price": 10.3,
-          "change_pct": 0.0,
-          "volume": 5348058,
-          "turnover_rate_pct": 0.52,
-          "turnover_billion": 0.551,
-          "revenue_yoy_pct": 141.99,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 51.7,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 141.99%；漲跌 0.00%；週轉率 0.52%"
-        },
-        {
-          "symbol": "6486",
-          "name": "互動",
-          "market": "上櫃",
-          "industry": "通信網路業",
-          "theme": "公司重大訊息",
-          "trade_price": 77.0,
-          "change_pct": -2.04,
-          "volume": 160191,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.123,
-          "revenue_yoy_pct": 60.06,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 50.6,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 60.06%；漲跌 -2.04%"
-        },
-        {
-          "symbol": "3706",
-          "name": "神達",
-          "market": "上市",
-          "industry": "電腦及週邊設備業",
-          "theme": "公司重大訊息",
-          "trade_price": 88.3,
-          "change_pct": -1.78,
-          "volume": 14420694,
-          "turnover_rate_pct": 1.09,
-          "turnover_billion": 12.733,
-          "revenue_yoy_pct": 80.93,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 50.3,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 80.93%；漲跌 -1.78%；週轉率 1.09%"
-        },
-        {
-          "symbol": "4989",
-          "name": "榮科",
-          "market": "上市",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 70.4,
-          "change_pct": -9.97,
-          "volume": 7565468,
-          "turnover_rate_pct": 5.49,
-          "turnover_billion": 5.326,
-          "revenue_yoy_pct": 73.41,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 49.6,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 73.41%；漲跌 -9.97%；週轉率 5.49%"
-        },
-        {
-          "symbol": "2867",
-          "name": "三商壽",
-          "market": "上市",
-          "industry": "金融保險業",
-          "theme": "公司重大訊息",
-          "trade_price": 8.98,
-          "change_pct": 0.79,
-          "volume": 37939427,
-          "turnover_rate_pct": 0.64,
-          "turnover_billion": 3.407,
-          "revenue_yoy_pct": 187.2,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 49.5,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 187.20%；漲跌 0.79%；週轉率 0.64%"
-        },
-        {
-          "symbol": "6015",
-          "name": "宏遠證",
-          "market": "上櫃",
-          "industry": "金融保險業",
-          "theme": "公司重大訊息",
-          "trade_price": 16.5,
-          "change_pct": -4.62,
-          "volume": 2714699,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.448,
-          "revenue_yoy_pct": 270.84,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 47.9,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 270.84%；漲跌 -4.62%"
-        },
-        {
-          "symbol": "6187",
-          "name": "萬潤",
-          "market": "上櫃",
-          "industry": "半導體業",
-          "theme": "公司重大訊息",
-          "trade_price": 975.0,
-          "change_pct": -9.3,
-          "volume": 2605785,
-          "turnover_rate_pct": null,
-          "turnover_billion": 25.406,
-          "revenue_yoy_pct": 87.06,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 47.6,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 87.06%；漲跌 -9.30%"
-        },
-        {
-          "symbol": "3090",
-          "name": "日電貿",
-          "market": "上市",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 194.5,
-          "change_pct": -6.94,
-          "volume": 16650576,
-          "turnover_rate_pct": 5.79,
-          "turnover_billion": 32.385,
-          "revenue_yoy_pct": 32.37,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 47.5,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 32.37%；漲跌 -6.94%；週轉率 5.79%"
-        },
-        {
-          "symbol": "1591",
-          "name": "駿吉-KY",
-          "market": "上櫃",
-          "industry": "電機機械",
-          "theme": "公司重大訊息",
-          "trade_price": null,
-          "change_pct": null,
-          "volume": null,
-          "turnover_rate_pct": null,
-          "turnover_billion": null,
-          "revenue_yoy_pct": 126.96,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 46.2,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 126.96%"
-        },
-        {
-          "symbol": "6239",
-          "name": "力成",
-          "market": "上市",
-          "industry": "半導體業",
-          "theme": "公司重大訊息",
-          "trade_price": 288.0,
-          "change_pct": -9.0,
-          "volume": 43365963,
-          "turnover_rate_pct": 5.71,
-          "turnover_billion": 124.894,
-          "revenue_yoy_pct": 21.71,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 45.3,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 21.71%；漲跌 -9.00%；週轉率 5.71%"
-        },
-        {
-          "symbol": "3450",
-          "name": "聯鈞",
-          "market": "上市",
-          "industry": "半導體業",
-          "theme": "公司重大訊息",
-          "trade_price": 432.0,
-          "change_pct": -10.0,
-          "volume": 4187634,
-          "turnover_rate_pct": 2.87,
-          "turnover_billion": 18.091,
-          "revenue_yoy_pct": 88.18,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 44.6,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 88.18%；漲跌 -10.00%；週轉率 2.87%"
-        },
-        {
-          "symbol": "3689",
-          "name": "湧德",
-          "market": "上櫃",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 106.0,
-          "change_pct": -7.42,
-          "volume": 2338128,
-          "turnover_rate_pct": null,
-          "turnover_billion": 2.478,
-          "revenue_yoy_pct": 72.66,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 44.0,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 72.66%；漲跌 -7.42%"
-        },
-        {
-          "symbol": "1810",
-          "name": "和成",
-          "market": "上市",
-          "industry": "玻璃陶瓷",
-          "theme": "公司重大訊息",
-          "trade_price": 27.15,
-          "change_pct": -6.06,
-          "volume": 19243717,
-          "turnover_rate_pct": 6.37,
-          "turnover_billion": 5.225,
-          "revenue_yoy_pct": -11.91,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 43.8,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -11.91%；漲跌 -6.06%；週轉率 6.37%"
-        },
-        {
-          "symbol": "6672",
-          "name": "騰輝電子-KY",
-          "market": "上市",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 241.0,
-          "change_pct": -9.91,
-          "volume": 3321978,
-          "turnover_rate_pct": 4.07,
-          "turnover_billion": 8.006,
-          "revenue_yoy_pct": 68.12,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 43.6,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 68.12%；漲跌 -9.91%；週轉率 4.07%"
-        },
-        {
-          "symbol": "2330",
-          "name": "台積電",
-          "market": "上市",
-          "industry": "半導體業",
-          "theme": "公司重大訊息",
-          "trade_price": 2290.0,
-          "change_pct": -7.29,
-          "volume": 97362670,
-          "turnover_rate_pct": 0.38,
-          "turnover_billion": 2229.605,
-          "revenue_yoy_pct": 67.87,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 43.4,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 67.87%；漲跌 -7.29%；週轉率 0.38%"
-        },
-        {
-          "symbol": "2812",
-          "name": "台中銀",
-          "market": "上市",
-          "industry": "金融保險業",
-          "theme": "公司重大訊息",
-          "trade_price": 20.55,
-          "change_pct": 1.48,
-          "volume": 31205183,
-          "turnover_rate_pct": 0.52,
-          "turnover_billion": 6.413,
-          "revenue_yoy_pct": 16.56,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 43.3,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 16.56%；漲跌 1.48%；週轉率 0.52%"
-        },
-        {
-          "symbol": "3028",
-          "name": "增你強",
-          "market": "上市",
-          "industry": "電子通路業",
-          "theme": "公司重大訊息",
-          "trade_price": 68.0,
-          "change_pct": 0.0,
-          "volume": 3317724,
-          "turnover_rate_pct": 1.4,
-          "turnover_billion": 2.256,
-          "revenue_yoy_pct": 65.62,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 43.0,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 65.62%；漲跌 0.00%；週轉率 1.40%"
-        },
-        {
-          "symbol": "1418",
-          "name": "東華",
-          "market": "上市",
-          "industry": "紡織纖維",
-          "theme": "公司重大訊息",
-          "trade_price": 18.35,
-          "change_pct": -0.81,
-          "volume": 12865,
-          "turnover_rate_pct": 0.02,
-          "turnover_billion": 0.002,
-          "revenue_yoy_pct": 6800.0,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 42.8,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 6800.00%；漲跌 -0.81%；週轉率 0.02%"
-        },
-        {
-          "symbol": "4529",
-          "name": "淳紳",
-          "market": "上櫃",
-          "industry": "其他業",
-          "theme": "公司重大訊息",
-          "trade_price": 4.16,
-          "change_pct": -3.93,
-          "volume": 17024,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.001,
-          "revenue_yoy_pct": 462.7,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 42.7,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 462.70%；漲跌 -3.93%"
-        },
-        {
-          "symbol": "6728",
-          "name": "上洋",
-          "market": "上櫃",
-          "industry": "居家生活",
-          "theme": "公司重大訊息",
-          "trade_price": 108.0,
-          "change_pct": -1.82,
-          "volume": 19017,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.021,
-          "revenue_yoy_pct": 28.99,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 42.0,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 28.99%；漲跌 -1.82%"
-        },
-        {
-          "symbol": "2236",
-          "name": "百達-KY",
-          "market": "上市",
-          "industry": "汽車工業",
-          "theme": "公司重大訊息",
-          "trade_price": 161.0,
-          "change_pct": 0.0,
-          "volume": 538652,
-          "turnover_rate_pct": 0.85,
-          "turnover_billion": 0.867,
-          "revenue_yoy_pct": 75.65,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 41.6,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 75.65%；漲跌 0.00%；週轉率 0.85%"
-        },
-        {
-          "symbol": "2892",
-          "name": "第一金",
-          "market": "上市",
-          "industry": "金融保險業",
-          "theme": "公司重大訊息",
-          "trade_price": 34.1,
-          "change_pct": 0.44,
-          "volume": 45041190,
-          "turnover_rate_pct": 0.31,
-          "turnover_billion": 15.359,
-          "revenue_yoy_pct": 9.73,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 41.0,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 9.73%；漲跌 0.44%；週轉率 0.31%"
-        },
-        {
-          "symbol": "4953",
-          "name": "緯軟",
-          "market": "上櫃",
-          "industry": "資訊服務業",
-          "theme": "公司重大訊息",
-          "trade_price": 121.5,
-          "change_pct": -3.19,
-          "volume": 307407,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.373,
-          "revenue_yoy_pct": 37.07,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 40.8,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 37.07%；漲跌 -3.19%"
-        },
-        {
-          "symbol": "6957",
-          "name": "裕慶-KY",
-          "market": "上市",
-          "industry": "其他業",
-          "theme": "公司重大訊息",
-          "trade_price": 246.5,
-          "change_pct": -1.2,
-          "volume": 410818,
-          "turnover_rate_pct": 0.74,
-          "turnover_billion": 1.013,
-          "revenue_yoy_pct": 33.53,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 40.5,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 33.53%；漲跌 -1.20%；週轉率 0.74%"
-        },
-        {
-          "symbol": "2609",
-          "name": "陽明",
-          "market": "上市",
-          "industry": "航運業",
-          "theme": "公司重大訊息",
-          "trade_price": 49.2,
-          "change_pct": -1.99,
-          "volume": 16323681,
-          "turnover_rate_pct": 0.47,
-          "turnover_billion": 8.031,
-          "revenue_yoy_pct": 20.18,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 40.5,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 20.18%；漲跌 -1.99%；週轉率 0.47%"
-        },
-        {
-          "symbol": "2313",
-          "name": "華通",
-          "market": "上市",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 212.0,
-          "change_pct": -9.98,
-          "volume": 34563669,
-          "turnover_rate_pct": 2.9,
-          "turnover_billion": 73.275,
-          "revenue_yoy_pct": 20.96,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 40.5,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 20.96%；漲跌 -9.98%；週轉率 2.90%"
-        },
-        {
-          "symbol": "2442",
-          "name": "新美齊",
-          "market": "上市",
-          "industry": "建材營造業",
-          "theme": "公司重大訊息",
-          "trade_price": 19.15,
-          "change_pct": -1.79,
-          "volume": 1832802,
-          "turnover_rate_pct": 0.56,
-          "turnover_billion": 0.351,
-          "revenue_yoy_pct": 220.09,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 39.7,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 220.09%；漲跌 -1.79%；週轉率 0.56%"
-        },
-        {
-          "symbol": "2379",
-          "name": "瑞昱",
-          "market": "上市",
-          "industry": "半導體業",
-          "theme": "公司重大訊息",
-          "trade_price": 718.0,
-          "change_pct": 0.84,
-          "volume": 7045073,
-          "turnover_rate_pct": 1.37,
-          "turnover_billion": 50.584,
-          "revenue_yoy_pct": 20.6,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 39.6,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 20.60%；漲跌 0.84%；週轉率 1.37%"
-        },
-        {
-          "symbol": "5227",
-          "name": "立凱-KY",
-          "market": "上櫃",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 31.2,
-          "change_pct": -0.16,
-          "volume": 482394,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.151,
-          "revenue_yoy_pct": -86.98,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 39.5,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -86.98%；漲跌 -0.16%"
-        },
-        {
-          "symbol": "8908",
-          "name": "欣雄",
-          "market": "上櫃",
-          "industry": "油電燃氣業",
-          "theme": "公司重大訊息",
-          "trade_price": 39.25,
-          "change_pct": -0.38,
-          "volume": 85791,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.034,
-          "revenue_yoy_pct": 13.75,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 39.5,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 13.75%；漲跌 -0.38%"
-        },
-        {
-          "symbol": "2754",
-          "name": "亞洲藏壽司",
-          "market": "上櫃",
-          "industry": "觀光餐旅",
-          "theme": "公司重大訊息",
-          "trade_price": 68.1,
-          "change_pct": -1.02,
-          "volume": 19450,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.013,
-          "revenue_yoy_pct": 12.26,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 39.1,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 12.26%；漲跌 -1.02%"
-        },
-        {
-          "symbol": "6703",
-          "name": "軒郁",
-          "market": "上櫃",
-          "industry": "生技醫療業",
-          "theme": "公司重大訊息",
-          "trade_price": 104.0,
-          "change_pct": -0.95,
-          "volume": 79512,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.083,
-          "revenue_yoy_pct": 13.63,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 38.8,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 13.63%；漲跌 -0.95%"
-        },
-        {
-          "symbol": "4938",
-          "name": "和碩",
-          "market": "上市",
-          "industry": "電腦及週邊設備業",
-          "theme": "公司重大訊息",
-          "trade_price": 82.2,
-          "change_pct": -1.2,
-          "volume": 15671687,
-          "turnover_rate_pct": 0.58,
-          "turnover_billion": 12.882,
-          "revenue_yoy_pct": 15.89,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 38.7,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 15.89%；漲跌 -1.20%；週轉率 0.58%"
-        },
-        {
-          "symbol": "6129",
-          "name": "普誠",
-          "market": "上櫃",
-          "industry": "半導體業",
-          "theme": "公司重大訊息",
-          "trade_price": 15.35,
-          "change_pct": -7.81,
-          "volume": 1557226,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.239,
-          "revenue_yoy_pct": 36.54,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 38.5,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 36.54%；漲跌 -7.81%"
-        },
-        {
-          "symbol": "3708",
-          "name": "上緯投控",
-          "market": "上市",
-          "industry": "綠能環保",
-          "theme": "公司重大訊息",
-          "trade_price": 95.1,
-          "change_pct": -6.31,
-          "volume": 835237,
-          "turnover_rate_pct": 0.91,
-          "turnover_billion": 0.794,
-          "revenue_yoy_pct": 61.7,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 38.4,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 61.70%；漲跌 -6.31%；週轉率 0.91%"
-        },
-        {
-          "symbol": "8064",
-          "name": "東捷",
-          "market": "上櫃",
-          "industry": "光電業",
-          "theme": "公司重大訊息",
-          "trade_price": 116.0,
-          "change_pct": -9.02,
-          "volume": 4648337,
-          "turnover_rate_pct": null,
-          "turnover_billion": 5.392,
-          "revenue_yoy_pct": 15.95,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 38.4,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 15.95%；漲跌 -9.02%"
-        },
-        {
-          "symbol": "5371",
-          "name": "中光電",
-          "market": "上櫃",
-          "industry": "光電業",
-          "theme": "公司重大訊息",
-          "trade_price": 81.5,
-          "change_pct": -9.04,
-          "volume": 30116452,
-          "turnover_rate_pct": null,
-          "turnover_billion": 24.545,
-          "revenue_yoy_pct": -11.35,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 38.1,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -11.35%；漲跌 -9.04%"
-        },
-        {
-          "symbol": "3711",
-          "name": "日月光投控",
-          "market": "上市",
-          "industry": "半導體業",
-          "theme": "公司重大訊息",
-          "trade_price": 614.0,
-          "change_pct": -9.97,
-          "volume": 27892135,
-          "turnover_rate_pct": 0.63,
-          "turnover_billion": 171.258,
-          "revenue_yoy_pct": 32.86,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 38.1,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 32.86%；漲跌 -9.97%；週轉率 0.63%"
-        },
-        {
-          "symbol": "4148",
-          "name": "全宇生技-KY",
-          "market": "上市",
-          "industry": "生技醫療業",
-          "theme": "公司重大訊息",
-          "trade_price": 30.05,
-          "change_pct": -0.66,
-          "volume": 44629,
-          "turnover_rate_pct": 0.07,
-          "turnover_billion": 0.013,
-          "revenue_yoy_pct": 31.52,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 38.0,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 31.52%；漲跌 -0.66%；週轉率 0.07%"
-        },
-        {
-          "symbol": "2323",
-          "name": "中環",
-          "market": "上市",
-          "industry": "光電業",
-          "theme": "公司重大訊息",
-          "trade_price": 10.25,
-          "change_pct": -6.39,
-          "volume": 12749640,
-          "turnover_rate_pct": 1.17,
-          "turnover_billion": 1.307,
-          "revenue_yoy_pct": 38.84,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 37.9,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 38.84%；漲跌 -6.39%；週轉率 1.17%"
-        },
-        {
-          "symbol": "5701",
-          "name": "劍湖山",
-          "market": "上櫃",
-          "industry": "觀光餐旅",
-          "theme": "公司重大訊息",
-          "trade_price": 4.7,
-          "change_pct": 6.82,
-          "volume": 234003,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.011,
-          "revenue_yoy_pct": -23.53,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 37.6,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -23.53%；漲跌 6.82%"
-        },
-        {
-          "symbol": "3691",
-          "name": "碩禾",
-          "market": "上櫃",
-          "industry": "光電業",
-          "theme": "公司重大訊息",
-          "trade_price": 117.5,
-          "change_pct": -9.96,
-          "volume": 913687,
-          "turnover_rate_pct": null,
-          "turnover_billion": 1.074,
-          "revenue_yoy_pct": 63.72,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 37.4,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 63.72%；漲跌 -9.96%"
-        },
-        {
-          "symbol": "2476",
-          "name": "鉅祥",
-          "market": "上市",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 118.5,
-          "change_pct": -9.89,
-          "volume": 3795806,
-          "turnover_rate_pct": 1.74,
-          "turnover_billion": 4.498,
-          "revenue_yoy_pct": 53.76,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 37.3,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 53.76%；漲跌 -9.89%；週轉率 1.74%"
-        },
-        {
-          "symbol": "4580",
-          "name": "捷流閥業",
-          "market": "上櫃",
-          "industry": "電機機械",
-          "theme": "公司重大訊息",
-          "trade_price": 80.9,
-          "change_pct": -0.98,
-          "volume": 61633,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.05,
-          "revenue_yoy_pct": -4.5,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 37.1,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -4.50%；漲跌 -0.98%"
-        },
-        {
-          "symbol": "5904",
-          "name": "寶雅",
-          "market": "上櫃",
-          "industry": "居家生活",
-          "theme": "公司重大訊息",
-          "trade_price": 615.0,
-          "change_pct": -1.28,
-          "volume": 1082523,
-          "turnover_rate_pct": null,
-          "turnover_billion": 6.658,
-          "revenue_yoy_pct": 8.35,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 36.8,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 8.35%；漲跌 -1.28%"
-        },
-        {
-          "symbol": "8905",
-          "name": "裕國",
-          "market": "上櫃",
-          "industry": "其他業",
-          "theme": "公司重大訊息",
-          "trade_price": 29.0,
-          "change_pct": -2.19,
-          "volume": 3383,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.001,
-          "revenue_yoy_pct": 18.79,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 36.8,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 18.79%；漲跌 -2.19%"
-        },
-        {
-          "symbol": "8472",
-          "name": "夠麻吉",
-          "market": "上櫃",
-          "industry": "數位雲端",
-          "theme": "公司重大訊息",
-          "trade_price": 78.5,
-          "change_pct": -0.63,
-          "volume": 18011,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.014,
-          "revenue_yoy_pct": -20.74,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 36.7,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -20.74%；漲跌 -0.63%"
-        },
-        {
-          "symbol": "3605",
-          "name": "宏致",
-          "market": "上市",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 79.3,
-          "change_pct": -6.6,
-          "volume": 4997023,
-          "turnover_rate_pct": 2.86,
-          "turnover_billion": 3.963,
-          "revenue_yoy_pct": 29.81,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 36.7,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 29.81%；漲跌 -6.60%；週轉率 2.86%"
-        },
-        {
-          "symbol": "4581",
-          "name": "光隆精密-KY",
-          "market": "上市",
-          "industry": "汽車工業",
-          "theme": "公司重大訊息",
-          "trade_price": 50.8,
-          "change_pct": 0.0,
-          "volume": 22070,
-          "turnover_rate_pct": 0.07,
-          "turnover_billion": 0.011,
-          "revenue_yoy_pct": 23.66,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 36.5,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 23.66%；漲跌 0.00%；週轉率 0.07%"
-        },
-        {
-          "symbol": "6472",
-          "name": "保瑞",
-          "market": "上市",
-          "industry": "生技醫療業",
-          "theme": "公司重大訊息",
-          "trade_price": 396.0,
-          "change_pct": -4.69,
-          "volume": 1636354,
-          "turnover_rate_pct": 1.28,
-          "turnover_billion": 6.48,
-          "revenue_yoy_pct": 39.22,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 36.3,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 39.22%；漲跌 -4.69%；週轉率 1.28%"
-        },
-        {
-          "symbol": "7819",
-          "name": "精誠金融",
-          "market": "上櫃",
-          "industry": "資訊服務業",
-          "theme": "公司重大訊息",
-          "trade_price": 36.3,
-          "change_pct": -3.59,
-          "volume": 64174,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.023,
-          "revenue_yoy_pct": -52.11,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 36.2,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -52.11%；漲跌 -3.59%"
-        },
-        {
-          "symbol": "6509",
-          "name": "聚和",
-          "market": "上櫃",
-          "industry": "化學工業",
-          "theme": "公司重大訊息",
-          "trade_price": 48.15,
-          "change_pct": -4.27,
-          "volume": 2612959,
-          "turnover_rate_pct": null,
-          "turnover_billion": 1.258,
-          "revenue_yoy_pct": 8.49,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 36.0,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 8.49%；漲跌 -4.27%"
-        },
-        {
-          "symbol": "6134",
-          "name": "萬旭",
-          "market": "上櫃",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 26.25,
-          "change_pct": -6.75,
-          "volume": 540748,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.142,
-          "revenue_yoy_pct": 36.38,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 35.9,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 36.38%；漲跌 -6.75%"
-        },
-        {
-          "symbol": "6173",
-          "name": "信昌電",
-          "market": "上櫃",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 194.0,
-          "change_pct": -9.98,
-          "volume": 820594,
-          "turnover_rate_pct": null,
-          "turnover_billion": 1.592,
-          "revenue_yoy_pct": 29.08,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 35.9,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 29.08%；漲跌 -9.98%"
-        },
-        {
-          "symbol": "1473",
-          "name": "台南",
-          "market": "上市",
-          "industry": "紡織纖維",
-          "theme": "公司重大訊息",
-          "trade_price": 20.0,
-          "change_pct": -0.99,
-          "volume": 60709,
-          "turnover_rate_pct": 0.04,
-          "turnover_billion": 0.012,
-          "revenue_yoy_pct": -0.86,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 35.4,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -0.86%；漲跌 -0.99%；週轉率 0.04%"
-        },
-        {
-          "symbol": "3372",
-          "name": "典範",
-          "market": "上櫃",
-          "industry": "半導體業",
-          "theme": "公司重大訊息",
-          "trade_price": 16.95,
-          "change_pct": -5.04,
-          "volume": 1252968,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.212,
-          "revenue_yoy_pct": 12.47,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 35.4,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 12.47%；漲跌 -5.04%"
-        },
-        {
-          "symbol": "9951",
-          "name": "皇田",
-          "market": "上櫃",
-          "industry": "電機機械",
-          "theme": "公司重大訊息",
-          "trade_price": 52.3,
-          "change_pct": -2.24,
-          "volume": 102605,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.054,
-          "revenue_yoy_pct": -4.45,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 35.3,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -4.45%；漲跌 -2.24%"
-        },
-        {
-          "symbol": "3511",
-          "name": "矽瑪",
-          "market": "上櫃",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 20.45,
-          "change_pct": -7.05,
-          "volume": 744908,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.152,
-          "revenue_yoy_pct": 23.14,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 35.2,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 23.14%；漲跌 -7.05%"
-        },
-        {
-          "symbol": "6477",
-          "name": "安集",
-          "market": "上市",
-          "industry": "光電業",
-          "theme": "公司重大訊息",
-          "trade_price": 38.1,
-          "change_pct": -7.07,
-          "volume": 5899872,
-          "turnover_rate_pct": 4.77,
-          "turnover_billion": 2.248,
-          "revenue_yoy_pct": -10.45,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 35.0,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -10.45%；漲跌 -7.07%；週轉率 4.77%"
-        },
-        {
-          "symbol": "8996",
-          "name": "高力",
-          "market": "上市",
-          "industry": "電機機械",
-          "theme": "公司重大訊息",
-          "trade_price": 1015.0,
-          "change_pct": -9.78,
-          "volume": 1707983,
-          "turnover_rate_pct": 1.83,
-          "turnover_billion": 17.336,
-          "revenue_yoy_pct": 37.56,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 35.0,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 37.56%；漲跌 -9.78%；週轉率 1.83%"
-        },
-        {
-          "symbol": "2062",
-          "name": "橋椿",
-          "market": "上市",
-          "industry": "居家生活",
-          "theme": "公司重大訊息",
-          "trade_price": 18.8,
-          "change_pct": -2.34,
-          "volume": 399135,
-          "turnover_rate_pct": 0.2,
-          "turnover_billion": 0.075,
-          "revenue_yoy_pct": 31.39,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 34.6,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 31.39%；漲跌 -2.34%；週轉率 0.20%"
-        },
-        {
-          "symbol": "3388",
-          "name": "崇越電",
-          "market": "上櫃",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 75.0,
-          "change_pct": -5.66,
-          "volume": 565295,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.424,
-          "revenue_yoy_pct": 18.97,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 34.4,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 18.97%；漲跌 -5.66%"
-        },
-        {
-          "symbol": "6721",
-          "name": "信實",
-          "market": "上櫃",
-          "industry": "其他業",
-          "theme": "公司重大訊息",
-          "trade_price": 52.7,
-          "change_pct": -1.13,
-          "volume": 34693,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.018,
-          "revenue_yoy_pct": -6.69,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 33.8,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -6.69%；漲跌 -1.13%"
-        },
-        {
-          "symbol": "4304",
-          "name": "勝昱",
-          "market": "上櫃",
-          "industry": "塑膠工業",
-          "theme": "公司重大訊息",
-          "trade_price": 18.7,
-          "change_pct": -6.5,
-          "volume": 9000,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.002,
-          "revenue_yoy_pct": 19.1,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 33.5,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 19.10%；漲跌 -6.50%"
-        },
-        {
-          "symbol": "4420",
-          "name": "光明",
-          "market": "上櫃",
-          "industry": "紡織纖維",
-          "theme": "公司重大訊息",
-          "trade_price": 35.6,
-          "change_pct": -1.11,
-          "volume": 31497,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.011,
-          "revenue_yoy_pct": -17.95,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 33.4,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -17.95%；漲跌 -1.11%"
-        },
-        {
-          "symbol": "2436",
-          "name": "偉詮電",
-          "market": "上市",
-          "industry": "半導體業",
-          "theme": "公司重大訊息",
-          "trade_price": 57.7,
-          "change_pct": -5.72,
-          "volume": 4412186,
-          "turnover_rate_pct": 2.21,
-          "turnover_billion": 2.546,
-          "revenue_yoy_pct": 18.28,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 33.4,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 18.28%；漲跌 -5.72%；週轉率 2.21%"
-        },
-        {
-          "symbol": "1532",
-          "name": "勤美",
-          "market": "上市",
-          "industry": "電機機械",
-          "theme": "公司重大訊息",
-          "trade_price": 23.1,
-          "change_pct": -1.91,
-          "volume": 595411,
-          "turnover_rate_pct": 0.14,
-          "turnover_billion": 0.138,
-          "revenue_yoy_pct": 20.39,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 33.3,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 20.39%；漲跌 -1.91%；週轉率 0.14%"
-        },
-        {
-          "symbol": "2385",
-          "name": "群光",
-          "market": "上市",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 102.5,
-          "change_pct": -2.84,
-          "volume": 6905032,
-          "turnover_rate_pct": 0.9,
-          "turnover_billion": 7.078,
-          "revenue_yoy_pct": -5.48,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 33.0,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -5.48%；漲跌 -2.84%；週轉率 0.90%"
-        },
-        {
-          "symbol": "3003",
-          "name": "健和興",
-          "market": "上市",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 60.0,
-          "change_pct": -9.09,
-          "volume": 1604430,
-          "turnover_rate_pct": 1.03,
-          "turnover_billion": 0.963,
-          "revenue_yoy_pct": 36.15,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 32.9,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 36.15%；漲跌 -9.09%；週轉率 1.03%"
-        },
-        {
-          "symbol": "3051",
-          "name": "力特",
-          "market": "上市",
-          "industry": "光電業",
-          "theme": "公司重大訊息",
-          "trade_price": 22.9,
-          "change_pct": -4.78,
-          "volume": 829821,
-          "turnover_rate_pct": 0.5,
-          "turnover_billion": 0.19,
-          "revenue_yoy_pct": 42.47,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 32.7,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 42.47%；漲跌 -4.78%；週轉率 0.50%"
-        },
-        {
-          "symbol": "7556",
-          "name": "意德士",
-          "market": "上櫃",
-          "industry": "半導體業",
-          "theme": "公司重大訊息",
-          "trade_price": 218.5,
-          "change_pct": -6.02,
-          "volume": 80170,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.175,
-          "revenue_yoy_pct": 8.78,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 32.7,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 8.78%；漲跌 -6.02%"
-        },
-        {
-          "symbol": "2106",
-          "name": "建大",
-          "market": "上市",
-          "industry": "橡膠工業",
-          "theme": "公司重大訊息",
-          "trade_price": 18.1,
-          "change_pct": -1.09,
-          "volume": 1658114,
-          "turnover_rate_pct": 0.17,
-          "turnover_billion": 0.3,
-          "revenue_yoy_pct": 11.6,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 32.6,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 11.60%；漲跌 -1.09%；週轉率 0.17%"
-        },
-        {
-          "symbol": "3501",
-          "name": "維熹",
-          "market": "上市",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 39.95,
-          "change_pct": -1.72,
-          "volume": 379057,
-          "turnover_rate_pct": 0.32,
-          "turnover_billion": 0.151,
-          "revenue_yoy_pct": 4.76,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 31.9,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 4.76%；漲跌 -1.72%；週轉率 0.32%"
-        },
-        {
-          "symbol": "4764",
-          "name": "雙鍵",
-          "market": "上市",
-          "industry": "化學工業",
-          "theme": "公司重大訊息",
-          "trade_price": 296.0,
-          "change_pct": -9.89,
-          "volume": 2330379,
-          "turnover_rate_pct": 2.72,
-          "turnover_billion": 6.898,
-          "revenue_yoy_pct": 22.36,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 31.7,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 22.36%；漲跌 -9.89%；週轉率 2.72%"
-        },
-        {
-          "symbol": "2367",
-          "name": "燿華",
-          "market": "上市",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 44.8,
-          "change_pct": -7.44,
-          "volume": 13846991,
-          "turnover_rate_pct": 1.96,
-          "turnover_billion": 6.203,
-          "revenue_yoy_pct": -4.14,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 31.5,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -4.14%；漲跌 -7.44%；週轉率 1.96%"
-        },
-        {
-          "symbol": "1742",
-          "name": "台蠟",
-          "market": "上櫃",
-          "industry": "化學工業",
-          "theme": "公司重大訊息",
-          "trade_price": 16.2,
-          "change_pct": -0.31,
-          "volume": 52071,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.008,
-          "revenue_yoy_pct": -22.0,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 31.3,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -22.00%；漲跌 -0.31%"
-        },
-        {
-          "symbol": "6203",
-          "name": "海韻電",
-          "market": "上櫃",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 64.2,
-          "change_pct": -1.23,
-          "volume": 177498,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.114,
-          "revenue_yoy_pct": -38.97,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 31.3,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -38.97%；漲跌 -1.23%"
-        },
-        {
-          "symbol": "6534",
-          "name": "正瀚-創",
-          "market": "上市",
-          "industry": "生技醫療業",
-          "theme": "公司重大訊息",
-          "trade_price": 91.8,
-          "change_pct": -2.03,
-          "volume": 107755,
-          "turnover_rate_pct": 0.1,
-          "turnover_billion": 0.099,
-          "revenue_yoy_pct": 28.62,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 30.6,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 28.62%；漲跌 -2.03%；週轉率 0.10%"
-        },
-        {
-          "symbol": "2882",
-          "name": "國泰金",
-          "market": "上市",
-          "industry": "金融保險業",
-          "theme": "公司重大訊息",
-          "trade_price": 58.6,
-          "change_pct": 0.0,
-          "volume": 51100,
-          "turnover_rate_pct": 0.0,
-          "turnover_billion": 0.03,
-          "revenue_yoy_pct": -42.04,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 30.1,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -42.04%；漲跌 0.00%；週轉率 0.00%"
-        },
-        {
-          "symbol": "6597",
-          "name": "立誠",
-          "market": "上櫃",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 63.0,
-          "change_pct": -5.55,
-          "volume": 5209,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.003,
-          "revenue_yoy_pct": -14.09,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 30.0,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -14.09%；漲跌 -5.55%"
-        },
-        {
-          "symbol": "1721",
-          "name": "三晃",
-          "market": "上市",
-          "industry": "化學工業",
-          "theme": "公司重大訊息",
-          "trade_price": 21.25,
-          "change_pct": -7.81,
-          "volume": 1847076,
-          "turnover_rate_pct": 1.0,
-          "turnover_billion": 0.393,
-          "revenue_yoy_pct": 8.68,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 30.0,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 8.68%；漲跌 -7.81%；週轉率 1.00%"
-        },
-        {
-          "symbol": "1413",
-          "name": "宏洲",
-          "market": "上市",
-          "industry": "紡織纖維",
-          "theme": "公司重大訊息",
-          "trade_price": 9.5,
-          "change_pct": 0.32,
-          "volume": 14033,
-          "turnover_rate_pct": 0.01,
-          "turnover_billion": 0.001,
-          "revenue_yoy_pct": -1.89,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 29.8,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -1.89%；漲跌 0.32%；週轉率 0.01%"
-        },
-        {
-          "symbol": "1225",
-          "name": "福懋油",
-          "market": "上市",
-          "industry": "食品工業",
-          "theme": "公司重大訊息",
-          "trade_price": 26.85,
-          "change_pct": -1.1,
-          "volume": 129845,
-          "turnover_rate_pct": 0.05,
-          "turnover_billion": 0.035,
-          "revenue_yoy_pct": 2.28,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 29.8,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 2.28%；漲跌 -1.10%；週轉率 0.05%"
-        },
-        {
-          "symbol": "1219",
-          "name": "福壽",
-          "market": "上市",
-          "industry": "食品工業",
-          "theme": "公司重大訊息",
-          "trade_price": 12.15,
-          "change_pct": -2.02,
-          "volume": 722125,
-          "turnover_rate_pct": 0.21,
-          "turnover_billion": 0.088,
-          "revenue_yoy_pct": 0.4,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 29.4,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 0.40%；漲跌 -2.02%；週轉率 0.21%"
-        },
-        {
-          "symbol": "4530",
-          "name": "宏易",
-          "market": "上櫃",
-          "industry": "觀光餐旅",
-          "theme": "公司重大訊息",
-          "trade_price": 26.0,
-          "change_pct": -1.52,
-          "volume": 9532,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.002,
-          "revenue_yoy_pct": -84.16,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 29.1,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -84.16%；漲跌 -1.52%"
-        },
-        {
-          "symbol": "6016",
-          "name": "康和證",
-          "market": "上櫃",
-          "industry": "金融保險業",
-          "theme": "公司重大訊息",
-          "trade_price": 24.0,
-          "change_pct": -5.7,
-          "volume": 8534666,
-          "turnover_rate_pct": null,
-          "turnover_billion": 2.048,
-          "revenue_yoy_pct": -46.81,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 28.8,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -46.81%；漲跌 -5.70%"
-        },
-        {
-          "symbol": "1457",
-          "name": "宜進",
-          "market": "上市",
-          "industry": "紡織纖維",
-          "theme": "公司重大訊息",
-          "trade_price": 14.25,
-          "change_pct": -1.04,
-          "volume": 66043,
-          "turnover_rate_pct": 0.02,
-          "turnover_billion": 0.009,
-          "revenue_yoy_pct": -2.3,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 28.7,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -2.30%；漲跌 -1.04%；週轉率 0.02%"
-        },
-        {
-          "symbol": "6695",
-          "name": "芯鼎",
-          "market": "上市",
-          "industry": "半導體業",
-          "theme": "公司重大訊息",
-          "trade_price": 52.3,
-          "change_pct": -7.1,
-          "volume": 1157646,
-          "turnover_rate_pct": 1.09,
-          "turnover_billion": 0.605,
-          "revenue_yoy_pct": -17.84,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 28.4,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -17.84%；漲跌 -7.10%；週轉率 1.09%"
-        },
-        {
-          "symbol": "4583",
-          "name": "台灣精銳",
-          "market": "上市",
-          "industry": "電機機械",
-          "theme": "公司重大訊息",
-          "trade_price": 560.0,
-          "change_pct": -7.13,
-          "volume": 89867,
-          "turnover_rate_pct": 0.11,
-          "turnover_billion": 0.503,
-          "revenue_yoy_pct": 29.98,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 28.3,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 29.98%；漲跌 -7.13%；週轉率 0.11%"
-        },
-        {
-          "symbol": "1503",
-          "name": "士電",
-          "market": "上市",
-          "industry": "電機機械",
-          "theme": "公司重大訊息",
-          "trade_price": 194.0,
-          "change_pct": -4.9,
-          "volume": 3642298,
-          "turnover_rate_pct": 0.7,
-          "turnover_billion": 7.066,
-          "revenue_yoy_pct": -10.58,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 27.8,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -10.58%；漲跌 -4.90%；週轉率 0.70%"
-        },
-        {
-          "symbol": "4569",
-          "name": "六方科-KY",
-          "market": "上市",
-          "industry": "汽車工業",
-          "theme": "公司重大訊息",
-          "trade_price": 158.5,
-          "change_pct": -5.37,
-          "volume": 122977,
-          "turnover_rate_pct": 0.4,
-          "turnover_billion": 0.195,
-          "revenue_yoy_pct": 10.89,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 27.8,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 10.89%；漲跌 -5.37%；週轉率 0.40%"
-        },
-        {
-          "symbol": "1218",
-          "name": "泰山",
-          "market": "上市",
-          "industry": "食品工業",
-          "theme": "公司重大訊息",
-          "trade_price": 16.4,
-          "change_pct": -1.8,
-          "volume": 1366421,
-          "turnover_rate_pct": 0.27,
-          "turnover_billion": 0.224,
-          "revenue_yoy_pct": -11.86,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 26.7,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -11.86%；漲跌 -1.80%；週轉率 0.27%"
-        },
-        {
-          "symbol": "1339",
-          "name": "昭輝",
-          "market": "上市",
-          "industry": "汽車工業",
-          "theme": "公司重大訊息",
-          "trade_price": 43.4,
-          "change_pct": -1.92,
-          "volume": 98633,
-          "turnover_rate_pct": 0.13,
-          "turnover_billion": 0.043,
-          "revenue_yoy_pct": -3.26,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 26.7,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -3.26%；漲跌 -1.92%；週轉率 0.13%"
-        },
-        {
-          "symbol": "2723",
-          "name": "美食-KY",
-          "market": "上市",
-          "industry": "觀光餐旅",
-          "theme": "公司重大訊息",
-          "trade_price": 63.0,
-          "change_pct": -3.52,
-          "volume": 384232,
-          "turnover_rate_pct": 0.21,
-          "turnover_billion": 0.242,
-          "revenue_yoy_pct": -4.16,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 26.2,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -4.16%；漲跌 -3.52%；週轉率 0.21%"
-        },
-        {
-          "symbol": "6117",
-          "name": "迎廣",
-          "market": "上市",
-          "industry": "電腦及週邊設備業",
-          "theme": "公司重大訊息",
-          "trade_price": 66.2,
-          "change_pct": -2.5,
-          "volume": 385915,
-          "turnover_rate_pct": 0.42,
-          "turnover_billion": 0.255,
-          "revenue_yoy_pct": -11.35,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 25.9,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -11.35%；漲跌 -2.50%；週轉率 0.42%"
-        },
-        {
-          "symbol": "5215",
-          "name": "科嘉-KY",
-          "market": "上市",
-          "industry": "電腦及週邊設備業",
-          "theme": "公司重大訊息",
-          "trade_price": 38.5,
-          "change_pct": -4.82,
-          "volume": 195500,
-          "turnover_rate_pct": 0.3,
-          "turnover_billion": 0.075,
-          "revenue_yoy_pct": 1.98,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 25.0,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 1.98%；漲跌 -4.82%；週轉率 0.30%"
-        },
-        {
-          "symbol": "2530",
-          "name": "華建",
-          "market": "上市",
-          "industry": "建材營造業",
-          "theme": "公司重大訊息",
-          "trade_price": 19.5,
-          "change_pct": 0.52,
-          "volume": 824099,
-          "turnover_rate_pct": 0.1,
-          "turnover_billion": 0.161,
-          "revenue_yoy_pct": -96.97,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 24.7,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -96.97%；漲跌 0.52%；週轉率 0.10%"
-        },
-        {
-          "symbol": "3504",
-          "name": "揚明光",
-          "market": "上市",
-          "industry": "光電業",
-          "theme": "公司重大訊息",
-          "trade_price": 64.0,
-          "change_pct": -8.05,
-          "volume": 781771,
-          "turnover_rate_pct": 0.69,
-          "turnover_billion": 0.5,
-          "revenue_yoy_pct": -2.38,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 24.6,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -2.38%；漲跌 -8.05%；週轉率 0.69%"
-        },
-        {
-          "symbol": "3027",
-          "name": "盛達",
-          "market": "上市",
-          "industry": "通信網路業",
-          "theme": "公司重大訊息",
-          "trade_price": 18.35,
-          "change_pct": -4.43,
-          "volume": 430582,
-          "turnover_rate_pct": 0.33,
-          "turnover_billion": 0.079,
-          "revenue_yoy_pct": -14.4,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 22.8,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -14.40%；漲跌 -4.43%；週轉率 0.33%"
-        },
-        {
-          "symbol": "1540",
-          "name": "喬福",
-          "market": "上市",
-          "industry": "電機機械",
-          "theme": "公司重大訊息",
-          "trade_price": 21.65,
-          "change_pct": -3.56,
-          "volume": 822844,
-          "turnover_rate_pct": 0.96,
-          "turnover_billion": 0.178,
-          "revenue_yoy_pct": -51.18,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 22.7,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -51.18%；漲跌 -3.56%；週轉率 0.96%"
-        },
-        {
-          "symbol": "6909",
-          "name": "創控",
-          "market": "上市",
-          "industry": "半導體業",
-          "theme": "公司重大訊息",
-          "trade_price": 43.9,
-          "change_pct": -6.4,
-          "volume": 800993,
-          "turnover_rate_pct": 1.19,
-          "turnover_billion": 0.352,
-          "revenue_yoy_pct": -32.1,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 20.7,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -32.10%；漲跌 -6.40%；週轉率 1.19%"
-        }
-      ],
-      "theme_score": 19.2,
-      "leader_stocks": [
-        {
-          "symbol": "3491",
-          "name": "昇達科"
-        },
-        {
-          "symbol": "4416",
-          "name": "三圓"
-        },
-        {
-          "symbol": "8099",
-          "name": "大世科"
-        },
-        {
-          "symbol": "2547",
-          "name": "日勝生"
-        },
-        {
-          "symbol": "6486",
-          "name": "互動"
-        }
-      ],
-      "low_base_stocks": [
-        {
-          "symbol": "4989",
-          "name": "榮科"
-        },
-        {
-          "symbol": "6015",
-          "name": "宏遠證"
-        },
-        {
-          "symbol": "6187",
-          "name": "萬潤"
-        },
-        {
-          "symbol": "3090",
-          "name": "日電貿"
-        },
-        {
-          "symbol": "6239",
-          "name": "力成"
-        }
-      ],
-      "rank": 4
-    },
-    {
       "theme": "電子零組件業",
       "theme_change_pct": -6.34,
       "turnover_billion": 2404.38,
@@ -19387,7 +16619,7 @@
           "name": "華容"
         }
       ],
-      "rank": 5
+      "rank": 4
     },
     {
       "theme": "油電燃氣業",
@@ -19785,7 +17017,7 @@
           "name": "山隆"
         }
       ],
-      "rank": 6
+      "rank": 5
     },
     {
       "theme": "金融保險業",
@@ -20999,7 +18231,7 @@
           "name": "公勝保經"
         }
       ],
-      "rank": 7
+      "rank": 6
     },
     {
       "theme": "貿易百貨業",
@@ -21569,7 +18801,7 @@
           "name": "金麗-KY"
         }
       ],
-      "rank": 8
+      "rank": 7
     },
     {
       "theme": "食品工業",
@@ -22587,7 +19819,7 @@
           "name": "大研生醫*"
         }
       ],
-      "rank": 9
+      "rank": 8
     },
     {
       "theme": "建材營造業",
@@ -25117,7 +22349,7 @@
           "name": "鉅陞"
         }
       ],
-      "rank": 10
+      "rank": 9
     },
     {
       "theme": "其他業",
@@ -27787,7 +25019,7 @@
           "name": "台火"
         }
       ],
-      "rank": 11
+      "rank": 10
     },
     {
       "theme": "運動休閒",
@@ -28609,7 +25841,7 @@
           "name": "喬山"
         }
       ],
-      "rank": 12
+      "rank": 11
     },
     {
       "theme": "觀光餐旅",
@@ -30103,7 +27335,7 @@
           "name": "洛碁"
         }
       ],
-      "rank": 13
+      "rank": 12
     },
     {
       "theme": "水泥工業",
@@ -30357,7 +27589,7 @@
           "name": "幸福"
         }
       ],
-      "rank": 14
+      "rank": 13
     },
     {
       "theme": "居家生活",
@@ -31403,7 +28635,7 @@
           "name": "中美實"
         }
       ],
-      "rank": 15
+      "rank": 14
     },
     {
       "theme": "鋼鐵工業",
@@ -32813,7 +30045,7 @@
           "name": "晉椿"
         }
       ],
-      "rank": 16
+      "rank": 15
     },
     {
       "theme": "造紙工業",
@@ -33071,7 +30303,7 @@
           "name": "正隆"
         }
       ],
-      "rank": 17
+      "rank": 16
     },
     {
       "theme": "文化創意業",
@@ -33865,7 +31097,7 @@
           "name": "昱泉"
         }
       ],
-      "rank": 18
+      "rank": 17
     },
     {
       "theme": "紡織纖維",
@@ -35387,7 +32619,7 @@
           "name": "銘旺實"
         }
       ],
-      "rank": 19
+      "rank": 18
     },
     {
       "theme": "橡膠工業",
@@ -35757,7 +32989,7 @@
           "name": "國際中橡"
         }
       ],
-      "rank": 20
+      "rank": 19
     },
     {
       "theme": "電機機械",
@@ -38623,7 +35855,7 @@
           "name": "精湛"
         }
       ],
-      "rank": 21
+      "rank": 20
     },
     {
       "theme": "光電業",
@@ -40688,6 +37920,34 @@
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 27.04%；漲跌 -6.26%"
         },
         {
+          "symbol": "6176",
+          "name": "瑞儀",
+          "market": "上市",
+          "industry": "光電業",
+          "theme": "光電業",
+          "trade_price": 84.5,
+          "change_pct": -4.63,
+          "volume": 6280539,
+          "turnover_rate_pct": 1.8,
+          "turnover_billion": 5.307,
+          "revenue_yoy_pct": -15.03,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 30.4,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -15.03%；漲跌 -4.63%"
+        },
+        {
           "symbol": "6168",
           "name": "宏齊",
           "market": "上市",
@@ -40826,34 +38086,6 @@
             "beneficiary"
           ],
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 4.51%；漲跌 -6.82%"
-        },
-        {
-          "symbol": "6176",
-          "name": "瑞儀",
-          "market": "上市",
-          "industry": "光電業",
-          "theme": "光電業",
-          "trade_price": 84.5,
-          "change_pct": -4.63,
-          "volume": 6280539,
-          "turnover_rate_pct": 1.35,
-          "turnover_billion": 5.307,
-          "revenue_yoy_pct": -15.03,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 29.6,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -15.03%；漲跌 -4.63%"
         },
         {
           "symbol": "3059",
@@ -41937,7 +39169,7 @@
           "name": "慧友"
         }
       ],
-      "rank": 22
+      "rank": 21
     },
     {
       "theme": "資訊服務業",
@@ -43263,7 +40495,7 @@
           "name": "緯軟"
         }
       ],
-      "rank": 23
+      "rank": 22
     },
     {
       "theme": "航運業",
@@ -44281,7 +41513,7 @@
           "name": "台船"
         }
       ],
-      "rank": 24
+      "rank": 23
     },
     {
       "theme": "綠能環保",
@@ -45607,7 +42839,7 @@
           "name": "立盈"
         }
       ],
-      "rank": 25
+      "rank": 24
     },
     {
       "theme": "數位雲端",
@@ -46765,7 +43997,7 @@
           "name": "欣新網"
         }
       ],
-      "rank": 26
+      "rank": 25
     },
     {
       "theme": "汽車工業",
@@ -48035,7 +45267,7 @@
           "name": "巧新"
         }
       ],
-      "rank": 27
+      "rank": 26
     },
     {
       "theme": "電腦及週邊設備業",
@@ -51153,7 +48385,7 @@
           "name": "營邦"
         }
       ],
-      "rank": 28
+      "rank": 27
     },
     {
       "theme": "電器電纜",
@@ -51695,7 +48927,7 @@
           "name": "大亞"
         }
       ],
-      "rank": 29
+      "rank": 28
     },
     {
       "theme": "其他電子業",
@@ -54393,7 +51625,7 @@
           "name": "光洋科"
         }
       ],
-      "rank": 30
+      "rank": 29
     },
     {
       "theme": "通信網路業",
@@ -56979,7 +54211,7 @@
           "name": "威潤"
         }
       ],
-      "rank": 31
+      "rank": 30
     },
     {
       "theme": "塑膠工業",
@@ -57743,6 +54975,270 @@
         {
           "symbol": "1308",
           "name": "亞聚"
+        }
+      ],
+      "rank": 31
+    },
+    {
+      "theme": "公司重大訊息",
+      "theme_change_pct": -3.48,
+      "turnover_billion": 8.27,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "beneficiary_count": 8,
+      "high_score_news_count": 0,
+      "avg_ai_score": 34.8,
+      "source_types": [
+        "news"
+      ],
+      "source_labels": [
+        "新聞事件"
+      ],
+      "beneficiary_stocks": [
+        {
+          "symbol": "4953",
+          "name": "緯軟",
+          "market": "上櫃",
+          "industry": "資訊服務業",
+          "theme": "公司重大訊息",
+          "trade_price": 121.5,
+          "change_pct": -3.19,
+          "volume": 307407,
+          "turnover_rate_pct": null,
+          "turnover_billion": 0.373,
+          "revenue_yoy_pct": 37.07,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 40.8,
+          "source_types": [
+            "news"
+          ],
+          "source_labels": [
+            "新聞事件"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "新聞事件帶動；營收年增 37.07%；漲跌 -3.19%"
+        },
+        {
+          "symbol": "3432",
+          "name": "台端",
+          "market": "上市",
+          "industry": "電子零組件業",
+          "theme": "公司重大訊息",
+          "trade_price": 17.0,
+          "change_pct": -4.23,
+          "volume": 39880,
+          "turnover_rate_pct": 0.09,
+          "turnover_billion": 0.007,
+          "revenue_yoy_pct": 97.58,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 39.4,
+          "source_types": [
+            "news"
+          ],
+          "source_labels": [
+            "新聞事件"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "新聞事件帶動；營收年增 97.58%；漲跌 -4.23%；週轉率 0.09%"
+        },
+        {
+          "symbol": "3708",
+          "name": "上緯投控",
+          "market": "上市",
+          "industry": "綠能環保",
+          "theme": "公司重大訊息",
+          "trade_price": 95.1,
+          "change_pct": -6.31,
+          "volume": 835237,
+          "turnover_rate_pct": 0.91,
+          "turnover_billion": 0.794,
+          "revenue_yoy_pct": 61.7,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 38.4,
+          "source_types": [
+            "news"
+          ],
+          "source_labels": [
+            "新聞事件"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "新聞事件帶動；營收年增 61.70%；漲跌 -6.31%；週轉率 0.91%"
+        },
+        {
+          "symbol": "5904",
+          "name": "寶雅",
+          "market": "上櫃",
+          "industry": "居家生活",
+          "theme": "公司重大訊息",
+          "trade_price": 615.0,
+          "change_pct": -1.28,
+          "volume": 1082523,
+          "turnover_rate_pct": null,
+          "turnover_billion": 6.658,
+          "revenue_yoy_pct": 8.35,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 36.8,
+          "source_types": [
+            "news"
+          ],
+          "source_labels": [
+            "新聞事件"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "新聞事件帶動；營收年增 8.35%；漲跌 -1.28%"
+        },
+        {
+          "symbol": "8472",
+          "name": "夠麻吉",
+          "market": "上櫃",
+          "industry": "數位雲端",
+          "theme": "公司重大訊息",
+          "trade_price": 78.5,
+          "change_pct": -0.63,
+          "volume": 18011,
+          "turnover_rate_pct": null,
+          "turnover_billion": 0.014,
+          "revenue_yoy_pct": -20.74,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 36.7,
+          "source_types": [
+            "news"
+          ],
+          "source_labels": [
+            "新聞事件"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "新聞事件帶動；營收年增 -20.74%；漲跌 -0.63%"
+        },
+        {
+          "symbol": "1721",
+          "name": "三晃",
+          "market": "上市",
+          "industry": "化學工業",
+          "theme": "公司重大訊息",
+          "trade_price": 21.25,
+          "change_pct": -7.81,
+          "volume": 1847076,
+          "turnover_rate_pct": 1.0,
+          "turnover_billion": 0.393,
+          "revenue_yoy_pct": 8.68,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 30.0,
+          "source_types": [
+            "news"
+          ],
+          "source_labels": [
+            "新聞事件"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "新聞事件帶動；營收年增 8.68%；漲跌 -7.81%；週轉率 1.00%"
+        },
+        {
+          "symbol": "4530",
+          "name": "宏易",
+          "market": "上櫃",
+          "industry": "觀光餐旅",
+          "theme": "公司重大訊息",
+          "trade_price": 26.0,
+          "change_pct": -1.52,
+          "volume": 9532,
+          "turnover_rate_pct": null,
+          "turnover_billion": 0.002,
+          "revenue_yoy_pct": -84.16,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 29.1,
+          "source_types": [
+            "news"
+          ],
+          "source_labels": [
+            "新聞事件"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "新聞事件帶動；營收年增 -84.16%；漲跌 -1.52%"
+        },
+        {
+          "symbol": "6936",
+          "name": "永鴻生技",
+          "market": "上市",
+          "industry": "生技醫療業",
+          "theme": "公司重大訊息",
+          "trade_price": 31.75,
+          "change_pct": -2.91,
+          "volume": 87279,
+          "turnover_rate_pct": 0.12,
+          "turnover_billion": 0.028,
+          "revenue_yoy_pct": -0.43,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 27.3,
+          "source_types": [
+            "news"
+          ],
+          "source_labels": [
+            "新聞事件"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "新聞事件帶動；營收年增 -0.43%；漲跌 -2.91%；週轉率 0.12%"
+        }
+      ],
+      "theme_score": 6.0,
+      "leader_stocks": [
+        {
+          "symbol": "4953",
+          "name": "緯軟"
+        },
+        {
+          "symbol": "3432",
+          "name": "台端"
+        },
+        {
+          "symbol": "3708",
+          "name": "上緯投控"
+        },
+        {
+          "symbol": "5904",
+          "name": "寶雅"
+        },
+        {
+          "symbol": "8472",
+          "name": "夠麻吉"
+        }
+      ],
+      "low_base_stocks": [
+        {
+          "symbol": "3432",
+          "name": "台端"
+        },
+        {
+          "symbol": "3708",
+          "name": "上緯投控"
+        },
+        {
+          "symbol": "1721",
+          "name": "三晃"
         }
       ],
       "rank": 32
@@ -60290,9 +57786,9 @@
       "rank": 35
     }
   ],
-  "run_id": "29604598851",
-  "generated_at": "2026-07-18T02:40:41+08:00",
+  "run_id": "29678751719",
+  "generated_at": "2026-07-19T15:50:58+08:00",
   "latest_trade_date": "2026-07-17",
-  "data_version": "20260717-0240",
+  "data_version": "20260717-1550",
   "source_pipeline": "update_all_site_data"
 }

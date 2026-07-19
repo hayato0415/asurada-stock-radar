@@ -1,6 +1,6 @@
 {
-  "build_id": "20260718-0239-scorecards",
-  "updated_at": "2026-07-18T02:39:44+08:00",
+  "build_id": "20260719-1550-scorecards",
+  "updated_at": "2026-07-19T15:50:08+08:00",
   "content_latest_at": "2026-07-17",
   "symbol": "6176",
   "name": "瑞儀",
@@ -147,8 +147,8 @@
       "key": "chip",
       "label": "籌碼 / 市場交易力道",
       "weight": 25,
-      "score": 2.4,
-      "raw_score": 9.6,
+      "score": 2.8,
+      "raw_score": 11.2,
       "coverage_pct": 66.7,
       "missing_count": 1,
       "rules": [
@@ -166,9 +166,9 @@
           "id": "turnover_chip",
           "label": "週轉率交易力道",
           "source_field": "turnover_rate_pct",
-          "raw_value": 1.35,
+          "raw_value": 1.8,
           "max_score": 10,
-          "score": 1.1,
+          "score": 1.5,
           "missing": false,
           "description": "週轉率反映籌碼換手。"
         },
@@ -188,8 +188,8 @@
       "key": "turnover",
       "label": "週轉率 / 交易熱度",
       "weight": 15,
-      "score": 1.7,
-      "raw_score": 11.3,
+      "score": 2.2,
+      "raw_score": 14.7,
       "coverage_pct": 100.0,
       "missing_count": 0,
       "rules": [
@@ -197,16 +197,16 @@
           "id": "turnover_rate",
           "label": "週轉率",
           "source_field": "turnover_rate_pct",
-          "raw_value": 1.35,
+          "raw_value": 1.8,
           "max_score": 15,
-          "score": 1.7,
+          "score": 2.2,
           "missing": false,
           "description": "週轉率越高，交易熱度越高；無上市股數時不硬算。"
         }
       ]
     }
   },
-  "total_score": 13.0,
+  "total_score": 13.9,
   "summary": {
     "symbol": "6176",
     "code": "6176",
@@ -218,7 +218,7 @@
     "trade_price": 84.5,
     "change_pct": -4.63,
     "volume": 6280539,
-    "turnover_rate_pct": 1.35,
+    "turnover_rate_pct": 1.8,
     "revenue_million": 3693.58,
     "revenue_mom_pct": 0.4,
     "revenue_yoy_pct": -15.03,
@@ -227,19 +227,19 @@
     "financial_period": "2026-06",
     "fundamental_score": 9.0,
     "technical_score": 20.7,
-    "chip_score": 9.6,
-    "turnover_score": 11.3,
+    "chip_score": 11.2,
+    "turnover_score": 14.7,
     "weighted_scores": {
       "fundamental": 2.7,
       "technical": 6.2,
-      "chip": 2.4,
-      "turnover": 1.7
+      "chip": 2.8,
+      "turnover": 2.2
     },
-    "total_score": 13.0,
+    "total_score": 13.9,
     "risk_level": "低",
-    "entry_reason": "營收年增 -15.03%，月增 0.40%，週轉率 1.35%",
+    "entry_reason": "營收年增 -15.03%，月增 0.40%，週轉率 1.80%",
     "data_quality_score": 66.7,
-    "updated_at": "2026-07-18T02:39:44+08:00",
+    "updated_at": "2026-07-19T15:50:08+08:00",
     "content_latest_at": "2026-07-17",
     "scorecard_path": "data/scorecards/6176.json",
     "news_scoring_included": false,
