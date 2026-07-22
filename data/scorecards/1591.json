@@ -1,7 +1,7 @@
 {
-  "build_id": "20260721-0025-scorecards",
-  "updated_at": "2026-07-21T00:25:29+08:00",
-  "content_latest_at": "2026-07-20",
+  "build_id": "20260722-1926-scorecards",
+  "updated_at": "2026-07-22T19:26:36+08:00",
+  "content_latest_at": "2026-07-22",
   "symbol": "1591",
   "name": "駿吉-KY",
   "market": "上櫃",
@@ -96,19 +96,19 @@
       "key": "technical",
       "label": "技術面",
       "weight": 30,
-      "score": 0,
-      "raw_score": 0.0,
-      "coverage_pct": 0.0,
-      "missing_count": 4,
+      "score": 16.0,
+      "raw_score": 53.3,
+      "coverage_pct": 50.0,
+      "missing_count": 2,
       "rules": [
         {
           "id": "change_1d",
           "label": "當日漲跌幅",
           "source_field": "change_pct",
-          "raw_value": null,
+          "raw_value": 9.95,
           "max_score": 12,
-          "score": 0,
-          "missing": true,
+          "score": 12.0,
+          "missing": false,
           "description": "當日價格強度。"
         },
         {
@@ -135,10 +135,10 @@
           "id": "price_available",
           "label": "成交價可用",
           "source_field": "trade_price",
-          "raw_value": null,
+          "raw_value": 34.25,
           "max_score": 4,
-          "score": 0,
-          "missing": true,
+          "score": 4,
+          "missing": false,
           "description": "有正式成交價才給資料完整分。"
         }
       ]
@@ -149,17 +149,17 @@
       "weight": 25,
       "score": 0,
       "raw_score": 0.0,
-      "coverage_pct": 0.0,
-      "missing_count": 3,
+      "coverage_pct": 33.3,
+      "missing_count": 2,
       "rules": [
         {
           "id": "volume",
           "label": "成交量",
           "source_field": "volume",
-          "raw_value": null,
+          "raw_value": 58335,
           "max_score": 10,
           "score": 0,
-          "missing": true,
+          "missing": false,
           "description": "成交量反映市場參與度。"
         },
         {
@@ -206,7 +206,7 @@
       ]
     }
   },
-  "total_score": 11.3,
+  "total_score": 27.3,
   "summary": {
     "symbol": "1591",
     "code": "1591",
@@ -215,9 +215,9 @@
     "industry": "電機機械",
     "theme": "電機機械",
     "supply_chain": "電機機械",
-    "trade_price": null,
-    "change_pct": null,
-    "volume": null,
+    "trade_price": 34.25,
+    "change_pct": 9.95,
+    "volume": 58335,
     "turnover_rate_pct": null,
     "revenue_million": 36.79,
     "revenue_mom_pct": 0.73,
@@ -226,21 +226,21 @@
     "gross_margin_pct": null,
     "financial_period": "2026-06",
     "fundamental_score": 37.7,
-    "technical_score": 0.0,
+    "technical_score": 53.3,
     "chip_score": 0.0,
     "turnover_score": 0.0,
     "weighted_scores": {
       "fundamental": 11.3,
-      "technical": 0,
+      "technical": 16.0,
       "chip": 0,
       "turnover": 0
     },
-    "total_score": 11.3,
-    "risk_level": "中",
+    "total_score": 27.3,
+    "risk_level": "高",
     "entry_reason": "營收年增 126.96%，月增 0.73%",
-    "data_quality_score": 12.5,
-    "updated_at": "2026-07-21T00:25:29+08:00",
-    "content_latest_at": "2026-07-20",
+    "data_quality_score": 33.3,
+    "updated_at": "2026-07-22T19:26:36+08:00",
+    "content_latest_at": "2026-07-22",
     "scorecard_path": "data/scorecards/1591.json",
     "news_scoring_included": false,
     "theme_scoring_included": false
@@ -248,12 +248,9 @@
   "missing_fields": [
     "change_20d",
     "change_5d",
-    "change_pct",
     "eps",
     "gross_margin_pct",
-    "trade_price",
     "turnover_rate_pct",
-    "volume",
     "volume_ratio_5d"
   ],
   "data_sources": {
