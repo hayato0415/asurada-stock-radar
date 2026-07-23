@@ -73,7 +73,7 @@ function renderToday(daily) {
   const body = $("#todayTop10Body");
   const cards = $("#todayTop10Cards");
   if (!items.length) {
-    if (body) body.innerHTML = emptyRow(18, "今日沒有可用的正式 Top 10。");
+    if (body) body.innerHTML = emptyRow(19, "今日沒有可用的正式 Top 10。");
     if (cards) cards.innerHTML = `<div class="empty-state">今日沒有可用的正式 Top 10。</div>`;
     return;
   }
@@ -91,6 +91,7 @@ function renderToday(daily) {
         <td>${formatNumber(item.technicalScore, 1)}</td>
         <td>${formatNumber(item.chipScore, 1)}</td>
         <td>${formatNumber(item.turnoverScore, 1)}</td>
+        <td>${formatPercent(item.turnoverRate, 2)}</td>
         <td>${item.appearances5d ?? "--"}</td>
         <td>${item.appearances20d ?? "--"}</td>
         <td>${item.consecutiveDays ?? "--"}</td>
@@ -120,6 +121,7 @@ function renderToday(daily) {
           <span>熱度 ${formatNumber(item.turnoverScore, 1)}</span>
         </div>
         <div class="tracking-card-meta">
+          <span>週轉率 ${formatPercent(item.turnoverRate, 2)}</span>
           <span>5 日 ${item.appearances5d ?? "--"} 次</span>
           <span>20 日 ${item.appearances20d ?? "--"} 次</span>
           <span>連續 ${item.consecutiveDays ?? "--"} 日</span>
@@ -235,7 +237,7 @@ function renderFailure(message) {
     warning.innerHTML = `<div class="tracking-alert tracking-alert-bad">${escapeHtml(message)}</div>`;
   }
   const tables = [
-    ["#todayTop10Body", 18],
+    ["#todayTop10Body", 19],
     ["#weeklyBody", 12],
     ["#monthlyBody", 11],
   ];

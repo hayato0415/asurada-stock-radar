@@ -46,6 +46,7 @@ def score_row(code: str, rank: int, data_date: str, total_offset: float = 0) -> 
         "concepts": ["AI"],
         "close": 100 + rank,
         "changePercent": 1.5,
+        "turnoverRate": round(rank * 0.25, 4),
         "fundamentalScore": fundamental,
         "technicalScore": technical,
         "chipScore": chip,
@@ -112,6 +113,13 @@ class PersistenceTests(unittest.TestCase):
     def test_same_date_rerun_does_not_duplicate_or_overwrite_snapshot(self) -> None:
         self.generate("2026-07-20")
         snapshot_path = self.history_dir / "2026-07-20.json"
+        legacy_snapshot = json.loads(snapshot_path.read_text(encoding="utf-8"))
+        for item in legacy_snapshot["items"]:
+            item.pop("turnoverRate", None)
+        snapshot_path.write_text(
+            json.dumps(legacy_snapshot, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
         original = snapshot_path.read_bytes()
 
         result = self.generate("2026-07-20", offset=8)
@@ -122,6 +130,7 @@ class PersistenceTests(unittest.TestCase):
         self.assertEqual(snapshot_path.read_bytes(), original)
         self.assertEqual(history["tradingDates"], ["2026-07-20"])
         self.assertEqual(daily["items"][0]["totalScore"], json.loads(original)["items"][0]["totalScore"])
+        self.assertEqual(daily["items"][0]["turnoverRate"], 0.25)
 
     def test_holiday_run_does_not_create_a_fake_trading_date(self) -> None:
         self.generate("2026-07-17", generated_at="2026-07-17T18:00:00+08:00")

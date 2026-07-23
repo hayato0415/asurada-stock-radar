@@ -249,6 +249,7 @@ def build_snapshot(
             "technicalScore": row.get("technicalScore"),
             "chipScore": row.get("chipScore"),
             "turnoverScore": row.get("turnoverScore"),
+            "turnoverRate": row.get("turnoverRate"),
             "tradeType": str(row.get("tradeType") or ""),
             "riskLabel": str(row.get("riskLabel") or ""),
             "dataDate": data_date,
@@ -509,6 +510,7 @@ def build_tracking_payloads(
     generated_at: str,
     valid_score_count: int,
     source_warnings: list[str] | None = None,
+    latest_official_scores: list[dict[str, Any]] | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, Any]]:
     if not snapshots:
         raise ValueError("沒有可用的每日 Top 10 快照")
@@ -517,10 +519,16 @@ def build_tracking_payloads(
     monthly = build_monthly_summary(snapshots)
     weekly_by_code = {item["code"]: item for item in weekly["items"]}
     monthly_by_code = {item["code"]: item for item in monthly["items"]}
+    latest_official_by_code = {
+        _symbol(item): item
+        for item in (latest_official_scores or [])
+        if isinstance(item, dict) and _symbol(item)
+    }
 
     enriched_items: list[dict[str, Any]] = []
     for item in latest["items"]:
         code = _symbol(item)
+        latest_official = latest_official_by_code.get(code, {})
         weekly_row = weekly_by_code[code]
         monthly_row = monthly_by_code[code]
         labels = _status_labels(code, snapshots, weekly_row, monthly_row)
@@ -533,6 +541,10 @@ def build_tracking_payloads(
         enriched_items.append(
             {
                 **item,
+                # Legacy immutable snapshots predate this display field. For
+                # today's summary only, read it from the same-date official
+                # factor row without rewriting the historical snapshot.
+                "turnoverRate": latest_official.get("turnoverRate", item.get("turnoverRate")),
                 "previousRank": weekly_row.get("previousRank"),
                 "rankChange": weekly_row.get("rankChange"),
                 "appearances5d": weekly_row.get("appearances5d"),
@@ -669,6 +681,7 @@ def generate_and_write(
             generated_at=generated_at,
             valid_score_count=valid_score_count,
             source_warnings=list(status.get("warnings") or []),
+            latest_official_scores=scores[: int(PERSISTENCE_RULES["top_n"])],
         )
         payloads = (daily, history, weekly, monthly)
         for path, payload in zip(output_paths, payloads):

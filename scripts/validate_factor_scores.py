@@ -174,6 +174,11 @@ def validate_persistence(expected_date: str, status: dict[str, Any]) -> int:
         return fail("ai-top10-daily.json contains missing or duplicate stock codes.")
     if any(item.get("dataDate") != expected_date for item in daily_items):
         return fail("ai-top10-daily.json contains a row with the wrong dataDate.")
+    if any(
+        not is_number(item.get("turnoverRate")) or item["turnoverRate"] < 0
+        for item in daily_items
+    ):
+        return fail("ai-top10-daily.json contains a missing or invalid turnoverRate.")
 
     history_dates = history.get("tradingDates")
     history_items = history.get("items")
