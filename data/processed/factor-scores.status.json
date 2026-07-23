@@ -157,10 +157,32 @@
     "factor-scores.json": "updated",
     "factor-scores.status.json": "updated",
     "factor-scores.meta.json": "updated",
-    "factor-quote-history.json": "updated"
+    "factor-quote-history.json": "updated",
+    "ai-top10-daily.json": "updated",
+    "ai-top10-history.json": "updated",
+    "ai-persistence-weekly.json": "updated",
+    "ai-persistence-monthly.json": "updated"
   },
   "run_id": "29937487745",
   "generated_at": "2026-07-23T00:21:11+08:00",
   "data_version": "20260722-0021",
-  "source_pipeline": "update_all_site_data"
+  "source_pipeline": "update_all_site_data",
+  "persistence_status": {
+    "ok": true,
+    "status": "ok",
+    "latest_trade_date": "2026-07-22",
+    "generated_at": "2026-07-23T11:26:47+08:00",
+    "snapshot_created": true,
+    "snapshot_path": "data/history/ai-top10/2026-07-22.json",
+    "history_trading_days": 1,
+    "items_count": 10,
+    "previous_data_preserved": false,
+    "failed_reasons": [],
+    "outputs": {
+      "ai-top10-daily.json": "updated",
+      "ai-top10-history.json": "updated",
+      "ai-persistence-weekly.json": "updated",
+      "ai-persistence-monthly.json": "updated"
+    }
+  }
 }

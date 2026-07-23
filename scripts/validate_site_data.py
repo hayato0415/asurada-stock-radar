@@ -22,6 +22,10 @@ STOCK_METRICS = DOCS_PROCESSED / "stock_metrics_daily.json"
 STOCK_MASTER = DOCS_PROCESSED / "stocks_master.json"
 FACTOR_STATUS = DOCS_PROCESSED / "factor-scores.status.json"
 FACTOR_SCORES = DOCS_PROCESSED / "factor-scores.json"
+AI_TOP10_DAILY = DOCS_PROCESSED / "ai-top10-daily.json"
+AI_TOP10_HISTORY = DOCS_PROCESSED / "ai-top10-history.json"
+AI_PERSISTENCE_WEEKLY = DOCS_PROCESSED / "ai-persistence-weekly.json"
+AI_PERSISTENCE_MONTHLY = DOCS_PROCESSED / "ai-persistence-monthly.json"
 NEWS_EVENTS = DOCS_PROCESSED / "news_events.json"
 MIN_QUOTE_COVERAGE_RATIO = 0.80
 
@@ -84,6 +88,7 @@ def first_existing(payload: Any, keys: tuple[str, ...]) -> Any:
 def payload_date(payload: Any) -> str:
   value = first_existing(payload, (
     "latest_trade_date",
+    "latestTradeDate",
     "trade_date",
     "content_latest_at",
     "market_date",
@@ -130,6 +135,10 @@ def main() -> int:
     STOCK_METRICS,
     FACTOR_STATUS,
     FACTOR_SCORES,
+    AI_TOP10_DAILY,
+    AI_TOP10_HISTORY,
+    AI_PERSISTENCE_WEEKLY,
+    AI_PERSISTENCE_MONTHLY,
     NEWS_EVENTS,
   ]
   if not all(ensure_exists(path, errors) for path in required):
@@ -144,6 +153,10 @@ def main() -> int:
   stock_metrics = read_json(STOCK_METRICS)
   factor_status = read_json(FACTOR_STATUS)
   factor_scores = read_json(FACTOR_SCORES)
+  ai_top10_daily = read_json(AI_TOP10_DAILY)
+  ai_top10_history = read_json(AI_TOP10_HISTORY)
+  ai_persistence_weekly = read_json(AI_PERSISTENCE_WEEKLY)
+  ai_persistence_monthly = read_json(AI_PERSISTENCE_MONTHLY)
   news_events = read_json(NEWS_EVENTS)
 
   expected = normalize_date(site_meta.get("latest_trade_date"))
@@ -154,6 +167,10 @@ def main() -> int:
   require_same_date("stock_metrics_daily.json", stock_metrics, expected, errors)
   require_same_date("factor-scores.status.json", factor_status, expected, errors)
   require_same_date("factor-scores.json", factor_scores, expected, errors)
+  require_same_date("ai-top10-daily.json", ai_top10_daily, expected, errors)
+  require_same_date("ai-top10-history.json", ai_top10_history, expected, errors)
+  require_same_date("ai-persistence-weekly.json", ai_persistence_weekly, expected, errors)
+  require_same_date("ai-persistence-monthly.json", ai_persistence_monthly, expected, errors)
 
   stock_items = get_items(stock_metrics)
   if not any(str(item.get("symbol") or item.get("code")) == "2337" for item in stock_items if isinstance(item, dict)):

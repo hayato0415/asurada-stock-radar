@@ -262,3 +262,249 @@
     min-width: 280px;
   }
 }
+
+/* AI Top 10 persistence tracking */
+.tracking-status-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.tracking-status-grid .metric-card strong {
+  overflow-wrap: anywhere;
+}
+
+.tracking-alert-list {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 1rem;
+}
+
+.tracking-alert {
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  font-weight: 800;
+  line-height: 1.6;
+}
+
+.tracking-alert-ok {
+  color: #bbf7d0;
+  border-color: rgba(34, 197, 94, 0.36);
+  background: rgba(34, 197, 94, 0.1);
+}
+
+.tracking-alert-warn {
+  color: #fde68a;
+  border-color: rgba(245, 158, 11, 0.38);
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.tracking-alert-bad {
+  color: #fecaca;
+  border-color: rgba(239, 68, 68, 0.42);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.tracking-nav {
+  position: sticky;
+  top: 0.75rem;
+  z-index: 12;
+  display: flex;
+  gap: 0.55rem;
+  margin: 1rem 0;
+  padding: 0.65rem;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(7, 17, 31, 0.92);
+  backdrop-filter: blur(16px);
+}
+
+.tracking-nav a {
+  flex: 0 0 auto;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  color: #bae6fd;
+  font-size: 0.86rem;
+  font-weight: 900;
+  background: rgba(56, 189, 248, 0.1);
+}
+
+.tracking-table-wrap {
+  max-width: 100%;
+}
+
+.tracking-table {
+  min-width: 2180px;
+}
+
+.tracking-table th,
+.tracking-table td,
+.persistence-table th,
+.persistence-table td {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.tracking-table .tracking-concepts {
+  min-width: 220px;
+  max-width: 320px;
+  white-space: normal;
+  line-height: 1.55;
+}
+
+.rank-flat {
+  color: var(--muted);
+}
+
+.status-badge-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  min-width: 130px;
+}
+
+.tracking-card-list {
+  display: none;
+}
+
+.persistence-grid,
+.method-grid,
+.factor-source-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.persistence-card,
+.method-card,
+.tracking-stock-card,
+.change-item {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.persistence-card {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.persistence-card p,
+.method-card p,
+.tracking-stock-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.method-card h3 {
+  margin: 0 0 0.5rem;
+  color: #dbeafe;
+}
+
+.tracking-card-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.tracking-rank {
+  color: var(--brand);
+  font-size: 1.1rem;
+  font-weight: 950;
+}
+
+.tracking-card-score,
+.tracking-card-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.tracking-card-score strong {
+  grid-row: span 2;
+  align-self: center;
+  color: var(--brand);
+  font-size: 2rem;
+}
+
+.tracking-card-score span,
+.tracking-card-meta span {
+  padding: 0.45rem 0.55rem;
+  border-radius: 10px;
+  color: var(--muted);
+  background: rgba(2, 6, 23, 0.3);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.tracking-change-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.change-list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.change-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.factor-status-panel.status-ok {
+  border-color: rgba(34, 197, 94, 0.32);
+}
+
+.factor-status-panel.status-warning {
+  border-color: rgba(245, 158, 11, 0.38);
+}
+
+@media (max-width: 980px) {
+  .tracking-status-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tracking-change-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .tracking-nav {
+    position: static;
+  }
+
+  .tracking-status-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tracking-table-wrap {
+    display: none;
+  }
+
+  .tracking-card-list {
+    display: grid;
+    gap: 0.85rem;
+    margin-top: 1rem;
+  }
+
+  .persistence-grid,
+  .method-grid,
+  .factor-source-list {
+    grid-template-columns: 1fr;
+  }
+
+  .change-item {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

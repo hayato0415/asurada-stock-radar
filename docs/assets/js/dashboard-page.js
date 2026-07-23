@@ -21,12 +21,12 @@ const TRANSPARENCY_CARDS = [
     limits: "若官方行情尚未更新或抓取失敗，會顯示資料尚未更新或沿用上一版狀態。"
   },
   {
-    title: "AI 選股清單",
-    purpose: "用全市場量化欄位排序，首頁只顯示 Top 5，完整排名在 AI 選股清單頁。",
+    title: "AI 選股與追蹤",
+    purpose: "以正式多因子評分建立每日 Top 10，並追蹤近 5 與近 20 個交易日的持續入榜狀態。",
     source: "data/processed/ai_scores_daily.json、stocks_master.json、stock_metrics_daily.json",
     canJudge: "可觀察哪些股票在基本面、技術面、成交熱度與資料覆蓋下排名較前。",
     cannotJudge: "不是推薦買進名單；未進前 100 的股票仍可在個股 AI 分析查詢。",
-    limits: "AI 選股清單是獨立量化排序，和多因子評分頁的 30/30/25/15 權重不是同一張表。"
+    limits: "正式排名統一採用基本面 30%、技術面 30%、籌碼面 25%、週轉熱度 15%；新聞不計分。"
   },
   {
     title: "多因子評分",

@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>題材資金輪動｜ASURADA Stock Radar</title>
+  <title>Top 10 題材集中度｜ASURADA Stock Radar</title>
   <link rel="stylesheet" href="./assets/css/base.css">
   <link rel="stylesheet" href="./assets/css/layout.css">
   <link rel="stylesheet" href="./assets/css/components.css">
-  <link rel="stylesheet" href="./assets/css/themes.css">
+  <link rel="stylesheet" href="./assets/css/themes.css?v=20260723-top10">
 </head>
 <body data-page="themes">
   <header class="app-header">
@@ -17,99 +17,75 @@
     </div>
     <nav class="site-nav" aria-label="主要導覽">
       <a href="./index.html">首頁</a>
-      <a href="./radar.html">AI 選股清單</a>
-      <a href="./factor-score.html">多因子評分</a>
-      <a href="./news.html">重點新聞雷達</a>
-      <a class="active" href="./themes.html">題材資金輪動</a>
+      <a class="active" href="./radar.html">AI 選股與追蹤</a>
+      <a href="./news.html">重點新聞</a>
       <a href="./stock.html">個股 AI 分析</a>
+      <a href="./radar.html#data-status">資料狀態</a>
     </nav>
   </header>
 
   <main class="page-shell">
     <section class="page-title-row">
       <div>
-        <p class="eyebrow">Theme Rotation</p>
-        <h1>題材資金輪動</h1>
+        <p class="eyebrow">TOP 10 CONCENTRATION</p>
+        <h1>今日 Top 10 產業／題材集中度</h1>
         <p class="page-note">
-          上市、上櫃全市場題材資金輪動排行，依題材強度排序顯示前 20；展開可查看所有受惠個股與資料來源。
+          題材只作輔助分類，不納入正式總分。本頁直接讀取 Python 已整理的今日 Top 10 集中度摘要。
         </p>
       </div>
       <span id="themesUpdatedAt" class="meta-pill">讀取中</span>
     </section>
 
-    <section class="panel filter-panel">
+    <section class="panel">
       <div class="section-head">
         <div>
-          <p class="eyebrow">Filters</p>
-          <h2>篩選題材</h2>
+          <p class="eyebrow">CLASSIFICATION ONLY</p>
+          <h2>題材不參與評分</h2>
         </div>
-        <span id="themesCoverage" class="meta-pill theme-coverage">統計中</span>
+        <a class="link-button" href="./radar.html">返回 AI 選股與追蹤</a>
       </div>
-      <div class="filter-grid theme-filter-grid">
-        <label>
-          搜尋題材 / 股票
-          <input id="themeSearch" type="search" placeholder="輸入題材、代號或名稱">
-        </label>
-        <label>
-          市場
-          <select id="marketFilter">
-            <option value="">全部市場</option>
-            <option value="上市">上市</option>
-            <option value="上櫃">上櫃</option>
-          </select>
-        </label>
-        <label>
-          來源
-          <select id="sourceFilter">
-            <option value="">全部來源</option>
-            <option value="master">主檔產業 / 供應鏈</option>
-            <option value="ai">AI 題材標籤</option>
-            <option value="news">新聞事件</option>
-            <option value="manual">手動題材對應</option>
-          </select>
-        </label>
-        <label>
-          分數
-          <select id="scoreFilter">
-            <option value="0">全部分數</option>
-            <option value="80">80+</option>
-            <option value="70">70+</option>
-            <option value="60">60+</option>
-          </select>
-        </label>
+      <p class="factor-note">
+        正式綜合分數固定由基本面 30%、技術面 30%、籌碼／市場交易力道 25%、週轉率／交易熱度 15% 組成。
+        題材與新聞不會改變股票排名。
+      </p>
+      <div class="metric-grid theme-summary-grid">
+        <article class="metric-card"><span>最新交易日</span><strong id="themeTradeDate">--</strong></article>
+        <article class="metric-card"><span>Top 10 檔數</span><strong id="themeTop10Count">--</strong></article>
+        <article class="metric-card"><span>產業分類數</span><strong id="industryGroupCount">--</strong></article>
+        <article class="metric-card"><span>題材分類數</span><strong id="themeGroupCount">--</strong></article>
       </div>
+      <div id="themesWarning" class="tracking-alert-list" aria-live="polite"></div>
+    </section>
+
+    <section class="theme-concentration-grid">
+      <article class="panel">
+        <div class="section-head">
+          <div><p class="eyebrow">INDUSTRY</p><h2>產業集中度</h2></div>
+        </div>
+        <div id="industryConcentration" class="concentration-list">
+          <div class="empty-state">資料載入中。</div>
+        </div>
+      </article>
+      <article class="panel">
+        <div class="section-head">
+          <div><p class="eyebrow">CONCEPT</p><h2>題材入榜檔數</h2></div>
+        </div>
+        <div id="themeConcentration" class="concentration-list">
+          <div class="empty-state">資料載入中。</div>
+        </div>
+      </article>
     </section>
 
     <section class="panel">
       <div class="section-head">
-        <div>
-          <p class="eyebrow">Theme Strength</p>
-          <h2>題材強度排名</h2>
-        </div>
-        <span id="themesCount" class="meta-pill">前 0 / 0 個題材</span>
+        <div><p class="eyebrow">TOP 10 MEMBERS</p><h2>今日入榜股票分類</h2></div>
       </div>
-      <div class="table-control-row">
-        <button class="table-freeze-toggle is-active" type="button" data-table-freeze-toggle=".theme-table" data-freeze-label="凍結表頭" aria-pressed="true">凍結表頭：開</button>
-      </div>
-      <p class="factor-scroll-hint">提示：請在下方表格區塊內滾動，表頭會固定在表格最上方。</p>
-      <div class="table-wrap theme-table-wrap">
-        <table class="data-table theme-table is-freeze-enabled">
+      <div class="table-wrap">
+        <table class="data-table concentration-table">
           <thead>
-            <tr>
-              <th>排名</th>
-              <th>題材</th>
-              <th>強度</th>
-              <th>題材漲幅</th>
-              <th>成交金額</th>
-              <th>上漲家數</th>
-              <th>漲停家數</th>
-              <th>受惠股數</th>
-              <th>新聞數</th>
-              <th>主要來源</th>
-              <th>受惠個股</th>
-            </tr>
+            <tr><th>排名</th><th>股票</th><th>市場</th><th>產業</th><th>題材</th><th>正式分數</th></tr>
           </thead>
-          <tbody id="themesTableBody"></tbody>
+          <tbody id="themeTop10Body"><tr><td colspan="6">資料載入中。</td></tr></tbody>
         </table>
       </div>
     </section>
@@ -119,6 +95,6 @@
     本網站內容僅供研究與資訊整理使用，不構成任何投資建議、買賣建議或獲利保證。
   </footer>
 
-  <script type="module" src="./assets/js/themes-page.js"></script>
+  <script type="module" src="./assets/js/themes-page.js?v=20260723-top10"></script>
 </body>
 </html>

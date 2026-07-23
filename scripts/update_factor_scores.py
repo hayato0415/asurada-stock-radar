@@ -37,6 +37,11 @@ try:
 except ModuleNotFoundError:  # Supports importing as scripts.update_factor_scores in tests.
     from scripts.official_daily_quotes import fetch_daily_quotes
 
+try:
+    from ai_top10_persistence import generate_and_write as generate_ai_top10_tracking
+except ModuleNotFoundError:  # Supports importing as scripts.update_factor_scores in tests.
+    from scripts.ai_top10_persistence import generate_and_write as generate_ai_top10_tracking
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data" / "processed"
@@ -46,6 +51,12 @@ OUTPUT = DATA_DIR / "factor-scores.json"
 STATUS_OUTPUT = DATA_DIR / "factor-scores.status.json"
 META_OUTPUT = DATA_DIR / "factor-scores.meta.json"
 HISTORY_OUTPUT = DATA_DIR / "factor-quote-history.json"
+PERSISTENCE_OUTPUT_NAMES = {
+    "ai-top10-daily.json",
+    "ai-top10-history.json",
+    "ai-persistence-weekly.json",
+    "ai-persistence-monthly.json",
+}
 
 TAIPEI = timezone(timedelta(hours=8))
 USER_AGENT = "ASURADA-Stock-Radar/2.0 (+https://github.com/hayato0415/asurada-stock-radar)"
@@ -67,22 +78,6 @@ WEIGHTS = {
     "chipScore": 0.25,
     "turnoverScore": 0.15,
 }
-
-EXCLUDED_NAME_KEYWORDS = (
-    "ETF",
-    "ETN",
-    "指數",
-    "指數投資證券",
-    "受益證券",
-    "認購",
-    "認售",
-    "權證",
-    "牛證",
-    "熊證",
-    "特別股",
-    "可轉債",
-    "債",
-)
 
 EXCLUDED_NAME_KEYWORDS = (
     "ETF",
@@ -163,7 +158,7 @@ def mirror_factor_output_to_docs(path: Path, text: str) -> None:
         relative = path.relative_to(DATA_DIR)
     except ValueError:
         return
-    if not relative.name.startswith("factor-"):
+    if not (relative.name.startswith("factor-") or relative.name in PERSISTENCE_OUTPUT_NAMES):
         return
     mirror_path = DOCS_DATA_DIR / relative
     mirror_path.parent.mkdir(parents=True, exist_ok=True)
@@ -175,6 +170,32 @@ def write_json(path: Path, payload: Any) -> None:
     text = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
     path.write_text(text, encoding="utf-8")
     mirror_factor_output_to_docs(path, text)
+
+
+def snapshot_output_files(paths: tuple[Path, ...]) -> dict[Path, bytes | None]:
+    return {path: path.read_bytes() if path.exists() else None for path in paths}
+
+
+def restore_output_files(snapshot: dict[Path, bytes | None]) -> None:
+    for path, content in snapshot.items():
+        if content is None:
+            if path.exists():
+                path.unlink()
+        else:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(content)
+
+        try:
+            relative = path.relative_to(DATA_DIR)
+        except ValueError:
+            continue
+        mirror = DOCS_DATA_DIR / relative
+        if content is None:
+            if mirror.exists():
+                mirror.unlink()
+        else:
+            mirror.parent.mkdir(parents=True, exist_ok=True)
+            mirror.write_bytes(content)
 
 
 def normalize_text(value: Any) -> str:
@@ -820,6 +841,7 @@ def write_failure_status(
     source_status: list[SourceStatus],
     failed_reasons: list[str],
     warnings: list[str],
+    persistence_reason: str | None = None,
 ) -> None:
     previous_items = get_items(read_json(OUTPUT, []))
     payload = {
@@ -843,9 +865,22 @@ def write_failure_status(
             "company_basic": "MOPS t187ap03_L / t187ap03_O",
         },
         "source_status": [status.as_dict() for status in source_status],
+        "persistence_status": {
+            "ok": False,
+            "status": "failed",
+            "previous_data_preserved": True,
+            "failed_reasons": [
+                persistence_reason
+                or "正式多因子評分更新失敗，持續入榜摘要保留上一版。"
+            ],
+        },
         "outputs": {
             "factor-scores.json": "preserved",
             "factor-scores.status.json": "updated",
+            "ai-top10-daily.json": "preserved",
+            "ai-top10-history.json": "preserved",
+            "ai-persistence-weekly.json": "preserved",
+            "ai-persistence-monthly.json": "preserved",
         },
     }
     write_json(STATUS_OUTPUT, payload)
@@ -987,9 +1022,6 @@ def run(target_date: str | None, force_history_refresh: bool) -> int:
         print("factor score update produced zero ranked rows; previous factor-scores.json preserved")
         return 1
 
-    write_json(OUTPUT, rows)
-    write_json(HISTORY_OUTPUT, history)
-
     status_payload = {
         "ok": True,
         "updated_at": attempted_at,
@@ -1023,9 +1055,12 @@ def run(target_date: str | None, force_history_refresh: bool) -> int:
             "factor-scores.status.json": "updated",
             "factor-scores.meta.json": "updated",
             "factor-quote-history.json": "updated",
+            "ai-top10-daily.json": "updated",
+            "ai-top10-history.json": "updated",
+            "ai-persistence-weekly.json": "updated",
+            "ai-persistence-monthly.json": "updated",
         },
     }
-    write_json(STATUS_OUTPUT, status_payload)
     meta_payload = {
         "updated_at": attempted_at,
         "latest_trade_date": latest_trade_date,
@@ -1045,12 +1080,86 @@ def run(target_date: str | None, force_history_refresh: bool) -> int:
         },
     }
     meta_payload["news_score"]["reason"] = FACTOR_NEWS_EXCLUSION_REASON
-    write_json(META_OUTPUT, meta_payload)
+
+    factor_snapshot = snapshot_output_files((OUTPUT, HISTORY_OUTPUT, META_OUTPUT))
+    try:
+        write_json(OUTPUT, rows)
+        write_json(HISTORY_OUTPUT, history)
+        write_json(META_OUTPUT, meta_payload)
+        persistence_status = generate_ai_top10_tracking(
+            rows,
+            meta_payload,
+            status_payload,
+            generated_at=attempted_at,
+        )
+    except Exception as exc:  # noqa: BLE001 - preserve all prior official outputs.
+        restore_output_files(factor_snapshot)
+        reason = f"Top 10 持續入榜資料產生失敗：{exc}"
+        write_failure_status(
+            target_date=target_date or latest_trade_date,
+            attempted_at=attempted_at,
+            source_status=source_status,
+            failed_reasons=[reason],
+            warnings=warnings,
+            persistence_reason=reason,
+        )
+        print("factor score update failed; previous factor and persistence outputs preserved")
+        print(f"- {reason}")
+        return 1
+
+    status_payload["persistence_status"] = persistence_status
+    write_json(STATUS_OUTPUT, status_payload)
 
     print(f"factor scores updated: {len(rows)} rows")
     print(f"latest trade date: {latest_trade_date}")
+    print(
+        "Top 10 persistence: "
+        f"{persistence_status['history_trading_days']} trading days; "
+        f"snapshot_created={persistence_status['snapshot_created']}"
+    )
     for row in rows[:10]:
         print(f"#{row['rank']} {row['code']} {row['name']} {row['totalScore']}")
+    return 0
+
+
+def run_persistence_only() -> int:
+    attempted_at = iso_now()
+    scores = read_json(OUTPUT, [])
+    meta = read_json(META_OUTPUT, {})
+    status = read_json(STATUS_OUTPUT, {})
+    if not isinstance(scores, list) or not isinstance(meta, dict) or not isinstance(status, dict):
+        print("persistence update failed: official factor outputs are invalid")
+        return 1
+
+    try:
+        persistence_status = generate_ai_top10_tracking(
+            scores,
+            meta,
+            status,
+            generated_at=attempted_at,
+        )
+    except Exception as exc:  # noqa: BLE001 - report while preserving prior summaries.
+        reason = f"Top 10 持續入榜資料產生失敗：{exc}"
+        status["persistence_status"] = {
+            "ok": False,
+            "status": "failed",
+            "previous_data_preserved": True,
+            "failed_reasons": [reason],
+        }
+        write_json(STATUS_OUTPUT, status)
+        print(reason)
+        return 1
+
+    status["persistence_status"] = persistence_status
+    outputs = status.setdefault("outputs", {})
+    if isinstance(outputs, dict):
+        outputs.update(persistence_status["outputs"])
+    write_json(STATUS_OUTPUT, status)
+    print(
+        "Top 10 persistence updated: "
+        f"{persistence_status['history_trading_days']} trading days; "
+        f"snapshot_created={persistence_status['snapshot_created']}"
+    )
     return 0
 
 
@@ -1058,7 +1167,14 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Update official-data factor scores.")
     parser.add_argument("--target-date", help="Expected market date, YYYY-MM-DD. If omitted, latest official quote date is used.")
     parser.add_argument("--force-history-refresh", action="store_true", help="Rebuild quote history from the current snapshot only.")
+    parser.add_argument(
+        "--persistence-only",
+        action="store_true",
+        help="Build Top 10 history summaries from the current successful official factor outputs without network access.",
+    )
     args = parser.parse_args()
+    if args.persistence_only:
+        return run_persistence_only()
     return run(args.target_date, args.force_history_refresh)
 
 

@@ -253,3 +253,87 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* Top 10 industry and concept concentration */
+.theme-summary-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.theme-concentration-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.concentration-list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.concentration-item {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: rgba(15, 23, 42, 0.52);
+}
+
+.concentration-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.concentration-head span {
+  color: #bae6fd;
+  font-weight: 900;
+}
+
+.concentration-bar {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.18);
+}
+
+.concentration-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--brand-2), var(--brand));
+}
+
+.concentration-stocks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.concentration-stocks .stock-link {
+  padding: 0.3rem 0.55rem;
+  border-radius: 999px;
+  color: #bae6fd;
+  background: rgba(56, 189, 248, 0.1);
+  font-size: 0.82rem;
+  font-weight: 850;
+}
+
+.concentration-table {
+  min-width: 760px;
+}
+
+@media (max-width: 900px) {
+  .theme-summary-grid,
+  .theme-concentration-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .theme-summary-grid,
+  .theme-concentration-grid {
+    grid-template-columns: 1fr;
+  }
+}

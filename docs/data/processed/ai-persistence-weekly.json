@@ -1,0 +1,254 @@
+{
+  "status": "ok",
+  "ok": true,
+  "latestTradeDate": "2026-07-22",
+  "latest_trade_date": "2026-07-22",
+  "generatedAt": "2026-07-23T11:26:47+08:00",
+  "generated_at": "2026-07-23T11:26:47+08:00",
+  "scoreVersion": "official-multifactor-v1",
+  "scoreSource": "docs/data/processed/factor-scores.json",
+  "weights": {
+    "fundamentalScore": 0.3,
+    "technicalScore": 0.3,
+    "chipScore": 0.25,
+    "turnoverScore": 0.15
+  },
+  "rules": {
+    "top_n": 10,
+    "weekly_trading_days": 5,
+    "monthly_trading_days": 20,
+    "stable_appearances_5d": 3,
+    "monthly_resident_appearances_20d": 10,
+    "score_weakening_consecutive_days": 3,
+    "single_day_breakout_appearances_5d": 1
+  },
+  "historyTradingDays": 1,
+  "windowSize": 5,
+  "availableTradingDays": 1,
+  "tradingDates": [
+    "2026-07-22"
+  ],
+  "itemsCount": 10,
+  "items": [
+    {
+      "code": "3374",
+      "name": "精材",
+      "market": "上櫃",
+      "industry": "半導體業",
+      "concepts": [
+        "半導體業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 1.0,
+      "bestRank5d": 1,
+      "latestRank": 1,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore5d": 84.7,
+      "latestScore": 84.7,
+      "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-07-22",
+      "lastSeenDate": "2026-07-22",
+      "isCurrent": true
+    },
+    {
+      "code": "3231",
+      "name": "緯創",
+      "market": "上市",
+      "industry": "電腦及週邊設備業",
+      "concepts": [
+        "電腦及週邊設備業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 2.0,
+      "bestRank5d": 2,
+      "latestRank": 2,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore5d": 84.3,
+      "latestScore": 84.3,
+      "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-07-22",
+      "lastSeenDate": "2026-07-22",
+      "isCurrent": true
+    },
+    {
+      "code": "6416",
+      "name": "瑞祺電通",
+      "market": "上市",
+      "industry": "通信網路業",
+      "concepts": [
+        "通信網路業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 3.0,
+      "bestRank5d": 3,
+      "latestRank": 3,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore5d": 83.8,
+      "latestScore": 83.8,
+      "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-07-22",
+      "lastSeenDate": "2026-07-22",
+      "isCurrent": true
+    },
+    {
+      "code": "6187",
+      "name": "萬潤",
+      "market": "上櫃",
+      "industry": "半導體業",
+      "concepts": [
+        "半導體業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 4.0,
+      "bestRank5d": 4,
+      "latestRank": 4,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore5d": 83.7,
+      "latestScore": 83.7,
+      "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-07-22",
+      "lastSeenDate": "2026-07-22",
+      "isCurrent": true
+    },
+    {
+      "code": "6414",
+      "name": "樺漢",
+      "market": "上市",
+      "industry": "電腦及週邊設備業",
+      "concepts": [
+        "電腦及週邊設備業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 5.0,
+      "bestRank5d": 5,
+      "latestRank": 5,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore5d": 83.5,
+      "latestScore": 83.5,
+      "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-07-22",
+      "lastSeenDate": "2026-07-22",
+      "isCurrent": true
+    },
+    {
+      "code": "8114",
+      "name": "振樺電",
+      "market": "上市",
+      "industry": "電腦及週邊設備業",
+      "concepts": [
+        "電腦及週邊設備業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 6.0,
+      "bestRank5d": 6,
+      "latestRank": 6,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore5d": 83.5,
+      "latestScore": 83.5,
+      "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-07-22",
+      "lastSeenDate": "2026-07-22",
+      "isCurrent": true
+    },
+    {
+      "code": "2027",
+      "name": "大成鋼",
+      "market": "上市",
+      "industry": "鋼鐵工業",
+      "concepts": [
+        "鋼鐵工業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 7.0,
+      "bestRank5d": 7,
+      "latestRank": 7,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore5d": 83.2,
+      "latestScore": 83.2,
+      "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-07-22",
+      "lastSeenDate": "2026-07-22",
+      "isCurrent": true
+    },
+    {
+      "code": "3022",
+      "name": "威強電",
+      "market": "上市",
+      "industry": "電腦及週邊設備業",
+      "concepts": [
+        "電腦及週邊設備業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 8.0,
+      "bestRank5d": 8,
+      "latestRank": 8,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore5d": 82.9,
+      "latestScore": 82.9,
+      "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-07-22",
+      "lastSeenDate": "2026-07-22",
+      "isCurrent": true
+    },
+    {
+      "code": "3088",
+      "name": "艾訊",
+      "market": "上櫃",
+      "industry": "電腦及週邊設備業",
+      "concepts": [
+        "電腦及週邊設備業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 9.0,
+      "bestRank5d": 9,
+      "latestRank": 9,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore5d": 82.9,
+      "latestScore": 82.9,
+      "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-07-22",
+      "lastSeenDate": "2026-07-22",
+      "isCurrent": true
+    },
+    {
+      "code": "5490",
+      "name": "同亨",
+      "market": "上櫃",
+      "industry": "電腦及週邊設備業",
+      "concepts": [
+        "電腦及週邊設備業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 10.0,
+      "bestRank5d": 10,
+      "latestRank": 10,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore5d": 82.6,
+      "latestScore": 82.6,
+      "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-07-22",
+      "lastSeenDate": "2026-07-22",
+      "isCurrent": true
+    }
+  ]
+}

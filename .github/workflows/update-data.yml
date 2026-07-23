@@ -47,6 +47,7 @@ jobs:
             "data/latest/*.json"
             "data/scorecards/*.json"
             "data/config/*.json"
+            "data/history/ai-top10/*.json"
             "docs/data/*.json"
             "docs/data/processed/*.json"
           )

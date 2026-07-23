@@ -1,5 +1,6 @@
 const DATA_ROOT = "./data/processed/";
 const SITE_META_PATH = "./data/site_meta.json";
+const DEFAULT_FETCH_TIMEOUT_MS = 15000;
 
 let siteMetaPromise = null;
 
@@ -8,9 +9,24 @@ function addVersion(path, version) {
   return `${path}${joiner}v=${encodeURIComponent(version || Date.now())}`;
 }
 
+async function fetchWithTimeout(path, timeoutMs = DEFAULT_FETCH_TIMEOUT_MS) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(path, { cache: "no-store", signal: controller.signal });
+  } catch (error) {
+    if (error?.name === "AbortError") {
+      throw new Error(`資料讀取逾時：${path}`);
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 export async function loadSiteMeta() {
   if (!siteMetaPromise) {
-    siteMetaPromise = fetch(addVersion(SITE_META_PATH, Date.now()), { cache: "no-store" })
+    siteMetaPromise = fetchWithTimeout(addVersion(SITE_META_PATH, Date.now()))
       .then((response) => {
         if (!response.ok) {
           throw new Error(`site_meta.json HTTP ${response.status}`);
@@ -31,7 +47,8 @@ export function getDataVersion(meta) {
 
 export async function fetchJsonPath(path, options = {}) {
   const meta = options.meta === undefined ? await loadSiteMeta() : options.meta;
-  const response = await fetch(addVersion(path, getDataVersion(meta)), { cache: "no-store" });
+  const timeoutMs = Number(options.timeoutMs || DEFAULT_FETCH_TIMEOUT_MS);
+  const response = await fetchWithTimeout(addVersion(path, getDataVersion(meta)), timeoutMs);
   if (!response.ok) {
     throw new Error(`資料讀取失敗：${path} (${response.status})`);
   }

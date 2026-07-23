@@ -3,184 +3,195 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AI 選股清單｜ASURADA Stock Radar</title>
-  <link rel="stylesheet" href="assets/css/base.css">
-  <link rel="stylesheet" href="assets/css/layout.css">
-  <link rel="stylesheet" href="assets/css/components.css">
-  <link rel="stylesheet" href="assets/css/radar.css">
+  <title>AI 選股與追蹤驗證｜ASURADA Stock Radar</title>
+  <link rel="stylesheet" href="./assets/css/base.css">
+  <link rel="stylesheet" href="./assets/css/layout.css">
+  <link rel="stylesheet" href="./assets/css/components.css">
+  <link rel="stylesheet" href="./assets/css/radar.css?v=20260723-top10">
 </head>
 <body data-page="radar">
   <header class="app-header">
-    <a class="brand" href="index.html" aria-label="回首頁">
+    <a class="brand" href="./index.html" aria-label="回首頁">
       <span>ASURADA Stock Radar</span>
       <small>AI 台股決策雷達</small>
     </a>
     <nav class="site-nav" aria-label="主導覽">
-      <a href="index.html">首頁</a>
-      <a class="active" href="radar.html">AI 選股清單</a>
-      <a href="factor-score.html">多因子評分</a>
-      <a href="news.html">重點新聞雷達</a>
-      <a href="themes.html">題材資金輪動</a>
-      <a href="stock.html">個股 AI 分析</a>
+      <a href="./index.html">首頁</a>
+      <a class="active" href="./radar.html">AI 選股與追蹤</a>
+      <a href="./news.html">重點新聞</a>
+      <a href="./stock.html">個股 AI 分析</a>
+      <a href="./radar.html#data-status">資料狀態</a>
     </nav>
   </header>
 
   <main class="page-shell radar-page">
     <section class="page-title-row">
       <div>
-        <p class="eyebrow">AI SCORE RANKING</p>
-        <h1>AI 選股清單</h1>
-        <p class="page-note">上市、上櫃全市場量化排序，僅顯示前 100 名；未列入前 100 的股票可用個股查詢查看。</p>
+        <p class="eyebrow">OFFICIAL MULTI-FACTOR TRACKING</p>
+        <h1>AI 選股與追蹤驗證</h1>
+        <p class="page-note">
+          排名只使用正式多因子評分，追蹤每日 Top 10、近 5 個交易日與近 20 個交易日的重複入榜狀態。
+        </p>
       </div>
-      <span id="radarUpdatedAt" class="update-pill">資料載入中</span>
+      <span id="radarUpdatedAt" class="meta-pill">資料載入中</span>
     </section>
 
-    <section class="panel radar-status-panel" aria-labelledby="radarStatusTitle">
+    <section id="data-status" class="panel radar-status-panel" aria-labelledby="radarStatusTitle">
       <div class="section-head">
         <div>
           <p class="eyebrow">DATA STATUS</p>
-          <h2 id="radarStatusTitle">雷達資料狀態</h2>
+          <h2 id="radarStatusTitle">正式評分與快照狀態</h2>
         </div>
-        <button id="reloadRadarData" class="solid-link" type="button">重新載入最新資料</button>
+        <button id="reloadRadarData" class="action-button" type="button">重新載入</button>
       </div>
-      <div class="metric-grid radar-status-grid">
-        <article class="metric-card">
-          <span>更新狀態</span>
-          <strong id="statusValue">--</strong>
-        </article>
-        <article class="metric-card">
-          <span>資料基準日</span>
-          <strong id="statusTradeDate">--</strong>
-        </article>
-        <article class="metric-card">
-          <span>最後更新時間</span>
-          <strong id="statusUpdatedAt">--</strong>
-        </article>
-        <article class="metric-card radar-status-reason">
-          <span>失敗原因 / 說明</span>
-          <strong id="statusReason">--</strong>
-        </article>
+      <div class="metric-grid tracking-status-grid">
+        <article class="metric-card"><span>最新交易日</span><strong id="latestTradeDate">--</strong></article>
+        <article class="metric-card"><span>全站更新時間</span><strong id="siteGeneratedAt">--</strong></article>
+        <article class="metric-card"><span>評分版本</span><strong id="scoreVersion">--</strong></article>
+        <article class="metric-card"><span>本日有效評分檔數</span><strong id="validScoreCount">--</strong></article>
+        <article class="metric-card"><span>今日 Top 10 狀態</span><strong id="top10Status">讀取中</strong></article>
+        <article class="metric-card"><span>歷史快照交易日</span><strong id="historyTradingDays">--</strong></article>
       </div>
-      <p id="radarStatusMessage" class="muted"></p>
+      <div id="radarWarnings" class="tracking-alert-list" aria-live="polite"></div>
     </section>
 
-    <section class="panel filter-panel" aria-label="AI 選股篩選">
-      <div class="filter-grid radar-filter-grid">
-        <label>
-          搜尋股票代號 / 名稱 / 產業 / 題材
-          <input id="stockSearch" type="search" placeholder="例如 2337、旺宏、半導體、記憶體">
-        </label>
-        <label>
-          市場
-          <select id="marketFilter">
-            <option value="">全部市場</option>
-            <option value="上市">上市</option>
-            <option value="上櫃">上櫃</option>
-          </select>
-        </label>
-        <label>
-          題材
-          <select id="themeFilter">
-            <option value="">全部題材</option>
-          </select>
-        </label>
-        <label>
-          型態
-          <select id="patternFilter">
-            <option value="">全部型態</option>
-          </select>
-        </label>
-        <label>
-          分數
-          <select id="scoreFilter">
-            <option value="">全部分數</option>
-            <option value="80">80 分以上</option>
-            <option value="70">70 分以上</option>
-            <option value="60">60 分以上</option>
-          </select>
-        </label>
-        <label>
-          營收年增率
-          <select id="revenueYoyFilter">
-            <option value="">全部</option>
-            <option value="0">0% 以上</option>
-            <option value="10">10% 以上</option>
-            <option value="30">30% 以上</option>
-            <option value="50">50% 以上</option>
-          </select>
-        </label>
-        <label>
-          EPS
-          <select id="epsFilter">
-            <option value="">全部</option>
-            <option value="0">0 以上</option>
-            <option value="1">1 以上</option>
-            <option value="3">3 以上</option>
-            <option value="5">5 以上</option>
-          </select>
-        </label>
-        <label>
-          毛利率
-          <select id="grossMarginFilter">
-            <option value="">全部</option>
-            <option value="10">10% 以上</option>
-            <option value="20">20% 以上</option>
-            <option value="30">30% 以上</option>
-            <option value="40">40% 以上</option>
-          </select>
-        </label>
-        <label>
-          風險
-          <select id="riskFilter">
-            <option value="">全部風險</option>
-            <option value="正常">正常</option>
-            <option value="過熱">過熱</option>
-            <option value="回檔">回檔</option>
-            <option value="低流動">低流動</option>
-            <option value="資料不足">資料不足</option>
-          </select>
-        </label>
-      </div>
-    </section>
+    <nav class="tracking-nav" aria-label="AI 選股頁次導覽">
+      <a href="#today-top10">今日 Top 10</a>
+      <a href="#continuous">連續入榜</a>
+      <a href="#weekly">近 5 日週榜</a>
+      <a href="#monthly">近 20 日月榜</a>
+      <a href="#changes">新進／跌出</a>
+      <a href="#methodology">評分說明</a>
+    </nav>
 
-    <section class="panel" aria-labelledby="radarTableTitle">
+    <section id="today-top10" class="panel">
       <div class="section-head">
         <div>
-          <p class="eyebrow">SCORE RANKING</p>
-          <h2 id="radarTableTitle">AI 分數排序表</h2>
-          <p id="radarCoverage" class="muted radar-coverage">資料載入中。</p>
+          <p class="eyebrow">TODAY TOP 10</p>
+          <h2>今日 AI Top 10</h2>
+          <p class="factor-note">所有分數直接讀取 factor-scores.json，不在瀏覽器重算。</p>
         </div>
-        <span id="radarCount" class="update-pill">--</span>
+        <span id="todayCount" class="meta-pill">0 / 10</span>
       </div>
-      <div class="table-control-row">
-        <button class="table-freeze-toggle is-active" type="button" data-table-freeze-toggle=".radar-table" data-freeze-label="凍結表頭" aria-pressed="true">凍結表頭：開</button>
-      </div>
-      <p class="factor-scroll-hint">提示：請在下方表格區塊內滾動，表頭會固定在表格最上方。</p>
-      <div class="table-wrap radar-table-wrap">
-        <table class="data-table radar-table is-freeze-enabled">
+      <div class="table-wrap tracking-table-wrap">
+        <table class="data-table tracking-table">
           <thead>
             <tr>
               <th>排名</th>
+              <th>變化</th>
               <th>股票</th>
               <th>市場</th>
-              <th>產業</th>
-              <th>題材</th>
-              <th>AI 分數</th>
-              <th>基本面</th>
-              <th>股價</th>
-              <th>漲跌%</th>
-              <th>營收(百萬)</th>
-              <th>營收YoY</th>
-              <th>EPS</th>
-              <th>毛利率</th>
+              <th>產業／概念</th>
+              <th>綜合</th>
+              <th>基本</th>
+              <th>技術</th>
+              <th>籌碼</th>
+              <th>熱度</th>
+              <th>5日</th>
+              <th>20日</th>
+              <th>連續</th>
+              <th>趨勢</th>
+              <th>操作</th>
               <th>風險</th>
-              <th>入選理由</th>
+              <th>入榜狀態</th>
+              <th>日期</th>
             </tr>
           </thead>
-          <tbody id="radarTableBody">
-            <tr><td colspan="15">資料載入中。</td></tr>
-          </tbody>
+          <tbody id="todayTop10Body"><tr><td colspan="18">資料載入中。</td></tr></tbody>
         </table>
+      </div>
+      <div id="todayTop10Cards" class="tracking-card-list"></div>
+    </section>
+
+    <section id="continuous" class="panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">PERSISTENT PICKS</p>
+          <h2>連續入榜</h2>
+        </div>
+        <span id="continuousCount" class="meta-pill">0 檔</span>
+      </div>
+      <div id="continuousList" class="persistence-grid">
+        <div class="empty-state">資料載入中。</div>
+      </div>
+    </section>
+
+    <section id="weekly" class="panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">LATEST 5 TRADING DAYS</p>
+          <h2>近 5 日週榜</h2>
+          <p id="weeklyWindow" class="factor-note">交易日載入中。</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table persistence-table">
+          <thead>
+            <tr>
+              <th>排序</th><th>股票</th><th>入榜次數</th><th>平均排名</th><th>最佳排名</th>
+              <th>最新排名</th><th>排名變化</th><th>連續天數</th><th>平均分數</th><th>最新分數</th>
+              <th>分數趨勢</th><th>首次／最後入榜</th>
+            </tr>
+          </thead>
+          <tbody id="weeklyBody"><tr><td colspan="12">資料載入中。</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="monthly" class="panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">LATEST 20 TRADING DAYS</p>
+          <h2>近 20 日月榜</h2>
+          <p id="monthlyWindow" class="factor-note">交易日載入中。</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table persistence-table">
+          <thead>
+            <tr>
+              <th>排序</th><th>股票</th><th>入榜次數</th><th>出現率</th><th>平均排名</th>
+              <th>最佳排名</th><th>連續天數</th><th>平均分數</th><th>最新分數</th>
+              <th>20日趨勢</th><th>首次／最後入榜</th>
+            </tr>
+          </thead>
+          <tbody id="monthlyBody"><tr><td colspan="11">資料載入中。</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="changes" class="tracking-change-grid">
+      <article class="panel">
+        <div class="section-head">
+          <div><p class="eyebrow">NEW / RETURNED</p><h2>新進榜／重返榜</h2></div>
+        </div>
+        <div id="newEntrantsList" class="change-list"><div class="empty-state">資料載入中。</div></div>
+      </article>
+      <article class="panel">
+        <div class="section-head">
+          <div><p class="eyebrow">DROPPED</p><h2>跌出榜</h2></div>
+        </div>
+        <div id="droppedList" class="change-list"><div class="empty-state">資料載入中。</div></div>
+      </article>
+    </section>
+
+    <section id="methodology" class="panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">SCORING POLICY</p>
+          <h2>多因子評分說明</h2>
+        </div>
+        <div class="title-actions">
+          <a class="link-button" href="./factor-score.html">完整評分制度</a>
+          <a class="link-button" href="./themes.html">題材集中度</a>
+        </div>
+      </div>
+      <div class="factor-weight-grid">
+        <article class="factor-weight-card"><span>基本面</span><strong>30%</strong></article>
+        <article class="factor-weight-card"><span>技術面</span><strong>30%</strong></article>
+        <article class="factor-weight-card"><span>籌碼／市場交易力道</span><strong>25%</strong></article>
+        <article class="factor-weight-card"><span>週轉率／交易熱度</span><strong>15%</strong></article>
+        <article class="factor-weight-card muted-weight"><span>新聞面</span><strong>0%</strong><small>不納入排名</small></article>
       </div>
     </section>
 
@@ -189,9 +200,6 @@
     </section>
   </main>
 
-  <script type="module">
-    import { initRadarPage } from "./assets/js/radar-page.js";
-    initRadarPage();
-  </script>
+  <script type="module" src="./assets/js/radar-page.js?v=20260723-top10"></script>
 </body>
 </html>

@@ -63,6 +63,10 @@ jobs:
           test -f _site/data/processed/ai_scores_daily.json
           test -f _site/data/processed/stock_metrics_daily.json
           test -f _site/data/processed/factor-scores.json
+          test -f _site/data/processed/ai-top10-daily.json
+          test -f _site/data/processed/ai-top10-history.json
+          test -f _site/data/processed/ai-persistence-weekly.json
+          test -f _site/data/processed/ai-persistence-monthly.json
 
       - name: Upload static site
         uses: actions/upload-pages-artifact@v3

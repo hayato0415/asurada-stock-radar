@@ -61,6 +61,7 @@ jobs:
             "data/latest"
             "data/scorecards"
             "data/config"
+            "data/history"
           )
           for path in "${paths[@]}"; do
             if compgen -G "$path" > /dev/null; then

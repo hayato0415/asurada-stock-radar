@@ -61,6 +61,10 @@ STATUS_TARGETS = [
     DOCS_PROCESSED / "factor-scores.json",
     DOCS_PROCESSED / "factor-scores.status.json",
     DOCS_PROCESSED / "factor-scores.meta.json",
+    DOCS_PROCESSED / "ai-top10-daily.json",
+    DOCS_PROCESSED / "ai-top10-history.json",
+    DOCS_PROCESSED / "ai-persistence-weekly.json",
+    DOCS_PROCESSED / "ai-persistence-monthly.json",
     DOCS_PROCESSED / "theme_stats.json",
     DOCS_PROCESSED / "news_events.json",
 ]
@@ -73,6 +77,10 @@ CRITICAL_SYNC_FILES = {
     "docs/data/processed/factor-scores.json",
     "docs/data/processed/factor-scores.status.json",
     "docs/data/processed/factor-scores.meta.json",
+    "docs/data/processed/ai-top10-daily.json",
+    "docs/data/processed/ai-top10-history.json",
+    "docs/data/processed/ai-persistence-weekly.json",
+    "docs/data/processed/ai-persistence-monthly.json",
 }
 
 COMMON_KEYS = {
@@ -87,8 +95,14 @@ FACTOR_OUTPUT_NAMES = {
     "factor-scores.json",
     "factor-scores.status.json",
     "factor-scores.meta.json",
+    "factor-quote-history.json",
+    "ai-top10-daily.json",
+    "ai-top10-history.json",
+    "ai-persistence-weekly.json",
+    "ai-persistence-monthly.json",
 }
 FACTOR_OUTPUTS = tuple(DATA_PROCESSED / name for name in sorted(FACTOR_OUTPUT_NAMES))
+FACTOR_TOP10_HISTORY = DATA_DIR / "history" / "ai-top10"
 NEWS_EVENTS_NAME = "news_events.json"
 
 
@@ -142,6 +156,21 @@ def restore_files(snapshot: dict[Path, bytes | None]) -> None:
             path.unlink(missing_ok=True)
         else:
             write_bytes_atomic(path, content)
+
+
+def snapshot_directory(path: Path) -> dict[Path, bytes]:
+    if not path.exists():
+        return {}
+    return {item: item.read_bytes() for item in path.glob("*.json") if item.is_file()}
+
+
+def restore_directory(path: Path, snapshot: dict[Path, bytes]) -> None:
+    if path.exists():
+        for item in path.glob("*.json"):
+            if item not in snapshot:
+                item.unlink(missing_ok=True)
+    for item, content in snapshot.items():
+        write_bytes_atomic(item, content)
 
 
 def tail(text: str, limit: int = 1800) -> str:
@@ -305,185 +334,6 @@ def make_metadata(now: datetime, latest: str) -> dict[str, str]:
         "latest_trade_date": latest,
         "data_version": data_version,
         "source_pipeline": "update_all_site_data",
-    }
-
-
-def number_or_none(value: Any) -> float | None:
-    if value in (None, ""):
-        return None
-    try:
-        number = float(str(value).replace(",", ""))
-    except (TypeError, ValueError):
-        return None
-    return number if number == number else None
-
-
-def stock_key(item: dict[str, Any]) -> str:
-    return str(item.get("symbol") or item.get("code") or "").strip()
-
-
-def factor_trade_type(item: dict[str, Any]) -> str:
-    total = number_or_none(item.get("total_score")) or 0
-    turnover = number_or_none(item.get("turnover_rate_pct")) or 0
-    change = abs(number_or_none(item.get("change_pct")) or 0)
-    if turnover >= 8 or change >= 5:
-        return "短線"
-    if total >= 55:
-        return "波段"
-    return "中長期"
-
-
-def factor_risk_label(item: dict[str, Any]) -> str:
-    risk = str(item.get("risk_level") or "").strip()
-    if risk == "高":
-        return "過熱"
-    if risk == "低":
-        return "正常"
-    turnover = number_or_none(item.get("turnover_rate_pct"))
-    change = number_or_none(item.get("change_pct"))
-    volume = number_or_none(item.get("volume"))
-    total = number_or_none(item.get("total_score")) or 0
-    if (turnover is not None and turnover >= 12) or (change is not None and change >= 7):
-        return "過熱"
-    if volume is None or volume <= 0:
-        return "低流動"
-    if total < 30:
-        return "冷門"
-    return "正常"
-
-
-def rebuild_factor_scores_from_ai_scores(latest: str, metadata: dict[str, str]) -> dict[str, Any] | None:
-    if not latest:
-        return None
-
-    factor_scores_path = DATA_PROCESSED / "factor-scores.json"
-    factor_status_path = DATA_PROCESSED / "factor-scores.status.json"
-    factor_meta_path = DATA_PROCESSED / "factor-scores.meta.json"
-    current_scores = read_json(factor_scores_path, [])
-    current_status = read_json(factor_status_path, {})
-    current_date = payload_date(current_scores)
-    status_date = payload_date(current_status)
-    if current_date == latest and status_date == latest:
-        return None
-
-    ai_payload = read_json(DATA_PROCESSED / "ai_scores_daily.json", {})
-    metrics_payload = read_json(DATA_PROCESSED / "stock_metrics_daily.json", {})
-    ai_date = payload_date(ai_payload)
-    metrics_date = payload_date(metrics_payload)
-    ai_items = [item for item in get_items(ai_payload) if isinstance(item, dict)]
-    metrics_items = [item for item in get_items(metrics_payload) if isinstance(item, dict)]
-
-    if ai_date != latest or metrics_date != latest or not ai_items:
-        return {
-            "name": "factor_scores_sync_fallback",
-            "script": "scripts/update_all_site_data.py",
-            "ok": False,
-            "returncode": None,
-            "started_at": metadata["generated_at"],
-            "finished_at": now_taipei().isoformat(),
-            "stdout_tail": "",
-            "stderr_tail": "",
-            "error": (
-                "Cannot rebuild factor scores because source dates are not synchronized: "
-                f"ai_scores_daily={ai_date or '--'}, stock_metrics_daily={metrics_date or '--'}, expected={latest}"
-            ),
-        }
-
-    metrics_by_symbol = {stock_key(item): item for item in metrics_items if stock_key(item)}
-    rows: list[dict[str, Any]] = []
-    sorted_items = sorted(ai_items, key=lambda item: number_or_none(item.get("total_score")) or -1, reverse=True)[:100]
-    revenue_month = first_existing(metrics_payload, ("revenue_month", "financial_period")) or latest[:7]
-
-    for rank, item in enumerate(sorted_items, start=1):
-        symbol = stock_key(item)
-        metric = metrics_by_symbol.get(symbol, {})
-        theme = item.get("theme") or item.get("supply_chain") or item.get("industry") or "未分類"
-        row = {
-            "rank": rank,
-            "code": symbol,
-            "symbol": symbol,
-            "name": item.get("name") or metric.get("name") or symbol,
-            "market": item.get("market") or metric.get("market") or "",
-            "industry": item.get("industry") or metric.get("industry") or "",
-            "concepts": [theme] if theme else [],
-            "close": number_or_none(item.get("trade_price")) if item.get("trade_price") is not None else number_or_none(metric.get("trade_price")),
-            "changePercent": number_or_none(item.get("change_pct")) if item.get("change_pct") is not None else number_or_none(metric.get("change_pct")),
-            "volume": number_or_none(item.get("volume")) if item.get("volume") is not None else number_or_none(metric.get("volume")),
-            "tradeValue": None,
-            "listedShares": number_or_none(metric.get("listed_shares")),
-            "turnoverRate": number_or_none(item.get("turnover_rate_pct")) if item.get("turnover_rate_pct") is not None else number_or_none(metric.get("turnover_rate_pct")),
-            "peRatio": None,
-            "pbRatio": None,
-            "dividendYield": None,
-            "revenueMonth": item.get("financial_period") or metric.get("financial_period") or revenue_month,
-            "revenueMillion": number_or_none(item.get("revenue_million")) if item.get("revenue_million") is not None else number_or_none(metric.get("revenue_million")),
-            "revenueMomPct": number_or_none(item.get("revenue_mom_pct")) if item.get("revenue_mom_pct") is not None else number_or_none(metric.get("revenue_mom_pct")),
-            "revenueYoyPct": number_or_none(item.get("revenue_yoy_pct")) if item.get("revenue_yoy_pct") is not None else number_or_none(metric.get("revenue_yoy_pct")),
-            "eps": number_or_none(item.get("eps")) if item.get("eps") is not None else number_or_none(metric.get("eps")),
-            "grossMarginPct": number_or_none(item.get("gross_margin_pct")) if item.get("gross_margin_pct") is not None else number_or_none(metric.get("gross_margin_pct")),
-            "fundamentalScore": number_or_none(item.get("fundamental_score")),
-            "technicalScore": number_or_none(item.get("technical_score")),
-            "chipScore": number_or_none(item.get("chip_score")),
-            "turnoverScore": number_or_none(item.get("turnover_score")),
-            "totalScore": number_or_none(item.get("total_score")),
-            "tradeType": factor_trade_type(item),
-            "riskLabel": factor_risk_label(item),
-            "updatedAt": metadata["generated_at"],
-            "dataDate": latest,
-            "scoreSource": "ai_scores_daily + stock_metrics_daily",
-        }
-        rows.append(row)
-
-    status_payload = {
-        **metadata,
-        "ok": True,
-        "status": "ok",
-        "updated_at": metadata["generated_at"],
-        "attempted_at": metadata["generated_at"],
-        "target_date": latest,
-        "latest_trade_date": latest,
-        "items_count": len(rows),
-        "rows_written": len(rows),
-        "previous_data_preserved": False,
-        "failed_reasons": [],
-        "warnings": ["多因子分數由全市場 AI 分數與行情資料同步重建，未使用新聞面評分。"],
-        "quality": {
-            "ai_score_rows": len(ai_items),
-            "metrics_rows": len(metrics_items),
-            "factor_rows": len(rows),
-        },
-        "source_status": [
-            {"source": "ai_scores_daily.json", "status": "ok", "latest_trade_date": ai_date, "rows": len(ai_items)},
-            {"source": "stock_metrics_daily.json", "status": "ok", "latest_trade_date": metrics_date, "rows": len(metrics_items)},
-        ],
-    }
-    meta_payload = {
-        **metadata,
-        "latest_trade_date": latest,
-        "updated_at": metadata["generated_at"],
-        "items_count": len(rows),
-        "score_version": "unified-ai-metrics-v1",
-        "weights": {
-            "fundamental": "from ai_scores_daily",
-            "technical": "from ai_scores_daily",
-            "chip": "from ai_scores_daily",
-            "turnover": "from ai_scores_daily",
-            "news": "not used by factor-score page",
-        },
-    }
-    write_json(factor_scores_path, rows)
-    write_json(factor_status_path, status_payload)
-    write_json(factor_meta_path, meta_payload)
-    return {
-        "name": "factor_scores_sync_fallback",
-        "script": "scripts/update_all_site_data.py",
-        "ok": True,
-        "returncode": 0,
-        "started_at": metadata["generated_at"],
-        "finished_at": now_taipei().isoformat(),
-        "stdout_tail": f"Rebuilt {len(rows)} factor score rows from synchronized AI scores and metrics.",
-        "stderr_tail": "",
-        "error": "",
     }
 
 
@@ -724,6 +574,7 @@ def write_status_files(status: dict[str, Any]) -> None:
 
 def main() -> int:
     factor_snapshot = snapshot_files(FACTOR_OUTPUTS)
+    factor_history_snapshot = snapshot_directory(FACTOR_TOP10_HISTORY)
     factor_pipeline_failed = False
     step_results: list[dict[str, Any]] = []
     for name, script in STEPS:
@@ -732,23 +583,17 @@ def main() -> int:
         if name in {"factor_scores", "validate_factor_scores"} and not result["ok"]:
             factor_pipeline_failed = True
             # update_factor_scores is expected to preserve old data itself, but
-            # the wrapper also rolls back all three canonical sidecars in case
-            # a process failed between writes.
+            # The wrapper also rolls back every canonical factor/persistence
+            # output in case a process failed between writes.
             restore_files(factor_snapshot)
+            restore_directory(FACTOR_TOP10_HISTORY, factor_history_snapshot)
 
     now = now_taipei()
     latest = latest_trade_date()
     metadata = make_metadata(now, latest)
 
-    # A source or validation failure must never be hidden by replacing the
-    # canonical factor output with an AI-derived fallback.
-    if not factor_pipeline_failed:
-        fallback_result = rebuild_factor_scores_from_ai_scores(latest, metadata)
-        if fallback_result:
-            step_results.append(fallback_result)
-            if not fallback_result["ok"]:
-                factor_pipeline_failed = True
-                restore_files(factor_snapshot)
+    # factor-scores.json and all Top 10 persistence outputs have one official
+    # source only: scripts/update_factor_scores.py. No AI-score fallback runs.
 
     remove_false_unified_news_metadata()
     excluded_names = FACTOR_OUTPUT_NAMES if factor_pipeline_failed else set()
