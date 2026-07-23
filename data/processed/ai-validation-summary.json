@@ -3,21 +3,21 @@
   "ok": true,
   "validationVersion": "ai-validation-v1",
   "eventMode": "first_entry",
-  "generatedAt": "2026-07-23T13:21:23+08:00",
-  "generated_at": "2026-07-23T13:21:23+08:00",
-  "latestSignalDate": "2026-07-22",
-  "latest_trade_date": "2026-07-22",
-  "totalSignals": 10,
+  "generatedAt": "2026-07-23T19:25:54+08:00",
+  "generated_at": "2026-07-23T19:25:55+08:00",
+  "latestSignalDate": "2026-07-23",
+  "latest_trade_date": "2026-07-23",
+  "totalSignals": 18,
   "completedSignals": 0,
-  "trackingSignals": 10,
+  "trackingSignals": 18,
   "invalidSignals": 0,
-  "averageD1Return": null,
-  "medianD1Return": null,
+  "averageD1Return": 0.2446,
+  "medianD1Return": 0.3238,
   "averageD5Return": null,
   "medianD5Return": null,
   "averageD20Return": null,
   "medianD20Return": null,
-  "winRateD1": null,
+  "winRateD1": 50.0,
   "winRateD5": null,
   "winRateD20": null,
   "benchmarkWinRateD5": null,
@@ -27,20 +27,32 @@
   "averageMfe20": null,
   "averageMae20": null,
   "worstDrawdown": null,
-  "bestSignal": null,
-  "worstSignal": null,
+  "bestSignal": {
+    "signalId": "3088_2026-07-22_official-multifactor-v1",
+    "code": "3088",
+    "name": "艾訊",
+    "period": "D+1",
+    "return": 5.4795
+  },
+  "worstSignal": {
+    "signalId": "5490_2026-07-22_official-multifactor-v1",
+    "code": "5490",
+    "name": "同亨",
+    "period": "D+1",
+    "return": -5.2098
+  },
   "all": {
-    "totalSignals": 10,
+    "totalSignals": 18,
     "completedSignals": 0,
-    "trackingSignals": 10,
+    "trackingSignals": 18,
     "invalidSignals": 0,
-    "averageD1Return": null,
-    "medianD1Return": null,
+    "averageD1Return": 0.2446,
+    "medianD1Return": 0.3238,
     "averageD5Return": null,
     "medianD5Return": null,
     "averageD20Return": null,
     "medianD20Return": null,
-    "winRateD1": null,
+    "winRateD1": 50.0,
     "winRateD5": null,
     "winRateD20": null,
     "benchmarkWinRateD5": null,
@@ -50,21 +62,33 @@
     "averageMfe20": null,
     "averageMae20": null,
     "worstDrawdown": null,
-    "bestSignal": null,
-    "worstSignal": null
+    "bestSignal": {
+      "signalId": "3088_2026-07-22_official-multifactor-v1",
+      "code": "3088",
+      "name": "艾訊",
+      "period": "D+1",
+      "return": 5.4795
+    },
+    "worstSignal": {
+      "signalId": "5490_2026-07-22_official-multifactor-v1",
+      "code": "5490",
+      "name": "同亨",
+      "period": "D+1",
+      "return": -5.2098
+    }
   },
   "recent5": {
-    "totalSignals": 10,
+    "totalSignals": 18,
     "completedSignals": 0,
-    "trackingSignals": 10,
+    "trackingSignals": 18,
     "invalidSignals": 0,
-    "averageD1Return": null,
-    "medianD1Return": null,
+    "averageD1Return": 0.2446,
+    "medianD1Return": 0.3238,
     "averageD5Return": null,
     "medianD5Return": null,
     "averageD20Return": null,
     "medianD20Return": null,
-    "winRateD1": null,
+    "winRateD1": 50.0,
     "winRateD5": null,
     "winRateD20": null,
     "benchmarkWinRateD5": null,
@@ -74,21 +98,33 @@
     "averageMfe20": null,
     "averageMae20": null,
     "worstDrawdown": null,
-    "bestSignal": null,
-    "worstSignal": null
+    "bestSignal": {
+      "signalId": "3088_2026-07-22_official-multifactor-v1",
+      "code": "3088",
+      "name": "艾訊",
+      "period": "D+1",
+      "return": 5.4795
+    },
+    "worstSignal": {
+      "signalId": "5490_2026-07-22_official-multifactor-v1",
+      "code": "5490",
+      "name": "同亨",
+      "period": "D+1",
+      "return": -5.2098
+    }
   },
   "recent20": {
-    "totalSignals": 10,
+    "totalSignals": 18,
     "completedSignals": 0,
-    "trackingSignals": 10,
+    "trackingSignals": 18,
     "invalidSignals": 0,
-    "averageD1Return": null,
-    "medianD1Return": null,
+    "averageD1Return": 0.2446,
+    "medianD1Return": 0.3238,
     "averageD5Return": null,
     "medianD5Return": null,
     "averageD20Return": null,
     "medianD20Return": null,
-    "winRateD1": null,
+    "winRateD1": 50.0,
     "winRateD5": null,
     "winRateD20": null,
     "benchmarkWinRateD5": null,
@@ -98,22 +134,34 @@
     "averageMfe20": null,
     "averageMae20": null,
     "worstDrawdown": null,
-    "bestSignal": null,
-    "worstSignal": null
+    "bestSignal": {
+      "signalId": "3088_2026-07-22_official-multifactor-v1",
+      "code": "3088",
+      "name": "艾訊",
+      "period": "D+1",
+      "return": 5.4795
+    },
+    "worstSignal": {
+      "signalId": "5490_2026-07-22_official-multifactor-v1",
+      "code": "5490",
+      "name": "同亨",
+      "period": "D+1",
+      "return": -5.2098
+    }
   },
   "monthly": {
     "2026-07": {
-      "totalSignals": 10,
+      "totalSignals": 18,
       "completedSignals": 0,
-      "trackingSignals": 10,
+      "trackingSignals": 18,
       "invalidSignals": 0,
-      "averageD1Return": null,
-      "medianD1Return": null,
+      "averageD1Return": 0.2446,
+      "medianD1Return": 0.3238,
       "averageD5Return": null,
       "medianD5Return": null,
       "averageD20Return": null,
       "medianD20Return": null,
-      "winRateD1": null,
+      "winRateD1": 50.0,
       "winRateD5": null,
       "winRateD20": null,
       "benchmarkWinRateD5": null,
@@ -123,21 +171,33 @@
       "averageMfe20": null,
       "averageMae20": null,
       "worstDrawdown": null,
-      "bestSignal": null,
-      "worstSignal": null
+      "bestSignal": {
+        "signalId": "3088_2026-07-22_official-multifactor-v1",
+        "code": "3088",
+        "name": "艾訊",
+        "period": "D+1",
+        "return": 5.4795
+      },
+      "worstSignal": {
+        "signalId": "5490_2026-07-22_official-multifactor-v1",
+        "code": "5490",
+        "name": "同亨",
+        "period": "D+1",
+        "return": -5.2098
+      }
     }
   },
   "periods": [
     {
       "period": "D+1",
-      "completedSamples": 0,
-      "averageReturn": null,
-      "medianReturn": null,
-      "winRate": null,
-      "averageExcessReturn": null,
-      "benchmarkWinRate": null,
-      "averageMfe": null,
-      "averageMae": null
+      "completedSamples": 10,
+      "averageReturn": 0.2446,
+      "medianReturn": 0.3238,
+      "winRate": 50.0,
+      "averageExcessReturn": 0.352,
+      "benchmarkWinRate": 50.0,
+      "averageMfe": 3.6687,
+      "averageMae": -3.0737
     },
     {
       "period": "D+3",
@@ -184,5 +244,8 @@
       "averageMae": null
     }
   ],
-  "denominatorRule": "Only signals with a completed period are included in that period's rate."
+  "denominatorRule": "Only signals with a completed period are included in that period's rate.",
+  "run_id": "30002999945",
+  "data_version": "20260723-1925",
+  "source_pipeline": "update_all_site_data"
 }
