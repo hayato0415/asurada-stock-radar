@@ -414,7 +414,11 @@ def quote_coverage_requirements(stocks: list[dict[str, Any]]) -> dict[str, int]:
     }
 
 
-def parse_quote_rows(rows: list[dict[str, Any]], market_label: str) -> tuple[dict[str, dict[str, Any]], str | None]:
+def parse_quote_rows(
+    rows: list[dict[str, Any]],
+    market_label: str,
+    source_url: str = "",
+) -> tuple[dict[str, dict[str, Any]], str | None]:
     quotes: dict[str, dict[str, Any]] = {}
     dates: list[str] = []
     for row in rows:
@@ -434,6 +438,15 @@ def parse_quote_rows(rows: list[dict[str, Any]], market_label: str) -> tuple[dic
         close = parse_number(
             first_by_keywords(row, [["closing", "price"], ["close"], ["收盤", "價"], ["成交", "價"]])
         )
+        open_price = parse_number(
+            first_by_keywords(row, [["opening", "price"], ["open"], ["開盤", "價"]])
+        )
+        high_price = parse_number(
+            first_by_keywords(row, [["highest", "price"], ["high"], ["最高", "價"]])
+        )
+        low_price = parse_number(
+            first_by_keywords(row, [["lowest", "price"], ["low"], ["最低", "價"]])
+        )
         change = parse_number(first_by_keywords(row, [["change"], ["漲跌", "價"], ["漲跌"]]))
         change_pct = parse_number(
             first_by_keywords(row, [["change", "percent"], ["漲跌", "百分"], ["漲跌", "幅"], ["漲幅"]])
@@ -449,17 +462,25 @@ def parse_quote_rows(rows: list[dict[str, Any]], market_label: str) -> tuple[dic
             first_by_keywords(row, [["trade", "value"], ["成交", "金額"], ["成交", "值"]])
         )
         turnover_rate = parse_number(first_by_keywords(row, [["turnover", "rate"], ["週轉"], ["周轉"]]))
+        transactions = parse_int(
+            first_by_keywords(row, [["transaction", "number"], ["transaction"], ["成交", "筆"]])
+        )
 
         quotes[symbol] = {
             "symbol": symbol,
             "name": name,
             "market": market_label,
             "trade_price": round_or_none(close, 2),
+            "open_price": round_or_none(open_price, 2),
+            "high_price": round_or_none(high_price, 2),
+            "low_price": round_or_none(low_price, 2),
             "change_pct": round_or_none(change_pct, 2),
             "volume": volume,
             "trade_value": round_or_none(trade_value, 0),
             "turnover_rate_pct": round_or_none(turnover_rate, 4),
+            "transactions": transactions,
             "source_date": source_date,
+            "source": source_url,
         }
     source_date = statistics.mode(dates) if dates else None
     return quotes, source_date
@@ -582,11 +603,16 @@ def update_history(
         series.append(
             {
                 "date": quote_date,
+                "open": quote.get("open_price"),
+                "high": quote.get("high_price"),
+                "low": quote.get("low_price"),
                 "close": quote.get("trade_price"),
                 "change_pct": quote.get("change_pct"),
                 "volume": quote.get("volume"),
                 "trade_value": quote.get("trade_value"),
                 "turnover_rate_pct": quote.get("turnover_rate_pct"),
+                "transactions": quote.get("transactions"),
+                "source": quote.get("source"),
             }
         )
         series.sort(key=lambda item: item.get("date") or "")
@@ -946,8 +972,8 @@ def run(target_date: str | None, force_history_refresh: bool) -> int:
         ]
     )
 
-    twse_quotes, twse_date = parse_quote_rows(twse_quote_rows, "上市")
-    tpex_quotes, tpex_date = parse_quote_rows(tpex_quote_rows, "上櫃")
+    twse_quotes, twse_date = parse_quote_rows(twse_quote_rows, "上市", twse_quote_status.url)
+    tpex_quotes, tpex_date = parse_quote_rows(tpex_quote_rows, "上櫃", tpex_quote_status.url)
     twse_quote_status.source_date = twse_date
     tpex_quote_status.source_date = tpex_date
 

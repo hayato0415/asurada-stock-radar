@@ -508,3 +508,320 @@
     flex-direction: column;
   }
 }
+
+/* Post-signal performance validation */
+.validation-panel {
+  scroll-margin-top: 1rem;
+}
+
+.validation-block {
+  margin-top: 1.35rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--line);
+}
+
+.validation-block-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-bottom: 0.9rem;
+}
+
+.validation-block-head h3 {
+  margin: 0;
+  color: #dbeafe;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+}
+
+.validation-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.validation-summary-card {
+  min-height: 110px;
+}
+
+.validation-period-table,
+.validation-detail-table,
+.validation-factor-table,
+.validation-portfolio-table {
+  min-width: 1120px;
+}
+
+.validation-detail-table {
+  min-width: 1900px;
+}
+
+.validation-factor-table {
+  min-width: 1320px;
+}
+
+.validation-portfolio-table {
+  min-width: 1560px;
+}
+
+.validation-period-card-list,
+.validation-detail-card-list {
+  display: none;
+}
+
+.validation-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.75rem;
+  margin: 0.9rem 0 1rem;
+}
+
+.validation-filter-grid label,
+.portfolio-horizon-control {
+  display: grid;
+  gap: 0.35rem;
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 850;
+}
+
+.validation-factor-insights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+  margin: 0.85rem 0;
+}
+
+.validation-insight-card {
+  display: grid;
+  gap: 0.45rem;
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.56);
+}
+
+.validation-insight-card span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 850;
+}
+
+.validation-insight-card strong {
+  color: #dbeafe;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.validation-portfolio-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.portfolio-horizon-control {
+  min-width: min(280px, 100%);
+}
+
+.portfolio-chart {
+  min-width: 0;
+  margin-top: 1rem;
+  padding: 0.85rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(2, 6, 23, 0.3);
+}
+
+.portfolio-chart svg {
+  display: block;
+  width: 100%;
+  min-height: 220px;
+  color: var(--muted);
+  overflow: visible;
+}
+
+.portfolio-chart text {
+  fill: currentColor;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.portfolio-line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.portfolio-line-ai {
+  stroke: #fb7185;
+}
+
+.portfolio-line-benchmark {
+  stroke: #38bdf8;
+}
+
+.portfolio-line-excess {
+  stroke: #fbbf24;
+}
+
+.portfolio-zero-line {
+  stroke: rgba(148, 163, 184, 0.35);
+  stroke-dasharray: 5 5;
+  vector-effect: non-scaling-stroke;
+}
+
+.portfolio-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 0.35rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 850;
+}
+
+.portfolio-chart-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.portfolio-chart-legend i {
+  width: 18px;
+  height: 3px;
+  border-radius: 999px;
+}
+
+.portfolio-legend-ai {
+  background: #fb7185;
+}
+
+.portfolio-legend-benchmark {
+  background: #38bdf8;
+}
+
+.portfolio-legend-excess {
+  background: #fbbf24;
+}
+
+.validation-card-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.validation-card-title > div {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.validation-metric-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.validation-metric-list div {
+  min-width: 0;
+  padding: 0.55rem;
+  border-radius: 10px;
+  background: rgba(2, 6, 23, 0.32);
+}
+
+.validation-metric-list dt {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.validation-metric-list dd {
+  margin: 0.25rem 0 0;
+  color: var(--text);
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.validation-metric-list dd.value-up {
+  color: var(--bad);
+}
+
+.validation-metric-list dd.value-down {
+  color: var(--good);
+}
+
+@media (max-width: 1100px) {
+  .validation-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .validation-portfolio-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .validation-block-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .validation-period-table-wrap,
+  .validation-detail-table-wrap {
+    display: none;
+  }
+
+  .validation-period-card-list,
+  .validation-detail-card-list {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .validation-period-card,
+  .validation-detail-card {
+    display: grid;
+    gap: 0.75rem;
+    min-width: 0;
+    padding: 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: rgba(15, 23, 42, 0.56);
+  }
+
+  .validation-detail-card p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .portfolio-chart {
+    padding: 0.55rem;
+    overflow-x: auto;
+  }
+
+  .portfolio-chart svg {
+    width: 720px;
+    max-width: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .validation-summary-grid,
+  .validation-portfolio-summary,
+  .validation-factor-insights,
+  .validation-filter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .validation-metric-list {
+    grid-template-columns: 1fr;
+  }
+}

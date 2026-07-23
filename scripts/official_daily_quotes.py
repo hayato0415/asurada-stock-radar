@@ -24,6 +24,7 @@ USER_AGENT = "ASURADA-Stock-Radar/2.0 (+https://github.com/hayato0415/asurada-st
 TWSE_OPENAPI = "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL"
 TPEX_OPENAPI = "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes"
 TWSE_HOLIDAY_SCHEDULE = "https://openapi.twse.com.tw/v1/holidaySchedule/holidaySchedule"
+TAIEX_MONTHLY_HISTORY = "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST"
 AFTER_CLOSE_CUTOFF = time(15, 20)
 HOLIDAY_MARKERS = ("放假", "休市", "市場無交易")
 OPEN_MARKERS = ("開始交易", "最後交易")
@@ -169,6 +170,69 @@ def _openapi_fallback(market: str) -> tuple[list[dict[str, Any]], str, str]:
     for row in rows:
         row["Date"] = source_date
     return rows, source_date, url
+
+
+def fetch_daily_quotes_exact(market: str, target_date: str) -> tuple[list[dict[str, Any]], str, str]:
+    """Fetch one exact official trading date without falling back to another day.
+
+    Historical validation must never relabel a previous close as the requested
+    date.  The regular ``fetch_daily_quotes`` fallback remains appropriate for
+    the site's before-close refresh, while this strict variant is used only for
+    filling known dates from the official TAIEX trading calendar.
+    """
+    market = market.strip().lower()
+    requested = parse_trade_date(target_date)
+    if market not in {"twse", "tpex"}:
+        raise ValueError(f"unsupported market: {market}")
+    if not requested:
+        raise ValueError(f"invalid target date: {target_date}")
+    if market == "twse":
+        rows, source_date, source_url = _twse_date_specific(requested)
+    else:
+        rows, source_date, source_url = _tpex_date_specific(requested)
+    if source_date != requested:
+        raise ValueError(f"{market.upper()} returned {source_date or '--'} for requested {requested}")
+    return rows, source_date, source_url
+
+
+def fetch_taiex_month(target_month: str) -> tuple[list[dict[str, Any]], str]:
+    """Return official TAIEX daily OHLC bars for one Gregorian month."""
+    parsed = parse_trade_date(f"{str(target_month)[:7]}-01")
+    if not parsed:
+        raise ValueError(f"invalid target month: {target_month}")
+    compact = parsed.replace("-", "")
+    url = TAIEX_MONTHLY_HISTORY + "?" + urllib.parse.urlencode(
+        {"date": compact, "response": "json"}
+    )
+    payload = _fetch_json(url)
+    if not isinstance(payload, dict) or str(payload.get("stat", "")).upper() != "OK":
+        raise ValueError(f"TAIEX monthly history is unavailable for {parsed[:7]}")
+    fields = payload.get("fields")
+    data = payload.get("data")
+    required = {"日期", "開盤指數", "最高指數", "最低指數", "收盤指數"}
+    if not isinstance(fields, list) or not required.issubset(set(fields)) or not isinstance(data, list):
+        raise ValueError("TAIEX monthly history is missing official OHLC fields")
+
+    rows: list[dict[str, Any]] = []
+    for values in data:
+        raw = dict(zip(fields, values))
+        trade_date = parse_trade_date(raw.get("日期"))
+        if not trade_date or trade_date[:7] != parsed[:7]:
+            continue
+        rows.append(
+            {
+                "date": trade_date,
+                "open": _clean_text(raw.get("開盤指數")),
+                "high": _clean_text(raw.get("最高指數")),
+                "low": _clean_text(raw.get("最低指數")),
+                "close": _clean_text(raw.get("收盤指數")),
+                "source": url,
+            }
+        )
+    if not rows:
+        raise ValueError(f"TAIEX monthly history returned zero rows for {parsed[:7]}")
+    rows.sort(key=lambda row: row["date"])
+    return rows, url
 
 
 @lru_cache(maxsize=1)

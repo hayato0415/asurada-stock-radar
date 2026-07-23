@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 1,
+  "validationVersion": "ai-validation-v1",
+  "updatedAt": "2026-07-23T13:21:24+08:00",
+  "asOfDate": "2026-07-23",
+  "earliestSignalDate": "2026-07-22",
+  "calendar": [
+    "2026-07-22"
+  ],
+  "benchmarkCode": "TAIEX",
+  "benchmark": [
+    {
+      "date": "2026-07-01",
+      "open": 46234.7,
+      "high": 47293.1,
+      "low": 46234.7,
+      "close": 47018.99,
+      "source": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260701&response=json"
+    },
+    {
+      "date": "2026-07-02",
+      "open": 46833.89,
+      "high": 46910.31,
+      "low": 45981.89,
+      "close": 46744.16,
+      "source": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260701&response=json"
+    },
+    {
+      "date": "2026-07-03",
+      "open": 46545.14,
+      "high": 46948.83,
+      "low": 45880.69,
+      "close": 46780.62,
+      "source": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260701&response=json"
+    },
+    {
+      "date": "2026-07-06",
+      "open": 46897.18,
+      "high": 47395.3,
+      "low": 46431.38,
+      "close": 46556.39,
+      "source": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260701&response=json"
+    },
+    {
+      "date": "2026-07-07",
+      "open": 46537.34,
+      "high": 46967.04,
+      "low": 45432.02,
+      "close": 45479.11,
+      "source": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260701&response=json"
+    },
+    {
+      "date": "2026-07-08",
+      "open": 45524.69,
+      "high": 45837.12,
+      "low": 45036.64,
+      "close": 45734.41,
+      "source": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260701&response=json"
+    },
+    {
+      "date": "2026-07-09",
+      "open": 45805.62,
+      "high": 46064.06,
+      "low": 45352.41,
+      "close": 45354.61,
+      "source": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260701&response=json"
+    },
+    {
+      "date": "2026-07-13",
+      "open": 45500.32,
+      "high": 46330.91,
+      "low": 45272.9,
+      "close": 45380.52,
+      "source": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260701&response=json"
+    },
+    {
+      "date": "2026-07-14",
+      "open": 45364.4,
+      "high": 45364.4,
+      "low": 43654.04,
+      "close": 44737.95,
+      "source": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260701&response=json"
+    },
+    {
+      "date": "2026-07-15",
+      "open": 44850.69,
+      "high": 45881.91,
+      "low": 44850.69,
+      "close": 45631.59,
+      "source": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260701&response=json"
+    },
+    {
+      "date": "2026-07-16",
+      "open": 45511.98,
+      "high": 45855.02,
+      "low": 44970.64,
+      "close": 45624.98,
+      "source": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260701&response=json"
+    },
+    {
+      "date": "2026-07-17",
+      "open": 45234.08,
+      "high": 45234.08,
+      "low": 42671.27,
+      "close": 42671.27,
+      "source": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260701&response=json"
+    },
+    {
+      "date": "2026-07-20",
+      "open": 42793.15,
+      "high": 43084.51,
+      "low": 41967.75,
+      "close": 42449.7,
+      "source": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260701&response=json"
+    },
+    {
+      "date": "2026-07-21",
+      "open": 42566.93,
+      "high": 44232.87,
+      "low": 42566.93,
+      "close": 44232.87,
+      "source": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260701&response=json"
+    },
+    {
+      "date": "2026-07-22",
+      "open": 44513.75,
+      "high": 45323.75,
+      "low": 44513.75,
+      "close": 44825.78,
+      "source": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260701&response=json"
+    }
+  ],
+  "stocks": {
+    "2027": {
+      "market": "twse",
+      "markets": [
+        "twse"
+      ],
+      "barsByMarket": {
+        "twse": []
+      },
+      "bars": []
+    },
+    "3022": {
+      "market": "twse",
+      "markets": [
+        "twse"
+      ],
+      "barsByMarket": {
+        "twse": []
+      },
+      "bars": []
+    },
+    "3088": {
+      "market": "tpex",
+      "markets": [
+        "tpex"
+      ],
+      "barsByMarket": {
+        "tpex": []
+      },
+      "bars": []
+    },
+    "3231": {
+      "market": "twse",
+      "markets": [
+        "twse"
+      ],
+      "barsByMarket": {
+        "twse": []
+      },
+      "bars": []
+    },
+    "3374": {
+      "market": "tpex",
+      "markets": [
+        "tpex"
+      ],
+      "barsByMarket": {
+        "tpex": []
+      },
+      "bars": []
+    },
+    "5490": {
+      "market": "tpex",
+      "markets": [
+        "tpex"
+      ],
+      "barsByMarket": {
+        "tpex": []
+      },
+      "bars": []
+    },
+    "6187": {
+      "market": "tpex",
+      "markets": [
+        "tpex"
+      ],
+      "barsByMarket": {
+        "tpex": []
+      },
+      "bars": []
+    },
+    "6414": {
+      "market": "twse",
+      "markets": [
+        "twse"
+      ],
+      "barsByMarket": {
+        "twse": []
+      },
+      "bars": []
+    },
+    "6416": {
+      "market": "twse",
+      "markets": [
+        "twse"
+      ],
+      "barsByMarket": {
+        "twse": []
+      },
+      "bars": []
+    },
+    "8114": {
+      "market": "twse",
+      "markets": [
+        "twse"
+      ],
+      "barsByMarket": {
+        "twse": []
+      },
+      "bars": []
+    }
+  },
+  "coverage": {
+    "twse": {},
+    "tpex": {}
+  },
+  "sourceStatus": [
+    {
+      "source": "TWSE TAIEX MI_5MINS_HIST",
+      "period": "2026-07",
+      "ok": true,
+      "rows": 15,
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260701&response=json",
+      "error": ""
+    }
+  ],
+  "sources": {
+    "benchmark": "TWSE TAIEX MI_5MINS_HIST",
+    "twse": "TWSE MI_INDEX exact-date daily quotes",
+    "tpex": "TPEx exact-date daily quotes"
+  }
+}

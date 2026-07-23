@@ -54,7 +54,9 @@ jobs:
           fi
 
           test -f _site/radar.html
+          test -f _site/data-status.html
           test -f _site/assets/js/radar-page.js
+          test -f _site/assets/js/data-status-page.js
           test -f _site/data/site_meta.json
           test -f _site/data/data_status.json
           test -f _site/data/radar.json
@@ -67,6 +69,11 @@ jobs:
           test -f _site/data/processed/ai-top10-history.json
           test -f _site/data/processed/ai-persistence-weekly.json
           test -f _site/data/processed/ai-persistence-monthly.json
+          test -f _site/data/processed/ai-validation-detail.json
+          test -f _site/data/processed/ai-validation-summary.json
+          test -f _site/data/processed/ai-validation-portfolio.json
+          test -f _site/data/processed/ai-factor-performance.json
+          test -f _site/data/processed/ai-validation-status.json
 
       - name: Upload static site
         uses: actions/upload-pages-artifact@v3

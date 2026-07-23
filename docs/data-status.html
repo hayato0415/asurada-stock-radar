@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>績效驗證狀態｜ASURADA Stock Radar</title>
+  <link rel="stylesheet" href="./assets/css/base.css">
+  <link rel="stylesheet" href="./assets/css/layout.css">
+  <link rel="stylesheet" href="./assets/css/components.css">
+  <link rel="stylesheet" href="./assets/css/radar.css?v=20260723-validation">
+</head>
+<body data-page="data-status">
+  <header class="app-header">
+    <a class="brand" href="./index.html" aria-label="回首頁">
+      <span>ASURADA Stock Radar</span>
+      <small>AI 台股決策雷達</small>
+    </a>
+    <nav class="site-nav" aria-label="主導覽">
+      <a href="./index.html">首頁</a>
+      <a href="./radar.html">AI 選股與追蹤</a>
+      <a href="./news.html">重點新聞</a>
+      <a href="./stock.html">個股 AI 分析</a>
+      <a class="active" href="./data-status.html">資料狀態</a>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    <section class="page-title-row">
+      <div>
+        <p class="eyebrow">VALIDATION DATA HEALTH</p>
+        <h1>績效驗證資料狀態</h1>
+        <p class="page-note">
+          檢查正式訊號、進場價、D+20 追蹤進度、缺少行情與大盤資料，以及是否已接入全站更新流程。
+        </p>
+      </div>
+      <span id="validationStatusUpdatedAt" class="meta-pill">資料載入中</span>
+    </section>
+
+    <section class="panel" aria-labelledby="validationHealthTitle">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">CURRENT HEALTH</p>
+          <h2 id="validationHealthTitle">驗證更新健康度</h2>
+        </div>
+        <div class="title-actions">
+          <a class="link-button" href="./radar.html#validation">查看成效驗證</a>
+          <button id="reloadValidationStatus" class="action-button" type="button">重新載入</button>
+        </div>
+      </div>
+      <div id="validationStatusSummary" class="status-summary-grid">
+        <div class="empty-state">驗證狀態載入中。</div>
+      </div>
+      <div id="validationStatusAlerts" class="status-alert-list" aria-live="polite"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="validationStatusDetailTitle">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">STATUS DETAILS</p>
+          <h2 id="validationStatusDetailTitle">驗證資料明細</h2>
+          <p class="factor-note">缺少資料會顯示實際筆數與最近錯誤，不會只以「成功」概括。</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table status-table">
+          <thead>
+            <tr>
+              <th>檢查項目</th>
+              <th>目前值</th>
+              <th>判定</th>
+              <th>說明</th>
+            </tr>
+          </thead>
+          <tbody id="validationStatusRows">
+            <tr><td colspan="4">驗證狀態載入中。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="disclaimer">
+      尚未到期的 D+1／D+3／D+5／D+10／D+20 保持空值，不會被視為失敗或 0% 報酬。
+    </section>
+  </main>
+
+  <script type="module" src="./assets/js/data-status-page.js?v=20260723-validation"></script>
+</body>
+</html>

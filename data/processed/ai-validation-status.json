@@ -1,0 +1,38 @@
+{
+  "status": "warning",
+  "ok": true,
+  "validationVersion": "ai-validation-v1",
+  "generatedAt": "2026-07-23T13:21:23+08:00",
+  "generated_at": "2026-07-23T13:21:23+08:00",
+  "latestValidationUpdateTime": "2026-07-23T13:21:23+08:00",
+  "latestSignalDate": "2026-07-22",
+  "latestEntryDate": "",
+  "latestPriceDate": "",
+  "latestBenchmarkDate": "2026-07-22",
+  "latest_trade_date": "2026-07-22",
+  "completedSignals": 0,
+  "trackingSignals": 10,
+  "d20CompletedSignals": 0,
+  "missingPriceCount": 0,
+  "missingBenchmarkCount": 0,
+  "snapshotCoverageGapCount": 0,
+  "snapshotCoverageGaps": [],
+  "pipelineIntegrated": true,
+  "previousDataPreserved": false,
+  "lastError": "",
+  "failedReasons": [],
+  "warnings": [
+    "D+5 尚無到期樣本，相關統計保持 null。",
+    "D+20 尚無到期樣本，相關統計保持 null。"
+  ],
+  "sourceStatus": [
+    {
+      "source": "TWSE TAIEX MI_5MINS_HIST",
+      "period": "2026-07",
+      "ok": true,
+      "rows": 15,
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260701&response=json",
+      "error": ""
+    }
+  ]
+}

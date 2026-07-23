@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="./assets/css/base.css">
   <link rel="stylesheet" href="./assets/css/layout.css">
   <link rel="stylesheet" href="./assets/css/components.css">
-  <link rel="stylesheet" href="./assets/css/radar.css?v=20260723-turnover">
+  <link rel="stylesheet" href="./assets/css/radar.css?v=20260723-validation">
 </head>
 <body data-page="radar">
   <header class="app-header">
@@ -42,7 +42,10 @@
           <p class="eyebrow">DATA STATUS</p>
           <h2 id="radarStatusTitle">正式評分與快照狀態</h2>
         </div>
-        <button id="reloadRadarData" class="action-button" type="button">重新載入</button>
+        <div class="title-actions">
+          <a class="link-button" href="./data-status.html">完整驗證狀態</a>
+          <button id="reloadRadarData" class="action-button" type="button">重新載入</button>
+        </div>
       </div>
       <div class="metric-grid tracking-status-grid">
         <article class="metric-card"><span>最新交易日</span><strong id="latestTradeDate">--</strong></article>
@@ -61,6 +64,7 @@
       <a href="#weekly">近 5 日週榜</a>
       <a href="#monthly">近 20 日月榜</a>
       <a href="#changes">新進／跌出</a>
+      <a href="#validation">成效驗證</a>
       <a href="#methodology">評分說明</a>
     </nav>
 
@@ -176,6 +180,241 @@
       </article>
     </section>
 
+    <section id="validation" class="panel validation-panel" aria-labelledby="validationTitle">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">POST-SIGNAL VALIDATION</p>
+          <h2 id="validationTitle">AI 入榜後成效驗證</h2>
+          <p class="factor-note">
+            正式績效以首次入榜事件為主，使用訊號後下一個有效交易日開盤價；所有結果由後端預先計算。
+          </p>
+        </div>
+        <span id="validationUpdatedAt" class="meta-pill">資料載入中</span>
+      </div>
+
+      <div id="validationWarnings" class="tracking-alert-list" aria-live="polite"></div>
+
+      <section class="validation-block" aria-labelledby="validationSummaryTitle">
+        <div class="validation-block-head">
+          <div>
+            <p class="eyebrow">PERFORMANCE SUMMARY</p>
+            <h3 id="validationSummaryTitle">績效摘要</h3>
+          </div>
+          <span class="badge">首次入榜事件</span>
+        </div>
+        <div id="validationSummary" class="validation-summary-grid">
+          <div class="empty-state">績效摘要載入中。</div>
+        </div>
+      </section>
+
+      <section class="validation-block" aria-labelledby="holdingComparisonTitle">
+        <div class="validation-block-head">
+          <div>
+            <p class="eyebrow">HOLDING PERIODS</p>
+            <h3 id="holdingComparisonTitle">持有期間比較</h3>
+          </div>
+        </div>
+        <div class="table-wrap validation-period-table-wrap">
+          <table class="data-table validation-period-table">
+            <thead>
+              <tr>
+                <th>週期</th>
+                <th>完成樣本</th>
+                <th>平均報酬</th>
+                <th>中位數報酬</th>
+                <th>上漲勝率</th>
+                <th>平均超額報酬</th>
+                <th>平均 MFE</th>
+                <th>平均 MAE</th>
+              </tr>
+            </thead>
+            <tbody id="validationPeriodBody">
+              <tr><td colspan="8">持有期間資料載入中。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="validationPeriodCards" class="validation-period-card-list"></div>
+      </section>
+
+      <section class="validation-block" aria-labelledby="validationDetailTitle">
+        <div class="validation-block-head">
+          <div>
+            <p class="eyebrow">SIGNAL DETAILS</p>
+            <h3 id="validationDetailTitle">個股驗證明細</h3>
+          </div>
+          <span id="validationDetailCount" class="meta-pill">0 筆</span>
+        </div>
+
+        <div class="validation-filter-grid">
+          <label>
+            統計模式
+            <select id="validationModeFilter">
+              <option value="firstEntry">首次入榜事件</option>
+              <option value="dailyObservation">每日榜單觀測</option>
+            </select>
+          </label>
+          <label>
+            訊號日期
+            <input id="validationDateFilter" type="date">
+          </label>
+          <label>
+            股票
+            <input id="validationStockFilter" type="search" placeholder="代號或名稱">
+          </label>
+          <label>
+            成功／失敗
+            <select id="validationOutcomeFilter">
+              <option value="">全部</option>
+              <option value="success">絕對報酬成功</option>
+              <option value="failure">絕對報酬未成功</option>
+              <option value="outperformed">跑贏大盤</option>
+              <option value="underperformed">未跑贏大盤</option>
+            </select>
+          </label>
+          <label>
+            驗證狀態
+            <select id="validationStatusFilter">
+              <option value="">全部</option>
+              <option value="completed">已完成</option>
+              <option value="tracking">追蹤中</option>
+              <option value="pending">等待進場</option>
+              <option value="invalid">資料異常</option>
+            </select>
+          </label>
+          <label>
+            操作屬性
+            <select id="validationTradeTypeFilter"><option value="">全部</option></select>
+          </label>
+          <label>
+            風險標籤
+            <select id="validationRiskFilter"><option value="">全部</option></select>
+          </label>
+          <label>
+            評分版本
+            <select id="validationVersionFilter"><option value="">全部</option></select>
+          </label>
+          <label>
+            連續入榜
+            <select id="validationConsecutiveFilter">
+              <option value="">全部</option>
+              <option value="1">1 日</option>
+              <option value="2">2 日</option>
+              <option value="3">3 日以上</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="table-wrap validation-detail-table-wrap">
+          <table class="data-table validation-detail-table">
+            <thead>
+              <tr>
+                <th>訊號日期</th>
+                <th>股票</th>
+                <th>當時排名</th>
+                <th>當時總分</th>
+                <th>入榜型態</th>
+                <th>連續入榜</th>
+                <th>正式進場日</th>
+                <th>進場價</th>
+                <th>D+1</th>
+                <th>D+5</th>
+                <th>D+20</th>
+                <th>MFE20</th>
+                <th>MAE20</th>
+                <th>D+20 超額</th>
+                <th>驗證狀態</th>
+                <th>評分版本</th>
+              </tr>
+            </thead>
+            <tbody id="validationDetailBody">
+              <tr><td colspan="16">個股驗證資料載入中。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="validationDetailCards" class="validation-detail-card-list"></div>
+        <p class="factor-note">為維持頁面效能，每次最多顯示符合條件的前 50 筆；統計摘要不受此限制。</p>
+      </section>
+
+      <section class="validation-block" aria-labelledby="factorPerformanceTitle">
+        <div class="validation-block-head">
+          <div>
+            <p class="eyebrow">FACTOR EFFECTIVENESS</p>
+            <h3 id="factorPerformanceTitle">有效因子分析</h3>
+          </div>
+        </div>
+        <div id="validationFactorWarning" class="tracking-alert-list"></div>
+        <div id="validationFactorCards" class="validation-factor-insights">
+          <div class="empty-state">因子績效載入中。</div>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table validation-factor-table">
+            <thead>
+              <tr>
+                <th>分組</th>
+                <th>樣本數</th>
+                <th>D+5 平均</th>
+                <th>D+5 中位數</th>
+                <th>D+5 勝率</th>
+                <th>D+20 平均</th>
+                <th>D+20 中位數</th>
+                <th>D+20 勝率</th>
+                <th>平均 MAE</th>
+                <th>跑贏大盤</th>
+              </tr>
+            </thead>
+            <tbody id="validationFactorBody">
+              <tr><td colspan="10">因子分組資料載入中。</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="validation-block" aria-labelledby="portfolioTitle">
+        <div class="validation-block-head">
+          <div>
+            <p class="eyebrow">EQUAL-WEIGHT PORTFOLIO</p>
+            <h3 id="portfolioTitle">AI Top 10 等權組合</h3>
+          </div>
+          <label class="portfolio-horizon-control">
+            持有期間
+            <select id="portfolioRangeFilter">
+              <option value="holding5">固定持有 5 個交易日</option>
+              <option value="holding20">固定持有 20 個交易日</option>
+            </select>
+          </label>
+        </div>
+        <div id="portfolioSummary" class="validation-portfolio-summary">
+          <div class="empty-state">組合績效載入中。</div>
+        </div>
+        <div id="portfolioCurve" class="portfolio-chart" aria-live="polite">
+          <div class="empty-state">組合曲線載入中。</div>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table validation-portfolio-table">
+            <thead>
+              <tr>
+                <th>日期</th>
+                <th>當日報酬</th>
+                <th>毛累積</th>
+                <th>淨累積</th>
+                <th>大盤累積</th>
+                <th>超額累積</th>
+                <th>最大回撤</th>
+                <th>持有檔數</th>
+                <th>新進場</th>
+                <th>到期</th>
+                <th>題材集中度</th>
+                <th>最大單一題材</th>
+              </tr>
+            </thead>
+            <tbody id="portfolioRows">
+              <tr><td colspan="12">組合資料載入中。</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
     <section id="methodology" class="panel">
       <div class="section-head">
         <div>
@@ -200,6 +439,6 @@
     </section>
   </main>
 
-  <script type="module" src="./assets/js/radar-page.js?v=20260723-turnover"></script>
+  <script type="module" src="./assets/js/radar-page.js?v=20260723-validation"></script>
 </body>
 </html>

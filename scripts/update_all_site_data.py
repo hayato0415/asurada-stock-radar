@@ -50,6 +50,8 @@ STEPS = [
     ("radar_close_data", "scripts/update_radar.py"),
     ("factor_scores", "scripts/update_factor_scores.py"),
     ("validate_factor_scores", "scripts/validate_factor_scores.py"),
+    ("ai_validation", "scripts/update_ai_validation.py"),
+    ("validate_ai_validation", "scripts/validate_ai_validation.py"),
 ]
 
 STATUS_TARGETS = [
@@ -65,6 +67,11 @@ STATUS_TARGETS = [
     DOCS_PROCESSED / "ai-top10-history.json",
     DOCS_PROCESSED / "ai-persistence-weekly.json",
     DOCS_PROCESSED / "ai-persistence-monthly.json",
+    DOCS_PROCESSED / "ai-validation-detail.json",
+    DOCS_PROCESSED / "ai-validation-summary.json",
+    DOCS_PROCESSED / "ai-validation-portfolio.json",
+    DOCS_PROCESSED / "ai-factor-performance.json",
+    DOCS_PROCESSED / "ai-validation-status.json",
     DOCS_PROCESSED / "theme_stats.json",
     DOCS_PROCESSED / "news_events.json",
 ]
@@ -81,6 +88,11 @@ CRITICAL_SYNC_FILES = {
     "docs/data/processed/ai-top10-history.json",
     "docs/data/processed/ai-persistence-weekly.json",
     "docs/data/processed/ai-persistence-monthly.json",
+    "docs/data/processed/ai-validation-detail.json",
+    "docs/data/processed/ai-validation-summary.json",
+    "docs/data/processed/ai-validation-portfolio.json",
+    "docs/data/processed/ai-factor-performance.json",
+    "docs/data/processed/ai-validation-status.json",
 }
 
 COMMON_KEYS = {
@@ -103,6 +115,18 @@ FACTOR_OUTPUT_NAMES = {
 }
 FACTOR_OUTPUTS = tuple(DATA_PROCESSED / name for name in sorted(FACTOR_OUTPUT_NAMES))
 FACTOR_TOP10_HISTORY = DATA_DIR / "history" / "ai-top10"
+AI_VALIDATION_OUTPUT_NAMES = {
+    "ai-validation-detail.json",
+    "ai-validation-summary.json",
+    "ai-validation-portfolio.json",
+    "ai-factor-performance.json",
+    "ai-validation-market-history.json",
+}
+AI_VALIDATION_STATUS_NAME = "ai-validation-status.json"
+AI_VALIDATION_OUTPUTS = tuple(
+    DATA_PROCESSED / name for name in sorted(AI_VALIDATION_OUTPUT_NAMES)
+)
+AI_VALIDATION_HISTORY = DATA_DIR / "history" / "ai-validation"
 NEWS_EVENTS_NAME = "news_events.json"
 
 
@@ -572,13 +596,82 @@ def write_status_files(status: dict[str, Any]) -> None:
     write_json(ROOT_UPDATE_STATUS, update_status)
 
 
+def write_validation_failure_status(reason: str, previous: dict[str, Any]) -> None:
+    """Preserve prior validation data while exposing this run's real failure."""
+    if not isinstance(previous, dict):
+        previous = {}
+    generated_at = now_taipei().isoformat()
+    payload = {
+        **{
+            key: previous.get(key)
+            for key in (
+                "latestSignalDate",
+                "latestEntryDate",
+                "latestPriceDate",
+                "latestBenchmarkDate",
+                "completedSignals",
+                "trackingSignals",
+                "d20CompletedSignals",
+                "missingPriceCount",
+                "missingBenchmarkCount",
+                "validationVersion",
+                "latest_trade_date",
+            )
+        },
+        "status": "failed",
+        "ok": False,
+        "generatedAt": generated_at,
+        "generated_at": generated_at,
+        "latestValidationUpdateTime": generated_at,
+        "pipelineIntegrated": True,
+        "previousDataPreserved": True,
+        "lastError": reason,
+        "failedReasons": [reason],
+        "warnings": previous.get("warnings") or [],
+    }
+    write_json(DATA_PROCESSED / AI_VALIDATION_STATUS_NAME, payload)
+    write_json(DOCS_PROCESSED / AI_VALIDATION_STATUS_NAME, payload)
+
+
 def main() -> int:
     factor_snapshot = snapshot_files(FACTOR_OUTPUTS)
     factor_history_snapshot = snapshot_directory(FACTOR_TOP10_HISTORY)
+    validation_snapshot = snapshot_files(AI_VALIDATION_OUTPUTS)
+    validation_history_snapshot = snapshot_directory(AI_VALIDATION_HISTORY)
+    validation_previous_status = read_json(
+        DATA_PROCESSED / AI_VALIDATION_STATUS_NAME,
+        {},
+    )
     factor_pipeline_failed = False
+    validation_pipeline_failed = False
     step_results: list[dict[str, Any]] = []
     for name, script in STEPS:
-        result = run_step(name, script)
+        if name in {"ai_validation", "validate_ai_validation"} and factor_pipeline_failed:
+            result = {
+                "name": name,
+                "script": script,
+                "ok": False,
+                "returncode": None,
+                "started_at": now_taipei().isoformat(),
+                "finished_at": now_taipei().isoformat(),
+                "stdout_tail": "",
+                "stderr_tail": "",
+                "error": "dependency failed: official factor/Top 10 pipeline did not complete",
+            }
+        elif name == "validate_ai_validation" and validation_pipeline_failed:
+            result = {
+                "name": name,
+                "script": script,
+                "ok": False,
+                "returncode": None,
+                "started_at": now_taipei().isoformat(),
+                "finished_at": now_taipei().isoformat(),
+                "stdout_tail": "",
+                "stderr_tail": "",
+                "error": "dependency failed: AI validation generator did not complete",
+            }
+        else:
+            result = run_step(name, script)
         step_results.append(result)
         if name in {"factor_scores", "validate_factor_scores"} and not result["ok"]:
             factor_pipeline_failed = True
@@ -587,6 +680,15 @@ def main() -> int:
             # output in case a process failed between writes.
             restore_files(factor_snapshot)
             restore_directory(FACTOR_TOP10_HISTORY, factor_history_snapshot)
+        if name in {"ai_validation", "validate_ai_validation"} and not result["ok"]:
+            if not validation_pipeline_failed:
+                validation_pipeline_failed = True
+                restore_files(validation_snapshot)
+                restore_directory(AI_VALIDATION_HISTORY, validation_history_snapshot)
+                write_validation_failure_status(
+                    f"{name}: {result.get('error') or 'unknown validation failure'}",
+                    validation_previous_status,
+                )
 
     now = now_taipei()
     latest = latest_trade_date()
@@ -597,6 +699,8 @@ def main() -> int:
 
     remove_false_unified_news_metadata()
     excluded_names = FACTOR_OUTPUT_NAMES if factor_pipeline_failed else set()
+    if validation_pipeline_failed:
+        excluded_names |= AI_VALIDATION_OUTPUT_NAMES | {AI_VALIDATION_STATUS_NAME}
     annotate_outputs(metadata, excluded_names)
     sync_processed_to_docs()
     copy_status_sidecars()

@@ -26,6 +26,11 @@ AI_TOP10_DAILY = DOCS_PROCESSED / "ai-top10-daily.json"
 AI_TOP10_HISTORY = DOCS_PROCESSED / "ai-top10-history.json"
 AI_PERSISTENCE_WEEKLY = DOCS_PROCESSED / "ai-persistence-weekly.json"
 AI_PERSISTENCE_MONTHLY = DOCS_PROCESSED / "ai-persistence-monthly.json"
+AI_VALIDATION_DETAIL = DOCS_PROCESSED / "ai-validation-detail.json"
+AI_VALIDATION_SUMMARY = DOCS_PROCESSED / "ai-validation-summary.json"
+AI_VALIDATION_PORTFOLIO = DOCS_PROCESSED / "ai-validation-portfolio.json"
+AI_FACTOR_PERFORMANCE = DOCS_PROCESSED / "ai-factor-performance.json"
+AI_VALIDATION_STATUS = DOCS_PROCESSED / "ai-validation-status.json"
 NEWS_EVENTS = DOCS_PROCESSED / "news_events.json"
 MIN_QUOTE_COVERAGE_RATIO = 0.80
 
@@ -139,6 +144,11 @@ def main() -> int:
     AI_TOP10_HISTORY,
     AI_PERSISTENCE_WEEKLY,
     AI_PERSISTENCE_MONTHLY,
+    AI_VALIDATION_DETAIL,
+    AI_VALIDATION_SUMMARY,
+    AI_VALIDATION_PORTFOLIO,
+    AI_FACTOR_PERFORMANCE,
+    AI_VALIDATION_STATUS,
     NEWS_EVENTS,
   ]
   if not all(ensure_exists(path, errors) for path in required):
@@ -157,6 +167,11 @@ def main() -> int:
   ai_top10_history = read_json(AI_TOP10_HISTORY)
   ai_persistence_weekly = read_json(AI_PERSISTENCE_WEEKLY)
   ai_persistence_monthly = read_json(AI_PERSISTENCE_MONTHLY)
+  ai_validation_detail = read_json(AI_VALIDATION_DETAIL)
+  ai_validation_summary = read_json(AI_VALIDATION_SUMMARY)
+  ai_validation_portfolio = read_json(AI_VALIDATION_PORTFOLIO)
+  ai_factor_performance = read_json(AI_FACTOR_PERFORMANCE)
+  ai_validation_status = read_json(AI_VALIDATION_STATUS)
   news_events = read_json(NEWS_EVENTS)
 
   expected = normalize_date(site_meta.get("latest_trade_date"))
@@ -171,6 +186,21 @@ def main() -> int:
   require_same_date("ai-top10-history.json", ai_top10_history, expected, errors)
   require_same_date("ai-persistence-weekly.json", ai_persistence_weekly, expected, errors)
   require_same_date("ai-persistence-monthly.json", ai_persistence_monthly, expected, errors)
+  require_same_date("ai-validation-detail.json", ai_validation_detail, expected, errors)
+  require_same_date("ai-validation-summary.json", ai_validation_summary, expected, errors)
+  require_same_date("ai-validation-portfolio.json", ai_validation_portfolio, expected, errors)
+  require_same_date("ai-factor-performance.json", ai_factor_performance, expected, errors)
+  require_same_date("ai-validation-status.json", ai_validation_status, expected, errors)
+
+  if not isinstance(ai_validation_status, dict) or ai_validation_status.get("ok") is not True:
+    errors.append(
+      "ai-validation-status.json is not successful: "
+      f"{ai_validation_status.get('failedReasons') or ai_validation_status.get('lastError') or 'unknown reason'}"
+    )
+  elif ai_validation_status.get("previousDataPreserved"):
+    errors.append("ai-validation-status.json preserved previous data after a failed refresh")
+  elif ai_validation_status.get("pipelineIntegrated") is not True:
+    errors.append("ai-validation-status.json is not integrated into update_all_site_data")
 
   stock_items = get_items(stock_metrics)
   if not any(str(item.get("symbol") or item.get("code")) == "2337" for item in stock_items if isinstance(item, dict)):
