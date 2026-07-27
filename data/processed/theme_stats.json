@@ -1,6 +1,6 @@
 {
   "date": "2026-07-27",
-  "updated_at": "2026-07-27 17:01",
+  "updated_at": "2026-07-27 20:42",
   "source": {
     "stock_master": "data/processed/stocks_master.json",
     "stock_metrics": "data/processed/stock_metrics_daily.json",
@@ -13,7 +13,7 @@
     "theme_count": 35,
     "beneficiary_stock_count": 1983,
     "quote_matched": 1969,
-    "revenue_matched": 1971,
+    "revenue_matched": 1970,
     "eps_matched": 0,
     "gross_margin_matched": 0,
     "news_event_count": 10,
@@ -22,11 +22,12 @@
     "missing_quote": [
       "1459",
       "1589",
-      "4130",
-      "4804"
+      "4804",
+      "7689"
     ],
     "missing_revenue": [
       "6947",
+      "7689",
       "7835"
     ],
     "missing_financials": [
@@ -136,7 +137,7 @@
     {
       "theme": "半導體業",
       "theme_change_pct": -0.5,
-      "turnover_billion": 3581.56,
+      "turnover_billion": 3663.26,
       "up_count": 62,
       "limit_up_count": 2,
       "beneficiary_count": 206,
@@ -831,9 +832,9 @@
           "theme": "半導體業",
           "trade_price": 2350.0,
           "change_pct": 0.0,
-          "volume": 25552208,
-          "turnover_rate_pct": 0.1,
-          "turnover_billion": 600.477,
+          "volume": 28939466,
+          "turnover_rate_pct": 0.11,
+          "turnover_billion": 680.077,
           "revenue_yoy_pct": 67.87,
           "eps": null,
           "gross_margin_pct": null,
@@ -1860,6 +1861,34 @@
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 40.55%；漲跌 0.00%"
         },
         {
+          "symbol": "6488",
+          "name": "環球晶",
+          "market": "上櫃",
+          "industry": "半導體業",
+          "theme": "半導體業",
+          "trade_price": 1065.0,
+          "change_pct": 3.4,
+          "volume": 5860401,
+          "turnover_rate_pct": null,
+          "turnover_billion": 62.413,
+          "revenue_yoy_pct": -1.63,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 44.6,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -1.63%；漲跌 3.40%"
+        },
+        {
           "symbol": "4967",
           "name": "十銓",
           "market": "上市",
@@ -1914,34 +1943,6 @@
             "beneficiary"
           ],
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 15.39%；漲跌 1.62%"
-        },
-        {
-          "symbol": "6488",
-          "name": "環球晶",
-          "market": "上櫃",
-          "industry": "半導體業",
-          "theme": "半導體業",
-          "trade_price": 1065.0,
-          "change_pct": 3.4,
-          "volume": 5780401,
-          "turnover_rate_pct": null,
-          "turnover_billion": 61.561,
-          "revenue_yoy_pct": -1.63,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 44.5,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -1.63%；漲跌 3.40%"
         },
         {
           "symbol": "7772",
@@ -4107,9 +4108,9 @@
           "theme": "半導體業",
           "trade_price": 3680.0,
           "change_pct": -1.87,
-          "volume": 9100283,
+          "volume": 9134283,
           "turnover_rate_pct": 0.57,
-          "turnover_billion": 334.89,
+          "turnover_billion": 336.142,
           "revenue_yoy_pct": 2.8,
           "eps": null,
           "gross_margin_pct": null,
@@ -11866,7 +11867,7 @@
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -56.58%；漲跌 -1.81%"
         }
       ],
-      "theme_score": 42.3,
+      "theme_score": 42.1,
       "leader_stocks": [
         {
           "symbol": "5328",
@@ -11919,7 +11920,7 @@
       "turnover_billion": 570.69,
       "up_count": 45,
       "limit_up_count": 3,
-      "beneficiary_count": 90,
+      "beneficiary_count": 91,
       "high_score_news_count": 0,
       "avg_ai_score": 40.1,
       "source_types": [
@@ -13668,6 +13669,34 @@
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -57.05%；漲跌 0.76%"
         },
         {
+          "symbol": "7689",
+          "name": "大鵬科CLMX",
+          "market": "上市",
+          "industry": "通信網路業",
+          "theme": "通信網路業",
+          "trade_price": null,
+          "change_pct": null,
+          "volume": null,
+          "turnover_rate_pct": null,
+          "turnover_billion": null,
+          "revenue_yoy_pct": null,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 34.6,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類"
+        },
+        {
           "symbol": "6470",
           "name": "宇智",
           "market": "上櫃",
@@ -14452,7 +14481,7 @@
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -62.32%；漲跌 -0.31%"
         }
       ],
-      "theme_score": 35.0,
+      "theme_score": 34.8,
       "leader_stocks": [
         {
           "symbol": "2332",
@@ -25936,7 +25965,7 @@
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -26.05%；漲跌 -0.82%"
         }
       ],
-      "theme_score": 25.8,
+      "theme_score": 25.7,
       "leader_stocks": [
         {
           "symbol": "8021",
@@ -25986,10 +26015,10 @@
     {
       "theme": "生技醫療業",
       "theme_change_pct": 0.08,
-      "turnover_billion": 50.36,
+      "turnover_billion": 50.59,
       "up_count": 74,
       "limit_up_count": 1,
-      "beneficiary_count": 160,
+      "beneficiary_count": 159,
       "high_score_news_count": 0,
       "avg_ai_score": 38.1,
       "source_types": [
@@ -29502,6 +29531,34 @@
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -8.33%；漲跌 -1.26%"
         },
         {
+          "symbol": "1731",
+          "name": "美吾華",
+          "market": "上市",
+          "industry": "生技醫療業",
+          "theme": "生技醫療業",
+          "trade_price": 20.65,
+          "change_pct": 0.49,
+          "volume": 1176728,
+          "turnover_rate_pct": 0.89,
+          "turnover_billion": 0.243,
+          "revenue_yoy_pct": 2.49,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 33.1,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 2.49%；漲跌 0.49%"
+        },
+        {
           "symbol": "4147",
           "name": "中裕",
           "market": "上櫃",
@@ -29670,34 +29727,6 @@
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 4.86%；漲跌 -0.80%"
         },
         {
-          "symbol": "4130",
-          "name": "健亞",
-          "market": "上櫃",
-          "industry": "生技醫療業",
-          "theme": "生技醫療業",
-          "trade_price": null,
-          "change_pct": null,
-          "volume": null,
-          "turnover_rate_pct": null,
-          "turnover_billion": null,
-          "revenue_yoy_pct": -10.1,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 32.0,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -10.10%"
-        },
-        {
           "symbol": "1786",
           "name": "科妍",
           "market": "上市",
@@ -29864,34 +29893,6 @@
             "beneficiary"
           ],
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 9.54%；漲跌 -9.05%"
-        },
-        {
-          "symbol": "1731",
-          "name": "美吾華",
-          "market": "上市",
-          "industry": "生技醫療業",
-          "theme": "生技醫療業",
-          "trade_price": 20.65,
-          "change_pct": 0.49,
-          "volume": 56728,
-          "turnover_rate_pct": 0.04,
-          "turnover_billion": 0.012,
-          "revenue_yoy_pct": 2.49,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 31.0,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 2.49%；漲跌 0.49%"
         },
         {
           "symbol": "6918",
@@ -30806,7 +30807,7 @@
           "reason": "新聞事件帶動；營收年增 -84.16%"
         }
       ],
-      "theme_score": 24.3,
+      "theme_score": 24.2,
       "leader_stocks": [
         {
           "symbol": "6541",
@@ -34712,7 +34713,7 @@
     {
       "theme": "其他業",
       "theme_change_pct": -0.18,
-      "turnover_billion": 18.74,
+      "turnover_billion": 19.77,
       "up_count": 36,
       "limit_up_count": 1,
       "beneficiary_count": 93,
@@ -36856,6 +36857,34 @@
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 2.75%；漲跌 -0.55%"
         },
         {
+          "symbol": "5871",
+          "name": "中租-KY",
+          "market": "上市",
+          "industry": "其他業",
+          "theme": "其他業",
+          "trade_price": 103.0,
+          "change_pct": 0.49,
+          "volume": 1010397,
+          "turnover_rate_pct": 0.06,
+          "turnover_billion": 1.041,
+          "revenue_yoy_pct": -0.82,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 30.8,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -0.82%；漲跌 0.49%"
+        },
+        {
           "symbol": "6464",
           "name": "台數科",
           "market": "上市",
@@ -36938,34 +36967,6 @@
             "beneficiary"
           ],
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -71.06%；漲跌 0.00%"
-        },
-        {
-          "symbol": "5871",
-          "name": "中租-KY",
-          "market": "上市",
-          "industry": "其他業",
-          "theme": "其他業",
-          "trade_price": 103.0,
-          "change_pct": 0.49,
-          "volume": 10397,
-          "turnover_rate_pct": 0.0,
-          "turnover_billion": 0.011,
-          "revenue_yoy_pct": -0.82,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 30.3,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -0.82%；漲跌 0.49%"
         },
         {
           "symbol": "1443",
@@ -40862,7 +40863,7 @@
     {
       "theme": "電腦及週邊設備業",
       "theme_change_pct": -1.25,
-      "turnover_billion": 759.41,
+      "turnover_billion": 760.96,
       "up_count": 25,
       "limit_up_count": 0,
       "beneficiary_count": 109,
@@ -40941,13 +40942,13 @@
           "theme": "電腦及週邊設備業",
           "trade_price": 73.0,
           "change_pct": 0.97,
-          "volume": 524276,
+          "volume": 2124276,
           "turnover_rate_pct": null,
-          "turnover_billion": 0.383,
+          "turnover_billion": 1.551,
           "revenue_yoy_pct": 72.07,
           "eps": null,
           "gross_margin_pct": null,
-          "total_score": 55.1,
+          "total_score": 55.8,
           "source_types": [
             "ai",
             "master"
@@ -41774,6 +41775,34 @@
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 9.77%；漲跌 1.31%"
         },
         {
+          "symbol": "2301",
+          "name": "光寶科",
+          "market": "上市",
+          "industry": "電腦及週邊設備業",
+          "theme": "電腦及週邊設備業",
+          "trade_price": 212.0,
+          "change_pct": -1.17,
+          "volume": 12834445,
+          "turnover_rate_pct": 0.55,
+          "turnover_billion": 27.209,
+          "revenue_yoy_pct": 36.98,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 42.1,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 36.98%；漲跌 -1.17%"
+        },
+        {
           "symbol": "2376",
           "name": "技嘉",
           "market": "上市",
@@ -41828,34 +41857,6 @@
             "beneficiary"
           ],
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 44.52%；漲跌 -3.65%"
-        },
-        {
-          "symbol": "2301",
-          "name": "光寶科",
-          "market": "上市",
-          "industry": "電腦及週邊設備業",
-          "theme": "電腦及週邊設備業",
-          "trade_price": 212.0,
-          "change_pct": -1.17,
-          "volume": 12652445,
-          "turnover_rate_pct": 0.55,
-          "turnover_billion": 26.823,
-          "revenue_yoy_pct": 36.98,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 42.0,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 36.98%；漲跌 -1.17%"
         },
         {
           "symbol": "6669",
@@ -43930,7 +43931,7 @@
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -51.55%；漲跌 -2.79%"
         }
       ],
-      "theme_score": 20.1,
+      "theme_score": 20.0,
       "leader_stocks": [
         {
           "symbol": "2425",
@@ -49670,7 +49671,7 @@
     {
       "theme": "航運業",
       "theme_change_pct": -0.61,
-      "turnover_billion": 104.39,
+      "turnover_billion": 104.58,
       "up_count": 11,
       "limit_up_count": 0,
       "beneficiary_count": 34,
@@ -50057,9 +50058,9 @@
           "theme": "航運業",
           "trade_price": 203.5,
           "change_pct": -1.21,
-          "volume": 6715641,
+          "volume": 6810641,
           "turnover_rate_pct": 0.31,
-          "turnover_billion": 13.666,
+          "turnover_billion": 13.86,
           "revenue_yoy_pct": 30.01,
           "eps": null,
           "gross_margin_pct": null,
@@ -57842,7 +57843,7 @@
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -44.67%；漲跌 -4.82%"
         }
       ],
-      "theme_score": 12.0,
+      "theme_score": 11.9,
       "leader_stocks": [
         {
           "symbol": "1303",
@@ -57890,9 +57891,9 @@
       "rank": 35
     }
   ],
-  "run_id": "30251984838",
-  "generated_at": "2026-07-27T17:04:23+08:00",
+  "run_id": "30266993541",
+  "generated_at": "2026-07-27T20:43:33+08:00",
   "latest_trade_date": "2026-07-27",
-  "data_version": "20260727-1704",
+  "data_version": "20260727-2043",
   "source_pipeline": "update_all_site_data"
 }

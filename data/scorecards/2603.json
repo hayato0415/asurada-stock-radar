@@ -1,6 +1,6 @@
 {
-  "build_id": "20260727-1701-scorecards",
-  "updated_at": "2026-07-27T17:01:41+08:00",
+  "build_id": "20260727-2042-scorecards",
+  "updated_at": "2026-07-27T20:42:49+08:00",
   "content_latest_at": "2026-07-27",
   "symbol": "2603",
   "name": "長榮",
@@ -147,8 +147,8 @@
       "key": "chip",
       "label": "籌碼 / 市場交易力道",
       "weight": 25,
-      "score": 1.6,
-      "raw_score": 6.4,
+      "score": 1.7,
+      "raw_score": 6.8,
       "coverage_pct": 66.7,
       "missing_count": 1,
       "rules": [
@@ -156,9 +156,9 @@
           "id": "volume",
           "label": "成交量",
           "source_field": "volume",
-          "raw_value": 6715641,
+          "raw_value": 6810641,
           "max_score": 10,
-          "score": 1.3,
+          "score": 1.4,
           "missing": false,
           "description": "成交量反映市場參與度。"
         },
@@ -206,7 +206,7 @@
       ]
     }
   },
-  "total_score": 18.2,
+  "total_score": 18.3,
   "summary": {
     "symbol": "2603",
     "code": "2603",
@@ -217,7 +217,7 @@
     "supply_chain": "航運業",
     "trade_price": 203.5,
     "change_pct": -1.21,
-    "volume": 6715641,
+    "volume": 6810641,
     "turnover_rate_pct": 0.31,
     "revenue_million": 39141.25,
     "revenue_mom_pct": 12.94,
@@ -227,19 +227,19 @@
     "financial_period": "2026-06",
     "fundamental_score": 25.7,
     "technical_score": 28.3,
-    "chip_score": 6.4,
+    "chip_score": 6.8,
     "turnover_score": 2.7,
     "weighted_scores": {
       "fundamental": 7.7,
       "technical": 8.5,
-      "chip": 1.6,
+      "chip": 1.7,
       "turnover": 0.4
     },
-    "total_score": 18.2,
+    "total_score": 18.3,
     "risk_level": "低",
     "entry_reason": "營收年增 30.01%，月增 12.94%，週轉率 0.31%",
     "data_quality_score": 66.7,
-    "updated_at": "2026-07-27T17:01:41+08:00",
+    "updated_at": "2026-07-27T20:42:49+08:00",
     "content_latest_at": "2026-07-27",
     "scorecard_path": "data/scorecards/2603.json",
     "news_scoring_included": false,
