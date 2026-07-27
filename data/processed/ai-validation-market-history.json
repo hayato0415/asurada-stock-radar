@@ -1,13 +1,14 @@
 {
   "schemaVersion": 1,
   "validationVersion": "ai-validation-v1",
-  "updatedAt": "2026-07-26T19:01:42+08:00",
-  "asOfDate": "2026-07-26",
+  "updatedAt": "2026-07-27T17:04:22+08:00",
+  "asOfDate": "2026-07-27",
   "earliestSignalDate": "2026-07-22",
   "calendar": [
     "2026-07-22",
     "2026-07-23",
-    "2026-07-24"
+    "2026-07-24",
+    "2026-07-27"
   ],
   "benchmarkCode": "TAIEX",
   "benchmark": [
@@ -146,6 +147,14 @@
       "low": 43607.4,
       "close": 43654.84,
       "source": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260701&response=json"
+    },
+    {
+      "date": "2026-07-27",
+      "open": 43585.92,
+      "high": 43686.15,
+      "low": 42969.48,
+      "close": 43634.19,
+      "source": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260701&response=json"
     }
   ],
   "stocks": {
@@ -181,6 +190,19 @@
             "volume": 9448801,
             "transactions": 5259,
             "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "twse",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 44.4,
+            "high": 45.15,
+            "low": 43.45,
+            "close": 44.55,
+            "volume": 22634085,
+            "transactions": 13030,
+            "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
           }
         ]
       },
@@ -210,6 +232,109 @@
           "volume": 9448801,
           "transactions": 5259,
           "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "twse",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 44.4,
+          "high": 45.15,
+          "low": 43.45,
+          "close": 44.55,
+          "volume": 22634085,
+          "transactions": 13030,
+          "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
+        }
+      ]
+    },
+    "2072": {
+      "market": "twse",
+      "markets": [
+        "twse"
+      ],
+      "barsByMarket": {
+        "twse": [
+          {
+            "date": "2026-07-23",
+            "market": "twse",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 144.5,
+            "high": 144.5,
+            "low": 141.5,
+            "close": 142.0,
+            "volume": 195132,
+            "transactions": 216,
+            "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260723&type=ALLBUT0999&response=json"
+          },
+          {
+            "date": "2026-07-24",
+            "market": "twse",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 144.0,
+            "high": 145.5,
+            "low": 143.0,
+            "close": 143.0,
+            "volume": 250188,
+            "transactions": 263,
+            "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "twse",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 148.0,
+            "high": 154.5,
+            "low": 146.5,
+            "close": 152.5,
+            "volume": 1026527,
+            "transactions": 1228,
+            "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
+          }
+        ]
+      },
+      "bars": [
+        {
+          "date": "2026-07-23",
+          "market": "twse",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 144.5,
+          "high": 144.5,
+          "low": 141.5,
+          "close": 142.0,
+          "volume": 195132,
+          "transactions": 216,
+          "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260723&type=ALLBUT0999&response=json"
+        },
+        {
+          "date": "2026-07-24",
+          "market": "twse",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 144.0,
+          "high": 145.5,
+          "low": 143.0,
+          "close": 143.0,
+          "volume": 250188,
+          "transactions": 263,
+          "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "twse",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 148.0,
+          "high": 154.5,
+          "low": 146.5,
+          "close": 152.5,
+          "volume": 1026527,
+          "transactions": 1228,
+          "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
         }
       ]
     },
@@ -245,6 +370,19 @@
             "volume": 11240251,
             "transactions": 7334,
             "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "twse",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 46.5,
+            "high": 47.6,
+            "low": 45.2,
+            "close": 46.0,
+            "volume": 6905102,
+            "transactions": 4506,
+            "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
           }
         ]
       },
@@ -274,6 +412,19 @@
           "volume": 11240251,
           "transactions": 7334,
           "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "twse",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 46.5,
+          "high": 47.6,
+          "low": 45.2,
+          "close": 46.0,
+          "volume": 6905102,
+          "transactions": 4506,
+          "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
         }
       ]
     },
@@ -309,6 +460,19 @@
             "volume": 18768237,
             "transactions": 17866,
             "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "twse",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 265.5,
+            "high": 272.0,
+            "low": 261.5,
+            "close": 272.0,
+            "volume": 14893860,
+            "transactions": 12977,
+            "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
           }
         ]
       },
@@ -338,6 +502,19 @@
           "volume": 18768237,
           "transactions": 17866,
           "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "twse",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 265.5,
+          "high": 272.0,
+          "low": 261.5,
+          "close": 272.0,
+          "volume": 14893860,
+          "transactions": 12977,
+          "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
         }
       ]
     },
@@ -373,6 +550,19 @@
             "volume": 9232216,
             "transactions": 5419,
             "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "twse",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 32.3,
+            "high": 32.5,
+            "low": 31.15,
+            "close": 31.6,
+            "volume": 4776233,
+            "transactions": 2826,
+            "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
           }
         ]
       },
@@ -402,6 +592,19 @@
           "volume": 9232216,
           "transactions": 5419,
           "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "twse",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 32.3,
+          "high": 32.5,
+          "low": 31.15,
+          "close": 31.6,
+          "volume": 4776233,
+          "transactions": 2826,
+          "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
         }
       ]
     },
@@ -437,6 +640,19 @@
             "volume": 22685290,
             "transactions": 14588,
             "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "twse",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 86.0,
+            "high": 86.0,
+            "low": 83.0,
+            "close": 84.0,
+            "volume": 10944981,
+            "transactions": 8892,
+            "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
           }
         ]
       },
@@ -466,6 +682,19 @@
           "volume": 22685290,
           "transactions": 14588,
           "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "twse",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 86.0,
+          "high": 86.0,
+          "low": 83.0,
+          "close": 84.0,
+          "volume": 10944981,
+          "transactions": 8892,
+          "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
         }
       ]
     },
@@ -501,6 +730,19 @@
             "volume": 4197953,
             "transactions": 4144,
             "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "twse",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 95.1,
+            "high": 95.6,
+            "low": 89.2,
+            "close": 91.7,
+            "volume": 4536164,
+            "transactions": 5299,
+            "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
           }
         ]
       },
@@ -530,6 +772,109 @@
           "volume": 4197953,
           "transactions": 4144,
           "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "twse",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 95.1,
+          "high": 95.6,
+          "low": 89.2,
+          "close": 91.7,
+          "volume": 4536164,
+          "transactions": 5299,
+          "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
+        }
+      ]
+    },
+    "3081": {
+      "market": "tpex",
+      "markets": [
+        "tpex"
+      ],
+      "barsByMarket": {
+        "tpex": [
+          {
+            "date": "2026-07-23",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 1720.0,
+            "high": 1830.0,
+            "low": 1645.0,
+            "close": 1830.0,
+            "volume": 2508622,
+            "transactions": 4912,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F23&id=&response=json"
+          },
+          {
+            "date": "2026-07-24",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 1810.0,
+            "high": 2010.0,
+            "low": 1745.0,
+            "close": 1760.0,
+            "volume": 10211327,
+            "transactions": 19333,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 1825.0,
+            "high": 1895.0,
+            "low": 1740.0,
+            "close": 1805.0,
+            "volume": 6204370,
+            "transactions": 10814,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
+          }
+        ]
+      },
+      "bars": [
+        {
+          "date": "2026-07-23",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 1720.0,
+          "high": 1830.0,
+          "low": 1645.0,
+          "close": 1830.0,
+          "volume": 2508622,
+          "transactions": 4912,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F23&id=&response=json"
+        },
+        {
+          "date": "2026-07-24",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 1810.0,
+          "high": 2010.0,
+          "low": 1745.0,
+          "close": 1760.0,
+          "volume": 10211327,
+          "transactions": 19333,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 1825.0,
+          "high": 1895.0,
+          "low": 1740.0,
+          "close": 1805.0,
+          "volume": 6204370,
+          "transactions": 10814,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
         }
       ]
     },
@@ -565,6 +910,19 @@
             "volume": 5502409,
             "transactions": 5407,
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 150.5,
+            "high": 151.5,
+            "low": 138.5,
+            "close": 141.5,
+            "volume": 2862709,
+            "transactions": 2809,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
           }
         ]
       },
@@ -594,6 +952,109 @@
           "volume": 5502409,
           "transactions": 5407,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 150.5,
+          "high": 151.5,
+          "low": 138.5,
+          "close": 141.5,
+          "volume": 2862709,
+          "transactions": 2809,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
+        }
+      ]
+    },
+    "3105": {
+      "market": "tpex",
+      "markets": [
+        "tpex"
+      ],
+      "barsByMarket": {
+        "tpex": [
+          {
+            "date": "2026-07-23",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 361.5,
+            "high": 385.0,
+            "low": 354.0,
+            "close": 364.5,
+            "volume": 22171020,
+            "transactions": 20820,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F23&id=&response=json"
+          },
+          {
+            "date": "2026-07-24",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 354.0,
+            "high": 371.5,
+            "low": 337.5,
+            "close": 341.5,
+            "volume": 20817849,
+            "transactions": 21472,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 313.5,
+            "high": 368.0,
+            "low": 307.5,
+            "close": 355.0,
+            "volume": 37397591,
+            "transactions": 31169,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
+          }
+        ]
+      },
+      "bars": [
+        {
+          "date": "2026-07-23",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 361.5,
+          "high": 385.0,
+          "low": 354.0,
+          "close": 364.5,
+          "volume": 22171020,
+          "transactions": 20820,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F23&id=&response=json"
+        },
+        {
+          "date": "2026-07-24",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 354.0,
+          "high": 371.5,
+          "low": 337.5,
+          "close": 341.5,
+          "volume": 20817849,
+          "transactions": 21472,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 313.5,
+          "high": 368.0,
+          "low": 307.5,
+          "close": 355.0,
+          "volume": 37397591,
+          "transactions": 31169,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
         }
       ]
     },
@@ -629,6 +1090,19 @@
             "volume": 179841065,
             "transactions": 118331,
             "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "twse",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 180.0,
+            "high": 180.5,
+            "low": 167.5,
+            "close": 177.0,
+            "volume": 109006063,
+            "transactions": 74481,
+            "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
           }
         ]
       },
@@ -658,6 +1132,19 @@
           "volume": 179841065,
           "transactions": 118331,
           "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "twse",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 180.0,
+          "high": 180.5,
+          "low": 167.5,
+          "close": 177.0,
+          "volume": 109006063,
+          "transactions": 74481,
+          "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
         }
       ]
     },
@@ -693,6 +1180,19 @@
             "volume": 562896,
             "transactions": 399,
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 17.95,
+            "high": 18.3,
+            "low": 17.5,
+            "close": 17.85,
+            "volume": 409059,
+            "transactions": 363,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
           }
         ]
       },
@@ -722,6 +1222,19 @@
           "volume": 562896,
           "transactions": 399,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 17.95,
+          "high": 18.3,
+          "low": 17.5,
+          "close": 17.85,
+          "volume": 409059,
+          "transactions": 363,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
         }
       ]
     },
@@ -757,6 +1270,19 @@
             "volume": 21811778,
             "transactions": 22726,
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 365.0,
+            "high": 375.0,
+            "low": 330.5,
+            "close": 345.0,
+            "volume": 22539600,
+            "transactions": 19443,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
           }
         ]
       },
@@ -786,6 +1312,19 @@
           "volume": 21811778,
           "transactions": 22726,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 365.0,
+          "high": 375.0,
+          "low": 330.5,
+          "close": 345.0,
+          "volume": 22539600,
+          "transactions": 19443,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
         }
       ]
     },
@@ -821,6 +1360,19 @@
             "volume": 3371735,
             "transactions": 2773,
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 65.0,
+            "high": 70.7,
+            "low": 65.0,
+            "close": 70.7,
+            "volume": 12392224,
+            "transactions": 7601,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
           }
         ]
       },
@@ -850,6 +1402,19 @@
           "volume": 3371735,
           "transactions": 2773,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 65.0,
+          "high": 70.7,
+          "low": 65.0,
+          "close": 70.7,
+          "volume": 12392224,
+          "transactions": 7601,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
         }
       ]
     },
@@ -885,6 +1450,19 @@
             "volume": 7696712,
             "transactions": 9791,
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 147.0,
+            "high": 148.0,
+            "low": 132.0,
+            "close": 136.0,
+            "volume": 2426912,
+            "transactions": 2825,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
           }
         ]
       },
@@ -914,6 +1492,19 @@
           "volume": 7696712,
           "transactions": 9791,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 147.0,
+          "high": 148.0,
+          "low": 132.0,
+          "close": 136.0,
+          "volume": 2426912,
+          "transactions": 2825,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
         }
       ]
     },
@@ -949,6 +1540,19 @@
             "volume": 3117157,
             "transactions": 2431,
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 55.1,
+            "high": 57.9,
+            "low": 53.2,
+            "close": 57.9,
+            "volume": 3020072,
+            "transactions": 2352,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
           }
         ]
       },
@@ -978,6 +1582,19 @@
           "volume": 3117157,
           "transactions": 2431,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 55.1,
+          "high": 57.9,
+          "low": 53.2,
+          "close": 57.9,
+          "volume": 3020072,
+          "transactions": 2352,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
         }
       ]
     },
@@ -1013,6 +1630,19 @@
             "volume": 2735032,
             "transactions": 2981,
             "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "twse",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 42.55,
+            "high": 44.0,
+            "low": 40.4,
+            "close": 42.55,
+            "volume": 5780777,
+            "transactions": 4410,
+            "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
           }
         ]
       },
@@ -1042,6 +1672,19 @@
           "volume": 2735032,
           "transactions": 2981,
           "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "twse",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 42.55,
+          "high": 44.0,
+          "low": 40.4,
+          "close": 42.55,
+          "volume": 5780777,
+          "transactions": 4410,
+          "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
         }
       ]
     },
@@ -1077,6 +1720,19 @@
             "volume": 3647242,
             "transactions": 2170,
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 40.1,
+            "high": 40.1,
+            "low": 37.5,
+            "close": 39.0,
+            "volume": 1768173,
+            "transactions": 1072,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
           }
         ]
       },
@@ -1106,6 +1762,19 @@
           "volume": 3647242,
           "transactions": 2170,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 40.1,
+          "high": 40.1,
+          "low": 37.5,
+          "close": 39.0,
+          "volume": 1768173,
+          "transactions": 1072,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
         }
       ]
     },
@@ -1141,6 +1810,19 @@
             "volume": 19568928,
             "transactions": 13929,
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 71.4,
+            "high": 71.4,
+            "low": 65.4,
+            "close": 66.8,
+            "volume": 5557266,
+            "transactions": 4354,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
           }
         ]
       },
@@ -1170,6 +1852,19 @@
           "volume": 19568928,
           "transactions": 13929,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 71.4,
+          "high": 71.4,
+          "low": 65.4,
+          "close": 66.8,
+          "volume": 5557266,
+          "transactions": 4354,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
         }
       ]
     },
@@ -1205,6 +1900,19 @@
             "volume": 25336927,
             "transactions": 24733,
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 434.0,
+            "high": 467.5,
+            "low": 421.5,
+            "close": 448.5,
+            "volume": 35422299,
+            "transactions": 35094,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
           }
         ]
       },
@@ -1234,6 +1942,19 @@
           "volume": 25336927,
           "transactions": 24733,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 434.0,
+          "high": 467.5,
+          "low": 421.5,
+          "close": 448.5,
+          "volume": 35422299,
+          "transactions": 35094,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
         }
       ]
     },
@@ -1269,6 +1990,19 @@
             "volume": 12543071,
             "transactions": 13698,
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 411.0,
+            "high": 447.5,
+            "low": 404.0,
+            "close": 433.5,
+            "volume": 6877853,
+            "transactions": 7519,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
           }
         ]
       },
@@ -1298,6 +2032,109 @@
           "volume": 12543071,
           "transactions": 13698,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 411.0,
+          "high": 447.5,
+          "low": 404.0,
+          "close": 433.5,
+          "volume": 6877853,
+          "transactions": 7519,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
+        }
+      ]
+    },
+    "5328": {
+      "market": "tpex",
+      "markets": [
+        "tpex"
+      ],
+      "barsByMarket": {
+        "tpex": [
+          {
+            "date": "2026-07-23",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 69.1,
+            "high": 70.0,
+            "low": 65.5,
+            "close": 67.0,
+            "volume": 37141825,
+            "transactions": 27112,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F23&id=&response=json"
+          },
+          {
+            "date": "2026-07-24",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 65.8,
+            "high": 67.0,
+            "low": 60.6,
+            "close": 61.1,
+            "volume": 14752905,
+            "transactions": 10664,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 61.0,
+            "high": 67.2,
+            "low": 60.2,
+            "close": 67.2,
+            "volume": 32138994,
+            "transactions": 21457,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
+          }
+        ]
+      },
+      "bars": [
+        {
+          "date": "2026-07-23",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 69.1,
+          "high": 70.0,
+          "low": 65.5,
+          "close": 67.0,
+          "volume": 37141825,
+          "transactions": 27112,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F23&id=&response=json"
+        },
+        {
+          "date": "2026-07-24",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 65.8,
+          "high": 67.0,
+          "low": 60.6,
+          "close": 61.1,
+          "volume": 14752905,
+          "transactions": 10664,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 61.0,
+          "high": 67.2,
+          "low": 60.2,
+          "close": 67.2,
+          "volume": 32138994,
+          "transactions": 21457,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
         }
       ]
     },
@@ -1333,6 +2170,19 @@
             "volume": 1235151,
             "transactions": 1032,
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 33.25,
+            "high": 33.5,
+            "low": 32.15,
+            "close": 32.7,
+            "volume": 967385,
+            "transactions": 766,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
           }
         ]
       },
@@ -1362,6 +2212,19 @@
           "volume": 1235151,
           "transactions": 1032,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 33.25,
+          "high": 33.5,
+          "low": 32.15,
+          "close": 32.7,
+          "volume": 967385,
+          "transactions": 766,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
         }
       ]
     },
@@ -1397,6 +2260,19 @@
             "volume": 4807076,
             "transactions": 3386,
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 40.15,
+            "high": 41.5,
+            "low": 39.4,
+            "close": 41.0,
+            "volume": 1476190,
+            "transactions": 1116,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
           }
         ]
       },
@@ -1426,6 +2302,19 @@
           "volume": 4807076,
           "transactions": 3386,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 40.15,
+          "high": 41.5,
+          "low": 39.4,
+          "close": 41.0,
+          "volume": 1476190,
+          "transactions": 1116,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
         }
       ]
     },
@@ -1461,6 +2350,19 @@
             "volume": 2226875,
             "transactions": 7881,
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 975.0,
+            "high": 1035.0,
+            "low": 957.0,
+            "close": 1035.0,
+            "volume": 3301152,
+            "transactions": 8915,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
           }
         ]
       },
@@ -1490,6 +2392,109 @@
           "volume": 2226875,
           "transactions": 7881,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 975.0,
+          "high": 1035.0,
+          "low": 957.0,
+          "close": 1035.0,
+          "volume": 3301152,
+          "transactions": 8915,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
+        }
+      ]
+    },
+    "6214": {
+      "market": "twse",
+      "markets": [
+        "twse"
+      ],
+      "barsByMarket": {
+        "twse": [
+          {
+            "date": "2026-07-23",
+            "market": "twse",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 143.5,
+            "high": 143.5,
+            "low": 139.0,
+            "close": 141.0,
+            "volume": 824204,
+            "transactions": 839,
+            "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260723&type=ALLBUT0999&response=json"
+          },
+          {
+            "date": "2026-07-24",
+            "market": "twse",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 140.5,
+            "high": 142.0,
+            "low": 139.0,
+            "close": 139.5,
+            "volume": 700137,
+            "transactions": 777,
+            "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "twse",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 142.0,
+            "high": 146.0,
+            "low": 140.0,
+            "close": 145.5,
+            "volume": 2662357,
+            "transactions": 2693,
+            "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
+          }
+        ]
+      },
+      "bars": [
+        {
+          "date": "2026-07-23",
+          "market": "twse",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 143.5,
+          "high": 143.5,
+          "low": 139.0,
+          "close": 141.0,
+          "volume": 824204,
+          "transactions": 839,
+          "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260723&type=ALLBUT0999&response=json"
+        },
+        {
+          "date": "2026-07-24",
+          "market": "twse",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 140.5,
+          "high": 142.0,
+          "low": 139.0,
+          "close": 139.5,
+          "volume": 700137,
+          "transactions": 777,
+          "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "twse",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 142.0,
+          "high": 146.0,
+          "low": 140.0,
+          "close": 145.5,
+          "volume": 2662357,
+          "transactions": 2693,
+          "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
         }
       ]
     },
@@ -1525,6 +2530,19 @@
             "volume": 6608312,
             "transactions": 7987,
             "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "twse",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 508.0,
+            "high": 520.0,
+            "low": 458.0,
+            "close": 469.0,
+            "volume": 7681758,
+            "transactions": 9207,
+            "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
           }
         ]
       },
@@ -1554,6 +2572,19 @@
           "volume": 6608312,
           "transactions": 7987,
           "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "twse",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 508.0,
+          "high": 520.0,
+          "low": 458.0,
+          "close": 469.0,
+          "volume": 7681758,
+          "transactions": 9207,
+          "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
         }
       ]
     },
@@ -1589,6 +2620,19 @@
             "volume": 1161864,
             "transactions": 1268,
             "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "twse",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 103.5,
+            "high": 108.0,
+            "low": 99.9,
+            "close": 102.0,
+            "volume": 1067821,
+            "transactions": 1006,
+            "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
           }
         ]
       },
@@ -1618,6 +2662,19 @@
           "volume": 1161864,
           "transactions": 1268,
           "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "twse",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 103.5,
+          "high": 108.0,
+          "low": 99.9,
+          "close": 102.0,
+          "volume": 1067821,
+          "transactions": 1006,
+          "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
         }
       ]
     },
@@ -1653,6 +2710,19 @@
             "volume": 1614770,
             "transactions": 1805,
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 85.5,
+            "high": 89.6,
+            "low": 78.1,
+            "close": 89.6,
+            "volume": 4474482,
+            "transactions": 3503,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
           }
         ]
       },
@@ -1682,6 +2752,19 @@
           "volume": 1614770,
           "transactions": 1805,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 85.5,
+          "high": 89.6,
+          "low": 78.1,
+          "close": 89.6,
+          "volume": 4474482,
+          "transactions": 3503,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
         }
       ]
     },
@@ -1717,6 +2800,19 @@
             "volume": 20719197,
             "transactions": 13915,
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 59.9,
+            "high": 66.6,
+            "low": 57.9,
+            "close": 63.3,
+            "volume": 16907133,
+            "transactions": 13027,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
           }
         ]
       },
@@ -1746,6 +2842,19 @@
           "volume": 20719197,
           "transactions": 13915,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F24&id=&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 59.9,
+          "high": 66.6,
+          "low": 57.9,
+          "close": 63.3,
+          "volume": 16907133,
+          "transactions": 13027,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json"
         }
       ]
     },
@@ -1781,6 +2890,19 @@
             "volume": 5050679,
             "transactions": 11632,
             "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+          },
+          {
+            "date": "2026-07-27",
+            "market": "twse",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 228.0,
+            "high": 231.0,
+            "low": 210.5,
+            "close": 217.5,
+            "volume": 1962515,
+            "transactions": 11966,
+            "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
           }
         ]
       },
@@ -1810,6 +2932,19 @@
           "volume": 5050679,
           "transactions": 11632,
           "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json"
+        },
+        {
+          "date": "2026-07-27",
+          "market": "twse",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 228.0,
+          "high": 231.0,
+          "low": 210.5,
+          "close": 217.5,
+          "volume": 1962515,
+          "transactions": 11966,
+          "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260727&type=ALLBUT0999&response=json"
         }
       ]
     }
@@ -1823,7 +2958,7 @@
       "source": "TWSE TAIEX MI_5MINS_HIST",
       "period": "2026-07",
       "ok": true,
-      "rows": 17,
+      "rows": 18,
       "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260701&response=json",
       "error": ""
     }
