@@ -1,6 +1,6 @@
 {
-  "build_id": "20260728-1608-scorecards",
-  "updated_at": "2026-07-28T16:08:49+08:00",
+  "build_id": "20260728-1936-scorecards",
+  "updated_at": "2026-07-28T19:36:01+08:00",
   "content_latest_at": "2026-07-28",
   "symbol": "2330",
   "name": "台積電",
@@ -147,8 +147,8 @@
       "key": "chip",
       "label": "籌碼 / 市場交易力道",
       "weight": 25,
-      "score": 8.9,
-      "raw_score": 35.6,
+      "score": 9.2,
+      "raw_score": 36.8,
       "coverage_pct": 66.7,
       "missing_count": 1,
       "rules": [
@@ -156,9 +156,9 @@
           "id": "volume",
           "label": "成交量",
           "source_field": "volume",
-          "raw_value": 44201317,
+          "raw_value": 45333029,
           "max_score": 10,
-          "score": 8.8,
+          "score": 9.1,
           "missing": false,
           "description": "成交量反映市場參與度。"
         },
@@ -206,7 +206,7 @@
       ]
     }
   },
-  "total_score": 27.0,
+  "total_score": 27.3,
   "summary": {
     "symbol": "2330",
     "code": "2330",
@@ -217,7 +217,7 @@
     "supply_chain": "半導體業",
     "trade_price": 2280.0,
     "change_pct": -2.98,
-    "volume": 44201317,
+    "volume": 45333029,
     "turnover_rate_pct": 0.17,
     "revenue_million": 442679.97,
     "revenue_mom_pct": 6.16,
@@ -227,19 +227,19 @@
     "financial_period": "2026-06",
     "fundamental_score": 35.3,
     "technical_score": 24.3,
-    "chip_score": 35.6,
+    "chip_score": 36.8,
     "turnover_score": 1.3,
     "weighted_scores": {
       "fundamental": 10.6,
       "technical": 7.3,
-      "chip": 8.9,
+      "chip": 9.2,
       "turnover": 0.2
     },
-    "total_score": 27.0,
+    "total_score": 27.3,
     "risk_level": "低",
     "entry_reason": "營收年增 67.87%，月增 6.16%，週轉率 0.17%",
     "data_quality_score": 66.7,
-    "updated_at": "2026-07-28T16:08:49+08:00",
+    "updated_at": "2026-07-28T19:36:01+08:00",
     "content_latest_at": "2026-07-28",
     "scorecard_path": "data/scorecards/2330.json",
     "news_scoring_included": false,
