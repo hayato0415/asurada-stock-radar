@@ -1,7 +1,7 @@
 {
-  "build_id": "20260729-0935-scorecards",
-  "updated_at": "2026-07-29T09:35:43+08:00",
-  "content_latest_at": "2026-07-28",
+  "build_id": "20260730-0022-scorecards",
+  "updated_at": "2026-07-30T00:22:18+08:00",
+  "content_latest_at": "2026-07-29",
   "symbol": "2897",
   "name": "王道銀行",
   "market": "上市",
@@ -147,8 +147,8 @@
       "key": "chip",
       "label": "籌碼 / 市場交易力道",
       "weight": 25,
-      "score": 0,
-      "raw_score": 0.0,
+      "score": 0.1,
+      "raw_score": 0.4,
       "coverage_pct": 66.7,
       "missing_count": 1,
       "rules": [
@@ -156,9 +156,9 @@
           "id": "volume",
           "label": "成交量",
           "source_field": "volume",
-          "raw_value": 171278,
+          "raw_value": 315815,
           "max_score": 10,
-          "score": 0,
+          "score": 0.1,
           "missing": false,
           "description": "成交量反映市場參與度。"
         },
@@ -206,7 +206,7 @@
       ]
     }
   },
-  "total_score": 15.7,
+  "total_score": 15.8,
   "summary": {
     "symbol": "2897",
     "code": "2897",
@@ -217,7 +217,7 @@
     "supply_chain": "金融保險業",
     "trade_price": 11.5,
     "change_pct": 0.0,
-    "volume": 171278,
+    "volume": 315815,
     "turnover_rate_pct": 0.01,
     "revenue_million": 1188.64,
     "revenue_mom_pct": 13.49,
@@ -227,20 +227,20 @@
     "financial_period": "2026-06",
     "fundamental_score": 21.3,
     "technical_score": 31.0,
-    "chip_score": 0.0,
+    "chip_score": 0.4,
     "turnover_score": 0.0,
     "weighted_scores": {
       "fundamental": 6.4,
       "technical": 9.3,
-      "chip": 0,
+      "chip": 0.1,
       "turnover": 0
     },
-    "total_score": 15.7,
+    "total_score": 15.8,
     "risk_level": "低",
     "entry_reason": "營收年增 14.10%，月增 13.49%，週轉率 0.01%",
     "data_quality_score": 66.7,
-    "updated_at": "2026-07-29T09:35:43+08:00",
-    "content_latest_at": "2026-07-28",
+    "updated_at": "2026-07-30T00:22:18+08:00",
+    "content_latest_at": "2026-07-29",
     "scorecard_path": "data/scorecards/2897.json",
     "news_scoring_included": false,
     "theme_scoring_included": false
