@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "updated_at": "2026-07-30T09:26:25+08:00",
-  "attempted_at": "2026-07-30T09:26:25+08:00",
-  "target_date": "2026-07-29",
-  "latest_trade_date": "2026-07-29",
+  "updated_at": "2026-08-01T15:52:43+08:00",
+  "attempted_at": "2026-08-01T15:52:43+08:00",
+  "target_date": "2026-07-31",
+  "latest_trade_date": "2026-07-31",
   "revenue_month": "2026-06",
   "items_count": 100,
   "rows_written": 100,
   "stock_master_count": 1973,
   "twse_quote_matched": 1081,
-  "tpex_quote_matched": 889,
+  "tpex_quote_matched": 888,
   "previous_data_preserved": false,
   "failed_reasons": [],
   "warnings": [],
@@ -21,43 +21,35 @@
   },
   "quality": {
     "stock_master_count": 1973,
-    "quote_matched": 1970,
-    "score_candidates": 1943,
-    "missing_quote_count": 3,
-    "missing_score_count": 27,
+    "quote_matched": 1969,
+    "score_candidates": 1951,
+    "missing_quote_count": 4,
+    "missing_score_count": 18,
     "missing_quote_sample": [
       "1459",
       "1589",
-      "4804"
+      "4804",
+      "5904"
     ],
     "missing_score_sample": [
-      "1213",
-      "2321",
+      "1259",
+      "1312",
+      "1538",
+      "2724",
+      "2924",
       "3064",
-      "3067",
       "3115",
-      "3131",
-      "3527",
-      "3537",
-      "3540",
-      "3629",
-      "4192",
-      "4549",
-      "4706",
-      "5013",
-      "5276",
-      "5514",
-      "6114",
+      "3587",
+      "4305",
+      "5520",
+      "6138",
       "6236",
-      "6411",
+      "6470",
+      "6624",
       "6875",
       "6945",
-      "7689",
-      "7743",
-      "7747",
-      "7753",
-      "7782",
-      "8923"
+      "6997",
+      "8905"
     ]
   },
   "quote_coverage": {
@@ -68,27 +60,27 @@
     },
     "matched": {
       "twse": 1081,
-      "tpex": 889
+      "tpex": 888
     }
   },
   "source_status": [
     {
       "name": "TWSE 上市每日行情",
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260729&type=ALLBUT0999&response=json",
+      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260731&type=ALLBUT0999&response=json",
       "ok": true,
       "http_status": null,
-      "source_date": "2026-07-29",
+      "source_date": "2026-07-31",
       "row_count": 1373,
       "error": "",
       "required_fields_missing": []
     },
     {
       "name": "TPEx 上櫃每日行情",
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F29&id=&response=json",
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F31&id=&response=json",
       "ok": true,
       "http_status": null,
-      "source_date": "2026-07-29",
-      "row_count": 10280,
+      "source_date": "2026-07-31",
+      "row_count": 10218,
       "error": "",
       "required_fields_missing": []
     },
@@ -108,7 +100,7 @@
       "ok": true,
       "http_status": 200,
       "source_date": null,
-      "row_count": 889,
+      "row_count": 888,
       "error": "",
       "required_fields_missing": []
     },
@@ -138,7 +130,7 @@
       "ok": true,
       "http_status": 200,
       "source_date": null,
-      "row_count": 1092,
+      "row_count": 1093,
       "error": "",
       "required_fields_missing": []
     },
@@ -148,7 +140,7 @@
       "ok": true,
       "http_status": 200,
       "source_date": null,
-      "row_count": 891,
+      "row_count": 890,
       "error": "",
       "required_fields_missing": []
     }
@@ -166,11 +158,11 @@
   "persistence_status": {
     "ok": true,
     "status": "ok",
-    "latest_trade_date": "2026-07-29",
-    "generated_at": "2026-07-30T09:26:25+08:00",
-    "snapshot_created": false,
-    "snapshot_path": "data/history/ai-top10/2026-07-29.json",
-    "history_trading_days": 6,
+    "latest_trade_date": "2026-07-31",
+    "generated_at": "2026-08-01T15:52:43+08:00",
+    "snapshot_created": true,
+    "snapshot_path": "data/history/ai-top10/2026-07-31.json",
+    "history_trading_days": 7,
     "items_count": 10,
     "previous_data_preserved": false,
     "failed_reasons": [],
@@ -181,8 +173,8 @@
       "ai-persistence-monthly.json": "updated"
     }
   },
-  "run_id": "30505465803",
-  "generated_at": "2026-07-30T09:27:34+08:00",
-  "data_version": "20260729-0927",
+  "run_id": "30690574323",
+  "generated_at": "2026-08-01T15:53:12+08:00",
+  "data_version": "20260731-1553",
   "source_pipeline": "update_all_site_data"
 }
