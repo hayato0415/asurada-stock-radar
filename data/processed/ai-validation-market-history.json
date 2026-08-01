@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "validationVersion": "ai-validation-v1",
-  "updatedAt": "2026-08-01T15:53:11+08:00",
+  "updatedAt": "2026-08-01T18:59:14+08:00",
   "asOfDate": "2026-08-01",
   "earliestSignalDate": "2026-07-22",
   "calendar": [
@@ -9167,22 +9167,6 @@
       "rows": 0,
       "url": "",
       "error": "TAIEX monthly history is unavailable for 2026-08"
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-07-30",
-      "ok": true,
-      "rows": 1335,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260730&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TPEX exact daily quotes",
-      "period": "2026-07-30",
-      "ok": true,
-      "rows": 10302,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F30&id=&response=json",
-      "error": ""
     }
   ],
   "sources": {
