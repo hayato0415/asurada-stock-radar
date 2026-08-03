@@ -2,16 +2,16 @@
   "status": "warning",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-08-02T19:00:17+08:00",
-  "generated_at": "2026-08-02T19:00:20+08:00",
-  "latestValidationUpdateTime": "2026-08-02T19:00:17+08:00",
-  "latestSignalDate": "2026-07-31",
-  "latestEntryDate": "2026-07-30",
-  "latestPriceDate": "2026-07-31",
-  "latestBenchmarkDate": "2026-07-31",
-  "latest_trade_date": "2026-07-31",
+  "generatedAt": "2026-08-03T16:58:01+08:00",
+  "generated_at": "2026-08-03T16:58:05+08:00",
+  "latestValidationUpdateTime": "2026-08-03T16:58:01+08:00",
+  "latestSignalDate": "2026-08-03",
+  "latestEntryDate": "2026-08-03",
+  "latestPriceDate": "2026-08-03",
+  "latestBenchmarkDate": "2026-08-03",
+  "latest_trade_date": "2026-08-03",
   "completedSignals": 0,
-  "trackingSignals": 50,
+  "trackingSignals": 58,
   "d20CompletedSignals": 0,
   "missingPriceCount": 0,
   "missingBenchmarkCount": 0,
@@ -24,7 +24,6 @@
   "lastError": "",
   "failedReasons": [],
   "warnings": [
-    "TAIEX monthly history is unavailable for 2026-08",
     "D+20 尚無到期樣本，相關統計保持 null。",
     "歷史 Top 10 快照缺少 1 個交易日；缺口不推定為跌出或連續入榜。"
   ],
@@ -40,13 +39,21 @@
     {
       "source": "TWSE TAIEX MI_5MINS_HIST",
       "period": "2026-08",
-      "ok": false,
-      "rows": 0,
-      "url": "",
-      "error": "TAIEX monthly history is unavailable for 2026-08"
+      "ok": true,
+      "rows": 1,
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260801&response=json",
+      "error": ""
+    },
+    {
+      "source": "TWSE exact daily quotes",
+      "period": "2026-07-30",
+      "ok": true,
+      "rows": 1335,
+      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260730&type=ALLBUT0999&response=json",
+      "error": ""
     }
   ],
-  "run_id": "30744807039",
-  "data_version": "20260731-1900",
+  "run_id": "30798973833",
+  "data_version": "20260803-1658",
   "source_pipeline": "update_all_site_data"
 }
