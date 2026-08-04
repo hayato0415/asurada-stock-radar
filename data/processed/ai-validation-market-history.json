@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "validationVersion": "ai-validation-v1",
-  "updatedAt": "2026-08-04T16:24:45+08:00",
+  "updatedAt": "2026-08-04T19:41:30+08:00",
   "asOfDate": "2026-08-04",
   "earliestSignalDate": "2026-07-22",
   "calendar": [
@@ -1562,8 +1562,8 @@
             "high": 816.0,
             "low": 781.0,
             "close": 806.0,
-            "volume": 4048111,
-            "transactions": 7401,
+            "volume": 4052111,
+            "transactions": 7402,
             "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260804&type=ALLBUT0999&response=json"
           }
         ]
@@ -1682,8 +1682,8 @@
           "high": 816.0,
           "low": 781.0,
           "close": 806.0,
-          "volume": 4048111,
-          "transactions": 7401,
+          "volume": 4052111,
+          "transactions": 7402,
           "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260804&type=ALLBUT0999&response=json"
         }
       ]
@@ -5006,8 +5006,8 @@
             "high": 198.0,
             "low": 183.0,
             "close": 195.0,
-            "volume": 147901367,
-            "transactions": 111227,
+            "volume": 153901367,
+            "transactions": 111228,
             "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260804&type=ALLBUT0999&response=json"
           }
         ]
@@ -5126,8 +5126,8 @@
           "high": 198.0,
           "low": 183.0,
           "close": 195.0,
-          "volume": 147901367,
-          "transactions": 111227,
+          "volume": 153901367,
+          "transactions": 111228,
           "source": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260804&type=ALLBUT0999&response=json"
         }
       ]
@@ -14256,14 +14256,6 @@
       "ok": true,
       "rows": 2,
       "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260801&response=json",
-      "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-07-30",
-      "ok": true,
-      "rows": 1335,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260730&type=ALLBUT0999&response=json",
       "error": ""
     },
     {
