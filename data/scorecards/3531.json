@@ -1,7 +1,7 @@
 {
-  "build_id": "20260804-1940-scorecards",
-  "updated_at": "2026-08-04T19:40:25+08:00",
-  "content_latest_at": "2026-08-04",
+  "build_id": "20260805-1613-scorecards",
+  "updated_at": "2026-08-05T16:13:10+08:00",
+  "content_latest_at": "2026-08-05",
   "symbol": "3531",
   "name": "先益",
   "market": "上櫃",
@@ -96,19 +96,19 @@
       "key": "technical",
       "label": "技術面",
       "weight": 30,
-      "score": 0,
-      "raw_score": 0.0,
-      "coverage_pct": 0.0,
-      "missing_count": 4,
+      "score": 7.7,
+      "raw_score": 25.7,
+      "coverage_pct": 50.0,
+      "missing_count": 2,
       "rules": [
         {
           "id": "change_1d",
           "label": "當日漲跌幅",
           "source_field": "change_pct",
-          "raw_value": null,
+          "raw_value": -2.47,
           "max_score": 12,
-          "score": 0,
-          "missing": true,
+          "score": 3.7,
+          "missing": false,
           "description": "當日價格強度。"
         },
         {
@@ -135,10 +135,10 @@
           "id": "price_available",
           "label": "成交價可用",
           "source_field": "trade_price",
-          "raw_value": null,
+          "raw_value": 21.7,
           "max_score": 4,
-          "score": 0,
-          "missing": true,
+          "score": 4,
+          "missing": false,
           "description": "有正式成交價才給資料完整分。"
         }
       ]
@@ -156,7 +156,7 @@
           "id": "volume",
           "label": "成交量",
           "source_field": "volume",
-          "raw_value": 1,
+          "raw_value": 4040,
           "max_score": 10,
           "score": 0,
           "missing": false,
@@ -206,7 +206,7 @@
       ]
     }
   },
-  "total_score": 2.0,
+  "total_score": 9.7,
   "summary": {
     "symbol": "3531",
     "code": "3531",
@@ -215,9 +215,9 @@
     "industry": "光電業",
     "theme": "光電業",
     "supply_chain": "光電業",
-    "trade_price": null,
-    "change_pct": null,
-    "volume": 1,
+    "trade_price": 21.7,
+    "change_pct": -2.47,
+    "volume": 4040,
     "turnover_rate_pct": null,
     "revenue_million": 76.73,
     "revenue_mom_pct": -3.67,
@@ -226,21 +226,21 @@
     "gross_margin_pct": null,
     "financial_period": "2026-06",
     "fundamental_score": 6.7,
-    "technical_score": 0.0,
+    "technical_score": 25.7,
     "chip_score": 0.0,
     "turnover_score": 0.0,
     "weighted_scores": {
       "fundamental": 2.0,
-      "technical": 0,
+      "technical": 7.7,
       "chip": 0,
       "turnover": 0
     },
-    "total_score": 2.0,
+    "total_score": 9.7,
     "risk_level": "低",
     "entry_reason": "營收年增 -27.59%，月增 -3.67%",
-    "data_quality_score": 20.8,
-    "updated_at": "2026-08-04T19:40:25+08:00",
-    "content_latest_at": "2026-08-04",
+    "data_quality_score": 33.3,
+    "updated_at": "2026-08-05T16:13:10+08:00",
+    "content_latest_at": "2026-08-05",
     "scorecard_path": "data/scorecards/3531.json",
     "news_scoring_included": false,
     "theme_scoring_included": false
@@ -248,10 +248,8 @@
   "missing_fields": [
     "change_20d",
     "change_5d",
-    "change_pct",
     "eps",
     "gross_margin_pct",
-    "trade_price",
     "turnover_rate_pct",
     "volume_ratio_5d"
   ],
