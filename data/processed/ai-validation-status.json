@@ -2,22 +2,23 @@
   "status": "warning",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-08-05T16:17:25+08:00",
-  "generated_at": "2026-08-05T16:18:26+08:00",
-  "latestValidationUpdateTime": "2026-08-05T16:17:25+08:00",
-  "latestSignalDate": "2026-08-05",
-  "latestEntryDate": "2026-08-05",
-  "latestPriceDate": "2026-08-05",
-  "latestBenchmarkDate": "2026-08-05",
-  "latest_trade_date": "2026-08-05",
+  "generatedAt": "2026-08-08T14:26:43+08:00",
+  "generated_at": "2026-08-08T14:27:07+08:00",
+  "latestValidationUpdateTime": "2026-08-08T14:26:43+08:00",
+  "latestSignalDate": "2026-08-07",
+  "latestEntryDate": "2026-08-06",
+  "latestPriceDate": "2026-08-07",
+  "latestBenchmarkDate": "2026-08-07",
+  "latest_trade_date": "2026-08-07",
   "completedSignals": 0,
-  "trackingSignals": 72,
+  "trackingSignals": 79,
   "d20CompletedSignals": 0,
   "missingPriceCount": 0,
   "missingBenchmarkCount": 0,
-  "snapshotCoverageGapCount": 1,
+  "snapshotCoverageGapCount": 2,
   "snapshotCoverageGaps": [
-    "2026-07-30"
+    "2026-07-30",
+    "2026-08-06"
   ],
   "pipelineIntegrated": true,
   "previousDataPreserved": false,
@@ -25,7 +26,7 @@
   "failedReasons": [],
   "warnings": [
     "D+20 尚無到期樣本，相關統計保持 null。",
-    "歷史 Top 10 快照缺少 1 個交易日；缺口不推定為跌出或連續入榜。"
+    "歷史 Top 10 快照缺少 2 個交易日；缺口不推定為跌出或連續入榜。"
   ],
   "sourceStatus": [
     {
@@ -40,7 +41,7 @@
       "source": "TWSE TAIEX MI_5MINS_HIST",
       "period": "2026-08",
       "ok": true,
-      "rows": 3,
+      "rows": 5,
       "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260801&response=json",
       "error": ""
     },
@@ -59,9 +60,25 @@
       "rows": 10302,
       "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F30&id=&response=json",
       "error": ""
+    },
+    {
+      "source": "TWSE exact daily quotes",
+      "period": "2026-08-06",
+      "ok": true,
+      "rows": 1338,
+      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260806&type=ALLBUT0999&response=json",
+      "error": ""
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-08-06",
+      "ok": true,
+      "rows": 10313,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F06&id=&response=json",
+      "error": ""
     }
   ],
-  "run_id": "30987806587",
-  "data_version": "20260805-1618",
+  "run_id": "31243871368",
+  "data_version": "20260807-1427",
   "source_pipeline": "update_all_site_data"
 }

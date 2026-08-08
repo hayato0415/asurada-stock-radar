@@ -1,8 +1,8 @@
 {
-  "build_id": "20260805-1613-scorecards",
-  "updated_at": "2026-08-05T16:13:10+08:00",
-  "content_latest_at": "2026-08-05",
-  "universe_count": 1973,
+  "build_id": "20260808-1425-scorecards",
+  "updated_at": "2026-08-08T14:25:49+08:00",
+  "content_latest_at": "2026-08-07",
+  "universe_count": 1974,
   "top100_count": 100,
   "formula": "total_score = fundamental_weighted + technical_weighted + chip_weighted + turnover_weighted",
   "weights": {
@@ -39,9 +39,9 @@
   },
   "data_sources": {},
   "quality": {
-    "scorecards_written": 1973,
-    "stock_master_count": 1973,
-    "metrics_count": 1973,
-    "missing_metric_count": 0
+    "scorecards_written": 1974,
+    "stock_master_count": 1974,
+    "metrics_count": 1974,
+    "missing_metric_count": 1
   }
 }
