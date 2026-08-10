@@ -1,6 +1,6 @@
 {
   "date": "2026-08-10",
-  "updated_at": "2026-08-10 18:44",
+  "updated_at": "2026-08-10 23:59",
   "source": {
     "stock_master": "data/processed/stocks_master.json",
     "stock_metrics": "data/processed/stock_metrics_daily.json",
@@ -9,9 +9,9 @@
     "manual_memberships": "data/manual/theme_memberships.csv"
   },
   "quality": {
-    "stock_master_count": 1974,
+    "stock_master_count": 1975,
     "theme_count": 35,
-    "beneficiary_stock_count": 1983,
+    "beneficiary_stock_count": 1984,
     "quote_matched": 1972,
     "revenue_matched": 1970,
     "eps_matched": 0,
@@ -21,13 +21,15 @@
     "missing_theme": [],
     "missing_quote": [
       "1589",
-      "4804"
+      "4804",
+      "7855"
     ],
     "missing_revenue": [
       "2237",
       "6947",
       "7689",
-      "7835"
+      "7835",
+      "7855"
     ],
     "missing_financials": [
       "1101",
@@ -44783,7 +44785,7 @@
       "turnover_billion": 30.4,
       "up_count": 51,
       "limit_up_count": 1,
-      "beneficiary_count": 93,
+      "beneficiary_count": 94,
       "high_score_news_count": 0,
       "avg_ai_score": 38.3,
       "source_types": [
@@ -46560,6 +46562,34 @@
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 36.97%；漲跌 -0.50%"
         },
         {
+          "symbol": "7855",
+          "name": "和運租車",
+          "market": "上市",
+          "industry": "其他業",
+          "theme": "其他業",
+          "trade_price": null,
+          "change_pct": null,
+          "volume": null,
+          "turnover_rate_pct": null,
+          "turnover_billion": null,
+          "revenue_yoy_pct": null,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 34.6,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類"
+        },
+        {
           "symbol": "8426",
           "name": "紅木-KY",
           "market": "上櫃",
@@ -47400,7 +47430,7 @@
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -37.18%；漲跌 -1.53%"
         }
       ],
-      "theme_score": 25.2,
+      "theme_score": 25.1,
       "leader_stocks": [
         {
           "symbol": "6179",
@@ -57908,9 +57938,9 @@
       "rank": 35
     }
   ],
-  "run_id": "31380343623",
-  "generated_at": "2026-08-10T18:45:41+08:00",
+  "run_id": "31406481560",
+  "generated_at": "2026-08-11T00:00:13+08:00",
   "latest_trade_date": "2026-08-10",
-  "data_version": "20260810-1845",
+  "data_version": "20260810-0000",
   "source_pipeline": "update_all_site_data"
 }

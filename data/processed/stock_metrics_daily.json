@@ -1,6 +1,6 @@
 {
   "date": "2026-08-10",
-  "updated_at": "2026-08-10 18:44",
+  "updated_at": "2026-08-10 23:59",
   "revenue_month": "2026-06",
   "source": {
     "daily_quote": {
@@ -11,7 +11,7 @@
     "listed_shares": "TWSE / TPEx company basic OpenAPI if available"
   },
   "quality": {
-    "stock_master_count": 1974,
+    "stock_master_count": 1975,
     "daily_quote_matched": 1972,
     "daily_quote_matched_by_market": {
       "twse": 1083,
@@ -29,13 +29,15 @@
     "revenue_matched": 1970,
     "missing_quote": [
       "1589",
-      "4804"
+      "4804",
+      "7855"
     ],
     "missing_revenue": [
       "2237",
       "6947",
       "7689",
-      "7835"
+      "7835",
+      "7855"
     ],
     "errors": []
   },
@@ -21197,6 +21199,18 @@
       "revenue_yoy_pct": 38.44
     },
     {
+      "symbol": "7855",
+      "name": "和運租車",
+      "trade_price": null,
+      "change_pct": null,
+      "volume": null,
+      "listed_shares": null,
+      "turnover_rate_pct": null,
+      "revenue_million": null,
+      "revenue_mom_pct": null,
+      "revenue_yoy_pct": null
+    },
+    {
       "symbol": "8011",
       "name": "台通",
       "trade_price": 16.5,
@@ -23729,9 +23743,9 @@
       "revenue_yoy_pct": 37.19
     }
   ],
-  "run_id": "31380343623",
-  "generated_at": "2026-08-10T18:45:41+08:00",
+  "run_id": "31406481560",
+  "generated_at": "2026-08-11T00:00:13+08:00",
   "latest_trade_date": "2026-08-10",
-  "data_version": "20260810-1845",
+  "data_version": "20260810-0000",
   "source_pipeline": "update_all_site_data"
 }
