@@ -2,16 +2,16 @@
   "status": "warning",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-08-08T14:26:43+08:00",
-  "generated_at": "2026-08-08T14:27:07+08:00",
-  "latestValidationUpdateTime": "2026-08-08T14:26:43+08:00",
-  "latestSignalDate": "2026-08-07",
-  "latestEntryDate": "2026-08-06",
-  "latestPriceDate": "2026-08-07",
-  "latestBenchmarkDate": "2026-08-07",
-  "latest_trade_date": "2026-08-07",
+  "generatedAt": "2026-08-10T18:45:33+08:00",
+  "generated_at": "2026-08-10T18:45:41+08:00",
+  "latestValidationUpdateTime": "2026-08-10T18:45:33+08:00",
+  "latestSignalDate": "2026-08-10",
+  "latestEntryDate": "2026-08-10",
+  "latestPriceDate": "2026-08-10",
+  "latestBenchmarkDate": "2026-08-10",
+  "latest_trade_date": "2026-08-10",
   "completedSignals": 0,
-  "trackingSignals": 79,
+  "trackingSignals": 85,
   "d20CompletedSignals": 0,
   "missingPriceCount": 0,
   "missingBenchmarkCount": 0,
@@ -41,7 +41,7 @@
       "source": "TWSE TAIEX MI_5MINS_HIST",
       "period": "2026-08",
       "ok": true,
-      "rows": 5,
+      "rows": 6,
       "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260801&response=json",
       "error": ""
     },
@@ -54,31 +54,15 @@
       "error": ""
     },
     {
-      "source": "TPEX exact daily quotes",
-      "period": "2026-07-30",
-      "ok": true,
-      "rows": 10302,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F30&id=&response=json",
-      "error": ""
-    },
-    {
       "source": "TWSE exact daily quotes",
       "period": "2026-08-06",
       "ok": true,
       "rows": 1338,
       "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260806&type=ALLBUT0999&response=json",
       "error": ""
-    },
-    {
-      "source": "TPEX exact daily quotes",
-      "period": "2026-08-06",
-      "ok": true,
-      "rows": 10313,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F06&id=&response=json",
-      "error": ""
     }
   ],
-  "run_id": "31243871368",
-  "data_version": "20260807-1427",
+  "run_id": "31380343623",
+  "data_version": "20260810-1845",
   "source_pipeline": "update_all_site_data"
 }
