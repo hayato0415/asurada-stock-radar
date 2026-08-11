@@ -1,7 +1,7 @@
 {
-  "build_id": "20260810-2359-scorecards",
-  "updated_at": "2026-08-10T23:59:20+08:00",
-  "content_latest_at": "2026-08-10",
+  "build_id": "20260812-0002-scorecards",
+  "updated_at": "2026-08-12T00:02:15+08:00",
+  "content_latest_at": "2026-08-11",
   "universe_count": 1975,
   "top100_count": 100,
   "formula": "total_score = fundamental_weighted + technical_weighted + chip_weighted + turnover_weighted",
@@ -42,6 +42,6 @@
     "scorecards_written": 1975,
     "stock_master_count": 1975,
     "metrics_count": 1975,
-    "missing_metric_count": 1
+    "missing_metric_count": 0
   }
 }

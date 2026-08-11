@@ -1,10 +1,10 @@
 {
   "status": "ok",
   "ok": true,
-  "latestTradeDate": "2026-08-10",
-  "latest_trade_date": "2026-08-10",
-  "generatedAt": "2026-08-10T23:59:46+08:00",
-  "generated_at": "2026-08-11T00:00:13+08:00",
+  "latestTradeDate": "2026-08-11",
+  "latest_trade_date": "2026-08-11",
+  "generatedAt": "2026-08-12T00:03:19+08:00",
+  "generated_at": "2026-08-12T00:04:20+08:00",
   "scoreVersion": "official-multifactor-v1",
   "scoreSource": "docs/data/processed/factor-scores.json",
   "weights": {
@@ -22,7 +22,7 @@
     "score_weakening_consecutive_days": 3,
     "single_day_breakout_appearances_5d": 1
   },
-  "historyTradingDays": 12,
+  "historyTradingDays": 13,
   "tradingDates": [
     "2026-07-22",
     "2026-07-23",
@@ -35,9 +35,10 @@
     "2026-08-04",
     "2026-08-05",
     "2026-08-07",
-    "2026-08-10"
+    "2026-08-10",
+    "2026-08-11"
   ],
-  "itemsCount": 12,
+  "itemsCount": 13,
   "items": [
     {
       "status": "ok",
@@ -3148,9 +3149,269 @@
           "scoreSource": "official_quote_valuation_revenue"
         }
       ]
+    },
+    {
+      "status": "ok",
+      "ok": true,
+      "dataDate": "2026-08-11",
+      "latest_trade_date": "2026-08-11",
+      "generatedAt": "2026-08-12T00:03:19+08:00",
+      "generated_at": "2026-08-12T00:03:19+08:00",
+      "scoreVersion": "official-multifactor-v1",
+      "scoreSource": "docs/data/processed/factor-scores.json",
+      "weights": {
+        "fundamentalScore": 0.3,
+        "technicalScore": 0.3,
+        "chipScore": 0.25,
+        "turnoverScore": 0.15
+      },
+      "validScoreCount": 1948,
+      "itemsCount": 10,
+      "items": [
+        {
+          "rank": 1,
+          "code": "4931",
+          "name": "新盛力",
+          "market": "上櫃",
+          "industry": "電腦及週邊設備業",
+          "concepts": [
+            "電腦及週邊設備業"
+          ],
+          "close": 255.0,
+          "changePercent": 7.14,
+          "totalScore": 89.3,
+          "fundamentalScore": 80.1,
+          "technicalScore": 88,
+          "chipScore": 100,
+          "turnoverScore": 92.8,
+          "turnoverRate": 3.2817,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-08-11",
+          "generatedAt": "2026-08-12T00:03:19+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 2,
+          "code": "8043",
+          "name": "蜜望實",
+          "market": "上櫃",
+          "industry": "電子零組件業",
+          "concepts": [
+            "電子零組件業"
+          ],
+          "close": 147.5,
+          "changePercent": 9.67,
+          "totalScore": 88.5,
+          "fundamentalScore": 82.3,
+          "technicalScore": 88,
+          "chipScore": 96.0,
+          "turnoverScore": 89.7,
+          "turnoverRate": 1.5643,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-08-11",
+          "generatedAt": "2026-08-12T00:03:19+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 3,
+          "code": "5443",
+          "name": "均豪",
+          "market": "上櫃",
+          "industry": "半導體業",
+          "concepts": [
+            "半導體業"
+          ],
+          "close": 107.5,
+          "changePercent": 2.87,
+          "totalScore": 85.9,
+          "fundamentalScore": 86.7,
+          "technicalScore": 78.6,
+          "chipScore": 99.6,
+          "turnoverScore": 76.0,
+          "turnoverRate": 0.3306,
+          "tradeType": "短線",
+          "riskLabel": "正常",
+          "dataDate": "2026-08-11",
+          "generatedAt": "2026-08-12T00:03:19+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 4,
+          "code": "6922",
+          "name": "宸曜",
+          "market": "上櫃",
+          "industry": "電腦及週邊設備業",
+          "concepts": [
+            "電腦及週邊設備業"
+          ],
+          "close": 213.0,
+          "changePercent": 4.41,
+          "totalScore": 85.7,
+          "fundamentalScore": 83.5,
+          "technicalScore": 83.2,
+          "chipScore": 95.3,
+          "turnoverScore": 78.9,
+          "turnoverRate": 0.414,
+          "tradeType": "短線",
+          "riskLabel": "正常",
+          "dataDate": "2026-08-11",
+          "generatedAt": "2026-08-12T00:03:19+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 5,
+          "code": "3211",
+          "name": "順達",
+          "market": "上櫃",
+          "industry": "電腦及週邊設備業",
+          "concepts": [
+            "電腦及週邊設備業"
+          ],
+          "close": 400.0,
+          "changePercent": 8.11,
+          "totalScore": 85.1,
+          "fundamentalScore": 68.0,
+          "technicalScore": 88,
+          "chipScore": 100,
+          "turnoverScore": 88.9,
+          "turnoverRate": 1.3462,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-08-11",
+          "generatedAt": "2026-08-12T00:03:19+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 6,
+          "code": "5426",
+          "name": "振發",
+          "market": "上櫃",
+          "industry": "電腦及週邊設備業",
+          "concepts": [
+            "電腦及週邊設備業"
+          ],
+          "close": 30.8,
+          "changePercent": 10.0,
+          "totalScore": 85.1,
+          "fundamentalScore": 83.8,
+          "technicalScore": 88,
+          "chipScore": 91.0,
+          "turnoverScore": 72.3,
+          "turnoverRate": 0.2466,
+          "tradeType": "波段",
+          "riskLabel": "過熱",
+          "dataDate": "2026-08-11",
+          "generatedAt": "2026-08-12T00:03:19+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 7,
+          "code": "5475",
+          "name": "德宏",
+          "market": "上櫃",
+          "industry": "電子零組件業",
+          "concepts": [
+            "電子零組件業"
+          ],
+          "close": 135.0,
+          "changePercent": 8.0,
+          "totalScore": 85.1,
+          "fundamentalScore": 86.1,
+          "technicalScore": 70,
+          "chipScore": 100,
+          "turnoverScore": 88.2,
+          "turnoverRate": 1.2179,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-08-11",
+          "generatedAt": "2026-08-12T00:03:19+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 8,
+          "code": "3044",
+          "name": "健鼎",
+          "market": "上市",
+          "industry": "電子零組件業",
+          "concepts": [
+            "電子零組件業"
+          ],
+          "close": 441.5,
+          "changePercent": 9.96,
+          "totalScore": 84.7,
+          "fundamentalScore": 65.9,
+          "technicalScore": 88,
+          "chipScore": 100,
+          "turnoverScore": 90.1,
+          "turnoverRate": 1.6926,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-08-11",
+          "generatedAt": "2026-08-12T00:03:19+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 9,
+          "code": "8084",
+          "name": "巨虹",
+          "market": "上櫃",
+          "industry": "電子通路業",
+          "concepts": [
+            "電子通路業"
+          ],
+          "close": 52.8,
+          "changePercent": 10.0,
+          "totalScore": 84.6,
+          "fundamentalScore": 89.0,
+          "technicalScore": 88,
+          "chipScore": 86.9,
+          "turnoverScore": 64.9,
+          "turnoverRate": 0.1453,
+          "tradeType": "波段",
+          "riskLabel": "過熱",
+          "dataDate": "2026-08-11",
+          "generatedAt": "2026-08-12T00:03:19+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 10,
+          "code": "2103",
+          "name": "台橡",
+          "market": "上市",
+          "industry": "橡膠工業",
+          "concepts": [
+            "橡膠工業"
+          ],
+          "close": 28.65,
+          "changePercent": 4.18,
+          "totalScore": 84.5,
+          "fundamentalScore": 69.0,
+          "technicalScore": 82.5,
+          "chipScore": 100,
+          "turnoverScore": 93.6,
+          "turnoverRate": 4.6411,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-08-11",
+          "generatedAt": "2026-08-12T00:03:19+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        }
+      ]
     }
   ],
-  "run_id": "31406481560",
-  "data_version": "20260810-0000",
+  "run_id": "31510072157",
+  "data_version": "20260811-0004",
   "source_pipeline": "update_all_site_data"
 }
