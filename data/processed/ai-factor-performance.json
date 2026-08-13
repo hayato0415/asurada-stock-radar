@@ -2,9 +2,9 @@
   "status": "ok",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-08-12T23:59:55+08:00",
-  "generated_at": "2026-08-12T23:59:58+08:00",
-  "latest_trade_date": "2026-08-12",
+  "generatedAt": "2026-08-14T00:01:25+08:00",
+  "generated_at": "2026-08-14T00:01:44+08:00",
+  "latest_trade_date": "2026-08-13",
   "thresholds": {
     "high": 75.0,
     "medium": 50.0,
@@ -13,7 +13,7 @@
   },
   "firstEntry": {
     "mode": "first_entry",
-    "itemsCount": 101,
+    "itemsCount": 106,
     "groups": {
       "factors": [
         {
@@ -22,7 +22,7 @@
           "factorLabel": "基本面",
           "band": "高分",
           "label": "基本面高分",
-          "sampleCount": 47,
+          "sampleCount": 51,
           "completedD5": 31,
           "averageD5Return": -2.2454,
           "medianD5Return": 0.9056,
@@ -46,7 +46,7 @@
           "factorLabel": "基本面",
           "band": "中分",
           "label": "基本面中分",
-          "sampleCount": 54,
+          "sampleCount": 55,
           "completedD5": 41,
           "averageD5Return": 0.2777,
           "medianD5Return": 0.9677,
@@ -118,7 +118,7 @@
           "factorLabel": "技術面",
           "band": "高分",
           "label": "技術面高分",
-          "sampleCount": 81,
+          "sampleCount": 86,
           "completedD5": 53,
           "averageD5Return": -1.6552,
           "medianD5Return": -1.2635,
@@ -214,7 +214,7 @@
           "factorLabel": "籌碼面",
           "band": "高分",
           "label": "籌碼面高分",
-          "sampleCount": 101,
+          "sampleCount": 106,
           "completedD5": 72,
           "averageD5Return": -0.8086,
           "medianD5Return": 0.9366,
@@ -310,7 +310,7 @@
           "factorLabel": "週轉熱度",
           "band": "高分",
           "label": "週轉熱度高分",
-          "sampleCount": 92,
+          "sampleCount": 97,
           "completedD5": 66,
           "averageD5Return": -0.5133,
           "medianD5Return": 1.1157,
@@ -405,7 +405,7 @@
         {
           "dimension": "signal_type",
           "label": "單日爆發",
-          "sampleCount": 32,
+          "sampleCount": 35,
           "completedD5": 18,
           "averageD5Return": 0.2214,
           "medianD5Return": 1.0783,
@@ -447,7 +447,7 @@
         {
           "dimension": "signal_type",
           "label": "排名下降",
-          "sampleCount": 4,
+          "sampleCount": 6,
           "completedD5": 4,
           "averageD5Return": -4.4607,
           "medianD5Return": -5.0858,
@@ -468,7 +468,7 @@
         {
           "dimension": "signal_type",
           "label": "新進榜",
-          "sampleCount": 88,
+          "sampleCount": 91,
           "completedD5": 62,
           "averageD5Return": -0.8882,
           "medianD5Return": 0.8992,
@@ -489,7 +489,7 @@
         {
           "dimension": "signal_type",
           "label": "重返榜",
-          "sampleCount": 13,
+          "sampleCount": 15,
           "completedD5": 10,
           "averageD5Return": -0.3156,
           "medianD5Return": 2.0516,
@@ -554,7 +554,7 @@
         {
           "dimension": "trade_type",
           "label": "短線",
-          "sampleCount": 87,
+          "sampleCount": 92,
           "completedD5": 61,
           "averageD5Return": -0.6678,
           "medianD5Return": 0.9677,
@@ -577,7 +577,7 @@
         {
           "dimension": "risk_label",
           "label": "正常",
-          "sampleCount": 30,
+          "sampleCount": 31,
           "completedD5": 24,
           "averageD5Return": -5.0133,
           "medianD5Return": -3.3957,
@@ -598,7 +598,7 @@
         {
           "dimension": "risk_label",
           "label": "過熱",
-          "sampleCount": 71,
+          "sampleCount": 75,
           "completedD5": 48,
           "averageD5Return": 1.2937,
           "medianD5Return": 2.3381,
@@ -621,7 +621,7 @@
         {
           "dimension": "score_version",
           "label": "official-multifactor-v1",
-          "sampleCount": 101,
+          "sampleCount": 106,
           "completedD5": 72,
           "averageD5Return": -0.8086,
           "medianD5Return": 0.9366,
@@ -648,7 +648,7 @@
         "factorLabel": "週轉熱度",
         "band": "高分",
         "label": "週轉熱度高分",
-        "sampleCount": 92,
+        "sampleCount": 97,
         "completedD5": 66,
         "averageD5Return": -0.5133,
         "medianD5Return": 1.1157,
@@ -672,7 +672,7 @@
         "factorLabel": "技術面",
         "band": "高分",
         "label": "技術面高分",
-        "sampleCount": 81,
+        "sampleCount": 86,
         "completedD5": 53,
         "averageD5Return": -1.6552,
         "medianD5Return": -1.2635,
@@ -692,17 +692,17 @@
       },
       "warning": "",
       "window": "最近 20 個有榜單的交易日",
-      "signalDateCount": 14
+      "signalDateCount": 15
     },
     "selectedScoreVersion": "official-multifactor-v1",
     "availableScoreVersions": [
       "official-multifactor-v1"
     ],
-    "totalItemsCount": 101,
+    "totalItemsCount": 106,
     "byScoreVersion": {
       "official-multifactor-v1": {
         "mode": "first_entry",
-        "itemsCount": 101,
+        "itemsCount": 106,
         "groups": {
           "factors": [
             {
@@ -711,7 +711,7 @@
               "factorLabel": "基本面",
               "band": "高分",
               "label": "基本面高分",
-              "sampleCount": 47,
+              "sampleCount": 51,
               "completedD5": 31,
               "averageD5Return": -2.2454,
               "medianD5Return": 0.9056,
@@ -735,7 +735,7 @@
               "factorLabel": "基本面",
               "band": "中分",
               "label": "基本面中分",
-              "sampleCount": 54,
+              "sampleCount": 55,
               "completedD5": 41,
               "averageD5Return": 0.2777,
               "medianD5Return": 0.9677,
@@ -807,7 +807,7 @@
               "factorLabel": "技術面",
               "band": "高分",
               "label": "技術面高分",
-              "sampleCount": 81,
+              "sampleCount": 86,
               "completedD5": 53,
               "averageD5Return": -1.6552,
               "medianD5Return": -1.2635,
@@ -903,7 +903,7 @@
               "factorLabel": "籌碼面",
               "band": "高分",
               "label": "籌碼面高分",
-              "sampleCount": 101,
+              "sampleCount": 106,
               "completedD5": 72,
               "averageD5Return": -0.8086,
               "medianD5Return": 0.9366,
@@ -999,7 +999,7 @@
               "factorLabel": "週轉熱度",
               "band": "高分",
               "label": "週轉熱度高分",
-              "sampleCount": 92,
+              "sampleCount": 97,
               "completedD5": 66,
               "averageD5Return": -0.5133,
               "medianD5Return": 1.1157,
@@ -1094,7 +1094,7 @@
             {
               "dimension": "signal_type",
               "label": "單日爆發",
-              "sampleCount": 32,
+              "sampleCount": 35,
               "completedD5": 18,
               "averageD5Return": 0.2214,
               "medianD5Return": 1.0783,
@@ -1136,7 +1136,7 @@
             {
               "dimension": "signal_type",
               "label": "排名下降",
-              "sampleCount": 4,
+              "sampleCount": 6,
               "completedD5": 4,
               "averageD5Return": -4.4607,
               "medianD5Return": -5.0858,
@@ -1157,7 +1157,7 @@
             {
               "dimension": "signal_type",
               "label": "新進榜",
-              "sampleCount": 88,
+              "sampleCount": 91,
               "completedD5": 62,
               "averageD5Return": -0.8882,
               "medianD5Return": 0.8992,
@@ -1178,7 +1178,7 @@
             {
               "dimension": "signal_type",
               "label": "重返榜",
-              "sampleCount": 13,
+              "sampleCount": 15,
               "completedD5": 10,
               "averageD5Return": -0.3156,
               "medianD5Return": 2.0516,
@@ -1243,7 +1243,7 @@
             {
               "dimension": "trade_type",
               "label": "短線",
-              "sampleCount": 87,
+              "sampleCount": 92,
               "completedD5": 61,
               "averageD5Return": -0.6678,
               "medianD5Return": 0.9677,
@@ -1266,7 +1266,7 @@
             {
               "dimension": "risk_label",
               "label": "正常",
-              "sampleCount": 30,
+              "sampleCount": 31,
               "completedD5": 24,
               "averageD5Return": -5.0133,
               "medianD5Return": -3.3957,
@@ -1287,7 +1287,7 @@
             {
               "dimension": "risk_label",
               "label": "過熱",
-              "sampleCount": 71,
+              "sampleCount": 75,
               "completedD5": 48,
               "averageD5Return": 1.2937,
               "medianD5Return": 2.3381,
@@ -1310,7 +1310,7 @@
             {
               "dimension": "score_version",
               "label": "official-multifactor-v1",
-              "sampleCount": 101,
+              "sampleCount": 106,
               "completedD5": 72,
               "averageD5Return": -0.8086,
               "medianD5Return": 0.9366,
@@ -1337,7 +1337,7 @@
             "factorLabel": "週轉熱度",
             "band": "高分",
             "label": "週轉熱度高分",
-            "sampleCount": 92,
+            "sampleCount": 97,
             "completedD5": 66,
             "averageD5Return": -0.5133,
             "medianD5Return": 1.1157,
@@ -1361,7 +1361,7 @@
             "factorLabel": "技術面",
             "band": "高分",
             "label": "技術面高分",
-            "sampleCount": 81,
+            "sampleCount": 86,
             "completedD5": 53,
             "averageD5Return": -1.6552,
             "medianD5Return": -1.2635,
@@ -1381,14 +1381,14 @@
           },
           "warning": "",
           "window": "最近 20 個有榜單的交易日",
-          "signalDateCount": 14
+          "signalDateCount": 15
         }
       }
     }
   },
   "dailyObservation": {
     "mode": "daily_observation",
-    "itemsCount": 140,
+    "itemsCount": 150,
     "groups": {
       "factors": [
         {
@@ -1397,7 +1397,7 @@
           "factorLabel": "基本面",
           "band": "高分",
           "label": "基本面高分",
-          "sampleCount": 63,
+          "sampleCount": 72,
           "completedD5": 41,
           "averageD5Return": -0.1096,
           "medianD5Return": 1.6667,
@@ -1421,7 +1421,7 @@
           "factorLabel": "基本面",
           "band": "中分",
           "label": "基本面中分",
-          "sampleCount": 77,
+          "sampleCount": 78,
           "completedD5": 59,
           "averageD5Return": -0.2186,
           "medianD5Return": 0.3509,
@@ -1493,7 +1493,7 @@
           "factorLabel": "技術面",
           "band": "高分",
           "label": "技術面高分",
-          "sampleCount": 113,
+          "sampleCount": 123,
           "completedD5": 75,
           "averageD5Return": -0.2929,
           "medianD5Return": 0.3509,
@@ -1589,7 +1589,7 @@
           "factorLabel": "籌碼面",
           "band": "高分",
           "label": "籌碼面高分",
-          "sampleCount": 140,
+          "sampleCount": 150,
           "completedD5": 100,
           "averageD5Return": -0.1739,
           "medianD5Return": 0.9366,
@@ -1685,7 +1685,7 @@
           "factorLabel": "週轉熱度",
           "band": "高分",
           "label": "週轉熱度高分",
-          "sampleCount": 130,
+          "sampleCount": 140,
           "completedD5": 94,
           "averageD5Return": 0.074,
           "medianD5Return": 1.1157,
@@ -1780,7 +1780,7 @@
         {
           "dimension": "signal_type",
           "label": "單日爆發",
-          "sampleCount": 32,
+          "sampleCount": 35,
           "completedD5": 18,
           "averageD5Return": 0.2214,
           "medianD5Return": 1.0783,
@@ -1822,7 +1822,7 @@
         {
           "dimension": "signal_type",
           "label": "排名上升",
-          "sampleCount": 22,
+          "sampleCount": 24,
           "completedD5": 15,
           "averageD5Return": 2.1697,
           "medianD5Return": 3.4177,
@@ -1843,7 +1843,7 @@
         {
           "dimension": "signal_type",
           "label": "排名下降",
-          "sampleCount": 25,
+          "sampleCount": 28,
           "completedD5": 20,
           "averageD5Return": -0.8994,
           "medianD5Return": -0.6663,
@@ -1864,7 +1864,7 @@
         {
           "dimension": "signal_type",
           "label": "新進榜",
-          "sampleCount": 88,
+          "sampleCount": 91,
           "completedD5": 62,
           "averageD5Return": -0.8882,
           "medianD5Return": 0.8992,
@@ -1885,7 +1885,7 @@
         {
           "dimension": "signal_type",
           "label": "連續入榜",
-          "sampleCount": 24,
+          "sampleCount": 28,
           "completedD5": 19,
           "averageD5Return": -1.9964,
           "medianD5Return": -2.2222,
@@ -1906,7 +1906,7 @@
         {
           "dimension": "signal_type",
           "label": "連續入榜 2 日",
-          "sampleCount": 16,
+          "sampleCount": 19,
           "completedD5": 11,
           "averageD5Return": -3.845,
           "medianD5Return": -3.9474,
@@ -1927,7 +1927,7 @@
         {
           "dimension": "signal_type",
           "label": "連續入榜 3 日以上",
-          "sampleCount": 8,
+          "sampleCount": 9,
           "completedD5": 8,
           "averageD5Return": 0.5453,
           "medianD5Return": -0.0084,
@@ -1948,7 +1948,7 @@
         {
           "dimension": "signal_type",
           "label": "重返榜",
-          "sampleCount": 20,
+          "sampleCount": 23,
           "completedD5": 13,
           "averageD5Return": 2.8348,
           "medianD5Return": 2.588,
@@ -2013,7 +2013,7 @@
         {
           "dimension": "trade_type",
           "label": "短線",
-          "sampleCount": 125,
+          "sampleCount": 135,
           "completedD5": 89,
           "averageD5Return": 0.0011,
           "medianD5Return": 0.9677,
@@ -2036,7 +2036,7 @@
         {
           "dimension": "risk_label",
           "label": "正常",
-          "sampleCount": 35,
+          "sampleCount": 39,
           "completedD5": 27,
           "averageD5Return": -4.8818,
           "medianD5Return": -3.2438,
@@ -2057,7 +2057,7 @@
         {
           "dimension": "risk_label",
           "label": "過熱",
-          "sampleCount": 105,
+          "sampleCount": 111,
           "completedD5": 73,
           "averageD5Return": 1.5674,
           "medianD5Return": 2.0882,
@@ -2080,7 +2080,7 @@
         {
           "dimension": "score_version",
           "label": "official-multifactor-v1",
-          "sampleCount": 140,
+          "sampleCount": 150,
           "completedD5": 100,
           "averageD5Return": -0.1739,
           "medianD5Return": 0.9366,
@@ -2107,7 +2107,7 @@
         "factorLabel": "基本面",
         "band": "高分",
         "label": "基本面高分",
-        "sampleCount": 63,
+        "sampleCount": 72,
         "completedD5": 41,
         "averageD5Return": -0.1096,
         "medianD5Return": 1.6667,
@@ -2131,7 +2131,7 @@
         "factorLabel": "技術面",
         "band": "高分",
         "label": "技術面高分",
-        "sampleCount": 113,
+        "sampleCount": 123,
         "completedD5": 75,
         "averageD5Return": -0.2929,
         "medianD5Return": 0.3509,
@@ -2151,17 +2151,17 @@
       },
       "warning": "",
       "window": "最近 20 個有榜單的交易日",
-      "signalDateCount": 14
+      "signalDateCount": 15
     },
     "selectedScoreVersion": "official-multifactor-v1",
     "availableScoreVersions": [
       "official-multifactor-v1"
     ],
-    "totalItemsCount": 140,
+    "totalItemsCount": 150,
     "byScoreVersion": {
       "official-multifactor-v1": {
         "mode": "daily_observation",
-        "itemsCount": 140,
+        "itemsCount": 150,
         "groups": {
           "factors": [
             {
@@ -2170,7 +2170,7 @@
               "factorLabel": "基本面",
               "band": "高分",
               "label": "基本面高分",
-              "sampleCount": 63,
+              "sampleCount": 72,
               "completedD5": 41,
               "averageD5Return": -0.1096,
               "medianD5Return": 1.6667,
@@ -2194,7 +2194,7 @@
               "factorLabel": "基本面",
               "band": "中分",
               "label": "基本面中分",
-              "sampleCount": 77,
+              "sampleCount": 78,
               "completedD5": 59,
               "averageD5Return": -0.2186,
               "medianD5Return": 0.3509,
@@ -2266,7 +2266,7 @@
               "factorLabel": "技術面",
               "band": "高分",
               "label": "技術面高分",
-              "sampleCount": 113,
+              "sampleCount": 123,
               "completedD5": 75,
               "averageD5Return": -0.2929,
               "medianD5Return": 0.3509,
@@ -2362,7 +2362,7 @@
               "factorLabel": "籌碼面",
               "band": "高分",
               "label": "籌碼面高分",
-              "sampleCount": 140,
+              "sampleCount": 150,
               "completedD5": 100,
               "averageD5Return": -0.1739,
               "medianD5Return": 0.9366,
@@ -2458,7 +2458,7 @@
               "factorLabel": "週轉熱度",
               "band": "高分",
               "label": "週轉熱度高分",
-              "sampleCount": 130,
+              "sampleCount": 140,
               "completedD5": 94,
               "averageD5Return": 0.074,
               "medianD5Return": 1.1157,
@@ -2553,7 +2553,7 @@
             {
               "dimension": "signal_type",
               "label": "單日爆發",
-              "sampleCount": 32,
+              "sampleCount": 35,
               "completedD5": 18,
               "averageD5Return": 0.2214,
               "medianD5Return": 1.0783,
@@ -2595,7 +2595,7 @@
             {
               "dimension": "signal_type",
               "label": "排名上升",
-              "sampleCount": 22,
+              "sampleCount": 24,
               "completedD5": 15,
               "averageD5Return": 2.1697,
               "medianD5Return": 3.4177,
@@ -2616,7 +2616,7 @@
             {
               "dimension": "signal_type",
               "label": "排名下降",
-              "sampleCount": 25,
+              "sampleCount": 28,
               "completedD5": 20,
               "averageD5Return": -0.8994,
               "medianD5Return": -0.6663,
@@ -2637,7 +2637,7 @@
             {
               "dimension": "signal_type",
               "label": "新進榜",
-              "sampleCount": 88,
+              "sampleCount": 91,
               "completedD5": 62,
               "averageD5Return": -0.8882,
               "medianD5Return": 0.8992,
@@ -2658,7 +2658,7 @@
             {
               "dimension": "signal_type",
               "label": "連續入榜",
-              "sampleCount": 24,
+              "sampleCount": 28,
               "completedD5": 19,
               "averageD5Return": -1.9964,
               "medianD5Return": -2.2222,
@@ -2679,7 +2679,7 @@
             {
               "dimension": "signal_type",
               "label": "連續入榜 2 日",
-              "sampleCount": 16,
+              "sampleCount": 19,
               "completedD5": 11,
               "averageD5Return": -3.845,
               "medianD5Return": -3.9474,
@@ -2700,7 +2700,7 @@
             {
               "dimension": "signal_type",
               "label": "連續入榜 3 日以上",
-              "sampleCount": 8,
+              "sampleCount": 9,
               "completedD5": 8,
               "averageD5Return": 0.5453,
               "medianD5Return": -0.0084,
@@ -2721,7 +2721,7 @@
             {
               "dimension": "signal_type",
               "label": "重返榜",
-              "sampleCount": 20,
+              "sampleCount": 23,
               "completedD5": 13,
               "averageD5Return": 2.8348,
               "medianD5Return": 2.588,
@@ -2786,7 +2786,7 @@
             {
               "dimension": "trade_type",
               "label": "短線",
-              "sampleCount": 125,
+              "sampleCount": 135,
               "completedD5": 89,
               "averageD5Return": 0.0011,
               "medianD5Return": 0.9677,
@@ -2809,7 +2809,7 @@
             {
               "dimension": "risk_label",
               "label": "正常",
-              "sampleCount": 35,
+              "sampleCount": 39,
               "completedD5": 27,
               "averageD5Return": -4.8818,
               "medianD5Return": -3.2438,
@@ -2830,7 +2830,7 @@
             {
               "dimension": "risk_label",
               "label": "過熱",
-              "sampleCount": 105,
+              "sampleCount": 111,
               "completedD5": 73,
               "averageD5Return": 1.5674,
               "medianD5Return": 2.0882,
@@ -2853,7 +2853,7 @@
             {
               "dimension": "score_version",
               "label": "official-multifactor-v1",
-              "sampleCount": 140,
+              "sampleCount": 150,
               "completedD5": 100,
               "averageD5Return": -0.1739,
               "medianD5Return": 0.9366,
@@ -2880,7 +2880,7 @@
             "factorLabel": "基本面",
             "band": "高分",
             "label": "基本面高分",
-            "sampleCount": 63,
+            "sampleCount": 72,
             "completedD5": 41,
             "averageD5Return": -0.1096,
             "medianD5Return": 1.6667,
@@ -2904,7 +2904,7 @@
             "factorLabel": "技術面",
             "band": "高分",
             "label": "技術面高分",
-            "sampleCount": 113,
+            "sampleCount": 123,
             "completedD5": 75,
             "averageD5Return": -0.2929,
             "medianD5Return": 0.3509,
@@ -2924,12 +2924,12 @@
           },
           "warning": "",
           "window": "最近 20 個有榜單的交易日",
-          "signalDateCount": 14
+          "signalDateCount": 15
         }
       }
     }
   },
-  "run_id": "31615177015",
-  "data_version": "20260812-2359",
+  "run_id": "31718241932",
+  "data_version": "20260813-0001",
   "source_pipeline": "update_all_site_data"
 }

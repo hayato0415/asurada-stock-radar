@@ -2,16 +2,16 @@
   "status": "warning",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-08-12T23:59:55+08:00",
-  "generated_at": "2026-08-12T23:59:58+08:00",
-  "latestValidationUpdateTime": "2026-08-12T23:59:55+08:00",
-  "latestSignalDate": "2026-08-12",
-  "latestEntryDate": "2026-08-12",
-  "latestPriceDate": "2026-08-12",
-  "latestBenchmarkDate": "2026-08-12",
-  "latest_trade_date": "2026-08-12",
+  "generatedAt": "2026-08-14T00:01:25+08:00",
+  "generated_at": "2026-08-14T00:01:44+08:00",
+  "latestValidationUpdateTime": "2026-08-14T00:01:25+08:00",
+  "latestSignalDate": "2026-08-13",
+  "latestEntryDate": "2026-08-13",
+  "latestPriceDate": "2026-08-13",
+  "latestBenchmarkDate": "2026-08-13",
+  "latest_trade_date": "2026-08-13",
   "completedSignals": 0,
-  "trackingSignals": 101,
+  "trackingSignals": 106,
   "d20CompletedSignals": 0,
   "missingPriceCount": 0,
   "missingBenchmarkCount": 0,
@@ -41,12 +41,44 @@
       "source": "TWSE TAIEX MI_5MINS_HIST",
       "period": "2026-08",
       "ok": true,
-      "rows": 8,
+      "rows": 9,
       "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260801&response=json",
+      "error": ""
+    },
+    {
+      "source": "TWSE exact daily quotes",
+      "period": "2026-07-30",
+      "ok": true,
+      "rows": 1335,
+      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260730&type=ALLBUT0999&response=json",
+      "error": ""
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-07-30",
+      "ok": true,
+      "rows": 10302,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F30&id=&response=json",
+      "error": ""
+    },
+    {
+      "source": "TWSE exact daily quotes",
+      "period": "2026-08-06",
+      "ok": true,
+      "rows": 1338,
+      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260806&type=ALLBUT0999&response=json",
+      "error": ""
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-08-06",
+      "ok": true,
+      "rows": 10313,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F06&id=&response=json",
       "error": ""
     }
   ],
-  "run_id": "31615177015",
-  "data_version": "20260812-2359",
+  "run_id": "31718241932",
+  "data_version": "20260813-0001",
   "source_pipeline": "update_all_site_data"
 }

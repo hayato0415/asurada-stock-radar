@@ -1,14 +1,14 @@
 {
   "ok": true,
-  "updated_at": "2026-08-12T23:59:31+08:00",
-  "attempted_at": "2026-08-12T23:59:31+08:00",
-  "target_date": "2026-08-12",
-  "latest_trade_date": "2026-08-12",
+  "updated_at": "2026-08-14T00:00:33+08:00",
+  "attempted_at": "2026-08-14T00:00:33+08:00",
+  "target_date": "2026-08-13",
+  "latest_trade_date": "2026-08-13",
   "revenue_month": "2026-07",
   "items_count": 100,
   "rows_written": 100,
   "stock_master_count": 1975,
-  "twse_quote_matched": 1084,
+  "twse_quote_matched": 1083,
   "tpex_quote_matched": 889,
   "previous_data_preserved": false,
   "failed_reasons": [],
@@ -21,39 +21,35 @@
   },
   "quality": {
     "stock_master_count": 1975,
-    "quote_matched": 1973,
-    "score_candidates": 1949,
-    "missing_quote_count": 2,
-    "missing_score_count": 24,
+    "quote_matched": 1972,
+    "score_candidates": 1953,
+    "missing_quote_count": 3,
+    "missing_score_count": 19,
     "missing_quote_sample": [
       "1589",
-      "4804"
+      "4804",
+      "6176"
     ],
     "missing_score_sample": [
-      "1538",
-      "1796",
-      "1909",
-      "2035",
-      "2941",
+      "1218",
+      "2754",
+      "2882",
+      "2949",
       "3064",
-      "3118",
-      "4728",
-      "4806",
-      "4950",
-      "5212",
-      "5455",
-      "6023",
-      "6597",
-      "6661",
-      "6762",
-      "6767",
-      "6843",
-      "6881",
-      "6904",
+      "3067",
+      "3232",
+      "3531",
+      "3632",
+      "5310",
+      "6212",
+      "6228",
+      "6485",
+      "6680",
       "6945",
       "6997",
+      "7712",
       "7747",
-      "8916"
+      "8409"
     ]
   },
   "quote_coverage": {
@@ -63,28 +59,28 @@
       "tpex": 712
     },
     "matched": {
-      "twse": 1084,
+      "twse": 1083,
       "tpex": 889
     }
   },
   "source_status": [
     {
       "name": "TWSE 上市每日行情",
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260812&type=ALLBUT0999&response=json",
+      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260813&type=ALLBUT0999&response=json",
       "ok": true,
       "http_status": null,
-      "source_date": "2026-08-12",
-      "row_count": 1379,
+      "source_date": "2026-08-13",
+      "row_count": 1378,
       "error": "",
       "required_fields_missing": []
     },
     {
       "name": "TPEx 上櫃每日行情",
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F12&id=&response=json",
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F13&id=&response=json",
       "ok": true,
       "http_status": null,
-      "source_date": "2026-08-12",
-      "row_count": 10400,
+      "source_date": "2026-08-13",
+      "row_count": 10474,
       "error": "",
       "required_fields_missing": []
     },
@@ -114,7 +110,7 @@
       "ok": true,
       "http_status": 200,
       "source_date": null,
-      "row_count": 1069,
+      "row_count": 1071,
       "error": "",
       "required_fields_missing": []
     },
@@ -162,11 +158,11 @@
   "persistence_status": {
     "ok": true,
     "status": "ok",
-    "latest_trade_date": "2026-08-12",
-    "generated_at": "2026-08-12T23:59:31+08:00",
-    "snapshot_created": false,
-    "snapshot_path": "data/history/ai-top10/2026-08-12.json",
-    "history_trading_days": 14,
+    "latest_trade_date": "2026-08-13",
+    "generated_at": "2026-08-14T00:00:33+08:00",
+    "snapshot_created": true,
+    "snapshot_path": "data/history/ai-top10/2026-08-13.json",
+    "history_trading_days": 15,
     "items_count": 10,
     "previous_data_preserved": false,
     "failed_reasons": [],
@@ -177,8 +173,8 @@
       "ai-persistence-monthly.json": "updated"
     }
   },
-  "run_id": "31615177015",
-  "generated_at": "2026-08-12T23:59:58+08:00",
-  "data_version": "20260812-2359",
+  "run_id": "31718241932",
+  "generated_at": "2026-08-14T00:01:44+08:00",
+  "data_version": "20260813-0001",
   "source_pipeline": "update_all_site_data"
 }
