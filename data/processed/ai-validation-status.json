@@ -2,9 +2,9 @@
   "status": "warning",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-08-14T18:37:43+08:00",
-  "generated_at": "2026-08-14T18:38:01+08:00",
-  "latestValidationUpdateTime": "2026-08-14T18:37:43+08:00",
+  "generatedAt": "2026-08-14T23:53:03+08:00",
+  "generated_at": "2026-08-14T23:53:07+08:00",
+  "latestValidationUpdateTime": "2026-08-14T23:53:03+08:00",
   "latestSignalDate": "2026-08-14",
   "latestEntryDate": "2026-08-14",
   "latestPriceDate": "2026-08-14",
@@ -44,41 +44,9 @@
       "rows": 10,
       "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260801&response=json",
       "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-07-30",
-      "ok": true,
-      "rows": 1335,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260730&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TPEX exact daily quotes",
-      "period": "2026-07-30",
-      "ok": true,
-      "rows": 10302,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F30&id=&response=json",
-      "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-06",
-      "ok": true,
-      "rows": 1338,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260806&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TPEX exact daily quotes",
-      "period": "2026-08-06",
-      "ok": true,
-      "rows": 10313,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F06&id=&response=json",
-      "error": ""
     }
   ],
-  "run_id": "31792643021",
-  "data_version": "20260814-1838",
+  "run_id": "31816480797",
+  "data_version": "20260814-2353",
   "source_pipeline": "update_all_site_data"
 }
