@@ -1,6 +1,6 @@
 {
   "date": "2026-08-14",
-  "updated_at": "2026-08-14 23:52",
+  "updated_at": "2026-08-15 14:01",
   "revenue_month": "2026-07",
   "source": {
     "daily_quote": {
@@ -26,7 +26,7 @@
       "twse": "2026-08-14",
       "tpex": "2026-08-14"
     },
-    "revenue_matched": 1962,
+    "revenue_matched": 1966,
     "missing_quote": [
       "1589",
       "4804",
@@ -38,12 +38,8 @@
       "2851",
       "2880",
       "2881",
-      "2882",
       "2883",
       "2885",
-      "2886",
-      "2887",
-      "2891",
       "2892",
       "5880"
     ],
@@ -1412,8 +1408,8 @@
       "trade_price": 101.0,
       "change_pct": -1.46,
       "volume": 1188660,
-      "listed_shares": 273108473,
-      "turnover_rate_pct": 0.44,
+      "listed_shares": 278570642,
+      "turnover_rate_pct": 0.43,
       "revenue_million": 894.96,
       "revenue_mom_pct": -23.99,
       "revenue_yoy_pct": 6.51
@@ -6586,9 +6582,9 @@
       "volume": 6259,
       "listed_shares": 14669210128,
       "turnover_rate_pct": 0.0,
-      "revenue_million": null,
-      "revenue_mom_pct": null,
-      "revenue_yoy_pct": null
+      "revenue_million": 25135.91,
+      "revenue_mom_pct": -22.2,
+      "revenue_yoy_pct": -69.71
     },
     {
       "symbol": "2883",
@@ -6634,9 +6630,9 @@
       "volume": 50705240,
       "listed_shares": 14833378282,
       "turnover_rate_pct": 0.34,
-      "revenue_million": null,
-      "revenue_mom_pct": null,
-      "revenue_yoy_pct": null
+      "revenue_million": 8644.03,
+      "revenue_mom_pct": 6.77,
+      "revenue_yoy_pct": 4.11
     },
     {
       "symbol": "2887",
@@ -6646,9 +6642,9 @@
       "volume": 193962,
       "listed_shares": 25115061997,
       "turnover_rate_pct": 0.0,
-      "revenue_million": null,
-      "revenue_mom_pct": null,
-      "revenue_yoy_pct": null
+      "revenue_million": 18052.28,
+      "revenue_mom_pct": 1.78,
+      "revenue_yoy_pct": -15.63
     },
     {
       "symbol": "2889",
@@ -6682,9 +6678,9 @@
       "volume": 557,
       "listed_shares": 19675932806,
       "turnover_rate_pct": 0.0,
-      "revenue_million": null,
-      "revenue_mom_pct": null,
-      "revenue_yoy_pct": null
+      "revenue_million": 18046.27,
+      "revenue_mom_pct": -8.99,
+      "revenue_yoy_pct": -18.42
     },
     {
       "symbol": "2892",
@@ -7016,7 +7012,7 @@
       "trade_price": 127.0,
       "change_pct": -0.78,
       "volume": 673618,
-      "listed_shares": 64258355,
+      "listed_shares": 64365055,
       "turnover_rate_pct": 1.05,
       "revenue_million": 494.29,
       "revenue_mom_pct": -0.65,
@@ -7100,7 +7096,7 @@
       "trade_price": 131.5,
       "change_pct": -2.23,
       "volume": 924965,
-      "listed_shares": 165979124,
+      "listed_shares": 165954124,
       "turnover_rate_pct": 0.56,
       "revenue_million": 642.45,
       "revenue_mom_pct": 4.83,
@@ -7124,8 +7120,8 @@
       "trade_price": 102.5,
       "change_pct": -1.44,
       "volume": 6007483,
-      "listed_shares": 288541819,
-      "turnover_rate_pct": 2.08,
+      "listed_shares": 290356903,
+      "turnover_rate_pct": 2.07,
       "revenue_million": 482.06,
       "revenue_mom_pct": 7.55,
       "revenue_yoy_pct": 51.43
@@ -8144,7 +8140,7 @@
       "trade_price": 862.0,
       "change_pct": 1.29,
       "volume": 4293886,
-      "listed_shares": 526915760,
+      "listed_shares": 526910360,
       "turnover_rate_pct": 0.81,
       "revenue_million": 4548.83,
       "revenue_mom_pct": 7.69,
@@ -8660,8 +8656,8 @@
       "trade_price": 113.5,
       "change_pct": -2.99,
       "volume": 2762016,
-      "listed_shares": 144635669,
-      "turnover_rate_pct": 1.91,
+      "listed_shares": 143286669,
+      "turnover_rate_pct": 1.93,
       "revenue_million": 1413.91,
       "revenue_mom_pct": -2.19,
       "revenue_yoy_pct": 59.23
@@ -23751,9 +23747,9 @@
       "revenue_yoy_pct": 82.49
     }
   ],
-  "run_id": "31816480797",
-  "generated_at": "2026-08-14T23:53:07+08:00",
+  "run_id": "31868382686",
+  "generated_at": "2026-08-15T14:02:27+08:00",
   "latest_trade_date": "2026-08-14",
-  "data_version": "20260814-2353",
+  "data_version": "20260814-1402",
   "source_pipeline": "update_all_site_data"
 }
