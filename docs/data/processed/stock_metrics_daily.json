@@ -1,6 +1,6 @@
 {
   "date": "2026-08-14",
-  "updated_at": "2026-08-15 23:20",
+  "updated_at": "2026-08-16 14:03",
   "revenue_month": "2026-07",
   "source": {
     "daily_quote": {
@@ -26,22 +26,15 @@
       "twse": "2026-08-14",
       "tpex": "2026-08-14"
     },
-    "revenue_matched": 1966,
+    "revenue_matched": 1973,
     "missing_quote": [
       "1589",
       "4804",
       "6176"
     ],
     "missing_revenue": [
-      "2816",
       "2850",
-      "2851",
-      "2880",
-      "2881",
-      "2883",
-      "2885",
-      "2892",
-      "5880"
+      "2883"
     ],
     "errors": []
   },
@@ -3556,7 +3549,7 @@
       "trade_price": 198.0,
       "change_pct": -2.7,
       "volume": 632825,
-      "listed_shares": 60288089,
+      "listed_shares": 60288889,
       "turnover_rate_pct": 1.05,
       "revenue_million": 281.96,
       "revenue_mom_pct": -0.97,
@@ -6402,9 +6395,9 @@
       "volume": 200792,
       "listed_shares": 223608000,
       "turnover_rate_pct": 0.09,
-      "revenue_million": null,
-      "revenue_mom_pct": null,
-      "revenue_yoy_pct": null
+      "revenue_million": 1019.44,
+      "revenue_mom_pct": -23.99,
+      "revenue_yoy_pct": -24.39
     },
     {
       "symbol": "2820",
@@ -6510,9 +6503,9 @@
       "volume": 3352290,
       "listed_shares": 800388750,
       "turnover_rate_pct": 0.42,
-      "revenue_million": null,
-      "revenue_mom_pct": null,
-      "revenue_yoy_pct": null
+      "revenue_million": 918.37,
+      "revenue_mom_pct": -41.98,
+      "revenue_yoy_pct": -33.46
     },
     {
       "symbol": "2852",
@@ -6558,9 +6551,9 @@
       "volume": 48593396,
       "listed_shares": 13916965089,
       "turnover_rate_pct": 0.35,
-      "revenue_million": null,
-      "revenue_mom_pct": null,
-      "revenue_yoy_pct": null
+      "revenue_million": 7755.43,
+      "revenue_mom_pct": 3.45,
+      "revenue_yoy_pct": 6.47
     },
     {
       "symbol": "2881",
@@ -6570,9 +6563,9 @@
       "volume": 12499,
       "listed_shares": 14007364952,
       "turnover_rate_pct": 0.0,
-      "revenue_million": null,
-      "revenue_mom_pct": null,
-      "revenue_yoy_pct": null
+      "revenue_million": 10661.0,
+      "revenue_mom_pct": -51.89,
+      "revenue_yoy_pct": -79.15
     },
     {
       "symbol": "2882",
@@ -6618,9 +6611,9 @@
       "volume": 22972077,
       "listed_shares": 13331149946,
       "turnover_rate_pct": 0.17,
-      "revenue_million": null,
-      "revenue_mom_pct": null,
-      "revenue_yoy_pct": null
+      "revenue_million": 17560.42,
+      "revenue_mom_pct": -10.3,
+      "revenue_yoy_pct": 78.99
     },
     {
       "symbol": "2886",
@@ -6690,9 +6683,9 @@
       "volume": 39847913,
       "listed_shares": 14379468650,
       "turnover_rate_pct": 0.28,
-      "revenue_million": null,
-      "revenue_mom_pct": null,
-      "revenue_yoy_pct": null
+      "revenue_million": 7765.81,
+      "revenue_mom_pct": 7.39,
+      "revenue_yoy_pct": 2.37
     },
     {
       "symbol": "2897",
@@ -14958,9 +14951,9 @@
       "volume": 12604649,
       "listed_shares": 15680936914,
       "turnover_rate_pct": 0.08,
-      "revenue_million": null,
-      "revenue_mom_pct": null,
-      "revenue_yoy_pct": null
+      "revenue_million": 7009.75,
+      "revenue_mom_pct": 7.53,
+      "revenue_yoy_pct": 20.44
     },
     {
       "symbol": "5902",
@@ -23747,9 +23740,9 @@
       "revenue_yoy_pct": 82.49
     }
   ],
-  "run_id": "31892361720",
-  "generated_at": "2026-08-15T23:21:29+08:00",
+  "run_id": "31930429808",
+  "generated_at": "2026-08-16T14:04:03+08:00",
   "latest_trade_date": "2026-08-14",
-  "data_version": "20260814-2321",
+  "data_version": "20260814-1404",
   "source_pipeline": "update_all_site_data"
 }
