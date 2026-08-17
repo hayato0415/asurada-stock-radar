@@ -1,7 +1,7 @@
 {
-  "build_id": "20260816-1751-scorecards",
-  "updated_at": "2026-08-16T17:51:33+08:00",
-  "content_latest_at": "2026-08-14",
+  "build_id": "20260817-2326-scorecards",
+  "updated_at": "2026-08-17T23:26:13+08:00",
+  "content_latest_at": "2026-08-17",
   "symbol": "1103",
   "name": "嘉泥",
   "market": "上市",
@@ -147,8 +147,8 @@
       "key": "chip",
       "label": "籌碼 / 市場交易力道",
       "weight": 25,
-      "score": 0,
-      "raw_score": 0.0,
+      "score": 0.1,
+      "raw_score": 0.4,
       "coverage_pct": 66.7,
       "missing_count": 1,
       "rules": [
@@ -156,9 +156,9 @@
           "id": "volume",
           "label": "成交量",
           "source_field": "volume",
-          "raw_value": 218734,
+          "raw_value": 283883,
           "max_score": 10,
-          "score": 0,
+          "score": 0.1,
           "missing": false,
           "description": "成交量反映市場參與度。"
         },
@@ -206,7 +206,7 @@
       ]
     }
   },
-  "total_score": 13.5,
+  "total_score": 13.6,
   "summary": {
     "symbol": "1103",
     "code": "1103",
@@ -217,7 +217,7 @@
     "supply_chain": "水泥工業",
     "trade_price": 13.15,
     "change_pct": 0.0,
-    "volume": 218734,
+    "volume": 283883,
     "turnover_rate_pct": 0.03,
     "revenue_million": 242.32,
     "revenue_mom_pct": 5.71,
@@ -227,20 +227,20 @@
     "financial_period": "2026-07",
     "fundamental_score": 14.0,
     "technical_score": 31.0,
-    "chip_score": 0.0,
+    "chip_score": 0.4,
     "turnover_score": 0.0,
     "weighted_scores": {
       "fundamental": 4.2,
       "technical": 9.3,
-      "chip": 0,
+      "chip": 0.1,
       "turnover": 0
     },
-    "total_score": 13.5,
+    "total_score": 13.6,
     "risk_level": "低",
     "entry_reason": "營收年增 -3.79%，月增 5.71%，週轉率 0.03%",
     "data_quality_score": 66.7,
-    "updated_at": "2026-08-16T17:51:33+08:00",
-    "content_latest_at": "2026-08-14",
+    "updated_at": "2026-08-17T23:26:13+08:00",
+    "content_latest_at": "2026-08-17",
     "scorecard_path": "data/scorecards/1103.json",
     "news_scoring_included": false,
     "theme_scoring_included": false
