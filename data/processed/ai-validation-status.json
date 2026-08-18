@@ -2,9 +2,9 @@
   "status": "warning",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-08-18T18:03:23+08:00",
-  "generated_at": "2026-08-18T18:04:10+08:00",
-  "latestValidationUpdateTime": "2026-08-18T18:03:23+08:00",
+  "generatedAt": "2026-08-18T23:34:04+08:00",
+  "generated_at": "2026-08-18T23:34:29+08:00",
+  "latestValidationUpdateTime": "2026-08-18T23:34:04+08:00",
   "latestSignalDate": "2026-08-18",
   "latestEntryDate": "2026-08-18",
   "latestPriceDate": "2026-08-18",
@@ -25,7 +25,6 @@
   "lastError": "",
   "failedReasons": [],
   "warnings": [
-    "Response ended prematurely",
     "D+20 尚無到期樣本，相關統計保持 null。",
     "歷史 Top 10 快照缺少 2 個交易日；缺口不推定為跌出或連續入榜。"
   ],
@@ -47,39 +46,15 @@
       "error": ""
     },
     {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-07-30",
-      "ok": true,
-      "rows": 1335,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260730&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
       "source": "TPEX exact daily quotes",
       "period": "2026-07-30",
-      "ok": false,
-      "rows": 0,
-      "url": "",
-      "error": "Response ended prematurely"
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-06",
       "ok": true,
-      "rows": 1338,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260806&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TPEX exact daily quotes",
-      "period": "2026-08-06",
-      "ok": true,
-      "rows": 10313,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F06&id=&response=json",
+      "rows": 10302,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F30&id=&response=json",
       "error": ""
     }
   ],
-  "run_id": "32124315271",
-  "data_version": "20260818-1804",
+  "run_id": "32154889966",
+  "data_version": "20260818-2334",
   "source_pipeline": "update_all_site_data"
 }
