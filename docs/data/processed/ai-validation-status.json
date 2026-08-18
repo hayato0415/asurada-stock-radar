@@ -2,16 +2,16 @@
   "status": "warning",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-08-17T23:27:21+08:00",
-  "generated_at": "2026-08-17T23:27:43+08:00",
-  "latestValidationUpdateTime": "2026-08-17T23:27:21+08:00",
-  "latestSignalDate": "2026-08-17",
-  "latestEntryDate": "2026-08-17",
-  "latestPriceDate": "2026-08-17",
-  "latestBenchmarkDate": "2026-08-17",
-  "latest_trade_date": "2026-08-17",
+  "generatedAt": "2026-08-18T18:03:23+08:00",
+  "generated_at": "2026-08-18T18:04:10+08:00",
+  "latestValidationUpdateTime": "2026-08-18T18:03:23+08:00",
+  "latestSignalDate": "2026-08-18",
+  "latestEntryDate": "2026-08-18",
+  "latestPriceDate": "2026-08-18",
+  "latestBenchmarkDate": "2026-08-18",
+  "latest_trade_date": "2026-08-18",
   "completedSignals": 0,
-  "trackingSignals": 119,
+  "trackingSignals": 125,
   "d20CompletedSignals": 0,
   "missingPriceCount": 0,
   "missingBenchmarkCount": 0,
@@ -25,6 +25,7 @@
   "lastError": "",
   "failedReasons": [],
   "warnings": [
+    "Response ended prematurely",
     "D+20 尚無到期樣本，相關統計保持 null。",
     "歷史 Top 10 快照缺少 2 個交易日；缺口不推定為跌出或連續入榜。"
   ],
@@ -41,7 +42,7 @@
       "source": "TWSE TAIEX MI_5MINS_HIST",
       "period": "2026-08",
       "ok": true,
-      "rows": 11,
+      "rows": 12,
       "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260801&response=json",
       "error": ""
     },
@@ -56,10 +57,10 @@
     {
       "source": "TPEX exact daily quotes",
       "period": "2026-07-30",
-      "ok": true,
-      "rows": 10302,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F30&id=&response=json",
-      "error": ""
+      "ok": false,
+      "rows": 0,
+      "url": "",
+      "error": "Response ended prematurely"
     },
     {
       "source": "TWSE exact daily quotes",
@@ -78,7 +79,7 @@
       "error": ""
     }
   ],
-  "run_id": "32042204233",
-  "data_version": "20260817-2327",
+  "run_id": "32124315271",
+  "data_version": "20260818-1804",
   "source_pipeline": "update_all_site_data"
 }
