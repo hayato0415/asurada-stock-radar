@@ -2,19 +2,19 @@
   "status": "warning",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-08-18T23:34:04+08:00",
-  "generated_at": "2026-08-18T23:34:29+08:00",
-  "latestValidationUpdateTime": "2026-08-18T23:34:04+08:00",
-  "latestSignalDate": "2026-08-18",
-  "latestEntryDate": "2026-08-18",
-  "latestPriceDate": "2026-08-18",
+  "generatedAt": "2026-08-19T23:31:38+08:00",
+  "generated_at": "2026-08-19T23:32:46+08:00",
+  "latestValidationUpdateTime": "2026-08-19T23:31:38+08:00",
+  "latestSignalDate": "2026-08-19",
+  "latestEntryDate": "2026-08-19",
+  "latestPriceDate": "2026-08-19",
   "latestBenchmarkDate": "2026-08-18",
-  "latest_trade_date": "2026-08-18",
-  "completedSignals": 0,
-  "trackingSignals": 125,
-  "d20CompletedSignals": 0,
+  "latest_trade_date": "2026-08-19",
+  "completedSignals": 10,
+  "trackingSignals": 120,
+  "d20CompletedSignals": 10,
   "missingPriceCount": 0,
-  "missingBenchmarkCount": 0,
+  "missingBenchmarkCount": 39,
   "snapshotCoverageGapCount": 2,
   "snapshotCoverageGaps": [
     "2026-07-30",
@@ -25,25 +25,27 @@
   "lastError": "",
   "failedReasons": [],
   "warnings": [
-    "D+20 尚無到期樣本，相關統計保持 null。",
+    "Expecting value: line 1 column 1 (char 0)",
+    "HTTPSConnectionPool(host='www.twse.com.tw', port=443): Read timed out. (read timeout=45)",
+    "39 筆訊號缺少同期 TAIEX benchmark。",
     "歷史 Top 10 快照缺少 2 個交易日；缺口不推定為跌出或連續入榜。"
   ],
   "sourceStatus": [
     {
       "source": "TWSE TAIEX MI_5MINS_HIST",
       "period": "2026-07",
-      "ok": true,
-      "rows": 22,
-      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260701&response=json",
-      "error": ""
+      "ok": false,
+      "rows": 0,
+      "url": "",
+      "error": "Expecting value: line 1 column 1 (char 0)"
     },
     {
       "source": "TWSE TAIEX MI_5MINS_HIST",
       "period": "2026-08",
-      "ok": true,
-      "rows": 12,
-      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260801&response=json",
-      "error": ""
+      "ok": false,
+      "rows": 0,
+      "url": "",
+      "error": "HTTPSConnectionPool(host='www.twse.com.tw', port=443): Read timed out. (read timeout=45)"
     },
     {
       "source": "TPEX exact daily quotes",
@@ -52,9 +54,17 @@
       "rows": 10302,
       "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F30&id=&response=json",
       "error": ""
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-08-06",
+      "ok": true,
+      "rows": 10313,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F06&id=&response=json",
+      "error": ""
     }
   ],
-  "run_id": "32154889966",
-  "data_version": "20260818-2334",
+  "run_id": "32270376287",
+  "data_version": "20260819-2332",
   "source_pipeline": "update_all_site_data"
 }
