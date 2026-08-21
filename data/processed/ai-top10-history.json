@@ -1,10 +1,10 @@
 {
   "status": "ok",
   "ok": true,
-  "latestTradeDate": "2026-08-19",
-  "latest_trade_date": "2026-08-19",
-  "generatedAt": "2026-08-19T23:31:15+08:00",
-  "generated_at": "2026-08-19T23:32:46+08:00",
+  "latestTradeDate": "2026-08-21",
+  "latest_trade_date": "2026-08-21",
+  "generatedAt": "2026-08-21T18:07:46+08:00",
+  "generated_at": "2026-08-21T18:08:33+08:00",
   "scoreVersion": "official-multifactor-v1",
   "scoreSource": "docs/data/processed/factor-scores.json",
   "weights": {
@@ -22,7 +22,7 @@
     "score_weakening_consecutive_days": 3,
     "single_day_breakout_appearances_5d": 1
   },
-  "historyTradingDays": 19,
+  "historyTradingDays": 20,
   "tradingDates": [
     "2026-07-22",
     "2026-07-23",
@@ -42,9 +42,10 @@
     "2026-08-14",
     "2026-08-17",
     "2026-08-18",
-    "2026-08-19"
+    "2026-08-19",
+    "2026-08-21"
   ],
-  "itemsCount": 19,
+  "itemsCount": 20,
   "items": [
     {
       "status": "ok",
@@ -4975,9 +4976,269 @@
           "scoreSource": "official_quote_valuation_revenue"
         }
       ]
+    },
+    {
+      "status": "ok",
+      "ok": true,
+      "dataDate": "2026-08-21",
+      "latest_trade_date": "2026-08-21",
+      "generatedAt": "2026-08-21T18:07:46+08:00",
+      "generated_at": "2026-08-21T18:07:46+08:00",
+      "scoreVersion": "official-multifactor-v1",
+      "scoreSource": "docs/data/processed/factor-scores.json",
+      "weights": {
+        "fundamentalScore": 0.3,
+        "technicalScore": 0.3,
+        "chipScore": 0.25,
+        "turnoverScore": 0.15
+      },
+      "validScoreCount": 1948,
+      "itemsCount": 10,
+      "items": [
+        {
+          "rank": 1,
+          "code": "1815",
+          "name": "富喬",
+          "market": "上櫃",
+          "industry": "電子零組件業",
+          "concepts": [
+            "電子零組件業"
+          ],
+          "close": 112.0,
+          "changePercent": 4.67,
+          "totalScore": 88.8,
+          "fundamentalScore": 82.7,
+          "technicalScore": 84.0,
+          "chipScore": 100,
+          "turnoverScore": 92.2,
+          "turnoverRate": 2.0674,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-08-21",
+          "generatedAt": "2026-08-21T18:07:46+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 2,
+          "code": "2615",
+          "name": "萬海",
+          "market": "上市",
+          "industry": "航運業",
+          "concepts": [
+            "航運業"
+          ],
+          "close": 124.5,
+          "changePercent": 9.69,
+          "totalScore": 88.1,
+          "fundamentalScore": 75.8,
+          "technicalScore": 88,
+          "chipScore": 100,
+          "turnoverScore": 93.2,
+          "turnoverRate": 3.1043,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-08-21",
+          "generatedAt": "2026-08-21T18:07:46+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 3,
+          "code": "2609",
+          "name": "陽明",
+          "market": "上市",
+          "industry": "航運業",
+          "concepts": [
+            "航運業"
+          ],
+          "close": 64.0,
+          "changePercent": 6.14,
+          "totalScore": 87.9,
+          "fundamentalScore": 74.6,
+          "technicalScore": 88,
+          "chipScore": 100,
+          "turnoverScore": 94.1,
+          "turnoverRate": 5.6982,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-08-21",
+          "generatedAt": "2026-08-21T18:07:46+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 4,
+          "code": "3441",
+          "name": "聯一光",
+          "market": "上櫃",
+          "industry": "光電業",
+          "concepts": [
+            "光電業"
+          ],
+          "close": 107.0,
+          "changePercent": 9.97,
+          "totalScore": 87.6,
+          "fundamentalScore": 73.3,
+          "technicalScore": 88,
+          "chipScore": 100,
+          "turnoverScore": 94.9,
+          "turnoverRate": 12.1915,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-08-21",
+          "generatedAt": "2026-08-21T18:07:46+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 5,
+          "code": "2637",
+          "name": "慧洋-KY",
+          "market": "上市",
+          "industry": "航運業",
+          "concepts": [
+            "航運業"
+          ],
+          "close": 102.0,
+          "changePercent": 7.71,
+          "totalScore": 87.3,
+          "fundamentalScore": 73.5,
+          "technicalScore": 88,
+          "chipScore": 100,
+          "turnoverScore": 92.5,
+          "turnoverRate": 2.3943,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-08-21",
+          "generatedAt": "2026-08-21T18:07:46+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 6,
+          "code": "3260",
+          "name": "威剛",
+          "market": "上櫃",
+          "industry": "半導體業",
+          "concepts": [
+            "半導體業"
+          ],
+          "close": 422.5,
+          "changePercent": 5.36,
+          "totalScore": 87.2,
+          "fundamentalScore": 80.4,
+          "technicalScore": 86.1,
+          "chipScore": 97.4,
+          "turnoverScore": 85.9,
+          "turnoverRate": 0.64,
+          "tradeType": "短線",
+          "riskLabel": "正常",
+          "dataDate": "2026-08-21",
+          "generatedAt": "2026-08-21T18:07:46+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 7,
+          "code": "2451",
+          "name": "創見",
+          "market": "上市",
+          "industry": "半導體業",
+          "concepts": [
+            "半導體業"
+          ],
+          "close": 312.5,
+          "changePercent": 9.84,
+          "totalScore": 87.1,
+          "fundamentalScore": 72.0,
+          "technicalScore": 88,
+          "chipScore": 100,
+          "turnoverScore": 93.7,
+          "turnoverRate": 4.2522,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-08-21",
+          "generatedAt": "2026-08-21T18:07:46+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 8,
+          "code": "1709",
+          "name": "和益",
+          "market": "上市",
+          "industry": "化學工業",
+          "concepts": [
+            "化學工業"
+          ],
+          "close": 33.3,
+          "changePercent": 9.9,
+          "totalScore": 86.7,
+          "fundamentalScore": 72.6,
+          "technicalScore": 88,
+          "chipScore": 98.2,
+          "turnoverScore": 93.3,
+          "turnoverRate": 3.1985,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-08-21",
+          "generatedAt": "2026-08-21T18:07:46+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 9,
+          "code": "5608",
+          "name": "四維航",
+          "market": "上市",
+          "industry": "航運業",
+          "concepts": [
+            "航運業"
+          ],
+          "close": 18.75,
+          "changePercent": 9.97,
+          "totalScore": 86.7,
+          "fundamentalScore": 70.1,
+          "technicalScore": 88,
+          "chipScore": 100,
+          "turnoverScore": 94.9,
+          "turnoverRate": 14.1047,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-08-21",
+          "generatedAt": "2026-08-21T18:07:46+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 10,
+          "code": "3081",
+          "name": "聯亞",
+          "market": "上櫃",
+          "industry": "通信網路業",
+          "concepts": [
+            "通信網路業"
+          ],
+          "close": 2920.0,
+          "changePercent": 5.04,
+          "totalScore": 86.4,
+          "fundamentalScore": 81.5,
+          "technicalScore": 85.1,
+          "chipScore": 95.4,
+          "turnoverScore": 83.9,
+          "turnoverRate": 0.4981,
+          "tradeType": "短線",
+          "riskLabel": "正常",
+          "dataDate": "2026-08-21",
+          "generatedAt": "2026-08-21T18:07:46+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        }
+      ]
     }
   ],
-  "run_id": "32270376287",
-  "data_version": "20260819-2332",
+  "run_id": "32470566940",
+  "data_version": "20260821-1808",
   "source_pipeline": "update_all_site_data"
 }

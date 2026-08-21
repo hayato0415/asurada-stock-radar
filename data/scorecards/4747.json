@@ -1,7 +1,7 @@
 {
-  "build_id": "20260819-2330-scorecards",
-  "updated_at": "2026-08-19T23:30:46+08:00",
-  "content_latest_at": "2026-08-19",
+  "build_id": "20260821-1806-scorecards",
+  "updated_at": "2026-08-21T18:06:59+08:00",
+  "content_latest_at": "2026-08-21",
   "symbol": "4747",
   "name": "強生",
   "market": "上櫃",
@@ -96,19 +96,19 @@
       "key": "technical",
       "label": "技術面",
       "weight": 30,
-      "score": 13.7,
-      "raw_score": 45.7,
-      "coverage_pct": 50.0,
-      "missing_count": 2,
+      "score": 0,
+      "raw_score": 0.0,
+      "coverage_pct": 0.0,
+      "missing_count": 4,
       "rules": [
         {
           "id": "change_1d",
           "label": "當日漲跌幅",
           "source_field": "change_pct",
-          "raw_value": 6.6,
+          "raw_value": null,
           "max_score": 12,
-          "score": 9.7,
-          "missing": false,
+          "score": 0,
+          "missing": true,
           "description": "當日價格強度。"
         },
         {
@@ -135,10 +135,10 @@
           "id": "price_available",
           "label": "成交價可用",
           "source_field": "trade_price",
-          "raw_value": 56.5,
+          "raw_value": null,
           "max_score": 4,
-          "score": 4,
-          "missing": false,
+          "score": 0,
+          "missing": true,
           "description": "有正式成交價才給資料完整分。"
         }
       ]
@@ -149,17 +149,17 @@
       "weight": 25,
       "score": 0,
       "raw_score": 0.0,
-      "coverage_pct": 33.3,
-      "missing_count": 2,
+      "coverage_pct": 0.0,
+      "missing_count": 3,
       "rules": [
         {
           "id": "volume",
           "label": "成交量",
           "source_field": "volume",
-          "raw_value": 159403,
+          "raw_value": null,
           "max_score": 10,
           "score": 0,
-          "missing": false,
+          "missing": true,
           "description": "成交量反映市場參與度。"
         },
         {
@@ -206,7 +206,7 @@
       ]
     }
   },
-  "total_score": 21.0,
+  "total_score": 7.3,
   "summary": {
     "symbol": "4747",
     "code": "4747",
@@ -215,9 +215,9 @@
     "industry": "生技醫療業",
     "theme": "生技醫療業",
     "supply_chain": "生技醫療業",
-    "trade_price": 56.5,
-    "change_pct": 6.6,
-    "volume": 159403,
+    "trade_price": null,
+    "change_pct": null,
+    "volume": null,
     "turnover_rate_pct": null,
     "revenue_million": 54.47,
     "revenue_mom_pct": 15.26,
@@ -226,21 +226,21 @@
     "gross_margin_pct": null,
     "financial_period": "2026-07",
     "fundamental_score": 24.3,
-    "technical_score": 45.7,
+    "technical_score": 0.0,
     "chip_score": 0.0,
     "turnover_score": 0.0,
     "weighted_scores": {
       "fundamental": 7.3,
-      "technical": 13.7,
+      "technical": 0,
       "chip": 0,
       "turnover": 0
     },
-    "total_score": 21.0,
-    "risk_level": "低",
+    "total_score": 7.3,
+    "risk_level": "中",
     "entry_reason": "營收年增 23.56%，月增 15.26%",
-    "data_quality_score": 33.3,
-    "updated_at": "2026-08-19T23:30:46+08:00",
-    "content_latest_at": "2026-08-19",
+    "data_quality_score": 12.5,
+    "updated_at": "2026-08-21T18:06:59+08:00",
+    "content_latest_at": "2026-08-21",
     "scorecard_path": "data/scorecards/4747.json",
     "news_scoring_included": false,
     "theme_scoring_included": false
@@ -248,9 +248,12 @@
   "missing_fields": [
     "change_20d",
     "change_5d",
+    "change_pct",
     "eps",
     "gross_margin_pct",
+    "trade_price",
     "turnover_rate_pct",
+    "volume",
     "volume_ratio_5d"
   ],
   "data_sources": {
