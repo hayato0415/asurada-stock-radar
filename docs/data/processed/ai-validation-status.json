@@ -2,17 +2,17 @@
   "status": "warning",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-09-02T02:11:35+08:00",
-  "generated_at": "2026-09-02T02:12:15+08:00",
-  "latestValidationUpdateTime": "2026-09-02T02:11:35+08:00",
-  "latestSignalDate": "2026-09-01",
-  "latestEntryDate": "2026-09-01",
-  "latestPriceDate": "2026-09-01",
-  "latestBenchmarkDate": "2026-09-01",
-  "latest_trade_date": "2026-09-01",
-  "completedSignals": 64,
-  "trackingSignals": 112,
-  "d20CompletedSignals": 64,
+  "generatedAt": "2026-09-02T21:48:41+08:00",
+  "generated_at": "2026-09-02T21:49:19+08:00",
+  "latestValidationUpdateTime": "2026-09-02T21:48:41+08:00",
+  "latestSignalDate": "2026-09-02",
+  "latestEntryDate": "2026-09-02",
+  "latestPriceDate": "2026-09-02",
+  "latestBenchmarkDate": "2026-09-02",
+  "latest_trade_date": "2026-09-02",
+  "completedSignals": 72,
+  "trackingSignals": 110,
+  "d20CompletedSignals": 72,
   "missingPriceCount": 0,
   "missingBenchmarkCount": 0,
   "snapshotCoverageGapCount": 4,
@@ -27,6 +27,7 @@
   "lastError": "",
   "failedReasons": [],
   "warnings": [
+    "Response ended prematurely",
     "歷史 Top 10 快照缺少 4 個交易日；缺口不推定為跌出或連續入榜。"
   ],
   "sourceStatus": [
@@ -50,7 +51,7 @@
       "source": "TWSE TAIEX MI_5MINS_HIST",
       "period": "2026-09",
       "ok": true,
-      "rows": 1,
+      "rows": 2,
       "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260901&response=json",
       "error": ""
     },
@@ -113,13 +114,13 @@
     {
       "source": "TPEX exact daily quotes",
       "period": "2026-08-25",
-      "ok": true,
-      "rows": 10489,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F25&id=&response=json",
-      "error": ""
+      "ok": false,
+      "rows": 0,
+      "url": "",
+      "error": "Response ended prematurely"
     }
   ],
-  "run_id": "33542021501",
-  "data_version": "20260901-0212",
+  "run_id": "33637844662",
+  "data_version": "20260902-2149",
   "source_pipeline": "update_all_site_data"
 }
