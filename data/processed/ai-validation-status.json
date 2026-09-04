@@ -2,17 +2,17 @@
   "status": "warning",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-09-04T02:23:03+08:00",
-  "generated_at": "2026-09-04T02:23:46+08:00",
-  "latestValidationUpdateTime": "2026-09-04T02:23:03+08:00",
-  "latestSignalDate": "2026-09-03",
-  "latestEntryDate": "2026-09-03",
-  "latestPriceDate": "2026-09-03",
-  "latestBenchmarkDate": "2026-09-03",
-  "latest_trade_date": "2026-09-03",
-  "completedSignals": 72,
-  "trackingSignals": 118,
-  "d20CompletedSignals": 72,
+  "generatedAt": "2026-09-04T18:01:41+08:00",
+  "generated_at": "2026-09-04T18:03:30+08:00",
+  "latestValidationUpdateTime": "2026-09-04T18:01:41+08:00",
+  "latestSignalDate": "2026-09-04",
+  "latestEntryDate": "2026-09-04",
+  "latestPriceDate": "2026-09-04",
+  "latestBenchmarkDate": "2026-09-04",
+  "latest_trade_date": "2026-09-04",
+  "completedSignals": 79,
+  "trackingSignals": 117,
+  "d20CompletedSignals": 79,
   "missingPriceCount": 0,
   "missingBenchmarkCount": 0,
   "snapshotCoverageGapCount": 4,
@@ -27,6 +27,7 @@
   "lastError": "",
   "failedReasons": [],
   "warnings": [
+    "Response ended prematurely",
     "歷史 Top 10 快照缺少 4 個交易日；缺口不推定為跌出或連續入榜。"
   ],
   "sourceStatus": [
@@ -50,7 +51,7 @@
       "source": "TWSE TAIEX MI_5MINS_HIST",
       "period": "2026-09",
       "ok": true,
-      "rows": 3,
+      "rows": 4,
       "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260901&response=json",
       "error": ""
     },
@@ -81,10 +82,10 @@
     {
       "source": "TPEX exact daily quotes",
       "period": "2026-08-06",
-      "ok": true,
-      "rows": 10313,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F06&id=&response=json",
-      "error": ""
+      "ok": false,
+      "rows": 0,
+      "url": "",
+      "error": "Response ended prematurely"
     },
     {
       "source": "TWSE exact daily quotes",
@@ -119,7 +120,7 @@
       "error": ""
     }
   ],
-  "run_id": "33790002991",
-  "data_version": "20260903-0223",
+  "run_id": "33860872300",
+  "data_version": "20260904-1803",
   "source_pipeline": "update_all_site_data"
 }
