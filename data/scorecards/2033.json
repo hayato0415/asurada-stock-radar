@@ -1,6 +1,6 @@
 {
-  "build_id": "20260904-2145-scorecards",
-  "updated_at": "2026-09-04T21:45:37+08:00",
+  "build_id": "20260905-1725-scorecards",
+  "updated_at": "2026-09-05T17:25:33+08:00",
   "content_latest_at": "2026-09-04",
   "symbol": "2033",
   "name": "佳大",
@@ -147,8 +147,8 @@
       "key": "chip",
       "label": "籌碼 / 市場交易力道",
       "weight": 25,
-      "score": 2.0,
-      "raw_score": 8.0,
+      "score": 1.5,
+      "raw_score": 6.0,
       "coverage_pct": 66.7,
       "missing_count": 1,
       "rules": [
@@ -166,9 +166,9 @@
           "id": "turnover_chip",
           "label": "週轉率交易力道",
           "source_field": "turnover_rate_pct",
-          "raw_value": 2.07,
+          "raw_value": 1.39,
           "max_score": 10,
-          "score": 1.7,
+          "score": 1.2,
           "missing": false,
           "description": "週轉率反映籌碼換手。"
         },
@@ -188,8 +188,8 @@
       "key": "turnover",
       "label": "週轉率 / 交易熱度",
       "weight": 15,
-      "score": 2.6,
-      "raw_score": 17.3,
+      "score": 1.7,
+      "raw_score": 11.3,
       "coverage_pct": 100.0,
       "missing_count": 0,
       "rules": [
@@ -197,16 +197,16 @@
           "id": "turnover_rate",
           "label": "週轉率",
           "source_field": "turnover_rate_pct",
-          "raw_value": 2.07,
+          "raw_value": 1.39,
           "max_score": 15,
-          "score": 2.6,
+          "score": 1.7,
           "missing": false,
           "description": "週轉率越高，交易熱度越高；無上市股數時不硬算。"
         }
       ]
     }
   },
-  "total_score": 18.7,
+  "total_score": 17.3,
   "summary": {
     "symbol": "2033",
     "code": "2033",
@@ -218,7 +218,7 @@
     "trade_price": 26.05,
     "change_pct": 1.96,
     "volume": 1673188,
-    "turnover_rate_pct": 2.07,
+    "turnover_rate_pct": 1.39,
     "revenue_million": 53.1,
     "revenue_mom_pct": 12.49,
     "revenue_yoy_pct": -16.48,
@@ -227,19 +227,19 @@
     "financial_period": "2026-07",
     "fundamental_score": 11.7,
     "technical_score": 35.3,
-    "chip_score": 8.0,
-    "turnover_score": 17.3,
+    "chip_score": 6.0,
+    "turnover_score": 11.3,
     "weighted_scores": {
       "fundamental": 3.5,
       "technical": 10.6,
-      "chip": 2.0,
-      "turnover": 2.6
+      "chip": 1.5,
+      "turnover": 1.7
     },
-    "total_score": 18.7,
+    "total_score": 17.3,
     "risk_level": "低",
-    "entry_reason": "營收年增 -16.48%，月增 12.49%，週轉率 2.07%",
+    "entry_reason": "營收年增 -16.48%，月增 12.49%，週轉率 1.39%",
     "data_quality_score": 66.7,
-    "updated_at": "2026-09-04T21:45:37+08:00",
+    "updated_at": "2026-09-05T17:25:33+08:00",
     "content_latest_at": "2026-09-04",
     "scorecard_path": "data/scorecards/2033.json",
     "news_scoring_included": false,
