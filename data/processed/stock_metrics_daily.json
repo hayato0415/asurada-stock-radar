@@ -1,6 +1,6 @@
 {
   "date": "2026-09-09",
-  "updated_at": "2026-09-09 18:09",
+  "updated_at": "2026-09-09 21:51",
   "revenue_month": "2026-07",
   "source": {
     "daily_quote": {
@@ -11,7 +11,7 @@
     "listed_shares": "TWSE / TPEx company basic OpenAPI if available"
   },
   "quality": {
-    "stock_master_count": 1974,
+    "stock_master_count": 1975,
     "daily_quote_matched": 1971,
     "daily_quote_matched_by_market": {
       "twse": 1083,
@@ -19,7 +19,7 @@
     },
     "daily_quote_required_by_market": {
       "twse": 868,
-      "tpex": 712
+      "tpex": 713
     },
     "daily_quote_minimum_ratio": 0.8,
     "daily_quote_source_dates": {
@@ -30,12 +30,14 @@
     "missing_quote": [
       "1589",
       "4804",
-      "6129"
+      "6129",
+      "7825"
     ],
     "missing_revenue": [
       "2850",
       "2883",
-      "3718"
+      "3718",
+      "7825"
     ],
     "errors": []
   },
@@ -21125,6 +21127,18 @@
       "revenue_yoy_pct": 3.11
     },
     {
+      "symbol": "7825",
+      "name": "和亞智慧",
+      "trade_price": null,
+      "change_pct": null,
+      "volume": null,
+      "listed_shares": null,
+      "turnover_rate_pct": null,
+      "revenue_million": null,
+      "revenue_mom_pct": null,
+      "revenue_yoy_pct": null
+    },
+    {
       "symbol": "7827",
       "name": "漢康-KY創",
       "trade_price": 151.5,
@@ -23729,9 +23743,9 @@
       "revenue_yoy_pct": 82.49
     }
   ],
-  "run_id": "34338571364",
-  "generated_at": "2026-09-09T18:11:10+08:00",
+  "run_id": "34359557342",
+  "generated_at": "2026-09-09T21:52:55+08:00",
   "latest_trade_date": "2026-09-09",
-  "data_version": "20260909-1811",
+  "data_version": "20260909-2152",
   "source_pipeline": "update_all_site_data"
 }

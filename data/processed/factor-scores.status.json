@@ -1,13 +1,13 @@
 {
   "ok": true,
-  "updated_at": "2026-09-09T18:09:52+08:00",
-  "attempted_at": "2026-09-09T18:09:52+08:00",
+  "updated_at": "2026-09-09T21:52:11+08:00",
+  "attempted_at": "2026-09-09T21:52:11+08:00",
   "target_date": "2026-09-09",
   "latest_trade_date": "2026-09-09",
   "revenue_month": "2026-07",
   "items_count": 100,
   "rows_written": 100,
-  "stock_master_count": 1974,
+  "stock_master_count": 1975,
   "twse_quote_matched": 1083,
   "tpex_quote_matched": 888,
   "previous_data_preserved": false,
@@ -20,15 +20,16 @@
     "company_basic": "MOPS t187ap03_L / t187ap03_O"
   },
   "quality": {
-    "stock_master_count": 1974,
+    "stock_master_count": 1975,
     "quote_matched": 1971,
     "score_candidates": 1941,
-    "missing_quote_count": 3,
+    "missing_quote_count": 4,
     "missing_score_count": 30,
     "missing_quote_sample": [
       "1589",
       "4804",
-      "6129"
+      "6129",
+      "7825"
     ],
     "missing_score_sample": [
       "1312",
@@ -67,7 +68,7 @@
     "minimum_ratio": 0.8,
     "required": {
       "twse": 868,
-      "tpex": 712
+      "tpex": 713
     },
     "matched": {
       "twse": 1083,
@@ -170,8 +171,8 @@
     "ok": true,
     "status": "ok",
     "latest_trade_date": "2026-09-09",
-    "generated_at": "2026-09-09T18:09:52+08:00",
-    "snapshot_created": true,
+    "generated_at": "2026-09-09T21:52:11+08:00",
+    "snapshot_created": false,
     "snapshot_path": "data/history/ai-top10/2026-09-09.json",
     "history_trading_days": 32,
     "items_count": 10,
@@ -184,8 +185,8 @@
       "ai-persistence-monthly.json": "updated"
     }
   },
-  "run_id": "34338571364",
-  "generated_at": "2026-09-09T18:11:10+08:00",
-  "data_version": "20260909-1811",
+  "run_id": "34359557342",
+  "generated_at": "2026-09-09T21:52:55+08:00",
+  "data_version": "20260909-2152",
   "source_pipeline": "update_all_site_data"
 }

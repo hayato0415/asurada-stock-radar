@@ -1,6 +1,6 @@
 {
   "date": "2026-09-09",
-  "updated_at": "2026-09-09 18:09",
+  "updated_at": "2026-09-09 21:51",
   "source": {
     "stock_master": "data/processed/stocks_master.json",
     "stock_metrics": "data/processed/stock_metrics_daily.json",
@@ -9,9 +9,9 @@
     "manual_memberships": "data/manual/theme_memberships.csv"
   },
   "quality": {
-    "stock_master_count": 1974,
+    "stock_master_count": 1975,
     "theme_count": 35,
-    "beneficiary_stock_count": 2094,
+    "beneficiary_stock_count": 2095,
     "quote_matched": 1971,
     "revenue_matched": 1971,
     "eps_matched": 0,
@@ -22,12 +22,14 @@
     "missing_quote": [
       "1589",
       "4804",
-      "6129"
+      "6129",
+      "7825"
     ],
     "missing_revenue": [
       "2850",
       "2883",
-      "3718"
+      "3718",
+      "7825"
     ],
     "missing_financials": [
       "1101",
@@ -27618,14 +27620,780 @@
       "rank": 9
     },
     {
+      "theme": "塑膠工業",
+      "theme_change_pct": 1.15,
+      "turnover_billion": 209.19,
+      "up_count": 16,
+      "limit_up_count": 0,
+      "beneficiary_count": 25,
+      "high_score_news_count": 0,
+      "avg_ai_score": 37.6,
+      "source_types": [
+        "ai",
+        "master"
+      ],
+      "source_labels": [
+        "AI 題材標籤",
+        "主檔產業 / 供應鏈"
+      ],
+      "beneficiary_stocks": [
+        {
+          "symbol": "4304",
+          "name": "勝昱",
+          "market": "上櫃",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 16.4,
+          "change_pct": -1.5,
+          "volume": 86002,
+          "turnover_rate_pct": null,
+          "turnover_billion": 0.014,
+          "revenue_yoy_pct": 54.85,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 50.3,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 54.85%；漲跌 -1.50%"
+        },
+        {
+          "symbol": "1303",
+          "name": "南亞",
+          "market": "上市",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 236.5,
+          "change_pct": 0.64,
+          "volume": 67601719,
+          "turnover_rate_pct": 0.85,
+          "turnover_billion": 159.878,
+          "revenue_yoy_pct": 44.53,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 48.9,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 44.53%；漲跌 0.64%"
+        },
+        {
+          "symbol": "1326",
+          "name": "台化",
+          "market": "上市",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 71.8,
+          "change_pct": 1.7,
+          "volume": 37249918,
+          "turnover_rate_pct": 0.64,
+          "turnover_billion": 26.745,
+          "revenue_yoy_pct": 34.18,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 48.1,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 34.18%；漲跌 1.70%"
+        },
+        {
+          "symbol": "1340",
+          "name": "勝悅-KY",
+          "market": "上市",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 5.2,
+          "change_pct": -0.57,
+          "volume": 74992,
+          "turnover_rate_pct": 0.05,
+          "turnover_billion": 0.004,
+          "revenue_yoy_pct": 138.88,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 46.7,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 138.88%；漲跌 -0.57%"
+        },
+        {
+          "symbol": "4303",
+          "name": "信立",
+          "market": "上櫃",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 36.35,
+          "change_pct": 1.96,
+          "volume": 984300,
+          "turnover_rate_pct": null,
+          "turnover_billion": 0.358,
+          "revenue_yoy_pct": 16.88,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 44.5,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 16.88%；漲跌 1.96%"
+        },
+        {
+          "symbol": "1301",
+          "name": "台塑",
+          "market": "上市",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 66.7,
+          "change_pct": 2.46,
+          "volume": 26927598,
+          "turnover_rate_pct": 0.42,
+          "turnover_billion": 17.961,
+          "revenue_yoy_pct": 4.77,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 43.6,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 4.77%；漲跌 2.46%"
+        },
+        {
+          "symbol": "1309",
+          "name": "台達化",
+          "market": "上市",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 14.2,
+          "change_pct": 4.41,
+          "volume": 3339653,
+          "turnover_rate_pct": 0.84,
+          "turnover_billion": 0.474,
+          "revenue_yoy_pct": -10.61,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 42.5,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -10.61%；漲跌 4.41%"
+        },
+        {
+          "symbol": "1341",
+          "name": "富林-KY",
+          "market": "上市",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 60.0,
+          "change_pct": 0.33,
+          "volume": 4008,
+          "turnover_rate_pct": 0.01,
+          "turnover_billion": 0.002,
+          "revenue_yoy_pct": 22.54,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 39.2,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 22.54%；漲跌 0.33%"
+        },
+        {
+          "symbol": "1304",
+          "name": "台聚",
+          "market": "上市",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 12.8,
+          "change_pct": 3.64,
+          "volume": 4243247,
+          "turnover_rate_pct": 0.36,
+          "turnover_billion": 0.543,
+          "revenue_yoy_pct": -4.95,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 37.6,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -4.95%；漲跌 3.64%"
+        },
+        {
+          "symbol": "1308",
+          "name": "亞聚",
+          "market": "上市",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 14.8,
+          "change_pct": 4.59,
+          "volume": 2326914,
+          "turnover_rate_pct": 0.39,
+          "turnover_billion": 0.344,
+          "revenue_yoy_pct": 7.73,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 37.2,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 7.73%；漲跌 4.59%"
+        },
+        {
+          "symbol": "4305",
+          "name": "世坤",
+          "market": "上櫃",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 42.05,
+          "change_pct": -2.66,
+          "volume": 2070,
+          "turnover_rate_pct": null,
+          "turnover_billion": 0.001,
+          "revenue_yoy_pct": 5.16,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 37.2,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 5.16%；漲跌 -2.66%"
+        },
+        {
+          "symbol": "1310",
+          "name": "台苯",
+          "market": "上市",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 8.87,
+          "change_pct": 3.5,
+          "volume": 3865106,
+          "turnover_rate_pct": 0.73,
+          "turnover_billion": 0.343,
+          "revenue_yoy_pct": -14.52,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 36.9,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -14.52%；漲跌 3.50%"
+        },
+        {
+          "symbol": "1307",
+          "name": "三芳",
+          "market": "上市",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 30.85,
+          "change_pct": 0.65,
+          "volume": 384437,
+          "turnover_rate_pct": 0.1,
+          "turnover_billion": 0.119,
+          "revenue_yoy_pct": 11.02,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 36.3,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 11.02%；漲跌 0.65%"
+        },
+        {
+          "symbol": "1314",
+          "name": "中石化",
+          "market": "上市",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 8.21,
+          "change_pct": 1.23,
+          "volume": 18123514,
+          "turnover_rate_pct": 0.48,
+          "turnover_billion": 1.488,
+          "revenue_yoy_pct": -35.6,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 35.9,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -35.60%；漲跌 1.23%"
+        },
+        {
+          "symbol": "1323",
+          "name": "永裕",
+          "market": "上市",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 21.15,
+          "change_pct": -0.47,
+          "volume": 40333,
+          "turnover_rate_pct": 0.04,
+          "turnover_billion": 0.009,
+          "revenue_yoy_pct": 28.99,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 35.0,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 28.99%；漲跌 -0.47%"
+        },
+        {
+          "symbol": "9950",
+          "name": "萬國通",
+          "market": "上櫃",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 10.3,
+          "change_pct": -0.96,
+          "volume": 14128,
+          "turnover_rate_pct": null,
+          "turnover_billion": 0.001,
+          "revenue_yoy_pct": -1.69,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 35.0,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -1.69%；漲跌 -0.96%"
+        },
+        {
+          "symbol": "1313",
+          "name": "聯成",
+          "market": "上市",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 12.15,
+          "change_pct": 2.97,
+          "volume": 3601297,
+          "turnover_rate_pct": 0.27,
+          "turnover_billion": 0.438,
+          "revenue_yoy_pct": -0.78,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 34.7,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -0.78%；漲跌 2.97%"
+        },
+        {
+          "symbol": "4306",
+          "name": "炎洲",
+          "market": "上市",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 15.2,
+          "change_pct": 0.66,
+          "volume": 690936,
+          "turnover_rate_pct": 0.1,
+          "turnover_billion": 0.105,
+          "revenue_yoy_pct": 15.15,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 33.7,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 15.15%；漲跌 0.66%"
+        },
+        {
+          "symbol": "1337",
+          "name": "再生-KY",
+          "market": "上市",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 4.51,
+          "change_pct": 0.0,
+          "volume": 222913,
+          "turnover_rate_pct": 0.08,
+          "turnover_billion": 0.01,
+          "revenue_yoy_pct": -1.82,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 32.5,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -1.82%；漲跌 0.00%"
+        },
+        {
+          "symbol": "1325",
+          "name": "恆大",
+          "market": "上市",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 26.4,
+          "change_pct": 1.73,
+          "volume": 249726,
+          "turnover_rate_pct": 0.29,
+          "turnover_billion": 0.066,
+          "revenue_yoy_pct": -0.16,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 31.8,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -0.16%；漲跌 1.73%"
+        },
+        {
+          "symbol": "1324",
+          "name": "地球",
+          "market": "上市",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 10.0,
+          "change_pct": 0.0,
+          "volume": 12241,
+          "turnover_rate_pct": 0.02,
+          "turnover_billion": 0.001,
+          "revenue_yoy_pct": 6.57,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 31.7,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 6.57%；漲跌 0.00%"
+        },
+        {
+          "symbol": "1305",
+          "name": "華夏",
+          "market": "上市",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 12.5,
+          "change_pct": 2.88,
+          "volume": 2015544,
+          "turnover_rate_pct": 0.35,
+          "turnover_billion": 0.252,
+          "revenue_yoy_pct": -24.55,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 31.2,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -24.55%；漲跌 2.88%"
+        },
+        {
+          "symbol": "1315",
+          "name": "達新",
+          "market": "上市",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 66.1,
+          "change_pct": 0.0,
+          "volume": 25244,
+          "turnover_rate_pct": 0.03,
+          "turnover_billion": 0.017,
+          "revenue_yoy_pct": -4.13,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 31.0,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -4.13%；漲跌 0.00%"
+        },
+        {
+          "symbol": "1321",
+          "name": "大洋",
+          "market": "上市",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": 32.5,
+          "change_pct": 0.46,
+          "volume": 53000,
+          "turnover_rate_pct": 0.02,
+          "turnover_billion": 0.017,
+          "revenue_yoy_pct": 1.42,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 30.9,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 1.42%；漲跌 0.46%"
+        },
+        {
+          "symbol": "1312",
+          "name": "國喬",
+          "market": "上市",
+          "industry": "塑膠工業",
+          "theme": "塑膠工業",
+          "trade_price": null,
+          "change_pct": null,
+          "volume": 0,
+          "turnover_rate_pct": 0.0,
+          "turnover_billion": null,
+          "revenue_yoy_pct": -5.02,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 27.3,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -5.02%；週轉率 0.00%"
+        }
+      ],
+      "theme_score": 28.2,
+      "leader_stocks": [
+        {
+          "symbol": "4304",
+          "name": "勝昱"
+        },
+        {
+          "symbol": "1303",
+          "name": "南亞"
+        },
+        {
+          "symbol": "1326",
+          "name": "台化"
+        },
+        {
+          "symbol": "1340",
+          "name": "勝悅-KY"
+        },
+        {
+          "symbol": "4303",
+          "name": "信立"
+        }
+      ],
+      "low_base_stocks": [
+        {
+          "symbol": "4304",
+          "name": "勝昱"
+        },
+        {
+          "symbol": "1303",
+          "name": "南亞"
+        },
+        {
+          "symbol": "1340",
+          "name": "勝悅-KY"
+        },
+        {
+          "symbol": "1341",
+          "name": "富林-KY"
+        },
+        {
+          "symbol": "4305",
+          "name": "世坤"
+        }
+      ],
+      "rank": 10
+    },
+    {
       "theme": "其他電子業",
       "theme_change_pct": 0.63,
       "turnover_billion": 372.83,
       "up_count": 58,
       "limit_up_count": 0,
-      "beneficiary_count": 94,
+      "beneficiary_count": 95,
       "high_score_news_count": 0,
-      "avg_ai_score": 40.1,
+      "avg_ai_score": 40.0,
       "source_types": [
         "ai",
         "master"
@@ -29568,6 +30336,34 @@
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 18.40%；漲跌 0.00%"
         },
         {
+          "symbol": "7825",
+          "name": "和亞智慧",
+          "market": "上櫃",
+          "industry": "其他電子業",
+          "theme": "其他電子業",
+          "trade_price": null,
+          "change_pct": null,
+          "volume": null,
+          "turnover_rate_pct": null,
+          "turnover_billion": null,
+          "revenue_yoy_pct": null,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 34.6,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類"
+        },
+        {
           "symbol": "5225",
           "name": "東科-KY",
           "market": "上市",
@@ -30268,7 +31064,7 @@
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -27.10%；漲跌 0.63%"
         }
       ],
-      "theme_score": 28.2,
+      "theme_score": 28.0,
       "leader_stocks": [
         {
           "symbol": "3324",
@@ -30311,772 +31107,6 @@
         {
           "symbol": "2354",
           "name": "鴻準"
-        }
-      ],
-      "rank": 10
-    },
-    {
-      "theme": "塑膠工業",
-      "theme_change_pct": 1.15,
-      "turnover_billion": 209.19,
-      "up_count": 16,
-      "limit_up_count": 0,
-      "beneficiary_count": 25,
-      "high_score_news_count": 0,
-      "avg_ai_score": 37.6,
-      "source_types": [
-        "ai",
-        "master"
-      ],
-      "source_labels": [
-        "AI 題材標籤",
-        "主檔產業 / 供應鏈"
-      ],
-      "beneficiary_stocks": [
-        {
-          "symbol": "4304",
-          "name": "勝昱",
-          "market": "上櫃",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 16.4,
-          "change_pct": -1.5,
-          "volume": 86002,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.014,
-          "revenue_yoy_pct": 54.85,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 50.3,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 54.85%；漲跌 -1.50%"
-        },
-        {
-          "symbol": "1303",
-          "name": "南亞",
-          "market": "上市",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 236.5,
-          "change_pct": 0.64,
-          "volume": 67601719,
-          "turnover_rate_pct": 0.85,
-          "turnover_billion": 159.878,
-          "revenue_yoy_pct": 44.53,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 48.9,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 44.53%；漲跌 0.64%"
-        },
-        {
-          "symbol": "1326",
-          "name": "台化",
-          "market": "上市",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 71.8,
-          "change_pct": 1.7,
-          "volume": 37249918,
-          "turnover_rate_pct": 0.64,
-          "turnover_billion": 26.745,
-          "revenue_yoy_pct": 34.18,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 48.1,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 34.18%；漲跌 1.70%"
-        },
-        {
-          "symbol": "1340",
-          "name": "勝悅-KY",
-          "market": "上市",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 5.2,
-          "change_pct": -0.57,
-          "volume": 74992,
-          "turnover_rate_pct": 0.05,
-          "turnover_billion": 0.004,
-          "revenue_yoy_pct": 138.88,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 46.7,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 138.88%；漲跌 -0.57%"
-        },
-        {
-          "symbol": "4303",
-          "name": "信立",
-          "market": "上櫃",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 36.35,
-          "change_pct": 1.96,
-          "volume": 984300,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.358,
-          "revenue_yoy_pct": 16.88,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 44.5,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 16.88%；漲跌 1.96%"
-        },
-        {
-          "symbol": "1301",
-          "name": "台塑",
-          "market": "上市",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 66.7,
-          "change_pct": 2.46,
-          "volume": 26927598,
-          "turnover_rate_pct": 0.42,
-          "turnover_billion": 17.961,
-          "revenue_yoy_pct": 4.77,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 43.6,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 4.77%；漲跌 2.46%"
-        },
-        {
-          "symbol": "1309",
-          "name": "台達化",
-          "market": "上市",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 14.2,
-          "change_pct": 4.41,
-          "volume": 3339653,
-          "turnover_rate_pct": 0.84,
-          "turnover_billion": 0.474,
-          "revenue_yoy_pct": -10.61,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 42.5,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -10.61%；漲跌 4.41%"
-        },
-        {
-          "symbol": "1341",
-          "name": "富林-KY",
-          "market": "上市",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 60.0,
-          "change_pct": 0.33,
-          "volume": 4008,
-          "turnover_rate_pct": 0.01,
-          "turnover_billion": 0.002,
-          "revenue_yoy_pct": 22.54,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 39.2,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 22.54%；漲跌 0.33%"
-        },
-        {
-          "symbol": "1304",
-          "name": "台聚",
-          "market": "上市",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 12.8,
-          "change_pct": 3.64,
-          "volume": 4243247,
-          "turnover_rate_pct": 0.36,
-          "turnover_billion": 0.543,
-          "revenue_yoy_pct": -4.95,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 37.6,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -4.95%；漲跌 3.64%"
-        },
-        {
-          "symbol": "1308",
-          "name": "亞聚",
-          "market": "上市",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 14.8,
-          "change_pct": 4.59,
-          "volume": 2326914,
-          "turnover_rate_pct": 0.39,
-          "turnover_billion": 0.344,
-          "revenue_yoy_pct": 7.73,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 37.2,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 7.73%；漲跌 4.59%"
-        },
-        {
-          "symbol": "4305",
-          "name": "世坤",
-          "market": "上櫃",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 42.05,
-          "change_pct": -2.66,
-          "volume": 2070,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.001,
-          "revenue_yoy_pct": 5.16,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 37.2,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 5.16%；漲跌 -2.66%"
-        },
-        {
-          "symbol": "1310",
-          "name": "台苯",
-          "market": "上市",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 8.87,
-          "change_pct": 3.5,
-          "volume": 3865106,
-          "turnover_rate_pct": 0.73,
-          "turnover_billion": 0.343,
-          "revenue_yoy_pct": -14.52,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 36.9,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -14.52%；漲跌 3.50%"
-        },
-        {
-          "symbol": "1307",
-          "name": "三芳",
-          "market": "上市",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 30.85,
-          "change_pct": 0.65,
-          "volume": 384437,
-          "turnover_rate_pct": 0.1,
-          "turnover_billion": 0.119,
-          "revenue_yoy_pct": 11.02,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 36.3,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 11.02%；漲跌 0.65%"
-        },
-        {
-          "symbol": "1314",
-          "name": "中石化",
-          "market": "上市",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 8.21,
-          "change_pct": 1.23,
-          "volume": 18123514,
-          "turnover_rate_pct": 0.48,
-          "turnover_billion": 1.488,
-          "revenue_yoy_pct": -35.6,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 35.9,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -35.60%；漲跌 1.23%"
-        },
-        {
-          "symbol": "1323",
-          "name": "永裕",
-          "market": "上市",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 21.15,
-          "change_pct": -0.47,
-          "volume": 40333,
-          "turnover_rate_pct": 0.04,
-          "turnover_billion": 0.009,
-          "revenue_yoy_pct": 28.99,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 35.0,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 28.99%；漲跌 -0.47%"
-        },
-        {
-          "symbol": "9950",
-          "name": "萬國通",
-          "market": "上櫃",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 10.3,
-          "change_pct": -0.96,
-          "volume": 14128,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.001,
-          "revenue_yoy_pct": -1.69,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 35.0,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -1.69%；漲跌 -0.96%"
-        },
-        {
-          "symbol": "1313",
-          "name": "聯成",
-          "market": "上市",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 12.15,
-          "change_pct": 2.97,
-          "volume": 3601297,
-          "turnover_rate_pct": 0.27,
-          "turnover_billion": 0.438,
-          "revenue_yoy_pct": -0.78,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 34.7,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -0.78%；漲跌 2.97%"
-        },
-        {
-          "symbol": "4306",
-          "name": "炎洲",
-          "market": "上市",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 15.2,
-          "change_pct": 0.66,
-          "volume": 690936,
-          "turnover_rate_pct": 0.1,
-          "turnover_billion": 0.105,
-          "revenue_yoy_pct": 15.15,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 33.7,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 15.15%；漲跌 0.66%"
-        },
-        {
-          "symbol": "1337",
-          "name": "再生-KY",
-          "market": "上市",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 4.51,
-          "change_pct": 0.0,
-          "volume": 222913,
-          "turnover_rate_pct": 0.08,
-          "turnover_billion": 0.01,
-          "revenue_yoy_pct": -1.82,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 32.5,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -1.82%；漲跌 0.00%"
-        },
-        {
-          "symbol": "1325",
-          "name": "恆大",
-          "market": "上市",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 26.4,
-          "change_pct": 1.73,
-          "volume": 249726,
-          "turnover_rate_pct": 0.29,
-          "turnover_billion": 0.066,
-          "revenue_yoy_pct": -0.16,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 31.8,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -0.16%；漲跌 1.73%"
-        },
-        {
-          "symbol": "1324",
-          "name": "地球",
-          "market": "上市",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 10.0,
-          "change_pct": 0.0,
-          "volume": 12241,
-          "turnover_rate_pct": 0.02,
-          "turnover_billion": 0.001,
-          "revenue_yoy_pct": 6.57,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 31.7,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 6.57%；漲跌 0.00%"
-        },
-        {
-          "symbol": "1305",
-          "name": "華夏",
-          "market": "上市",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 12.5,
-          "change_pct": 2.88,
-          "volume": 2015544,
-          "turnover_rate_pct": 0.35,
-          "turnover_billion": 0.252,
-          "revenue_yoy_pct": -24.55,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 31.2,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -24.55%；漲跌 2.88%"
-        },
-        {
-          "symbol": "1315",
-          "name": "達新",
-          "market": "上市",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 66.1,
-          "change_pct": 0.0,
-          "volume": 25244,
-          "turnover_rate_pct": 0.03,
-          "turnover_billion": 0.017,
-          "revenue_yoy_pct": -4.13,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 31.0,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -4.13%；漲跌 0.00%"
-        },
-        {
-          "symbol": "1321",
-          "name": "大洋",
-          "market": "上市",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": 32.5,
-          "change_pct": 0.46,
-          "volume": 53000,
-          "turnover_rate_pct": 0.02,
-          "turnover_billion": 0.017,
-          "revenue_yoy_pct": 1.42,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 30.9,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 1.42%；漲跌 0.46%"
-        },
-        {
-          "symbol": "1312",
-          "name": "國喬",
-          "market": "上市",
-          "industry": "塑膠工業",
-          "theme": "塑膠工業",
-          "trade_price": null,
-          "change_pct": null,
-          "volume": 0,
-          "turnover_rate_pct": 0.0,
-          "turnover_billion": null,
-          "revenue_yoy_pct": -5.02,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 27.3,
-          "source_types": [
-            "ai",
-            "master"
-          ],
-          "source_labels": [
-            "AI 題材標籤",
-            "主檔產業 / 供應鏈"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -5.02%；週轉率 0.00%"
-        }
-      ],
-      "theme_score": 28.2,
-      "leader_stocks": [
-        {
-          "symbol": "4304",
-          "name": "勝昱"
-        },
-        {
-          "symbol": "1303",
-          "name": "南亞"
-        },
-        {
-          "symbol": "1326",
-          "name": "台化"
-        },
-        {
-          "symbol": "1340",
-          "name": "勝悅-KY"
-        },
-        {
-          "symbol": "4303",
-          "name": "信立"
-        }
-      ],
-      "low_base_stocks": [
-        {
-          "symbol": "4304",
-          "name": "勝昱"
-        },
-        {
-          "symbol": "1303",
-          "name": "南亞"
-        },
-        {
-          "symbol": "1340",
-          "name": "勝悅-KY"
-        },
-        {
-          "symbol": "1341",
-          "name": "富林-KY"
-        },
-        {
-          "symbol": "4305",
-          "name": "世坤"
         }
       ],
       "rank": 11
@@ -60794,9 +60824,9 @@
       "rank": 35
     }
   ],
-  "run_id": "34338571364",
-  "generated_at": "2026-09-09T18:11:10+08:00",
+  "run_id": "34359557342",
+  "generated_at": "2026-09-09T21:52:55+08:00",
   "latest_trade_date": "2026-09-09",
-  "data_version": "20260909-1811",
+  "data_version": "20260909-2152",
   "source_pipeline": "update_all_site_data"
 }
