@@ -2,9 +2,9 @@
   "status": "ok",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-09-11T02:08:39+08:00",
-  "generated_at": "2026-09-11T02:08:45+08:00",
-  "latest_trade_date": "2026-09-10",
+  "generatedAt": "2026-09-11T21:45:24+08:00",
+  "generated_at": "2026-09-11T21:46:13+08:00",
+  "latest_trade_date": "2026-09-11",
   "portfolioRule": "Each first-entry signal cycle is equally weighted and held for a fixed number of valid individual-stock trading days.",
   "calculationDisclosure": {
     "weighting": "Daily equal weight among active first-entry signals.",
@@ -24,13 +24,14 @@
   "holding5": {
     "holdingDays": 5,
     "status": "price_data_incomplete",
-    "signalCount": 222,
+    "signalCount": 227,
     "incompleteSignalCount": 1,
     "incompleteSignals": [
       {
         "signalId": "3591_2026-09-04_official-multifactor-v1",
         "dates": [
-          "2026-09-10"
+          "2026-09-10",
+          "2026-09-11"
         ]
       }
     ],
@@ -53,7 +54,7 @@
     "missingPriceRule": "A held position with an official no-trade or unknown-coverage session invalidates the aggregate curve; prices are never carried forward.",
     "summary": {
       "status": "price_data_incomplete",
-      "signalCount": 222,
+      "signalCount": 227,
       "rowsCount": 0,
       "grossReturn": null,
       "netReturn": null,
@@ -67,13 +68,14 @@
   "holding20": {
     "holdingDays": 20,
     "status": "price_data_incomplete",
-    "signalCount": 222,
+    "signalCount": 227,
     "incompleteSignalCount": 1,
     "incompleteSignals": [
       {
         "signalId": "3591_2026-09-04_official-multifactor-v1",
         "dates": [
-          "2026-09-10"
+          "2026-09-10",
+          "2026-09-11"
         ]
       }
     ],
@@ -96,7 +98,7 @@
     "missingPriceRule": "A held position with an official no-trade or unknown-coverage session invalidates the aggregate curve; prices are never carried forward.",
     "summary": {
       "status": "price_data_incomplete",
-      "signalCount": 222,
+      "signalCount": 227,
       "rowsCount": 0,
       "grossReturn": null,
       "netReturn": null,
@@ -107,7 +109,7 @@
       "recent20": null
     }
   },
-  "run_id": "34512374915",
-  "data_version": "20260910-0208",
+  "run_id": "34605886145",
+  "data_version": "20260911-2146",
   "source_pipeline": "update_all_site_data"
 }
