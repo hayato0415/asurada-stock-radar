@@ -2,9 +2,9 @@
   "status": "warning",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-09-15T22:25:26+08:00",
-  "generated_at": "2026-09-15T22:25:59+08:00",
-  "latestValidationUpdateTime": "2026-09-15T22:25:26+08:00",
+  "generatedAt": "2026-09-16T02:44:51+08:00",
+  "generated_at": "2026-09-16T02:45:12+08:00",
+  "latestValidationUpdateTime": "2026-09-16T02:44:51+08:00",
   "latestSignalDate": "2026-09-15",
   "latestEntryDate": "2026-09-15",
   "latestPriceDate": "2026-09-15",
@@ -27,8 +27,6 @@
   "lastError": "",
   "failedReasons": [],
   "warnings": [
-    "520 Server Error: <none> for url: https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F06&id=&response=json",
-    "Response ended prematurely",
     "歷史 Top 10 快照缺少 4 個交易日；缺口不推定為跌出或連續入榜。"
   ],
   "sourceStatus": [
@@ -57,79 +55,23 @@
       "error": ""
     },
     {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-07-30",
-      "ok": true,
-      "rows": 1335,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260730&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TPEX exact daily quotes",
-      "period": "2026-07-30",
-      "ok": true,
-      "rows": 10302,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F30&id=&response=json",
-      "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-06",
-      "ok": true,
-      "rows": 1338,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260806&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
       "source": "TPEX exact daily quotes",
       "period": "2026-08-06",
-      "ok": false,
-      "rows": 0,
-      "url": "",
-      "error": "520 Server Error: <none> for url: https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F06&id=&response=json"
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-20",
       "ok": true,
-      "rows": 1337,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260820&type=ALLBUT0999&response=json",
+      "rows": 10313,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F06&id=&response=json",
       "error": ""
     },
     {
       "source": "TPEX exact daily quotes",
       "period": "2026-08-20",
-      "ok": false,
-      "rows": 0,
-      "url": "",
-      "error": "Response ended prematurely"
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-25",
       "ok": true,
-      "rows": 1339,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260825&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TPEX exact daily quotes",
-      "period": "2026-08-25",
-      "ok": true,
-      "rows": 10489,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F25&id=&response=json",
-      "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-09-15",
-      "ok": true,
-      "rows": 1340,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260915&type=ALLBUT0999&response=json",
+      "rows": 10628,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F20&id=&response=json",
       "error": ""
     }
   ],
-  "run_id": "34981378522",
-  "data_version": "20260915-2225",
+  "run_id": "35009199248",
+  "data_version": "20260915-0245",
   "source_pipeline": "update_all_site_data"
 }
