@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-15 03:44",
+  "updated_at": "2026-09-15 22:24",
   "source": "TWSE ISIN public pages",
   "items": [
     {
@@ -5135,6 +5135,15 @@
     {
       "symbol": "2937",
       "name": "集雅社",
+      "market": "上櫃",
+      "industry": "居家生活",
+      "theme": "",
+      "supply_chain": "居家生活",
+      "data_source": "TWSE ISIN public page"
+    },
+    {
+      "symbol": "2938",
+      "name": "床的世界",
       "market": "上櫃",
       "industry": "居家生活",
       "theme": "",
@@ -17778,9 +17787,9 @@
       "data_source": "TWSE ISIN public page"
     }
   ],
-  "run_id": "34888639851",
-  "generated_at": "2026-09-15T03:45:22+08:00",
-  "latest_trade_date": "2026-09-14",
-  "data_version": "20260914-0345",
+  "run_id": "34981378522",
+  "generated_at": "2026-09-15T22:25:59+08:00",
+  "latest_trade_date": "2026-09-15",
+  "data_version": "20260915-2225",
   "source_pipeline": "update_all_site_data"
 }

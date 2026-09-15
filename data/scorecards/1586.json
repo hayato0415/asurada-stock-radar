@@ -1,7 +1,7 @@
 {
-  "build_id": "20260915-0344-scorecards",
-  "updated_at": "2026-09-15T03:44:24+08:00",
-  "content_latest_at": "2026-09-14",
+  "build_id": "20260915-2224-scorecards",
+  "updated_at": "2026-09-15T22:24:48+08:00",
+  "content_latest_at": "2026-09-15",
   "symbol": "1586",
   "name": "和勤",
   "market": "上櫃",
@@ -147,8 +147,8 @@
       "key": "chip",
       "label": "籌碼 / 市場交易力道",
       "weight": 25,
-      "score": 0,
-      "raw_score": 0.0,
+      "score": 0.1,
+      "raw_score": 0.4,
       "coverage_pct": 33.3,
       "missing_count": 2,
       "rules": [
@@ -156,9 +156,9 @@
           "id": "volume",
           "label": "成交量",
           "source_field": "volume",
-          "raw_value": 184335,
+          "raw_value": 328398,
           "max_score": 10,
-          "score": 0,
+          "score": 0.1,
           "missing": false,
           "description": "成交量反映市場參與度。"
         },
@@ -206,7 +206,7 @@
       ]
     }
   },
-  "total_score": 14.1,
+  "total_score": 14.2,
   "summary": {
     "symbol": "1586",
     "code": "1586",
@@ -217,7 +217,7 @@
     "supply_chain": "電機機械",
     "trade_price": 18.0,
     "change_pct": 0.0,
-    "volume": 184335,
+    "volume": 328398,
     "turnover_rate_pct": null,
     "revenue_million": 209.68,
     "revenue_mom_pct": -4.35,
@@ -227,20 +227,20 @@
     "financial_period": "2026-08",
     "fundamental_score": 16.0,
     "technical_score": 31.0,
-    "chip_score": 0.0,
+    "chip_score": 0.4,
     "turnover_score": 0.0,
     "weighted_scores": {
       "fundamental": 4.8,
       "technical": 9.3,
-      "chip": 0,
+      "chip": 0.1,
       "turnover": 0
     },
-    "total_score": 14.1,
+    "total_score": 14.2,
     "risk_level": "低",
     "entry_reason": "營收年增 12.52%，月增 -4.35%",
     "data_quality_score": 33.3,
-    "updated_at": "2026-09-15T03:44:24+08:00",
-    "content_latest_at": "2026-09-14",
+    "updated_at": "2026-09-15T22:24:48+08:00",
+    "content_latest_at": "2026-09-15",
     "scorecard_path": "data/scorecards/1586.json",
     "news_scoring_included": false,
     "theme_scoring_included": false
