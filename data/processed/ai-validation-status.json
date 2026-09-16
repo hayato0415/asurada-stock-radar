@@ -2,17 +2,17 @@
   "status": "warning",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-09-16T02:44:51+08:00",
-  "generated_at": "2026-09-16T02:45:12+08:00",
-  "latestValidationUpdateTime": "2026-09-16T02:44:51+08:00",
-  "latestSignalDate": "2026-09-15",
-  "latestEntryDate": "2026-09-15",
-  "latestPriceDate": "2026-09-15",
-  "latestBenchmarkDate": "2026-09-15",
-  "latest_trade_date": "2026-09-15",
-  "completedSignals": 125,
+  "generatedAt": "2026-09-16T18:20:27+08:00",
+  "generated_at": "2026-09-16T18:20:53+08:00",
+  "latestValidationUpdateTime": "2026-09-16T18:20:27+08:00",
+  "latestSignalDate": "2026-09-16",
+  "latestEntryDate": "2026-09-16",
+  "latestPriceDate": "2026-09-16",
+  "latestBenchmarkDate": "2026-09-16",
+  "latest_trade_date": "2026-09-16",
+  "completedSignals": 130,
   "trackingSignals": 124,
-  "d20CompletedSignals": 125,
+  "d20CompletedSignals": 130,
   "missingPriceCount": 0,
   "missingBenchmarkCount": 0,
   "snapshotCoverageGapCount": 4,
@@ -50,8 +50,16 @@
       "source": "TWSE TAIEX MI_5MINS_HIST",
       "period": "2026-09",
       "ok": true,
-      "rows": 11,
+      "rows": 12,
       "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20260901&response=json",
+      "error": ""
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-07-30",
+      "ok": true,
+      "rows": 10302,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F30&id=&response=json",
       "error": ""
     },
     {
@@ -69,9 +77,25 @@
       "rows": 10628,
       "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F20&id=&response=json",
       "error": ""
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-08-25",
+      "ok": true,
+      "rows": 10489,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F25&id=&response=json",
+      "error": ""
+    },
+    {
+      "source": "TWSE exact daily quotes",
+      "period": "2026-09-16",
+      "ok": true,
+      "rows": 1340,
+      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260916&type=ALLBUT0999&response=json",
+      "error": ""
     }
   ],
-  "run_id": "35009199248",
-  "data_version": "20260915-0245",
+  "run_id": "35084286139",
+  "data_version": "20260916-1820",
   "source_pipeline": "update_all_site_data"
 }
