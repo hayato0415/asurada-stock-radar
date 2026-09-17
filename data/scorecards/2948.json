@@ -1,7 +1,7 @@
 {
-  "build_id": "20260916-1819-scorecards",
-  "updated_at": "2026-09-16T18:19:30+08:00",
-  "content_latest_at": "2026-09-16",
+  "build_id": "20260917-2225-scorecards",
+  "updated_at": "2026-09-17T22:25:45+08:00",
+  "content_latest_at": "2026-09-17",
   "symbol": "2948",
   "name": "寶陞",
   "market": "上櫃",
@@ -96,19 +96,19 @@
       "key": "technical",
       "label": "技術面",
       "weight": 30,
-      "score": 0,
-      "raw_score": 0.0,
-      "coverage_pct": 0.0,
-      "missing_count": 4,
+      "score": 9.5,
+      "raw_score": 31.7,
+      "coverage_pct": 50.0,
+      "missing_count": 2,
       "rules": [
         {
           "id": "change_1d",
           "label": "當日漲跌幅",
           "source_field": "change_pct",
-          "raw_value": null,
+          "raw_value": 0.27,
           "max_score": 12,
-          "score": 0,
-          "missing": true,
+          "score": 5.5,
+          "missing": false,
           "description": "當日價格強度。"
         },
         {
@@ -135,10 +135,10 @@
           "id": "price_available",
           "label": "成交價可用",
           "source_field": "trade_price",
-          "raw_value": null,
+          "raw_value": 37.75,
           "max_score": 4,
-          "score": 0,
-          "missing": true,
+          "score": 4,
+          "missing": false,
           "description": "有正式成交價才給資料完整分。"
         }
       ]
@@ -156,7 +156,7 @@
           "id": "volume",
           "label": "成交量",
           "source_field": "volume",
-          "raw_value": 249,
+          "raw_value": 1474,
           "max_score": 10,
           "score": 0,
           "missing": false,
@@ -206,7 +206,7 @@
       ]
     }
   },
-  "total_score": 3.4,
+  "total_score": 12.9,
   "summary": {
     "symbol": "2948",
     "code": "2948",
@@ -215,9 +215,9 @@
     "industry": "居家生活",
     "theme": "居家生活",
     "supply_chain": "居家生活",
-    "trade_price": null,
-    "change_pct": null,
-    "volume": 249,
+    "trade_price": 37.75,
+    "change_pct": 0.27,
+    "volume": 1474,
     "turnover_rate_pct": null,
     "revenue_million": 184.41,
     "revenue_mom_pct": -7.64,
@@ -226,21 +226,21 @@
     "gross_margin_pct": null,
     "financial_period": "2026-08",
     "fundamental_score": 11.3,
-    "technical_score": 0.0,
+    "technical_score": 31.7,
     "chip_score": 0.0,
     "turnover_score": 0.0,
     "weighted_scores": {
       "fundamental": 3.4,
-      "technical": 0,
+      "technical": 9.5,
       "chip": 0,
       "turnover": 0
     },
-    "total_score": 3.4,
+    "total_score": 12.9,
     "risk_level": "低",
     "entry_reason": "營收年增 -1.36%，月增 -7.64%",
-    "data_quality_score": 20.8,
-    "updated_at": "2026-09-16T18:19:30+08:00",
-    "content_latest_at": "2026-09-16",
+    "data_quality_score": 33.3,
+    "updated_at": "2026-09-17T22:25:45+08:00",
+    "content_latest_at": "2026-09-17",
     "scorecard_path": "data/scorecards/2948.json",
     "news_scoring_included": false,
     "theme_scoring_included": false
@@ -248,10 +248,8 @@
   "missing_fields": [
     "change_20d",
     "change_5d",
-    "change_pct",
     "eps",
     "gross_margin_pct",
-    "trade_price",
     "turnover_rate_pct",
     "volume_ratio_5d"
   ],
