@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "updated_at": "2026-09-21T02:00:31+08:00",
-  "attempted_at": "2026-09-21T02:00:31+08:00",
-  "target_date": "2026-09-18",
-  "latest_trade_date": "2026-09-18",
+  "updated_at": "2026-09-21T19:10:41+08:00",
+  "attempted_at": "2026-09-21T19:10:41+08:00",
+  "target_date": "2026-09-21",
+  "latest_trade_date": "2026-09-21",
   "revenue_month": "2026-08",
   "items_count": 100,
   "rows_written": 100,
-  "stock_master_count": 1976,
-  "twse_quote_matched": 1078,
-  "tpex_quote_matched": 888,
+  "stock_master_count": 1978,
+  "twse_quote_matched": 1081,
+  "tpex_quote_matched": 891,
   "previous_data_preserved": false,
   "failed_reasons": [],
   "warnings": [],
@@ -20,78 +20,71 @@
     "company_basic": "MOPS t187ap03_L / t187ap03_O"
   },
   "quality": {
-    "stock_master_count": 1976,
-    "quote_matched": 1966,
-    "score_candidates": 1943,
-    "missing_quote_count": 10,
-    "missing_score_count": 23,
+    "stock_master_count": 1978,
+    "quote_matched": 1972,
+    "score_candidates": 1952,
+    "missing_quote_count": 6,
+    "missing_score_count": 20,
     "missing_quote_sample": [
       "1441",
       "1589",
-      "2321",
-      "3356",
-      "3591",
-      "3710",
       "4804",
       "6550",
-      "8059",
-      "8277"
+      "7812",
+      "7856"
     ],
     "missing_score_sample": [
       "1240",
-      "1538",
-      "2073",
-      "2235",
-      "2751",
+      "2926",
       "2949",
-      "3064",
-      "3629",
+      "3067",
+      "3260",
       "3718",
-      "4305",
-      "4413",
-      "4584",
-      "5205",
-      "5601",
-      "5902",
+      "4502",
+      "5276",
+      "5314",
+      "5520",
+      "5878",
       "6198",
-      "6512",
-      "6680",
+      "6212",
+      "6615",
+      "6762",
+      "6929",
       "6945",
+      "7708",
       "8077",
-      "8342",
-      "8923",
-      "8929"
+      "8444"
     ]
   },
   "quote_coverage": {
     "minimum_ratio": 0.8,
     "required": {
       "twse": 868,
-      "tpex": 714
+      "tpex": 715
     },
     "matched": {
-      "twse": 1078,
-      "tpex": 888
+      "twse": 1081,
+      "tpex": 891
     }
   },
   "source_status": [
     {
       "name": "TWSE 上市每日行情",
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260918&type=ALLBUT0999&response=json",
+      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260921&type=ALLBUT0999&response=json",
       "ok": true,
       "http_status": null,
-      "source_date": "2026-09-18",
-      "row_count": 1377,
+      "source_date": "2026-09-21",
+      "row_count": 1380,
       "error": "",
       "required_fields_missing": []
     },
     {
       "name": "TPEx 上櫃每日行情",
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F09%2F18&id=&response=json",
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F09%2F21&id=&response=json",
       "ok": true,
       "http_status": null,
-      "source_date": "2026-09-18",
-      "row_count": 11481,
+      "source_date": "2026-09-21",
+      "row_count": 11524,
       "error": "",
       "required_fields_missing": []
     },
@@ -111,7 +104,7 @@
       "ok": true,
       "http_status": 200,
       "source_date": null,
-      "row_count": 887,
+      "row_count": 890,
       "error": "",
       "required_fields_missing": []
     },
@@ -169,11 +162,11 @@
   "persistence_status": {
     "ok": true,
     "status": "ok",
-    "latest_trade_date": "2026-09-18",
-    "generated_at": "2026-09-21T02:00:31+08:00",
-    "snapshot_created": false,
-    "snapshot_path": "data/history/ai-top10/2026-09-18.json",
-    "history_trading_days": 39,
+    "latest_trade_date": "2026-09-21",
+    "generated_at": "2026-09-21T19:10:41+08:00",
+    "snapshot_created": true,
+    "snapshot_path": "data/history/ai-top10/2026-09-21.json",
+    "history_trading_days": 40,
     "items_count": 10,
     "previous_data_preserved": false,
     "failed_reasons": [],
@@ -184,8 +177,8 @@
       "ai-persistence-monthly.json": "updated"
     }
   },
-  "run_id": "35527579940",
-  "generated_at": "2026-09-21T02:01:09+08:00",
-  "data_version": "20260918-0201",
+  "run_id": "35592395725",
+  "generated_at": "2026-09-21T19:11:33+08:00",
+  "data_version": "20260921-1911",
   "source_pipeline": "update_all_site_data"
 }
