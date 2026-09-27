@@ -1,6 +1,6 @@
 {
   "date": "2026-09-24",
-  "updated_at": "2026-09-26 21:50",
+  "updated_at": "2026-09-27 18:48",
   "source": {
     "stock_master": "data/processed/stocks_master.json",
     "stock_metrics": "data/processed/stock_metrics_daily.json",
@@ -11,12 +11,12 @@
   "quality": {
     "stock_master_count": 1978,
     "theme_count": 35,
-    "beneficiary_stock_count": 1988,
+    "beneficiary_stock_count": 1987,
     "quote_matched": 1971,
     "revenue_matched": 1976,
     "eps_matched": 0,
     "gross_margin_matched": 0,
-    "news_event_count": 10,
+    "news_event_count": 9,
     "manual_membership_count": 0,
     "missing_theme": [],
     "missing_quote": [
@@ -57468,13 +57468,13 @@
     },
     {
       "theme": "公司重大訊息",
-      "theme_change_pct": -0.81,
-      "turnover_billion": 105.26,
+      "theme_change_pct": -1.03,
+      "turnover_billion": 7.32,
       "up_count": 1,
       "limit_up_count": 0,
-      "beneficiary_count": 10,
+      "beneficiary_count": 9,
       "high_score_news_count": 0,
-      "avg_ai_score": 40.0,
+      "avg_ai_score": 40.3,
       "source_types": [
         "news"
       ],
@@ -57482,32 +57482,6 @@
         "新聞事件"
       ],
       "beneficiary_stocks": [
-        {
-          "symbol": "4958",
-          "name": "臻鼎-KY",
-          "market": "上市",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 475.5,
-          "change_pct": 0.53,
-          "volume": 20619766,
-          "turnover_rate_pct": 1.85,
-          "turnover_billion": 98.047,
-          "revenue_yoy_pct": 41.05,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 50.9,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 41.05%；漲跌 0.53%；週轉率 1.85%"
-        },
         {
           "symbol": "6949",
           "name": "沛爾生醫*-創",
@@ -57585,6 +57559,32 @@
             "beneficiary"
           ],
           "reason": "新聞事件帶動；營收年增 36.47%；漲跌 -0.82%；週轉率 0.47%"
+        },
+        {
+          "symbol": "3629",
+          "name": "地心引力",
+          "market": "上櫃",
+          "industry": "文化創意業",
+          "theme": "公司重大訊息",
+          "trade_price": null,
+          "change_pct": null,
+          "volume": 299,
+          "turnover_rate_pct": null,
+          "turnover_billion": null,
+          "revenue_yoy_pct": 381.0,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 42.2,
+          "source_types": [
+            "news"
+          ],
+          "source_labels": [
+            "新聞事件"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "新聞事件帶動；營收年增 381.00%"
         },
         {
           "symbol": "5904",
@@ -57691,20 +57691,20 @@
           "reason": "新聞事件帶動；營收年增 1.05%；漲跌 0.00%"
         },
         {
-          "symbol": "2891",
-          "name": "中信金",
+          "symbol": "2023",
+          "name": "燁輝",
           "market": "上市",
-          "industry": "金融保險業",
+          "industry": "鋼鐵工業",
           "theme": "公司重大訊息",
-          "trade_price": 61.0,
-          "change_pct": 0.0,
-          "volume": 2428,
-          "turnover_rate_pct": 0.0,
-          "turnover_billion": 0.001,
-          "revenue_yoy_pct": -32.01,
+          "trade_price": 13.65,
+          "change_pct": 0.37,
+          "volume": 765267,
+          "turnover_rate_pct": 0.04,
+          "turnover_billion": 0.104,
+          "revenue_yoy_pct": -14.31,
           "eps": null,
           "gross_margin_pct": null,
-          "total_score": 30.8,
+          "total_score": 27.2,
           "source_types": [
             "news"
           ],
@@ -57714,41 +57714,11 @@
           "roles": [
             "beneficiary"
           ],
-          "reason": "新聞事件帶動；營收年增 -32.01%；漲跌 0.00%；週轉率 0.00%"
-        },
-        {
-          "symbol": "3593",
-          "name": "力銘",
-          "market": "上市",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 9.5,
-          "change_pct": 0.0,
-          "volume": 19985,
-          "turnover_rate_pct": 0.03,
-          "turnover_billion": 0.002,
-          "revenue_yoy_pct": -29.8,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 24.6,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -29.80%；漲跌 0.00%；週轉率 0.03%"
+          "reason": "新聞事件帶動；營收年增 -14.31%；漲跌 0.37%；週轉率 0.04%"
         }
       ],
-      "theme_score": 13.7,
+      "theme_score": 12.9,
       "leader_stocks": [
-        {
-          "symbol": "4958",
-          "name": "臻鼎-KY"
-        },
         {
           "symbol": "6949",
           "name": "沛爾生醫*-創"
@@ -57762,6 +57732,10 @@
           "name": "國慶科技"
         },
         {
+          "symbol": "3629",
+          "name": "地心引力"
+        },
+        {
           "symbol": "5904",
           "name": "寶雅*"
         }
@@ -57770,10 +57744,6 @@
         {
           "symbol": "8472",
           "name": "納維康"
-        },
-        {
-          "symbol": "1721",
-          "name": "國慶科技"
         },
         {
           "symbol": "5904",
@@ -58045,9 +58015,9 @@
       "rank": 35
     }
   ],
-  "run_id": "36246398778",
-  "generated_at": "2026-09-26T21:51:16+08:00",
+  "run_id": "36313680959",
+  "generated_at": "2026-09-27T18:50:01+08:00",
   "latest_trade_date": "2026-09-24",
-  "data_version": "20260924-2151",
+  "data_version": "20260924-1850",
   "source_pipeline": "update_all_site_data"
 }
