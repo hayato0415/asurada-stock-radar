@@ -1,6 +1,6 @@
 {
   "date": "2026-09-24",
-  "updated_at": "2026-09-28 02:54",
+  "updated_at": "2026-09-29 05:06",
   "source": {
     "stock_master": "data/processed/stocks_master.json",
     "stock_metrics": "data/processed/stock_metrics_daily.json",
@@ -11,12 +11,12 @@
   "quality": {
     "stock_master_count": 1978,
     "theme_count": 35,
-    "beneficiary_stock_count": 1987,
+    "beneficiary_stock_count": 1986,
     "quote_matched": 1971,
     "revenue_matched": 1976,
     "eps_matched": 0,
     "gross_margin_matched": 0,
-    "news_event_count": 9,
+    "news_event_count": 8,
     "manual_membership_count": 0,
     "missing_theme": [],
     "missing_quote": [
@@ -57468,13 +57468,13 @@
     },
     {
       "theme": "公司重大訊息",
-      "theme_change_pct": -1.03,
-      "turnover_billion": 7.32,
-      "up_count": 1,
+      "theme_change_pct": -1.16,
+      "turnover_billion": 7.22,
+      "up_count": 0,
       "limit_up_count": 0,
-      "beneficiary_count": 9,
+      "beneficiary_count": 8,
       "high_score_news_count": 0,
-      "avg_ai_score": 40.3,
+      "avg_ai_score": 41.5,
       "source_types": [
         "news"
       ],
@@ -57561,32 +57561,6 @@
           "reason": "新聞事件帶動；營收年增 36.47%；漲跌 -0.82%；週轉率 0.47%"
         },
         {
-          "symbol": "3629",
-          "name": "地心引力",
-          "market": "上櫃",
-          "industry": "文化創意業",
-          "theme": "公司重大訊息",
-          "trade_price": null,
-          "change_pct": null,
-          "volume": 299,
-          "turnover_rate_pct": null,
-          "turnover_billion": null,
-          "revenue_yoy_pct": 381.0,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 42.2,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 381.00%"
-        },
-        {
           "symbol": "5904",
           "name": "寶雅*",
           "market": "上櫃",
@@ -57639,6 +57613,32 @@
           "reason": "新聞事件帶動；營收年增 84.84%；漲跌 -0.39%；週轉率 0.12%"
         },
         {
+          "symbol": "2509",
+          "name": "全坤建",
+          "market": "上市",
+          "industry": "建材營造業",
+          "theme": "公司重大訊息",
+          "trade_price": 14.35,
+          "change_pct": -0.69,
+          "volume": 70476,
+          "turnover_rate_pct": 0.03,
+          "turnover_billion": 0.01,
+          "revenue_yoy_pct": 510.33,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 38.9,
+          "source_types": [
+            "news"
+          ],
+          "source_labels": [
+            "新聞事件"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "新聞事件帶動；營收年增 510.33%；漲跌 -0.69%；週轉率 0.03%"
+        },
+        {
           "symbol": "4530",
           "name": "天意能創",
           "market": "上櫃",
@@ -57689,35 +57689,9 @@
             "beneficiary"
           ],
           "reason": "新聞事件帶動；營收年增 1.05%；漲跌 0.00%"
-        },
-        {
-          "symbol": "2023",
-          "name": "燁輝",
-          "market": "上市",
-          "industry": "鋼鐵工業",
-          "theme": "公司重大訊息",
-          "trade_price": 13.65,
-          "change_pct": 0.37,
-          "volume": 765267,
-          "turnover_rate_pct": 0.04,
-          "turnover_billion": 0.104,
-          "revenue_yoy_pct": -14.31,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 27.2,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -14.31%；漲跌 0.37%；週轉率 0.04%"
         }
       ],
-      "theme_score": 12.9,
+      "theme_score": 10.6,
       "leader_stocks": [
         {
           "symbol": "6949",
@@ -57732,12 +57706,12 @@
           "name": "國慶科技"
         },
         {
-          "symbol": "3629",
-          "name": "地心引力"
-        },
-        {
           "symbol": "5904",
           "name": "寶雅*"
+        },
+        {
+          "symbol": "2072",
+          "name": "世紀風電"
         }
       ],
       "low_base_stocks": [
@@ -58015,9 +57989,9 @@
       "rank": 35
     }
   ],
-  "run_id": "36342359901",
-  "generated_at": "2026-09-28T02:56:05+08:00",
+  "run_id": "36483612075",
+  "generated_at": "2026-09-29T05:07:35+08:00",
   "latest_trade_date": "2026-09-24",
-  "data_version": "20260924-0256",
+  "data_version": "20260924-0507",
   "source_pipeline": "update_all_site_data"
 }
