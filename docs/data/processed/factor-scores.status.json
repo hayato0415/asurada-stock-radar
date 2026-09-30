@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "updated_at": "2026-09-30T03:48:35+08:00",
-  "attempted_at": "2026-09-30T03:48:35+08:00",
-  "target_date": "2026-09-29",
-  "latest_trade_date": "2026-09-29",
+  "updated_at": "2026-09-30T19:27:44+08:00",
+  "attempted_at": "2026-09-30T19:27:44+08:00",
+  "target_date": "2026-09-30",
+  "latest_trade_date": "2026-09-30",
   "revenue_month": "2026-08",
   "items_count": 100,
   "rows_written": 100,
-  "stock_master_count": 1978,
+  "stock_master_count": 1977,
   "twse_quote_matched": 1083,
-  "tpex_quote_matched": 890,
+  "tpex_quote_matched": 888,
   "previous_data_preserved": false,
   "failed_reasons": [],
   "warnings": [],
@@ -20,79 +20,66 @@
     "company_basic": "MOPS t187ap03_L / t187ap03_O"
   },
   "quality": {
-    "stock_master_count": 1978,
-    "quote_matched": 1973,
-    "score_candidates": 1944,
-    "missing_quote_count": 5,
-    "missing_score_count": 29,
+    "stock_master_count": 1977,
+    "quote_matched": 1971,
+    "score_candidates": 1956,
+    "missing_quote_count": 6,
+    "missing_score_count": 15,
     "missing_quote_sample": [
       "1589",
       "2601",
+      "4527",
       "4804",
       "4806",
-      "8183"
+      "5301"
     ],
     "missing_score_sample": [
-      "1312",
-      "1341",
-      "1538",
-      "2035",
-      "2235",
+      "2064",
       "2724",
-      "2891",
-      "2947",
-      "2949",
       "3064",
-      "3332",
-      "3531",
+      "3067",
       "3718",
-      "4584",
-      "4609",
-      "5205",
-      "5276",
-      "5703",
-      "5906",
-      "6198",
-      "6496",
-      "6542",
+      "4305",
+      "5455",
+      "5520",
+      "5601",
+      "6212",
+      "6661",
       "6662",
-      "6762",
-      "6855",
       "6945",
-      "8077",
-      "8102",
-      "8921"
+      "8349",
+      "8440"
     ]
   },
   "quote_coverage": {
     "minimum_ratio": 0.8,
     "required": {
       "twse": 868,
-      "tpex": 715
+      "tpex": 714
     },
     "matched": {
       "twse": 1083,
-      "tpex": 890
+      "tpex": 888
     }
   },
   "source_status": [
     {
       "name": "TWSE 上市每日行情",
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260929&type=ALLBUT0999&response=json",
+      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260930&type=ALLBUT0999&response=json",
       "ok": true,
       "http_status": null,
-      "source_date": "2026-09-29",
+      "source_date": "2026-09-30",
       "row_count": 1382,
       "error": "",
       "required_fields_missing": []
     },
     {
       "name": "TPEx 上櫃每日行情",
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F09%2F29&id=&response=json",
+      "url": "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes",
       "ok": true,
       "http_status": null,
-      "source_date": "2026-09-29",
-      "row_count": 11730,
+      "source_date": "2026-09-30",
+      "row_count": 11772,
       "error": "",
       "required_fields_missing": []
     },
@@ -102,7 +89,7 @@
       "ok": true,
       "http_status": 200,
       "source_date": null,
-      "row_count": 1081,
+      "row_count": 1083,
       "error": "",
       "required_fields_missing": []
     },
@@ -112,7 +99,7 @@
       "ok": true,
       "http_status": 200,
       "source_date": null,
-      "row_count": 889,
+      "row_count": 887,
       "error": "",
       "required_fields_missing": []
     },
@@ -170,11 +157,11 @@
   "persistence_status": {
     "ok": true,
     "status": "ok",
-    "latest_trade_date": "2026-09-29",
-    "generated_at": "2026-09-30T03:48:35+08:00",
-    "snapshot_created": false,
-    "snapshot_path": "data/history/ai-top10/2026-09-29.json",
-    "history_trading_days": 44,
+    "latest_trade_date": "2026-09-30",
+    "generated_at": "2026-09-30T19:27:44+08:00",
+    "snapshot_created": true,
+    "snapshot_path": "data/history/ai-top10/2026-09-30.json",
+    "history_trading_days": 45,
     "items_count": 10,
     "previous_data_preserved": false,
     "failed_reasons": [],
@@ -185,8 +172,8 @@
       "ai-persistence-monthly.json": "updated"
     }
   },
-  "run_id": "36621734142",
-  "generated_at": "2026-09-30T03:49:04+08:00",
-  "data_version": "20260929-0349",
+  "run_id": "36708165283",
+  "generated_at": "2026-09-30T19:30:57+08:00",
+  "data_version": "20260930-1930",
   "source_pipeline": "update_all_site_data"
 }
