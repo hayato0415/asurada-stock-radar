@@ -1,7 +1,7 @@
 {
-  "build_id": "20261001-0352-scorecards",
-  "updated_at": "2026-10-01T03:52:27+08:00",
-  "content_latest_at": "2026-09-30",
+  "build_id": "20261001-1956-scorecards",
+  "updated_at": "2026-10-01T19:56:14+08:00",
+  "content_latest_at": "2026-10-01",
   "symbol": "1815",
   "name": "富喬",
   "market": "上櫃",
@@ -147,8 +147,8 @@
       "key": "chip",
       "label": "籌碼 / 市場交易力道",
       "weight": 25,
-      "score": 3.3,
-      "raw_score": 13.2,
+      "score": 6.3,
+      "raw_score": 25.2,
       "coverage_pct": 33.3,
       "missing_count": 2,
       "rules": [
@@ -156,9 +156,9 @@
           "id": "volume",
           "label": "成交量",
           "source_field": "volume",
-          "raw_value": 16579982,
+          "raw_value": 31721995,
           "max_score": 10,
-          "score": 3.3,
+          "score": 6.3,
           "missing": false,
           "description": "成交量反映市場參與度。"
         },
@@ -206,7 +206,7 @@
       ]
     }
   },
-  "total_score": 24.3,
+  "total_score": 27.3,
   "summary": {
     "symbol": "1815",
     "code": "1815",
@@ -217,7 +217,7 @@
     "supply_chain": "電子零組件業",
     "trade_price": 116.0,
     "change_pct": 0.0,
-    "volume": 16579982,
+    "volume": 31721995,
     "turnover_rate_pct": null,
     "revenue_million": 912.4,
     "revenue_mom_pct": 6.79,
@@ -227,20 +227,20 @@
     "financial_period": "2026-08",
     "fundamental_score": 39.0,
     "technical_score": 31.0,
-    "chip_score": 13.2,
+    "chip_score": 25.2,
     "turnover_score": 0.0,
     "weighted_scores": {
       "fundamental": 11.7,
       "technical": 9.3,
-      "chip": 3.3,
+      "chip": 6.3,
       "turnover": 0
     },
-    "total_score": 24.3,
+    "total_score": 27.3,
     "risk_level": "低",
     "entry_reason": "營收年增 79.21%，月增 6.79%",
     "data_quality_score": 33.3,
-    "updated_at": "2026-10-01T03:52:27+08:00",
-    "content_latest_at": "2026-09-30",
+    "updated_at": "2026-10-01T19:56:14+08:00",
+    "content_latest_at": "2026-10-01",
     "scorecard_path": "data/scorecards/1815.json",
     "news_scoring_included": false,
     "theme_scoring_included": false

@@ -2,17 +2,17 @@
   "status": "warning",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-10-01T03:53:08+08:00",
-  "generated_at": "2026-10-01T03:53:17+08:00",
-  "latestValidationUpdateTime": "2026-10-01T03:53:08+08:00",
-  "latestSignalDate": "2026-09-30",
-  "latestEntryDate": "2026-09-30",
-  "latestPriceDate": "2026-09-30",
-  "latestBenchmarkDate": "2026-09-30",
-  "latest_trade_date": "2026-09-30",
-  "completedSignals": 169,
-  "trackingSignals": 141,
-  "d20CompletedSignals": 169,
+  "generatedAt": "2026-10-01T19:57:41+08:00",
+  "generated_at": "2026-10-01T19:58:28+08:00",
+  "latestValidationUpdateTime": "2026-10-01T19:57:41+08:00",
+  "latestSignalDate": "2026-10-01",
+  "latestEntryDate": "2026-10-01",
+  "latestPriceDate": "2026-10-01",
+  "latestBenchmarkDate": "2026-10-01",
+  "latest_trade_date": "2026-10-01",
+  "completedSignals": 176,
+  "trackingSignals": 142,
+  "d20CompletedSignals": 176,
   "missingPriceCount": 0,
   "missingBenchmarkCount": 0,
   "snapshotCoverageGapCount": 4,
@@ -27,7 +27,7 @@
   "lastError": "",
   "failedReasons": [],
   "warnings": [
-    "TAIEX monthly history is unavailable for 2026-10",
+    "Response ended prematurely",
     "歷史 Top 10 快照缺少 4 個交易日；缺口不推定為跌出或連續入榜。"
   ],
   "sourceStatus": [
@@ -58,13 +58,45 @@
     {
       "source": "TWSE TAIEX MI_5MINS_HIST",
       "period": "2026-10",
+      "ok": true,
+      "rows": 1,
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20261001&response=json",
+      "error": ""
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-07-30",
+      "ok": true,
+      "rows": 10302,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F30&id=&response=json",
+      "error": ""
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-08-06",
+      "ok": true,
+      "rows": 10313,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F06&id=&response=json",
+      "error": ""
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-08-20",
       "ok": false,
       "rows": 0,
       "url": "",
-      "error": "TAIEX monthly history is unavailable for 2026-10"
+      "error": "Response ended prematurely"
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-08-25",
+      "ok": true,
+      "rows": 10489,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F25&id=&response=json",
+      "error": ""
     }
   ],
-  "run_id": "36768533660",
-  "data_version": "20260930-0353",
+  "run_id": "36857781934",
+  "data_version": "20261001-1958",
   "source_pipeline": "update_all_site_data"
 }
