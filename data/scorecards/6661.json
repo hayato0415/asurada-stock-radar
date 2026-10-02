@@ -1,7 +1,7 @@
 {
-  "build_id": "20261002-0408-scorecards",
-  "updated_at": "2026-10-02T04:08:38+08:00",
-  "content_latest_at": "2026-10-01",
+  "build_id": "20261002-1923-scorecards",
+  "updated_at": "2026-10-02T19:23:17+08:00",
+  "content_latest_at": "2026-10-02",
   "symbol": "6661",
   "name": "威健生技",
   "market": "上櫃",
@@ -147,8 +147,8 @@
       "key": "chip",
       "label": "籌碼 / 市場交易力道",
       "weight": 25,
-      "score": 0,
-      "raw_score": 0.0,
+      "score": 0.5,
+      "raw_score": 2.0,
       "coverage_pct": 33.3,
       "missing_count": 2,
       "rules": [
@@ -156,9 +156,9 @@
           "id": "volume",
           "label": "成交量",
           "source_field": "volume",
-          "raw_value": 0,
+          "raw_value": 2313933,
           "max_score": 10,
-          "score": 0,
+          "score": 0.5,
           "missing": false,
           "description": "成交量反映市場參與度。"
         },
@@ -206,7 +206,7 @@
       ]
     }
   },
-  "total_score": 2.0,
+  "total_score": 2.5,
   "summary": {
     "symbol": "6661",
     "code": "6661",
@@ -217,7 +217,7 @@
     "supply_chain": "生技醫療業",
     "trade_price": null,
     "change_pct": null,
-    "volume": 0,
+    "volume": 2313933,
     "turnover_rate_pct": null,
     "revenue_million": 32.26,
     "revenue_mom_pct": -2.7,
@@ -227,20 +227,20 @@
     "financial_period": "2026-08",
     "fundamental_score": 6.7,
     "technical_score": 0.0,
-    "chip_score": 0.0,
+    "chip_score": 2.0,
     "turnover_score": 0.0,
     "weighted_scores": {
       "fundamental": 2.0,
       "technical": 0,
-      "chip": 0,
+      "chip": 0.5,
       "turnover": 0
     },
-    "total_score": 2.0,
-    "risk_level": "中",
+    "total_score": 2.5,
+    "risk_level": "低",
     "entry_reason": "營收年增 -31.25%，月增 -2.70%",
     "data_quality_score": 20.8,
-    "updated_at": "2026-10-02T04:08:38+08:00",
-    "content_latest_at": "2026-10-01",
+    "updated_at": "2026-10-02T19:23:17+08:00",
+    "content_latest_at": "2026-10-02",
     "scorecard_path": "data/scorecards/6661.json",
     "news_scoring_included": false,
     "theme_scoring_included": false

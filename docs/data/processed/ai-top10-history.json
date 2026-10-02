@@ -1,10 +1,10 @@
 {
   "status": "ok",
   "ok": true,
-  "latestTradeDate": "2026-10-01",
-  "latest_trade_date": "2026-10-01",
-  "generatedAt": "2026-10-02T04:09:05+08:00",
-  "generated_at": "2026-10-02T04:09:46+08:00",
+  "latestTradeDate": "2026-10-02",
+  "latest_trade_date": "2026-10-02",
+  "generatedAt": "2026-10-02T19:24:11+08:00",
+  "generated_at": "2026-10-02T19:26:11+08:00",
   "scoreVersion": "official-multifactor-v1",
   "scoreSource": "docs/data/processed/factor-scores.json",
   "weights": {
@@ -22,7 +22,7 @@
     "score_weakening_consecutive_days": 3,
     "single_day_breakout_appearances_5d": 1
   },
-  "historyTradingDays": 46,
+  "historyTradingDays": 47,
   "tradingDates": [
     "2026-07-22",
     "2026-07-23",
@@ -69,9 +69,10 @@
     "2026-09-24",
     "2026-09-29",
     "2026-09-30",
-    "2026-10-01"
+    "2026-10-01",
+    "2026-10-02"
   ],
-  "itemsCount": 46,
+  "itemsCount": 47,
   "items": [
     {
       "status": "ok",
@@ -12022,9 +12023,269 @@
           "scoreSource": "official_quote_valuation_revenue"
         }
       ]
+    },
+    {
+      "status": "ok",
+      "ok": true,
+      "dataDate": "2026-10-02",
+      "latest_trade_date": "2026-10-02",
+      "generatedAt": "2026-10-02T19:24:11+08:00",
+      "generated_at": "2026-10-02T19:24:11+08:00",
+      "scoreVersion": "official-multifactor-v1",
+      "scoreSource": "docs/data/processed/factor-scores.json",
+      "weights": {
+        "fundamentalScore": 0.3,
+        "technicalScore": 0.3,
+        "chipScore": 0.25,
+        "turnoverScore": 0.15
+      },
+      "validScoreCount": 1947,
+      "itemsCount": 10,
+      "items": [
+        {
+          "rank": 1,
+          "code": "4991",
+          "name": "環宇-KY",
+          "market": "上櫃",
+          "industry": "半導體業",
+          "concepts": [
+            "半導體業"
+          ],
+          "close": 534.0,
+          "changePercent": 9.99,
+          "totalScore": 89.7,
+          "fundamentalScore": 86.5,
+          "technicalScore": 88,
+          "chipScore": 98.6,
+          "turnoverScore": 84.6,
+          "turnoverRate": 0.708,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-10-02",
+          "generatedAt": "2026-10-02T19:24:11+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 2,
+          "code": "6548",
+          "name": "長科*",
+          "market": "上櫃",
+          "industry": "半導體業",
+          "concepts": [
+            "半導體業"
+          ],
+          "close": 76.7,
+          "changePercent": 7.27,
+          "totalScore": 87.6,
+          "fundamentalScore": 75.8,
+          "technicalScore": 88,
+          "chipScore": 99.3,
+          "turnoverScore": 90.8,
+          "turnoverRate": 2.3042,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-10-02",
+          "generatedAt": "2026-10-02T19:24:11+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 3,
+          "code": "2444",
+          "name": "兆勁",
+          "market": "上市",
+          "industry": "通信網路業",
+          "concepts": [
+            "通信網路業"
+          ],
+          "close": 16.5,
+          "changePercent": 10.0,
+          "totalScore": 87.0,
+          "fundamentalScore": 80.5,
+          "technicalScore": 88,
+          "chipScore": 90.0,
+          "turnoverScore": 93.3,
+          "turnoverRate": 5.3697,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-10-02",
+          "generatedAt": "2026-10-02T19:24:11+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 4,
+          "code": "4927",
+          "name": "泰鼎-KY",
+          "market": "上市",
+          "industry": "電子零組件業",
+          "concepts": [
+            "電子零組件業"
+          ],
+          "close": 48.15,
+          "changePercent": 9.93,
+          "totalScore": 85.7,
+          "fundamentalScore": 67.6,
+          "technicalScore": 88,
+          "chipScore": 100,
+          "turnoverScore": 93.7,
+          "turnoverRate": 6.5702,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-10-02",
+          "generatedAt": "2026-10-02T19:24:11+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 5,
+          "code": "3673",
+          "name": "TPK-KY",
+          "market": "上市",
+          "industry": "光電業",
+          "concepts": [
+            "光電業"
+          ],
+          "close": 80.6,
+          "changePercent": 9.96,
+          "totalScore": 85.5,
+          "fundamentalScore": 66.6,
+          "technicalScore": 88,
+          "chipScore": 100,
+          "turnoverScore": 93.9,
+          "turnoverRate": 7.0603,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-10-02",
+          "generatedAt": "2026-10-02T19:24:11+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 6,
+          "code": "6207",
+          "name": "雷科",
+          "market": "上櫃",
+          "industry": "電子零組件業",
+          "concepts": [
+            "電子零組件業"
+          ],
+          "close": 148.0,
+          "changePercent": 2.07,
+          "totalScore": 85.1,
+          "fundamentalScore": 78.3,
+          "technicalScore": 76.2,
+          "chipScore": 100,
+          "turnoverScore": 91.5,
+          "turnoverRate": 2.7901,
+          "tradeType": "短線",
+          "riskLabel": "正常",
+          "dataDate": "2026-10-02",
+          "generatedAt": "2026-10-02T19:24:11+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 7,
+          "code": "4551",
+          "name": "智伸科",
+          "market": "上市",
+          "industry": "汽車工業",
+          "concepts": [
+            "汽車工業"
+          ],
+          "close": 186.0,
+          "changePercent": 7.83,
+          "totalScore": 84.9,
+          "fundamentalScore": 66.6,
+          "technicalScore": 88,
+          "chipScore": 98.9,
+          "turnoverScore": 91.7,
+          "turnoverRate": 2.9312,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-10-02",
+          "generatedAt": "2026-10-02T19:24:11+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 8,
+          "code": "3081",
+          "name": "聯亞",
+          "market": "上櫃",
+          "industry": "通信網路業",
+          "concepts": [
+            "通信網路業"
+          ],
+          "close": 2925.0,
+          "changePercent": 9.96,
+          "totalScore": 84.8,
+          "fundamentalScore": 77.4,
+          "technicalScore": 88,
+          "chipScore": 92.2,
+          "turnoverScore": 81.2,
+          "turnoverRate": 0.4564,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-10-02",
+          "generatedAt": "2026-10-02T19:24:11+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 9,
+          "code": "1708",
+          "name": "東鹼",
+          "market": "上市",
+          "industry": "化學工業",
+          "concepts": [
+            "化學工業"
+          ],
+          "close": 56.2,
+          "changePercent": 4.85,
+          "totalScore": 84.7,
+          "fundamentalScore": 68.9,
+          "technicalScore": 84.5,
+          "chipScore": 99.0,
+          "turnoverScore": 92.9,
+          "turnoverRate": 4.4744,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-10-02",
+          "generatedAt": "2026-10-02T19:24:11+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 10,
+          "code": "6274",
+          "name": "台燿",
+          "market": "上櫃",
+          "industry": "電子零組件業",
+          "concepts": [
+            "電子零組件業"
+          ],
+          "close": 1620.0,
+          "changePercent": 5.54,
+          "totalScore": 84.7,
+          "fundamentalScore": 76.4,
+          "technicalScore": 86.6,
+          "chipScore": 94.9,
+          "turnoverScore": 80.3,
+          "turnoverRate": 0.4126,
+          "tradeType": "短線",
+          "riskLabel": "正常",
+          "dataDate": "2026-10-02",
+          "generatedAt": "2026-10-02T19:24:11+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        }
+      ]
     }
   ],
-  "run_id": "36919302567",
-  "data_version": "20261001-0409",
+  "run_id": "37000593249",
+  "data_version": "20261002-1926",
   "source_pipeline": "update_all_site_data"
 }
