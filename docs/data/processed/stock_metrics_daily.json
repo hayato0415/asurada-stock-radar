@@ -1,11 +1,11 @@
 {
   "date": "2026-10-02",
-  "updated_at": "2026-10-02 23:58",
+  "updated_at": "2026-10-03 03:46",
   "revenue_month": "2026-08",
   "source": {
     "daily_quote": {
       "twse": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20261002&type=ALLBUT0999&response=json",
-      "tpex": "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes"
+      "tpex": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F10%2F02&id=&response=json"
     },
     "monthly_revenue": "MOPS / TWSE listed revenue + TPEx OTC revenue OpenAPI",
     "listed_shares": "TWSE / TPEx company basic OpenAPI if available"
@@ -23768,9 +23768,9 @@
       "revenue_yoy_pct": 34.07
     }
   ],
-  "run_id": "37030347772",
-  "generated_at": "2026-10-02T23:59:38+08:00",
+  "run_id": "37056189894",
+  "generated_at": "2026-10-03T03:47:25+08:00",
   "latest_trade_date": "2026-10-02",
-  "data_version": "20261002-2359",
+  "data_version": "20261002-0347",
   "source_pipeline": "update_all_site_data"
 }
