@@ -1,10 +1,10 @@
 {
   "status": "ok",
   "ok": true,
-  "latestTradeDate": "2026-10-02",
-  "latest_trade_date": "2026-10-02",
-  "generatedAt": "2026-10-05T02:32:50+08:00",
-  "generated_at": "2026-10-05T02:33:34+08:00",
+  "latestTradeDate": "2026-10-05",
+  "latest_trade_date": "2026-10-05",
+  "generatedAt": "2026-10-06T02:45:17+08:00",
+  "generated_at": "2026-10-06T02:46:30+08:00",
   "scoreVersion": "official-multifactor-v1",
   "scoreSource": "docs/data/processed/factor-scores.json",
   "weights": {
@@ -22,61 +22,39 @@
     "score_weakening_consecutive_days": 3,
     "single_day_breakout_appearances_5d": 1
   },
-  "historyTradingDays": 47,
+  "historyTradingDays": 48,
   "windowSize": 5,
   "availableTradingDays": 5,
   "tradingDates": [
-    "2026-09-24",
     "2026-09-29",
     "2026-09-30",
     "2026-10-01",
-    "2026-10-02"
+    "2026-10-02",
+    "2026-10-05"
   ],
-  "itemsCount": 38,
+  "itemsCount": 43,
   "items": [
     {
-      "code": "6207",
-      "name": "雷科",
-      "market": "上櫃",
-      "industry": "電子零組件業",
+      "code": "2340",
+      "name": "台亞",
+      "market": "上市",
+      "industry": "半導體業",
       "concepts": [
-        "電子零組件業"
+        "半導體業"
       ],
       "appearances5d": 3,
-      "averageRank5d": 3.67,
-      "bestRank5d": 1,
-      "latestRank": 6,
+      "averageRank5d": 7.33,
+      "bestRank5d": 6,
+      "latestRank": 9,
       "previousRank": null,
       "rankChange": null,
       "consecutiveDays": 1,
-      "averageScore5d": 87.13,
-      "latestScore": 85.1,
+      "averageScore5d": 85.33,
+      "latestScore": 84.7,
       "scoreTrend": "下降",
-      "firstSeenDate": "2026-09-24",
-      "lastSeenDate": "2026-10-02",
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-10-05",
       "isCurrent": true
-    },
-    {
-      "code": "3455",
-      "name": "由田",
-      "market": "上櫃",
-      "industry": "光電業",
-      "concepts": [
-        "光電業"
-      ],
-      "appearances5d": 3,
-      "averageRank5d": 7.67,
-      "bestRank5d": 6,
-      "latestRank": 9,
-      "previousRank": 9,
-      "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore5d": 85.8,
-      "latestScore": 85.6,
-      "scoreTrend": "持平",
-      "firstSeenDate": "2026-09-24",
-      "lastSeenDate": "2026-10-01",
-      "isCurrent": false
     },
     {
       "code": "3311",
@@ -90,7 +68,7 @@
       "averageRank5d": 3.5,
       "bestRank5d": 2,
       "latestRank": 2,
-      "previousRank": 2,
+      "previousRank": null,
       "rankChange": null,
       "consecutiveDays": 0,
       "averageScore5d": 86.15,
@@ -98,6 +76,28 @@
       "scoreTrend": "上升",
       "firstSeenDate": "2026-09-30",
       "lastSeenDate": "2026-10-01",
+      "isCurrent": false
+    },
+    {
+      "code": "6207",
+      "name": "雷科",
+      "market": "上櫃",
+      "industry": "電子零組件業",
+      "concepts": [
+        "電子零組件業"
+      ],
+      "appearances5d": 2,
+      "averageRank5d": 3.5,
+      "bestRank5d": 1,
+      "latestRank": 6,
+      "previousRank": 6,
+      "rankChange": null,
+      "consecutiveDays": 0,
+      "averageScore5d": 86.95,
+      "latestScore": 85.1,
+      "scoreTrend": "下降",
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-10-02",
       "isCurrent": false
     },
     {
@@ -112,80 +112,14 @@
       "averageRank5d": 4.0,
       "bestRank5d": 3,
       "latestRank": 5,
-      "previousRank": null,
+      "previousRank": 5,
       "rankChange": null,
-      "consecutiveDays": 1,
+      "consecutiveDays": 0,
       "averageScore5d": 85.55,
       "latestScore": 85.5,
       "scoreTrend": "下降",
       "firstSeenDate": "2026-09-30",
       "lastSeenDate": "2026-10-02",
-      "isCurrent": true
-    },
-    {
-      "code": "2030",
-      "name": "彰源",
-      "market": "上市",
-      "industry": "鋼鐵工業",
-      "concepts": [
-        "鋼鐵工業"
-      ],
-      "appearances5d": 2,
-      "averageRank5d": 4.5,
-      "bestRank5d": 2,
-      "latestRank": 2,
-      "previousRank": null,
-      "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore5d": 86.3,
-      "latestScore": 86.0,
-      "scoreTrend": "下降",
-      "firstSeenDate": "2026-09-24",
-      "lastSeenDate": "2026-09-30",
-      "isCurrent": false
-    },
-    {
-      "code": "3624",
-      "name": "光頡",
-      "market": "上櫃",
-      "industry": "電子零組件業",
-      "concepts": [
-        "電子零組件業"
-      ],
-      "appearances5d": 2,
-      "averageRank5d": 4.5,
-      "bestRank5d": 4,
-      "latestRank": 4,
-      "previousRank": 4,
-      "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore5d": 86.6,
-      "latestScore": 85.9,
-      "scoreTrend": "下降",
-      "firstSeenDate": "2026-09-24",
-      "lastSeenDate": "2026-10-01",
-      "isCurrent": false
-    },
-    {
-      "code": "6693",
-      "name": "廣閎科",
-      "market": "上櫃",
-      "industry": "半導體業",
-      "concepts": [
-        "半導體業"
-      ],
-      "appearances5d": 2,
-      "averageRank5d": 5.5,
-      "bestRank5d": 1,
-      "latestRank": 10,
-      "previousRank": null,
-      "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore5d": 86.9,
-      "latestScore": 85.5,
-      "scoreTrend": "下降",
-      "firstSeenDate": "2026-09-24",
-      "lastSeenDate": "2026-09-29",
       "isCurrent": false
     },
     {
@@ -200,58 +134,36 @@
       "averageRank5d": 6.0,
       "bestRank5d": 3,
       "latestRank": 3,
-      "previousRank": null,
+      "previousRank": 3,
       "rankChange": null,
-      "consecutiveDays": 1,
+      "consecutiveDays": 0,
       "averageScore5d": 85.75,
       "latestScore": 87.0,
       "scoreTrend": "上升",
       "firstSeenDate": "2026-09-30",
       "lastSeenDate": "2026-10-02",
-      "isCurrent": true
-    },
-    {
-      "code": "2340",
-      "name": "台亞",
-      "market": "上市",
-      "industry": "半導體業",
-      "concepts": [
-        "半導體業"
-      ],
-      "appearances5d": 2,
-      "averageRank5d": 6.5,
-      "bestRank5d": 6,
-      "latestRank": 6,
-      "previousRank": null,
-      "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore5d": 85.65,
-      "latestScore": 85.2,
-      "scoreTrend": "下降",
-      "firstSeenDate": "2026-09-29",
-      "lastSeenDate": "2026-09-30",
       "isCurrent": false
     },
     {
-      "code": "8040",
-      "name": "九暘",
+      "code": "3455",
+      "name": "由田",
       "market": "上櫃",
-      "industry": "半導體業",
+      "industry": "光電業",
       "concepts": [
-        "半導體業"
+        "光電業"
       ],
       "appearances5d": 2,
       "averageRank5d": 7.5,
-      "bestRank5d": 5,
-      "latestRank": 5,
+      "bestRank5d": 6,
+      "latestRank": 9,
       "previousRank": null,
       "rankChange": null,
       "consecutiveDays": 0,
-      "averageScore5d": 86.1,
-      "latestScore": 87.0,
-      "scoreTrend": "上升",
-      "firstSeenDate": "2026-09-24",
-      "lastSeenDate": "2026-09-29",
+      "averageScore5d": 85.9,
+      "latestScore": 85.6,
+      "scoreTrend": "下降",
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-10-01",
       "isCurrent": false
     },
     {
@@ -266,14 +178,36 @@
       "averageRank5d": 1.0,
       "bestRank5d": 1,
       "latestRank": 1,
-      "previousRank": null,
+      "previousRank": 1,
       "rankChange": null,
-      "consecutiveDays": 1,
+      "consecutiveDays": 0,
       "averageScore5d": 89.7,
       "latestScore": 89.7,
       "scoreTrend": "資料不足",
       "firstSeenDate": "2026-10-02",
       "lastSeenDate": "2026-10-02",
+      "isCurrent": false
+    },
+    {
+      "code": "8358",
+      "name": "金居",
+      "market": "上櫃",
+      "industry": "電子零組件業",
+      "concepts": [
+        "電子零組件業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 1.0,
+      "bestRank5d": 1,
+      "latestRank": 1,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore5d": 88.0,
+      "latestScore": 88.0,
+      "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-10-05",
+      "lastSeenDate": "2026-10-05",
       "isCurrent": true
     },
     {
@@ -288,7 +222,7 @@
       "averageRank5d": 1.0,
       "bestRank5d": 1,
       "latestRank": 1,
-      "previousRank": 1,
+      "previousRank": null,
       "rankChange": null,
       "consecutiveDays": 0,
       "averageScore5d": 87.0,
@@ -343,28 +277,6 @@
       "isCurrent": false
     },
     {
-      "code": "6148",
-      "name": "驊宏資",
-      "market": "上櫃",
-      "industry": "資訊服務業",
-      "concepts": [
-        "資訊服務業"
-      ],
-      "appearances5d": 1,
-      "averageRank5d": 2.0,
-      "bestRank5d": 2,
-      "latestRank": 2,
-      "previousRank": null,
-      "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore5d": 88.2,
-      "latestScore": 88.2,
-      "scoreTrend": "資料不足",
-      "firstSeenDate": "2026-09-24",
-      "lastSeenDate": "2026-09-24",
-      "isCurrent": false
-    },
-    {
       "code": "6548",
       "name": "長科*",
       "market": "上櫃",
@@ -376,15 +288,59 @@
       "averageRank5d": 2.0,
       "bestRank5d": 2,
       "latestRank": 2,
-      "previousRank": null,
+      "previousRank": 2,
       "rankChange": null,
-      "consecutiveDays": 1,
+      "consecutiveDays": 0,
       "averageScore5d": 87.6,
       "latestScore": 87.6,
       "scoreTrend": "資料不足",
       "firstSeenDate": "2026-10-02",
       "lastSeenDate": "2026-10-02",
+      "isCurrent": false
+    },
+    {
+      "code": "3491",
+      "name": "昇達科",
+      "market": "上櫃",
+      "industry": "通信網路業",
+      "concepts": [
+        "通信網路業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 2.0,
+      "bestRank5d": 2,
+      "latestRank": 2,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore5d": 87.1,
+      "latestScore": 87.1,
+      "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-10-05",
+      "lastSeenDate": "2026-10-05",
       "isCurrent": true
+    },
+    {
+      "code": "2030",
+      "name": "彰源",
+      "market": "上市",
+      "industry": "鋼鐵工業",
+      "concepts": [
+        "鋼鐵工業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 2.0,
+      "bestRank5d": 2,
+      "latestRank": 2,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 0,
+      "averageScore5d": 86.0,
+      "latestScore": 86.0,
+      "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-09-30",
+      "lastSeenDate": "2026-09-30",
+      "isCurrent": false
     },
     {
       "code": "3580",
@@ -409,8 +365,8 @@
       "isCurrent": false
     },
     {
-      "code": "6643",
-      "name": "M31",
+      "code": "6187",
+      "name": "萬潤",
       "market": "上櫃",
       "industry": "半導體業",
       "concepts": [
@@ -422,13 +378,13 @@
       "latestRank": 3,
       "previousRank": null,
       "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore5d": 88.0,
-      "latestScore": 88.0,
+      "consecutiveDays": 1,
+      "averageScore5d": 86.7,
+      "latestScore": 86.7,
       "scoreTrend": "資料不足",
-      "firstSeenDate": "2026-09-24",
-      "lastSeenDate": "2026-09-24",
-      "isCurrent": false
+      "firstSeenDate": "2026-10-05",
+      "lastSeenDate": "2026-10-05",
+      "isCurrent": true
     },
     {
       "code": "6127",
@@ -442,7 +398,7 @@
       "averageRank5d": 3.0,
       "bestRank5d": 3,
       "latestRank": 3,
-      "previousRank": 3,
+      "previousRank": null,
       "rankChange": null,
       "consecutiveDays": 0,
       "averageScore5d": 86.2,
@@ -475,8 +431,8 @@
       "isCurrent": false
     },
     {
-      "code": "4927",
-      "name": "泰鼎-KY",
+      "code": "4989",
+      "name": "榮科",
       "market": "上市",
       "industry": "電子零組件業",
       "concepts": [
@@ -489,12 +445,56 @@
       "previousRank": null,
       "rankChange": null,
       "consecutiveDays": 1,
+      "averageScore5d": 86.1,
+      "latestScore": 86.1,
+      "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-10-05",
+      "lastSeenDate": "2026-10-05",
+      "isCurrent": true
+    },
+    {
+      "code": "3624",
+      "name": "光頡",
+      "market": "上櫃",
+      "industry": "電子零組件業",
+      "concepts": [
+        "電子零組件業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 4.0,
+      "bestRank5d": 4,
+      "latestRank": 4,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 0,
+      "averageScore5d": 85.9,
+      "latestScore": 85.9,
+      "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-10-01",
+      "lastSeenDate": "2026-10-01",
+      "isCurrent": false
+    },
+    {
+      "code": "4927",
+      "name": "泰鼎-KY",
+      "market": "上市",
+      "industry": "電子零組件業",
+      "concepts": [
+        "電子零組件業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 4.0,
+      "bestRank5d": 4,
+      "latestRank": 4,
+      "previousRank": 4,
+      "rankChange": null,
+      "consecutiveDays": 0,
       "averageScore5d": 85.7,
       "latestScore": 85.7,
       "scoreTrend": "資料不足",
       "firstSeenDate": "2026-10-02",
       "lastSeenDate": "2026-10-02",
-      "isCurrent": true
+      "isCurrent": false
     },
     {
       "code": "6691",
@@ -519,6 +519,50 @@
       "isCurrent": false
     },
     {
+      "code": "8040",
+      "name": "九暘",
+      "market": "上櫃",
+      "industry": "半導體業",
+      "concepts": [
+        "半導體業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 5.0,
+      "bestRank5d": 5,
+      "latestRank": 5,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 0,
+      "averageScore5d": 87.0,
+      "latestScore": 87.0,
+      "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29",
+      "isCurrent": false
+    },
+    {
+      "code": "6190",
+      "name": "萬泰科",
+      "market": "上櫃",
+      "industry": "通信網路業",
+      "concepts": [
+        "通信網路業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 5.0,
+      "bestRank5d": 5,
+      "latestRank": 5,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore5d": 85.9,
+      "latestScore": 85.9,
+      "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-10-05",
+      "lastSeenDate": "2026-10-05",
+      "isCurrent": true
+    },
+    {
       "code": "6173",
       "name": "信昌電",
       "market": "上櫃",
@@ -530,7 +574,7 @@
       "averageRank5d": 5.0,
       "bestRank5d": 5,
       "latestRank": 5,
-      "previousRank": 5,
+      "previousRank": null,
       "rankChange": null,
       "consecutiveDays": 0,
       "averageScore5d": 85.8,
@@ -538,28 +582,6 @@
       "scoreTrend": "資料不足",
       "firstSeenDate": "2026-10-01",
       "lastSeenDate": "2026-10-01",
-      "isCurrent": false
-    },
-    {
-      "code": "7792",
-      "name": "安葆",
-      "market": "上櫃",
-      "industry": "其他電子業",
-      "concepts": [
-        "其他電子業"
-      ],
-      "appearances5d": 1,
-      "averageRank5d": 6.0,
-      "bestRank5d": 6,
-      "latestRank": 6,
-      "previousRank": null,
-      "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore5d": 86.9,
-      "latestScore": 86.9,
-      "scoreTrend": "資料不足",
-      "firstSeenDate": "2026-09-24",
-      "lastSeenDate": "2026-09-24",
       "isCurrent": false
     },
     {
@@ -574,7 +596,7 @@
       "averageRank5d": 6.0,
       "bestRank5d": 6,
       "latestRank": 6,
-      "previousRank": 6,
+      "previousRank": null,
       "rankChange": null,
       "consecutiveDays": 0,
       "averageScore5d": 85.8,
@@ -583,6 +605,28 @@
       "firstSeenDate": "2026-10-01",
       "lastSeenDate": "2026-10-01",
       "isCurrent": false
+    },
+    {
+      "code": "1815",
+      "name": "富喬",
+      "market": "上櫃",
+      "industry": "電子零組件業",
+      "concepts": [
+        "電子零組件業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 6.0,
+      "bestRank5d": 6,
+      "latestRank": 6,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore5d": 85.5,
+      "latestScore": 85.5,
+      "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-10-05",
+      "lastSeenDate": "2026-10-05",
+      "isCurrent": true
     },
     {
       "code": "8043",
@@ -596,7 +640,7 @@
       "averageRank5d": 7.0,
       "bestRank5d": 7,
       "latestRank": 7,
-      "previousRank": 7,
+      "previousRank": null,
       "rankChange": null,
       "consecutiveDays": 0,
       "averageScore5d": 85.7,
@@ -605,6 +649,28 @@
       "firstSeenDate": "2026-10-01",
       "lastSeenDate": "2026-10-01",
       "isCurrent": false
+    },
+    {
+      "code": "1714",
+      "name": "和桐",
+      "market": "上市",
+      "industry": "化學工業",
+      "concepts": [
+        "化學工業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 7.0,
+      "bestRank5d": 7,
+      "latestRank": 7,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore5d": 85.2,
+      "latestScore": 85.2,
+      "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-10-05",
+      "lastSeenDate": "2026-10-05",
+      "isCurrent": true
     },
     {
       "code": "6116",
@@ -640,15 +706,15 @@
       "averageRank5d": 7.0,
       "bestRank5d": 7,
       "latestRank": 7,
-      "previousRank": null,
+      "previousRank": 7,
       "rankChange": null,
-      "consecutiveDays": 1,
+      "consecutiveDays": 0,
       "averageScore5d": 84.9,
       "latestScore": 84.9,
       "scoreTrend": "資料不足",
       "firstSeenDate": "2026-10-02",
       "lastSeenDate": "2026-10-02",
-      "isCurrent": true
+      "isCurrent": false
     },
     {
       "code": "6414",
@@ -684,7 +750,7 @@
       "averageRank5d": 8.0,
       "bestRank5d": 8,
       "latestRank": 8,
-      "previousRank": 8,
+      "previousRank": null,
       "rankChange": null,
       "consecutiveDays": 0,
       "averageScore5d": 85.6,
@@ -695,9 +761,9 @@
       "isCurrent": false
     },
     {
-      "code": "3081",
-      "name": "聯亞",
-      "market": "上櫃",
+      "code": "6152",
+      "name": "百一",
+      "market": "上市",
       "industry": "通信網路業",
       "concepts": [
         "通信網路業"
@@ -712,9 +778,31 @@
       "averageScore5d": 84.8,
       "latestScore": 84.8,
       "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-10-05",
+      "lastSeenDate": "2026-10-05",
+      "isCurrent": true
+    },
+    {
+      "code": "3081",
+      "name": "聯亞",
+      "market": "上櫃",
+      "industry": "通信網路業",
+      "concepts": [
+        "通信網路業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 8.0,
+      "bestRank5d": 8,
+      "latestRank": 8,
+      "previousRank": 8,
+      "rankChange": null,
+      "consecutiveDays": 0,
+      "averageScore5d": 84.8,
+      "latestScore": 84.8,
+      "scoreTrend": "資料不足",
       "firstSeenDate": "2026-10-02",
       "lastSeenDate": "2026-10-02",
-      "isCurrent": true
+      "isCurrent": false
     },
     {
       "code": "3592",
@@ -761,28 +849,6 @@
       "isCurrent": false
     },
     {
-      "code": "4566",
-      "name": "時碩工業",
-      "market": "上市",
-      "industry": "電機機械",
-      "concepts": [
-        "電機機械"
-      ],
-      "appearances5d": 1,
-      "averageRank5d": 9.0,
-      "bestRank5d": 9,
-      "latestRank": 9,
-      "previousRank": null,
-      "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore5d": 85.5,
-      "latestScore": 85.5,
-      "scoreTrend": "資料不足",
-      "firstSeenDate": "2026-09-24",
-      "lastSeenDate": "2026-09-24",
-      "isCurrent": false
-    },
-    {
       "code": "1708",
       "name": "東鹼",
       "market": "上市",
@@ -794,15 +860,15 @@
       "averageRank5d": 9.0,
       "bestRank5d": 9,
       "latestRank": 9,
-      "previousRank": null,
+      "previousRank": 9,
       "rankChange": null,
-      "consecutiveDays": 1,
+      "consecutiveDays": 0,
       "averageScore5d": 84.7,
       "latestScore": 84.7,
       "scoreTrend": "資料不足",
       "firstSeenDate": "2026-10-02",
       "lastSeenDate": "2026-10-02",
-      "isCurrent": true
+      "isCurrent": false
     },
     {
       "code": "4760",
@@ -816,7 +882,7 @@
       "averageRank5d": 10.0,
       "bestRank5d": 10,
       "latestRank": 10,
-      "previousRank": 10,
+      "previousRank": null,
       "rankChange": null,
       "consecutiveDays": 0,
       "averageScore5d": 85.6,
@@ -825,6 +891,50 @@
       "firstSeenDate": "2026-10-01",
       "lastSeenDate": "2026-10-01",
       "isCurrent": false
+    },
+    {
+      "code": "6693",
+      "name": "廣閎科",
+      "market": "上櫃",
+      "industry": "半導體業",
+      "concepts": [
+        "半導體業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 10.0,
+      "bestRank5d": 10,
+      "latestRank": 10,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 0,
+      "averageScore5d": 85.5,
+      "latestScore": 85.5,
+      "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29",
+      "isCurrent": false
+    },
+    {
+      "code": "6419",
+      "name": "京晨科",
+      "market": "上櫃",
+      "industry": "光電業",
+      "concepts": [
+        "光電業"
+      ],
+      "appearances5d": 1,
+      "averageRank5d": 10.0,
+      "bestRank5d": 10,
+      "latestRank": 10,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore5d": 84.7,
+      "latestScore": 84.7,
+      "scoreTrend": "資料不足",
+      "firstSeenDate": "2026-10-05",
+      "lastSeenDate": "2026-10-05",
+      "isCurrent": true
     },
     {
       "code": "6274",
@@ -838,15 +948,15 @@
       "averageRank5d": 10.0,
       "bestRank5d": 10,
       "latestRank": 10,
-      "previousRank": null,
+      "previousRank": 10,
       "rankChange": null,
-      "consecutiveDays": 1,
+      "consecutiveDays": 0,
       "averageScore5d": 84.7,
       "latestScore": 84.7,
       "scoreTrend": "資料不足",
       "firstSeenDate": "2026-10-02",
       "lastSeenDate": "2026-10-02",
-      "isCurrent": true
+      "isCurrent": false
     },
     {
       "code": "1709",
@@ -871,7 +981,7 @@
       "isCurrent": false
     }
   ],
-  "run_id": "37224772994",
-  "data_version": "20261002-0233",
+  "run_id": "37358141815",
+  "data_version": "20261005-0246",
   "source_pipeline": "update_all_site_data"
 }
