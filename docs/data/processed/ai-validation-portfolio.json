@@ -2,9 +2,9 @@
   "status": "ok",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-10-07T04:00:39+08:00",
-  "generated_at": "2026-10-07T04:00:51+08:00",
-  "latest_trade_date": "2026-10-06",
+  "generatedAt": "2026-10-08T04:29:00+08:00",
+  "generated_at": "2026-10-08T04:29:51+08:00",
+  "latest_trade_date": "2026-10-07",
   "portfolioRule": "Each first-entry signal cycle is equally weighted and held for a fixed number of valid individual-stock trading days.",
   "calculationDisclosure": {
     "weighting": "Daily equal weight among active first-entry signals.",
@@ -24,8 +24,8 @@
   "holding5": {
     "holdingDays": 5,
     "status": "price_data_incomplete",
-    "signalCount": 335,
-    "incompleteSignalCount": 1,
+    "signalCount": 341,
+    "incompleteSignalCount": 2,
     "incompleteSignals": [
       {
         "signalId": "3591_2026-09-04_official-multifactor-v1",
@@ -37,6 +37,12 @@
           "2026-09-16",
           "2026-09-17",
           "2026-09-18"
+        ]
+      },
+      {
+        "signalId": "6173_2026-10-01_official-multifactor-v1",
+        "dates": [
+          "2026-10-07"
         ]
       }
     ],
@@ -59,7 +65,7 @@
     "missingPriceRule": "A held position with an official no-trade or unknown-coverage session invalidates the aggregate curve; prices are never carried forward.",
     "summary": {
       "status": "price_data_incomplete",
-      "signalCount": 335,
+      "signalCount": 341,
       "rowsCount": 0,
       "grossReturn": null,
       "netReturn": null,
@@ -73,8 +79,8 @@
   "holding20": {
     "holdingDays": 20,
     "status": "price_data_incomplete",
-    "signalCount": 335,
-    "incompleteSignalCount": 1,
+    "signalCount": 339,
+    "incompleteSignalCount": 4,
     "incompleteSignals": [
       {
         "signalId": "3591_2026-09-04_official-multifactor-v1",
@@ -86,6 +92,24 @@
           "2026-09-16",
           "2026-09-17",
           "2026-09-18"
+        ]
+      },
+      {
+        "signalId": "6173_2026-09-10_official-multifactor-v1",
+        "dates": [
+          "2026-10-07"
+        ]
+      },
+      {
+        "signalId": "6173_2026-09-16_official-multifactor-v1",
+        "dates": [
+          "2026-10-07"
+        ]
+      },
+      {
+        "signalId": "6173_2026-10-01_official-multifactor-v1",
+        "dates": [
+          "2026-10-07"
         ]
       }
     ],
@@ -108,7 +132,7 @@
     "missingPriceRule": "A held position with an official no-trade or unknown-coverage session invalidates the aggregate curve; prices are never carried forward.",
     "summary": {
       "status": "price_data_incomplete",
-      "signalCount": 335,
+      "signalCount": 339,
       "rowsCount": 0,
       "grossReturn": null,
       "netReturn": null,
@@ -119,7 +143,7 @@
       "recent20": null
     }
   },
-  "run_id": "37522934395",
-  "data_version": "20261006-0400",
+  "run_id": "37681783306",
+  "data_version": "20261007-0429",
   "source_pipeline": "update_all_site_data"
 }
