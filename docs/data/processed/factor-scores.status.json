@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "updated_at": "2026-10-12T03:22:25+08:00",
-  "attempted_at": "2026-10-12T03:22:25+08:00",
-  "target_date": "2026-10-08",
-  "latest_trade_date": "2026-10-08",
+  "updated_at": "2026-10-13T03:14:34+08:00",
+  "attempted_at": "2026-10-13T03:14:34+08:00",
+  "target_date": "2026-10-12",
+  "latest_trade_date": "2026-10-12",
   "revenue_month": "2026-09",
   "items_count": 100,
   "rows_written": 100,
   "stock_master_count": 1978,
-  "twse_quote_matched": 1082,
-  "tpex_quote_matched": 886,
+  "twse_quote_matched": 1083,
+  "tpex_quote_matched": 887,
   "previous_data_preserved": false,
   "failed_reasons": [],
   "warnings": [],
@@ -21,15 +21,13 @@
   },
   "quality": {
     "stock_master_count": 1978,
-    "quote_matched": 1968,
-    "score_candidates": 1890,
-    "missing_quote_count": 10,
-    "missing_score_count": 78,
+    "quote_matched": 1970,
+    "score_candidates": 1893,
+    "missing_quote_count": 8,
+    "missing_score_count": 77,
     "missing_quote_sample": [
       "1589",
       "2067",
-      "2323",
-      "3085",
       "3625",
       "3632",
       "4155",
@@ -38,21 +36,26 @@
       "6173"
     ],
     "missing_score_sample": [
+      "1435",
+      "1565",
       "1569",
       "1742",
       "1813",
-      "2073",
+      "2064",
+      "2323",
       "2718",
       "2726",
       "2734",
-      "3115",
+      "2948",
+      "2949",
+      "3064",
+      "3085",
       "3191",
       "3205",
       "3252",
       "3288",
       "3313",
       "3322",
-      "3332",
       "3609",
       "3623",
       "3631",
@@ -67,7 +70,6 @@
       "4503",
       "4530",
       "4563",
-      "4581",
       "4714",
       "4745",
       "4924",
@@ -83,11 +85,7 @@
       "5530",
       "5543",
       "5703",
-      "5906",
-      "6111",
-      "6198",
-      "6199",
-      "6212"
+      "6111"
     ]
   },
   "quote_coverage": {
@@ -97,28 +95,28 @@
       "tpex": 715
     },
     "matched": {
-      "twse": 1082,
-      "tpex": 886
+      "twse": 1083,
+      "tpex": 887
     }
   },
   "source_status": [
     {
       "name": "TWSE 上市每日行情",
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20261008&type=ALLBUT0999&response=json",
+      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20261012&type=ALLBUT0999&response=json",
       "ok": true,
       "http_status": null,
-      "source_date": "2026-10-08",
-      "row_count": 1380,
+      "source_date": "2026-10-12",
+      "row_count": 1381,
       "error": "",
       "required_fields_missing": []
     },
     {
       "name": "TPEx 上櫃每日行情",
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F10%2F08&id=&response=json",
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F10%2F12&id=&response=json",
       "ok": true,
       "http_status": null,
-      "source_date": "2026-10-08",
-      "row_count": 12221,
+      "source_date": "2026-10-12",
+      "row_count": 12316,
       "error": "",
       "required_fields_missing": []
     },
@@ -138,7 +136,7 @@
       "ok": true,
       "http_status": 200,
       "source_date": null,
-      "row_count": 885,
+      "row_count": 886,
       "error": "",
       "required_fields_missing": []
     },
@@ -148,7 +146,7 @@
       "ok": true,
       "http_status": 200,
       "source_date": null,
-      "row_count": 1086,
+      "row_count": 868,
       "error": "",
       "required_fields_missing": []
     },
@@ -158,7 +156,7 @@
       "ok": true,
       "http_status": 200,
       "source_date": null,
-      "row_count": 758,
+      "row_count": 761,
       "error": "",
       "required_fields_missing": []
     },
@@ -196,11 +194,11 @@
   "persistence_status": {
     "ok": true,
     "status": "ok",
-    "latest_trade_date": "2026-10-08",
-    "generated_at": "2026-10-12T03:22:25+08:00",
-    "snapshot_created": false,
-    "snapshot_path": "data/history/ai-top10/2026-10-08.json",
-    "history_trading_days": 51,
+    "latest_trade_date": "2026-10-12",
+    "generated_at": "2026-10-13T03:14:34+08:00",
+    "snapshot_created": true,
+    "snapshot_path": "data/history/ai-top10/2026-10-12.json",
+    "history_trading_days": 52,
     "items_count": 10,
     "previous_data_preserved": false,
     "failed_reasons": [],
@@ -211,8 +209,8 @@
       "ai-persistence-monthly.json": "updated"
     }
   },
-  "run_id": "38167644828",
-  "generated_at": "2026-10-12T03:23:08+08:00",
-  "data_version": "20261008-0323",
+  "run_id": "38296150539",
+  "generated_at": "2026-10-13T03:15:58+08:00",
+  "data_version": "20261012-0315",
   "source_pipeline": "update_all_site_data"
 }
