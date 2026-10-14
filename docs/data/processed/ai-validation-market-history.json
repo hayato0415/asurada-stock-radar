@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "validationVersion": "ai-validation-v1",
-  "updatedAt": "2026-10-14T18:53:41+08:00",
+  "updatedAt": "2026-10-14T22:41:02+08:00",
   "asOfDate": "2026-10-14",
   "earliestSignalDate": "2026-07-22",
   "calendar": [
@@ -61,7 +61,8 @@
     "2026-10-07",
     "2026-10-08",
     "2026-10-12",
-    "2026-10-13"
+    "2026-10-13",
+    "2026-10-14"
   ],
   "benchmarkCode": "TAIEX",
   "benchmark": [
@@ -631,6 +632,14 @@
       "high": 49126.27,
       "low": 48066.36,
       "close": 48341.31,
+      "source": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20261001&response=json"
+    },
+    {
+      "date": "2026-10-14",
+      "open": 48382.64,
+      "high": 49059.12,
+      "low": 48382.64,
+      "close": 48625.83,
       "source": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20261001&response=json"
     }
   ],
@@ -6879,6 +6888,19 @@
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F19&id=&response=json"
           },
           {
+            "date": "2026-08-20",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 43.95,
+            "high": 46.0,
+            "low": 43.25,
+            "close": 43.55,
+            "volume": 592370,
+            "transactions": 454,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F20&id=&response=json"
+          },
+          {
             "date": "2026-08-21",
             "market": "tpex",
             "rawPresent": true,
@@ -7608,6 +7630,19 @@
           "volume": 260939,
           "transactions": 266,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F19&id=&response=json"
+        },
+        {
+          "date": "2026-08-20",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 43.95,
+          "high": 46.0,
+          "low": 43.25,
+          "close": 43.55,
+          "volume": 592370,
+          "transactions": 454,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F20&id=&response=json"
         },
         {
           "date": "2026-08-21",
@@ -118903,6 +118938,19 @@
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F19&id=&response=json"
           },
           {
+            "date": "2026-08-20",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 38.25,
+            "high": 38.5,
+            "low": 37.5,
+            "close": 37.5,
+            "volume": 419043,
+            "transactions": 386,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F20&id=&response=json"
+          },
+          {
             "date": "2026-08-21",
             "market": "tpex",
             "rawPresent": true,
@@ -119632,6 +119680,19 @@
           "volume": 665470,
           "transactions": 702,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F19&id=&response=json"
+        },
+        {
+          "date": "2026-08-20",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 38.25,
+          "high": 38.5,
+          "low": 37.5,
+          "close": 37.5,
+          "volume": 419043,
+          "transactions": 386,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F20&id=&response=json"
         },
         {
           "date": "2026-08-21",
@@ -123359,6 +123420,19 @@
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F19&id=&response=json"
           },
           {
+            "date": "2026-08-20",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 20.8,
+            "high": 20.8,
+            "low": 20.15,
+            "close": 20.45,
+            "volume": 71640,
+            "transactions": 69,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F20&id=&response=json"
+          },
+          {
             "date": "2026-08-21",
             "market": "tpex",
             "rawPresent": true,
@@ -124088,6 +124162,19 @@
           "volume": 64724,
           "transactions": 72,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F19&id=&response=json"
+        },
+        {
+          "date": "2026-08-20",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 20.8,
+          "high": 20.8,
+          "low": 20.15,
+          "close": 20.45,
+          "volume": 71640,
+          "transactions": 69,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F20&id=&response=json"
         },
         {
           "date": "2026-08-21",
@@ -138273,6 +138360,19 @@
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F19&id=&response=json"
           },
           {
+            "date": "2026-08-20",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 47.7,
+            "high": 47.7,
+            "low": 46.05,
+            "close": 46.1,
+            "volume": 53198,
+            "transactions": 123,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F20&id=&response=json"
+          },
+          {
             "date": "2026-08-21",
             "market": "tpex",
             "rawPresent": true,
@@ -139002,6 +139102,19 @@
           "volume": 78352,
           "transactions": 93,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F19&id=&response=json"
+        },
+        {
+          "date": "2026-08-20",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 47.7,
+          "high": 47.7,
+          "low": 46.05,
+          "close": 46.1,
+          "volume": 53198,
+          "transactions": 123,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F20&id=&response=json"
         },
         {
           "date": "2026-08-21",
@@ -196513,6 +196626,19 @@
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F19&id=&response=json"
           },
           {
+            "date": "2026-08-20",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 89.7,
+            "high": 92.6,
+            "low": 89.1,
+            "close": 92.0,
+            "volume": 54159,
+            "transactions": 84,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F20&id=&response=json"
+          },
+          {
             "date": "2026-08-21",
             "market": "tpex",
             "rawPresent": true,
@@ -197242,6 +197368,19 @@
           "volume": 56141,
           "transactions": 105,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F19&id=&response=json"
+        },
+        {
+          "date": "2026-08-20",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 89.7,
+          "high": 92.6,
+          "low": 89.1,
+          "close": 92.0,
+          "volume": 54159,
+          "transactions": 84,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F20&id=&response=json"
         },
         {
           "date": "2026-08-21",
@@ -247749,6 +247888,19 @@
             "volume": null,
             "transactions": null,
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F10%2F13&id=&response=json"
+          },
+          {
+            "date": "2026-10-14",
+            "market": "tpex",
+            "rawPresent": false,
+            "hasTrade": false,
+            "open": null,
+            "high": null,
+            "low": null,
+            "close": null,
+            "volume": null,
+            "transactions": null,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F10%2F14&id=&response=json"
           }
         ]
       },
@@ -248480,6 +248632,19 @@
           "volume": null,
           "transactions": null,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F10%2F13&id=&response=json"
+        },
+        {
+          "date": "2026-10-14",
+          "market": "tpex",
+          "rawPresent": false,
+          "hasTrade": false,
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null,
+          "volume": null,
+          "transactions": null,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F10%2F14&id=&response=json"
         }
       ]
     },
@@ -350253,9 +350418,9 @@
         "ok": true,
         "coverageVerified": true,
         "parsedRows": 10628,
-        "requiredRows": 891,
-        "referenceRows": 893,
-        "masterRows": 893,
+        "requiredRows": 892,
+        "referenceRows": 894,
+        "masterRows": 894,
         "previousMatchedRows": 887,
         "error": "",
         "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F20&id=&response=json",
@@ -350326,6 +350491,19 @@
         "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F10%2F13&id=&response=json",
         "rows": 12414,
         "rawRows": 12421
+      },
+      "2026-10-14": {
+        "ok": true,
+        "coverageVerified": true,
+        "parsedRows": 12459,
+        "requiredRows": 892,
+        "referenceRows": 894,
+        "masterRows": 894,
+        "previousMatchedRows": 887,
+        "error": "",
+        "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F10%2F14&id=&response=json",
+        "rows": 12459,
+        "rawRows": 12466
       }
     }
   },
@@ -350358,80 +350536,24 @@
       "source": "TWSE TAIEX MI_5MINS_HIST",
       "period": "2026-10",
       "ok": true,
-      "rows": 6,
+      "rows": 9,
       "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20261001&response=json",
       "error": ""
     },
     {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-07-30",
-      "ok": true,
-      "rows": 1335,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260730&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TPEX exact daily quotes",
-      "period": "2026-07-30",
-      "ok": true,
-      "rows": 10302,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F30&id=&response=json",
-      "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-06",
-      "ok": true,
-      "rows": 1338,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260806&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TPEX exact daily quotes",
-      "period": "2026-08-06",
-      "ok": true,
-      "rows": 10313,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F06&id=&response=json",
-      "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-20",
-      "ok": true,
-      "rows": 1337,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260820&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
       "source": "TPEX exact daily quotes",
       "period": "2026-08-20",
-      "ok": false,
-      "rows": 0,
-      "url": "",
-      "error": "Response ended prematurely"
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-25",
       "ok": true,
-      "rows": 1339,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260825&type=ALLBUT0999&response=json",
+      "rows": 10628,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F20&id=&response=json",
       "error": ""
     },
     {
       "source": "TPEX exact daily quotes",
-      "period": "2026-08-25",
+      "period": "2026-10-14",
       "ok": true,
-      "rows": 10489,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F25&id=&response=json",
-      "error": ""
-    },
-    {
-      "source": "TPEX exact daily quotes",
-      "period": "2026-10-13",
-      "ok": true,
-      "rows": 12414,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F10%2F13&id=&response=json",
+      "rows": 12459,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F10%2F14&id=&response=json",
       "error": ""
     }
   ],

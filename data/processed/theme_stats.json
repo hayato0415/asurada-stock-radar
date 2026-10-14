@@ -1,6 +1,6 @@
 {
   "date": "2026-10-14",
-  "updated_at": "2026-10-14 18:49",
+  "updated_at": "2026-10-14 22:38",
   "source": {
     "stock_master": "data/processed/stocks_master.json",
     "stock_metrics": "data/processed/stock_metrics_daily.json",
@@ -9,9 +9,9 @@
     "manual_memberships": "data/manual/theme_memberships.csv"
   },
   "quality": {
-    "stock_master_count": 1978,
+    "stock_master_count": 1979,
     "theme_count": 35,
-    "beneficiary_stock_count": 2059,
+    "beneficiary_stock_count": 2060,
     "quote_matched": 1970,
     "revenue_matched": 1963,
     "eps_matched": 0,
@@ -27,7 +27,8 @@
       "4155",
       "4804",
       "6167",
-      "6173"
+      "6173",
+      "7806"
     ],
     "missing_revenue": [
       "2816",
@@ -44,7 +45,8 @@
       "2887",
       "2891",
       "2892",
-      "5880"
+      "5880",
+      "7806"
     ],
     "missing_financials": [
       "1101",
@@ -57276,7 +57278,7 @@
       "turnover_billion": 16.56,
       "up_count": 15,
       "limit_up_count": 0,
-      "beneficiary_count": 33,
+      "beneficiary_count": 34,
       "high_score_news_count": 0,
       "avg_ai_score": 33.9,
       "source_types": [
@@ -57651,6 +57653,34 @@
             "beneficiary"
           ],
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -1.63%；漲跌 0.39%"
+        },
+        {
+          "symbol": "7806",
+          "name": "精華生醫",
+          "market": "上櫃",
+          "industry": "食品工業",
+          "theme": "食品工業",
+          "trade_price": null,
+          "change_pct": null,
+          "volume": null,
+          "turnover_rate_pct": null,
+          "turnover_billion": null,
+          "revenue_yoy_pct": null,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 34.6,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類"
         },
         {
           "symbol": "1796",
@@ -58213,7 +58243,7 @@
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -28.49%；漲跌 -0.89%"
         }
       ],
-      "theme_score": 21.0,
+      "theme_score": 20.7,
       "leader_stocks": [
         {
           "symbol": "6846",
@@ -59913,9 +59943,9 @@
       "rank": 35
     }
   ],
-  "run_id": "38550922918",
-  "generated_at": "2026-10-14T18:53:48+08:00",
+  "run_id": "38581971317",
+  "generated_at": "2026-10-14T22:41:09+08:00",
   "latest_trade_date": "2026-10-14",
-  "data_version": "20261014-1853",
+  "data_version": "20261014-2241",
   "source_pipeline": "update_all_site_data"
 }

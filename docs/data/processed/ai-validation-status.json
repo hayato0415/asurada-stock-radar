@@ -2,19 +2,19 @@
   "status": "warning",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-10-14T18:51:58+08:00",
-  "generated_at": "2026-10-14T18:53:48+08:00",
-  "latestValidationUpdateTime": "2026-10-14T18:51:58+08:00",
+  "generatedAt": "2026-10-14T22:40:28+08:00",
+  "generated_at": "2026-10-14T22:41:09+08:00",
+  "latestValidationUpdateTime": "2026-10-14T22:40:28+08:00",
   "latestSignalDate": "2026-10-14",
   "latestEntryDate": "2026-10-14",
   "latestPriceDate": "2026-10-14",
-  "latestBenchmarkDate": "2026-10-13",
+  "latestBenchmarkDate": "2026-10-14",
   "latest_trade_date": "2026-10-14",
   "completedSignals": 234,
   "trackingSignals": 147,
   "d20CompletedSignals": 234,
-  "missingPriceCount": 5,
-  "missingBenchmarkCount": 34,
+  "missingPriceCount": 0,
+  "missingBenchmarkCount": 0,
   "snapshotCoverageGapCount": 4,
   "snapshotCoverageGaps": [
     "2026-07-30",
@@ -27,9 +27,6 @@
   "lastError": "",
   "failedReasons": [],
   "warnings": [
-    "Response ended prematurely",
-    "5 筆訊號仍有個股行情缺口或無有效交易。",
-    "34 筆訊號缺少同期 TAIEX benchmark。",
     "歷史 Top 10 快照缺少 4 個交易日；缺口不推定為跌出或連續入榜。"
   ],
   "sourceStatus": [
@@ -61,84 +58,28 @@
       "source": "TWSE TAIEX MI_5MINS_HIST",
       "period": "2026-10",
       "ok": true,
-      "rows": 6,
+      "rows": 9,
       "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20261001&response=json",
       "error": ""
     },
     {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-07-30",
-      "ok": true,
-      "rows": 1335,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260730&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TPEX exact daily quotes",
-      "period": "2026-07-30",
-      "ok": true,
-      "rows": 10302,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F30&id=&response=json",
-      "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-06",
-      "ok": true,
-      "rows": 1338,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260806&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TPEX exact daily quotes",
-      "period": "2026-08-06",
-      "ok": true,
-      "rows": 10313,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F06&id=&response=json",
-      "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-20",
-      "ok": true,
-      "rows": 1337,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260820&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
       "source": "TPEX exact daily quotes",
       "period": "2026-08-20",
-      "ok": false,
-      "rows": 0,
-      "url": "",
-      "error": "Response ended prematurely"
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-25",
       "ok": true,
-      "rows": 1339,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260825&type=ALLBUT0999&response=json",
+      "rows": 10628,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F20&id=&response=json",
       "error": ""
     },
     {
       "source": "TPEX exact daily quotes",
-      "period": "2026-08-25",
+      "period": "2026-10-14",
       "ok": true,
-      "rows": 10489,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F25&id=&response=json",
-      "error": ""
-    },
-    {
-      "source": "TPEX exact daily quotes",
-      "period": "2026-10-13",
-      "ok": true,
-      "rows": 12414,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F10%2F13&id=&response=json",
+      "rows": 12459,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F10%2F14&id=&response=json",
       "error": ""
     }
   ],
-  "run_id": "38550922918",
-  "data_version": "20261014-1853",
+  "run_id": "38581971317",
+  "data_version": "20261014-2241",
   "source_pipeline": "update_all_site_data"
 }

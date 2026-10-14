@@ -1,17 +1,17 @@
 {
   "date": "2026-10-14",
-  "updated_at": "2026-10-14 18:50",
+  "updated_at": "2026-10-14 22:39",
   "revenue_month": "2026-09",
   "source": {
     "daily_quote": {
       "twse": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20261014&type=ALLBUT0999&response=json",
-      "tpex": "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes"
+      "tpex": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F10%2F14&id=&response=json"
     },
     "monthly_revenue": "MOPS / TWSE listed revenue + TPEx OTC revenue OpenAPI",
     "listed_shares": "TWSE / TPEx company basic OpenAPI if available"
   },
   "quality": {
-    "stock_master_count": 1978,
+    "stock_master_count": 1979,
     "daily_quote_matched": 1970,
     "daily_quote_matched_by_market": {
       "twse": 1083,
@@ -19,7 +19,7 @@
     },
     "daily_quote_required_by_market": {
       "twse": 868,
-      "tpex": 715
+      "tpex": 716
     },
     "daily_quote_minimum_ratio": 0.8,
     "daily_quote_source_dates": {
@@ -35,7 +35,8 @@
       "4155",
       "4804",
       "6167",
-      "6173"
+      "6173",
+      "7806"
     ],
     "missing_revenue": [
       "2816",
@@ -52,7 +53,8 @@
       "2887",
       "2891",
       "2892",
-      "5880"
+      "5880",
+      "7806"
     ],
     "errors": []
   },
@@ -21058,6 +21060,18 @@
       "revenue_yoy_pct": 19.06
     },
     {
+      "symbol": "7806",
+      "name": "精華生醫",
+      "trade_price": null,
+      "change_pct": null,
+      "volume": null,
+      "listed_shares": null,
+      "turnover_rate_pct": null,
+      "revenue_million": null,
+      "revenue_mom_pct": null,
+      "revenue_yoy_pct": null
+    },
+    {
       "symbol": "7810",
       "name": "捷創科技",
       "trade_price": 234.5,
@@ -23794,9 +23808,9 @@
       "revenue_yoy_pct": 50.61
     }
   ],
-  "run_id": "38550922918",
-  "generated_at": "2026-10-14T18:53:48+08:00",
+  "run_id": "38581971317",
+  "generated_at": "2026-10-14T22:41:09+08:00",
   "latest_trade_date": "2026-10-14",
-  "data_version": "20261014-1853",
+  "data_version": "20261014-2241",
   "source_pipeline": "update_all_site_data"
 }
