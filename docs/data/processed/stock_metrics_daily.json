@@ -1,6 +1,6 @@
 {
   "date": "2026-10-15",
-  "updated_at": "2026-10-15 18:23",
+  "updated_at": "2026-10-15 22:28",
   "revenue_month": "2026-09",
   "source": {
     "daily_quote": {
@@ -15,11 +15,11 @@
     "daily_quote_matched": 1968,
     "daily_quote_matched_by_market": {
       "twse": 1081,
-      "tpex": 887
+      "tpex": 886
     },
     "daily_quote_required_by_market": {
-      "twse": 868,
-      "tpex": 716
+      "twse": 869,
+      "tpex": 715
     },
     "daily_quote_minimum_ratio": 0.8,
     "daily_quote_source_dates": {
@@ -23808,9 +23808,9 @@
       "revenue_yoy_pct": 50.61
     }
   ],
-  "run_id": "38719596032",
-  "generated_at": "2026-10-15T18:26:19+08:00",
+  "run_id": "38750093427",
+  "generated_at": "2026-10-15T22:31:26+08:00",
   "latest_trade_date": "2026-10-15",
-  "data_version": "20261015-1826",
+  "data_version": "20261015-2231",
   "source_pipeline": "update_all_site_data"
 }

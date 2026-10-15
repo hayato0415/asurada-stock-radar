@@ -1,7 +1,7 @@
 {
   "ok": true,
-  "updated_at": "2026-10-15T18:23:55+08:00",
-  "attempted_at": "2026-10-15T18:23:55+08:00",
+  "updated_at": "2026-10-15T22:28:51+08:00",
+  "attempted_at": "2026-10-15T22:28:51+08:00",
   "target_date": "2026-10-15",
   "latest_trade_date": "2026-10-15",
   "revenue_month": "2026-09",
@@ -64,8 +64,8 @@
   "quote_coverage": {
     "minimum_ratio": 0.8,
     "required": {
-      "twse": 868,
-      "tpex": 716
+      "twse": 869,
+      "tpex": 715
     },
     "matched": {
       "twse": 1081,
@@ -85,7 +85,7 @@
     },
     {
       "name": "TPEx 上櫃每日行情",
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F10%2F15&id=&response=json",
+      "url": "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes",
       "ok": true,
       "http_status": null,
       "source_date": "2026-10-15",
@@ -168,8 +168,8 @@
     "ok": true,
     "status": "ok",
     "latest_trade_date": "2026-10-15",
-    "generated_at": "2026-10-15T18:23:55+08:00",
-    "snapshot_created": true,
+    "generated_at": "2026-10-15T22:28:51+08:00",
+    "snapshot_created": false,
     "snapshot_path": "data/history/ai-top10/2026-10-15.json",
     "history_trading_days": 55,
     "items_count": 10,
@@ -182,8 +182,8 @@
       "ai-persistence-monthly.json": "updated"
     }
   },
-  "run_id": "38719596032",
-  "generated_at": "2026-10-15T18:26:19+08:00",
-  "data_version": "20261015-1826",
+  "run_id": "38750093427",
+  "generated_at": "2026-10-15T22:31:26+08:00",
+  "data_version": "20261015-2231",
   "source_pipeline": "update_all_site_data"
 }
