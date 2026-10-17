@@ -1,7 +1,7 @@
 {
   "ok": true,
-  "updated_at": "2026-10-17T02:39:02+08:00",
-  "attempted_at": "2026-10-17T02:39:02+08:00",
+  "updated_at": "2026-10-18T01:47:18+08:00",
+  "attempted_at": "2026-10-18T01:47:18+08:00",
   "target_date": "2026-10-16",
   "latest_trade_date": "2026-10-16",
   "revenue_month": "2026-09",
@@ -22,9 +22,9 @@
   "quality": {
     "stock_master_count": 1979,
     "quote_matched": 1968,
-    "score_candidates": 1938,
+    "score_candidates": 1939,
     "missing_quote_count": 11,
-    "missing_score_count": 30,
+    "missing_score_count": 29,
     "missing_quote_sample": [
       "1516",
       "1589",
@@ -66,7 +66,6 @@
       "7713",
       "7782",
       "8279",
-      "8908",
       "8917",
       "8923"
     ]
@@ -109,7 +108,7 @@
       "ok": true,
       "http_status": 200,
       "source_date": null,
-      "row_count": 1081,
+      "row_count": 1082,
       "error": "",
       "required_fields_missing": []
     },
@@ -129,7 +128,7 @@
       "ok": true,
       "http_status": 200,
       "source_date": null,
-      "row_count": 1079,
+      "row_count": 1088,
       "error": "",
       "required_fields_missing": []
     },
@@ -149,7 +148,7 @@
       "ok": true,
       "http_status": 200,
       "source_date": null,
-      "row_count": 1095,
+      "row_count": 1096,
       "error": "",
       "required_fields_missing": []
     },
@@ -178,7 +177,7 @@
     "ok": true,
     "status": "ok",
     "latest_trade_date": "2026-10-16",
-    "generated_at": "2026-10-17T02:39:02+08:00",
+    "generated_at": "2026-10-18T01:47:18+08:00",
     "snapshot_created": false,
     "snapshot_path": "data/history/ai-top10/2026-10-16.json",
     "history_trading_days": 56,
@@ -192,8 +191,8 @@
       "ai-persistence-monthly.json": "updated"
     }
   },
-  "run_id": "38948752822",
-  "generated_at": "2026-10-17T02:39:58+08:00",
-  "data_version": "20261016-0239",
+  "run_id": "39055151286",
+  "generated_at": "2026-10-18T01:47:49+08:00",
+  "data_version": "20261016-0147",
   "source_pipeline": "update_all_site_data"
 }
