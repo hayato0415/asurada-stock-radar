@@ -2,9 +2,9 @@
   "status": "warning",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-10-21T22:38:25+08:00",
-  "generated_at": "2026-10-21T22:38:45+08:00",
-  "latestValidationUpdateTime": "2026-10-21T22:38:25+08:00",
+  "generatedAt": "2026-10-22T03:09:03+08:00",
+  "generated_at": "2026-10-22T03:09:20+08:00",
+  "latestValidationUpdateTime": "2026-10-22T03:09:03+08:00",
   "latestSignalDate": "2026-10-21",
   "latestEntryDate": "2026-10-21",
   "latestPriceDate": "2026-10-21",
@@ -61,17 +61,9 @@
       "rows": 14,
       "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20261001&response=json",
       "error": ""
-    },
-    {
-      "source": "TPEX exact daily quotes",
-      "period": "2026-08-25",
-      "ok": true,
-      "rows": 10489,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F25&id=&response=json",
-      "error": ""
     }
   ],
-  "run_id": "39617977195",
-  "data_version": "20261021-2238",
+  "run_id": "39658789028",
+  "data_version": "20261021-0309",
   "source_pipeline": "update_all_site_data"
 }
