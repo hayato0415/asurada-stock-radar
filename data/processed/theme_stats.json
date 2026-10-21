@@ -1,6 +1,6 @@
 {
   "date": "2026-10-21",
-  "updated_at": "2026-10-21 18:47",
+  "updated_at": "2026-10-21 22:36",
   "source": {
     "stock_master": "data/processed/stocks_master.json",
     "stock_metrics": "data/processed/stock_metrics_daily.json",
@@ -9,9 +9,9 @@
     "manual_memberships": "data/manual/theme_memberships.csv"
   },
   "quality": {
-    "stock_master_count": 1980,
+    "stock_master_count": 1981,
     "theme_count": 35,
-    "beneficiary_stock_count": 2073,
+    "beneficiary_stock_count": 2074,
     "quote_matched": 1975,
     "revenue_matched": 1979,
     "eps_matched": 0,
@@ -22,11 +22,13 @@
     "missing_quote": [
       "1516",
       "1589",
+      "2249",
       "4804",
       "6142",
       "8047"
     ],
     "missing_revenue": [
+      "2249",
       "6467"
     ],
     "missing_financials": [
@@ -31851,7 +31853,7 @@
       "turnover_billion": 197.67,
       "up_count": 51,
       "limit_up_count": 3,
-      "beneficiary_count": 101,
+      "beneficiary_count": 102,
       "high_score_news_count": 0,
       "avg_ai_score": 39.5,
       "source_types": [
@@ -33880,6 +33882,34 @@
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -1.39%；漲跌 -0.14%"
         },
         {
+          "symbol": "2249",
+          "name": "湧盛",
+          "market": "上櫃",
+          "industry": "電機機械",
+          "theme": "電機機械",
+          "trade_price": null,
+          "change_pct": null,
+          "volume": null,
+          "turnover_rate_pct": null,
+          "turnover_billion": null,
+          "revenue_yoy_pct": null,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 34.6,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類"
+        },
+        {
           "symbol": "6843",
           "name": "進典",
           "market": "上櫃",
@@ -34692,7 +34722,7 @@
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -45.44%；週轉率 0.00%"
         }
       ],
-      "theme_score": 27.3,
+      "theme_score": 27.2,
       "leader_stocks": [
         {
           "symbol": "8996",
@@ -60264,9 +60294,9 @@
       "rank": 35
     }
   ],
-  "run_id": "39585827174",
-  "generated_at": "2026-10-21T18:49:25+08:00",
+  "run_id": "39617977195",
+  "generated_at": "2026-10-21T22:38:45+08:00",
   "latest_trade_date": "2026-10-21",
-  "data_version": "20261021-1849",
+  "data_version": "20261021-2238",
   "source_pipeline": "update_all_site_data"
 }
