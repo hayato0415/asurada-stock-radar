@@ -1,13 +1,13 @@
 {
   "ok": true,
-  "updated_at": "2026-10-22T18:45:24+08:00",
-  "attempted_at": "2026-10-22T18:45:24+08:00",
+  "updated_at": "2026-10-23T03:04:33+08:00",
+  "attempted_at": "2026-10-23T03:04:33+08:00",
   "target_date": "2026-10-22",
   "latest_trade_date": "2026-10-22",
   "revenue_month": "2026-09",
   "items_count": 100,
   "rows_written": 100,
-  "stock_master_count": 1981,
+  "stock_master_count": 1983,
   "twse_quote_matched": 1084,
   "tpex_quote_matched": 892,
   "previous_data_preserved": false,
@@ -20,16 +20,18 @@
     "company_basic": "MOPS t187ap03_L / t187ap03_O"
   },
   "quality": {
-    "stock_master_count": 1981,
+    "stock_master_count": 1983,
     "quote_matched": 1976,
     "score_candidates": 1941,
-    "missing_quote_count": 5,
+    "missing_quote_count": 7,
     "missing_score_count": 35,
     "missing_quote_sample": [
       "1516",
       "1589",
       "4804",
       "6142",
+      "6898",
+      "6938",
       "8047"
     ],
     "missing_score_sample": [
@@ -74,7 +76,7 @@
     "minimum_ratio": 0.8,
     "required": {
       "twse": 870,
-      "tpex": 716
+      "tpex": 717
     },
     "matched": {
       "twse": 1084,
@@ -94,7 +96,7 @@
     },
     {
       "name": "TPEx 上櫃每日行情",
-      "url": "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes",
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F10%2F22&id=&response=json",
       "ok": true,
       "http_status": null,
       "source_date": "2026-10-22",
@@ -177,8 +179,8 @@
     "ok": true,
     "status": "ok",
     "latest_trade_date": "2026-10-22",
-    "generated_at": "2026-10-22T18:45:24+08:00",
-    "snapshot_created": true,
+    "generated_at": "2026-10-23T03:04:33+08:00",
+    "snapshot_created": false,
     "snapshot_path": "data/history/ai-top10/2026-10-22.json",
     "history_trading_days": 60,
     "items_count": 10,
@@ -191,8 +193,8 @@
       "ai-persistence-monthly.json": "updated"
     }
   },
-  "run_id": "39764771949",
-  "generated_at": "2026-10-22T18:48:01+08:00",
-  "data_version": "20261022-1848",
+  "run_id": "39836681890",
+  "generated_at": "2026-10-23T03:05:05+08:00",
+  "data_version": "20261022-0305",
   "source_pipeline": "update_all_site_data"
 }

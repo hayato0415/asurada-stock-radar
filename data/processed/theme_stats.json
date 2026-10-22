@@ -1,6 +1,6 @@
 {
   "date": "2026-10-22",
-  "updated_at": "2026-10-22 18:44",
+  "updated_at": "2026-10-23 03:04",
   "source": {
     "stock_master": "data/processed/stocks_master.json",
     "stock_metrics": "data/processed/stock_metrics_daily.json",
@@ -9,9 +9,9 @@
     "manual_memberships": "data/manual/theme_memberships.csv"
   },
   "quality": {
-    "stock_master_count": 1981,
+    "stock_master_count": 1983,
     "theme_count": 35,
-    "beneficiary_stock_count": 2057,
+    "beneficiary_stock_count": 2059,
     "quote_matched": 1976,
     "revenue_matched": 1979,
     "eps_matched": 0,
@@ -24,11 +24,15 @@
       "1589",
       "4804",
       "6142",
+      "6898",
+      "6938",
       "8047"
     ],
     "missing_revenue": [
       "2249",
-      "6467"
+      "6467",
+      "6898",
+      "6938"
     ],
     "missing_financials": [
       "1101",
@@ -140,9 +144,9 @@
       "turnover_billion": 40.98,
       "up_count": 24,
       "limit_up_count": 6,
-      "beneficiary_count": 45,
+      "beneficiary_count": 47,
       "high_score_news_count": 0,
-      "avg_ai_score": 42.6,
+      "avg_ai_score": 42.2,
       "source_types": [
         "ai",
         "master"
@@ -1161,6 +1165,62 @@
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 3.77%；漲跌 -0.90%"
         },
         {
+          "symbol": "6898",
+          "name": "程曦資訊",
+          "market": "上櫃",
+          "industry": "資訊服務業",
+          "theme": "資訊服務業",
+          "trade_price": null,
+          "change_pct": null,
+          "volume": null,
+          "turnover_rate_pct": null,
+          "turnover_billion": null,
+          "revenue_yoy_pct": null,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 34.6,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類"
+        },
+        {
+          "symbol": "6938",
+          "name": "藍新資訊",
+          "market": "上櫃",
+          "industry": "資訊服務業",
+          "theme": "資訊服務業",
+          "trade_price": null,
+          "change_pct": null,
+          "volume": null,
+          "turnover_rate_pct": null,
+          "turnover_billion": null,
+          "revenue_yoy_pct": null,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 34.6,
+          "source_types": [
+            "ai",
+            "master"
+          ],
+          "source_labels": [
+            "AI 題材標籤",
+            "主檔產業 / 供應鏈"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "AI 題材標籤；供應鏈 / 產業歸類"
+        },
+        {
           "symbol": "2453",
           "name": "凌群",
           "market": "上市",
@@ -1413,7 +1473,7 @@
           "reason": "AI 題材標籤；供應鏈 / 產業歸類；營收年增 -15.91%；漲跌 -1.36%"
         }
       ],
-      "theme_score": 36.3,
+      "theme_score": 35.8,
       "leader_stocks": [
         {
           "symbol": "2468",
@@ -59843,9 +59903,9 @@
       "rank": 35
     }
   ],
-  "run_id": "39764771949",
-  "generated_at": "2026-10-22T18:48:01+08:00",
+  "run_id": "39836681890",
+  "generated_at": "2026-10-23T03:05:05+08:00",
   "latest_trade_date": "2026-10-22",
-  "data_version": "20261022-1848",
+  "data_version": "20261022-0305",
   "source_pipeline": "update_all_site_data"
 }

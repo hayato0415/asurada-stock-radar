@@ -1,6 +1,6 @@
 {
   "date": "2026-10-22",
-  "updated_at": "2026-10-22 18:45",
+  "updated_at": "2026-10-23 03:04",
   "revenue_month": "2026-09",
   "source": {
     "daily_quote": {
@@ -11,7 +11,7 @@
     "listed_shares": "TWSE / TPEx company basic OpenAPI if available"
   },
   "quality": {
-    "stock_master_count": 1981,
+    "stock_master_count": 1983,
     "daily_quote_matched": 1976,
     "daily_quote_matched_by_market": {
       "twse": 1084,
@@ -19,7 +19,7 @@
     },
     "daily_quote_required_by_market": {
       "twse": 870,
-      "tpex": 716
+      "tpex": 717
     },
     "daily_quote_minimum_ratio": 0.8,
     "daily_quote_source_dates": {
@@ -32,11 +32,15 @@
       "1589",
       "4804",
       "6142",
+      "6898",
+      "6938",
       "8047"
     ],
     "missing_revenue": [
       "2249",
-      "6467"
+      "6467",
+      "6898",
+      "6938"
     ],
     "errors": []
   },
@@ -19758,6 +19762,18 @@
       "revenue_yoy_pct": -47.39
     },
     {
+      "symbol": "6898",
+      "name": "程曦資訊",
+      "trade_price": null,
+      "change_pct": null,
+      "volume": null,
+      "listed_shares": null,
+      "turnover_rate_pct": null,
+      "revenue_million": null,
+      "revenue_mom_pct": null,
+      "revenue_yoy_pct": null
+    },
+    {
       "symbol": "6899",
       "name": "創為精密",
       "trade_price": 48.8,
@@ -20080,6 +20096,18 @@
       "revenue_million": 390.17,
       "revenue_mom_pct": 47.08,
       "revenue_yoy_pct": 29.06
+    },
+    {
+      "symbol": "6938",
+      "name": "藍新資訊",
+      "trade_price": null,
+      "change_pct": null,
+      "volume": null,
+      "listed_shares": null,
+      "turnover_rate_pct": null,
+      "revenue_million": null,
+      "revenue_mom_pct": null,
+      "revenue_yoy_pct": null
     },
     {
       "symbol": "6944",
@@ -23814,9 +23842,9 @@
       "revenue_yoy_pct": 50.61
     }
   ],
-  "run_id": "39764771949",
-  "generated_at": "2026-10-22T18:48:01+08:00",
+  "run_id": "39836681890",
+  "generated_at": "2026-10-23T03:05:05+08:00",
   "latest_trade_date": "2026-10-22",
-  "data_version": "20261022-1848",
+  "data_version": "20261022-0305",
   "source_pipeline": "update_all_site_data"
 }

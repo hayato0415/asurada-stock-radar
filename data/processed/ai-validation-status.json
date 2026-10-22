@@ -2,9 +2,9 @@
   "status": "warning",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-10-22T18:47:40+08:00",
-  "generated_at": "2026-10-22T18:48:01+08:00",
-  "latestValidationUpdateTime": "2026-10-22T18:47:40+08:00",
+  "generatedAt": "2026-10-23T03:04:52+08:00",
+  "generated_at": "2026-10-23T03:05:05+08:00",
+  "latestValidationUpdateTime": "2026-10-23T03:04:52+08:00",
   "latestSignalDate": "2026-10-22",
   "latestEntryDate": "2026-10-22",
   "latestPriceDate": "2026-10-22",
@@ -61,41 +61,9 @@
       "rows": 15,
       "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20261001&response=json",
       "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-07-30",
-      "ok": true,
-      "rows": 1335,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260730&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-06",
-      "ok": true,
-      "rows": 1338,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260806&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-20",
-      "ok": true,
-      "rows": 1337,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260820&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-25",
-      "ok": true,
-      "rows": 1339,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260825&type=ALLBUT0999&response=json",
-      "error": ""
     }
   ],
-  "run_id": "39764771949",
-  "data_version": "20261022-1848",
+  "run_id": "39836681890",
+  "data_version": "20261022-0305",
   "source_pipeline": "update_all_site_data"
 }
