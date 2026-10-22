@@ -1,7 +1,7 @@
 {
-  "build_id": "20261022-0308-scorecards",
-  "updated_at": "2026-10-22T03:08:04+08:00",
-  "content_latest_at": "2026-10-21",
+  "build_id": "20261022-1844-scorecards",
+  "updated_at": "2026-10-22T18:44:33+08:00",
+  "content_latest_at": "2026-10-22",
   "symbol": "6245",
   "name": "立端",
   "market": "上櫃",
@@ -147,8 +147,8 @@
       "key": "chip",
       "label": "籌碼 / 市場交易力道",
       "weight": 25,
-      "score": 0.3,
-      "raw_score": 1.2,
+      "score": 0.2,
+      "raw_score": 0.8,
       "coverage_pct": 33.3,
       "missing_count": 2,
       "rules": [
@@ -156,9 +156,9 @@
           "id": "volume",
           "label": "成交量",
           "source_field": "volume",
-          "raw_value": 1251887,
+          "raw_value": 999994,
           "max_score": 10,
-          "score": 0.3,
+          "score": 0.2,
           "missing": false,
           "description": "成交量反映市場參與度。"
         },
@@ -206,7 +206,7 @@
       ]
     }
   },
-  "total_score": 14.0,
+  "total_score": 13.9,
   "summary": {
     "symbol": "6245",
     "code": "6245",
@@ -217,7 +217,7 @@
     "supply_chain": "通信網路業",
     "trade_price": 90.1,
     "change_pct": 0.0,
-    "volume": 1251887,
+    "volume": 999994,
     "turnover_rate_pct": null,
     "revenue_million": 799.74,
     "revenue_mom_pct": -0.34,
@@ -227,20 +227,20 @@
     "financial_period": "2026-09",
     "fundamental_score": 14.7,
     "technical_score": 31.0,
-    "chip_score": 1.2,
+    "chip_score": 0.8,
     "turnover_score": 0.0,
     "weighted_scores": {
       "fundamental": 4.4,
       "technical": 9.3,
-      "chip": 0.3,
+      "chip": 0.2,
       "turnover": 0
     },
-    "total_score": 14.0,
+    "total_score": 13.9,
     "risk_level": "低",
     "entry_reason": "營收年增 4.56%，月增 -0.34%",
     "data_quality_score": 33.3,
-    "updated_at": "2026-10-22T03:08:04+08:00",
-    "content_latest_at": "2026-10-21",
+    "updated_at": "2026-10-22T18:44:33+08:00",
+    "content_latest_at": "2026-10-22",
     "scorecard_path": "data/scorecards/6245.json",
     "news_scoring_included": false,
     "theme_scoring_included": false

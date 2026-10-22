@@ -1,10 +1,10 @@
 {
   "status": "ok",
   "ok": true,
-  "latestTradeDate": "2026-10-21",
-  "latest_trade_date": "2026-10-21",
-  "generatedAt": "2026-10-22T03:08:37+08:00",
-  "generated_at": "2026-10-22T03:09:20+08:00",
+  "latestTradeDate": "2026-10-22",
+  "latest_trade_date": "2026-10-22",
+  "generatedAt": "2026-10-22T18:45:24+08:00",
+  "generated_at": "2026-10-22T18:48:01+08:00",
   "scoreVersion": "official-multifactor-v1",
   "scoreSource": "docs/data/processed/factor-scores.json",
   "weights": {
@@ -22,7 +22,7 @@
     "score_weakening_consecutive_days": 3,
     "single_day_breakout_appearances_5d": 1
   },
-  "historyTradingDays": 59,
+  "historyTradingDays": 60,
   "tradingDates": [
     "2026-07-22",
     "2026-07-23",
@@ -82,9 +82,10 @@
     "2026-10-16",
     "2026-10-19",
     "2026-10-20",
-    "2026-10-21"
+    "2026-10-21",
+    "2026-10-22"
   ],
-  "itemsCount": 59,
+  "itemsCount": 60,
   "items": [
     {
       "status": "ok",
@@ -15415,9 +15416,269 @@
           "scoreSource": "official_quote_valuation_revenue"
         }
       ]
+    },
+    {
+      "status": "ok",
+      "ok": true,
+      "dataDate": "2026-10-22",
+      "latest_trade_date": "2026-10-22",
+      "generatedAt": "2026-10-22T18:45:24+08:00",
+      "generated_at": "2026-10-22T18:45:24+08:00",
+      "scoreVersion": "official-multifactor-v1",
+      "scoreSource": "docs/data/processed/factor-scores.json",
+      "weights": {
+        "fundamentalScore": 0.3,
+        "technicalScore": 0.3,
+        "chipScore": 0.25,
+        "turnoverScore": 0.15
+      },
+      "validScoreCount": 1941,
+      "itemsCount": 10,
+      "items": [
+        {
+          "rank": 1,
+          "code": "4526",
+          "name": "東台",
+          "market": "上市",
+          "industry": "電機機械",
+          "concepts": [
+            "電機機械"
+          ],
+          "close": 41.05,
+          "changePercent": 7.88,
+          "totalScore": 91.1,
+          "fundamentalScore": 76.9,
+          "technicalScore": 96,
+          "chipScore": 100,
+          "turnoverScore": 94.9,
+          "turnoverRate": 22.3275,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-10-22",
+          "generatedAt": "2026-10-22T18:45:24+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 2,
+          "code": "6456",
+          "name": "GIS-KY",
+          "market": "上市",
+          "industry": "光電業",
+          "concepts": [
+            "光電業"
+          ],
+          "close": 102.0,
+          "changePercent": 3.66,
+          "totalScore": 89.8,
+          "fundamentalScore": 79.5,
+          "technicalScore": 89.0,
+          "chipScore": 100,
+          "turnoverScore": 94.8,
+          "turnoverRate": 20.2703,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-10-22",
+          "generatedAt": "2026-10-22T18:45:24+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 3,
+          "code": "2468",
+          "name": "華經",
+          "market": "上市",
+          "industry": "資訊服務業",
+          "concepts": [
+            "資訊服務業"
+          ],
+          "close": 55.0,
+          "changePercent": 10.0,
+          "totalScore": 88.3,
+          "fundamentalScore": 67.4,
+          "technicalScore": 96,
+          "chipScore": 100,
+          "turnoverScore": 95.0,
+          "turnoverRate": 30.7374,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-10-22",
+          "generatedAt": "2026-10-22T18:45:24+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 4,
+          "code": "2069",
+          "name": "運錩",
+          "market": "上市",
+          "industry": "鋼鐵工業",
+          "concepts": [
+            "鋼鐵工業"
+          ],
+          "close": 28.95,
+          "changePercent": 5.85,
+          "totalScore": 87.9,
+          "fundamentalScore": 71.3,
+          "technicalScore": 95.5,
+          "chipScore": 94.8,
+          "turnoverScore": 94.1,
+          "turnoverRate": 6.6482,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-10-22",
+          "generatedAt": "2026-10-22T18:45:24+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 5,
+          "code": "4720",
+          "name": "德淵",
+          "market": "上市",
+          "industry": "化學工業",
+          "concepts": [
+            "化學工業"
+          ],
+          "close": 30.95,
+          "changePercent": 5.81,
+          "totalScore": 85.8,
+          "fundamentalScore": 61.3,
+          "technicalScore": 95.4,
+          "chipScore": 98.4,
+          "turnoverScore": 94.7,
+          "turnoverRate": 19.054,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-10-22",
+          "generatedAt": "2026-10-22T18:45:24+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 6,
+          "code": "4989",
+          "name": "榮科",
+          "market": "上市",
+          "industry": "電子零組件業",
+          "concepts": [
+            "電子零組件業"
+          ],
+          "close": 71.0,
+          "changePercent": 3.05,
+          "totalScore": 83.8,
+          "fundamentalScore": 61.5,
+          "technicalScore": 87.2,
+          "chipScore": 100,
+          "turnoverScore": 94.7,
+          "turnoverRate": 17.2678,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-10-22",
+          "generatedAt": "2026-10-22T18:45:24+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 7,
+          "code": "6277",
+          "name": "宏正",
+          "market": "上市",
+          "industry": "電腦及週邊設備業",
+          "concepts": [
+            "電腦及週邊設備業"
+          ],
+          "close": 100.5,
+          "changePercent": 2.34,
+          "totalScore": 83.4,
+          "fundamentalScore": 65.5,
+          "technicalScore": 85.0,
+          "chipScore": 97.0,
+          "turnoverScore": 93.3,
+          "turnoverRate": 4.1244,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-10-22",
+          "generatedAt": "2026-10-22T18:45:24+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 8,
+          "code": "7730",
+          "name": "暉盛-創",
+          "market": "上市",
+          "industry": "半導體業",
+          "concepts": [
+            "半導體業"
+          ],
+          "close": 242.5,
+          "changePercent": 9.98,
+          "totalScore": 83.2,
+          "fundamentalScore": 63.0,
+          "technicalScore": 96,
+          "chipScore": 88.3,
+          "turnoverScore": 89.3,
+          "turnoverRate": 1.4393,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-10-22",
+          "generatedAt": "2026-10-22T18:45:24+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 9,
+          "code": "2466",
+          "name": "冠西電",
+          "market": "上市",
+          "industry": "光電業",
+          "concepts": [
+            "光電業"
+          ],
+          "close": 261.0,
+          "changePercent": 5.03,
+          "totalScore": 82.2,
+          "fundamentalScore": 51.0,
+          "technicalScore": 93.1,
+          "chipScore": 100,
+          "turnoverScore": 93.3,
+          "turnoverRate": 4.1739,
+          "tradeType": "短線",
+          "riskLabel": "過熱",
+          "dataDate": "2026-10-22",
+          "generatedAt": "2026-10-22T18:45:24+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        },
+        {
+          "rank": 10,
+          "code": "6214",
+          "name": "精誠",
+          "market": "上市",
+          "industry": "資訊服務業",
+          "concepts": [
+            "資訊服務業"
+          ],
+          "close": 201.0,
+          "changePercent": 1.01,
+          "totalScore": 82.1,
+          "fundamentalScore": 74.6,
+          "technicalScore": 81.0,
+          "chipScore": 89.8,
+          "turnoverScore": 86.5,
+          "turnoverRate": 0.8355,
+          "tradeType": "短線",
+          "riskLabel": "正常",
+          "dataDate": "2026-10-22",
+          "generatedAt": "2026-10-22T18:45:24+08:00",
+          "scoreVersion": "official-multifactor-v1",
+          "scoreSource": "official_quote_valuation_revenue"
+        }
+      ]
     }
   ],
-  "run_id": "39658789028",
-  "data_version": "20261021-0309",
+  "run_id": "39764771949",
+  "data_version": "20261022-1848",
   "source_pipeline": "update_all_site_data"
 }
