@@ -1,6 +1,6 @@
 {
   "date": "2026-10-22",
-  "updated_at": "2026-10-26 02:10",
+  "updated_at": "2026-10-27 00:18",
   "source": {
     "stock_master": "data/processed/stocks_master.json",
     "stock_metrics": "data/processed/stock_metrics_daily.json",
@@ -11,12 +11,12 @@
   "quality": {
     "stock_master_count": 1984,
     "theme_count": 35,
-    "beneficiary_stock_count": 1990,
+    "beneficiary_stock_count": 1986,
     "quote_matched": 1976,
     "revenue_matched": 1979,
     "eps_matched": 0,
     "gross_margin_matched": 0,
-    "news_event_count": 6,
+    "news_event_count": 2,
     "manual_membership_count": 0,
     "missing_theme": [],
     "missing_quote": [
@@ -13843,218 +13843,6 @@
       "rank": 5
     },
     {
-      "theme": "公司重大訊息",
-      "theme_change_pct": 1.06,
-      "turnover_billion": 3.81,
-      "up_count": 3,
-      "limit_up_count": 0,
-      "beneficiary_count": 6,
-      "high_score_news_count": 0,
-      "avg_ai_score": 36.9,
-      "source_types": [
-        "news"
-      ],
-      "source_labels": [
-        "新聞事件"
-      ],
-      "beneficiary_stocks": [
-        {
-          "symbol": "2072",
-          "name": "世紀能源",
-          "market": "上市",
-          "industry": "綠能環保",
-          "theme": "公司重大訊息",
-          "trade_price": 124.0,
-          "change_pct": 1.64,
-          "volume": 348439,
-          "turnover_rate_pct": 0.18,
-          "turnover_billion": 0.432,
-          "revenue_yoy_pct": 64.81,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 42.0,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 64.81%；漲跌 1.64%；週轉率 0.18%"
-        },
-        {
-          "symbol": "3432",
-          "name": "台端",
-          "market": "上市",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 13.85,
-          "change_pct": -0.36,
-          "volume": 19290,
-          "turnover_rate_pct": 0.05,
-          "turnover_billion": 0.003,
-          "revenue_yoy_pct": 103.43,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 41.9,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 103.43%；漲跌 -0.36%；週轉率 0.05%"
-        },
-        {
-          "symbol": "6467",
-          "name": "泰合",
-          "market": "上市",
-          "industry": "生技醫療業",
-          "theme": "公司重大訊息",
-          "trade_price": 202.5,
-          "change_pct": 8.29,
-          "volume": 1090297,
-          "turnover_rate_pct": 1.82,
-          "turnover_billion": 2.208,
-          "revenue_yoy_pct": null,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 41.6,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；漲跌 8.29%；週轉率 1.82%"
-        },
-        {
-          "symbol": "6279",
-          "name": "胡連",
-          "market": "上櫃",
-          "industry": "電子零組件業",
-          "theme": "公司重大訊息",
-          "trade_price": 111.5,
-          "change_pct": -1.33,
-          "volume": 338450,
-          "turnover_rate_pct": null,
-          "turnover_billion": 0.377,
-          "revenue_yoy_pct": 13.65,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 38.3,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 13.65%；漲跌 -1.33%"
-        },
-        {
-          "symbol": "5203",
-          "name": "訊連",
-          "market": "上市",
-          "industry": "資訊服務業",
-          "theme": "公司重大訊息",
-          "trade_price": 60.5,
-          "change_pct": 1.68,
-          "volume": 239900,
-          "turnover_rate_pct": 0.31,
-          "turnover_billion": 0.145,
-          "revenue_yoy_pct": -15.95,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 31.4,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 -15.95%；漲跌 1.68%；週轉率 0.31%"
-        },
-        {
-          "symbol": "6949",
-          "name": "沛爾生醫*-創",
-          "market": "上市",
-          "industry": "生技醫療業",
-          "theme": "公司重大訊息",
-          "trade_price": 37.7,
-          "change_pct": -3.58,
-          "volume": 1722641,
-          "turnover_rate_pct": 0.13,
-          "turnover_billion": 0.649,
-          "revenue_yoy_pct": 2.28,
-          "eps": null,
-          "gross_margin_pct": null,
-          "total_score": 26.1,
-          "source_types": [
-            "news"
-          ],
-          "source_labels": [
-            "新聞事件"
-          ],
-          "roles": [
-            "beneficiary"
-          ],
-          "reason": "新聞事件帶動；營收年增 2.28%；漲跌 -3.58%；週轉率 0.13%"
-        }
-      ],
-      "theme_score": 23.8,
-      "leader_stocks": [
-        {
-          "symbol": "2072",
-          "name": "世紀能源"
-        },
-        {
-          "symbol": "3432",
-          "name": "台端"
-        },
-        {
-          "symbol": "6467",
-          "name": "泰合"
-        },
-        {
-          "symbol": "6279",
-          "name": "胡連"
-        },
-        {
-          "symbol": "5203",
-          "name": "訊連"
-        }
-      ],
-      "low_base_stocks": [
-        {
-          "symbol": "3432",
-          "name": "台端"
-        },
-        {
-          "symbol": "6279",
-          "name": "胡連"
-        },
-        {
-          "symbol": "6949",
-          "name": "沛爾生醫*-創"
-        }
-      ],
-      "rank": 6
-    },
-    {
       "theme": "鋼鐵工業",
       "theme_change_pct": 0.23,
       "turnover_billion": 25.75,
@@ -15462,7 +15250,7 @@
           "name": "千興"
         }
       ],
-      "rank": 7
+      "rank": 6
     },
     {
       "theme": "文化創意業",
@@ -16256,7 +16044,7 @@
           "name": "智冠"
         }
       ],
-      "rank": 8
+      "rank": 7
     },
     {
       "theme": "航運業",
@@ -17274,7 +17062,7 @@
           "name": "四維航"
         }
       ],
-      "rank": 9
+      "rank": 8
     },
     {
       "theme": "貿易百貨業",
@@ -17844,7 +17632,7 @@
           "name": "高林"
         }
       ],
-      "rank": 10
+      "rank": 9
     },
     {
       "theme": "電腦及週邊設備業",
@@ -20990,7 +20778,7 @@
           "name": "緯創"
         }
       ],
-      "rank": 11
+      "rank": 10
     },
     {
       "theme": "油電燃氣業",
@@ -21388,7 +21176,7 @@
           "name": "大台北"
         }
       ],
-      "rank": 12
+      "rank": 11
     },
     {
       "theme": "塑膠工業",
@@ -22154,7 +21942,7 @@
           "name": "台塑"
         }
       ],
-      "rank": 13
+      "rank": 12
     },
     {
       "theme": "食品工業",
@@ -23172,7 +22960,7 @@
           "name": "生合"
         }
       ],
-      "rank": 14
+      "rank": 13
     },
     {
       "theme": "光電業",
@@ -26486,7 +26274,7 @@
           "name": "台表科"
         }
       ],
-      "rank": 15
+      "rank": 14
     },
     {
       "theme": "金融保險業",
@@ -27672,7 +27460,7 @@
           "name": "大展證"
         }
       ],
-      "rank": 16
+      "rank": 15
     },
     {
       "theme": "生技醫療業",
@@ -32218,7 +32006,7 @@
           "name": "佰研"
         }
       ],
-      "rank": 17
+      "rank": 16
     },
     {
       "theme": "農業科技業",
@@ -32384,7 +32172,7 @@
           "name": "瑞基"
         }
       ],
-      "rank": 18
+      "rank": 17
     },
     {
       "theme": "建材營造業",
@@ -34914,7 +34702,7 @@
           "name": "大城地產"
         }
       ],
-      "rank": 19
+      "rank": 18
     },
     {
       "theme": "紡織纖維",
@@ -36436,7 +36224,7 @@
           "name": "宏和"
         }
       ],
-      "rank": 20
+      "rank": 19
     },
     {
       "theme": "橡膠工業",
@@ -36810,7 +36598,7 @@
           "name": "厚生"
         }
       ],
-      "rank": 21
+      "rank": 20
     },
     {
       "theme": "其他業",
@@ -39508,7 +39296,7 @@
           "name": "鑽石投資"
         }
       ],
-      "rank": 22
+      "rank": 21
     },
     {
       "theme": "數位雲端",
@@ -40694,7 +40482,7 @@
           "name": "威聯通"
         }
       ],
-      "rank": 23
+      "rank": 22
     },
     {
       "theme": "化學工業",
@@ -41936,7 +41724,7 @@
           "name": "康普"
         }
       ],
-      "rank": 24
+      "rank": 23
     },
     {
       "theme": "電機機械",
@@ -44858,7 +44646,7 @@
           "name": "健椿"
         }
       ],
-      "rank": 25
+      "rank": 24
     },
     {
       "theme": "綠能環保",
@@ -46212,7 +46000,7 @@
           "name": "麗升能源"
         }
       ],
-      "rank": 26
+      "rank": 25
     },
     {
       "theme": "其他電子業",
@@ -48910,7 +48698,7 @@
           "name": "友威科"
         }
       ],
-      "rank": 27
+      "rank": 26
     },
     {
       "theme": "汽車工業",
@@ -50208,7 +49996,7 @@
           "name": "江申"
         }
       ],
-      "rank": 28
+      "rank": 27
     },
     {
       "theme": "居家生活",
@@ -51282,7 +51070,7 @@
           "name": "弘帆"
         }
       ],
-      "rank": 29
+      "rank": 28
     },
     {
       "theme": "觀光餐旅",
@@ -52776,7 +52564,7 @@
           "name": "五福"
         }
       ],
-      "rank": 30
+      "rank": 29
     },
     {
       "theme": "通信網路業",
@@ -55418,7 +55206,7 @@
           "name": "光環"
         }
       ],
-      "rank": 31
+      "rank": 30
     },
     {
       "theme": "運動休閒",
@@ -56240,7 +56028,7 @@
           "name": "鉅明"
         }
       ],
-      "rank": 32
+      "rank": 31
     },
     {
       "theme": "玻璃陶瓷",
@@ -56430,7 +56218,7 @@
           "name": "和成"
         }
       ],
-      "rank": 33
+      "rank": 32
     },
     {
       "theme": "電器電纜",
@@ -56972,7 +56760,7 @@
           "name": "合機"
         }
       ],
-      "rank": 34
+      "rank": 33
     },
     {
       "theme": "電子通路業",
@@ -58102,12 +57890,100 @@
           "name": "華立"
         }
       ],
+      "rank": 34
+    },
+    {
+      "theme": "公司重大訊息",
+      "theme_change_pct": -3.52,
+      "turnover_billion": 4.98,
+      "up_count": 0,
+      "limit_up_count": 0,
+      "beneficiary_count": 2,
+      "high_score_news_count": 0,
+      "avg_ai_score": 36.4,
+      "source_types": [
+        "news"
+      ],
+      "source_labels": [
+        "新聞事件"
+      ],
+      "beneficiary_stocks": [
+        {
+          "symbol": "3680",
+          "name": "家登",
+          "market": "上櫃",
+          "industry": "半導體業",
+          "theme": "公司重大訊息",
+          "trade_price": 503.0,
+          "change_pct": -3.45,
+          "volume": 861333,
+          "turnover_rate_pct": null,
+          "turnover_billion": 4.333,
+          "revenue_yoy_pct": 67.74,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 46.6,
+          "source_types": [
+            "news"
+          ],
+          "source_labels": [
+            "新聞事件"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "新聞事件帶動；營收年增 67.74%；漲跌 -3.45%"
+        },
+        {
+          "symbol": "6949",
+          "name": "沛爾生醫*-創",
+          "market": "上市",
+          "industry": "生技醫療業",
+          "theme": "公司重大訊息",
+          "trade_price": 37.7,
+          "change_pct": -3.58,
+          "volume": 1722641,
+          "turnover_rate_pct": 0.13,
+          "turnover_billion": 0.649,
+          "revenue_yoy_pct": 2.28,
+          "eps": null,
+          "gross_margin_pct": null,
+          "total_score": 26.1,
+          "source_types": [
+            "news"
+          ],
+          "source_labels": [
+            "新聞事件"
+          ],
+          "roles": [
+            "beneficiary"
+          ],
+          "reason": "新聞事件帶動；營收年增 2.28%；漲跌 -3.58%；週轉率 0.13%"
+        }
+      ],
+      "theme_score": 6.1,
+      "leader_stocks": [
+        {
+          "symbol": "3680",
+          "name": "家登"
+        },
+        {
+          "symbol": "6949",
+          "name": "沛爾生醫*-創"
+        }
+      ],
+      "low_base_stocks": [
+        {
+          "symbol": "6949",
+          "name": "沛爾生醫*-創"
+        }
+      ],
       "rank": 35
     }
   ],
-  "run_id": "40219904408",
-  "generated_at": "2026-10-26T02:11:51+08:00",
+  "run_id": "40357251849",
+  "generated_at": "2026-10-27T00:20:16+08:00",
   "latest_trade_date": "2026-10-22",
-  "data_version": "20261022-0211",
+  "data_version": "20261022-0020",
   "source_pipeline": "update_all_site_data"
 }
