@@ -2,17 +2,17 @@
   "status": "warning",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-10-30T00:24:30+08:00",
-  "generated_at": "2026-10-30T00:25:33+08:00",
-  "latestValidationUpdateTime": "2026-10-30T00:24:30+08:00",
-  "latestSignalDate": "2026-10-29",
-  "latestEntryDate": "2026-10-29",
-  "latestPriceDate": "2026-10-29",
-  "latestBenchmarkDate": "2026-10-29",
-  "latest_trade_date": "2026-10-29",
-  "completedSignals": 296,
+  "generatedAt": "2026-10-30T19:45:58+08:00",
+  "generated_at": "2026-10-30T19:49:09+08:00",
+  "latestValidationUpdateTime": "2026-10-30T19:45:58+08:00",
+  "latestSignalDate": "2026-10-30",
+  "latestEntryDate": "2026-10-30",
+  "latestPriceDate": "2026-10-30",
+  "latestBenchmarkDate": "2026-10-30",
+  "latest_trade_date": "2026-10-30",
+  "completedSignals": 302,
   "trackingSignals": 143,
-  "d20CompletedSignals": 296,
+  "d20CompletedSignals": 302,
   "missingPriceCount": 0,
   "missingBenchmarkCount": 0,
   "snapshotCoverageGapCount": 4,
@@ -27,6 +27,8 @@
   "lastError": "",
   "failedReasons": [],
   "warnings": [
+    "Response ended prematurely",
+    "HTTPSConnectionPool(host='www.tpex.org.tw', port=443): Read timed out.",
     "歷史 Top 10 快照缺少 4 個交易日；缺口不推定為跌出或連續入榜。"
   ],
   "sourceStatus": [
@@ -58,16 +60,32 @@
       "source": "TWSE TAIEX MI_5MINS_HIST",
       "period": "2026-10",
       "ok": true,
-      "rows": 18,
+      "rows": 19,
       "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20261001&response=json",
       "error": ""
     },
     {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-07-30",
+      "source": "TPEX exact daily quotes",
+      "period": "2026-07-23",
+      "ok": false,
+      "rows": 0,
+      "url": "",
+      "error": "Response ended prematurely"
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-07-27",
       "ok": true,
-      "rows": 1335,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260730&type=ALLBUT0999&response=json",
+      "rows": 10167,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F27&id=&response=json",
+      "error": ""
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-07-29",
+      "ok": true,
+      "rows": 10274,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F29&id=&response=json",
       "error": ""
     },
     {
@@ -79,11 +97,11 @@
       "error": ""
     },
     {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-06",
+      "source": "TPEX exact daily quotes",
+      "period": "2026-08-05",
       "ok": true,
-      "rows": 1338,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260806&type=ALLBUT0999&response=json",
+      "rows": 10246,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F05&id=&response=json",
       "error": ""
     },
     {
@@ -95,12 +113,12 @@
       "error": ""
     },
     {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-20",
-      "ok": true,
-      "rows": 1337,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260820&type=ALLBUT0999&response=json",
-      "error": ""
+      "source": "TPEX exact daily quotes",
+      "period": "2026-08-11",
+      "ok": false,
+      "rows": 0,
+      "url": "",
+      "error": "Response ended prematurely"
     },
     {
       "source": "TPEX exact daily quotes",
@@ -111,23 +129,87 @@
       "error": ""
     },
     {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-25",
+      "source": "TPEX exact daily quotes",
+      "period": "2026-08-24",
       "ok": true,
-      "rows": 1339,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260825&type=ALLBUT0999&response=json",
+      "rows": 10468,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F24&id=&response=json",
       "error": ""
     },
     {
       "source": "TPEX exact daily quotes",
       "period": "2026-08-25",
+      "ok": false,
+      "rows": 0,
+      "url": "",
+      "error": "HTTPSConnectionPool(host='www.tpex.org.tw', port=443): Read timed out."
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-08-26",
       "ok": true,
-      "rows": 10489,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F25&id=&response=json",
+      "rows": 10543,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F26&id=&response=json",
       "error": ""
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-08-31",
+      "ok": true,
+      "rows": 10706,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F31&id=&response=json",
+      "error": ""
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-09-29",
+      "ok": false,
+      "rows": 0,
+      "url": "",
+      "error": "Response ended prematurely"
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-10-08",
+      "ok": false,
+      "rows": 0,
+      "url": "",
+      "error": "Response ended prematurely"
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-10-14",
+      "ok": true,
+      "rows": 12459,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F10%2F14&id=&response=json",
+      "error": ""
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-10-16",
+      "ok": false,
+      "rows": 0,
+      "url": "",
+      "error": "Response ended prematurely"
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-10-21",
+      "ok": false,
+      "rows": 0,
+      "url": "",
+      "error": "Response ended prematurely"
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-10-27",
+      "ok": false,
+      "rows": 0,
+      "url": "",
+      "error": "Response ended prematurely"
     }
   ],
-  "run_id": "40910612426",
-  "data_version": "20261029-0025",
+  "run_id": "41049705221",
+  "data_version": "20261030-1949",
   "source_pipeline": "update_all_site_data"
 }
