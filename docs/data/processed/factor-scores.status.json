@@ -1,7 +1,7 @@
 {
   "ok": true,
-  "updated_at": "2026-10-31T00:10:19+08:00",
-  "attempted_at": "2026-10-31T00:10:19+08:00",
+  "updated_at": "2026-10-31T19:17:05+08:00",
+  "attempted_at": "2026-10-31T19:17:05+08:00",
   "target_date": "2026-10-30",
   "latest_trade_date": "2026-10-30",
   "revenue_month": "2026-09",
@@ -22,9 +22,9 @@
   "quality": {
     "stock_master_count": 1986,
     "quote_matched": 1981,
-    "score_candidates": 1954,
+    "score_candidates": 1955,
     "missing_quote_count": 5,
-    "missing_score_count": 27,
+    "missing_score_count": 26,
     "missing_quote_sample": [
       "1589",
       "4207",
@@ -56,7 +56,6 @@
       "6945",
       "7716",
       "7728",
-      "7867",
       "8342",
       "8409",
       "9941"
@@ -100,7 +99,7 @@
       "ok": true,
       "http_status": 200,
       "source_date": null,
-      "row_count": 1087,
+      "row_count": 1088,
       "error": "",
       "required_fields_missing": []
     },
@@ -140,7 +139,7 @@
       "ok": true,
       "http_status": 200,
       "source_date": null,
-      "row_count": 1098,
+      "row_count": 1099,
       "error": "",
       "required_fields_missing": []
     },
@@ -169,7 +168,7 @@
     "ok": true,
     "status": "ok",
     "latest_trade_date": "2026-10-30",
-    "generated_at": "2026-10-31T00:10:19+08:00",
+    "generated_at": "2026-10-31T19:17:05+08:00",
     "snapshot_created": false,
     "snapshot_path": "data/history/ai-top10/2026-10-30.json",
     "history_trading_days": 64,
@@ -183,8 +182,8 @@
       "ai-persistence-monthly.json": "updated"
     }
   },
-  "run_id": "41087140230",
-  "generated_at": "2026-10-31T00:12:15+08:00",
-  "data_version": "20261030-0012",
+  "run_id": "41196051058",
+  "generated_at": "2026-10-31T19:17:42+08:00",
+  "data_version": "20261030-1917",
   "source_pipeline": "update_all_site_data"
 }
