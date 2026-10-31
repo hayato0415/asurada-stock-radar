@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "validationVersion": "ai-validation-v1",
-  "updatedAt": "2026-10-31T23:30:35+08:00",
-  "asOfDate": "2026-10-31",
+  "updatedAt": "2026-11-01T03:09:33+08:00",
+  "asOfDate": "2026-11-01",
   "earliestSignalDate": "2026-07-22",
   "calendar": [
     "2026-07-22",
@@ -471313,6 +471313,14 @@
       "rows": 19,
       "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20261001&response=json",
       "error": ""
+    },
+    {
+      "source": "TWSE TAIEX MI_5MINS_HIST",
+      "period": "2026-11",
+      "ok": false,
+      "rows": 0,
+      "url": "",
+      "error": "TAIEX monthly history is unavailable for 2026-11"
     }
   ],
   "sources": {
