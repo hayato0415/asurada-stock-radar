@@ -1,10 +1,10 @@
 {
   "status": "ok",
   "ok": true,
-  "latestTradeDate": "2026-11-02",
-  "latest_trade_date": "2026-11-02",
-  "generatedAt": "2026-11-03T03:41:23+08:00",
-  "generated_at": "2026-11-03T03:41:55+08:00",
+  "latestTradeDate": "2026-11-03",
+  "latest_trade_date": "2026-11-03",
+  "generatedAt": "2026-11-03T21:08:44+08:00",
+  "generated_at": "2026-11-03T21:12:16+08:00",
   "scoreVersion": "official-multifactor-v1",
   "scoreSource": "docs/data/processed/factor-scores.json",
   "weights": {
@@ -22,11 +22,10 @@
     "score_weakening_consecutive_days": 3,
     "single_day_breakout_appearances_5d": 1
   },
-  "historyTradingDays": 65,
+  "historyTradingDays": 66,
   "windowSize": 20,
   "availableTradingDays": 20,
   "tradingDates": [
-    "2026-10-01",
     "2026-10-02",
     "2026-10-05",
     "2026-10-06",
@@ -45,9 +44,10 @@
     "2026-10-28",
     "2026-10-29",
     "2026-10-30",
-    "2026-11-02"
+    "2026-11-02",
+    "2026-11-03"
   ],
-  "itemsCount": 117,
+  "itemsCount": 115,
   "items": [
     {
       "code": "4526",
@@ -61,7 +61,7 @@
       "averageRank20d": 4.0,
       "bestRank20d": 1,
       "latestRank": 7,
-      "previousRank": 7,
+      "previousRank": null,
       "rankChange": null,
       "consecutiveDays": 0,
       "averageScore20d": 89.81,
@@ -84,15 +84,15 @@
       "averageRank20d": 3.5,
       "bestRank20d": 1,
       "latestRank": 1,
-      "previousRank": 3,
-      "rankChange": 2,
-      "consecutiveDays": 2,
+      "previousRank": 1,
+      "rankChange": null,
+      "consecutiveDays": 0,
       "averageScore20d": 90.38,
       "latestScore": 93.3,
       "scoreTrend20d": "上升",
       "firstSeenDate": "2026-10-13",
       "lastSeenDate": "2026-11-02",
-      "isCurrent": true,
+      "isCurrent": false,
       "appearanceRate20d": 0.3
     },
     {
@@ -149,20 +149,20 @@
       "concepts": [
         "通信網路業"
       ],
-      "appearances20d": 4,
-      "averageRank20d": 4.75,
+      "appearances20d": 5,
+      "averageRank20d": 5.0,
       "bestRank20d": 2,
-      "latestRank": 2,
+      "latestRank": 6,
       "previousRank": null,
       "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore20d": 89.05,
-      "latestScore": 90.9,
+      "consecutiveDays": 1,
+      "averageScore20d": 88.02,
+      "latestScore": 83.9,
       "scoreTrend20d": "下降",
       "firstSeenDate": "2026-10-12",
-      "lastSeenDate": "2026-10-16",
-      "isCurrent": false,
-      "appearanceRate20d": 0.2
+      "lastSeenDate": "2026-11-03",
+      "isCurrent": true,
+      "appearanceRate20d": 0.25
     },
     {
       "code": "6925",
@@ -185,29 +185,6 @@
       "firstSeenDate": "2026-10-15",
       "lastSeenDate": "2026-10-20",
       "isCurrent": false,
-      "appearanceRate20d": 0.2
-    },
-    {
-      "code": "3147",
-      "name": "大綜",
-      "market": "上櫃",
-      "industry": "資訊服務業",
-      "concepts": [
-        "資訊服務業"
-      ],
-      "appearances20d": 4,
-      "averageRank20d": 7.0,
-      "bestRank20d": 2,
-      "latestRank": 8,
-      "previousRank": null,
-      "rankChange": null,
-      "consecutiveDays": 1,
-      "averageScore20d": 87.25,
-      "latestScore": 86.4,
-      "scoreTrend20d": "上升",
-      "firstSeenDate": "2026-10-01",
-      "lastSeenDate": "2026-11-02",
-      "isCurrent": true,
       "appearanceRate20d": 0.2
     },
     {
@@ -257,6 +234,29 @@
       "appearanceRate20d": 0.2
     },
     {
+      "code": "3287",
+      "name": "廣寰科",
+      "market": "上櫃",
+      "industry": "電腦及週邊設備業",
+      "concepts": [
+        "電腦及週邊設備業"
+      ],
+      "appearances20d": 3,
+      "averageRank20d": 2.33,
+      "bestRank20d": 1,
+      "latestRank": 1,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore20d": 88.63,
+      "latestScore": 88.3,
+      "scoreTrend20d": "下降",
+      "firstSeenDate": "2026-10-13",
+      "lastSeenDate": "2026-11-03",
+      "isCurrent": true,
+      "appearanceRate20d": 0.15
+    },
+    {
       "code": "1569",
       "name": "濱川",
       "market": "上櫃",
@@ -300,6 +300,29 @@
       "firstSeenDate": "2026-10-13",
       "lastSeenDate": "2026-10-16",
       "isCurrent": false,
+      "appearanceRate20d": 0.15
+    },
+    {
+      "code": "8099",
+      "name": "大世科",
+      "market": "上櫃",
+      "industry": "資訊服務業",
+      "concepts": [
+        "資訊服務業"
+      ],
+      "appearances20d": 3,
+      "averageRank20d": 3.0,
+      "bestRank20d": 1,
+      "latestRank": 5,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore20d": 88.3,
+      "latestScore": 85.7,
+      "scoreTrend20d": "下降",
+      "firstSeenDate": "2026-10-29",
+      "lastSeenDate": "2026-11-03",
+      "isCurrent": true,
       "appearanceRate20d": 0.15
     },
     {
@@ -429,15 +452,15 @@
       "averageRank20d": 5.33,
       "bestRank20d": 3,
       "latestRank": 5,
-      "previousRank": null,
+      "previousRank": 5,
       "rankChange": null,
-      "consecutiveDays": 1,
+      "consecutiveDays": 0,
       "averageScore20d": 87.8,
       "latestScore": 87.4,
       "scoreTrend20d": "下降",
       "firstSeenDate": "2026-10-16",
       "lastSeenDate": "2026-11-02",
-      "isCurrent": true,
+      "isCurrent": false,
       "appearanceRate20d": 0.15
     },
     {
@@ -453,14 +476,37 @@
       "bestRank20d": 6,
       "latestRank": 6,
       "previousRank": 6,
-      "rankChange": 0,
-      "consecutiveDays": 3,
+      "rankChange": null,
+      "consecutiveDays": 0,
       "averageScore20d": 86.77,
       "latestScore": 86.8,
       "scoreTrend20d": "下降",
       "firstSeenDate": "2026-10-29",
       "lastSeenDate": "2026-11-02",
-      "isCurrent": true,
+      "isCurrent": false,
+      "appearanceRate20d": 0.15
+    },
+    {
+      "code": "3147",
+      "name": "大綜",
+      "market": "上櫃",
+      "industry": "資訊服務業",
+      "concepts": [
+        "資訊服務業"
+      ],
+      "appearances20d": 3,
+      "averageRank20d": 6.67,
+      "bestRank20d": 2,
+      "latestRank": 8,
+      "previousRank": 8,
+      "rankChange": null,
+      "consecutiveDays": 0,
+      "averageScore20d": 87.8,
+      "latestScore": 86.4,
+      "scoreTrend20d": "下降",
+      "firstSeenDate": "2026-10-06",
+      "lastSeenDate": "2026-11-02",
+      "isCurrent": false,
       "appearanceRate20d": 0.15
     },
     {
@@ -484,6 +530,29 @@
       "firstSeenDate": "2026-10-02",
       "lastSeenDate": "2026-10-19",
       "isCurrent": false,
+      "appearanceRate20d": 0.15
+    },
+    {
+      "code": "5013",
+      "name": "強新",
+      "market": "上櫃",
+      "industry": "鋼鐵工業",
+      "concepts": [
+        "鋼鐵工業"
+      ],
+      "appearances20d": 3,
+      "averageRank20d": 7.67,
+      "bestRank20d": 4,
+      "latestRank": 4,
+      "previousRank": 10,
+      "rankChange": 6,
+      "consecutiveDays": 3,
+      "averageScore20d": 85.17,
+      "latestScore": 85.7,
+      "scoreTrend20d": "上升",
+      "firstSeenDate": "2026-10-30",
+      "lastSeenDate": "2026-11-03",
+      "isCurrent": true,
       "appearanceRate20d": 0.15
     },
     {
@@ -544,37 +613,14 @@
       "averageRank20d": 2.0,
       "bestRank20d": 2,
       "latestRank": 2,
-      "previousRank": null,
+      "previousRank": 2,
       "rankChange": null,
-      "consecutiveDays": 1,
+      "consecutiveDays": 0,
       "averageScore20d": 91.1,
       "latestScore": 89.5,
       "scoreTrend20d": "下降",
       "firstSeenDate": "2026-10-28",
       "lastSeenDate": "2026-11-02",
-      "isCurrent": true,
-      "appearanceRate20d": 0.1
-    },
-    {
-      "code": "8099",
-      "name": "大世科",
-      "market": "上櫃",
-      "industry": "資訊服務業",
-      "concepts": [
-        "資訊服務業"
-      ],
-      "appearances20d": 2,
-      "averageRank20d": 2.0,
-      "bestRank20d": 1,
-      "latestRank": 1,
-      "previousRank": 1,
-      "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore20d": 89.6,
-      "latestScore": 89.5,
-      "scoreTrend20d": "下降",
-      "firstSeenDate": "2026-10-29",
-      "lastSeenDate": "2026-10-30",
       "isCurrent": false,
       "appearanceRate20d": 0.1
     },
@@ -590,15 +636,15 @@
       "averageRank20d": 2.0,
       "bestRank20d": 1,
       "latestRank": 3,
-      "previousRank": null,
+      "previousRank": 3,
       "rankChange": null,
-      "consecutiveDays": 1,
+      "consecutiveDays": 0,
       "averageScore20d": 90.2,
       "latestScore": 89.0,
       "scoreTrend20d": "下降",
       "firstSeenDate": "2026-10-27",
       "lastSeenDate": "2026-11-02",
-      "isCurrent": true,
+      "isCurrent": false,
       "appearanceRate20d": 0.1
     },
     {
@@ -625,29 +671,6 @@
       "appearanceRate20d": 0.1
     },
     {
-      "code": "3287",
-      "name": "廣寰科",
-      "market": "上櫃",
-      "industry": "電腦及週邊設備業",
-      "concepts": [
-        "電腦及週邊設備業"
-      ],
-      "appearances20d": 2,
-      "averageRank20d": 3.0,
-      "bestRank20d": 1,
-      "latestRank": 1,
-      "previousRank": null,
-      "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore20d": 88.8,
-      "latestScore": 87.9,
-      "scoreTrend20d": "下降",
-      "firstSeenDate": "2026-10-13",
-      "lastSeenDate": "2026-10-15",
-      "isCurrent": false,
-      "appearanceRate20d": 0.1
-    },
-    {
       "code": "2603",
       "name": "長榮",
       "market": "上市",
@@ -659,7 +682,7 @@
       "averageRank20d": 3.0,
       "bestRank20d": 2,
       "latestRank": 2,
-      "previousRank": 2,
+      "previousRank": null,
       "rankChange": null,
       "consecutiveDays": 0,
       "averageScore20d": 89.05,
@@ -713,29 +736,6 @@
       "scoreTrend20d": "上升",
       "firstSeenDate": "2026-10-02",
       "lastSeenDate": "2026-10-12",
-      "isCurrent": false,
-      "appearanceRate20d": 0.1
-    },
-    {
-      "code": "3624",
-      "name": "光頡",
-      "market": "上櫃",
-      "industry": "電子零組件業",
-      "concepts": [
-        "電子零組件業"
-      ],
-      "appearances20d": 2,
-      "averageRank20d": 3.5,
-      "bestRank20d": 3,
-      "latestRank": 3,
-      "previousRank": null,
-      "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore20d": 87.85,
-      "latestScore": 89.8,
-      "scoreTrend20d": "上升",
-      "firstSeenDate": "2026-10-01",
-      "lastSeenDate": "2026-10-08",
       "isCurrent": false,
       "appearanceRate20d": 0.1
     },
@@ -797,15 +797,15 @@
       "averageRank20d": 4.5,
       "bestRank20d": 4,
       "latestRank": 4,
-      "previousRank": 5,
-      "rankChange": 1,
-      "consecutiveDays": 2,
+      "previousRank": 4,
+      "rankChange": null,
+      "consecutiveDays": 0,
       "averageScore20d": 87.25,
       "latestScore": 87.9,
       "scoreTrend20d": "上升",
       "firstSeenDate": "2026-10-30",
       "lastSeenDate": "2026-11-02",
-      "isCurrent": true,
+      "isCurrent": false,
       "appearanceRate20d": 0.1
     },
     {
@@ -935,7 +935,7 @@
       "averageRank20d": 6.5,
       "bestRank20d": 4,
       "latestRank": 4,
-      "previousRank": 4,
+      "previousRank": null,
       "rankChange": null,
       "consecutiveDays": 0,
       "averageScore20d": 87.75,
@@ -944,6 +944,29 @@
       "firstSeenDate": "2026-10-28",
       "lastSeenDate": "2026-10-30",
       "isCurrent": false,
+      "appearanceRate20d": 0.1
+    },
+    {
+      "code": "4720",
+      "name": "德淵",
+      "market": "上市",
+      "industry": "化學工業",
+      "concepts": [
+        "化學工業"
+      ],
+      "appearances20d": 2,
+      "averageRank20d": 6.5,
+      "bestRank20d": 5,
+      "latestRank": 8,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore20d": 84.4,
+      "latestScore": 83.0,
+      "scoreTrend20d": "下降",
+      "firstSeenDate": "2026-10-22",
+      "lastSeenDate": "2026-11-03",
+      "isCurrent": true,
       "appearanceRate20d": 0.1
     },
     {
@@ -1004,7 +1027,7 @@
       "averageRank20d": 8.0,
       "bestRank20d": 6,
       "latestRank": 10,
-      "previousRank": 10,
+      "previousRank": null,
       "rankChange": null,
       "consecutiveDays": 0,
       "averageScore20d": 86.85,
@@ -1012,29 +1035,6 @@
       "scoreTrend20d": "下降",
       "firstSeenDate": "2026-10-12",
       "lastSeenDate": "2026-10-30",
-      "isCurrent": false,
-      "appearanceRate20d": 0.1
-    },
-    {
-      "code": "4760",
-      "name": "勤凱",
-      "market": "上櫃",
-      "industry": "其他電子業",
-      "concepts": [
-        "其他電子業"
-      ],
-      "appearances20d": 2,
-      "averageRank20d": 8.5,
-      "bestRank20d": 7,
-      "latestRank": 7,
-      "previousRank": null,
-      "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore20d": 86.8,
-      "latestScore": 88.0,
-      "scoreTrend20d": "上升",
-      "firstSeenDate": "2026-10-01",
-      "lastSeenDate": "2026-10-08",
       "isCurrent": false,
       "appearanceRate20d": 0.1
     },
@@ -1105,29 +1105,6 @@
       "firstSeenDate": "2026-10-05",
       "lastSeenDate": "2026-10-08",
       "isCurrent": false,
-      "appearanceRate20d": 0.1
-    },
-    {
-      "code": "5013",
-      "name": "強新",
-      "market": "上櫃",
-      "industry": "鋼鐵工業",
-      "concepts": [
-        "鋼鐵工業"
-      ],
-      "appearances20d": 2,
-      "averageRank20d": 9.5,
-      "bestRank20d": 9,
-      "latestRank": 10,
-      "previousRank": 9,
-      "rankChange": -1,
-      "consecutiveDays": 2,
-      "averageScore20d": 84.9,
-      "latestScore": 86.2,
-      "scoreTrend20d": "上升",
-      "firstSeenDate": "2026-10-30",
-      "lastSeenDate": "2026-11-02",
-      "isCurrent": true,
       "appearanceRate20d": 0.1
     },
     {
@@ -1246,29 +1223,6 @@
       "appearanceRate20d": 0.05
     },
     {
-      "code": "8042",
-      "name": "金山電",
-      "market": "上櫃",
-      "industry": "電子零組件業",
-      "concepts": [
-        "電子零組件業"
-      ],
-      "appearances20d": 1,
-      "averageRank20d": 1.0,
-      "bestRank20d": 1,
-      "latestRank": 1,
-      "previousRank": null,
-      "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore20d": 87.0,
-      "latestScore": 87.0,
-      "scoreTrend20d": "資料不足",
-      "firstSeenDate": "2026-10-01",
-      "lastSeenDate": "2026-10-01",
-      "isCurrent": false,
-      "appearanceRate20d": 0.05
-    },
-    {
       "code": "1615",
       "name": "大山",
       "market": "上市",
@@ -1315,12 +1269,12 @@
       "appearanceRate20d": 0.05
     },
     {
-      "code": "3311",
-      "name": "閎暉",
-      "market": "上市",
-      "industry": "通信網路業",
+      "code": "8272",
+      "name": "全景軟體",
+      "market": "上櫃",
+      "industry": "資訊服務業",
       "concepts": [
-        "通信網路業"
+        "資訊服務業"
       ],
       "appearances20d": 1,
       "averageRank20d": 2.0,
@@ -1328,13 +1282,13 @@
       "latestRank": 2,
       "previousRank": null,
       "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore20d": 86.9,
-      "latestScore": 86.9,
+      "consecutiveDays": 1,
+      "averageScore20d": 87.6,
+      "latestScore": 87.6,
       "scoreTrend20d": "資料不足",
-      "firstSeenDate": "2026-10-01",
-      "lastSeenDate": "2026-10-01",
-      "isCurrent": false,
+      "firstSeenDate": "2026-11-03",
+      "lastSeenDate": "2026-11-03",
+      "isCurrent": true,
       "appearanceRate20d": 0.05
     },
     {
@@ -1357,6 +1311,29 @@
       "scoreTrend20d": "資料不足",
       "firstSeenDate": "2026-10-13",
       "lastSeenDate": "2026-10-13",
+      "isCurrent": false,
+      "appearanceRate20d": 0.05
+    },
+    {
+      "code": "3624",
+      "name": "光頡",
+      "market": "上櫃",
+      "industry": "電子零組件業",
+      "concepts": [
+        "電子零組件業"
+      ],
+      "appearances20d": 1,
+      "averageRank20d": 3.0,
+      "bestRank20d": 3,
+      "latestRank": 3,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 0,
+      "averageScore20d": 89.8,
+      "latestScore": 89.8,
+      "scoreTrend20d": "資料不足",
+      "firstSeenDate": "2026-10-08",
+      "lastSeenDate": "2026-10-08",
       "isCurrent": false,
       "appearanceRate20d": 0.05
     },
@@ -1384,12 +1361,12 @@
       "appearanceRate20d": 0.05
     },
     {
-      "code": "6127",
-      "name": "九豪",
-      "market": "上櫃",
-      "industry": "電子零組件業",
+      "code": "1802",
+      "name": "台玻",
+      "market": "上市",
+      "industry": "玻璃陶瓷",
       "concepts": [
-        "電子零組件業"
+        "玻璃陶瓷"
       ],
       "appearances20d": 1,
       "averageRank20d": 3.0,
@@ -1397,13 +1374,13 @@
       "latestRank": 3,
       "previousRank": null,
       "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore20d": 86.2,
-      "latestScore": 86.2,
+      "consecutiveDays": 1,
+      "averageScore20d": 86.0,
+      "latestScore": 86.0,
       "scoreTrend20d": "資料不足",
-      "firstSeenDate": "2026-10-01",
-      "lastSeenDate": "2026-10-01",
-      "isCurrent": false,
+      "firstSeenDate": "2026-11-03",
+      "lastSeenDate": "2026-11-03",
+      "isCurrent": true,
       "appearanceRate20d": 0.05
     },
     {
@@ -1637,52 +1614,6 @@
       "appearanceRate20d": 0.05
     },
     {
-      "code": "4720",
-      "name": "德淵",
-      "market": "上市",
-      "industry": "化學工業",
-      "concepts": [
-        "化學工業"
-      ],
-      "appearances20d": 1,
-      "averageRank20d": 5.0,
-      "bestRank20d": 5,
-      "latestRank": 5,
-      "previousRank": null,
-      "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore20d": 85.8,
-      "latestScore": 85.8,
-      "scoreTrend20d": "資料不足",
-      "firstSeenDate": "2026-10-22",
-      "lastSeenDate": "2026-10-22",
-      "isCurrent": false,
-      "appearanceRate20d": 0.05
-    },
-    {
-      "code": "6173",
-      "name": "信昌電",
-      "market": "上櫃",
-      "industry": "電子零組件業",
-      "concepts": [
-        "電子零組件業"
-      ],
-      "appearances20d": 1,
-      "averageRank20d": 5.0,
-      "bestRank20d": 5,
-      "latestRank": 5,
-      "previousRank": null,
-      "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore20d": 85.8,
-      "latestScore": 85.8,
-      "scoreTrend20d": "資料不足",
-      "firstSeenDate": "2026-10-01",
-      "lastSeenDate": "2026-10-01",
-      "isCurrent": false,
-      "appearanceRate20d": 0.05
-    },
-    {
       "code": "6885",
       "name": "全福生技",
       "market": "上市",
@@ -1794,29 +1725,6 @@
       "scoreTrend20d": "資料不足",
       "firstSeenDate": "2026-10-20",
       "lastSeenDate": "2026-10-20",
-      "isCurrent": false,
-      "appearanceRate20d": 0.05
-    },
-    {
-      "code": "6175",
-      "name": "立敦",
-      "market": "上櫃",
-      "industry": "電子零組件業",
-      "concepts": [
-        "電子零組件業"
-      ],
-      "appearances20d": 1,
-      "averageRank20d": 6.0,
-      "bestRank20d": 6,
-      "latestRank": 6,
-      "previousRank": null,
-      "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore20d": 85.8,
-      "latestScore": 85.8,
-      "scoreTrend20d": "資料不足",
-      "firstSeenDate": "2026-10-01",
-      "lastSeenDate": "2026-10-01",
       "isCurrent": false,
       "appearanceRate20d": 0.05
     },
@@ -1936,6 +1844,29 @@
       "appearanceRate20d": 0.05
     },
     {
+      "code": "4760",
+      "name": "勤凱",
+      "market": "上櫃",
+      "industry": "其他電子業",
+      "concepts": [
+        "其他電子業"
+      ],
+      "appearances20d": 1,
+      "averageRank20d": 7.0,
+      "bestRank20d": 7,
+      "latestRank": 7,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 0,
+      "averageScore20d": 88.0,
+      "latestScore": 88.0,
+      "scoreTrend20d": "資料不足",
+      "firstSeenDate": "2026-10-08",
+      "lastSeenDate": "2026-10-08",
+      "isCurrent": false,
+      "appearanceRate20d": 0.05
+    },
+    {
       "code": "4540",
       "name": "全球傳動",
       "market": "上市",
@@ -1970,37 +1901,14 @@
       "averageRank20d": 7.0,
       "bestRank20d": 7,
       "latestRank": 7,
-      "previousRank": null,
+      "previousRank": 7,
       "rankChange": null,
-      "consecutiveDays": 1,
+      "consecutiveDays": 0,
       "averageScore20d": 86.5,
       "latestScore": 86.5,
       "scoreTrend20d": "資料不足",
       "firstSeenDate": "2026-11-02",
       "lastSeenDate": "2026-11-02",
-      "isCurrent": true,
-      "appearanceRate20d": 0.05
-    },
-    {
-      "code": "8043",
-      "name": "蜜望實",
-      "market": "上櫃",
-      "industry": "電子零組件業",
-      "concepts": [
-        "電子零組件業"
-      ],
-      "appearances20d": 1,
-      "averageRank20d": 7.0,
-      "bestRank20d": 7,
-      "latestRank": 7,
-      "previousRank": null,
-      "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore20d": 85.7,
-      "latestScore": 85.7,
-      "scoreTrend20d": "資料不足",
-      "firstSeenDate": "2026-10-01",
-      "lastSeenDate": "2026-10-01",
       "isCurrent": false,
       "appearanceRate20d": 0.05
     },
@@ -2071,6 +1979,29 @@
       "firstSeenDate": "2026-10-02",
       "lastSeenDate": "2026-10-02",
       "isCurrent": false,
+      "appearanceRate20d": 0.05
+    },
+    {
+      "code": "6865",
+      "name": "偉康科技",
+      "market": "上櫃",
+      "industry": "數位雲端",
+      "concepts": [
+        "數位雲端"
+      ],
+      "appearances20d": 1,
+      "averageRank20d": 7.0,
+      "bestRank20d": 7,
+      "latestRank": 7,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore20d": 83.2,
+      "latestScore": 83.2,
+      "scoreTrend20d": "資料不足",
+      "firstSeenDate": "2026-11-03",
+      "lastSeenDate": "2026-11-03",
+      "isCurrent": true,
       "appearanceRate20d": 0.05
     },
     {
@@ -2200,7 +2131,7 @@
       "averageRank20d": 8.0,
       "bestRank20d": 8,
       "latestRank": 8,
-      "previousRank": 8,
+      "previousRank": null,
       "rankChange": null,
       "consecutiveDays": 0,
       "averageScore20d": 84.9,
@@ -2430,15 +2361,15 @@
       "averageRank20d": 9.0,
       "bestRank20d": 9,
       "latestRank": 9,
-      "previousRank": null,
+      "previousRank": 9,
       "rankChange": null,
-      "consecutiveDays": 1,
+      "consecutiveDays": 0,
       "averageScore20d": 86.3,
       "latestScore": 86.3,
       "scoreTrend20d": "資料不足",
       "firstSeenDate": "2026-11-02",
       "lastSeenDate": "2026-11-02",
-      "isCurrent": true,
+      "isCurrent": false,
       "appearanceRate20d": 0.05
     },
     {
@@ -2465,29 +2396,6 @@
       "appearanceRate20d": 0.05
     },
     {
-      "code": "3455",
-      "name": "由田",
-      "market": "上櫃",
-      "industry": "光電業",
-      "concepts": [
-        "光電業"
-      ],
-      "appearances20d": 1,
-      "averageRank20d": 9.0,
-      "bestRank20d": 9,
-      "latestRank": 9,
-      "previousRank": null,
-      "rankChange": null,
-      "consecutiveDays": 0,
-      "averageScore20d": 85.6,
-      "latestScore": 85.6,
-      "scoreTrend20d": "資料不足",
-      "firstSeenDate": "2026-10-01",
-      "lastSeenDate": "2026-10-01",
-      "isCurrent": false,
-      "appearanceRate20d": 0.05
-    },
-    {
       "code": "1708",
       "name": "東鹼",
       "market": "上市",
@@ -2508,6 +2416,29 @@
       "firstSeenDate": "2026-10-02",
       "lastSeenDate": "2026-10-02",
       "isCurrent": false,
+      "appearanceRate20d": 0.05
+    },
+    {
+      "code": "7767",
+      "name": "仁大資訊",
+      "market": "上櫃",
+      "industry": "資訊服務業",
+      "concepts": [
+        "資訊服務業"
+      ],
+      "appearances20d": 1,
+      "averageRank20d": 9.0,
+      "bestRank20d": 9,
+      "latestRank": 9,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore20d": 82.9,
+      "latestScore": 82.9,
+      "scoreTrend20d": "資料不足",
+      "firstSeenDate": "2026-11-03",
+      "lastSeenDate": "2026-11-03",
+      "isCurrent": true,
       "appearanceRate20d": 0.05
     },
     {
@@ -2718,6 +2649,29 @@
       "appearanceRate20d": 0.05
     },
     {
+      "code": "5202",
+      "name": "力新",
+      "market": "上櫃",
+      "industry": "資訊服務業",
+      "concepts": [
+        "資訊服務業"
+      ],
+      "appearances20d": 1,
+      "averageRank20d": 10.0,
+      "bestRank20d": 10,
+      "latestRank": 10,
+      "previousRank": null,
+      "rankChange": null,
+      "consecutiveDays": 1,
+      "averageScore20d": 82.7,
+      "latestScore": 82.7,
+      "scoreTrend20d": "資料不足",
+      "firstSeenDate": "2026-11-03",
+      "lastSeenDate": "2026-11-03",
+      "isCurrent": true,
+      "appearanceRate20d": 0.05
+    },
+    {
       "code": "6214",
       "name": "精誠",
       "market": "上市",
@@ -2741,7 +2695,7 @@
       "appearanceRate20d": 0.05
     }
   ],
-  "run_id": "41512089984",
-  "data_version": "20261102-0341",
+  "run_id": "41640574931",
+  "data_version": "20261103-2112",
   "source_pipeline": "update_all_site_data"
 }
