@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "validationVersion": "ai-validation-v1",
-  "updatedAt": "2026-11-07T19:58:27+08:00",
+  "updatedAt": "2026-11-07T23:51:07+08:00",
   "asOfDate": "2026-11-07",
   "earliestSignalDate": "2026-07-22",
   "calendar": [
@@ -538363,14 +538363,6 @@
       "ok": true,
       "rows": 5,
       "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20261101&response=json",
-      "error": ""
-    },
-    {
-      "source": "TPEX exact daily quotes",
-      "period": "2026-08-06",
-      "ok": true,
-      "rows": 10313,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F06&id=&response=json",
       "error": ""
     }
   ],
