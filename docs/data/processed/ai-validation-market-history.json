@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "validationVersion": "ai-validation-v1",
-  "updatedAt": "2026-11-07T04:42:58+08:00",
+  "updatedAt": "2026-11-07T19:58:27+08:00",
   "asOfDate": "2026-11-07",
   "earliestSignalDate": "2026-07-22",
   "calendar": [
@@ -262793,6 +262793,19 @@
             "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F05&id=&response=json"
           },
           {
+            "date": "2026-08-06",
+            "market": "tpex",
+            "rawPresent": true,
+            "hasTrade": true,
+            "open": 45.5,
+            "high": 46.0,
+            "low": 43.95,
+            "close": 44.35,
+            "volume": 161074,
+            "transactions": 326,
+            "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F06&id=&response=json"
+          },
+          {
             "date": "2026-08-07",
             "market": "tpex",
             "rawPresent": true,
@@ -263717,6 +263730,19 @@
           "volume": 349137,
           "transactions": 521,
           "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F05&id=&response=json"
+        },
+        {
+          "date": "2026-08-06",
+          "market": "tpex",
+          "rawPresent": true,
+          "hasTrade": true,
+          "open": 45.5,
+          "high": 46.0,
+          "low": 43.95,
+          "close": 44.35,
+          "volume": 161074,
+          "transactions": 326,
+          "source": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F06&id=&response=json"
         },
         {
           "date": "2026-08-07",
@@ -538341,19 +538367,11 @@
     },
     {
       "source": "TPEX exact daily quotes",
-      "period": "2026-07-30",
-      "ok": true,
-      "rows": 10302,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F30&id=&response=json",
-      "error": ""
-    },
-    {
-      "source": "TPEX exact daily quotes",
       "period": "2026-08-06",
-      "ok": false,
-      "rows": 0,
-      "url": "",
-      "error": "Response ended prematurely"
+      "ok": true,
+      "rows": 10313,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F06&id=&response=json",
+      "error": ""
     }
   ],
   "sources": {
