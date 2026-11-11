@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "validationVersion": "ai-validation-v1",
-  "updatedAt": "2026-11-11T21:04:35+08:00",
-  "asOfDate": "2026-11-11",
+  "updatedAt": "2026-11-12T01:24:19+08:00",
+  "asOfDate": "2026-11-12",
   "earliestSignalDate": "2026-07-22",
   "calendar": [
     "2026-07-22",
@@ -572522,14 +572522,6 @@
       "ok": true,
       "rows": 8,
       "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20261101&response=json",
-      "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-11-11",
-      "ok": true,
-      "rows": 1352,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20261111&type=ALLBUT0999&response=json",
       "error": ""
     }
   ],
