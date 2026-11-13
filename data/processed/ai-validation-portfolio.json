@@ -2,9 +2,9 @@
   "status": "ok",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-11-13T01:51:03+08:00",
-  "generated_at": "2026-11-13T01:51:16+08:00",
-  "latest_trade_date": "2026-11-12",
+  "generatedAt": "2026-11-14T01:21:31+08:00",
+  "generated_at": "2026-11-14T01:22:14+08:00",
+  "latest_trade_date": "2026-11-13",
   "portfolioRule": "Each first-entry signal cycle is equally weighted and held for a fixed number of valid individual-stock trading days.",
   "calculationDisclosure": {
     "weighting": "Daily equal weight among active first-entry signals.",
@@ -24,7 +24,7 @@
   "holding5": {
     "holdingDays": 5,
     "status": "price_data_incomplete",
-    "signalCount": 499,
+    "signalCount": 508,
     "incompleteSignalCount": 2,
     "incompleteSignals": [
       {
@@ -71,7 +71,7 @@
     "missingPriceRule": "A held position with an official no-trade or unknown-coverage session invalidates the aggregate curve; prices are never carried forward.",
     "summary": {
       "status": "price_data_incomplete",
-      "signalCount": 499,
+      "signalCount": 508,
       "rowsCount": 0,
       "grossReturn": null,
       "netReturn": null,
@@ -85,13 +85,14 @@
   "holding20": {
     "holdingDays": 20,
     "status": "price_data_incomplete",
-    "signalCount": 496,
+    "signalCount": 505,
     "incompleteSignalCount": 5,
     "incompleteSignals": [
       {
         "signalId": "1808_2026-10-27_official-multifactor-v1",
         "dates": [
-          "2026-11-12"
+          "2026-11-12",
+          "2026-11-13"
         ]
       },
       {
@@ -162,7 +163,7 @@
     "missingPriceRule": "A held position with an official no-trade or unknown-coverage session invalidates the aggregate curve; prices are never carried forward.",
     "summary": {
       "status": "price_data_incomplete",
-      "signalCount": 496,
+      "signalCount": 505,
       "rowsCount": 0,
       "grossReturn": null,
       "netReturn": null,
@@ -173,7 +174,7 @@
       "recent20": null
     }
   },
-  "run_id": "43272044153",
-  "data_version": "20261112-0151",
+  "run_id": "43471476823",
+  "data_version": "20261113-0122",
   "source_pipeline": "update_all_site_data"
 }

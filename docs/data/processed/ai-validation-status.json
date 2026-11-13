@@ -2,17 +2,17 @@
   "status": "warning",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-11-13T01:51:03+08:00",
-  "generated_at": "2026-11-13T01:51:16+08:00",
-  "latestValidationUpdateTime": "2026-11-13T01:51:03+08:00",
-  "latestSignalDate": "2026-11-12",
-  "latestEntryDate": "2026-11-12",
-  "latestPriceDate": "2026-11-12",
-  "latestBenchmarkDate": "2026-11-12",
-  "latest_trade_date": "2026-11-12",
-  "completedSignals": 374,
+  "generatedAt": "2026-11-14T01:21:31+08:00",
+  "generated_at": "2026-11-14T01:22:14+08:00",
+  "latestValidationUpdateTime": "2026-11-14T01:21:31+08:00",
+  "latestSignalDate": "2026-11-13",
+  "latestEntryDate": "2026-11-13",
+  "latestPriceDate": "2026-11-13",
+  "latestBenchmarkDate": "2026-11-13",
+  "latest_trade_date": "2026-11-13",
+  "completedSignals": 381,
   "trackingSignals": 136,
-  "d20CompletedSignals": 374,
+  "d20CompletedSignals": 381,
   "missingPriceCount": 0,
   "missingBenchmarkCount": 0,
   "snapshotCoverageGapCount": 4,
@@ -66,12 +66,84 @@
       "source": "TWSE TAIEX MI_5MINS_HIST",
       "period": "2026-11",
       "ok": true,
-      "rows": 9,
+      "rows": 10,
       "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20261101&response=json",
+      "error": ""
+    },
+    {
+      "source": "TWSE exact daily quotes",
+      "period": "2026-07-30",
+      "ok": true,
+      "rows": 1335,
+      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260730&type=ALLBUT0999&response=json",
+      "error": ""
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-07-30",
+      "ok": true,
+      "rows": 10302,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F07%2F30&id=&response=json",
+      "error": ""
+    },
+    {
+      "source": "TWSE exact daily quotes",
+      "period": "2026-08-06",
+      "ok": true,
+      "rows": 1338,
+      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260806&type=ALLBUT0999&response=json",
+      "error": ""
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-08-06",
+      "ok": true,
+      "rows": 10313,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F06&id=&response=json",
+      "error": ""
+    },
+    {
+      "source": "TWSE exact daily quotes",
+      "period": "2026-08-20",
+      "ok": true,
+      "rows": 1337,
+      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260820&type=ALLBUT0999&response=json",
+      "error": ""
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-08-20",
+      "ok": true,
+      "rows": 10628,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F20&id=&response=json",
+      "error": ""
+    },
+    {
+      "source": "TWSE exact daily quotes",
+      "period": "2026-08-25",
+      "ok": true,
+      "rows": 1339,
+      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260825&type=ALLBUT0999&response=json",
+      "error": ""
+    },
+    {
+      "source": "TPEX exact daily quotes",
+      "period": "2026-08-25",
+      "ok": true,
+      "rows": 10489,
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F08%2F25&id=&response=json",
+      "error": ""
+    },
+    {
+      "source": "TWSE exact daily quotes",
+      "period": "2026-11-13",
+      "ok": true,
+      "rows": 1351,
+      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20261113&type=ALLBUT0999&response=json",
       "error": ""
     }
   ],
-  "run_id": "43272044153",
-  "data_version": "20261112-0151",
+  "run_id": "43471476823",
+  "data_version": "20261113-0122",
   "source_pipeline": "update_all_site_data"
 }
