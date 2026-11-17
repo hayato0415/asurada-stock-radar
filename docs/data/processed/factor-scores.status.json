@@ -1,7 +1,7 @@
 {
   "ok": true,
-  "updated_at": "2026-11-17T23:04:27+08:00",
-  "attempted_at": "2026-11-17T23:04:27+08:00",
+  "updated_at": "2026-11-18T02:45:44+08:00",
+  "attempted_at": "2026-11-18T02:45:44+08:00",
   "target_date": "2026-11-17",
   "latest_trade_date": "2026-11-17",
   "revenue_month": "2026-10",
@@ -176,8 +176,8 @@
     "ok": true,
     "status": "ok",
     "latest_trade_date": "2026-11-17",
-    "generated_at": "2026-11-17T23:04:27+08:00",
-    "snapshot_created": true,
+    "generated_at": "2026-11-18T02:45:44+08:00",
+    "snapshot_created": false,
     "snapshot_path": "data/history/ai-top10/2026-11-17.json",
     "history_trading_days": 76,
     "items_count": 10,
@@ -190,8 +190,8 @@
       "ai-persistence-monthly.json": "updated"
     }
   },
-  "run_id": "44108334277",
-  "generated_at": "2026-11-17T23:05:58+08:00",
-  "data_version": "20261117-2305",
+  "run_id": "44150660949",
+  "generated_at": "2026-11-18T02:46:30+08:00",
+  "data_version": "20261117-0246",
   "source_pipeline": "update_all_site_data"
 }
