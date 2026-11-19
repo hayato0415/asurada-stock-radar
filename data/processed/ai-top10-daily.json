@@ -1,10 +1,10 @@
 {
   "status": "ok",
   "ok": true,
-  "latestTradeDate": "2026-11-18",
-  "latest_trade_date": "2026-11-18",
-  "generatedAt": "2026-11-19T02:20:31+08:00",
-  "generated_at": "2026-11-19T02:21:13+08:00",
+  "latestTradeDate": "2026-11-19",
+  "latest_trade_date": "2026-11-19",
+  "generatedAt": "2026-11-19T22:45:02+08:00",
+  "generated_at": "2026-11-19T22:47:19+08:00",
   "scoreVersion": "official-multifactor-v1",
   "scoreSource": "docs/data/processed/factor-scores.json",
   "weights": {
@@ -22,72 +22,38 @@
     "score_weakening_consecutive_days": 3,
     "single_day_breakout_appearances_5d": 1
   },
-  "historyTradingDays": 77,
-  "validScoreCount": 1955,
+  "historyTradingDays": 78,
+  "validScoreCount": 1960,
   "itemsCount": 10,
   "warnings": [],
   "items": [
     {
       "rank": 1,
-      "code": "4916",
-      "name": "事欣科",
+      "code": "6782",
+      "name": "視陽",
       "market": "上市",
-      "industry": "電腦及週邊設備業",
+      "industry": "生技醫療業",
       "concepts": [
-        "電腦及週邊設備業"
+        "生技醫療業"
       ],
-      "close": 111.0,
-      "changePercent": 9.9,
-      "totalScore": 88.3,
-      "fundamentalScore": 67.7,
+      "close": 290.5,
+      "changePercent": 9.01,
+      "totalScore": 88.7,
+      "fundamentalScore": 69.7,
       "technicalScore": 96,
       "chipScore": 100,
-      "turnoverScore": 94.9,
-      "turnoverRate": 23.9057,
+      "turnoverScore": 93.5,
+      "turnoverRate": 3.4295,
       "tradeType": "短線",
       "riskLabel": "過熱",
-      "dataDate": "2026-11-18",
-      "generatedAt": "2026-11-18T22:44:33+08:00",
-      "scoreVersion": "official-multifactor-v1",
-      "scoreSource": "official_quote_valuation_revenue",
-      "previousRank": null,
-      "rankChange": null,
-      "appearances5d": 2,
-      "appearances20d": 2,
-      "consecutiveDays": 1,
-      "scoreTrend": "持平",
-      "entryStatus": "重返榜",
-      "statusLabels": [
-        "重返榜"
-      ]
-    },
-    {
-      "rank": 2,
-      "code": "6416",
-      "name": "瑞祺電通",
-      "market": "上市",
-      "industry": "通信網路業",
-      "concepts": [
-        "通信網路業"
-      ],
-      "close": 121.0,
-      "changePercent": 7.56,
-      "totalScore": 87.2,
-      "fundamentalScore": 66.7,
-      "technicalScore": 96,
-      "chipScore": 97.7,
-      "turnoverScore": 92.8,
-      "turnoverRate": 3.5415,
-      "tradeType": "短線",
-      "riskLabel": "過熱",
-      "dataDate": "2026-11-18",
-      "generatedAt": "2026-11-18T22:44:33+08:00",
+      "dataDate": "2026-11-19",
+      "generatedAt": "2026-11-19T22:45:02+08:00",
       "scoreVersion": "official-multifactor-v1",
       "scoreSource": "official_quote_valuation_revenue",
       "previousRank": null,
       "rankChange": null,
       "appearances5d": 1,
-      "appearances20d": 1,
+      "appearances20d": 2,
       "consecutiveDays": 1,
       "scoreTrend": "資料不足",
       "entryStatus": "重返榜",
@@ -97,26 +63,62 @@
       ]
     },
     {
-      "rank": 3,
-      "code": "3715",
-      "name": "定穎投控",
-      "market": "上市",
-      "industry": "電子零組件業",
+      "rank": 2,
+      "code": "8089",
+      "name": "康全電訊",
+      "market": "上櫃",
+      "industry": "通信網路業",
       "concepts": [
-        "電子零組件業"
+        "通信網路業"
       ],
-      "close": 140.0,
-      "changePercent": 9.8,
+      "close": 35.9,
+      "changePercent": 0.0,
+      "totalScore": 88.2,
+      "fundamentalScore": 88.9,
+      "technicalScore": 78.0,
+      "chipScore": 98.6,
+      "turnoverScore": 90.0,
+      "turnoverRate": 1.5809,
+      "tradeType": "短線",
+      "riskLabel": "正常",
+      "dataDate": "2026-11-19",
+      "generatedAt": "2026-11-19T22:45:02+08:00",
+      "scoreVersion": "official-multifactor-v1",
+      "scoreSource": "official_quote_valuation_revenue",
+      "previousRank": 9,
+      "rankChange": 7,
+      "appearances5d": 3,
+      "appearances20d": 5,
+      "consecutiveDays": 2,
+      "scoreTrend": "下降",
+      "entryStatus": "連續入榜",
+      "statusLabels": [
+        "連續入榜",
+        "排名上升",
+        "穩定入榜"
+      ]
+    },
+    {
+      "rank": 3,
+      "code": "4807",
+      "name": "日成-KY",
+      "market": "上市",
+      "industry": "貿易百貨業",
+      "concepts": [
+        "貿易百貨業"
+      ],
+      "close": 37.0,
+      "changePercent": 7.25,
       "totalScore": 86.2,
-      "fundamentalScore": 66.7,
+      "fundamentalScore": 77.9,
       "technicalScore": 96,
-      "chipScore": 93.1,
-      "turnoverScore": 94.0,
-      "turnoverRate": 6.3512,
+      "chipScore": 81.8,
+      "turnoverScore": 90.2,
+      "turnoverRate": 1.5963,
       "tradeType": "短線",
       "riskLabel": "過熱",
-      "dataDate": "2026-11-18",
-      "generatedAt": "2026-11-18T22:44:33+08:00",
+      "dataDate": "2026-11-19",
+      "generatedAt": "2026-11-19T22:45:02+08:00",
       "scoreVersion": "official-multifactor-v1",
       "scoreSource": "official_quote_valuation_revenue",
       "previousRank": null,
@@ -132,41 +134,6 @@
     },
     {
       "rank": 4,
-      "code": "6190",
-      "name": "萬泰科",
-      "market": "上櫃",
-      "industry": "通信網路業",
-      "concepts": [
-        "通信網路業"
-      ],
-      "close": 66.4,
-      "changePercent": 9.93,
-      "totalScore": 86.1,
-      "fundamentalScore": 76.2,
-      "technicalScore": 88,
-      "chipScore": 99.5,
-      "turnoverScore": 79.6,
-      "turnoverRate": 0.4344,
-      "tradeType": "短線",
-      "riskLabel": "過熱",
-      "dataDate": "2026-11-18",
-      "generatedAt": "2026-11-18T22:44:33+08:00",
-      "scoreVersion": "official-multifactor-v1",
-      "scoreSource": "official_quote_valuation_revenue",
-      "previousRank": null,
-      "rankChange": null,
-      "appearances5d": 1,
-      "appearances20d": 1,
-      "consecutiveDays": 1,
-      "scoreTrend": "資料不足",
-      "entryStatus": "重返榜",
-      "statusLabels": [
-        "重返榜",
-        "單日爆發"
-      ]
-    },
-    {
-      "rank": 5,
       "code": "9933",
       "name": "中鼎",
       "market": "上市",
@@ -174,53 +141,55 @@
       "concepts": [
         "其他業"
       ],
-      "close": 57.5,
-      "changePercent": 1.59,
-      "totalScore": 85.5,
+      "close": 56.6,
+      "changePercent": -1.57,
+      "totalScore": 81.4,
       "fundamentalScore": 71.6,
-      "technicalScore": 82.8,
-      "chipScore": 100,
-      "turnoverScore": 94.3,
-      "turnoverRate": 7.3984,
+      "technicalScore": 73.3,
+      "chipScore": 96.0,
+      "turnoverScore": 93.0,
+      "turnoverRate": 2.9506,
       "tradeType": "短線",
       "riskLabel": "過熱",
-      "dataDate": "2026-11-18",
-      "generatedAt": "2026-11-18T22:44:33+08:00",
+      "dataDate": "2026-11-19",
+      "generatedAt": "2026-11-19T22:45:02+08:00",
       "scoreVersion": "official-multifactor-v1",
       "scoreSource": "official_quote_valuation_revenue",
-      "previousRank": 2,
-      "rankChange": -3,
-      "appearances5d": 2,
-      "appearances20d": 2,
-      "consecutiveDays": 2,
+      "previousRank": 5,
+      "rankChange": 1,
+      "appearances5d": 3,
+      "appearances20d": 3,
+      "consecutiveDays": 3,
       "scoreTrend": "下降",
       "entryStatus": "連續入榜",
       "statusLabels": [
         "連續入榜",
-        "排名下降"
+        "排名上升",
+        "穩定入榜",
+        "分數轉弱"
       ]
     },
     {
-      "rank": 6,
-      "code": "4977",
-      "name": "眾達-KY",
-      "market": "上市",
-      "industry": "通信網路業",
+      "rank": 5,
+      "code": "6199",
+      "name": "天品",
+      "market": "上櫃",
+      "industry": "其他業",
       "concepts": [
-        "通信網路業"
+        "其他業"
       ],
-      "close": 197.0,
-      "changePercent": 9.75,
-      "totalScore": 85.2,
-      "fundamentalScore": 57.3,
-      "technicalScore": 96,
-      "chipScore": 100,
-      "turnoverScore": 95.0,
-      "turnoverRate": 34.4342,
+      "close": 172.5,
+      "changePercent": 0.58,
+      "totalScore": 81.3,
+      "fundamentalScore": 76.5,
+      "technicalScore": 79.7,
+      "chipScore": 84.4,
+      "turnoverScore": 89.1,
+      "turnoverRate": 1.3948,
       "tradeType": "短線",
-      "riskLabel": "過熱",
-      "dataDate": "2026-11-18",
-      "generatedAt": "2026-11-18T22:44:33+08:00",
+      "riskLabel": "正常",
+      "dataDate": "2026-11-19",
+      "generatedAt": "2026-11-19T22:45:02+08:00",
       "scoreVersion": "official-multifactor-v1",
       "scoreSource": "official_quote_valuation_revenue",
       "previousRank": null,
@@ -231,31 +200,64 @@
       "scoreTrend": "資料不足",
       "entryStatus": "重返榜",
       "statusLabels": [
-        "重返榜",
-        "單日爆發"
+        "重返榜"
+      ]
+    },
+    {
+      "rank": 6,
+      "code": "8415",
+      "name": "大國鋼",
+      "market": "上櫃",
+      "industry": "鋼鐵工業",
+      "concepts": [
+        "鋼鐵工業"
+      ],
+      "close": 42.2,
+      "changePercent": 1.44,
+      "totalScore": 80.3,
+      "fundamentalScore": 76.9,
+      "technicalScore": 82.3,
+      "chipScore": 98.4,
+      "turnoverScore": 53.1,
+      "turnoverRate": 0.0843,
+      "tradeType": "波段",
+      "riskLabel": "正常",
+      "dataDate": "2026-11-19",
+      "generatedAt": "2026-11-19T22:45:02+08:00",
+      "scoreVersion": "official-multifactor-v1",
+      "scoreSource": "official_quote_valuation_revenue",
+      "previousRank": null,
+      "rankChange": null,
+      "appearances5d": 2,
+      "appearances20d": 2,
+      "consecutiveDays": 1,
+      "scoreTrend": "下降",
+      "entryStatus": "重返榜",
+      "statusLabels": [
+        "重返榜"
       ]
     },
     {
       "rank": 7,
-      "code": "2413",
-      "name": "環科",
-      "market": "上市",
-      "industry": "電子零組件業",
+      "code": "7584",
+      "name": "樂意",
+      "market": "上櫃",
+      "industry": "文化創意業",
       "concepts": [
-        "電子零組件業"
+        "文化創意業"
       ],
-      "close": 53.3,
-      "changePercent": 9.9,
-      "totalScore": 84.4,
-      "fundamentalScore": 62.6,
-      "technicalScore": 88,
-      "chipScore": 100,
-      "turnoverScore": 94.8,
-      "turnoverRate": 14.3705,
-      "tradeType": "短線",
+      "close": 44.45,
+      "changePercent": 9.89,
+      "totalScore": 79.4,
+      "fundamentalScore": 69.4,
+      "technicalScore": 96,
+      "chipScore": 77.4,
+      "turnoverScore": 69.6,
+      "turnoverRate": 0.2487,
+      "tradeType": "波段",
       "riskLabel": "過熱",
-      "dataDate": "2026-11-18",
-      "generatedAt": "2026-11-18T22:44:33+08:00",
+      "dataDate": "2026-11-19",
+      "generatedAt": "2026-11-19T22:45:02+08:00",
       "scoreVersion": "official-multifactor-v1",
       "scoreSource": "official_quote_valuation_revenue",
       "previousRank": null,
@@ -272,41 +274,111 @@
     },
     {
       "rank": 8,
-      "code": "7717",
-      "name": "萊德光電-KY",
-      "market": "上櫃",
+      "code": "5388",
+      "name": "中磊",
+      "market": "上市",
       "industry": "通信網路業",
       "concepts": [
         "通信網路業"
       ],
-      "close": 570.0,
-      "changePercent": 6.94,
-      "totalScore": 83.9,
-      "fundamentalScore": 83.2,
-      "technicalScore": 88,
-      "chipScore": 83.9,
-      "turnoverScore": 76.8,
-      "turnoverRate": 0.3441,
+      "close": 71.6,
+      "changePercent": -0.42,
+      "totalScore": 78.7,
+      "fundamentalScore": 72.9,
+      "technicalScore": 68.7,
+      "chipScore": 91.4,
+      "turnoverScore": 89.3,
+      "turnoverRate": 1.4111,
       "tradeType": "短線",
       "riskLabel": "正常",
-      "dataDate": "2026-11-18",
-      "generatedAt": "2026-11-18T22:44:33+08:00",
+      "dataDate": "2026-11-19",
+      "generatedAt": "2026-11-19T22:45:02+08:00",
       "scoreVersion": "official-multifactor-v1",
       "scoreSource": "official_quote_valuation_revenue",
-      "previousRank": 1,
-      "rankChange": -7,
-      "appearances5d": 2,
-      "appearances20d": 2,
-      "consecutiveDays": 2,
-      "scoreTrend": "下降",
-      "entryStatus": "連續入榜",
+      "previousRank": null,
+      "rankChange": null,
+      "appearances5d": 1,
+      "appearances20d": 1,
+      "consecutiveDays": 1,
+      "scoreTrend": "資料不足",
+      "entryStatus": "新進榜",
       "statusLabels": [
-        "連續入榜",
-        "排名下降"
+        "新進榜"
       ]
     },
     {
       "rank": 9,
+      "code": "2412",
+      "name": "中華電",
+      "market": "上市",
+      "industry": "通信網路業",
+      "concepts": [
+        "通信網路業"
+      ],
+      "close": 166.0,
+      "changePercent": 0.91,
+      "totalScore": 78.4,
+      "fundamentalScore": 60.3,
+      "technicalScore": 80.7,
+      "chipScore": 98.8,
+      "turnoverScore": 75.7,
+      "turnoverRate": 0.3725,
+      "tradeType": "短線",
+      "riskLabel": "正常",
+      "dataDate": "2026-11-19",
+      "generatedAt": "2026-11-19T22:45:02+08:00",
+      "scoreVersion": "official-multifactor-v1",
+      "scoreSource": "official_quote_valuation_revenue",
+      "previousRank": null,
+      "rankChange": null,
+      "appearances5d": 1,
+      "appearances20d": 1,
+      "consecutiveDays": 1,
+      "scoreTrend": "資料不足",
+      "entryStatus": "新進榜",
+      "statusLabels": [
+        "新進榜"
+      ]
+    },
+    {
+      "rank": 10,
+      "code": "6148",
+      "name": "驊宏資",
+      "market": "上櫃",
+      "industry": "資訊服務業",
+      "concepts": [
+        "資訊服務業"
+      ],
+      "close": 49.25,
+      "changePercent": -5.11,
+      "totalScore": 77.7,
+      "fundamentalScore": 86.7,
+      "technicalScore": 41.7,
+      "chipScore": 100,
+      "turnoverScore": 94.7,
+      "turnoverRate": 9.1543,
+      "tradeType": "中長期",
+      "riskLabel": "過熱",
+      "dataDate": "2026-11-19",
+      "generatedAt": "2026-11-19T22:45:02+08:00",
+      "scoreVersion": "official-multifactor-v1",
+      "scoreSource": "official_quote_valuation_revenue",
+      "previousRank": null,
+      "rankChange": null,
+      "appearances5d": 3,
+      "appearances20d": 5,
+      "consecutiveDays": 1,
+      "scoreTrend": "下降",
+      "entryStatus": "重返榜",
+      "statusLabels": [
+        "重返榜",
+        "穩定入榜"
+      ]
+    }
+  ],
+  "continuous": [
+    {
+      "rank": 2,
       "code": "8089",
       "name": "康全電訊",
       "market": "上櫃",
@@ -315,72 +387,34 @@
         "通信網路業"
       ],
       "close": 35.9,
-      "changePercent": 9.95,
-      "totalScore": 83.9,
+      "changePercent": 0.0,
+      "totalScore": 88.2,
       "fundamentalScore": 88.9,
-      "technicalScore": 96,
-      "chipScore": 68.2,
-      "turnoverScore": 76.2,
-      "turnoverRate": 0.3317,
+      "technicalScore": 78.0,
+      "chipScore": 98.6,
+      "turnoverScore": 90.0,
+      "turnoverRate": 1.5809,
       "tradeType": "短線",
-      "riskLabel": "過熱",
-      "dataDate": "2026-11-18",
-      "generatedAt": "2026-11-18T22:44:33+08:00",
+      "riskLabel": "正常",
+      "dataDate": "2026-11-19",
+      "generatedAt": "2026-11-19T22:45:02+08:00",
       "scoreVersion": "official-multifactor-v1",
       "scoreSource": "official_quote_valuation_revenue",
-      "previousRank": null,
-      "rankChange": null,
+      "previousRank": 9,
+      "rankChange": 7,
       "appearances5d": 3,
-      "appearances20d": 4,
-      "consecutiveDays": 1,
-      "scoreTrend": "下降",
-      "entryStatus": "重返榜",
-      "statusLabels": [
-        "重返榜",
-        "穩定入榜"
-      ]
-    },
-    {
-      "rank": 10,
-      "code": "2323",
-      "name": "中環",
-      "market": "上市",
-      "industry": "光電業",
-      "concepts": [
-        "光電業"
-      ],
-      "close": 12.05,
-      "changePercent": 1.26,
-      "totalScore": 83.6,
-      "fundamentalScore": 69.2,
-      "technicalScore": 81.8,
-      "chipScore": 97.7,
-      "turnoverScore": 92.3,
-      "turnoverRate": 2.8623,
-      "tradeType": "短線",
-      "riskLabel": "過熱",
-      "dataDate": "2026-11-18",
-      "generatedAt": "2026-11-18T22:44:33+08:00",
-      "scoreVersion": "official-multifactor-v1",
-      "scoreSource": "official_quote_valuation_revenue",
-      "previousRank": 6,
-      "rankChange": -4,
-      "appearances5d": 3,
-      "appearances20d": 3,
-      "consecutiveDays": 3,
+      "appearances20d": 5,
+      "consecutiveDays": 2,
       "scoreTrend": "下降",
       "entryStatus": "連續入榜",
       "statusLabels": [
         "連續入榜",
-        "排名下降",
-        "穩定入榜",
-        "分數轉弱"
+        "排名上升",
+        "穩定入榜"
       ]
-    }
-  ],
-  "continuous": [
+    },
     {
-      "rank": 5,
+      "rank": 4,
       "code": "9933",
       "name": "中鼎",
       "market": "上市",
@@ -388,92 +422,22 @@
       "concepts": [
         "其他業"
       ],
-      "close": 57.5,
-      "changePercent": 1.59,
-      "totalScore": 85.5,
+      "close": 56.6,
+      "changePercent": -1.57,
+      "totalScore": 81.4,
       "fundamentalScore": 71.6,
-      "technicalScore": 82.8,
-      "chipScore": 100,
-      "turnoverScore": 94.3,
-      "turnoverRate": 7.3984,
+      "technicalScore": 73.3,
+      "chipScore": 96.0,
+      "turnoverScore": 93.0,
+      "turnoverRate": 2.9506,
       "tradeType": "短線",
       "riskLabel": "過熱",
-      "dataDate": "2026-11-18",
-      "generatedAt": "2026-11-18T22:44:33+08:00",
+      "dataDate": "2026-11-19",
+      "generatedAt": "2026-11-19T22:45:02+08:00",
       "scoreVersion": "official-multifactor-v1",
       "scoreSource": "official_quote_valuation_revenue",
-      "previousRank": 2,
-      "rankChange": -3,
-      "appearances5d": 2,
-      "appearances20d": 2,
-      "consecutiveDays": 2,
-      "scoreTrend": "下降",
-      "entryStatus": "連續入榜",
-      "statusLabels": [
-        "連續入榜",
-        "排名下降"
-      ]
-    },
-    {
-      "rank": 8,
-      "code": "7717",
-      "name": "萊德光電-KY",
-      "market": "上櫃",
-      "industry": "通信網路業",
-      "concepts": [
-        "通信網路業"
-      ],
-      "close": 570.0,
-      "changePercent": 6.94,
-      "totalScore": 83.9,
-      "fundamentalScore": 83.2,
-      "technicalScore": 88,
-      "chipScore": 83.9,
-      "turnoverScore": 76.8,
-      "turnoverRate": 0.3441,
-      "tradeType": "短線",
-      "riskLabel": "正常",
-      "dataDate": "2026-11-18",
-      "generatedAt": "2026-11-18T22:44:33+08:00",
-      "scoreVersion": "official-multifactor-v1",
-      "scoreSource": "official_quote_valuation_revenue",
-      "previousRank": 1,
-      "rankChange": -7,
-      "appearances5d": 2,
-      "appearances20d": 2,
-      "consecutiveDays": 2,
-      "scoreTrend": "下降",
-      "entryStatus": "連續入榜",
-      "statusLabels": [
-        "連續入榜",
-        "排名下降"
-      ]
-    },
-    {
-      "rank": 10,
-      "code": "2323",
-      "name": "中環",
-      "market": "上市",
-      "industry": "光電業",
-      "concepts": [
-        "光電業"
-      ],
-      "close": 12.05,
-      "changePercent": 1.26,
-      "totalScore": 83.6,
-      "fundamentalScore": 69.2,
-      "technicalScore": 81.8,
-      "chipScore": 97.7,
-      "turnoverScore": 92.3,
-      "turnoverRate": 2.8623,
-      "tradeType": "短線",
-      "riskLabel": "過熱",
-      "dataDate": "2026-11-18",
-      "generatedAt": "2026-11-18T22:44:33+08:00",
-      "scoreVersion": "official-multifactor-v1",
-      "scoreSource": "official_quote_valuation_revenue",
-      "previousRank": 6,
-      "rankChange": -4,
+      "previousRank": 5,
+      "rankChange": 1,
       "appearances5d": 3,
       "appearances20d": 3,
       "consecutiveDays": 3,
@@ -481,7 +445,7 @@
       "entryStatus": "連續入榜",
       "statusLabels": [
         "連續入榜",
-        "排名下降",
+        "排名上升",
         "穩定入榜",
         "分數轉弱"
       ]
@@ -490,65 +454,31 @@
   "newEntrants": [
     {
       "rank": 1,
-      "code": "4916",
-      "name": "事欣科",
+      "code": "6782",
+      "name": "視陽",
       "market": "上市",
-      "industry": "電腦及週邊設備業",
+      "industry": "生技醫療業",
       "concepts": [
-        "電腦及週邊設備業"
+        "生技醫療業"
       ],
-      "close": 111.0,
-      "changePercent": 9.9,
-      "totalScore": 88.3,
-      "fundamentalScore": 67.7,
+      "close": 290.5,
+      "changePercent": 9.01,
+      "totalScore": 88.7,
+      "fundamentalScore": 69.7,
       "technicalScore": 96,
       "chipScore": 100,
-      "turnoverScore": 94.9,
-      "turnoverRate": 23.9057,
+      "turnoverScore": 93.5,
+      "turnoverRate": 3.4295,
       "tradeType": "短線",
       "riskLabel": "過熱",
-      "dataDate": "2026-11-18",
-      "generatedAt": "2026-11-18T22:44:33+08:00",
-      "scoreVersion": "official-multifactor-v1",
-      "scoreSource": "official_quote_valuation_revenue",
-      "previousRank": null,
-      "rankChange": null,
-      "appearances5d": 2,
-      "appearances20d": 2,
-      "consecutiveDays": 1,
-      "scoreTrend": "持平",
-      "entryStatus": "重返榜",
-      "statusLabels": [
-        "重返榜"
-      ]
-    },
-    {
-      "rank": 2,
-      "code": "6416",
-      "name": "瑞祺電通",
-      "market": "上市",
-      "industry": "通信網路業",
-      "concepts": [
-        "通信網路業"
-      ],
-      "close": 121.0,
-      "changePercent": 7.56,
-      "totalScore": 87.2,
-      "fundamentalScore": 66.7,
-      "technicalScore": 96,
-      "chipScore": 97.7,
-      "turnoverScore": 92.8,
-      "turnoverRate": 3.5415,
-      "tradeType": "短線",
-      "riskLabel": "過熱",
-      "dataDate": "2026-11-18",
-      "generatedAt": "2026-11-18T22:44:33+08:00",
+      "dataDate": "2026-11-19",
+      "generatedAt": "2026-11-19T22:45:02+08:00",
       "scoreVersion": "official-multifactor-v1",
       "scoreSource": "official_quote_valuation_revenue",
       "previousRank": null,
       "rankChange": null,
       "appearances5d": 1,
-      "appearances20d": 1,
+      "appearances20d": 2,
       "consecutiveDays": 1,
       "scoreTrend": "資料不足",
       "entryStatus": "重返榜",
@@ -559,25 +489,25 @@
     },
     {
       "rank": 3,
-      "code": "3715",
-      "name": "定穎投控",
+      "code": "4807",
+      "name": "日成-KY",
       "market": "上市",
-      "industry": "電子零組件業",
+      "industry": "貿易百貨業",
       "concepts": [
-        "電子零組件業"
+        "貿易百貨業"
       ],
-      "close": 140.0,
-      "changePercent": 9.8,
+      "close": 37.0,
+      "changePercent": 7.25,
       "totalScore": 86.2,
-      "fundamentalScore": 66.7,
+      "fundamentalScore": 77.9,
       "technicalScore": 96,
-      "chipScore": 93.1,
-      "turnoverScore": 94.0,
-      "turnoverRate": 6.3512,
+      "chipScore": 81.8,
+      "turnoverScore": 90.2,
+      "turnoverRate": 1.5963,
       "tradeType": "短線",
       "riskLabel": "過熱",
-      "dataDate": "2026-11-18",
-      "generatedAt": "2026-11-18T22:44:33+08:00",
+      "dataDate": "2026-11-19",
+      "generatedAt": "2026-11-19T22:45:02+08:00",
       "scoreVersion": "official-multifactor-v1",
       "scoreSource": "official_quote_valuation_revenue",
       "previousRank": null,
@@ -592,26 +522,26 @@
       ]
     },
     {
-      "rank": 4,
-      "code": "6190",
-      "name": "萬泰科",
+      "rank": 5,
+      "code": "6199",
+      "name": "天品",
       "market": "上櫃",
-      "industry": "通信網路業",
+      "industry": "其他業",
       "concepts": [
-        "通信網路業"
+        "其他業"
       ],
-      "close": 66.4,
-      "changePercent": 9.93,
-      "totalScore": 86.1,
-      "fundamentalScore": 76.2,
-      "technicalScore": 88,
-      "chipScore": 99.5,
-      "turnoverScore": 79.6,
-      "turnoverRate": 0.4344,
+      "close": 172.5,
+      "changePercent": 0.58,
+      "totalScore": 81.3,
+      "fundamentalScore": 76.5,
+      "technicalScore": 79.7,
+      "chipScore": 84.4,
+      "turnoverScore": 89.1,
+      "turnoverRate": 1.3948,
       "tradeType": "短線",
-      "riskLabel": "過熱",
-      "dataDate": "2026-11-18",
-      "generatedAt": "2026-11-18T22:44:33+08:00",
+      "riskLabel": "正常",
+      "dataDate": "2026-11-19",
+      "generatedAt": "2026-11-19T22:45:02+08:00",
       "scoreVersion": "official-multifactor-v1",
       "scoreSource": "official_quote_valuation_revenue",
       "previousRank": null,
@@ -622,66 +552,64 @@
       "scoreTrend": "資料不足",
       "entryStatus": "重返榜",
       "statusLabels": [
-        "重返榜",
-        "單日爆發"
+        "重返榜"
       ]
     },
     {
       "rank": 6,
-      "code": "4977",
-      "name": "眾達-KY",
-      "market": "上市",
-      "industry": "通信網路業",
+      "code": "8415",
+      "name": "大國鋼",
+      "market": "上櫃",
+      "industry": "鋼鐵工業",
       "concepts": [
-        "通信網路業"
+        "鋼鐵工業"
       ],
-      "close": 197.0,
-      "changePercent": 9.75,
-      "totalScore": 85.2,
-      "fundamentalScore": 57.3,
-      "technicalScore": 96,
-      "chipScore": 100,
-      "turnoverScore": 95.0,
-      "turnoverRate": 34.4342,
-      "tradeType": "短線",
-      "riskLabel": "過熱",
-      "dataDate": "2026-11-18",
-      "generatedAt": "2026-11-18T22:44:33+08:00",
+      "close": 42.2,
+      "changePercent": 1.44,
+      "totalScore": 80.3,
+      "fundamentalScore": 76.9,
+      "technicalScore": 82.3,
+      "chipScore": 98.4,
+      "turnoverScore": 53.1,
+      "turnoverRate": 0.0843,
+      "tradeType": "波段",
+      "riskLabel": "正常",
+      "dataDate": "2026-11-19",
+      "generatedAt": "2026-11-19T22:45:02+08:00",
       "scoreVersion": "official-multifactor-v1",
       "scoreSource": "official_quote_valuation_revenue",
       "previousRank": null,
       "rankChange": null,
-      "appearances5d": 1,
-      "appearances20d": 1,
+      "appearances5d": 2,
+      "appearances20d": 2,
       "consecutiveDays": 1,
-      "scoreTrend": "資料不足",
+      "scoreTrend": "下降",
       "entryStatus": "重返榜",
       "statusLabels": [
-        "重返榜",
-        "單日爆發"
+        "重返榜"
       ]
     },
     {
       "rank": 7,
-      "code": "2413",
-      "name": "環科",
-      "market": "上市",
-      "industry": "電子零組件業",
+      "code": "7584",
+      "name": "樂意",
+      "market": "上櫃",
+      "industry": "文化創意業",
       "concepts": [
-        "電子零組件業"
+        "文化創意業"
       ],
-      "close": 53.3,
-      "changePercent": 9.9,
-      "totalScore": 84.4,
-      "fundamentalScore": 62.6,
-      "technicalScore": 88,
-      "chipScore": 100,
-      "turnoverScore": 94.8,
-      "turnoverRate": 14.3705,
-      "tradeType": "短線",
+      "close": 44.45,
+      "changePercent": 9.89,
+      "totalScore": 79.4,
+      "fundamentalScore": 69.4,
+      "technicalScore": 96,
+      "chipScore": 77.4,
+      "turnoverScore": 69.6,
+      "turnoverRate": 0.2487,
+      "tradeType": "波段",
       "riskLabel": "過熱",
-      "dataDate": "2026-11-18",
-      "generatedAt": "2026-11-18T22:44:33+08:00",
+      "dataDate": "2026-11-19",
+      "generatedAt": "2026-11-19T22:45:02+08:00",
       "scoreVersion": "official-multifactor-v1",
       "scoreSource": "official_quote_valuation_revenue",
       "previousRank": null,
@@ -697,32 +625,100 @@
       ]
     },
     {
-      "rank": 9,
-      "code": "8089",
-      "name": "康全電訊",
-      "market": "上櫃",
+      "rank": 8,
+      "code": "5388",
+      "name": "中磊",
+      "market": "上市",
       "industry": "通信網路業",
       "concepts": [
         "通信網路業"
       ],
-      "close": 35.9,
-      "changePercent": 9.95,
-      "totalScore": 83.9,
-      "fundamentalScore": 88.9,
-      "technicalScore": 96,
-      "chipScore": 68.2,
-      "turnoverScore": 76.2,
-      "turnoverRate": 0.3317,
+      "close": 71.6,
+      "changePercent": -0.42,
+      "totalScore": 78.7,
+      "fundamentalScore": 72.9,
+      "technicalScore": 68.7,
+      "chipScore": 91.4,
+      "turnoverScore": 89.3,
+      "turnoverRate": 1.4111,
       "tradeType": "短線",
+      "riskLabel": "正常",
+      "dataDate": "2026-11-19",
+      "generatedAt": "2026-11-19T22:45:02+08:00",
+      "scoreVersion": "official-multifactor-v1",
+      "scoreSource": "official_quote_valuation_revenue",
+      "previousRank": null,
+      "rankChange": null,
+      "appearances5d": 1,
+      "appearances20d": 1,
+      "consecutiveDays": 1,
+      "scoreTrend": "資料不足",
+      "entryStatus": "新進榜",
+      "statusLabels": [
+        "新進榜"
+      ]
+    },
+    {
+      "rank": 9,
+      "code": "2412",
+      "name": "中華電",
+      "market": "上市",
+      "industry": "通信網路業",
+      "concepts": [
+        "通信網路業"
+      ],
+      "close": 166.0,
+      "changePercent": 0.91,
+      "totalScore": 78.4,
+      "fundamentalScore": 60.3,
+      "technicalScore": 80.7,
+      "chipScore": 98.8,
+      "turnoverScore": 75.7,
+      "turnoverRate": 0.3725,
+      "tradeType": "短線",
+      "riskLabel": "正常",
+      "dataDate": "2026-11-19",
+      "generatedAt": "2026-11-19T22:45:02+08:00",
+      "scoreVersion": "official-multifactor-v1",
+      "scoreSource": "official_quote_valuation_revenue",
+      "previousRank": null,
+      "rankChange": null,
+      "appearances5d": 1,
+      "appearances20d": 1,
+      "consecutiveDays": 1,
+      "scoreTrend": "資料不足",
+      "entryStatus": "新進榜",
+      "statusLabels": [
+        "新進榜"
+      ]
+    },
+    {
+      "rank": 10,
+      "code": "6148",
+      "name": "驊宏資",
+      "market": "上櫃",
+      "industry": "資訊服務業",
+      "concepts": [
+        "資訊服務業"
+      ],
+      "close": 49.25,
+      "changePercent": -5.11,
+      "totalScore": 77.7,
+      "fundamentalScore": 86.7,
+      "technicalScore": 41.7,
+      "chipScore": 100,
+      "turnoverScore": 94.7,
+      "turnoverRate": 9.1543,
+      "tradeType": "中長期",
       "riskLabel": "過熱",
-      "dataDate": "2026-11-18",
-      "generatedAt": "2026-11-18T22:44:33+08:00",
+      "dataDate": "2026-11-19",
+      "generatedAt": "2026-11-19T22:45:02+08:00",
       "scoreVersion": "official-multifactor-v1",
       "scoreSource": "official_quote_valuation_revenue",
       "previousRank": null,
       "rankChange": null,
       "appearances5d": 3,
-      "appearances20d": 4,
+      "appearances20d": 5,
       "consecutiveDays": 1,
       "scoreTrend": "下降",
       "entryStatus": "重返榜",
@@ -734,26 +730,86 @@
   ],
   "dropped": [
     {
-      "rank": 3,
-      "code": "2636",
-      "name": "台驊控股",
+      "rank": 1,
+      "code": "4916",
+      "name": "事欣科",
       "market": "上市",
-      "industry": "航運業",
+      "industry": "電腦及週邊設備業",
       "concepts": [
-        "航運業"
+        "電腦及週邊設備業"
       ],
-      "close": 71.8,
-      "changePercent": 3.61,
-      "totalScore": 85.4,
-      "fundamentalScore": 79.3,
-      "technicalScore": 83.8,
-      "chipScore": 92.6,
-      "turnoverScore": 88.5,
-      "turnoverRate": 1.2271,
+      "close": 111.0,
+      "changePercent": 9.9,
+      "totalScore": 88.3,
+      "fundamentalScore": 67.7,
+      "technicalScore": 96,
+      "chipScore": 100,
+      "turnoverScore": 94.9,
+      "turnoverRate": 23.9057,
       "tradeType": "短線",
-      "riskLabel": "正常",
-      "dataDate": "2026-11-17",
-      "generatedAt": "2026-11-17T23:04:27+08:00",
+      "riskLabel": "過熱",
+      "dataDate": "2026-11-18",
+      "generatedAt": "2026-11-18T22:44:33+08:00",
+      "scoreVersion": "official-multifactor-v1",
+      "scoreSource": "official_quote_valuation_revenue",
+      "previousRank": 1,
+      "latestRank": null,
+      "entryStatus": "跌出榜",
+      "statusLabels": [
+        "跌出榜"
+      ]
+    },
+    {
+      "rank": 2,
+      "code": "6416",
+      "name": "瑞祺電通",
+      "market": "上市",
+      "industry": "通信網路業",
+      "concepts": [
+        "通信網路業"
+      ],
+      "close": 121.0,
+      "changePercent": 7.56,
+      "totalScore": 87.2,
+      "fundamentalScore": 66.7,
+      "technicalScore": 96,
+      "chipScore": 97.7,
+      "turnoverScore": 92.8,
+      "turnoverRate": 3.5415,
+      "tradeType": "短線",
+      "riskLabel": "過熱",
+      "dataDate": "2026-11-18",
+      "generatedAt": "2026-11-18T22:44:33+08:00",
+      "scoreVersion": "official-multifactor-v1",
+      "scoreSource": "official_quote_valuation_revenue",
+      "previousRank": 2,
+      "latestRank": null,
+      "entryStatus": "跌出榜",
+      "statusLabels": [
+        "跌出榜"
+      ]
+    },
+    {
+      "rank": 3,
+      "code": "3715",
+      "name": "定穎投控",
+      "market": "上市",
+      "industry": "電子零組件業",
+      "concepts": [
+        "電子零組件業"
+      ],
+      "close": 140.0,
+      "changePercent": 9.8,
+      "totalScore": 86.2,
+      "fundamentalScore": 66.7,
+      "technicalScore": 96,
+      "chipScore": 93.1,
+      "turnoverScore": 94.0,
+      "turnoverRate": 6.3512,
+      "tradeType": "短線",
+      "riskLabel": "過熱",
+      "dataDate": "2026-11-18",
+      "generatedAt": "2026-11-18T22:44:33+08:00",
       "scoreVersion": "official-multifactor-v1",
       "scoreSource": "official_quote_valuation_revenue",
       "previousRank": 3,
@@ -765,25 +821,25 @@
     },
     {
       "rank": 4,
-      "code": "6150",
-      "name": "撼訊",
+      "code": "6190",
+      "name": "萬泰科",
       "market": "上櫃",
-      "industry": "電腦及週邊設備業",
+      "industry": "通信網路業",
       "concepts": [
-        "電腦及週邊設備業"
+        "通信網路業"
       ],
-      "close": 80.1,
-      "changePercent": 1.01,
-      "totalScore": 85.4,
-      "fundamentalScore": 76.3,
-      "technicalScore": 81.0,
-      "chipScore": 99.3,
-      "turnoverScore": 89.0,
-      "turnoverRate": 1.317,
+      "close": 66.4,
+      "changePercent": 9.93,
+      "totalScore": 86.1,
+      "fundamentalScore": 76.2,
+      "technicalScore": 88,
+      "chipScore": 99.5,
+      "turnoverScore": 79.6,
+      "turnoverRate": 0.4344,
       "tradeType": "短線",
-      "riskLabel": "正常",
-      "dataDate": "2026-11-17",
-      "generatedAt": "2026-11-17T23:04:27+08:00",
+      "riskLabel": "過熱",
+      "dataDate": "2026-11-18",
+      "generatedAt": "2026-11-18T22:44:33+08:00",
       "scoreVersion": "official-multifactor-v1",
       "scoreSource": "official_quote_valuation_revenue",
       "previousRank": 4,
@@ -794,29 +850,29 @@
       ]
     },
     {
-      "rank": 5,
-      "code": "6743",
-      "name": "安普新",
+      "rank": 6,
+      "code": "4977",
+      "name": "眾達-KY",
       "market": "上市",
-      "industry": "其他電子業",
+      "industry": "通信網路業",
       "concepts": [
-        "其他電子業"
+        "通信網路業"
       ],
-      "close": 35.55,
-      "changePercent": 1.86,
-      "totalScore": 85.1,
-      "fundamentalScore": 76.1,
-      "technicalScore": 83.6,
-      "chipScore": 93.3,
-      "turnoverScore": 92.4,
-      "turnoverRate": 2.6382,
+      "close": 197.0,
+      "changePercent": 9.75,
+      "totalScore": 85.2,
+      "fundamentalScore": 57.3,
+      "technicalScore": 96,
+      "chipScore": 100,
+      "turnoverScore": 95.0,
+      "turnoverRate": 34.4342,
       "tradeType": "短線",
       "riskLabel": "過熱",
-      "dataDate": "2026-11-17",
-      "generatedAt": "2026-11-17T23:04:27+08:00",
+      "dataDate": "2026-11-18",
+      "generatedAt": "2026-11-18T22:44:33+08:00",
       "scoreVersion": "official-multifactor-v1",
       "scoreSource": "official_quote_valuation_revenue",
-      "previousRank": 5,
+      "previousRank": 6,
       "latestRank": null,
       "entryStatus": "跌出榜",
       "statusLabels": [
@@ -825,25 +881,25 @@
     },
     {
       "rank": 7,
-      "code": "8415",
-      "name": "大國鋼",
-      "market": "上櫃",
-      "industry": "鋼鐵工業",
+      "code": "2413",
+      "name": "環科",
+      "market": "上市",
+      "industry": "電子零組件業",
       "concepts": [
-        "鋼鐵工業"
+        "電子零組件業"
       ],
-      "close": 41.35,
-      "changePercent": 9.97,
-      "totalScore": 84.8,
-      "fundamentalScore": 76.9,
-      "technicalScore": 96,
-      "chipScore": 98.0,
-      "turnoverScore": 55.9,
-      "turnoverRate": 0.0883,
-      "tradeType": "波段",
+      "close": 53.3,
+      "changePercent": 9.9,
+      "totalScore": 84.4,
+      "fundamentalScore": 62.6,
+      "technicalScore": 88,
+      "chipScore": 100,
+      "turnoverScore": 94.8,
+      "turnoverRate": 14.3705,
+      "tradeType": "短線",
       "riskLabel": "過熱",
-      "dataDate": "2026-11-17",
-      "generatedAt": "2026-11-17T23:04:27+08:00",
+      "dataDate": "2026-11-18",
+      "generatedAt": "2026-11-18T22:44:33+08:00",
       "scoreVersion": "official-multifactor-v1",
       "scoreSource": "official_quote_valuation_revenue",
       "previousRank": 7,
@@ -855,25 +911,25 @@
     },
     {
       "rank": 8,
-      "code": "7799",
-      "name": "禾榮科",
-      "market": "上市",
-      "industry": "生技醫療業",
+      "code": "7717",
+      "name": "萊德光電-KY",
+      "market": "上櫃",
+      "industry": "通信網路業",
       "concepts": [
-        "生技醫療業"
+        "通信網路業"
       ],
-      "close": 485.0,
-      "changePercent": 4.75,
-      "totalScore": 84.7,
-      "fundamentalScore": 70.9,
-      "technicalScore": 84.2,
-      "chipScore": 100,
-      "turnoverScore": 87.7,
-      "turnoverRate": 1.1065,
+      "close": 570.0,
+      "changePercent": 6.94,
+      "totalScore": 83.9,
+      "fundamentalScore": 83.2,
+      "technicalScore": 88,
+      "chipScore": 83.9,
+      "turnoverScore": 76.8,
+      "turnoverRate": 0.3441,
       "tradeType": "短線",
       "riskLabel": "正常",
-      "dataDate": "2026-11-17",
-      "generatedAt": "2026-11-17T23:04:27+08:00",
+      "dataDate": "2026-11-18",
+      "generatedAt": "2026-11-18T22:44:33+08:00",
       "scoreVersion": "official-multifactor-v1",
       "scoreSource": "official_quote_valuation_revenue",
       "previousRank": 8,
@@ -884,56 +940,26 @@
       ]
     },
     {
-      "rank": 9,
-      "code": "6163",
-      "name": "華電網",
-      "market": "上櫃",
-      "industry": "資訊服務業",
-      "concepts": [
-        "資訊服務業"
-      ],
-      "close": 40.85,
-      "changePercent": -0.85,
-      "totalScore": 84.5,
-      "fundamentalScore": 86.7,
-      "technicalScore": 67.5,
-      "chipScore": 100,
-      "turnoverScore": 88.0,
-      "turnoverRate": 1.1646,
-      "tradeType": "短線",
-      "riskLabel": "正常",
-      "dataDate": "2026-11-17",
-      "generatedAt": "2026-11-17T23:04:27+08:00",
-      "scoreVersion": "official-multifactor-v1",
-      "scoreSource": "official_quote_valuation_revenue",
-      "previousRank": 9,
-      "latestRank": null,
-      "entryStatus": "跌出榜",
-      "statusLabels": [
-        "跌出榜"
-      ]
-    },
-    {
       "rank": 10,
-      "code": "5013",
-      "name": "強新",
-      "market": "上櫃",
-      "industry": "鋼鐵工業",
+      "code": "2323",
+      "name": "中環",
+      "market": "上市",
+      "industry": "光電業",
       "concepts": [
-        "鋼鐵工業"
+        "光電業"
       ],
-      "close": 66.6,
-      "changePercent": 9.9,
-      "totalScore": 83.9,
-      "fundamentalScore": 75.2,
-      "technicalScore": 96,
-      "chipScore": 82.7,
-      "turnoverScore": 79.3,
-      "turnoverRate": 0.4477,
+      "close": 12.05,
+      "changePercent": 1.26,
+      "totalScore": 83.6,
+      "fundamentalScore": 69.2,
+      "technicalScore": 81.8,
+      "chipScore": 97.7,
+      "turnoverScore": 92.3,
+      "turnoverRate": 2.8623,
       "tradeType": "短線",
       "riskLabel": "過熱",
-      "dataDate": "2026-11-17",
-      "generatedAt": "2026-11-17T23:04:27+08:00",
+      "dataDate": "2026-11-18",
+      "generatedAt": "2026-11-18T22:44:33+08:00",
       "scoreVersion": "official-multifactor-v1",
       "scoreSource": "official_quote_valuation_revenue",
       "previousRank": 10,
@@ -947,91 +973,103 @@
   "industryConcentration": [
     {
       "name": "通信網路業",
-      "count": 5,
+      "count": 3,
       "stocks": [
-        {
-          "code": "6416",
-          "name": "瑞祺電通",
-          "rank": 2,
-          "totalScore": 87.2
-        },
-        {
-          "code": "6190",
-          "name": "萬泰科",
-          "rank": 4,
-          "totalScore": 86.1
-        },
-        {
-          "code": "4977",
-          "name": "眾達-KY",
-          "rank": 6,
-          "totalScore": 85.2
-        },
-        {
-          "code": "7717",
-          "name": "萊德光電-KY",
-          "rank": 8,
-          "totalScore": 83.9
-        },
         {
           "code": "8089",
           "name": "康全電訊",
-          "rank": 9,
-          "totalScore": 83.9
-        }
-      ]
-    },
-    {
-      "name": "電子零組件業",
-      "count": 2,
-      "stocks": [
-        {
-          "code": "3715",
-          "name": "定穎投控",
-          "rank": 3,
-          "totalScore": 86.2
+          "rank": 2,
+          "totalScore": 88.2
         },
         {
-          "code": "2413",
-          "name": "環科",
-          "rank": 7,
-          "totalScore": 84.4
-        }
-      ]
-    },
-    {
-      "name": "光電業",
-      "count": 1,
-      "stocks": [
+          "code": "5388",
+          "name": "中磊",
+          "rank": 8,
+          "totalScore": 78.7
+        },
         {
-          "code": "2323",
-          "name": "中環",
-          "rank": 10,
-          "totalScore": 83.6
+          "code": "2412",
+          "name": "中華電",
+          "rank": 9,
+          "totalScore": 78.4
         }
       ]
     },
     {
       "name": "其他業",
-      "count": 1,
+      "count": 2,
       "stocks": [
         {
           "code": "9933",
           "name": "中鼎",
+          "rank": 4,
+          "totalScore": 81.4
+        },
+        {
+          "code": "6199",
+          "name": "天品",
           "rank": 5,
-          "totalScore": 85.5
+          "totalScore": 81.3
         }
       ]
     },
     {
-      "name": "電腦及週邊設備業",
+      "name": "文化創意業",
       "count": 1,
       "stocks": [
         {
-          "code": "4916",
-          "name": "事欣科",
+          "code": "7584",
+          "name": "樂意",
+          "rank": 7,
+          "totalScore": 79.4
+        }
+      ]
+    },
+    {
+      "name": "生技醫療業",
+      "count": 1,
+      "stocks": [
+        {
+          "code": "6782",
+          "name": "視陽",
           "rank": 1,
-          "totalScore": 88.3
+          "totalScore": 88.7
+        }
+      ]
+    },
+    {
+      "name": "貿易百貨業",
+      "count": 1,
+      "stocks": [
+        {
+          "code": "4807",
+          "name": "日成-KY",
+          "rank": 3,
+          "totalScore": 86.2
+        }
+      ]
+    },
+    {
+      "name": "資訊服務業",
+      "count": 1,
+      "stocks": [
+        {
+          "code": "6148",
+          "name": "驊宏資",
+          "rank": 10,
+          "totalScore": 77.7
+        }
+      ]
+    },
+    {
+      "name": "鋼鐵工業",
+      "count": 1,
+      "stocks": [
+        {
+          "code": "8415",
+          "name": "大國鋼",
+          "rank": 6,
+          "totalScore": 80.3
         }
       ]
     }
@@ -1039,96 +1077,108 @@
   "themeConcentration": [
     {
       "name": "通信網路業",
-      "count": 5,
+      "count": 3,
       "stocks": [
-        {
-          "code": "6416",
-          "name": "瑞祺電通",
-          "rank": 2,
-          "totalScore": 87.2
-        },
-        {
-          "code": "6190",
-          "name": "萬泰科",
-          "rank": 4,
-          "totalScore": 86.1
-        },
-        {
-          "code": "4977",
-          "name": "眾達-KY",
-          "rank": 6,
-          "totalScore": 85.2
-        },
-        {
-          "code": "7717",
-          "name": "萊德光電-KY",
-          "rank": 8,
-          "totalScore": 83.9
-        },
         {
           "code": "8089",
           "name": "康全電訊",
-          "rank": 9,
-          "totalScore": 83.9
-        }
-      ]
-    },
-    {
-      "name": "電子零組件業",
-      "count": 2,
-      "stocks": [
-        {
-          "code": "3715",
-          "name": "定穎投控",
-          "rank": 3,
-          "totalScore": 86.2
+          "rank": 2,
+          "totalScore": 88.2
         },
         {
-          "code": "2413",
-          "name": "環科",
-          "rank": 7,
-          "totalScore": 84.4
-        }
-      ]
-    },
-    {
-      "name": "光電業",
-      "count": 1,
-      "stocks": [
+          "code": "5388",
+          "name": "中磊",
+          "rank": 8,
+          "totalScore": 78.7
+        },
         {
-          "code": "2323",
-          "name": "中環",
-          "rank": 10,
-          "totalScore": 83.6
+          "code": "2412",
+          "name": "中華電",
+          "rank": 9,
+          "totalScore": 78.4
         }
       ]
     },
     {
       "name": "其他業",
-      "count": 1,
+      "count": 2,
       "stocks": [
         {
           "code": "9933",
           "name": "中鼎",
+          "rank": 4,
+          "totalScore": 81.4
+        },
+        {
+          "code": "6199",
+          "name": "天品",
           "rank": 5,
-          "totalScore": 85.5
+          "totalScore": 81.3
         }
       ]
     },
     {
-      "name": "電腦及週邊設備業",
+      "name": "文化創意業",
       "count": 1,
       "stocks": [
         {
-          "code": "4916",
-          "name": "事欣科",
+          "code": "7584",
+          "name": "樂意",
+          "rank": 7,
+          "totalScore": 79.4
+        }
+      ]
+    },
+    {
+      "name": "生技醫療業",
+      "count": 1,
+      "stocks": [
+        {
+          "code": "6782",
+          "name": "視陽",
           "rank": 1,
-          "totalScore": 88.3
+          "totalScore": 88.7
+        }
+      ]
+    },
+    {
+      "name": "貿易百貨業",
+      "count": 1,
+      "stocks": [
+        {
+          "code": "4807",
+          "name": "日成-KY",
+          "rank": 3,
+          "totalScore": 86.2
+        }
+      ]
+    },
+    {
+      "name": "資訊服務業",
+      "count": 1,
+      "stocks": [
+        {
+          "code": "6148",
+          "name": "驊宏資",
+          "rank": 10,
+          "totalScore": 77.7
+        }
+      ]
+    },
+    {
+      "name": "鋼鐵工業",
+      "count": 1,
+      "stocks": [
+        {
+          "code": "8415",
+          "name": "大國鋼",
+          "rank": 6,
+          "totalScore": 80.3
         }
       ]
     }
   ],
-  "run_id": "44368152525",
-  "data_version": "20261118-0221",
+  "run_id": "44546525076",
+  "data_version": "20261119-2247",
   "source_pipeline": "update_all_site_data"
 }
