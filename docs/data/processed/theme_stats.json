@@ -1,6 +1,6 @@
 {
   "date": "2026-11-23",
-  "updated_at": "2026-11-24 00:34",
+  "updated_at": "2026-11-24 05:45",
   "source": {
     "stock_master": "data/processed/stocks_master.json",
     "stock_metrics": "data/processed/stock_metrics_daily.json",
@@ -6662,7 +6662,7 @@
           "trade_price": 66.9,
           "change_pct": 5.52,
           "volume": 4052835,
-          "turnover_rate_pct": 0.81,
+          "turnover_rate_pct": 0.77,
           "turnover_billion": 2.711,
           "revenue_yoy_pct": 79.24,
           "eps": null,
@@ -12132,12 +12132,12 @@
           "trade_price": 247.0,
           "change_pct": -0.2,
           "volume": 9565978,
-          "turnover_rate_pct": 6.5,
+          "turnover_rate_pct": 6.32,
           "turnover_billion": 23.628,
           "revenue_yoy_pct": 93.52,
           "eps": null,
           "gross_margin_pct": null,
-          "total_score": 58.7,
+          "total_score": 58.4,
           "source_types": [
             "ai",
             "master"
@@ -18256,7 +18256,7 @@
           "trade_price": 234.0,
           "change_pct": 3.31,
           "volume": 1529181,
-          "turnover_rate_pct": 3.59,
+          "turnover_rate_pct": 3.58,
           "turnover_billion": 3.578,
           "revenue_yoy_pct": 178.95,
           "eps": null,
@@ -58090,9 +58090,9 @@
       "rank": 35
     }
   ],
-  "run_id": "45217223345",
-  "generated_at": "2026-11-24T00:36:58+08:00",
+  "run_id": "45271394053",
+  "generated_at": "2026-11-24T05:47:14+08:00",
   "latest_trade_date": "2026-11-23",
-  "data_version": "20261123-0036",
+  "data_version": "20261123-0547",
   "source_pipeline": "update_all_site_data"
 }
