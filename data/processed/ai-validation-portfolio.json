@@ -2,9 +2,9 @@
   "status": "ok",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-11-23T04:57:31+08:00",
-  "generated_at": "2026-11-23T04:57:43+08:00",
-  "latest_trade_date": "2026-11-20",
+  "generatedAt": "2026-11-24T00:35:42+08:00",
+  "generated_at": "2026-11-24T00:36:58+08:00",
+  "latest_trade_date": "2026-11-23",
   "portfolioRule": "Each first-entry signal cycle is equally weighted and held for a fixed number of valid individual-stock trading days.",
   "calculationDisclosure": {
     "weighting": "Daily equal weight among active first-entry signals.",
@@ -24,7 +24,7 @@
   "holding5": {
     "holdingDays": 5,
     "status": "price_data_incomplete",
-    "signalCount": 545,
+    "signalCount": 551,
     "incompleteSignalCount": 2,
     "incompleteSignals": [
       {
@@ -71,7 +71,7 @@
     "missingPriceRule": "A held position with an official no-trade or unknown-coverage session invalidates the aggregate curve; prices are never carried forward.",
     "summary": {
       "status": "price_data_incomplete",
-      "signalCount": 545,
+      "signalCount": 551,
       "rowsCount": 0,
       "grossReturn": null,
       "netReturn": null,
@@ -85,7 +85,7 @@
   "holding20": {
     "holdingDays": 20,
     "status": "price_data_incomplete",
-    "signalCount": 542,
+    "signalCount": 548,
     "incompleteSignalCount": 5,
     "incompleteSignals": [
       {
@@ -168,7 +168,7 @@
     "missingPriceRule": "A held position with an official no-trade or unknown-coverage session invalidates the aggregate curve; prices are never carried forward.",
     "summary": {
       "status": "price_data_incomplete",
-      "signalCount": 542,
+      "signalCount": 548,
       "rowsCount": 0,
       "grossReturn": null,
       "netReturn": null,
@@ -179,7 +179,7 @@
       "recent20": null
     }
   },
-  "run_id": "45069176939",
-  "data_version": "20261120-0457",
+  "run_id": "45217223345",
+  "data_version": "20261123-0036",
   "source_pipeline": "update_all_site_data"
 }
