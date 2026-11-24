@@ -2,9 +2,9 @@
   "status": "warning",
   "ok": true,
   "validationVersion": "ai-validation-v1",
-  "generatedAt": "2026-11-25T00:40:13+08:00",
-  "generated_at": "2026-11-25T00:40:53+08:00",
-  "latestValidationUpdateTime": "2026-11-25T00:40:13+08:00",
+  "generatedAt": "2026-11-25T04:22:13+08:00",
+  "generated_at": "2026-11-25T04:22:31+08:00",
+  "latestValidationUpdateTime": "2026-11-25T04:22:13+08:00",
   "latestSignalDate": "2026-11-24",
   "latestEntryDate": "2026-11-24",
   "latestPriceDate": "2026-11-24",
@@ -69,49 +69,9 @@
       "rows": 17,
       "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20261101&response=json",
       "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-07-30",
-      "ok": true,
-      "rows": 1335,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260730&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-06",
-      "ok": true,
-      "rows": 1338,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260806&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-20",
-      "ok": true,
-      "rows": 1337,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260820&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-25",
-      "ok": true,
-      "rows": 1339,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260825&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TPEX exact daily quotes",
-      "period": "2026-11-24",
-      "ok": true,
-      "rows": 13842,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F11%2F24&id=&response=json",
-      "error": ""
     }
   ],
-  "run_id": "45437537416",
-  "data_version": "20261124-0040",
+  "run_id": "45479147585",
+  "data_version": "20261124-0422",
   "source_pipeline": "update_all_site_data"
 }
