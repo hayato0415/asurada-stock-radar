@@ -1,13 +1,13 @@
 {
   "ok": true,
-  "updated_at": "2026-11-25T04:21:43+08:00",
-  "attempted_at": "2026-11-25T04:21:43+08:00",
-  "target_date": "2026-11-24",
-  "latest_trade_date": "2026-11-24",
+  "updated_at": "2026-11-26T00:12:03+08:00",
+  "attempted_at": "2026-11-26T00:12:03+08:00",
+  "target_date": "2026-11-25",
+  "latest_trade_date": "2026-11-25",
   "revenue_month": "2026-10",
   "items_count": 100,
   "rows_written": 100,
-  "stock_master_count": 1986,
+  "stock_master_count": 1987,
   "twse_quote_matched": 1088,
   "tpex_quote_matched": 895,
   "previous_data_preserved": false,
@@ -20,35 +20,59 @@
     "company_basic": "MOPS t187ap03_L / t187ap03_O"
   },
   "quality": {
-    "stock_master_count": 1986,
+    "stock_master_count": 1987,
     "quote_matched": 1983,
-    "score_candidates": 1972,
-    "missing_quote_count": 3,
-    "missing_score_count": 11,
+    "score_candidates": 1949,
+    "missing_quote_count": 4,
+    "missing_score_count": 34,
     "missing_quote_sample": [
       "4804",
+      "7869",
       "8084",
       "8291"
     ],
     "missing_score_sample": [
-      "1312",
-      "2073",
+      "1538",
+      "2235",
       "2321",
+      "2724",
+      "2937",
+      "2948",
+      "3064",
+      "3067",
       "3085",
+      "3521",
       "4168",
+      "4192",
+      "4413",
+      "4530",
+      "4550",
       "4609",
-      "4806",
       "5703",
+      "5878",
+      "6198",
+      "6212",
+      "6512",
+      "6615",
+      "6649",
+      "6846",
+      "6856",
+      "6904",
       "6945",
       "6958",
-      "8342"
+      "6997",
+      "7743",
+      "7794",
+      "8905",
+      "8917",
+      "9960"
     ]
   },
   "quote_coverage": {
     "minimum_ratio": 0.8,
     "required": {
       "twse": 871,
-      "tpex": 719
+      "tpex": 720
     },
     "matched": {
       "twse": 1088,
@@ -58,21 +82,21 @@
   "source_status": [
     {
       "name": "TWSE 上市每日行情",
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20261124&type=ALLBUT0999&response=json",
+      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20261125&type=ALLBUT0999&response=json",
       "ok": true,
       "http_status": null,
-      "source_date": "2026-11-24",
+      "source_date": "2026-11-25",
       "row_count": 1394,
       "error": "",
       "required_fields_missing": []
     },
     {
       "name": "TPEx 上櫃每日行情",
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F11%2F24&id=&response=json",
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F11%2F25&id=&response=json",
       "ok": true,
       "http_status": null,
-      "source_date": "2026-11-24",
-      "row_count": 13849,
+      "source_date": "2026-11-25",
+      "row_count": 13830,
       "error": "",
       "required_fields_missing": []
     },
@@ -150,11 +174,11 @@
   "persistence_status": {
     "ok": true,
     "status": "ok",
-    "latest_trade_date": "2026-11-24",
-    "generated_at": "2026-11-25T04:21:43+08:00",
-    "snapshot_created": false,
-    "snapshot_path": "data/history/ai-top10/2026-11-24.json",
-    "history_trading_days": 81,
+    "latest_trade_date": "2026-11-25",
+    "generated_at": "2026-11-26T00:12:03+08:00",
+    "snapshot_created": true,
+    "snapshot_path": "data/history/ai-top10/2026-11-25.json",
+    "history_trading_days": 82,
     "items_count": 10,
     "previous_data_preserved": false,
     "failed_reasons": [],
@@ -165,8 +189,8 @@
       "ai-persistence-monthly.json": "updated"
     }
   },
-  "run_id": "45479147585",
-  "generated_at": "2026-11-25T04:22:31+08:00",
-  "data_version": "20261124-0422",
+  "run_id": "45651185386",
+  "generated_at": "2026-11-26T00:14:05+08:00",
+  "data_version": "20261125-0014",
   "source_pipeline": "update_all_site_data"
 }
