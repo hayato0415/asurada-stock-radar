@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "validationVersion": "ai-validation-v1",
-  "updatedAt": "2026-11-26T23:51:48+08:00",
-  "asOfDate": "2026-11-26",
+  "updatedAt": "2026-11-27T03:15:01+08:00",
+  "asOfDate": "2026-11-27",
   "earliestSignalDate": "2026-07-22",
   "calendar": [
     "2026-07-22",
@@ -716855,62 +716855,6 @@
       "ok": true,
       "rows": 19,
       "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20261101&response=json",
-      "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-07-23",
-      "ok": true,
-      "rows": 1333,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260723&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-07-24",
-      "ok": true,
-      "rows": 1334,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260724&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-07-30",
-      "ok": true,
-      "rows": 1335,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260730&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-06",
-      "ok": true,
-      "rows": 1338,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260806&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-20",
-      "ok": true,
-      "rows": 1337,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260820&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TWSE exact daily quotes",
-      "period": "2026-08-25",
-      "ok": true,
-      "rows": 1339,
-      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20260825&type=ALLBUT0999&response=json",
-      "error": ""
-    },
-    {
-      "source": "TPEX exact daily quotes",
-      "period": "2026-11-26",
-      "ok": true,
-      "rows": 13825,
-      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date=2026%2F11%2F26&id=&response=json",
       "error": ""
     }
   ],
